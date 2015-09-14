@@ -7,7 +7,7 @@ s.description      = "VWO iOS SDK enables you to A/B test mobile apps."
 s.homepage         = "http://vwo.com"
 s.license          = { :type => 'Commercial', :text => 'See http://vwo.com/terms-conditions' }
 s.author           = { 'VWO' => 'info@wingify.com' }
-s.source           = { :git => "https://office.wingify.com/gitlab/swapnil.agarwal/VWO-iOS.git", :tag => s.version.to_s }
+s.source           = { :git => "https://github.com/agarwalswapnil/VWO-iOS-SDK.git", :tag => s.version.to_s }
  s.social_media_url = "http://twitter.com/wingify"
 
 s.platform     = :ios, '7.0'
