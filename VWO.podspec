@@ -1,40 +1,20 @@
-#
-# Be sure to run `pod lib lint VWO.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
-  s.name             = "VWO"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of VWO."
+s.name             = "VWO"
+s.version          = "1.1.0"
+s.summary          = "VWO SDK for A/B Testing iOS apps."
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!  
-  s.description      = <<-DESC
-                       DESC
+s.description      = "VWO iOS SDK enables you to A/B test mobile apps."
+s.homepage         = "http://vwo.com"
+s.license          = { :type => 'Commercial', :text => 'See http://vwo.com/terms-conditions' }
+s.author           = { 'VWO' => 'info@wingify.com' }
+s.source           = { :git => "https://office.wingify.com/gitlab/swapnil.agarwal/VWO-iOS.git", :tag => s.version.to_s }
+ s.social_media_url = "http://twitter.com/wingify"
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/VWO"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
-  s.license          = 'MIT'
-  s.author           = { "Swapnil Agarwal" => "swapnil.agarwal@wingify.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/VWO.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+s.platform     = :ios, '7.0'
+s.requires_arc = true
 
-  s.platform     = :ios, '7.0'
-  s.requires_arc = true
-
-  s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'VWO' => ['Pod/Assets/*.png']
-  }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+s.public_header_files = "Pod/VWO.framework/**/*.h"
+s.frameworks = "Foundation", "UIKit"
+s.vendored_frameworks = "Pod/VWO.framework"
+s.xcconfig = { "OTHER_LDFLAGS" => "-ObjC" }
 end
