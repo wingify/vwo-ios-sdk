@@ -19,7 +19,7 @@ This library supports iOS version 7.0 and above.
 
 ## Setting up VWO Account
 
-Sign Up for VWO account at http://vwo.com
+Sign Up for VWO account at https://vwo.com
 
 ## Getting Started Documentation
 * [Installation Instructions](https://vwo.com/knowledge/integrating-ios-sdk/)
@@ -31,14 +31,13 @@ Wingify, info@wingify.com
 
 ## License
 
-By using this SDK, you agree to abide by the [VWO Terms & Conditions](http://vwo.com/terms-conditions).
+By using this SDK, you agree to abide by the [VWO Terms & Conditions](https://vwo.com/terms-conditions).
 
 ## API
 **1.) API to fetch settings**
 
 * Type: GET
 * URL: https://dacdn.vwo.com/mobile
-* Sample URL: [sample url with parameters](https://dacdn.vwo.com/mobile?a=10&dt=x86_64&i=cccf243b3e2b18b4bdfbad0a8d2b1f2b&k=%7B%2234%22%3A%222%22%2C%2229%22%3A%221%22%2C%2237%22%3A%223%22%2C%2228%22%3A%221%22%2C%2231%22%3A%221%22%7D&os=9.1&r=0.1312175181839697&u=1F4140267B594340AFEA983544A8E985&v=1.4.4)
 * Parameters:
 
 >a: account id, account id of your vwo account
@@ -66,12 +65,12 @@ By using this SDK, you agree to abide by the [VWO Terms & Conditions](http://vwo
 
 * Response:
 JSON response, list of all the campaigns running for this app.
+* [Sample URL](https://dacdn.vwo.com/mobile?a=10&dt=x86_64&i=cccf243b3e2b18b4bdfbad0a8d2b1f2b&k=%7B%2234%22%3A%222%22%2C%2229%22%3A%221%22%2C%2237%22%3A%223%22%2C%2228%22%3A%221%22%2C%2231%22%3A%221%22%7D&os=9.1&r=0.1312175181839697&u=1F4140267B594340AFEA983544A8E985&v=1.4.4)
 
 **2.) API to record when user becomes part of a campaign**
 
 * Type: GET
 * URL: https://dacdn.vwo.com/l.gif
-* Sample URL: [sample url with parameters](http://dacdn.vwo.com/l.gif?account_id=1&combination=2&ed=%7B%22i%22%3A%2239c9fe3503ba2887a1584451a0158b3c%22%2C%22lt%22%3A1443187441.434723%2C%22av%22%3A%221.0%22%2C%22os%22%3A%228.2%22%2C%22dt%22%3A%22x86_64%22%7D&experiment_id=151&random=0.5582756186175513&s=2&u=BD652F8E-7684-45CB-A9AF-66B7EE18337A)
 * Parameters:
 
 >experiment_id: campaign id
@@ -107,7 +106,6 @@ JSON response, list of all the campaigns running for this app.
 
 * Type: GET
 * URL: https://dacdn.vwo.com/c.gif
-* Sample URL: [sample url with parameters](http://dacdn.vwo.com/c.gif?account_id=1&combination=2&ed=%7B%22i%22%3A%2239c9fe3503ba2887a1584451a0158b3c%22%2C%22lt%22%3A1443187450.503595%2C%22av%22%3A%221.0%22%2C%22os%22%3A%228.2%22%2C%22dt%22%3A%22x86_64%22%7D&experiment_id=151&goal_id=1&random=0.1486650517436979&s=2&u=BD652F8E-7684-45CB-A9AF-66B7EE18337A)
 * Parameters:
 
 >experiment_id: campaign id
