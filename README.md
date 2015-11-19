@@ -65,7 +65,7 @@ By using this SDK, you agree to abide by the [VWO Terms & Conditions](https://vw
 
 * Response:
 JSON response, list of all the campaigns running for this app.
-* [Sample URL](https://dacdn.vwo.com/mobile?a=10&dt=x86_64&i=cccf243b3e2b18b4bdfbad0a8d2b1f2b&k=%7B%2234%22%3A%222%22%2C%2229%22%3A%221%22%2C%2237%22%3A%223%22%2C%2228%22%3A%221%22%2C%2231%22%3A%221%22%7D&os=9.1&r=0.1312175181839697&u=1F4140267B594340AFEA983544A8E985&v=1.4.4)
+* [Sample URL](https://dacdn.vwo.com/mobile?a=10&dt=x86_64&i=cccf243b3e2b18b4bdfbad0a8d2b1f2b&k=%7B%2234%22%3A%222%22%2C%2229%22%3A%221%22%2C%2237%22%3A%223%22%2C%2228%22%3A%221%22%2C%2231%22%3A%221%22%7D&os=9.1&r=0.1312175181839697&u=1F4140267B594340AFEA983544A8E985&v=1.4.5)
 
 **2.) API to record when user becomes part of a campaign**
 
@@ -137,10 +137,10 @@ combination: variation id for the campaign
 * Response:
 1 pixel image
 
-# Points to consider while using API 
+## Points to consider while using API 
 
 * Trigger l.gif only once per campaign.
 * Trigger c.gif only once per goal, even if the goal is triggered multiple times.
-* If campaign status is EXCLUDED, do not run campaign on this user. Pass, current-k, as k={campaign-id:0}
+* If campaign status is EXCLUDED, do not run campaign for this user. Pass, current-k, as k={campaign-id:0}
 * If campaign status is equal to PAUSED, pause this campaign.
 * If segment_object is present, handle segmentation conditions. Only if user becomes eligible to become part of this campaign, then only make user part of the campaign.
