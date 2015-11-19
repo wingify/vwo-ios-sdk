@@ -13,6 +13,18 @@ it, simply add the following line to your Podfile:
 pod 'VWO'
 ```
 
+## iOS Version Support
+
+This library supports iOS version 7.0 and above.
+
+## Setting up VWO Account
+
+Sign Up for VWO account at http://vwo.com
+
+## Getting Started Documentation
+* [Installation Instructions](https://vwo.com/knowledge/integrating-ios-sdk/)
+* [Creating and Running Campaign](https://vwo.com/knowledge/folder-creating-mobile-app-campaigns/)
+
 ## Author
 
 Wingify, info@wingify.com
