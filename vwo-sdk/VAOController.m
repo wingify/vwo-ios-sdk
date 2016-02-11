@@ -183,7 +183,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
          *  check is required, b/c status can be EXCLUDED as well
          */
         NSString *status = [experiment[@"status"] uppercaseString];
-        if ([status isEqualToString:@"EXCLUED"]) {
+        if ([status isEqualToString:@"EXCLUDED"]) {
             // save 0 against experiment-id so that this user can be excluded from the experiment
             [[VAOModel sharedInstance] checkAndMakePartOfExperiment:experimentId variationId:@"0"];
             continue;
