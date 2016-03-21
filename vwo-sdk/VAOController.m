@@ -11,7 +11,7 @@
 #import "VAOModel.h"
 #import "VAOAPIClient.h"
 #import "VAOSocketClient.h"
-//#import "VAOGoogleAnalytics.h"
+#import "VAOGoogleAnalytics.h"
 //#import "VAOFlurry.h"
 #import "VAORavenClient.h"
 #include <sys/types.h>
@@ -193,26 +193,11 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
             continue;
         }
         
-        
-        /**
-         *  Comment this, until we support google and flurry
-         */
-        
-        /*
-        // if the user is becoming a part of this experiment, trigger events
-        if ([self pushToGoogleAnalytics]) {
-            [[VAOGoogleAnalytics sharedInstance] experimentWithId:experimentId variationId:variationId];
-        }
-        
-        if ([self pushToFlurry]) {
-            [[VAOFlurry sharedInstance] experimentWithId:experimentId variationId:variationId];
-        }
-        */
-        
         NSString *variationId = [NSString stringWithFormat:@"%@", experiment[@"variations"][@"id"]];
         NSMutableDictionary *experimentDict = [NSMutableDictionary dictionary];
         
         experimentDict[@"variationId"] = variationId;
+        experimentDict[@"variationName"] = experiment[@"variations"][@"name"];
         experimentDict[@"goals"] = experiment[@"goals"];
         experimentDict[@"json"] = experiment[@"variations"][@"changes"];
         experimentDict[@"status"] = experiment[@"status"];
@@ -225,6 +210,12 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         if (experiment[@"segment_object"]) {
             experimentDict[@"segment"] = experiment[@"segment_object"];
         }
+        
+        if (experiment[@"UA"]) {
+            experimentDict[@"UA"] = experiment[@"UA"];
+        }
+        
+        experimentDict[@"name"] = (experiment[@"name"] ? experiment[@"name"] : @"VWO Campaign Name");
         
         // check if we can run this experiment on this user
         if ([self checkSegmentationAndMakePartOfExperiment:experimentId forExperiment:experimentDict]) {
@@ -595,8 +586,9 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
             continue;
         }
         
-        NSString *variationId = [_meta[expId] valueForKey:@"variationId"];
-        NSArray *goalsArray = [_meta[expId] objectForKey:@"goals"];
+        NSDictionary *experiment = _meta[expId];
+        NSString *variationId = [experiment valueForKey:@"variationId"];
+        NSArray *goalsArray = [experiment objectForKey:@"goals"];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"identifier == %@", goal];
         
         NSArray *filteredGoalsArray = [goalsArray filteredArrayUsingPredicate:predicate];
@@ -608,7 +600,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
             
             NSInteger goalId = [goalDictionary[@"id"] integerValue];
             NSString *goalIdAsString = [NSString stringWithFormat:@"%li", (long)goalId];
-            BOOL triggerGoalOnce = [_meta[expId][@"countGoalOnce"] boolValue];
+            BOOL triggerGoalOnce = [experiment[@"countGoalOnce"] boolValue];
             BOOL shouldTriggerGoal = (triggerGoalOnce ? [[VAOModel sharedInstance] shouldTriggerGoal:goalIdAsString forExperiment:expId]  : YES);
             
             if (shouldTriggerGoal) {
@@ -616,6 +608,16 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
                                                                experimentId:[expId integerValue]
                                                                 variationId:variationId
                                                                     revenue:value];
+                
+                if (experiment[@"UA"]) {
+                    [[VAOGoogleAnalytics sharedInstance] goalTriggeredWithName:goal
+                                                                        goalId:goalIdAsString
+                                                                     goalValue:value
+                                                                experimentName:experiment[@"name"]
+                                                                  experimentId:expId
+                                                                 variationName:experiment[@"variationName"]
+                                                                   variationId:variationId];
+                }
                 //push to snowplow
                 //                [[VAODataCollector sharedInstance] trackGoalWithExperimentId:[expId intValue]
                 //                                                                 variationId:[variationId intValue]
@@ -705,6 +707,18 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         // make user part of this experiment
         [[VAOModel sharedInstance] checkAndMakePartOfExperiment:expId
                                                     variationId:experiment[@"variationId"]];
+        
+        // if UA integration is enabled
+        if (experiment[@"UA"]) {
+            
+            NSNumber *dimension = (experiment[@"UA"][@"s"] ? experiment[@"UA"][@"s"]: @1);
+            
+            [[VAOGoogleAnalytics sharedInstance] experimentWithName:experiment[@"name"]
+                                                       experimentId:expId
+                                                      variationName:(experiment[@"variationName"] ? experiment[@"variationName"] : @"variation-name")
+                                                        variationId:experiment[@"variationId"]
+                                                          dimension:dimension];
+        }
     }
     
     return YES;
