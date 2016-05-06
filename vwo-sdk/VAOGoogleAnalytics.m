@@ -77,14 +77,19 @@
             }
             
 //            VAOLog(@"dictionary = %@", dictionary);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             id returnDictionary = [gaiDictionaryBuilder performSelector:NSSelectorFromString(@"build")];
             // trigger on defaultTracker
             [defaultTracker performSelector:NSSelectorFromString(@"send:") withObject:returnDictionary];
+#pragma clang diagnostic pop
         }
     }
     @catch (NSException *exception) {
-        VAOLog(@"GA exception: %@",exception);
+        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
+        VAORavenCaptureException(selfException);
         VAORavenCaptureException(exception);
+        
     }
     @finally {
         

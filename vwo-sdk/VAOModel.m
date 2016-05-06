@@ -72,6 +72,8 @@ NSMutableDictionary *campaigns;
     }
     @catch (NSException *exception) {
         VAORavenCaptureException(exception);
+        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
+        VAORavenCaptureException(selfException);
     }
     @finally {
         
@@ -95,6 +97,8 @@ NSMutableDictionary *campaigns;
     }
     @catch (NSException *exception) {
         VAORavenCaptureException(exception);
+        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
+        VAORavenCaptureException(selfException);
     }
     @finally {
         
@@ -145,6 +149,8 @@ NSMutableDictionary *campaigns;
         }
         @catch (NSException *exception) {
             VAORavenCaptureException(exception);
+            NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
+            VAORavenCaptureException(selfException);
         }
         @finally {
             

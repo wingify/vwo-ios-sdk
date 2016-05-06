@@ -541,6 +541,8 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         }
     }
     @catch (NSException *exception) {
+        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
+        VAORavenCaptureException(selfException);
         VAORavenCaptureException(exception)
     }
     @finally {
@@ -646,6 +648,8 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         return nil;
     }
     @catch (NSException *exception) {
+        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
+        VAORavenCaptureException(selfException);
         VAORavenCaptureException(exception);
     }
     @finally {
@@ -668,6 +672,8 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         return json;
     }
     @catch (NSException *exception) {
+        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
+        VAORavenCaptureException(selfException);
         VAORavenCaptureException(exception);
     }
     @finally {
