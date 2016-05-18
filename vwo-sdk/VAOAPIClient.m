@@ -13,7 +13,7 @@
 #import "VAOAFHTTPRequestOperationManager.h"
 #import "VAOAFHTTPRequestOperationManager+Synchronous.h"
 
-#define kProtocol @"https://"
+#define kProtocol @"http://"
 static float kVAOTimerInterval = 20.0;
 static int kVAOPendingMessagesThreshold = 3;
 static BOOL _optOut;
