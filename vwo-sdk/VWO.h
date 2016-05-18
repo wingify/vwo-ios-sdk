@@ -63,6 +63,11 @@
 + (void)markConversionForGoal:(NSString*)goal withValue:(double)value;
 
 /**
+ *  Set Value for custom variable defined on VWO
+ */
++ (void)setValue:(NSString*)value forCusomtorVariable:(NSString*)variable;
+
+/**
  *  Retruns VWO SDK version
  */
 + (NSString*)sdkVersion;

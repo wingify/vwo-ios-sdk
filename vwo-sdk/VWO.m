@@ -183,6 +183,10 @@
     [[VAOController sharedInstance] markConversionForGoal:goal withValue:[NSNumber numberWithDouble:value]];
 }
 
++ (void)setValue:(NSString*)value forCusomtorVariable:(NSString*)variable {
+    [[VAOController sharedInstance] setValue:value forCusomtorVariable:variable];
+}
+
 + (NSString*)sdkVersion {
     return VWO_SDK_VERSION;
 }

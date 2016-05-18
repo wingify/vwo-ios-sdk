@@ -28,6 +28,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     BOOL _previewMode;
     NSMutableDictionary *_meta; // holds the set of changes to be applied to various UI elements
     NSMutableDictionary *_activeGoals;
+    NSMutableDictionary *customVariables;
 }
 
 + (void)initializeAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock {
@@ -50,12 +51,26 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         _lastUpdateTime = 0;
         _previewMode = NO;
         _activeGoals = [[NSMutableDictionary alloc] init];
+        customVariables = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 - (void)loadMetaList {
     _meta = [[VAOModel sharedInstance] loadMeta];
+}
+
+- (void)setValue:(NSString*)value forCusomtorVariable:(NSString*)variable {
+    if(!value || !variable) return;
+    @try {
+        [customVariables setObject:value forKey:variable];
+    }
+    @catch (NSException *exception) {
+        VAORavenCaptureException(exception);
+    }
+    @finally {
+        
+    }
 }
 
 - (void)applicationDidEnterBackground {
@@ -246,7 +261,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 }
 
 
--(BOOL)evaluateOperand:(NSArray*)operandValue operator:(int)operator type:(int)type {
+-(BOOL)evaluateOperand:(NSArray*)operandValue lOperandValue:(NSString*)lOperandValue operator:(int)operator type:(int)type {
     
     // remove null values
     NSMutableArray *newoperandValue = [NSMutableArray arrayWithArray:operandValue];
@@ -423,6 +438,59 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
             default:
                 break;
         }
+    } else if (type == 7) {
+        // Custom Variable
+        NSLog(@"operandValue %@", operandValue);
+        NSLog(@"lOperandValue %@", lOperandValue);
+        NSString *targetValue = [operandValue firstObject];
+        NSString *currentValue = [customVariables objectForKey:lOperandValue];
+        if (!currentValue) {
+            toReturn = NO;
+            return toReturn;
+        }
+            
+//        [nil range]
+        switch (operator) {
+            case 5: {
+                if([currentValue rangeOfString:targetValue options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound) {
+                    toReturn = YES;
+                }
+                
+                break;
+            }
+                
+            case 7: {  // Contains
+                if ([currentValue rangeOfString:targetValue].location != NSNotFound) {
+                    toReturn = YES;
+                }
+                break;
+            }
+                
+            case 11: {  // is equal to
+                if ([targetValue isEqualToString:currentValue]) {
+                    toReturn = YES;
+                }
+                break;
+            }
+                
+            case 12: {  // is NOT equal to
+                if ([targetValue isEqualToString:currentValue] == NO) {
+                    toReturn = YES;
+                }
+                break;
+            }
+                
+            case 13: {  // starts with
+                NSRange range =  [currentValue rangeOfString:targetValue];
+                if (range.location == 0) {
+                    toReturn = YES;
+                }
+                
+                break;
+            }
+            default:
+                break;
+        }
     }
     
     return toReturn;
@@ -490,11 +558,12 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
                 operandValue = [NSArray arrayWithObject:segment[@"rOperandValue"]];
             }
 
+            NSString *lOperandValue = segment[@"lOperandValue"];
             int type = [segment[@"type"] intValue];
             
             //1
             // evaluate
-            BOOL currentValue = [self evaluateOperand:operandValue operator:operator type:type];
+            BOOL currentValue = [self evaluateOperand:operandValue lOperandValue:lOperandValue operator:operator type:type];
             
             //2
             if (logicalOperator && leftParenthesis) {

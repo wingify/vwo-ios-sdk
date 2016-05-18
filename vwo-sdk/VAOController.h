@@ -20,6 +20,7 @@
 - (void)applicationDidEnterPreviewMode;
 - (void)applicationDidExitPreviewMode;
 - (void)previewMeta:(NSDictionary *)changes;
+- (void)setValue:(NSString*)value forCusomtorVariable:(NSString*)variable;
 
 // Goals
 - (void)markConversionForGoal:(NSString*)goal withValue:(NSNumber*)value;
