@@ -99,7 +99,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     _remoteDataDownloading = YES;
     
     [[VAOModel sharedInstance] downloadMetaWithCompletionBlock:^(NSMutableArray *meta){
-        VAOLog(@"downloaded");
         _lastUpdateTime = currentTime;
         _remoteDataDownloading = NO;
         
@@ -440,8 +439,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         }
     } else if (type == 7) {
         // Custom Variable
-        NSLog(@"operandValue %@", operandValue);
-        NSLog(@"lOperandValue %@", lOperandValue);
         NSString *targetValue = [operandValue firstObject];
         NSString *currentValue = [customVariables objectForKey:lOperandValue];
         if (!currentValue) {

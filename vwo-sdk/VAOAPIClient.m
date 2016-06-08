@@ -13,7 +13,7 @@
 #import "VAOAFHTTPRequestOperationManager.h"
 #import "VAOAFHTTPRequestOperationManager+Synchronous.h"
 
-#define kProtocol @"http://"
+#define kProtocol @"https://"
 static float kVAOTimerInterval = 20.0;
 static int kVAOPendingMessagesThreshold = 3;
 static BOOL _optOut;
@@ -133,13 +133,13 @@ NSTimer *_timer;
     } else {
         VAOLog(@"----------------------------------------> Downloading A-SYNC");
         [manager GET:url parameters:parameters success:^(VAOAFHTTPRequestOperation *operation, id responseObject) {
-            VAOLog(@"JSON: %@", responseObject);
-            VAOLog(@"calling url url = %@", operation.request.URL);
+            //VAOLog(@"JSON: %@", responseObject);
+            //VAOLog(@"calling url url = %@", operation.request.URL);
             if (successBlock) {
                 successBlock(responseObject);
             }
         } failure:^(VAOAFHTTPRequestOperation *operation, NSError *error) {
-            VAOLog(@"Error: %@", error);
+            //VAOLog(@"Error: %@", error);
             if (failureBlock) {
                 failureBlock(error);
             }
@@ -182,7 +182,7 @@ NSTimer *_timer;
 }
 
 - (void)_call:(NSString *)method with:(NSDictionary *)params{
-    VAOLog(@"Called %@ with %@", method, params);
+    //VAOLog(@"Called %@ with %@", method, params);
     if(_optOut == NO){
         NSString *transitId = [VAOAPIClient allocateTransitId];
         NSNumber *timestamp = @([[NSDate date] timeIntervalSince1970]);
@@ -245,12 +245,12 @@ NSTimer *_timer;
 //#endif
     
     [manager GET:url parameters:parameters success:^(VAOAFHTTPRequestOperation *operation, id responseObject) {
-        VAOLog(@"JSON: %@", responseObject);
+        //VAOLog(@"JSON: %@", responseObject);
         if (successBlock) {
             successBlock(transitId);
         }
     } failure:^(VAOAFHTTPRequestOperation *operation, NSError *error) {
-        VAOLog(@"Error: %@", error);
+        //VAOLog(@"Error: %@", error);
         if (operation.response.statusCode == 200) {
             if (successBlock) {
                 successBlock(transitId);
@@ -268,7 +268,6 @@ NSTimer *_timer;
  * Timer operation to send messages to VAO server.
  */
 - (void)_tick {
-    VAOLog(@"Tick!");
     for (NSDictionary *message in _pendingMessages) {
         
         if ([_transittingMessages containsObject:message[@"id"]]) {

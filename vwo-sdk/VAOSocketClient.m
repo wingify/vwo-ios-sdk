@@ -36,7 +36,6 @@
 -(void)initMethods {
     __weak id socket_ = socket;
     socket.onConnect = ^{
-        VAOLog(@"print this on successful connection");
         VAOLog(@"[[UIDevice currentDevice] name] = %@", [[UIDevice currentDevice] name] );
         NSDictionary *dict  = @{@"name":[[UIDevice currentDevice] name],
                                 @"type": @"iOS",

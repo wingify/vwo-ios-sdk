@@ -16,7 +16,7 @@
 
 #define VAO_EDITOR_TCP_HOST @"pyhub.vwo.com"
 #define VAO_EDITOR_TCP_PORT 8889
-#define VWO_SDK_VERSION @"1.4.5"
+#define VWO_SDK_VERSION @"1.4.8"
 
 #define VAO_SESSION_KEY @"vaoSession"
 
