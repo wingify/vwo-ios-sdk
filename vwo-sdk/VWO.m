@@ -83,7 +83,7 @@
         NSDictionary *tags = [NSDictionary dictionaryWithObjectsAndKeys:accountId, @"VAO Account Id", nil];
         NSDictionary *extra = [NSDictionary dictionaryWithObjectsAndKeys:bunldeId, @"Bundle Identifier",
                                                                         appName, @"App Name", nil];
-        VAORavenClient *client = [VAORavenClient clientWithDSN:@"https://624c0b4aad0d4bf9b0831f421efdbf48:881e3ff45bc64c55bd4e59ed42e9c8eb@app.getsentry.com/41858"
+        VAORavenClient *client = [VAORavenClient clientWithDSN:@"https://56b791081b704ac8bea1235de2c80232:6e57880a9f904235a1bd3ba02b7a837b@app.getsentry.com/41858"
                                                          extra:extra
                                                           tags:tags];
         
