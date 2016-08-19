@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'WingifyMobileApp', :exclusive => true do
-  pod "VWO", :path => "../"
+target 'WingifyMobileApp' do
+	pod 'VWO', '~> 1.4.9'
 end

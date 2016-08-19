@@ -227,12 +227,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01FB8689169E2D8B00A0A1A8 /* Build configuration list for PBXNativeTarget "WingifyMobileApp" */;
 			buildPhases = (
-				EABA3568354EF4B46E840C55 /* Check Pods Manifest.lock */,
+				EABA3568354EF4B46E840C55 /* [CP] Check Pods Manifest.lock */,
 				01FB8661169E2D8B00A0A1A8 /* Sources */,
 				01FB8662169E2D8B00A0A1A8 /* Frameworks */,
 				01FB8663169E2D8B00A0A1A8 /* Resources */,
-				907CDF392969CDFFBB968E81 /* Embed Pods Frameworks */,
-				E5DBB363B8BD5EF4E712ED07 /* Copy Pods Resources */,
+				907CDF392969CDFFBB968E81 /* [CP] Embed Pods Frameworks */,
+				E5DBB363B8BD5EF4E712ED07 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -307,14 +307,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		907CDF392969CDFFBB968E81 /* Embed Pods Frameworks */ = {
+		907CDF392969CDFFBB968E81 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,14 +322,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WingifyMobileApp/Pods-WingifyMobileApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E5DBB363B8BD5EF4E712ED07 /* Copy Pods Resources */ = {
+		E5DBB363B8BD5EF4E712ED07 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,14 +337,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WingifyMobileApp/Pods-WingifyMobileApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EABA3568354EF4B46E840C55 /* Check Pods Manifest.lock */ = {
+		EABA3568354EF4B46E840C55 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,6 +461,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Classes/WingifyMobileApp-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/WingifyMobileApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wingify.abtestapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2488d820-60ba-41f7-8b34-56591fa5d842";
@@ -479,6 +480,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Classes/WingifyMobileApp-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/WingifyMobileApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wingify.abtestapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2488d820-60ba-41f7-8b34-56591fa5d842";
