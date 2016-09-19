@@ -12,6 +12,9 @@
 		01FB866E169E2D8B00A0A1A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FB866D169E2D8B00A0A1A8 /* CoreGraphics.framework */; };
 		01FB86B0169E42B600A0A1A8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FB86AF169E42B600A0A1A8 /* MapKit.framework */; };
 		A27A83A606C55FEB178DE9D9 /* Pods_WingifyMobileApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB66B02BC8243138A2E6F7B /* Pods_WingifyMobileApp.framework */; };
+		CC2319671D8FC7DC0035730A /* LayoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2319661D8FC7DC0035730A /* LayoutViewController.m */; };
+		CC2319AB1D8FDEB10035730A /* P5.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC2319A91D8FDEB10035730A /* P5.jpeg */; };
+		CC2319AC1D8FDEB10035730A /* P6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC2319AA1D8FDEB10035730A /* P6.jpg */; };
 		CC9F01821BF0B06B00A0165F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC9F01811BF0B06B00A0165F /* Images.xcassets */; };
 		CCCB75181BFC8D9900A05CC4 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB74FA1BFC8D9900A05CC4 /* AboutViewController.m */; };
 		CCCB75191BFC8D9900A05CC4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCB74FC1BFC8D9900A05CC4 /* AppDelegate.m */; };
@@ -55,6 +58,10 @@
 		0CEEFF4E7D641426AD9108E7 /* Pods-WingifyABTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingifyABTestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-WingifyABTestApp/Pods-WingifyABTestApp.release.xcconfig"; sourceTree = "<group>"; };
 		23130EAB8CE3F376CAD3747F /* Pods-WingifyMobileApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingifyMobileApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-WingifyMobileApp/Pods-WingifyMobileApp.release.xcconfig"; sourceTree = "<group>"; };
 		2DB66B02BC8243138A2E6F7B /* Pods_WingifyMobileApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WingifyMobileApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC2319651D8FC7DC0035730A /* LayoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutViewController.h; sourceTree = "<group>"; };
+		CC2319661D8FC7DC0035730A /* LayoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutViewController.m; sourceTree = "<group>"; };
+		CC2319A91D8FDEB10035730A /* P5.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = P5.jpeg; sourceTree = "<group>"; };
+		CC2319AA1D8FDEB10035730A /* P6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = P6.jpg; sourceTree = "<group>"; };
 		CC9F01811BF0B06B00A0165F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = WingifyABTestApp/Images.xcassets; sourceTree = "<group>"; };
 		CCCB74F91BFC8D9900A05CC4 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		CCCB74FA1BFC8D9900A05CC4 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
@@ -183,6 +190,8 @@
 				CCCB750E1BFC8D9900A05CC4 /* reveal-icon@2x.png */,
 				CCCB750F1BFC8D9900A05CC4 /* SortViewController.h */,
 				CCCB75101BFC8D9900A05CC4 /* SortViewController.m */,
+				CC2319651D8FC7DC0035730A /* LayoutViewController.h */,
+				CC2319661D8FC7DC0035730A /* LayoutViewController.m */,
 				CCCB75111BFC8D9900A05CC4 /* SWRevealViewController */,
 				CCCB75141BFC8D9900A05CC4 /* VariableViewController.h */,
 				CCCB75151BFC8D9900A05CC4 /* VariableViewController.m */,
@@ -215,6 +224,8 @@
 				CCCB75331BFC8DA600A05CC4 /* P2.png */,
 				CCCB75341BFC8DA600A05CC4 /* P3.png */,
 				CCCB75351BFC8DA600A05CC4 /* P4.png */,
+				CC2319A91D8FDEB10035730A /* P5.jpeg */,
+				CC2319AA1D8FDEB10035730A /* P6.jpg */,
 				CCCB75361BFC8DA600A05CC4 /* white-bg.png */,
 			);
 			path = images;
@@ -280,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCCB75401BFC8DA600A05CC4 /* P3.png in Resources */,
+				CC2319AB1D8FDEB10035730A /* P5.jpeg in Resources */,
 				CCCB75291BFC8D9900A05CC4 /* WingifyMobileApp-Info.plist in Resources */,
 				CCCB751D1BFC8D9900A05CC4 /* Default@2x.png in Resources */,
 				CCCB753F1BFC8DA600A05CC4 /* P2.png in Resources */,
@@ -289,6 +301,7 @@
 				CCCB753D1BFC8DA600A05CC4 /* image1.jpeg in Resources */,
 				CC9F01821BF0B06B00A0165F /* Images.xcassets in Resources */,
 				CCCB75391BFC8DA600A05CC4 /* B3@2x.png in Resources */,
+				CC2319AC1D8FDEB10035730A /* P6.jpg in Resources */,
 				CCCB75371BFC8DA600A05CC4 /* B1@2x.png in Resources */,
 				CCCB751F1BFC8D9900A05CC4 /* MainStoryboard-iPad.storyboard in Resources */,
 				CCCB75201BFC8D9900A05CC4 /* MainStoryboard.storyboard in Resources */,
@@ -365,6 +378,7 @@
 				CCCB75211BFC8D9900A05CC4 /* LoginViewController.m in Sources */,
 				CCCB75271BFC8D9900A05CC4 /* SWRevealViewController.m in Sources */,
 				CCCB75191BFC8D9900A05CC4 /* AppDelegate.m in Sources */,
+				CC2319671D8FC7DC0035730A /* LayoutViewController.m in Sources */,
 				CCCB75261BFC8D9900A05CC4 /* SortViewController.m in Sources */,
 				CCCB75181BFC8D9900A05CC4 /* AboutViewController.m in Sources */,
 				CCCB751A1BFC8D9900A05CC4 /* BannerViewController.m in Sources */,
