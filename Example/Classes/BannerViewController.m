@@ -38,8 +38,26 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSString *imageName = [VWO objectForKey:@"banner-image" defaultObject:@"B2.png"];
-    [self.variationBannerview setImage:[UIImage imageNamed:imageName]];
+    NSString *imageName = [VWO objectForKey:@"banner-image" defaultObject:@"B1.png"];
+    
+    if ([imageName hasPrefix:@"http"]) {
+        [self downloadAndShowImage:imageName];
+    } else {
+        [self.variationBannerview setImage:[UIImage imageNamed:imageName]];
+    }
+}
+
+-(void)downloadAndShowImage:(NSString*)imageName {
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithURL:[NSURL URLWithString:imageName] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (!error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.variationBannerview.image = [[UIImage alloc] initWithData:data];
+            });
+            
+        }
+        
+    }] resume];
 }
 
 -(void)variationBannerTapped:(id)sender {
