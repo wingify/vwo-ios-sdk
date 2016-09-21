@@ -155,7 +155,7 @@
     NSString *category = [NSString stringWithFormat:@"VWO Campaign - %@ - %@", expName, expId];
     NSString *action = [NSString stringWithFormat:@"%@ - %@", expName, expId];
     NSString *label = [NSString stringWithFormat:@"%@ - %@", varName, varId];
-    NSString *dimName = [NSString stringWithFormat:@"CamId:%@, VarName:%@", expId, varName];
+    NSString *dimName = [NSString stringWithFormat:@"CampId:%@, VarName:%@", expId, varName];
     
     [self triggerEventWithCategory:category eventAction:action eventLabel:label eventValue:nil dimensionName:dimName dimensionValue:dimValue];
 }
