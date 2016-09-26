@@ -342,8 +342,8 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         }
     } else if (type ==3) {
         // day of week
-        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        NSDateComponents *comps = [gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]];
         NSInteger weekday = [comps weekday];
         
         // start from sunday = 0
@@ -365,8 +365,8 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     } else if (type == 4) {
         // hour of the day
         
-        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *comps = [gregorian components:NSHourCalendarUnit fromDate:[NSDate date]];
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        NSDateComponents *comps = [gregorian components:NSCalendarUnitHour fromDate:[NSDate date]];
         NSInteger hourOfDay = [comps hour];
         
         // set default to YES in case of NOT equal to
