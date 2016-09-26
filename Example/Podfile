@@ -2,5 +2,5 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 target 'WingifyMobileApp' do
-	pod 'VWO', '~> 1.4.9'
+	pod 'VWO', :path => '../'
 end

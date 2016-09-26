@@ -54,7 +54,10 @@
         // set and increment session
         [VAOUtils incrementSessionNumber];
         
-        NSString *bunldeId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
+        
+        // set up sentry exception handling
+        [self setupSentry:accountId];
+        
         
         [[VAOAPIClient sharedInstance] schedule];
 
@@ -76,21 +79,27 @@
         NSLog(@"|------------------------------------------------------------------------|");
         NSLog(@"|------                     VWO Initialized                        ------|");
         NSLog(@"|------------------------------------------------------------------------|");
-
-            
-        // set up Exception Handling
-        NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-        NSDictionary *tags = [NSDictionary dictionaryWithObjectsAndKeys:accountId, @"VAO Account Id", nil];
-        NSDictionary *extra = [NSDictionary dictionaryWithObjectsAndKeys:bunldeId, @"Bundle Identifier",
-                                                                        appName, @"App Name", nil];
-        VAORavenClient *client = [VAORavenClient clientWithDSN:@"https://56b791081b704ac8bea1235de2c80232:6e57880a9f904235a1bd3ba02b7a837b@app.getsentry.com/41858"
-                                                         extra:extra
-                                                          tags:tags];
-        
-        [client setupExceptionHandler];
-        [VAORavenClient setSharedClient:client];
         
     });
+}
+
+// set up Exception Handling
+
++ (void)setupSentry:(NSString*)accountId {
+    NSString *bunldeId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
+    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+    NSDictionary *tags = [NSDictionary dictionaryWithObjectsAndKeys:accountId, @"VAO Account Id", nil];
+    NSDictionary *extra = [NSDictionary dictionaryWithObjectsAndKeys:bunldeId, @"Bundle Identifier",
+                           appName, @"App Name",
+                           [self sdkVersion], @"SDK Version", nil];
+    
+    VAORavenClient *client = [VAORavenClient clientWithDSN:@"https://c3f6ba4cf03548f3bd90066dd182a649:6d6d9593d15944849cc9f8d88ccf1fb0@sentry.io/41858"
+                                                     extra:extra
+                                                      tags:tags];
+    
+    //NOTE: Commented the line below, as we do not want to capture all the exceptions. We will manually capture our own exceptions..
+    //        [client setupExceptionHandler];
+    [VAORavenClient setSharedClient:client];
 }
 
 /**

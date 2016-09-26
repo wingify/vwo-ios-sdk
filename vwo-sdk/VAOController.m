@@ -186,62 +186,71 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
  */
 - (void)_useMeta:(NSMutableArray *)newMeta{
 //    VAOLog(@"Meta before: %@", [_meta description]);
-    
-    _meta = [NSMutableDictionary dictionary];
-    
-    for (NSDictionary *experiment in newMeta) {
+
+    @try {        
+        _meta = [NSMutableDictionary dictionary];
         
-        NSString *experimentId = [experiment[@"id"] stringValue];
-        
-        /**
-         *  check is required, b/c status can be EXCLUDED as well
-         */
-        NSString *status = [experiment[@"status"] uppercaseString];
-        if ([status isEqualToString:@"EXCLUED"]) {
-            // save 0 against experiment-id so that this user can be excluded from the experiment
-            [[VAOModel sharedInstance] checkAndMakePartOfExperiment:experimentId variationId:@"0"];
-            continue;
-        } else if ([status isEqualToString:@"RUNNING"] == NO) {
-            continue;
-        } else if (![self isValueValid:experiment[@"variations"]] || ![self isValueValid:experiment[@"variations"][@"id"]]) {
-            continue;
+        for (NSDictionary *experiment in newMeta) {
+            
+            NSString *experimentId = [experiment[@"id"] stringValue];
+            
+            /**
+             *  check is required, b/c status can be EXCLUDED as well
+             */
+            NSString *status = [experiment[@"status"] uppercaseString];
+            if ([status isEqualToString:@"EXCLUED"]) {
+                // save 0 against experiment-id so that this user can be excluded from the experiment
+                [[VAOModel sharedInstance] checkAndMakePartOfExperiment:experimentId variationId:@"0"];
+                continue;
+            } else if ([status isEqualToString:@"RUNNING"] == NO) {
+                continue;
+            } else if (![self isValueValid:experiment[@"variations"]] || ![self isValueValid:experiment[@"variations"][@"id"]]) {
+                continue;
+            }
+            
+            NSString *variationId = [NSString stringWithFormat:@"%@", experiment[@"variations"][@"id"]];
+            NSMutableDictionary *experimentDict = [NSMutableDictionary dictionary];
+            
+            experimentDict[@"variationId"] = variationId;
+            experimentDict[@"variationName"] = experiment[@"variations"][@"name"];
+            experimentDict[@"goals"] = experiment[@"goals"];
+            experimentDict[@"json"] = experiment[@"variations"][@"changes"];
+            experimentDict[@"status"] = experiment[@"status"];
+            if ([experiment[@"count_goal_once"] boolValue]) {
+                [experimentDict setValue:@1 forKey:@"countGoalOnce"];
+            } else {
+                [experimentDict setValue:@0 forKey:@"countGoalOnce"];
+            }
+            
+            if (experiment[@"segment_object"]) {
+                experimentDict[@"segment"] = experiment[@"segment_object"];
+            }
+            
+            if (experiment[@"UA"]) {
+                experimentDict[@"UA"] = experiment[@"UA"];
+            }
+            
+            experimentDict[@"name"] = (experiment[@"name"] ? experiment[@"name"] : @"VWO Campaign Name");
+            
+            // check if we can run this experiment on this user
+            if ([self checkSegmentationAndMakePartOfExperiment:experimentId forExperiment:experimentDict]) {
+                [_meta setObject:experimentDict forKey:experimentId];
+            }
         }
         
-        NSString *variationId = [NSString stringWithFormat:@"%@", experiment[@"variations"][@"id"]];
-        NSMutableDictionary *experimentDict = [NSMutableDictionary dictionary];
+        //    VAOLog(@"Meta after: %@", [_meta description]);
         
-        experimentDict[@"variationId"] = variationId;
-        experimentDict[@"variationName"] = experiment[@"variations"][@"name"];
-        experimentDict[@"goals"] = experiment[@"goals"];
-        experimentDict[@"json"] = experiment[@"variations"][@"changes"];
-        experimentDict[@"status"] = experiment[@"status"];
-        if ([experiment[@"count_goal_once"] boolValue]) {
-            [experimentDict setValue:@1 forKey:@"countGoalOnce"];
-        } else {
-            [experimentDict setValue:@0 forKey:@"countGoalOnce"];
+        if (!_previewMode) {
+            [[VAOModel sharedInstance] saveMeta:_meta];
         }
+    } @catch (NSException *exception) {
+        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
+        VAORavenCaptureException(selfException);
+        VAORavenCaptureException(exception);
+    } @finally {
         
-        if (experiment[@"segment_object"]) {
-            experimentDict[@"segment"] = experiment[@"segment_object"];
-        }
-        
-        if (experiment[@"UA"]) {
-            experimentDict[@"UA"] = experiment[@"UA"];
-        }
-        
-        experimentDict[@"name"] = (experiment[@"name"] ? experiment[@"name"] : @"VWO Campaign Name");
-        
-        // check if we can run this experiment on this user
-        if ([self checkSegmentationAndMakePartOfExperiment:experimentId forExperiment:experimentDict]) {
-            [_meta setObject:experimentDict forKey:experimentId];
-        }
     }
-    
-//    VAOLog(@"Meta after: %@", [_meta description]);
-    
-    if (!_previewMode) {
-        [[VAOModel sharedInstance] saveMeta:_meta];
-    }
+
     
 }
 
@@ -609,7 +618,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     @catch (NSException *exception) {
         NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
         VAORavenCaptureException(selfException);
-        VAORavenCaptureException(exception)
+        VAORavenCaptureException(exception);
     }
     @finally {
         return [[stack lastObject] boolValue];
