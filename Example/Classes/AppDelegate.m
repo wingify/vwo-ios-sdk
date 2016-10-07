@@ -14,11 +14,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [VWO setValue:@"paid" forCusomtorVariable:@"userType"];
-    [VWO setValue:@"yoyo1" forCusomtorVariable:@"checkmy"];
-    [VWO launchVWOWithCallback:^{
-        NSLog(@"completion block ---> %@", [VWO allObjects]);
-    }];
+    //[VWO setValue:@"paid" forCusomtorVariable:@"userType"];
+    //[VWO setValue:@"yoyo1" forCusomtorVariable:@"checkmy"];
+    //[VWO launchVWOWithCallback:^{
+    //    NSLog(@"completion block ---> %@", [VWO allObjects]);
+    //}];
+    [VWO launchVWOSynchronously];
     
     return YES;
 }
