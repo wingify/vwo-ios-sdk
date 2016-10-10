@@ -46,6 +46,7 @@
 		CCCB75401BFC8DA600A05CC4 /* P3.png in Resources */ = {isa = PBXBuildFile; fileRef = CCCB75341BFC8DA600A05CC4 /* P3.png */; };
 		CCCB75411BFC8DA600A05CC4 /* P4.png in Resources */ = {isa = PBXBuildFile; fileRef = CCCB75351BFC8DA600A05CC4 /* P4.png */; };
 		CCCB75421BFC8DA600A05CC4 /* white-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CCCB75361BFC8DA600A05CC4 /* white-bg.png */; };
+		CCD261AF1DA7ABEE005EF77B /* AppKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD261AE1DA7ABEE005EF77B /* AppKeyViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,8 @@
 		CCCB75341BFC8DA600A05CC4 /* P3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = P3.png; sourceTree = "<group>"; };
 		CCCB75351BFC8DA600A05CC4 /* P4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = P4.png; sourceTree = "<group>"; };
 		CCCB75361BFC8DA600A05CC4 /* white-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white-bg.png"; sourceTree = "<group>"; };
+		CCD261AD1DA7ABEE005EF77B /* AppKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppKeyViewController.h; sourceTree = "<group>"; };
+		CCD261AE1DA7ABEE005EF77B /* AppKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppKeyViewController.m; sourceTree = "<group>"; };
 		DAB7762985B5E85B48F33859 /* Pods-WingifyABTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingifyABTestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WingifyABTestApp/Pods-WingifyABTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		EDEB63F9F0F4C705C4A3CD65 /* Pods-WingifyMobileApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingifyMobileApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WingifyMobileApp/Pods-WingifyMobileApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +172,8 @@
 		CCCB74F81BFC8D9900A05CC4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CCD261AD1DA7ABEE005EF77B /* AppKeyViewController.h */,
+				CCD261AE1DA7ABEE005EF77B /* AppKeyViewController.m */,
 				CCCB74F91BFC8D9900A05CC4 /* AboutViewController.h */,
 				CCCB74FA1BFC8D9900A05CC4 /* AboutViewController.m */,
 				CCCB74FB1BFC8D9900A05CC4 /* AppDelegate.h */,
@@ -382,6 +387,7 @@
 				CCCB75261BFC8D9900A05CC4 /* SortViewController.m in Sources */,
 				CCCB75181BFC8D9900A05CC4 /* AboutViewController.m in Sources */,
 				CCCB751A1BFC8D9900A05CC4 /* BannerViewController.m in Sources */,
+				CCD261AF1DA7ABEE005EF77B /* AppKeyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

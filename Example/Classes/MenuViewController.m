@@ -29,7 +29,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return 7;
 }
 
 -(BOOL)deleteFile:(NSString*)fileName {
@@ -89,6 +89,10 @@
             break;
             
         case 6:
+            CellIdentifier = @"appkey";
+            break;
+            
+        case 7:
             CellIdentifier = @"about";
             break;
     }
