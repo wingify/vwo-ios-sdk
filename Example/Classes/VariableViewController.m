@@ -37,6 +37,9 @@
     } completion:nil];
     
     self.variationLabel.text = [NSString stringWithFormat:@"Variation, ball speed = %i", speed.intValue];
+    [self.variationLabel updateConstraints];
+    [self.variationLabel layoutIfNeeded];
+    
 }
 
 - (void)customSetup

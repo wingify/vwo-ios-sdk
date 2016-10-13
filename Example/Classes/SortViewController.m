@@ -147,6 +147,10 @@
     nameLabel.text = phone[@"name"];
     priceLabel.text = [NSString stringWithFormat:@"$%@", phone[@"price"]];
     
+    [imageView updateConstraints];
+    [imageView setNeedsLayout];
+    [imageView layoutIfNeeded];
+    
     
     [cell setNeedsLayout];
     [cell layoutIfNeeded];
@@ -159,7 +163,7 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     float cellWidth = (screenWidth/ 2.0) - 20; //Replace the divisor with the column count requirement. Make sure to have it in float.
-    CGSize size = CGSizeMake(cellWidth, 80);
+    CGSize size = CGSizeMake(cellWidth, 110);
     
     return size;
 }

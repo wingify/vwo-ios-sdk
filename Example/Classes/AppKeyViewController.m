@@ -12,7 +12,9 @@
 @property (nonatomic) IBOutlet UIBarButtonItem* revealButtonItem;
 @end
 
-@implementation AppKeyViewController
+@implementation AppKeyViewController {
+    NSUserDefaults *defaults;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -21,6 +23,8 @@
 
 - (void)customSetup
 {
+    defaults = [NSUserDefaults standardUserDefaults];
+    
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
     {
@@ -54,7 +58,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -62,12 +66,47 @@
     static NSString *CellIdentifier = @"keycell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier forIndexPath: indexPath];
     UILabel *label = (UILabel*)[cell viewWithTag:101];
+    
+    NSString *account = [defaults stringForKey:@"useAccount"];
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    
     if (indexPath.row == 0) {
         label.text = @"Demo App for account 10";
+        if([account isEqualToString:@"10"]) {
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        }
     } else {
         label.text = @"Demo App for account 196";
+        if([account isEqualToString:@"196"]) {
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        }
     }
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    
+    
+    if(indexPath.row == 0) {
+        [defaults setObject:@"10" forKey:@"useAccount"];
+    } else {
+        [defaults setObject:@"196" forKey:@"useAccount"];
+    }
+    
+    [defaults synchronize];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self setCheckMark:indexPath];
+}
+
+-(void)setCheckMark:(NSIndexPath*)indexPath {
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    
+    NSIndexPath *iPath = [NSIndexPath indexPathForRow:(indexPath.row+1)%2 inSection:0];
+    cell = [self.tableView cellForRowAtIndexPath:iPath];
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
 }
 @end

@@ -136,7 +136,11 @@
             break;
     }
     
+    [nameLabel updateConstraints];
+    [nameLabel setNeedsLayout];
+    [nameLabel layoutIfNeeded];
     
+
     /*
      UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:iv.bounds
      byRoundingCorners:(UIRectCornerBottomRight)

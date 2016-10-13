@@ -215,16 +215,17 @@
 {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
+    float cellHeight = 95;
     float cellWidth = (screenWidth/ 2.0) - 20; //Replace the divisor with the column count requirement. Make sure to have it in float.
     if (collectionView == self.controlCollectionView) {
-        return CGSizeMake(cellWidth, 80);
+        return CGSizeMake(cellWidth, cellHeight);
     } else {
         NSString *layout = [VWO objectForKey:@"layout" defaultObject:@"list"];
         if([layout isEqualToString:@"grid"]) {
             cellWidth = cellWidth/2;
         }
         
-        return CGSizeMake(cellWidth, 80);
+        return CGSizeMake(cellWidth, cellHeight);
         
     }
     
