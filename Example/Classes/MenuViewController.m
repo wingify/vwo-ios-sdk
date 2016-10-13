@@ -37,12 +37,16 @@
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
     NSString *filePath = [documentsPath stringByAppendingPathComponent:fileName];
-    NSError *error;
-    BOOL success = [fileManager removeItemAtPath:filePath error:&error];
-    if(error) {
-        NSLog(@"error: %@", error);
+    if([fileManager fileExistsAtPath:filePath]) {
+        NSError *error;
+        BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+        if(error) {
+            NSLog(@"error: %@", error);
+        }
+        return success;
     }
-    return success;
+    
+    return true;
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
