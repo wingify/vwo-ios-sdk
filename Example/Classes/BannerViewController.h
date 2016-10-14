@@ -13,4 +13,6 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *variationCollectionView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *variationBannerview;
+
+- (IBAction)refresh:(id)sender;
 @end

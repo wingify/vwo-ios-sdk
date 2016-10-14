@@ -163,6 +163,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Login Campaign" id="KbI-f5-Z2j">
                         <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" style="plain" id="Inx-Wl-XPE"/>
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="6jk-Xh-mDj">
+                            <connections>
+                                <action selector="refresh:" destination="7k1-p9-rbO" id="GwC-2Y-ddz"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -241,13 +246,17 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="B1.png" translatesAutoresizingMaskIntoConstraints="NO" id="xTt-Jp-Oae"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="B1.png" translatesAutoresizingMaskIntoConstraints="NO" id="xTt-Jp-Oae">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="96" id="SKT-Cz-qxg"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="xTt-Jp-Oae" firstAttribute="centerX" secondItem="WAk-sn-CVT" secondAttribute="centerX" id="0sx-1U-glY"/>
                                     <constraint firstItem="X3h-KN-jGp" firstAttribute="top" secondItem="WAk-sn-CVT" secondAttribute="top" constant="4" id="7ZW-Xr-Y0U"/>
-                                    <constraint firstItem="xTt-Jp-Oae" firstAttribute="top" secondItem="WAk-sn-CVT" secondAttribute="top" constant="10" id="TL1-wg-b93"/>
+                                    <constraint firstItem="xTt-Jp-Oae" firstAttribute="top" secondItem="WAk-sn-CVT" secondAttribute="top" constant="33" id="TL1-wg-b93"/>
                                     <constraint firstItem="xTt-Jp-Oae" firstAttribute="width" secondItem="WAk-sn-CVT" secondAttribute="width" multiplier="0.85" id="VR4-ER-YHM"/>
                                     <constraint firstItem="X3h-KN-jGp" firstAttribute="centerX" secondItem="WAk-sn-CVT" secondAttribute="centerX" id="oJm-h9-pLk"/>
                                 </constraints>
@@ -301,17 +310,21 @@
                                             <outlet property="delegate" destination="WkT-H8-zrm" id="Rqb-ge-Nu5"/>
                                         </connections>
                                     </collectionView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="B2.png" translatesAutoresizingMaskIntoConstraints="NO" id="hrc-ky-2s8"/>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Variation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEe-BY-Am4">
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="B2.png" translatesAutoresizingMaskIntoConstraints="NO" id="hrc-ky-2s8">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="96" id="WRL-rF-nVd"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="hrc-ky-2s8" firstAttribute="centerX" secondItem="90x-f1-PhA" secondAttribute="centerX" id="5cM-6o-dLp"/>
-                                    <constraint firstItem="hrc-ky-2s8" firstAttribute="top" secondItem="90x-f1-PhA" secondAttribute="top" constant="10" id="6wh-hP-yap"/>
+                                    <constraint firstItem="hrc-ky-2s8" firstAttribute="top" secondItem="90x-f1-PhA" secondAttribute="top" constant="33" id="6wh-hP-yap"/>
                                     <constraint firstItem="PEe-BY-Am4" firstAttribute="centerX" secondItem="90x-f1-PhA" secondAttribute="centerX" id="Qze-2s-XaO"/>
                                     <constraint firstItem="PEe-BY-Am4" firstAttribute="top" secondItem="90x-f1-PhA" secondAttribute="top" constant="4" id="bzQ-0W-YER"/>
                                     <constraint firstItem="hrc-ky-2s8" firstAttribute="width" secondItem="90x-f1-PhA" secondAttribute="width" multiplier="0.85" id="wJi-Tu-Vc7"/>
@@ -346,6 +359,11 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Banner Campaign" id="OLw-DT-xHF">
                         <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" style="plain" id="219-PO-NaO"/>
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="qgO-mS-8CQ">
+                            <connections>
+                                <action selector="refresh:" destination="WkT-H8-zrm" id="dz5-5U-eIx"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -593,7 +611,7 @@
                                             <constraint firstAttribute="height" constant="96" id="WAi-ND-r41"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Control, ball speed = 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fbt-OX-OWe">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Control, ball speed = 2.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fbt-OX-OWe">
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -656,6 +674,11 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Variable Campaign" id="43F-UV-xLE">
                         <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" style="plain" id="RT2-di-5oA"/>
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="gSt-JF-zjX">
+                            <connections>
+                                <action selector="refresh:" destination="omC-cZ-wy5" id="wCz-aP-AIX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -720,7 +743,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CellIdentifier" id="oHi-Lc-qTh">
-                                                <rect key="frame" x="37" y="0.0" width="261" height="110"/>
+                                                <rect key="frame" x="36" y="0.0" width="261" height="110"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="261" height="110"/>
@@ -877,6 +900,11 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Sorting Campaign" id="JbL-O7-Fn4">
                         <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" style="plain" id="q0x-dA-Rdw"/>
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="ehF-VW-Fgo">
+                            <connections>
+                                <action selector="refresh:" destination="uU1-Vz-X9w" id="Mlb-hX-xGS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -1064,7 +1092,7 @@ This app links to a domain called http://www.vwo.com</string>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CellIdentifier" id="MV7-G8-90M">
-                                                <rect key="frame" x="27" y="0.0" width="281" height="106"/>
+                                                <rect key="frame" x="26" y="0.0" width="281" height="106"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="281" height="106"/>
@@ -1172,7 +1200,7 @@ This app links to a domain called http://www.vwo.com</string>
                                                     <constraint firstItem="eMA-Ip-qQM" firstAttribute="leading" secondItem="ZpO-rs-vV6" secondAttribute="trailing" constant="5" id="Noj-WB-N9m"/>
                                                     <constraint firstItem="ZpO-rs-vV6" firstAttribute="leading" secondItem="R9c-hv-5N6" secondAttribute="leading" constant="2" id="W5I-Gn-N7a"/>
                                                     <constraint firstItem="3r6-cs-84D" firstAttribute="top" secondItem="R9c-hv-5N6" secondAttribute="top" constant="8" id="dax-cM-Qdh"/>
-                                                    <constraint firstItem="3r6-cs-84D" firstAttribute="leading" secondItem="ZpO-rs-vV6" secondAttribute="trailing" constant="5" id="gz5-gk-PHL"/>
+                                                    <constraint firstItem="3r6-cs-84D" firstAttribute="leading" secondItem="ZpO-rs-vV6" secondAttribute="trailing" id="gz5-gk-PHL"/>
                                                     <constraint firstItem="eMA-Ip-qQM" firstAttribute="top" secondItem="3r6-cs-84D" secondAttribute="bottom" constant="8" id="ix9-dc-BvG"/>
                                                     <constraint firstItem="1tj-gl-v6w" firstAttribute="width" secondItem="R9c-hv-5N6" secondAttribute="width" id="oj8-yI-B44"/>
                                                     <constraint firstItem="1tj-gl-v6w" firstAttribute="centerX" secondItem="R9c-hv-5N6" secondAttribute="centerX" id="wD7-9Z-C7l"/>
@@ -1223,6 +1251,11 @@ This app links to a domain called http://www.vwo.com</string>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Layout Campaign" id="rQt-qs-Fej">
                         <barButtonItem key="leftBarButtonItem" image="reveal-icon.png" style="plain" id="DmX-Mu-BIB"/>
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="75N-xq-TxN">
+                            <connections>
+                                <action selector="refresh:" destination="GXw-oe-SuT" id="VZJ-sX-xx6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>

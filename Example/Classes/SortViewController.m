@@ -53,10 +53,11 @@
     [self customSetup];
     variationProducts = [NSArray arrayWithArray:products];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    [self setupVariation];
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+-(void)setupVariation{
     @try {
         NSString *sorting = [VWO objectForKey:@"sorting" defaultObject:@"popularity"];
         NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:sorting ascending:YES];
@@ -168,4 +169,7 @@
     return size;
 }
 
+- (IBAction)refresh:(id)sender {
+     [self setupVariation];
+}
 @end

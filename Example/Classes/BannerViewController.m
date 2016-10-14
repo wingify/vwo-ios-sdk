@@ -19,6 +19,7 @@
 {
     [super viewDidLoad];
     [self customSetup];
+    [self showBanner];
 }
 
 - (void)customSetup
@@ -36,8 +37,7 @@
     [self.variationBannerview setUserInteractionEnabled:YES];
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+-(void)showBanner {
     NSString *imageName = [VWO objectForKey:@"banner-image" defaultObject:@"B1.png"];
     
     if ([imageName hasPrefix:@"http"]) {
@@ -53,6 +53,9 @@
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.variationBannerview.image = [[UIImage alloc] initWithData:data];
+                [self.variationBannerview updateConstraints];
+                [self.variationBannerview setNeedsLayout];
+                [self.variationBannerview layoutIfNeeded];
             });
             
         }
@@ -171,4 +174,7 @@
     return size;
 }
 
+- (IBAction)refresh:(id)sender {
+    [self showBanner];
+}
 @end

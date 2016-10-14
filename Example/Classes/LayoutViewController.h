@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *controlCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView *variationCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *variationLabel;
+- (IBAction)refresh:(id)sender;
 
 @end
