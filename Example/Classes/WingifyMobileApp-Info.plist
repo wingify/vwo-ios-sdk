@@ -46,7 +46,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>VWOAppKey</key>
-	<string>d18cbcfbe786e569d8ec4358fc2da213-136376</string>
+	<key>VWOAppKey-10</key>
+	<string>cccf243b3e2b18b4bdfbad0a8d2b1f2b-10</string>
+	<key>VWOAppKey-196</key>
+	<string>e03da441ed98e745d232816350e6dc96-196</string>
 </dict>
 </plist>
