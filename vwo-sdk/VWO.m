@@ -110,7 +110,7 @@
  * @return `YES` if the debugger is attached to the current process, `NO` otherwise
  */
 + (BOOL)isDebuggerAttached {
-    return YES;
+//    return YES;
     
     static BOOL debuggerIsAttached = NO;
     

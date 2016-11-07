@@ -61,13 +61,15 @@ static NSString *_token;
 }
 
 + (NSString*)vaoAccountIdAppKeyCombination {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *useAccount = [defaults stringForKey:@"useAccount"];
-    if(useAccount && [useAccount isEqualToString:@"196"]) {
-        return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"VWOAppKey-196"];
-    } else {
-        return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"VWOAppKey-10"];
-    }
+    NSString *combination = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"VWOAppKey"];
+    return combination;
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSString *useAccount = [defaults stringForKey:@"useAccount"];
+//    if(useAccount && [useAccount isEqualToString:@"196"]) {
+//        return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"VWOAppKey-196"];
+//    } else {
+//        return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"VWOAppKey-10"];
+//    }
 }
 
 + (NSString*)vaoAccountId {
