@@ -46,6 +46,7 @@
 		CCCB75401BFC8DA600A05CC4 /* P3.png in Resources */ = {isa = PBXBuildFile; fileRef = CCCB75341BFC8DA600A05CC4 /* P3.png */; };
 		CCCB75411BFC8DA600A05CC4 /* P4.png in Resources */ = {isa = PBXBuildFile; fileRef = CCCB75351BFC8DA600A05CC4 /* P4.png */; };
 		CCCB75421BFC8DA600A05CC4 /* white-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CCCB75361BFC8DA600A05CC4 /* white-bg.png */; };
+		CCD261AF1DA7ABEE005EF77B /* AppKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCD261AE1DA7ABEE005EF77B /* AppKeyViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,8 @@
 		CCCB75341BFC8DA600A05CC4 /* P3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = P3.png; sourceTree = "<group>"; };
 		CCCB75351BFC8DA600A05CC4 /* P4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = P4.png; sourceTree = "<group>"; };
 		CCCB75361BFC8DA600A05CC4 /* white-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white-bg.png"; sourceTree = "<group>"; };
+		CCD261AD1DA7ABEE005EF77B /* AppKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppKeyViewController.h; sourceTree = "<group>"; };
+		CCD261AE1DA7ABEE005EF77B /* AppKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppKeyViewController.m; sourceTree = "<group>"; };
 		DAB7762985B5E85B48F33859 /* Pods-WingifyABTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingifyABTestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WingifyABTestApp/Pods-WingifyABTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		EDEB63F9F0F4C705C4A3CD65 /* Pods-WingifyMobileApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingifyMobileApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WingifyMobileApp/Pods-WingifyMobileApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +172,8 @@
 		CCCB74F81BFC8D9900A05CC4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CCD261AD1DA7ABEE005EF77B /* AppKeyViewController.h */,
+				CCD261AE1DA7ABEE005EF77B /* AppKeyViewController.m */,
 				CCCB74F91BFC8D9900A05CC4 /* AboutViewController.h */,
 				CCCB74FA1BFC8D9900A05CC4 /* AboutViewController.m */,
 				CCCB74FB1BFC8D9900A05CC4 /* AppDelegate.h */,
@@ -382,6 +387,7 @@
 				CCCB75261BFC8D9900A05CC4 /* SortViewController.m in Sources */,
 				CCCB75181BFC8D9900A05CC4 /* AboutViewController.m in Sources */,
 				CCCB751A1BFC8D9900A05CC4 /* BannerViewController.m in Sources */,
+				CCD261AF1DA7ABEE005EF77B /* AppKeyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,14 +477,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Swapnil Agarwal (KSEVDU2PLR)";
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Classes/WingifyMobileApp-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/WingifyMobileApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wingify.abtestapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2488d820-60ba-41f7-8b34-56591fa5d842";
+				PROVISIONING_PROFILE = "eac04e91-7bb8-4992-84bf-ca07c07efc87";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -490,14 +497,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Swapnil Agarwal (KSEVDU2PLR)";
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Classes/WingifyMobileApp-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Classes/WingifyMobileApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wingify.abtestapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2488d820-60ba-41f7-8b34-56591fa5d842";
+				PROVISIONING_PROFILE = "eac04e91-7bb8-4992-84bf-ca07c07efc87";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

@@ -19,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *controlLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *variationLabel;
+- (IBAction)refresh:(id)sender;
 
 @end

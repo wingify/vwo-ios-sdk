@@ -110,6 +110,8 @@
  * @return `YES` if the debugger is attached to the current process, `NO` otherwise
  */
 + (BOOL)isDebuggerAttached {
+//    return YES;
+    
     static BOOL debuggerIsAttached = NO;
     
     static dispatch_once_t debuggerPredicate;

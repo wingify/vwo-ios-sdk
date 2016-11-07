@@ -19,6 +19,7 @@
 {
     [super viewDidLoad];
     [self customSetup];
+    [self setupVariation];
 }
 
 
@@ -36,14 +37,11 @@
     _label.textColor = _color;
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-//    self.variationSignin.titleLabel.text = ;
-//    self.variationSignup.titleLabel.text = [VWO objectForKey:@"sign-up-text" defaultObject:@"or Try Us"];
+-(void)setupVariation{
     
-    [self.variationSignin setTitle:[VWO objectForKey:@"sign-in-text" defaultObject:@"Let's start"] forState:UIControlStateNormal];
-    [self.variationSignup setTitle:[VWO objectForKey:@"sign-up-text" defaultObject:@"or Try Us"] forState:UIControlStateNormal];
-    NSLog(@"object = %@", [VWO objectForKey:@"sign-in-text"]);
+    [self.variationSignin setTitle:[VWO objectForKey:@"sign-in-text" defaultObject:@"Login"] forState:UIControlStateNormal];
+    [self.variationSignup setTitle:[VWO objectForKey:@"sign-up-text" defaultObject:@"or Sign Up"] forState:UIControlStateNormal];
+    
     [self.variationSignin.titleLabel setNeedsLayout];
     [self.variationSignin.titleLabel layoutIfNeeded];
     [self.variationSignup.titleLabel setNeedsLayout];
@@ -93,4 +91,7 @@
 }
 
 
+- (IBAction)refresh:(id)sender {
+    [self setupVariation];
+}
 @end

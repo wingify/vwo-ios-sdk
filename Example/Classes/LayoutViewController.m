@@ -78,20 +78,10 @@
     flow.minimumLineSpacing = 10;
     [self.controlCollectionView setCollectionViewLayout:flow];
     
-    
-    
-    UICollectionViewFlowLayout *flow2 = [[UICollectionViewFlowLayout alloc] init];
-    flow2.itemSize = CGSizeMake(100, 100);
-    flow2.scrollDirection = UICollectionViewScrollDirectionVertical;
-    flow2.minimumInteritemSpacing = 0;
-    flow2.minimumLineSpacing = 10;
-    [self.variationCollectionView setCollectionViewLayout:flow2];
-    
-    
+    [self setupVariation];
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+-(void)setupVariation{
     @try {
         NSString *layout = [VWO objectForKey:@"layout" defaultObject:@"list"];
         
@@ -105,6 +95,16 @@
         
     }
 
+    UICollectionViewFlowLayout *flow2 = [[UICollectionViewFlowLayout alloc] init];
+    flow2.itemSize = CGSizeMake(100, 100);
+    flow2.scrollDirection = UICollectionViewScrollDirectionVertical;
+    flow2.minimumInteritemSpacing = 0;
+    flow2.minimumLineSpacing = 10;
+    [self.variationCollectionView setCollectionViewLayout:flow2];
+    
+    [self.variationCollectionView updateConstraints];
+    [self.variationCollectionView setNeedsLayout];
+    [self.variationCollectionView layoutIfNeeded];
 }
 
 - (void)customSetup
@@ -215,34 +215,29 @@
 {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
+    float cellHeight = 95;
     float cellWidth = (screenWidth/ 2.0) - 20; //Replace the divisor with the column count requirement. Make sure to have it in float.
     if (collectionView == self.controlCollectionView) {
-        return CGSizeMake(cellWidth, 80);
+        return CGSizeMake(cellWidth, cellHeight);
     } else {
         NSString *layout = [VWO objectForKey:@"layout" defaultObject:@"list"];
         if([layout isEqualToString:@"grid"]) {
             cellWidth = cellWidth/2;
         }
         
-        return CGSizeMake(cellWidth, 80);
+        return CGSizeMake(cellWidth, cellHeight);
         
     }
     
 }
 
-//#pragma mark collection view cell paddings
-//- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-//    return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
-//}
-//
-//
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-//    
-//    return 5.0;
-//}
+// Layout: Set Edges
+- (UIEdgeInsets)collectionView:
+(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0,8,0,8);  // top, left, bottom, right
+}
 
-//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-//    return UIEdgeInsetsMake(20, 20, 20, 20);
-//}
-
+- (IBAction)refresh:(id)sender {
+    [self setupVariation];
+}
 @end

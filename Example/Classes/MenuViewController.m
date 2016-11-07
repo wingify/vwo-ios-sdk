@@ -29,8 +29,38 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return 7;
 }
+
+-(BOOL)deleteFile:(NSString*)fileName {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:fileName];
+    if([fileManager fileExistsAtPath:filePath]) {
+        NSError *error;
+        BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+        if(error) {
+            NSLog(@"error: %@", error);
+        }
+        return success;
+    }
+    
+    return true;
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row == 5) {
+        
+        if ([self deleteFile:@"__vaocampaigns.plist"] && [self deleteFile:@"__vaojson.plist"]) {
+            exit(0);
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Error in clearing data." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -57,8 +87,16 @@
         case 4:
             CellIdentifier = @"layout";
             break;
-            
+
         case 5:
+            CellIdentifier = @"cleardata";
+            break;
+            
+        case 6:
+            CellIdentifier = @"appkey";
+            break;
+            
+        case 7:
             CellIdentifier = @"about";
             break;
     }

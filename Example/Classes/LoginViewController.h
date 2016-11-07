@@ -14,5 +14,6 @@
 @property (nonatomic, strong) NSString* text;
 @property (weak, nonatomic) IBOutlet UIButton *variationSignin;
 @property (weak, nonatomic) IBOutlet UIButton *variationSignup;
+- (IBAction)refresh:(id)sender;
 
 @end
