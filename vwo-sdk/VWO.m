@@ -1,6 +1,6 @@
 //
-//  VAO.m
-//  VAO
+//  VWO.m
+//  VWO
 //
 //  Created by Wingify on 17/09/13.
 //  Copyright (c) 2013 Wingify Software Pvt. Ltd. All rights reserved.
@@ -19,7 +19,7 @@
 @implementation VWO
 
 /**
- * Call to this function kickstarts VAO. This should be called as early as possible in application life cycle.
+ * Call to this function kickstarts VWO. This should be called as early as possible in application life cycle.
  * Currently, it gets called in  application:willFinishLaunchingWithOptions:
  * See if we can call it in main(), before we call UIApplicationMain()? (see:
  * https://developer.apple.com/library/ios/documentation/iphone/conceptual/iphoneosprogrammingguide/ManagingYourApplicationsFlow/ManagingYourApplicationsFlow.html#//apple_ref/doc/uid/TP40007072-CH4-SW7 )
@@ -188,6 +188,14 @@
 
 + (void)markConversionForGoal:(NSString*)goal withValue:(double)value {
     [[VAOController sharedInstance] markConversionForGoal:goal withValue:[NSNumber numberWithDouble:value]];
+}
+
++ (void)trackUserManually {
+    [[VAOController sharedInstance] trackUserManually];
+}
+
++ (void)trackUserInCampaign:(NSString*)key {
+    [[VAOController sharedInstance] trackUserInCampaign:key];
 }
 
 + (void)setValue:(NSString*)value forCusomtorVariable:(NSString*)variable {

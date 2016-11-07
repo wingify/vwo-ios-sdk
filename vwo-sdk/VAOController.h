@@ -21,10 +21,11 @@
 - (void)applicationDidExitPreviewMode;
 - (void)previewMeta:(NSDictionary *)changes;
 - (void)setValue:(NSString*)value forCusomtorVariable:(NSString*)variable;
-
+- (void)trackUserManually;
 // Goals
 - (void)markConversionForGoal:(NSString*)goal withValue:(NSNumber*)value;
 
 // json Methods
 - (id)objectForKey:(NSString*)key;
+- (void)trackUserInCampaign:(NSString*)key;
 @end

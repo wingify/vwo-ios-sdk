@@ -27,19 +27,18 @@
  */
 + (void)launchVWOSynchronously;
 
-
 /**
- *  It searches all the available experiments, identifies the experiment and returns object for the specified key
- *  User is made part of the identified experiment.
+ *  It searches all the available campaigns, identifies the campaign and returns object for the specified key
+ *  By default user is made part of the identified campaign, unless you call 'trackUserManually' method BEFORE initialisation.
  */
 + (id)objectForKey:(NSString*)key;
 
 /**
- *  If any object for the specified key cannot be found, 
- *  it returns the default object.
- *  It is possible if an invalid key is specified OR
- *  It is possible if internet connection is not available and a key is specified 
- *  for which any experiment cannot be found
+ *  Behaves in the same manner as 'objectForKey', it returns defaultObject instead of nil when:
+ *  - an object for the specified key cannot be found,
+ *  - an invalid key is specified
+ *  - if internet connection is not available
+ *  - in case of any error
  */
 + (id)objectForKey:(NSString*)key defaultObject:(id)defaultObject;
 
@@ -56,6 +55,19 @@
 + (void)markConversionForGoal:(NSString*)goal withValue:(double)value;
 
 /**
+ *  If you call 'trackUserManually' before calling launch method then
+ *  a user IS NOT automatically made part of campaign.
+ *  You should call 'trackUserInCampaign' when you want to include a user in a campaign.
+ */
++ (void)trackUserManually;
+
+/**
+ *  It searches all the available campaigns, identifies the campaign and make user part of that campaign.
+ *  A user is counted only once for a particular campaign.
+ */
++ (void)trackUserInCampaign:(NSString*)key;
+
+/**
  *  Set Value for custom variable defined on VWO
  */
 + (void)setValue:(NSString*)value forCusomtorVariable:(NSString*)variable;
@@ -64,4 +76,5 @@
  *  Retruns VWO SDK version
  */
 + (NSString*)sdkVersion;
+
 @end
