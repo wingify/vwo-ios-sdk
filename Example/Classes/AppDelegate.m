@@ -18,12 +18,6 @@
     if([defaults stringForKey:@"useAccount"] == nil) {
         [defaults setObject:@"10" forKey:@"useAccount"];
     }
-    // Override point for customization after application launch.
-    //[VWO setValue:@"paid" forCusomtorVariable:@"userType"];
-    //[VWO setValue:@"yoyo1" forCusomtorVariable:@"checkmy"];
-    //[VWO launchVWOWithCallback:^{
-    //    NSLog(@"completion block ---> %@", [VWO allObjects]);
-    //}];
     [VWO launchVWOSynchronously];
     
     return YES;

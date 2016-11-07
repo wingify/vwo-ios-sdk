@@ -170,10 +170,6 @@
     [self setupAsynchronously:NO withCallback:nil];
 }
 
-+ (NSDictionary*)allObjects {
-    return [[VAOController sharedInstance] allObjects];
-}
-
 + (id)objectForKey:(NSString*)key {
     return [[VAOController sharedInstance] objectForKey:key];
 }

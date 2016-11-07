@@ -732,30 +732,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     }
 }
 
-- (id)allObjects {
-    @try {
-        NSMutableDictionary *json = [NSMutableDictionary dictionary];
-        for (NSString *expId in [_meta allKeys]) {
-            NSDictionary *experiment = _meta[expId];
-            
-            if ([experiment[@"json"] isKindOfClass:[NSDictionary class]]) {
-                NSDictionary *thisExpJSON = experiment[@"json"];
-                [json addEntriesFromDictionary:[thisExpJSON copy]];
-            }
-
-        }
-        return json;
-    }
-    @catch (NSException *exception) {
-        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
-        VAORavenCaptureException(selfException);
-        VAORavenCaptureException(exception);
-    }
-    @finally {
-        
-    }
-}
-
 /**
  *  This method verifies if user has been part of the experiment
  *  If YES (user has been part) it returns YES

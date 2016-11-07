@@ -27,13 +27,6 @@
  */
 + (void)launchVWOSynchronously;
 
-/**
- *  Returns all the objects of all the available experiments.
- *  User is made part of ALL the available experiments.
- *  It is recommended to call this method only when you want to use all the objects,
- *  as it makes user part of all the available experiments
- */
-+ (NSDictionary*)allObjects;
 
 /**
  *  It searches all the available experiments, identifies the experiment and returns object for the specified key

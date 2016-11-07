@@ -26,6 +26,5 @@
 - (void)markConversionForGoal:(NSString*)goal withValue:(NSNumber*)value;
 
 // json Methods
-- (id)allObjects;
 - (id)objectForKey:(NSString*)key;
 @end
