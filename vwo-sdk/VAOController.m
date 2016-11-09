@@ -744,6 +744,10 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 }
 
 - (void)trackUserInCampaign:(NSString*)key {
+    if(_trackUserManually == NO) {
+        return;
+    }
+    
     @try {
         for (NSString *expId in [_meta allKeys]) {
             NSDictionary *experiment = _meta[expId];
