@@ -29,5 +29,3 @@
 + (NSString*)deviceType;
 @end
 
-
-void VAOMethodSwizzle(Class aClass, SEL originalSelector, SEL swizzledSelector);
