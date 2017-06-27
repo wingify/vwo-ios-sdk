@@ -24,6 +24,5 @@
 - (BOOL)hasBeenPartOfExperiment:(NSString*)experimentId;
 - (void)checkAndMakePartOfExperiment:(NSString*)experimentId variationId:(NSString*)variationId;
 - (BOOL)shouldTriggerGoal:(NSString*)goalId forExperiment:(NSString*)experimentId;
-- (BOOL)isUserPartOfAnyExperiment;
 - (NSMutableDictionary*)getCurrentExperimentsVariationPairs;
 @end

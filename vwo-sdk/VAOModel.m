@@ -106,14 +106,6 @@ NSMutableDictionary *campaigns;
 }
 
 /**
- *  Returns YES is user has been made part of any experiment so far
- *  Returns NO otherwise
- */
-- (BOOL)isUserPartOfAnyExperiment {
-    return ([[campaigns allKeys] count] > 0);
-}
-
-/**
  *  Returns YES is user has been made part of the experiment id
  *  Returns NO otherwise
  */
