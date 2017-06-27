@@ -88,13 +88,6 @@ static NSString *_token;
     return nil;
 }
 
-+ (NSInteger)majoriOSversion {
-    NSString *iOSVersion = [[UIDevice currentDevice] systemVersion];
-    NSArray *versionsArray = [iOSVersion componentsSeparatedByString:@"."];
-    NSInteger majorVersion = [versionsArray[0] integerValue];
-    return majorVersion;
-}
-
 + (NSString*)deviceType {
     struct utsname systemInfo;
     uname(&systemInfo);

@@ -23,7 +23,6 @@
 + (NSNumber*)getSessionNumber;
 + (void)setIsNewVisitor:(BOOL)newVisitor;
 + (BOOL)getIsNewVisitor;
-+ (NSInteger)majoriOSversion;
 + (NSString*)vaoAccountId;
 + (NSString*)vaoAppKey;
 + (NSString*)deviceType;
