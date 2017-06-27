@@ -11,6 +11,8 @@
 #import <sys/types.h>
 #import <sys/sysctl.h>
 
+static NSString *kDefUUID = @"vaoUUID";
+
 @implementation VAODeviceInfo
 
 // Eg: @"iPhone7,2" on iPhone 6
@@ -55,7 +57,12 @@
 //Fetches UUID from persistent storage. If not available creates one
 + (NSString *)getUUID {
     //TODO: Make UUID persistant and return the same one
-    NSString *uuid = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    NSString *uuid = [[NSUserDefaults standardUserDefaults] stringForKey:kDefUUID];
+    if (uuid == nil) {
+        NSString *newUuid = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        [[NSUserDefaults standardUserDefaults] setObject:newUuid forKey:kDefUUID];
+        return newUuid;
+    }
     return uuid;
 }
 
