@@ -12,7 +12,6 @@
 #import "VAOAPIClient.h"
 #import "VAOSocketClient.h"
 #import "VAOGoogleAnalytics.h"
-//#import "VAOFlurry.h"
 #import "VAORavenClient.h"
 #include <sys/types.h>
 #include <sys/sysctl.h>
@@ -263,20 +262,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     
 }
 
-/**
- * https://github.com/fahrulazmi/UIDeviceHardware/blob/master/UIDeviceHardware.m
- */
-
-- (NSString *)platform{
-    size_t size;
-    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
-    char *machine = malloc(size);
-    sysctlbyname("hw.machine", machine, &size, NULL, 0);
-    NSString *platform = [NSString stringWithUTF8String:machine];
-    free(machine);
-    return platform;
-}
-
 
 -(BOOL)evaluateOperand:(NSArray*)operandValue lOperandValue:(NSString*)lOperandValue operator:(int)operator type:(int)type {
     
@@ -324,28 +309,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
                         }
                     }
                     break;
-                }
-            }
-        }
-        
-    } else if (type == 2) {
-        // device type
-        
-        if(TARGET_IPHONE_SIMULATOR) {
-            toReturn = YES;
-        } else {
-            NSString *platform = [self platform];
-            
-            // set default to YES in case of NOT equal to
-            if (operator == 12) {
-                toReturn = YES;
-            }
-            
-            if ([operandValue containsObject:platform]) {
-                if (operator == 11) {
-                    toReturn = YES;
-                } else if (operator == 12) {
-                    toReturn = NO;
                 }
             }
         }
