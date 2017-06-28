@@ -89,7 +89,6 @@ NSTimer *_timer;
 
 // For App
 - (void) pullABData:(NSMutableDictionary *)experimentsAndVariationsPair
-            preview:(BOOL)isPreview
             success:(void(^)(id))successBlock
             failure:(void(^)(NSError *))failureBlock
       isSynchronous:(BOOL)synchronous {
@@ -165,24 +164,18 @@ NSTimer *_timer;
                           variationId:(NSString *)variationId
                               revenue:(NSNumber*)revenue {
     
-    NSString *method = @"goal";
-    NSDictionary *params;
-    if (!revenue || revenue == (id)[NSNull null]) {
-        params = @{@"goalId": @(goalId),
-                   @"expId":@(experimentId),
-                   @"varId": variationId};
-    } else {
-        params = @{@"goalId": @(goalId),
-                   @"expId":@(experimentId),
-                   @"varId": variationId,
-                   @"revenue": revenue};
+    NSMutableDictionary *params = [NSMutableDictionary
+                                   dictionaryWithDictionary:@{@"goalId": @(goalId),
+                                                              @"expId":@(experimentId),
+                                                              @"varId": variationId}];
+    if (revenue != nil) {
+        params[@"revenue"] = revenue;
     }
 
-    [self _call:method with:params];
+    [self _call:@"goal" with:params];
 }
 
 - (void)_call:(NSString *)method with:(NSDictionary *)params{
-    //VAOLog(@"Called %@ with %@", method, params);
     if(_optOut == NO){
         NSString *transitId = [VAOAPIClient allocateTransitId];
         NSNumber *timestamp = @([[NSDate date] timeIntervalSince1970]);
@@ -239,11 +232,7 @@ NSTimer *_timer;
     }
     
     VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
-//#if DEBUG
-//    manager.securityPolicy.allowInvalidCertificates = YES;
-//    manager.securityPolicy.validatesDomainName = NO;
-//#endif
-    
+
     [manager GET:url parameters:parameters success:^(VAOAFHTTPRequestOperation *operation, id responseObject) {
         //VAOLog(@"JSON: %@", responseObject);
         if (successBlock) {
