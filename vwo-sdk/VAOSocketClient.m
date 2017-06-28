@@ -62,17 +62,13 @@
         [[VAOController sharedInstance] applicationDidEnterPreviewMode];
         id object = [arguments firstObject];
         if (object && object[@"name"]) {
-            NSLog(@"|------------------------------------------------------------------------|");
-            NSLog(@"|------         VWO: In preview mode. Connected with:%@            ------|", object[@"name"]);
-            NSLog(@"|------------------------------------------------------------------------|");
+            NSLog(@"VWO: In preview mode. Connected with:%@", object[@"name"]);
         }
     }];
 
     [socket on:@"browser_disconnect" callback:^(SIOParameterArray *arguments) {
         VAOLog(@"in browser_disconnect");
-        NSLog(@"|------------------------------------------------------------------------|");
-        NSLog(@"|------         VWO: In preview mode. DIS Connected                ------|");
-        NSLog(@"|------------------------------------------------------------------------|");
+        NSLog(@"VWO: In preview mode. Disconnected");
         [[VAOController sharedInstance] applicationDidExitPreviewMode];
     }];
     

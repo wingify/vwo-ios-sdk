@@ -38,9 +38,7 @@
         // get values for various parameters and initialize singletons
         NSString *accountId = [VAOUtils vaoAccountId];
         if([accountId isKindOfClass:NSString.class] == NO){
-            NSLog(@"|------------------------------------------------------------------------|");
-            NSLog(@"|------VWO: Check if you have VWOAppKey in your info.plist file ------|");
-            NSLog(@"|------------------------------------------------------------------------|");
+            NSLog(@"VWO: Check if you have VWOAppKey in your info.plist file");
             return;
         }
         
@@ -74,12 +72,9 @@
         [notificationCenter addObserver:[VAOController sharedInstance]
                                selector:@selector(applicationWillEnterForeground)
                                    name:UIApplicationWillEnterForegroundNotification object:nil];
-        
-        
-        NSLog(@"|------------------------------------------------------------------------|");
-        NSLog(@"|------                     VWO Initialized                        ------|");
-        NSLog(@"|------------------------------------------------------------------------|");
-        
+
+        NSLog(@"VWO Initialized");
+
     });
 }
 
@@ -97,8 +92,6 @@
                                                      extra:extra
                                                       tags:tags];
     
-    //NOTE: Commented the line below, as we do not want to capture all the exceptions. We will manually capture our own exceptions..
-    //        [client setupExceptionHandler];
     [VAORavenClient setSharedClient:client];
 }
 
