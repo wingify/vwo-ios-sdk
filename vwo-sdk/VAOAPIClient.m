@@ -51,12 +51,12 @@ NSTimer *_timer;
 - (void)applicationWillEnterForeground{
     _timer = [NSTimer scheduledTimerWithTimeInterval:kVAOTimerInterval
                                               target:[VAOAPIClient sharedInstance]
-                                            selector:@selector(_tick)
+                                            selector:@selector(sendAllPendingMessages)
                                             userInfo:nil
                                              repeats:YES];
     
     // make call, so that any pending messages can be sent. Just being GREEDY!
-    [self _tick];
+    [self sendAllPendingMessages];
 }
 
 /**
@@ -109,13 +109,9 @@ NSTimer *_timer;
     
     
     VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
-//#if DEBUG
-//    manager.securityPolicy.allowInvalidCertificates = YES;
-//    manager.securityPolicy.validatesDomainName = NO;
-//#endif
-    
+
     if (synchronous) {
-        VAOLog(@"----------------------------------------> Downloading SYNC");
+        VAOLog(@"Synchronously Downloading Campaigns");
         NSError *error;
         id data = [manager syncGET:url
                                parameters:parameters
@@ -128,15 +124,12 @@ NSTimer *_timer;
         }
         
     } else {
-        VAOLog(@"----------------------------------------> Downloading A-SYNC");
+        VAOLog(@"ASynchronously Downloading Campaigns");
         [manager GET:url parameters:parameters success:^(VAOAFHTTPRequestOperation *operation, id responseObject) {
-            //VAOLog(@"JSON: %@", responseObject);
-            //VAOLog(@"calling url url = %@", operation.request.URL);
             if (successBlock) {
                 successBlock(responseObject);
             }
         } failure:^(VAOAFHTTPRequestOperation *operation, NSError *error) {
-            //VAOLog(@"Error: %@", error);
             if (failureBlock) {
                 failureBlock(error);
             }
@@ -145,9 +138,7 @@ NSTimer *_timer;
 }
 
 - (void) pushVariationRenderWithExperimentId:(NSInteger)experimentId variationId:(NSString *)variationId{
-    NSString *method = @"render";
-    NSDictionary *params = @{@"expId": @(experimentId), @"varId": variationId};
-    [self _call:method with:params];
+    [self callMethod:@"render" withParameters:@{@"expId": @(experimentId), @"varId": variationId}];
 }
 
 - (void) pushGoalConversionWithGoalId:(NSInteger)goalId
@@ -163,10 +154,10 @@ NSTimer *_timer;
         params[@"revenue"] = revenue;
     }
 
-    [self _call:@"goal" with:params];
+    [self callMethod:@"goal" withParameters:params];
 }
 
-- (void)_call:(NSString *)method with:(NSDictionary *)params{
+- (void)callMethod:(NSString *)method withParameters:(NSDictionary *)params{
     if(_optOut == NO){
         NSString *transitId = [VAOAPIClient allocateTransitId];
         NSNumber *timestamp = @([[NSDate date] timeIntervalSince1970]);
@@ -174,7 +165,7 @@ NSTimer *_timer;
         [_pendingMessages addObject:message];
         [[VAOModel sharedInstance] saveMessages:[_pendingMessages copy]];
         if(_pendingMessages.count >= kVAOPendingMessagesThreshold){
-            [self _tick];
+            [self sendAllPendingMessages];
         }
     }
 }
@@ -247,7 +238,7 @@ NSTimer *_timer;
 /**
  * Timer operation to send messages to VAO server.
  */
-- (void)_tick {
+- (void)sendAllPendingMessages {
     for (NSDictionary *message in _pendingMessages) {
         
         if ([_transittingMessages containsObject:message[@"id"]]) {
