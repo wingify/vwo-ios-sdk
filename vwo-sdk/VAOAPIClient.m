@@ -41,33 +41,23 @@ NSTimer *_timer;
     _pendingMessages = [NSMutableArray arrayWithArray:[[VAOModel sharedInstance] loadMessages]];
     _transittingMessages = [NSMutableArray array];
     
-//    // fire first call early on to clear any pending data from last time the application was run.
-    [self applicationWillEnterForeground];
+    // fire first call early on to clear any pending data from last time the application was run.
+    [self startTimer];
 }
 
-/**
- * load pending messages from persistent storage.
- */
-- (void)applicationWillEnterForeground{
+- (void) startTimer {
     _timer = [NSTimer scheduledTimerWithTimeInterval:kVAOTimerInterval
                                               target:[VAOAPIClient sharedInstance]
                                             selector:@selector(sendAllPendingMessages)
                                             userInfo:nil
                                              repeats:YES];
-    
-    // make call, so that any pending messages can be sent. Just being GREEDY!
-    [self sendAllPendingMessages];
+    [_timer fire];//to start immediately
 }
 
-/**
- * Invalidate the timer
- */
-- (void)applicationDidEnterBackground {
-//    [[VAOModel sharedInstance] saveMessages:_pendingMessages];
+- (void)stopTimer {
     [_timer invalidate];
     _timer = nil;
 }
-
 - (void)optOut:(BOOL)status{
     _optOut = status;
     [_pendingMessages removeAllObjects];

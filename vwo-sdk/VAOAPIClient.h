@@ -15,8 +15,8 @@
 
 + (instancetype)sharedInstance;
 - (void)schedule;
-- (void)applicationWillEnterForeground;
-- (void)applicationDidEnterBackground;
+- (void)startTimer;
+- (void)stopTimer;
 - (void)optOut:(BOOL)status;
 
 // For App

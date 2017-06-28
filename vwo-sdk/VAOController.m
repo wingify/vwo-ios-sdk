@@ -78,12 +78,12 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 - (void)applicationDidEnterBackground {
     if(_previewMode == NO) {
         _lastUpdateTime = [NSDate timeIntervalSinceReferenceDate];
-        [[VAOAPIClient sharedInstance] applicationDidEnterBackground];
+        [[VAOAPIClient sharedInstance] stopTimer];
     }
 }
 
 - (void)applicationWillEnterForeground {
-    [[VAOAPIClient sharedInstance] applicationWillEnterForeground];
+    [[VAOAPIClient sharedInstance] startTimer];
     if(_remoteDataDownloading == NO) {
         NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
         if(currentTime - _lastUpdateTime < kMinUpdateTimeGap){
