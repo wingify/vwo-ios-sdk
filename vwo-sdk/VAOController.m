@@ -113,12 +113,10 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
 - (void)applicationDidEnterPreviewMode {
     _previewMode = YES;
-    [[VAOAPIClient sharedInstance] applicationDidEnterPreviewMode];
 }
 
 - (void)applicationDidExitPreviewMode{
     _previewMode = NO;
-    [[VAOAPIClient sharedInstance] applicationDidExitPreviewMode];
     
     // we should load
     [self loadMetaList];

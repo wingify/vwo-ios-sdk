@@ -43,7 +43,7 @@ NSMutableDictionary *campaigns;
 - (void)downloadMetaWithCompletionBlock:(void(^)(NSMutableArray *meta))completionBlock
                         withCurrentMeta:(NSMutableDictionary*)currentPairs asynchronously:(BOOL)async {
     
-    [[VAOAPIClient sharedInstance] pullABData:currentPairs preview:NO success:^(NSMutableArray *array) {
+    [[VAOAPIClient sharedInstance] pullABData:currentPairs success:^(NSMutableArray *array) {
         
 //        VAOLog(@"the json from server is = %@", array);
         

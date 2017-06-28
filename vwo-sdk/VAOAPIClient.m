@@ -17,7 +17,6 @@
 static float kVAOTimerInterval = 20.0;
 static int kVAOPendingMessagesThreshold = 3;
 static BOOL _optOut;
-BOOL _previewMode;
 
 // For queqeing of messages to be sent.
 static NSInteger _transitId;
@@ -38,7 +37,6 @@ NSTimer *_timer;
 
 - (void)schedule {
     _optOut = NO;
-    _previewMode = NO;
     _transitId = (NSInteger) [[NSDate date] timeIntervalSinceReferenceDate];
     _pendingMessages = [NSMutableArray arrayWithArray:[[VAOModel sharedInstance] loadMessages]];
     _transittingMessages = [NSMutableArray array];
@@ -144,13 +142,6 @@ NSTimer *_timer;
             }
         }];
     }
-}
-
-- (void)applicationDidEnterPreviewMode{
-    _previewMode = YES;
-}
-- (void)applicationDidExitPreviewMode{
-    _previewMode = NO;
 }
 
 - (void) pushVariationRenderWithExperimentId:(NSInteger)experimentId variationId:(NSString *)variationId{

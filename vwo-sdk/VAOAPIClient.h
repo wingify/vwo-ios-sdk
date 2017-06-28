@@ -21,7 +21,6 @@
 
 // For App
 - (void) pullABData:(NSMutableDictionary *)experimentsAndVariationsPair
-            preview:(BOOL)isPreview
             success:(void(^)(id))successBlock
             failure:(void(^)(NSError *))failureBlock
       isSynchronous:(BOOL)synchronous;
@@ -33,9 +32,5 @@
                          experimentId:(NSInteger)experimentId
                           variationId:(NSString *)variationId
                               revenue:(NSNumber*)revenue;
-
-// For LivePreview, i.e., ability to preview variations on device.
-- (void)applicationDidEnterPreviewMode;
-- (void)applicationDidExitPreviewMode;
 
 @end
