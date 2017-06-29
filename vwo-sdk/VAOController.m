@@ -20,6 +20,15 @@
 
 static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
+typedef NS_ENUM(NSInteger, SegmentationType) {
+    SegmentationTypeCustomVariable=7,
+    SegmentationTypeAppVersion=6,
+    SegmentationTypeiOSVersion=1,
+    SegmentationTypeDayOfWeek=3,
+    SegmentationTypeHourOfTheDay=4,
+    SegmentationTypeLocation=5
+};
+
 @implementation VAOController {
     
     BOOL _remoteDataDownloading;
@@ -258,12 +267,10 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     } @finally {
         
     }
-
-    
 }
 
 
--(BOOL)evaluateOperand:(NSArray*)operandValue lOperandValue:(NSString*)lOperandValue operator:(int)operator type:(int)type {
+-(BOOL)evaluateOperand:(NSArray*)operandValue lOperandValue:(NSString*)lOperandValue operator:(int)operator type:(SegmentationType)segmentType {
     
     // remove null values
     NSMutableArray *newoperandValue = [NSMutableArray arrayWithArray:operandValue];
@@ -274,203 +281,203 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     }
     
     BOOL toReturn = NO;
-    if (type == 1) {
-        // ios version type
-        
-        // find current version
-        NSString *currentVersion = [[UIDevice currentDevice] systemVersion];
-        // consider only x.y version
-        if (currentVersion.length > 3) {
-            currentVersion = [currentVersion substringToIndex:3];
-        } else if (currentVersion.length == 1) {
-            currentVersion = [currentVersion stringByAppendingString:@".0"];
-        }
-        
-        
-        if ([operandValue containsObject:currentVersion]) {
-            if (operator == 11) {
-                toReturn = YES;
-            } else if (operator == 12) {
-                toReturn = NO;
+    switch (segmentType) {
+        case SegmentationTypeiOSVersion: {
+            NSString *currentVersion = [[UIDevice currentDevice] systemVersion];
+            // consider only x.y version
+            if (currentVersion.length > 3) {
+                currentVersion = [currentVersion substringToIndex:3];
+            } else if (currentVersion.length == 1) {
+                currentVersion = [currentVersion stringByAppendingString:@".0"];
             }
-        } else {
-            // iterate
-            if (operator == 12) {
-                toReturn = YES;
-            }
-            
-            for (NSString *version in operandValue) {
-                if (version && ([version rangeOfString:@">="].location != NSNotFound)) {
-                    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO([version substringFromIndex:2])) {
-                        if (operator == 11) {
-                            toReturn = YES;
-                        } else if (operator == 12) {
-                            toReturn = NO;
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-    } else if (type ==3) {
-        // day of week
-        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-        NSDateComponents *comps = [gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]];
-        NSInteger weekday = [comps weekday];
-        
-        // start from sunday = 0
-        weekday = weekday - 1;
-        
-        // set default to YES in case of NOT equal to
-        if (operator == 12) {
-            toReturn = YES;
-        }
-        
-        if ([operandValue containsObject:[NSNumber numberWithInteger:weekday]]) {
-            if (operator == 11) {
-                toReturn = YES;
-            } else if (operator == 12) {
-                toReturn = NO;
-            }
-        }
-        
-    } else if (type == 4) {
-        // hour of the day
-        
-        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-        NSDateComponents *comps = [gregorian components:NSCalendarUnitHour fromDate:[NSDate date]];
-        NSInteger hourOfDay = [comps hour];
-        
-        // set default to YES in case of NOT equal to
-        if (operator == 12) {
-            toReturn = YES;
-        }
-        
-        if ([operandValue containsObject:[NSNumber numberWithInteger:hourOfDay]]) {
-            if (operator == 11) {
-                toReturn = YES;
-            } else if (operator == 12) {
-                toReturn = NO;
-            }
-        }
-        
-    } else if (type == 5) {
-        // Country
-        
-        NSString *country = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
-        
-        // set default to YES in case of NOT equal to
-        if (operator == 12) {
-            toReturn = YES;
-        }
-        
-        if (([operandValue containsObject:country])) {
-            if (operator == 11) {
-                toReturn = YES;
-            } else if (operator == 12) {
-                toReturn = NO;
-            }
-        }
-        
-    } else if (type == 6) {
-        // App Version
-        NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
-        NSString *currentVersion = infoDictionary[@"CFBundleShortVersionString"];
-        NSString *targetVersion = [operandValue firstObject];
-        switch (operator) {
-            case 5: {
-                if([currentVersion rangeOfString:targetVersion options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound) {
+
+
+            if ([operandValue containsObject:currentVersion]) {
+                if (operator == 11) {
                     toReturn = YES;
+                } else if (operator == 12) {
+                    toReturn = NO;
                 }
-                
-                break;
-            }
-                
-            case 7: {  // Contains
-                if ([currentVersion rangeOfString:targetVersion].location != NSNotFound) {
-                    toReturn = YES;
-                }
-                break;
-            }
-                
-            case 11: {  // is equal to
-                if ([targetVersion isEqualToString:currentVersion]) {
-                    toReturn = YES;
-                }
-                break;
-            }
-                
-            case 12: {  // is NOT equal to
-                if ([targetVersion isEqualToString:currentVersion] == NO) {
-                    toReturn = YES;
-                }
-                break;
-            }
-                
-            case 13: {  // starts with
-                NSRange range =  [currentVersion rangeOfString:targetVersion];
-                if (range.location == 0) {
+            } else {
+                // iterate
+                if (operator == 12) {
                     toReturn = YES;
                 }
 
-                break;
+                for (NSString *version in operandValue) {
+                    if (version && ([version rangeOfString:@">="].location != NSNotFound)) {
+                        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO([version substringFromIndex:2])) {
+                            if (operator == 11) {
+                                toReturn = YES;
+                            } else if (operator == 12) {
+                                toReturn = NO;
+                            }
+                        }
+                        break;
+                    }
+                }
             }
-            default:
-                break;
+            break;
         }
-    } else if (type == 7) {
-        // Custom Variable
-        NSString *targetValue = [operandValue firstObject];
-        NSString *currentValue = [customVariables objectForKey:lOperandValue];
-        if (!currentValue) {
-            toReturn = NO;
-            return toReturn;
+        case SegmentationTypeDayOfWeek: {
+            // day of week
+            NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            NSDateComponents *comps = [gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]];
+            NSInteger weekday = [comps weekday];
+
+            // start from sunday = 0
+            weekday = weekday - 1;
+
+            // set default to YES in case of NOT equal to
+            if (operator == 12) {
+                toReturn = YES;
+            }
+
+            if ([operandValue containsObject:[NSNumber numberWithInteger:weekday]]) {
+                if (operator == 11) {
+                    toReturn = YES;
+                } else if (operator == 12) {
+                    toReturn = NO;
+                }
+            }
+            break;
         }
-            
-//        [nil range]
-        switch (operator) {
-            case 5: {
-                if([currentValue rangeOfString:targetValue options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound) {
-                    toReturn = YES;
-                }
-                
-                break;
+        case SegmentationTypeHourOfTheDay: {
+            NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            NSDateComponents *comps = [gregorian components:NSCalendarUnitHour fromDate:[NSDate date]];
+            NSInteger hourOfDay = [comps hour];
+
+            // set default to YES in case of NOT equal to
+            if (operator == 12) {
+                toReturn = YES;
             }
-                
-            case 7: {  // Contains
-                if ([currentValue rangeOfString:targetValue].location != NSNotFound) {
+
+            if ([operandValue containsObject:[NSNumber numberWithInteger:hourOfDay]]) {
+                if (operator == 11) {
                     toReturn = YES;
+                } else if (operator == 12) {
+                    toReturn = NO;
                 }
-                break;
             }
-                
-            case 11: {  // is equal to
-                if ([targetValue isEqualToString:currentValue]) {
-                    toReturn = YES;
-                }
-                break;
-            }
-                
-            case 12: {  // is NOT equal to
-                if ([targetValue isEqualToString:currentValue] == NO) {
-                    toReturn = YES;
-                }
-                break;
-            }
-                
-            case 13: {  // starts with
-                NSRange range =  [currentValue rangeOfString:targetValue];
-                if (range.location == 0) {
-                    toReturn = YES;
-                }
-                
-                break;
-            }
-            default:
-                break;
+            break;
         }
-    }
-    
+        case SegmentationTypeLocation: {
+            NSString *country = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
+
+            // set default to YES in case of NOT equal to
+            if (operator == 12) {
+                toReturn = YES;
+            }
+
+            if (([operandValue containsObject:country])) {
+                if (operator == 11) {
+                    toReturn = YES;
+                } else if (operator == 12) {
+                    toReturn = NO;
+                }
+            }
+            break;
+        }
+        case SegmentationTypeAppVersion: {
+            // App Version
+            NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
+            NSString *currentVersion = infoDictionary[@"CFBundleShortVersionString"];
+            NSString *targetVersion = [operandValue firstObject];
+            switch (operator) {
+                case 5: {
+                    if([currentVersion rangeOfString:targetVersion options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound) {
+                        toReturn = YES;
+                    }
+
+                    break;
+                }
+
+                case 7: {  // Contains
+                    if ([currentVersion rangeOfString:targetVersion].location != NSNotFound) {
+                        toReturn = YES;
+                    }
+                    break;
+                }
+
+                case 11: {  // is equal to
+                    if ([targetVersion isEqualToString:currentVersion]) {
+                        toReturn = YES;
+                    }
+                    break;
+                }
+
+                case 12: {  // is NOT equal to
+                    if ([targetVersion isEqualToString:currentVersion] == NO) {
+                        toReturn = YES;
+                    }
+                    break;
+                }
+
+                case 13: {  // starts with
+                    NSRange range =  [currentVersion rangeOfString:targetVersion];
+                    if (range.location == 0) {
+                        toReturn = YES;
+                    }
+                    
+                    break;
+                }
+                default: break;
+            }
+            break;
+        }
+        case SegmentationTypeCustomVariable: {
+            NSString *targetValue = [operandValue firstObject];
+            NSString *currentValue = [customVariables objectForKey:lOperandValue];
+            if (!currentValue) {
+                toReturn = NO;
+                return toReturn;
+            }
+
+            //        [nil range]
+            switch (operator) {
+                case 5: {
+                    if([currentValue rangeOfString:targetValue options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound) {
+                        toReturn = YES;
+                    }
+
+                    break;
+                }
+
+                case 7: {  // Contains
+                    if ([currentValue rangeOfString:targetValue].location != NSNotFound) {
+                        toReturn = YES;
+                    }
+                    break;
+                }
+
+                case 11: {  // is equal to
+                    if ([targetValue isEqualToString:currentValue]) {
+                        toReturn = YES;
+                    }
+                    break;
+                }
+
+                case 12: {  // is NOT equal to
+                    if ([targetValue isEqualToString:currentValue] == NO) {
+                        toReturn = YES;
+                    }
+                    break;
+                }
+
+                case 13: {  // starts with
+                    NSRange range =  [currentValue rangeOfString:targetValue];
+                    if (range.location == 0) {
+                        toReturn = YES;
+                    }
+                    
+                    break;
+                }
+                default: break;
+            }
+            break;
+        }
+        default: break;
+    }    
     return toReturn;
 }
 
@@ -537,11 +544,11 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
             }
 
             NSString *lOperandValue = segment[@"lOperandValue"];
-            int type = [segment[@"type"] intValue];
-            
+            SegmentationType segmentType = [segment[@"type"] intValue];
+
             //1
             // evaluate
-            BOOL currentValue = [self evaluateOperand:operandValue lOperandValue:lOperandValue operator:operator type:type];
+            BOOL currentValue = [self evaluateOperand:operandValue lOperandValue:lOperandValue operator:operator type:segmentType];
             
             //2
             if (logicalOperator && leftParenthesis) {
