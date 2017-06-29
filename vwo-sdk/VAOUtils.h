@@ -14,7 +14,6 @@
 
 @interface VAOUtils : NSObject
 
-+ (NSString*)getUUID;
 + (void)setIsNewVisitor:(BOOL)newVisitor;
 + (BOOL)getIsNewVisitor;
 @end

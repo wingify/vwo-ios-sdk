@@ -92,7 +92,7 @@ NSTimer *_timer;
     parameters[@"i"] = VAOSDKInfo.appKey;
     parameters[@"dt"] = [VAODeviceInfo deviceType];
     parameters[@"os"] = [[UIDevice currentDevice] systemVersion];
-    parameters[@"u"] = [VAOUtils getUUID];
+    parameters[@"u"] = [VAODeviceInfo getUUID];
     parameters[@"r"] =  @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
     
     if (currentStr) {
@@ -193,7 +193,7 @@ NSTimer *_timer;
     parameters[@"experiment_id"] = params[@"expId"];
     parameters[@"account_id"] = VAOSDKInfo.accountID;
     parameters[@"combination"] = params[@"varId"];
-    parameters[@"u"] = [VAOUtils getUUID];
+    parameters[@"u"] = [VAODeviceInfo getUUID];
     parameters[@"s"] = [VAOSDKInfo sessionCount];
     parameters[@"random"] = @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
     parameters[@"ed"] = extraData;

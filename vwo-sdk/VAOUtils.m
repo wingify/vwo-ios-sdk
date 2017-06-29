@@ -14,27 +14,6 @@ static NSString *_token;
 
 @implementation VAOUtils
 
-+ (NSString*)generateUUID {
-    NSString *UUID = [[NSUUID UUID] UUIDString];
-    UUID = [UUID stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    return UUID;
-}
-
-+ (NSString *)getUUID{
-    static NSString *deviceId = nil;
-    static dispatch_once_t oncePredicate;
-    dispatch_once(&oncePredicate, ^{
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        deviceId = [defaults objectForKey:@"vaoUUID"];
-        if(deviceId == nil){
-            deviceId = [self generateUUID];
-            [defaults setValue:deviceId forKey:@"vaoUUID"];
-            [defaults synchronize];
-        }
-    });
-    return deviceId;
-}
-
 + (void)setIsNewVisitor:(BOOL)newVisitor {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:newVisitor forKey:@"vaoNewVisitor"];

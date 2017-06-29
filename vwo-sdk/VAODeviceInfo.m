@@ -54,7 +54,7 @@ static NSString *kDefUUID = @"vaoUUID";
 }
 
 
-//Fetches UUID from persistent storage. If not available creates one
+/// Fetches UUID from persistent storage. If not available creates one
 + (NSString *)getUUID {
     //TODO: Make UUID persistant and return the same one
     NSString *uuid = [[NSUserDefaults standardUserDefaults] stringForKey:kDefUUID];
