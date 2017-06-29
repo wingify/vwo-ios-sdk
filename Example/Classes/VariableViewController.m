@@ -47,7 +47,7 @@
     [self.variationView layoutIfNeeded];
     
     self.variationBallTopConstraint.constant = 8 + 50;
-    NSNumber *speed = [VWO objectForKey:@"ball-speed" defaultObject:@2];
+    NSNumber *speed = [VWO variationForKey:@"ball-speed" defaultObject:@2];
     NSLog(@"speed = %f", [speed floatValue]);
     
     [UIView animateWithDuration:1.0f/[speed floatValue]

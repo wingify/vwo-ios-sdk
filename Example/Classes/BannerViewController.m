@@ -38,7 +38,7 @@
 }
 
 -(void)showBanner {
-    NSString *imageName = [VWO objectForKey:@"banner-image" defaultObject:@"B1.png"];
+    NSString *imageName = [VWO variationForKey:@"banner-image" defaultObject:@"B1.png"];
     
     if ([imageName hasPrefix:@"http"]) {
         [self downloadAndShowImage:imageName];

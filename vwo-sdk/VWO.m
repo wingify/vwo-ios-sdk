@@ -27,8 +27,6 @@
  * https://developer.apple.com/library/ios/documentation/iphone/conceptual/iphoneosprogrammingguide/ManagingYourApplicationsFlow/ManagingYourApplicationsFlow.html#//apple_ref/doc/uid/TP40007072-CH4-SW7 )
  */
 + (void)setUpForKey:(NSString *) key isAsync:(BOOL) async completion:(void (^)(void))completionBlock {
-
-//+ (void)setupAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock {
     static VWO *instance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
@@ -112,12 +110,12 @@
     [self setUpForKey:key isAsync:NO completion:nil];
 }
 
-+ (id)objectForKey:(NSString*)key {
++ (id)variationForKey:(NSString*)key {
     return [[VAOController sharedInstance] objectForKey:key];
 }
 
-+ (id)objectForKey:(NSString*)key defaultObject:(id)defaultObject {
-    id object = [self objectForKey:key];
++ (id)variationForKey:(NSString*)key defaultObject:(id)defaultObject {
+    id object = [self variationForKey:key];
     if (!object) {
         object = defaultObject;
     }

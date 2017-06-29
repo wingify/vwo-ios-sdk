@@ -31,7 +31,7 @@
  *  It searches all the available campaigns, identifies the campaign and returns object for the specified key
  *  By default user is made part of the identified campaign, unless you call 'trackUserManually' method BEFORE initialisation.
  */
-+ (id)objectForKey:(NSString*)key;
++ (id)variationForKey:(NSString*)key;
 
 /**
  *  Behaves in the same manner as 'objectForKey', it returns defaultObject instead of nil when:
@@ -40,7 +40,7 @@
  *  - if internet connection is not available
  *  - in case of any error
  */
-+ (id)objectForKey:(NSString*)key defaultObject:(id)defaultObject;
++ (id)variationForKey:(NSString*)key defaultObject:(id)defaultObject;
 
 /**
  *  Triggers goal for the specified goal string

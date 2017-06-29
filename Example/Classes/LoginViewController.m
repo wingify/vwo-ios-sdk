@@ -39,8 +39,8 @@
 
 -(void)setupVariation{
     
-    [self.variationSignin setTitle:[VWO objectForKey:@"sign-in-text" defaultObject:@"Login"] forState:UIControlStateNormal];
-    [self.variationSignup setTitle:[VWO objectForKey:@"sign-up-text" defaultObject:@"or Sign Up"] forState:UIControlStateNormal];
+    [self.variationSignin setTitle:[VWO variationForKey:@"sign-in-text" defaultObject:@"Login"] forState:UIControlStateNormal];
+    [self.variationSignup setTitle:[VWO variationForKey:@"sign-up-text" defaultObject:@"or Sign Up"] forState:UIControlStateNormal];
     
     [self.variationSignin.titleLabel setNeedsLayout];
     [self.variationSignin.titleLabel layoutIfNeeded];

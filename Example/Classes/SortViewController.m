@@ -59,7 +59,7 @@
 
 -(void)setupVariation{
     @try {
-        NSString *sorting = [VWO objectForKey:@"sorting" defaultObject:@"popularity"];
+        NSString *sorting = [VWO variationForKey:@"sorting" defaultObject:@"popularity"];
         NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:sorting ascending:YES];
         NSArray *descriptors = [NSArray arrayWithObject:valueDescriptor];
         variationProducts = [variationProducts sortedArrayUsingDescriptors:descriptors];
