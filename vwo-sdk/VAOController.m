@@ -285,6 +285,8 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
         case SegmentationTypeiOSVersion: {
             NSString *currentVersion = [[UIDevice currentDevice] systemVersion];
             // consider only x.y version
+            //TODO: fix this
+            //Wont work since major version of the release now contain two digit numbers
             if (currentVersion.length > 3) {
                 currentVersion = [currentVersion substringToIndex:3];
             } else if (currentVersion.length == 1) {
