@@ -17,7 +17,7 @@
 
 + (void)setAppKeyID:(NSString *) key;
 + (void)incrementSessionCount;
-+ (int)sessionCount;
++ (NSNumber *)sessionCount;
 + (BOOL)isNewUser;
 
 @end

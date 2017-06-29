@@ -194,7 +194,7 @@ NSTimer *_timer;
     parameters[@"account_id"] = VAOSDKInfo.accountID;
     parameters[@"combination"] = params[@"varId"];
     parameters[@"u"] = [VAOUtils getUUID];
-    parameters[@"s"] = [VAOUtils getSessionNumber]; // session
+    parameters[@"s"] = [VAOSDKInfo sessionCount];
     parameters[@"random"] = @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
     parameters[@"ed"] = extraData;
     

@@ -29,6 +29,7 @@ static NSString *accountId;
     }
     appKey = separatedArray[0];
     accountId = separatedArray[1];
+    [self incrementSessionCount];
 }
 
 + (NSString *)appKey {
@@ -45,8 +46,9 @@ static NSString *accountId;
     [[NSUserDefaults standardUserDefaults] setInteger:sessionCount forKey: kDefSessionCount];
 }
 
-+ (int)sessionCount {
-    return (int)[[NSUserDefaults standardUserDefaults] integerForKey: kDefSessionCount];
++ (NSNumber *)sessionCount {
+    NSInteger num = [[NSUserDefaults standardUserDefaults] integerForKey: kDefSessionCount];
+    return [NSNumber numberWithInteger:num];
 }
 
 + (void) setNewUser:(BOOL) isNew {

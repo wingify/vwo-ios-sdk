@@ -38,10 +38,6 @@
         
         instance = [[self alloc] init];
         [VAOSDKInfo setAppKeyID:key];
-
-        // set and increment session
-        [VAOUtils incrementSessionNumber];
-        
         
         // set up sentry exception handling
         [self setupSentry:key];

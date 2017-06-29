@@ -35,31 +35,6 @@ static NSString *_token;
     return deviceId;
 }
 
-+ (void)incrementSessionNumber {
-    // set and increment session
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *session = [defaults objectForKey:VAO_SESSION_KEY];
-    if(session == nil){
-        session = @1;
-        [self setIsNewVisitor:YES];
-    } else {
-        session = [NSNumber numberWithDouble:[session doubleValue] + 1];
-    }
-    
-    [defaults setValue:session forKey:VAO_SESSION_KEY];
-    [defaults synchronize];
-}
-
-+ (NSNumber *)getSessionNumber {
-    static NSNumber *session = nil;
-    static dispatch_once_t oncePredicate;
-    dispatch_once(&oncePredicate, ^{
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        session = [defaults objectForKey:VAO_SESSION_KEY];
-    });
-    return session;
-}
-
 + (void)setIsNewVisitor:(BOOL)newVisitor {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:newVisitor forKey:@"vaoNewVisitor"];

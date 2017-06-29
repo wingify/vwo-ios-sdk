@@ -15,12 +15,6 @@
 @interface VAOUtils : NSObject
 
 + (NSString*)getUUID;
-/**
- *  increments and sets session number
- *  also set new visitor for first run
- */
-+ (void)incrementSessionNumber;
-+ (NSNumber*)getSessionNumber;
 + (void)setIsNewVisitor:(BOOL)newVisitor;
 + (BOOL)getIsNewVisitor;
 @end
