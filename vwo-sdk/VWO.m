@@ -41,8 +41,7 @@
         [VAOSDKInfo setAppKeyID:key];
         
         // set up sentry exception handling
-        [self setupSentry:key];
-        
+        [self setupSentry:VAOSDKInfo.accountID];
         
         [[VAOAPIClient sharedInstance] schedule];
 
