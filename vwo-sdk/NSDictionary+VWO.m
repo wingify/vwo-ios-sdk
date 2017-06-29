@@ -6,9 +6,9 @@
 //
 //
 
-#import "NSDictionary+Extras.h"
+#import "NSDictionary+VWO.h"
 
-@implementation NSDictionary (Extras)
+@implementation NSDictionary (VWO)
 - (nullable NSString*)toString {
     NSError *error;
     NSData *currentData = [NSJSONSerialization dataWithJSONObject:self options:kNilOptions error:&error];

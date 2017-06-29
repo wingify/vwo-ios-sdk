@@ -1,5 +1,5 @@
 //
-//  NSDictionary+Extras.h
+//  NSDictionary+VWO.h
 //  Pods
 //
 //  Created by Kaunteya Suryawanshi on 28/06/17.
@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDictionary (Extras)
+@interface NSDictionary (VWO)
 - (nullable NSString*)toString;
 @end
