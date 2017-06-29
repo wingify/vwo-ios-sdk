@@ -12,7 +12,7 @@
 @interface VAOSDKInfo : NSObject
 
 @property (class) NSString *appKey;
-@property (class) NSString *vwoAccountId;
+@property (class) NSString *accountId;
 @property (class, readonly) NSString *sdkVersion;
 
 

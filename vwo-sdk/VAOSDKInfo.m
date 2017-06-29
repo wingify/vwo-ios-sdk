@@ -14,7 +14,7 @@ static NSString *kDefnewUSer = @"vaonewUser";
 @implementation VAOSDKInfo
 
 @dynamic appKey;
-@dynamic vwoAccountId;
+@dynamic accountId;
 
 + (NSString *)sdkVersion {
     //TODO: Put it in persistent storage or plist
@@ -29,7 +29,7 @@ static NSString *kDefnewUSer = @"vaonewUser";
     }
 
     VAOSDKInfo.appKey = separatedArray[0];
-    VAOSDKInfo.vwoAccountId = separatedArray[1];
+    VAOSDKInfo.accountId = separatedArray[1];
 }
 
 + (void)incrementSessionCount {
