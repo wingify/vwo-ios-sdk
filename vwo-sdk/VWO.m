@@ -24,7 +24,9 @@
  * See if we can call it in main(), before we call UIApplicationMain()? (see:
  * https://developer.apple.com/library/ios/documentation/iphone/conceptual/iphoneosprogrammingguide/ManagingYourApplicationsFlow/ManagingYourApplicationsFlow.html#//apple_ref/doc/uid/TP40007072-CH4-SW7 )
  */
-+ (void)setupAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock {
++ (void)setUpForKey:(NSString *) key isAsync:(BOOL) async completion:(void (^)(void))completionBlock {
+
+//+ (void)setupAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock {
     static VWO *instance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
@@ -151,16 +153,16 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-+ (void)launchVWO {
-    [self setupAsynchronously:YES withCallback:nil];
++ (void)launchForAPIKey:(NSString *) key {
+    [self setUpForKey:key isAsync:YES completion:nil];
 }
 
-+ (void)launchVWOWithCallback:(void (^)(void))completionBlock {
-    [self setupAsynchronously:YES withCallback:completionBlock];
++ (void)launchForAPIKey:(NSString *) key completion:(void(^)(void))completionBlock {
+    [self setUpForKey:key isAsync:YES completion:completionBlock];
 }
 
-+ (void)launchVWOSynchronously {
-    [self setupAsynchronously:NO withCallback:nil];
++ (void)launchSynchronouslyForAPIKey:(NSString *) key {
+    [self setUpForKey:key isAsync:NO completion:nil];
 }
 
 + (id)objectForKey:(NSString*)key {

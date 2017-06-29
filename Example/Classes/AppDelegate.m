@@ -18,7 +18,7 @@
     if([defaults stringForKey:@"useAccount"] == nil) {
         [defaults setObject:@"10" forKey:@"useAccount"];
     }
-    [VWO launchVWOSynchronously];
+    [VWO launchForAPIKey:@"<appID>-<accountID>"];
     
     return YES;
 }

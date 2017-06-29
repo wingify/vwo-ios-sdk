@@ -11,21 +11,21 @@
  *  Launch VWO
  *  Call VWO's server asynchronously to fetch settings
  */
-+ (void)launchVWO;
++ (void)launchForAPIKey:(NSString *) key;
 
 /**
  *  Launch VWO
  *  Call VWO's server Asynchronously
  *  It will call passed in code block on completion (success or error)
  */
-+ (void)launchVWOWithCallback:(void (^)(void))completionBlock;
++ (void)launchForAPIKey:(NSString *) key completion:(void(^)(void))completionBlock;
 
 /**
  *  Launch VWO
  *  Call VWO's server Synchronously
  *  Application will pause until settings are fetched or timed out
  */
-+ (void)launchVWOSynchronously;
++ (void)launchSynchronouslyForAPIKey: (NSString *) key;
 
 /**
  *  It searches all the available campaigns, identifies the campaign and returns object for the specified key
