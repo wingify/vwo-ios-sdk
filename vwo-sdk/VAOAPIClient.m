@@ -181,7 +181,7 @@ NSTimer *_timer;
     
     NSDictionary *extraParams = @{@"lt": message[@"timestamp"],
                                   @"v": VWO_SDK_VERSION,
-                                  @"i": [VAOSDKInfo appKey],
+                                  @"i": VAOSDKInfo.appKey,
                                   @"av": appVersion,
                                   @"dt": [VAODeviceInfo deviceType],
                                   @"os": [[UIDevice currentDevice] systemVersion]
