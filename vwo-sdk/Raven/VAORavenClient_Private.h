@@ -15,7 +15,6 @@
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) VAORavenConfig *config;
 
-- (NSString *)generateUUID;
 - (NSDictionary *)prepareDictionaryForMessage:(NSString *)message
                                         level:(RavenLogLevel)level
                               additionalExtra:(NSDictionary *)additionalExtra
