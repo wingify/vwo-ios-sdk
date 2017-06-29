@@ -60,27 +60,6 @@ static NSString *_token;
     return session;
 }
 
-+ (NSString*)vaoAccountIdAppKeyCombination {
-    NSString *combination = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"VWOAppKey"];
-    return combination;
-}
-
-+ (NSString*)vaoAccountId {
-    NSString *accountId = [self vaoAccountIdAppKeyCombination];
-    if ([[accountId componentsSeparatedByString:@"-"] count] == 2) {
-        return [[accountId componentsSeparatedByString:@"-"] objectAtIndex:1];
-    }
-    return nil;
-}
-
-+ (NSString*)vaoAppKey {
-    NSString *accountId = [self vaoAccountIdAppKeyCombination];
-    if ([[accountId componentsSeparatedByString:@"-"] count] == 2) {
-        return [[accountId componentsSeparatedByString:@"-"] objectAtIndex:0];
-    }
-    return nil;
-}
-
 + (NSString*)deviceType {
     struct utsname systemInfo;
     uname(&systemInfo);

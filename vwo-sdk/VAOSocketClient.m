@@ -10,6 +10,7 @@
 #import "VAOSIOSocket.h"
 #import "VAOController.h"
 #import "VAOUtils.h"
+#import "VAOSDKInfo.h"
 
 #define kSocketIP @"https://mobilepreview.vwo.com:443"
 @implementation VAOSocketClient{
@@ -39,8 +40,8 @@
         VAOLog(@"[[UIDevice currentDevice] name] = %@", [[UIDevice currentDevice] name] );
         NSDictionary *dict  = @{@"name":[[UIDevice currentDevice] name],
                                 @"type": @"iOS",
-                                @"appKey": [VAOUtils vaoAppKey]};
-        
+                                @"appKey": VAOSDKInfo.appKey};
+
         [socket_ emit:@"register_mobile" args:[NSArray arrayWithObject:dict]];
     };
     

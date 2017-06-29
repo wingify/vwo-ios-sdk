@@ -12,6 +12,8 @@
 #import "VAOUtils.h"
 #import "VAOAFHTTPRequestOperationManager.h"
 #import "VAOAFHTTPRequestOperationManager+Synchronous.h"
+#import "VAOSDKInfo.h"
+#import "VAODeviceInfo.h"
 
 #define kProtocol @"https://"
 static float kVAOTimerInterval = 20.0;
@@ -85,9 +87,9 @@ NSTimer *_timer;
     
     NSString *url = [NSString stringWithFormat:@"%@%@/mobile", kProtocol,VAO_DOMAIN];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"a"] = [VAOUtils vaoAccountId];
+    parameters[@"a"] = VAOSDKInfo.accountID;
     parameters[@"v"] = VWO_SDK_VERSION,
-    parameters[@"i"] =  [VAOUtils vaoAppKey];
+    parameters[@"i"] = VAOSDKInfo.appKey;
     parameters[@"dt"] = [VAOUtils deviceType];
     parameters[@"os"] = [[UIDevice currentDevice] systemVersion];
     parameters[@"u"] = [VAOUtils getUUID];
@@ -179,7 +181,7 @@ NSTimer *_timer;
     
     NSDictionary *extraParams = @{@"lt": message[@"timestamp"],
                                   @"v": VWO_SDK_VERSION,
-                                  @"i": [VAOUtils vaoAppKey],
+                                  @"i": [VAOSDKInfo appKey],
                                   @"av": appVersion,
                                   @"dt": [VAOUtils deviceType],
                                   @"os": [[UIDevice currentDevice] systemVersion]
@@ -189,7 +191,7 @@ NSTimer *_timer;
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"experiment_id"] = params[@"expId"];
-    parameters[@"account_id"] = [VAOUtils vaoAccountId];
+    parameters[@"account_id"] = VAOSDKInfo.accountID;
     parameters[@"combination"] = params[@"varId"];
     parameters[@"u"] = [VAOUtils getUUID];
     parameters[@"s"] = [VAOUtils getSessionNumber]; // session

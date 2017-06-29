@@ -11,12 +11,11 @@
 //Any information that is related to VWO will be handled by this class
 @interface VAOSDKInfo : NSObject
 
-@property (class) NSString *appKey;
-@property (class) NSString *accountId;
 @property (class, readonly) NSString *sdkVersion;
+@property (class, readonly) NSString *appKey;
+@property (class, readonly) NSString *accountID;
 
-
-+ (void)setAppKeyAndID:(NSString *) key;
++ (void)setAppKeyID:(NSString *) key;
 + (void)incrementSessionCount;
 + (int)sessionCount;
 + (BOOL)isNewUser;

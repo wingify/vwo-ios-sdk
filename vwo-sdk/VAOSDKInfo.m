@@ -11,25 +11,32 @@
 static NSString *kDefSessionCount = @"vaosessionCount";
 static NSString *kDefnewUSer = @"vaonewUser";
 
-@implementation VAOSDKInfo
+static NSString *appKey;
+static NSString *accountId;
 
-@dynamic appKey;
-@dynamic accountId;
+@implementation VAOSDKInfo
 
 + (NSString *)sdkVersion {
     //TODO: Put it in persistent storage or plist
     return @"1.5.0";
 }
 
-+ (void)setAppKeyAndID:(NSString *) key {
++ (void)setAppKeyID:(NSString *) key {
     NSArray<NSString *> *separatedArray = [key componentsSeparatedByString:@"-"];
     if ([separatedArray count] != 2) {
         //TODO: Log Error - invalid key
         return;
     }
+    appKey = separatedArray[0];
+    accountId = separatedArray[1];
+}
 
-    VAOSDKInfo.appKey = separatedArray[0];
-    VAOSDKInfo.accountId = separatedArray[1];
++ (NSString *)appKey {
+    return appKey;
+}
+
++ (NSString *)accountID {
+    return accountId;
 }
 
 + (void)incrementSessionCount {

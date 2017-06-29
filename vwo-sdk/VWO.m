@@ -15,6 +15,7 @@
 #import "VAOSocketClient.h"
 #import <sys/types.h>
 #import <sys/sysctl.h>
+#import "VAOSDKInfo.h"
 
 @implementation VWO
 
@@ -36,27 +37,14 @@
         }
         
         instance = [[self alloc] init];
-            
-        // get values for various parameters and initialize singletons
-        NSString *accountId = [VAOUtils vaoAccountId];
-        if([accountId isKindOfClass:NSString.class] == NO){
-            NSLog(@"VWO: Check if you have VWOAppKey in your info.plist file");
-            return;
-        }
-        
-        NSString *accountIdStr = accountId;
-        
-        // check if accountId is valid or not
-        if(accountIdStr.length == 0){
-            return;
-        }
-        
+        [VAOSDKInfo setAppKeyID:key];
+
         // set and increment session
         [VAOUtils incrementSessionNumber];
         
         
         // set up sentry exception handling
-        [self setupSentry:accountId];
+        [self setupSentry:key];
         
         
         [[VAOAPIClient sharedInstance] schedule];
