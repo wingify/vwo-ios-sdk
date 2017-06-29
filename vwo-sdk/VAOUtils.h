@@ -23,6 +23,5 @@
 + (NSNumber*)getSessionNumber;
 + (void)setIsNewVisitor:(BOOL)newVisitor;
 + (BOOL)getIsNewVisitor;
-+ (NSString*)deviceType;
 @end
 

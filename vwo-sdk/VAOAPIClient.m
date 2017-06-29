@@ -90,7 +90,7 @@ NSTimer *_timer;
     parameters[@"a"] = VAOSDKInfo.accountID;
     parameters[@"v"] = VWO_SDK_VERSION,
     parameters[@"i"] = VAOSDKInfo.appKey;
-    parameters[@"dt"] = [VAOUtils deviceType];
+    parameters[@"dt"] = [VAODeviceInfo deviceType];
     parameters[@"os"] = [[UIDevice currentDevice] systemVersion];
     parameters[@"u"] = [VAOUtils getUUID];
     parameters[@"r"] =  @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
@@ -183,7 +183,7 @@ NSTimer *_timer;
                                   @"v": VWO_SDK_VERSION,
                                   @"i": [VAOSDKInfo appKey],
                                   @"av": appVersion,
-                                  @"dt": [VAOUtils deviceType],
+                                  @"dt": [VAODeviceInfo deviceType],
                                   @"os": [[UIDevice currentDevice] systemVersion]
                                   };
     

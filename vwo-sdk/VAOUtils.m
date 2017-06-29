@@ -60,12 +60,6 @@ static NSString *_token;
     return session;
 }
 
-+ (NSString*)deviceType {
-    struct utsname systemInfo;
-    uname(&systemInfo);
-    return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
-}
-
 + (void)setIsNewVisitor:(BOOL)newVisitor {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:newVisitor forKey:@"vaoNewVisitor"];
