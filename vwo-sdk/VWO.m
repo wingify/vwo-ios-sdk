@@ -64,8 +64,6 @@
     });
 }
 
-// set up Exception Handling
-
 + (void)setupSentry:(NSString*)accountId {
     NSString *bunldeId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
     NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
@@ -147,6 +145,6 @@
 }
 
 + (NSString*)sdkVersion {
-    return VWO_SDK_VERSION;
+    return [VAOSDKInfo sdkVersion];
 }
 @end
