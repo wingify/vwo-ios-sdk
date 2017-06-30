@@ -118,7 +118,7 @@
 }
 
 + (void)setValue:(NSString*)value forCustomVariable:(NSString*)variable {
-    [[VAOController sharedInstance] setValue:value forCusomtorVariable:variable];
+    [[VAOController sharedInstance] setValue:value forCustomVariable:variable];
 }
 
 + (NSString*)sdkVersion {

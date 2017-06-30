@@ -69,6 +69,16 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     _meta = [[VAOModel sharedInstance] loadMeta];
 }
 
+- (void)setValue:(NSString*)value forCustomVariable:(NSString*)variable {
+    if(!value || !variable) return;
+    @try {
+        [customVariables setObject:value forKey:variable];
+    }
+    @catch (NSException *exception) {
+        VAORavenCaptureException(exception);
+    }
+}
+
 - (void)applicationDidEnterBackground {
     if(_previewMode == NO) {
         _lastUpdateTime = [NSDate timeIntervalSinceReferenceDate];
@@ -191,8 +201,6 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
         NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
         VAORavenCaptureException(selfException);
         VAORavenCaptureException(exception);
-    } @finally {
-        
     }
 }
 
@@ -629,9 +637,6 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
         VAORavenCaptureException(selfException);
         VAORavenCaptureException(exception);
     }
-    @finally {
-        
-    }
 }
 
 - (void)trackUserInCampaign:(NSString*)key {
@@ -657,9 +662,6 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
         NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
         VAORavenCaptureException(selfException);
         VAORavenCaptureException(exception);
-    }
-    @finally {
-        
     }
 }
 

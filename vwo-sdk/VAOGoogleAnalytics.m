@@ -91,9 +91,6 @@
         VAORavenCaptureException(exception);
         
     }
-    @finally {
-        
-    }
 }
 
 -(id)performSelectorAndReturnValue:(SEL)selector target:(id)target {

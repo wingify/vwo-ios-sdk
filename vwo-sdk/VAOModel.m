@@ -75,9 +75,6 @@ NSMutableDictionary *campaigns;
         NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
         VAORavenCaptureException(selfException);
     }
-    @finally {
-        
-    }
 }
 
 - (NSArray *)loadMessages {
@@ -99,9 +96,6 @@ NSMutableDictionary *campaigns;
         VAORavenCaptureException(exception);
         NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
         VAORavenCaptureException(selfException);
-    }
-    @finally {
-        
     }
 }
 
@@ -144,15 +138,10 @@ NSMutableDictionary *campaigns;
             NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
             VAORavenCaptureException(selfException);
         }
-        @finally {
-            
-        }
-        
         if ([variationId isEqualToString:@"0"] == NO) {
             [[VAOAPIClient sharedInstance] pushVariationRenderWithExperimentId:[experimentId integerValue]
                                                                    variationId:variationId];
         }
-
     }
 }
 
