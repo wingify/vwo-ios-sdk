@@ -37,7 +37,7 @@ NSMutableDictionary *campaigns;
 }
 
 - (NSString*)getCampaignPath {
-    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/__vaocampaigns.plist"];
+    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/UserCampaigns.plist"];
 }
 
 - (void)downloadMetaWithCompletionBlock:(void(^)(NSMutableArray *meta))completionBlock
@@ -56,7 +56,7 @@ NSMutableDictionary *campaigns;
 }
 
 - (NSMutableDictionary*)loadMeta {
-    NSString *abPlist = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/__vaojson.plist"];
+    NSString *abPlist = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/CampaignInfo.plist"];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:abPlist];
     return dict;
 }
@@ -67,7 +67,7 @@ NSMutableDictionary *campaigns;
      * Original values, in particular, may not be serializable at all, e.g., images.
      */
     @try {
-        NSString *abPlist = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/__vaojson.plist"];
+        NSString *abPlist = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/CampaignInfo.plist"];
         [meta writeToFile:abPlist atomically:YES];
     }
     @catch (NSException *exception) {
@@ -81,7 +81,7 @@ NSMutableDictionary *campaigns;
 }
 
 - (NSArray *)loadMessages {
-    NSString *messagesPlist = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/__vaomessages.plist"];
+    NSString *messagesPlist = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/PendingMessages.plist"];
     NSArray *messages = [NSArray arrayWithContentsOfFile:messagesPlist];
     return messages;
 }
@@ -90,7 +90,7 @@ NSMutableDictionary *campaigns;
     @try {
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            NSString *messagesPlist = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/__vaomessages.plist"];
+            NSString *messagesPlist = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/PendingMessages.plist"];
             [messages writeToFile:messagesPlist atomically:YES];
         });
 
