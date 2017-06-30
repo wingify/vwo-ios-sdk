@@ -141,59 +141,54 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
  *  Rewrite meta file.
  */
 - (void)_useMeta:(NSMutableArray *)newMeta{
-//    VAOLog(@"Meta before: %@", [_meta description]);
-
     @try {        
         _meta = [NSMutableDictionary dictionary];
         
-        for (NSDictionary *experiment in newMeta) {
-            
-            NSString *experimentId = [experiment[@"id"] stringValue];
+        for (NSDictionary *campaign in newMeta) {
+
+            NSString *campaignId = [campaign[@"id"] stringValue];
             
             //  check is required, b/c status can be EXCLUDED as well
-            NSString *status = [experiment[@"status"] uppercaseString];
+            NSString *status = [campaign[@"status"] uppercaseString];
             if ([status isEqualToString:@"EXCLUED"]) {
                 // save 0 against experiment-id so that this user can be excluded from the experiment
-                [[VAOModel sharedInstance] checkAndMakePartOfExperiment:experimentId variationId:@"0"];
+                [[VAOModel sharedInstance] checkAndMakePartOfExperiment:campaignId variationId:@"0"];
                 continue;
             } else if ([status isEqualToString:@"RUNNING"] == NO) {
                 continue;
-            } else if (![self hasValidValue:experiment[@"variations"]] || ![self hasValidValue:experiment[@"variations"][@"id"]]) {
+            } else if (![self hasValidValue:campaign[@"variations"]] || ![self hasValidValue:campaign[@"variations"][@"id"]]) {
                 continue;
             }
             
-            NSString *variationId = [NSString stringWithFormat:@"%@", experiment[@"variations"][@"id"]];
-            NSMutableDictionary *experimentDict = [NSMutableDictionary dictionary];
+            NSString *variationId = [NSString stringWithFormat:@"%@", campaign[@"variations"][@"id"]];
+            NSMutableDictionary *campaignDict = [NSMutableDictionary dictionary];
             
-            experimentDict[@"variationId"] = variationId;
-            experimentDict[@"variationName"] = experiment[@"variations"][@"name"];
-            experimentDict[@"goals"] = experiment[@"goals"];
-            experimentDict[@"json"] = experiment[@"variations"][@"changes"];
-            experimentDict[@"status"] = experiment[@"status"];
+            campaignDict[@"variationId"] = variationId;
+            campaignDict[@"variationName"] = campaign[@"variations"][@"name"];
+            campaignDict[@"goals"] = campaign[@"goals"];
+            campaignDict[@"json"] = campaign[@"variations"][@"changes"];
+            campaignDict[@"status"] = campaign[@"status"];
 
-            if (experiment[@"segment_object"]) {
-                experimentDict[@"segment"] = experiment[@"segment_object"];
+            if (campaign[@"segment_object"]) {
+                campaignDict[@"segment"] = campaign[@"segment_object"];
             }
             
-            if (experiment[@"UA"]) {
-                experimentDict[@"UA"] = experiment[@"UA"];
+            if (campaign[@"UA"]) {
+                campaignDict[@"UA"] = campaign[@"UA"];
             }
             
-            experimentDict[@"name"] = (experiment[@"name"] ? experiment[@"name"] : @"VWO Campaign Name");
+            campaignDict[@"name"] = (campaign[@"name"] ? campaign[@"name"] : @"VWO Campaign Name");
             
             // check if we can run this experiment on this user
-            if ([self checkSegmentation:experimentId forExperiment:experimentDict]) {
-                [_meta setObject:experimentDict forKey:experimentId];
+            if ([self checkSegmentation:campaignId forCampaign:campaignDict]) {
+                [_meta setObject:campaignDict forKey:campaignId];
                 
                 // count user in campaign
                 if(_trackUserManually == NO) {
-                    [self checkAndtrackUserForExperiment:experimentId forExperiment:experimentDict];
+                    [self checkAndtrackUserForExperiment:campaignId forCampaign:campaignDict];
                 }
             }
         }
-        
-        //    VAOLog(@"Meta after: %@", [_meta description]);
-        
         if (!_previewMode) {
             [[VAOModel sharedInstance] saveMeta:_meta];
         }
@@ -674,7 +669,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
  *      Otherwise returns NO
  *
  */
-- (BOOL)checkSegmentation:(NSString*)expId forExperiment:(NSDictionary*)experiment {
+- (BOOL)checkSegmentation:(NSString*)expId forCampaign:(NSDictionary*)experiment {
     if ([[VAOModel sharedInstance] hasBeenPartOfExperiment:expId] == NO) {
         
         // check if segmentation exists
@@ -698,7 +693,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     return YES;
 }
 
-- (void)checkAndtrackUserForExperiment:(NSString*)expId forExperiment:(NSDictionary*)experiment {
+- (void)checkAndtrackUserForExperiment:(NSString*)expId forCampaign:(NSDictionary*)experiment {
     if ([[VAOModel sharedInstance] hasBeenPartOfExperiment:expId]) {
         return;
     }
