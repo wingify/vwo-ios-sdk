@@ -228,12 +228,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
             experimentDict[@"goals"] = experiment[@"goals"];
             experimentDict[@"json"] = experiment[@"variations"][@"changes"];
             experimentDict[@"status"] = experiment[@"status"];
-            if ([experiment[@"count_goal_once"] boolValue]) {
-                [experimentDict setValue:@1 forKey:@"countGoalOnce"];
-            } else {
-                [experimentDict setValue:@0 forKey:@"countGoalOnce"];
-            }
-            
+
             if (experiment[@"segment_object"]) {
                 experimentDict[@"segment"] = experiment[@"segment_object"];
             }
@@ -658,8 +653,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
             
             NSInteger goalId = [goalDictionary[@"id"] integerValue];
             NSString *goalIdAsString = [NSString stringWithFormat:@"%li", (long)goalId];
-            BOOL triggerGoalOnce = [experiment[@"countGoalOnce"] boolValue];
-            BOOL shouldTriggerGoal = (triggerGoalOnce ? [[VAOModel sharedInstance] shouldTriggerGoal:goalIdAsString forExperiment:expId]  : YES);
+            BOOL shouldTriggerGoal = [[VAOModel sharedInstance] shouldTriggerGoal:goalIdAsString forExperiment:expId];
             
             if (shouldTriggerGoal) {
                 [[VAOAPIClient sharedInstance] pushGoalConversionWithGoalId:goalId
