@@ -30,7 +30,6 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
 };
 
 @implementation VAOController {
-    
     BOOL _remoteDataDownloading;
     NSTimeInterval _lastUpdateTime;
     BOOL _previewMode;
@@ -68,19 +67,6 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
 
 - (void)loadMetaList {
     _meta = [[VAOModel sharedInstance] loadMeta];
-}
-
-- (void)setValue:(NSString*)value forCusomtorVariable:(NSString*)variable {
-    if(!value || !variable) return;
-    @try {
-        [customVariables setObject:value forKey:variable];
-    }
-    @catch (NSException *exception) {
-        VAORavenCaptureException(exception);
-    }
-    @finally {
-        
-    }
 }
 
 - (void)applicationDidEnterBackground {
@@ -131,62 +117,10 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
 }
 
 /**
- *  Sample Meta Structure
-{
-    "1": {
-        "variationId": 123,
-        "goals": [
-             {
-                 "type": "REVENUE_TRACKING",
-                 "identifier": "Banner Track",
-                 "id": 1
-             }
-        ],
-        "json": {
-            "What": "VWO Json Experiemnt",
-            "value": 184467440737095500000
-        },
-         "segment": {
-            "segmentationType": "pre",
-             "segment_code": {
-                "device": "iPad"
-             },
-             "id": "some-id",
-             "type": "predefined",
-             "name": "iPad Traffic",
-             "platform": "mobile-app",
-             "description": "Segment for iPad traffic only"
-         }
-    },
-    "2": {
-        "variationId": 1231,
-        "goals": [
-             {
-             "type": "REVENUE_TRACKING",
-             "identifier": "Banner Track",
-             "id": 1
-             }
-        ],
-        "json": {
-            "reaction": "WOW"
-        }
-    }
-}
- */
-
-/**
  *  returns NO if value is nil or [NSNull null]
  */
-- (BOOL)isValueValid:(id)value {
-    if (value == nil) {
-        return NO;
-    }
-    
-    if (value == [NSNull null]) {
-        return NO;
-    }
-    
-    return YES;
+- (BOOL)hasValidValue:(id)value {
+    return (value != nil && value != [NSNull null]);
 }
 
 - (void)trackUserManually {
@@ -206,9 +140,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
             
             NSString *experimentId = [experiment[@"id"] stringValue];
             
-            /**
-             *  check is required, b/c status can be EXCLUDED as well
-             */
+            //  check is required, b/c status can be EXCLUDED as well
             NSString *status = [experiment[@"status"] uppercaseString];
             if ([status isEqualToString:@"EXCLUED"]) {
                 // save 0 against experiment-id so that this user can be excluded from the experiment
@@ -216,7 +148,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
                 continue;
             } else if ([status isEqualToString:@"RUNNING"] == NO) {
                 continue;
-            } else if (![self isValueValid:experiment[@"variations"]] || ![self isValueValid:experiment[@"variations"][@"id"]]) {
+            } else if (![self hasValidValue:experiment[@"variations"]] || ![self hasValidValue:experiment[@"variations"][@"id"]]) {
                 continue;
             }
             
@@ -670,11 +602,6 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
                                                                  variationName:experiment[@"variationName"]
                                                                    variationId:variationId];
                 }
-                //push to snowplow
-                //                [[VAODataCollector sharedInstance] trackGoalWithExperimentId:[expId intValue]
-                //                                                                 variationId:[variationId intValue]
-                //                                                                    goalName:goal
-                //                                                                     revenue:nil];
             }
 
         }
@@ -780,9 +707,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     
     // if UA integration is enabled
     if (experiment[@"UA"]) {
-        
         NSNumber *dimension = (experiment[@"UA"][@"s"] ? experiment[@"UA"][@"s"]: @1);
-        
         [[VAOGoogleAnalytics sharedInstance] experimentWithName:experiment[@"name"]
                                                    experimentId:expId
                                                   variationName:(experiment[@"variationName"] ? experiment[@"variationName"] : @"variation-name")
@@ -791,4 +716,3 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     }
 }
 @end
-
