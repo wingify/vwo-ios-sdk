@@ -17,7 +17,6 @@
 - (void)schedule;
 - (void)startTimer;
 - (void)stopTimer;
-- (void)optOut:(BOOL)status;
 
 // For App
 - (void) pullABData:(NSMutableDictionary *)experimentsAndVariationsPair

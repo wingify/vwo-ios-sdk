@@ -18,7 +18,6 @@
 #define kProtocol @"https://"
 static float kVAOTimerInterval = 20.0;
 static int kVAOPendingMessagesThreshold = 3;
-static BOOL _optOut;
 
 // For queqeing of messages to be sent.
 static NSInteger _transitId;
@@ -38,7 +37,6 @@ NSTimer *_timer;
 }
 
 - (void)schedule {
-    _optOut = NO;
     _transitId = (NSInteger) [[NSDate date] timeIntervalSinceReferenceDate];
     _pendingMessages = [NSMutableArray arrayWithArray:[[VAOModel sharedInstance] loadMessages]];
     _transittingMessages = [NSMutableArray array];
@@ -59,10 +57,6 @@ NSTimer *_timer;
 - (void)stopTimer {
     [_timer invalidate];
     _timer = nil;
-}
-- (void)optOut:(BOOL)status{
-    _optOut = status;
-    [_pendingMessages removeAllObjects];
 }
 
 - (NSString*)convertDictionaryToString:(NSDictionary*)dictionary {
@@ -150,15 +144,13 @@ NSTimer *_timer;
 }
 
 - (void)callMethod:(NSString *)method withParameters:(NSDictionary *)params{
-    if(_optOut == NO){
-        NSString *transitId = [VAOAPIClient allocateTransitId];
-        NSNumber *timestamp = @([[NSDate date] timeIntervalSince1970]);
-        NSDictionary *message = @{@"method":method, @"params":params, @"timestamp":timestamp, @"id":transitId};
-        [_pendingMessages addObject:message];
-        [[VAOModel sharedInstance] saveMessages:[_pendingMessages copy]];
-        if(_pendingMessages.count >= kVAOPendingMessagesThreshold){
-            [self sendAllPendingMessages];
-        }
+    NSString *transitId = [VAOAPIClient allocateTransitId];
+    NSNumber *timestamp = @([[NSDate date] timeIntervalSince1970]);
+    NSDictionary *message = @{@"method":method, @"params":params, @"timestamp":timestamp, @"id":transitId};
+    [_pendingMessages addObject:message];
+    [[VAOModel sharedInstance] saveMessages:[_pendingMessages copy]];
+    if(_pendingMessages.count >= kVAOPendingMessagesThreshold){
+        [self sendAllPendingMessages];
     }
 }
 

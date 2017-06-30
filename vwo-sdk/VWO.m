@@ -30,11 +30,7 @@
     static VWO *instance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
-        
-        if([self isOptOut]){
-            return;
-        }
-        
+                
         instance = [[self alloc] init];
         [VAOSDKInfo setAppKeyID:key];
         
@@ -75,23 +71,6 @@
                                                       tags:tags];
     
     [VAORavenClient setSharedClient:client];
-}
-
-+ (void)setOptOut:(BOOL)status {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL optOut = [[defaults objectForKey:@"vaoOptOut"] boolValue];
-    if(optOut != status){
-        [defaults setValue:@(status) forKey:@"vaoOptOut"];
-        [defaults synchronize];
-
-        [[VAOAPIClient sharedInstance] optOut:status];
-    }
-}
-
-+ (BOOL)isOptOut {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL optOut = [[defaults objectForKey:@"vaoOptOut"] boolValue];
-    return optOut;
 }
 
 -(void)dealloc{
