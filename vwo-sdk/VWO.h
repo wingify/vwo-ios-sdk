@@ -70,7 +70,7 @@
 /**
  *  Set Value for custom variable defined on VWO
  */
-+ (void)setValue:(NSString*)value forCusomtorVariable:(NSString*)variable;
++ (void)setValue:(NSString*)value forCustomVariable:(NSString*)variable;
 
 /**
  *  Retruns VWO SDK version

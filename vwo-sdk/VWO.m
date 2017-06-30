@@ -138,7 +138,7 @@
     [[VAOController sharedInstance] trackUserInCampaign:key];
 }
 
-+ (void)setValue:(NSString*)value forCusomtorVariable:(NSString*)variable {
++ (void)setValue:(NSString*)value forCustomVariable:(NSString*)variable {
     [[VAOController sharedInstance] setValue:value forCusomtorVariable:variable];
 }
 
