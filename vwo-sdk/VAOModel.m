@@ -40,9 +40,10 @@ NSMutableDictionary *campaigns;
     return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/UserCampaigns.plist"];
 }
 
-- (void)downloadCampaignInfoWithCompletionBlock:(void(^)(NSMutableArray *info))completionBlock
-                        withCurrentCampaignInfo:(NSMutableDictionary*)currentPairs asynchronously:(BOOL)async {
-    
+- (void)downLoadCampaignInfoAsynchronously:(BOOL)async
+                   withCurrentCampaignInfo:(NSMutableDictionary *) currentPairs
+                                completion:(void(^)(NSMutableArray *info))completionBlock {
+        
     [[VAOAPIClient sharedInstance] pullABData:currentPairs success:^(NSMutableArray *array) {
         
 //        VAOLog(@"the json from server is = %@", array);

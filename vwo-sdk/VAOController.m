@@ -104,7 +104,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
     _remoteDataDownloading = YES;
     
-    [[VAOModel sharedInstance] downloadCampaignInfoWithCompletionBlock:^(NSMutableArray *info){
+    [[VAOModel sharedInstance] downLoadCampaignInfoAsynchronously:async withCurrentCampaignInfo:[[VAOModel sharedInstance] getCurrentExperimentsVariationPairs] completion:^(NSMutableArray *info) {
         _lastUpdateTime = currentTime;
         _remoteDataDownloading = NO;
         
@@ -112,7 +112,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
         if (completionBlock) {
             completionBlock();
         }
-    } withCurrentCampaignInfo:[[VAOModel sharedInstance] getCurrentExperimentsVariationPairs] asynchronously:async];
+    }];
 }
 
 - (void)applicationDidEnterPreviewMode {

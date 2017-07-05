@@ -15,8 +15,10 @@
 
 + (instancetype)sharedInstance;
 
-- (void)downloadCampaignInfoWithCompletionBlock:(void(^)(NSMutableArray *info))completionBlock
-                        withCurrentCampaignInfo:(NSMutableDictionary*)currentPairs asynchronously:(BOOL)async;
+- (void)downLoadCampaignInfoAsynchronously:(BOOL)async
+                   withCurrentCampaignInfo:(NSMutableDictionary *) currentPairs
+                                completion:(void(^)(NSMutableArray *info))completionBlock;
+
 - (NSArray *)loadMessages;
 - (void)saveCampaignInfo:(NSDictionary *)campaignInfo;
 - (NSMutableDictionary*)getCampaignInfo;
