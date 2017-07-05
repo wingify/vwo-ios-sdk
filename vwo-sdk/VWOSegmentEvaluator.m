@@ -8,6 +8,7 @@
 
 #import "VWOSegmentEvaluator.h"
 #import <UIKit/UIKit.h>
+#import "VAORavenClient.h"
 
 typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeCustomVariable=7,
