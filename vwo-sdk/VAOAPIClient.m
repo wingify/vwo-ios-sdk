@@ -9,7 +9,6 @@
 #import "VAOAPIClient.h"
 #import "VAOModel.h"
 #import <sys/utsname.h>
-#import "VAOUtils.h"
 #import "VAOAFHTTPRequestOperationManager.h"
 #import "VAOAFHTTPRequestOperationManager+Synchronous.h"
 #import "VAOSDKInfo.h"

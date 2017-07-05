@@ -18,6 +18,6 @@
 + (void)setAppKeyID:(NSString *) key;
 + (void)incrementSessionCount;
 + (NSNumber *)sessionCount;
-+ (BOOL)isNewUser;
-
++ (BOOL)isReturningVisitor;
++ (void)setReturningVisitor:(BOOL) isReturningVisitor;
 @end

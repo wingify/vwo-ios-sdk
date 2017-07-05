@@ -9,7 +9,7 @@
 #import "VAOSDKInfo.h"
 
 static NSString *kDefSessionCount = @"VWOSessionCount";
-static NSString *kDefnewUSer = @"VWONewUser";
+static NSString *kDefReturningVisitor = @"VWOReturningVisitor";
 
 static NSString *appKey;
 static NSString *accountId;
@@ -51,12 +51,12 @@ static NSString *accountId;
     return [NSNumber numberWithInteger:num];
 }
 
-+ (void) setNewUser:(BOOL) isNew {
-    return [[NSUserDefaults standardUserDefaults] setBool:isNew forKey: kDefnewUSer];
++ (void) setReturningVisitor:(BOOL) isReturningVisitor {
+    return [[NSUserDefaults standardUserDefaults] setBool:isReturningVisitor forKey: kDefReturningVisitor];
 }
 
-+ (BOOL)isNewUser {
-    return [[NSUserDefaults standardUserDefaults] boolForKey: kDefnewUSer];
++ (BOOL)isReturningVisitor {
+    return [[NSUserDefaults standardUserDefaults] boolForKey: kDefReturningVisitor];
 };
 
 @end

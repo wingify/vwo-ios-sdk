@@ -7,7 +7,6 @@
 //
 
 #import "VAOController.h"
-#import "VAOUtils.h"
 #import "VAOModel.h"
 #import "VAOAPIClient.h"
 #import "VAOSocketClient.h"
@@ -15,6 +14,7 @@
 #import "VAORavenClient.h"
 #include <sys/types.h>
 #include <sys/sysctl.h>
+#include "VAOSDKInfo.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -428,7 +428,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
                ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone)) {
         return YES;
     } else if (segmentObject[@"returning_visitor"]) {
-        return ([VAOUtils getIsNewVisitor] != [segmentObject[@"returning_visitor"] boolValue]);
+        return ([VAOSDKInfo isReturningVisitor] == [segmentObject[@"returning_visitor"] boolValue]);
     }
     
     return NO;

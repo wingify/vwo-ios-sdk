@@ -10,7 +10,7 @@
 #import "VAOAPIClient.h"
 #import "VAOController.h"
 #import "VAORavenClient.h"
-#import "VAOUtils.h"
+#import "VAOSDKInfo.h"
 
 @implementation VAOModel
 
@@ -30,7 +30,7 @@ NSMutableDictionary *campaigns;
         NSString *campaignsPlist = [self getCampaignPath];
         campaigns = [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithContentsOfFile:campaignsPlist]];
         if ([[campaigns allKeys] count] > 0) {
-            [VAOUtils setIsNewVisitor:NO];
+            [VAOSDKInfo setReturningVisitor:YES];
         }
     }
     return self;
