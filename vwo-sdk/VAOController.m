@@ -646,7 +646,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
             if ([experiment[@"json"] isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *thisExpJSON = experiment[@"json"];
                 if (thisExpJSON[key]) {
-                    [self checkAndtrackUserForExperiment:expId forExperiment:experiment];
+                    [self checkAndtrackUserForExperiment:expId forCampaign:experiment];
                     return;
                 }
             }
