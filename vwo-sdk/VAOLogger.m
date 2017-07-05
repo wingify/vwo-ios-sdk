@@ -32,9 +32,16 @@
     NSLog(@"WARNING: %@", warning);
 }
 
-+ (void)error:(NSString *) error {
++ (void)error:(NSError *) error {
     NSLog(@"ERROR: %@", error);
     //Send to sentry
 }
+
++ (void)errorStr:(NSString *) error {
+    NSLog(@"ERROR: %@", error);
+    //Send to sentry
+}
+
+
 
 @end

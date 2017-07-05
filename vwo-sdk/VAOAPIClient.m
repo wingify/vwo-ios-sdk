@@ -97,7 +97,7 @@ NSTimer *_timer;
     VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
 
     if (synchronous) {
-        VAOLog(@"Synchronously Downloading Campaigns");
+        [VAOLogger info:@"Synchronously Downloading Campaigns"];
         NSError *error;
         id data = [manager syncGET:url
                                parameters:parameters
@@ -110,7 +110,7 @@ NSTimer *_timer;
         }
         
     } else {
-        VAOLog(@"ASynchronously Downloading Campaigns");
+        [VAOLogger info:@"ASynchronously Downloading Campaigns"];
         [manager GET:url parameters:parameters success:^(VAOAFHTTPRequestOperation *operation, id responseObject) {
             if (successBlock) {
                 successBlock(responseObject);
@@ -200,12 +200,11 @@ NSTimer *_timer;
     VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
 
     [manager GET:url parameters:parameters success:^(VAOAFHTTPRequestOperation *operation, id responseObject) {
-        //VAOLog(@"JSON: %@", responseObject);
         if (successBlock) {
             successBlock(transitId);
         }
     } failure:^(VAOAFHTTPRequestOperation *operation, NSError *error) {
-        //VAOLog(@"Error: %@", error);
+        [VAOLogger error:error];
         if (operation.response.statusCode == 200) {
             if (successBlock) {
                 successBlock(transitId);

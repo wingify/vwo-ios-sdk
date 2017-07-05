@@ -129,7 +129,7 @@ void vaoexceptionHandler(NSException *exception) {
         
         // Parse DSN
         if (_config && ![_config setDSN:DSN]) {
-            VAOLog(@"Invalid DSN %@!", DSN);
+            [VAOLogger errorStr:[NSString stringWithFormat:@"Invalid DSN %@!", DSN]];
             return nil;
         }
     }
@@ -386,8 +386,8 @@ void vaoexceptionHandler(NSException *exception) {
 
 - (void)sendJSON:(NSData *)JSON {
     if (!self.config) {
-        VAOLog(@"Sentry JSON (DSN not configured, will not be sent):\n%@\n",
-              [[NSString alloc] initWithData:JSON encoding:NSUTF8StringEncoding]);
+        [VAOLogger errorStr:[NSString stringWithFormat:@"Sentry JSON (DSN not configured, will not be sent):\n%@\n",[[NSString alloc] initWithData:JSON encoding:NSUTF8StringEncoding]]];
+
         return;
     }
     
@@ -408,9 +408,8 @@ void vaoexceptionHandler(NSException *exception) {
 
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (data) {
-        	VAOLog(@"JSON sent to Sentry");
         } else {
-            VAOLog(@"Connection failed! Error - %@ %@", [connectionError localizedDescription], [[connectionError userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+            [VAOLogger errorStr:[NSString stringWithFormat:@"Connection failed! Error - %@ %@", [connectionError localizedDescription], [[connectionError userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
         }
     }];
 }

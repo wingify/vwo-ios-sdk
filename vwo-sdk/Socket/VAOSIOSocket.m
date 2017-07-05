@@ -72,8 +72,7 @@ static NSString *SIOMD5(NSString *string) {
 
     socket.javascriptWebView = [[UIWebView alloc] init];
     [socket.javascriptContext setExceptionHandler: ^(JSContext *context, JSValue *errorValue) {
-        VAOLog(@"JSError: %@", errorValue);
-        VAOLog(@"%@", [NSThread callStackSymbols]);
+        [VAOLogger errorStr:[NSString stringWithFormat:@"JSError: %@", errorValue]];
     }];
 
     socket.javascriptContext[@"window"][@"onload"] = ^() {
@@ -217,7 +216,7 @@ static NSString *SIOMD5(NSString *string) {
             if ([NSJSONSerialization isValidJSONObject:arg]) {
                 [arguments addObject: [[NSString alloc] initWithData: [NSJSONSerialization dataWithJSONObject: arg options: 0 error: nil] encoding: NSUTF8StringEncoding]];
             } else {
-                VAOLog(@"SIOSocket serialization error at %@", NSStringFromSelector(_cmd));
+                [VAOLogger errorStr:[NSString stringWithFormat:@"SIOSocket serialization error at %@", NSStringFromSelector(_cmd)]];
             }
         }
     }

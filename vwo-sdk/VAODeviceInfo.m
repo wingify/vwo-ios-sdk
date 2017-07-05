@@ -42,7 +42,6 @@ static NSString *kDefUUID = @"vaoUUID";
         name[3] = getpid();
 
         if (sysctl(name, 4, &info, &info_size, NULL, 0) == -1) {
-//            VAOLog(@"ERROR: Checking for a running debugger via sysctl() failed: %s", strerror(errno));
             debuggerIsAttached = false;
         }
 

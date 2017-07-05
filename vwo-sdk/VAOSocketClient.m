@@ -37,7 +37,7 @@
 -(void)initMethods {
     __weak id socket_ = socket;
     socket.onConnect = ^{
-        VAOLog(@"[[UIDevice currentDevice] name] = %@", [[UIDevice currentDevice] name] );
+        [VAOLogger info:[NSString stringWithFormat:@"[[UIDevice currentDevice] name] = %@", [[UIDevice currentDevice] name]]];
         NSDictionary *dict  = @{@"name":[[UIDevice currentDevice] name],
                                 @"type": @"iOS",
                                 @"appKey": VAOSDKInfo.appKey};
@@ -46,20 +46,20 @@
     };
     
     socket.onDisconnect = ^{
-        VAOLog(@"socket disconnected");
+        [VAOLogger info:@"Socket disconnected"];
         [[VAOController sharedInstance] applicationDidExitPreviewMode];
     };
     
     socket.onConnectError = ^(NSDictionary *error) {
-        VAOLog(@"error in connection = %@", error);
+        [VAOLogger errorStr:[NSString stringWithFormat:@"error in connection = %@", error]];
     };
     
     socket.onError = ^(NSDictionary *error) {
-        VAOLog(@"error = %@", error);
+        [VAOLogger errorStr:[NSString stringWithFormat:@"error = %@", error]];
     };
     
     [socket on:@"browser_connect" callback:^(SIOParameterArray *arguments) {
-        VAOLog(@"in browser_connect");
+        [VAOLogger info:@"In browser connect"];
         [[VAOController sharedInstance] applicationDidEnterPreviewMode];
         id object = [arguments firstObject];
         if (object && object[@"name"]) {
@@ -68,19 +68,17 @@
     }];
 
     [socket on:@"browser_disconnect" callback:^(SIOParameterArray *arguments) {
-        VAOLog(@"in browser_disconnect");
-        NSLog(@"VWO: In preview mode. Disconnected");
+        [VAOLogger info:@"In preview mode. Disconnected"];
         [[VAOController sharedInstance] applicationDidExitPreviewMode];
     }];
     
     [socket on:@"receive_variation" callback:^(SIOParameterArray *arguments) {
-        
-        VAOLog(@"receive_variation arugments = %@", arguments);
+        [VAOLogger info:[NSString stringWithFormat:@"receive_variation arugments = %@", arguments]];
         id expObject = [arguments firstObject];
         
         // check for sanity of expObject
         if (!expObject || !expObject[@"variationId"]) {
-            VAOLog(@"receive_variation ERROR");
+            [VAOLogger info:@"Received variation error"];
         }
         
         [socket emit:@"receive_variation_success" args:[NSArray arrayWithObject:@{@"variationId":expObject[@"variationId"]}]];

@@ -8,8 +8,8 @@
 
 #import "VAOSDKInfo.h"
 
-static NSString *kDefSessionCount = @"vaosessionCount";
-static NSString *kDefnewUSer = @"vaonewUser";
+static NSString *kDefSessionCount = @"VWOSessionCount";
+static NSString *kDefnewUSer = @"VWONewUser";
 
 static NSString *appKey;
 static NSString *accountId;

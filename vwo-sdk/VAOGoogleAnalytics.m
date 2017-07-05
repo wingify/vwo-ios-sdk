@@ -16,7 +16,7 @@
 + (instancetype)sharedInstance {
     Class class =  NSClassFromString(@"GAI");
     if (class == nil) {
-        VAOLog(@"COULD NOT FIND GAI CLASS. RETURNING...");
+        [VAOLogger info:@"COULD NOT FIND GAI CLASS. RETURNING..."];
         return nil;
     }
     
@@ -76,7 +76,6 @@
                 gaiDictionaryBuilder = gaiDictionaryWithDimension;
             }
             
-//            VAOLog(@"dictionary = %@", dictionary);
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             id returnDictionary = [gaiDictionaryBuilder performSelector:NSSelectorFromString(@"build")];

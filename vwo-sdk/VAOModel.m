@@ -45,14 +45,13 @@ NSMutableDictionary *campaigns;
                                 completion:(void(^)(NSMutableArray *info))completionBlock {
         
     [[VAOAPIClient sharedInstance] pullABData:currentPairs success:^(NSMutableArray *array) {
-        
-//        VAOLog(@"the json from server is = %@", array);
+        [VAOLogger info:[NSString stringWithFormat:@"Array: %@", array]];
         
         if (completionBlock) {
             completionBlock(array);
         }
     } failure:^(NSError *error) {
-        VAOLog(@"Failed to connect to the VAO server to download AB logs. %@\n", error);
+        [VAOLogger errorStr:[NSString stringWithFormat:@"Failed to connect to the VAO server to download AB logs. %@\n", error]];
     } isSynchronous:!async];
 }
 
