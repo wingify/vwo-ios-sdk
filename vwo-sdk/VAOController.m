@@ -34,14 +34,14 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     NSTimeInterval _lastUpdateTime;
     BOOL _previewMode;
     BOOL _trackUserManually;
-    NSMutableDictionary *_meta; // holds the set of changes to be applied to various UI elements
+    NSMutableDictionary *_campaignInfo; // holds the set of changes to be applied to various UI elements
     NSMutableDictionary *_activeGoals;
     NSMutableDictionary *customVariables;
 }
 
 + (void)initializeAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock {
-    [[self sharedInstance] loadMetaList];
-    [[self sharedInstance] downloadMetaAsynchronously:async withCallback:completionBlock];
+    [[self sharedInstance] updateCampaignInfo];
+    [[self sharedInstance] downloadCampaignAsynchronously:async withCallback:completionBlock];
 }
 
 + (instancetype)sharedInstance{
@@ -65,8 +65,8 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     return self;
 }
 
-- (void)loadMetaList {
-    _meta = [[VAOModel sharedInstance] loadMeta];
+- (void)updateCampaignInfo {
+    _campaignInfo = [[VAOModel sharedInstance] getCampaignInfo];
 }
 
 - (void)setValue:(NSString*)value forCustomVariable:(NSString*)variable {
@@ -94,25 +94,25 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
             return;
         }
         
-        [self downloadMetaAsynchronously:YES withCallback:nil];
+        [self downloadCampaignAsynchronously:YES withCallback:nil];
     }
 }
 
 
-- (void)downloadMetaAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock {
+- (void)downloadCampaignAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock {
     
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
     _remoteDataDownloading = YES;
     
-    [[VAOModel sharedInstance] downloadMetaWithCompletionBlock:^(NSMutableArray *meta){
+    [[VAOModel sharedInstance] downloadCampaignInfoWithCompletionBlock:^(NSMutableArray *info){
         _lastUpdateTime = currentTime;
         _remoteDataDownloading = NO;
         
-        [self _useMeta:meta];
+        [self _updateCampaignInfo:info];
         if (completionBlock) {
             completionBlock();
         }
-    } withCurrentMeta:[[VAOModel sharedInstance] getCurrentExperimentsVariationPairs] asynchronously:async];
+    } withCurrentCampaignInfo:[[VAOModel sharedInstance] getCurrentExperimentsVariationPairs] asynchronously:async];
 }
 
 - (void)applicationDidEnterPreviewMode {
@@ -123,7 +123,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     _previewMode = NO;
     
     // we should load
-    [self loadMetaList];
+    [self updateCampaignInfo];
 }
 
 /**
@@ -138,13 +138,13 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
 }
 
 /**
- *  Rewrite meta file.
+ *  Rewrite Campaign information file.
  */
-- (void)_useMeta:(NSMutableArray *)newMeta{
+- (void)_updateCampaignInfo:(NSMutableArray *)newInfo{
     @try {        
-        _meta = [NSMutableDictionary dictionary];
+        _campaignInfo = [NSMutableDictionary dictionary];
         
-        for (NSDictionary *campaign in newMeta) {
+        for (NSDictionary *campaign in newInfo) {
 
             NSString *campaignId = [campaign[@"id"] stringValue];
             
@@ -181,7 +181,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
             
             // check if we can run this experiment on this user
             if ([self checkSegmentation:campaignId forCampaign:campaignDict]) {
-                [_meta setObject:campaignDict forKey:campaignId];
+                [_campaignInfo setObject:campaignDict forKey:campaignId];
                 
                 // count user in campaign
                 if(_trackUserManually == NO) {
@@ -190,7 +190,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
             }
         }
         if (!_previewMode) {
-            [[VAOModel sharedInstance] saveMeta:_meta];
+            [[VAOModel sharedInstance] saveCampaignInfo:_campaignInfo];
         }
     } @catch (NSException *exception) {
         NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
@@ -540,13 +540,13 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
  * This replaces the _meta with the passed in changes
  * In preview mode, we only provide the preview changes and do not provide meta of currently running experiments
  */
-- (void)previewMeta:(NSDictionary *)changes {
+- (void)preview:(NSDictionary *)changes {
 
     // convert changes dictionary to our usable format
     NSString *experimentId = [NSString stringWithFormat:@"%i", arc4random()];
     NSString *variationId = [NSString stringWithFormat:@"%@", [changes objectForKey:@"variationId"]];
-    _meta = [NSMutableDictionary dictionary];
-    _meta[experimentId] = @{
+    _campaignInfo = [NSMutableDictionary dictionary];
+    _campaignInfo[experimentId] = @{
                             @"variationId":variationId,
                             @"json":changes[@"json"]
                             };
@@ -566,7 +566,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     }
 
     // find for each experiment, whether goal is present or not
-    for (NSString *expId in [_meta allKeys]) {
+    for (NSString *expId in [_campaignInfo allKeys]) {
         
         // check if user is part of this experiment
         if ([[VAOModel sharedInstance] hasBeenPartOfExperiment:expId] == NO) {
@@ -574,7 +574,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
             continue;
         }
         
-        NSDictionary *experiment = _meta[expId];
+        NSDictionary *experiment = _campaignInfo[expId];
         NSString *variationId = [experiment valueForKey:@"variationId"];
         NSArray *goalsArray = [experiment objectForKey:@"goals"];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"identifier == %@", goal];
@@ -614,8 +614,8 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
 
 - (id)objectForKey:(NSString*)key {
     @try {
-        for (NSString *expId in [_meta allKeys]) {
-            NSDictionary *experiment = _meta[expId];
+        for (NSString *expId in [_campaignInfo allKeys]) {
+            NSDictionary *experiment = _campaignInfo[expId];
             
             if ([experiment[@"json"] isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *thisExpJSON = experiment[@"json"];
@@ -640,8 +640,8 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     }
     
     @try {
-        for (NSString *expId in [_meta allKeys]) {
-            NSDictionary *experiment = _meta[expId];
+        for (NSString *expId in [_campaignInfo allKeys]) {
+            NSDictionary *experiment = _campaignInfo[expId];
             
             if ([experiment[@"json"] isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *thisExpJSON = experiment[@"json"];

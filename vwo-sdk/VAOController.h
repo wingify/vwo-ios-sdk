@@ -19,7 +19,7 @@
 - (void)applicationWillEnterForeground;
 - (void)applicationDidEnterPreviewMode;
 - (void)applicationDidExitPreviewMode;
-- (void)previewMeta:(NSDictionary *)changes;
+- (void)preview:(NSDictionary *)changes;
 - (void)setValue:(NSString*)value forCustomVariable:(NSString*)variable;
 - (void)trackUserManually;
 // Goals

@@ -15,11 +15,11 @@
 
 + (instancetype)sharedInstance;
 
-- (void)downloadMetaWithCompletionBlock:(void(^)(NSMutableArray *meta))completionBlock
-                        withCurrentMeta:(NSMutableDictionary*)currentMeta asynchronously:(BOOL)async;
+- (void)downloadCampaignInfoWithCompletionBlock:(void(^)(NSMutableArray *info))completionBlock
+                        withCurrentCampaignInfo:(NSMutableDictionary*)currentPairs asynchronously:(BOOL)async;
 - (NSArray *)loadMessages;
-- (void)saveMeta:(NSDictionary *)meta;
-- (NSMutableDictionary*)loadMeta;
+- (void)saveCampaignInfo:(NSDictionary *)campaignInfo;
+- (NSMutableDictionary*)getCampaignInfo;
 - (void)saveMessages:(NSArray *)messages;
 - (BOOL)hasBeenPartOfExperiment:(NSString*)experimentId;
 - (void)checkAndMakePartOfExperiment:(NSString*)experimentId variationId:(NSString*)variationId;

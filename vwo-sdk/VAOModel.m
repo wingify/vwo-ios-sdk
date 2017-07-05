@@ -40,8 +40,8 @@ NSMutableDictionary *campaigns;
     return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/UserCampaigns.plist"];
 }
 
-- (void)downloadMetaWithCompletionBlock:(void(^)(NSMutableArray *meta))completionBlock
-                        withCurrentMeta:(NSMutableDictionary*)currentPairs asynchronously:(BOOL)async {
+- (void)downloadCampaignInfoWithCompletionBlock:(void(^)(NSMutableArray *info))completionBlock
+                        withCurrentCampaignInfo:(NSMutableDictionary*)currentPairs asynchronously:(BOOL)async {
     
     [[VAOAPIClient sharedInstance] pullABData:currentPairs success:^(NSMutableArray *array) {
         
@@ -55,20 +55,20 @@ NSMutableDictionary *campaigns;
     } isSynchronous:!async];
 }
 
-- (NSMutableDictionary*)loadMeta {
+- (NSMutableDictionary*)getCampaignInfo {
     NSString *abPlist = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/CampaignInfo.plist"];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:abPlist];
     return dict;
 }
 
-- (void)saveMeta:(NSDictionary *)meta {
+- (void)saveCampaignInfo:(NSDictionary *)campaignInfo {
     /**
      * we assume that `meta` is the unabridged meta to be saved and is not polluted by any merging of old/original values.
      * Original values, in particular, may not be serializable at all, e.g., images.
      */
     @try {
         NSString *abPlist = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/CampaignInfo.plist"];
-        [meta writeToFile:abPlist atomically:YES];
+        [campaignInfo writeToFile:abPlist atomically:YES];
     }
     @catch (NSException *exception) {
         VAORavenCaptureException(exception);

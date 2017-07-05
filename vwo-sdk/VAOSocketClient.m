@@ -86,7 +86,7 @@
         [socket emit:@"receive_variation_success" args:[NSArray arrayWithObject:@{@"variationId":expObject[@"variationId"]}]];
         
         if (arguments.count) {
-            [[VAOController sharedInstance] previewMeta:[arguments firstObject]];
+            [[VAOController sharedInstance] preview:[arguments firstObject]];
             
             NSLog(@"VWO: In preview mode. Variation Received :%@", [arguments firstObject][@"json"]);
         }
