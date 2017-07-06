@@ -9,10 +9,9 @@
 #import "VAOGoal.h"
 #import "NSDictionary+VWO.h"
 
-NSString * const kId = @"id";
-NSString * const kIdentifier = @"identifier";
-NSString * const kType = @"type";
-
+static NSString * kId = @"id";
+static NSString * kIdentifier = @"identifier";
+static NSString * kType = @"type";
 
 @implementation VAOGoal
 
