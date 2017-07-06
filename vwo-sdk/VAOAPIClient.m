@@ -115,13 +115,8 @@ NSTimer *_timer;
                           variationId:(NSString *)variationId
                               revenue:(NSNumber*)revenue {
     
-    NSMutableDictionary *params = [NSMutableDictionary
-                                   dictionaryWithDictionary:@{@"goalId": @(goalId),
-                                                              @"expId":@(experimentId),
-                                                              @"varId": variationId}];
-    if (revenue != nil) {
-        params[@"revenue"] = revenue;
-    }
+    NSMutableDictionary *params = [@{@"goalId": @(goalId), @"expId":@(experimentId), @"varId": variationId} mutableCopy];
+    params[@"revenue"] = revenue;
 
     [self callMethod:@"goal" withParameters:params];
 }
