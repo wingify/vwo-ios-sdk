@@ -73,9 +73,7 @@ NSMutableDictionary *campaigns;
         [campaignInfo writeToFile:[self campaignInfoPath] atomically:YES];
     }
     @catch (NSException *exception) {
-        VAORavenCaptureException(exception);
-        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
-        VAORavenCaptureException(selfException);
+        [VAOLogger exception:exception];
     }
 }
 
@@ -96,9 +94,7 @@ NSMutableDictionary *campaigns;
 
     }
     @catch (NSException *exception) {
-        VAORavenCaptureException(exception);
-        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
-        VAORavenCaptureException(selfException);
+        [VAOLogger exception:exception];
     }
 }
 
@@ -137,9 +133,7 @@ NSMutableDictionary *campaigns;
             });
         }
         @catch (NSException *exception) {
-            VAORavenCaptureException(exception);
-            NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
-            VAORavenCaptureException(selfException);
+            [VAOLogger exception:exception];
         }
         if ([variationId isEqualToString:@"0"] == NO) {
             [[VAOAPIClient sharedInstance] pushVariationRenderWithExperimentId:[experimentId integerValue]

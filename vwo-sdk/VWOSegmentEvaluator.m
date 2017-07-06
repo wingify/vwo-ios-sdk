@@ -92,9 +92,6 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
         }
     }
     @catch (NSException *exception) {
-        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
-        VAORavenCaptureException(selfException);
-        VAORavenCaptureException(exception);
     }
     @finally {
         return [[stack lastObject] boolValue];

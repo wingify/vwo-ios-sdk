@@ -85,10 +85,7 @@
         }
     }
     @catch (NSException *exception) {
-        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
-        VAORavenCaptureException(selfException);
-        VAORavenCaptureException(exception);
-        
+        [VAOLogger exception:exception];
     }
 }
 

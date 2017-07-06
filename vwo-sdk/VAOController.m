@@ -75,7 +75,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
         [customVariables setObject:value forKey:variable];
     }
     @catch (NSException *exception) {
-        VAORavenCaptureException(exception);
+        [VAOLogger exception:exception];
     }
 }
 
@@ -193,9 +193,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
             [[VAOModel sharedInstance] saveCampaignInfo:_campaignInfo];
         }
     } @catch (NSException *exception) {
-        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
-        VAORavenCaptureException(selfException);
-        VAORavenCaptureException(exception);
+        [VAOLogger exception:exception];
     }
 }
 
@@ -527,9 +525,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
         }
     }
     @catch (NSException *exception) {
-        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
-        VAORavenCaptureException(selfException);
-        VAORavenCaptureException(exception);
+        [VAOLogger exception:exception];
     }
     @finally {
         return [[stack lastObject] boolValue];
@@ -628,9 +624,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
         return nil;
     }
     @catch (NSException *exception) {
-        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
-        VAORavenCaptureException(selfException);
-        VAORavenCaptureException(exception);
+        [VAOLogger exception:exception];
     }
 }
 
@@ -654,9 +648,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
         }
     }
     @catch (NSException *exception) {
-        NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
-        VAORavenCaptureException(selfException);
-        VAORavenCaptureException(exception);
+        [VAOLogger exception:exception];
     }
 }
 

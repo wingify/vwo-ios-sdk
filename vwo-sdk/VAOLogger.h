@@ -16,5 +16,6 @@
 + (void)info:(NSString *) info;
 + (void)warning:(NSString *) warning;
 + (void)error:(NSError *) error;
++ (void)exception:(NSException *)exception;
 + (void)errorStr:(NSString *) error;
 @end

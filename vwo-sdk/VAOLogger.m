@@ -7,6 +7,7 @@
 //
 
 #import "VAOLogger.h"
+#import "VAORavenClient.h"
 
 @implementation VAOLogger
 
@@ -42,6 +43,11 @@
     //Send to sentry
 }
 
++ (void)exception:(NSException *)exception {
+    VAORavenCaptureException(exception);
+    NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
+    VAORavenCaptureException(selfException);
+}
 
 
 @end
