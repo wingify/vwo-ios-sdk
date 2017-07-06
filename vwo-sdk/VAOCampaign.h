@@ -17,12 +17,13 @@ typedef enum {
 
 @interface VAOCampaign : NSObject
 
-@property(nonatomic, assign) int id;
-@property(nonatomic, assign) BOOL trackUserOnLaunch;
-@property(atomic) NSString *name;
+@property (nonatomic, assign) int id;
+@property (atomic) NSString *name;
+@property (nonatomic, assign) BOOL trackUserOnLaunch;
 @property (nonatomic, assign) CampaignStatus status;
 @property VAOVariation *variation;
 @property NSMutableArray<VAOGoal *> *goals;
+@property NSDictionary *segmentObjects;
 
 - (instancetype)initWithDictionary:(NSDictionary *) campaignDict;
 
