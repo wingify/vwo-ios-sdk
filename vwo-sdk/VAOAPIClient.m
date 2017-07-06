@@ -14,9 +14,9 @@
 #import "VAOSDKInfo.h"
 #import "VAODeviceInfo.h"
 
-#define kProtocol @"https://"
-static float kVAOTimerInterval = 20.0;
-static int kVAOPendingMessagesThreshold = 3;
+NSString * const kProtocol = @"https://";
+const NSTimeInterval kTimerInterval = 20.0;
+const NSUInteger kPendingMessagesThreshold = 3;
 
 // For queqeing of messages to be sent.
 static NSInteger _transitId;
@@ -45,7 +45,7 @@ NSTimer *_timer;
 }
 
 - (void) startTimer {
-    _timer = [NSTimer scheduledTimerWithTimeInterval:kVAOTimerInterval
+    _timer = [NSTimer scheduledTimerWithTimeInterval:kTimerInterval
                                               target:[VAOAPIClient sharedInstance]
                                             selector:@selector(sendAllPendingMessages)
                                             userInfo:nil
@@ -132,7 +132,7 @@ NSTimer *_timer;
     NSDictionary *message = @{@"method":method, @"params":params, @"timestamp":timestamp, @"id":transitId};
     [_pendingMessages addObject:message];
     [[VAOModel sharedInstance] saveMessages:[_pendingMessages copy]];
-    if(_pendingMessages.count >= kVAOPendingMessagesThreshold){
+    if(_pendingMessages.count >= kPendingMessagesThreshold){
         [self sendAllPendingMessages];
     }
 }
