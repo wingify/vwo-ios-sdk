@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum { GoalTypeCustom, GoalTypeRevenue } GoalType;
+
 @interface VAOGoal : NSObject
 
-@property NSString *id;
-@property NSString *name;
-@property NSString *type;
+@property(nonatomic, assign) int id;
+@property NSString *identifier;
+@property (nonatomic, assign) GoalType type;
 
 @end
