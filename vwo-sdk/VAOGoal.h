@@ -16,4 +16,6 @@ typedef enum { GoalTypeCustom, GoalTypeRevenue } GoalType;
 @property NSString *identifier;
 @property (nonatomic, assign) GoalType type;
 
+- (instancetype)initWithDictionary:(NSDictionary *) goalDict;
+
 @end

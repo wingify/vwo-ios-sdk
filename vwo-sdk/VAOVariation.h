@@ -14,7 +14,7 @@
 @property(atomic) NSString *name;
 @property(atomic) NSDictionary *changes;
 
-- (instancetype)initWithNSDictionary:(NSDictionary *) variationDict;
+- (instancetype)initWithDictionary:(NSDictionary *) variationDict;
 
 -(BOOL)isControl;
 

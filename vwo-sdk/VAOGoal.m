@@ -15,7 +15,7 @@ static NSString * kType = @"type";
 
 @implementation VAOGoal
 
-- (instancetype)initWithNSDictionary:(NSDictionary *) goalDict {
+- (instancetype)initWithDictionary:(NSDictionary *) goalDict {
     self = [super init];
     if (self) {
         if ([goalDict hasKeys:@[kId, kIdentifier]]) {
@@ -28,6 +28,8 @@ static NSString * kType = @"type";
             } else if([typeString isEqualToString:@"REVENUE_TRACKING"]) {
                 [self setType:GoalTypeRevenue];
             }
+        } else {
+            return nil;
         }
     }
     return self;

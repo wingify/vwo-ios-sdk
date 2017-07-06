@@ -15,13 +15,15 @@ static NSString * kChanges = @"changes";
 
 @implementation VAOVariation
 
-- (instancetype)initWithNSDictionary:(NSDictionary *) variationDict {
+- (instancetype)initWithDictionary:(NSDictionary *) variationDict {
     self = [super init];
     if (self) {
         if ([variationDict hasKeys:@[kId, kName]]) {
             [self setId:[variationDict[kId] intValue]];
             [self setName:[variationDict[kName] stringValue]];
             [self setChanges:variationDict[kChanges]];
+        } else {
+            return nil;
         }
     }
     return self;
