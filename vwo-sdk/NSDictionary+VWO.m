@@ -18,8 +18,13 @@
     return nil;
 }
 
-- (BOOL) hasKey:(NSString *) key {
-    return [self objectForKey:key] != nil;
+/// Returns YES only if it contains all the keys in parameter
+- (BOOL)hasKeys:(NSArray<NSString *> *)keys {
+    for (NSString *key in keys) {
+        if ([self objectForKey:key] == nil) {
+            return NO;
+        }
+    }
+    return YES;
 }
-
 @end

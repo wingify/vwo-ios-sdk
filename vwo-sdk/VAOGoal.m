@@ -18,7 +18,7 @@ static NSString * kType = @"type";
 - (instancetype)initWithNSDictionary:(NSDictionary *) goalDict {
     self = [super init];
     if (self) {
-        if ([goalDict hasKey:kId] && [goalDict hasKey:kIdentifier]) {
+        if ([goalDict hasKeys:@[kId, kIdentifier]]) {
             [self setId:[goalDict[kId] intValue]];
             [self setIdentifier:kIdentifier];
 
