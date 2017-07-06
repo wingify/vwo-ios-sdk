@@ -18,4 +18,8 @@
     return nil;
 }
 
+- (BOOL) hasKey:(NSString *) key {
+    return [self objectForKey:key] != nil;
+}
+
 @end

@@ -10,4 +10,5 @@
 
 @interface NSDictionary (VWO)
 - (nullable NSString*)toString;
+- (BOOL) hasKey:(nonnull NSString *) key;
 @end
