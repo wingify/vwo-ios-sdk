@@ -10,9 +10,11 @@
 
 @interface VAOVariation : NSObject
 
-@property NSString *id;
-@property NSString *identifier;
-@property NSString *name;
+@property(nonatomic, assign) int id;
+@property(atomic) NSString *name;
+@property(atomic) NSDictionary *changes;
+
+- (instancetype)initWithNSDictionary:(NSDictionary *) variationDict;
 
 -(BOOL)isControl;
 
