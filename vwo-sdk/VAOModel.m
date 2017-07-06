@@ -27,7 +27,7 @@ NSMutableDictionary *campaigns;
 
 - (id)init {
     if (self = [super init]) {
-        NSString *campaignsPlist = [self getCampaignPath];
+        NSString *campaignsPlist = [self userCampaignsPath];
         campaigns = [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithContentsOfFile:campaignsPlist]];
         if ([[campaigns allKeys] count] > 0) {
             [VAOSDKInfo setReturningVisitor:YES];
@@ -36,8 +36,8 @@ NSMutableDictionary *campaigns;
     return self;
 }
 
-- (NSString*)getCampaignPath {
-    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/UserCampaigns.plist"];
+- (NSString*)userCampaignsPath {
+    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOUserCampaigns.plist"];
 }
 
 - (void)downLoadCampaignInfoAsynchronously:(BOOL)async
@@ -55,9 +55,12 @@ NSMutableDictionary *campaigns;
     } isSynchronous:!async];
 }
 
+- (NSString *)campaignInfoPath {
+    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOCampaignInfo.plist"];
+}
+
 - (NSMutableDictionary*)getCampaignInfo {
-    NSString *abPlist = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/CampaignInfo.plist"];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:abPlist];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:[self campaignInfoPath]];
     return dict;
 }
 
@@ -67,8 +70,7 @@ NSMutableDictionary *campaigns;
      * Original values, in particular, may not be serializable at all, e.g., images.
      */
     @try {
-        NSString *abPlist = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/CampaignInfo.plist"];
-        [campaignInfo writeToFile:abPlist atomically:YES];
+        [campaignInfo writeToFile:[self campaignInfoPath] atomically:YES];
     }
     @catch (NSException *exception) {
         VAORavenCaptureException(exception);
@@ -77,18 +79,19 @@ NSMutableDictionary *campaigns;
     }
 }
 
+- (NSString *) pendingMessagesPath {
+    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOPendingMessages.plist"];
+}
+
 - (NSArray *)loadMessages {
-    NSString *messagesPlist = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/PendingMessages.plist"];
-    NSArray *messages = [NSArray arrayWithContentsOfFile:messagesPlist];
-    return messages;
+    return [NSArray arrayWithContentsOfFile:[self pendingMessagesPath]];
 }
 
 - (void)saveMessages:(NSArray *)messages {
     @try {
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            NSString *messagesPlist = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/PendingMessages.plist"];
-            [messages writeToFile:messagesPlist atomically:YES];
+            [messages writeToFile:[self pendingMessagesPath] atomically:YES];
         });
 
     }
@@ -129,7 +132,7 @@ NSMutableDictionary *campaigns;
         
         @try {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                NSString *campaignsPlist = [self getCampaignPath];
+                NSString *campaignsPlist = [self userCampaignsPath];
                 [[campaigns copy] writeToFile:campaignsPlist atomically:YES];
             });
         }
@@ -157,7 +160,7 @@ NSMutableDictionary *campaigns;
         [newGoalsArray addObject:goalId];
         experimentDict[@"goals"] = newGoalsArray;
         campaigns[experimentId] = experimentDict;
-        NSString *campaignsPlist = [self getCampaignPath];
+        NSString *campaignsPlist = [self userCampaignsPath];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             [[campaigns copy] writeToFile:campaignsPlist atomically:YES];
         });
