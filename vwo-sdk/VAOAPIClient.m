@@ -140,15 +140,9 @@ NSTimer *_timer;
     NSDictionary *params = message[@"params"];
     BOOL isRender = [message[@"method"] isEqualToString:@"render"];
     NSString *appVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
-    
-    
-    NSString *url = [kProtocol stringByAppendingString:VAO_DOMAIN];
-    if(isRender) {
-        url = [url stringByAppendingString:@"/l.gif"];
-    } else {
-        url = [url stringByAppendingString:@"/c.gif"];
-    }
-    
+
+    NSString *url = [NSString stringWithFormat:@"%@%@/%@.gif", kProtocol, VAO_DOMAIN, isRender ? @"l"  :@"c"];
+
     NSDictionary *extraParams = @{@"lt": message[@"timestamp"],
                                   @"v": VWO_SDK_VERSION,
                                   @"i": VAOSDKInfo.appKey,
