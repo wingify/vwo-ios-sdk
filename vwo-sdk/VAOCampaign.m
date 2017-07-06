@@ -46,6 +46,8 @@ static NSString * kType                 = @"type";
             //Variation
             VAOVariation *variation = [[VAOVariation alloc] initWithDictionary:campaignDict[kVariation]];
             if (variation) [self setVariation:variation];
+        } else {
+            return nil;
         }
     }
     return self;
