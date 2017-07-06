@@ -58,25 +58,11 @@ NSTimer *_timer;
     _timer = nil;
 }
 
-- (NSString*)convertDictionaryToString:(NSDictionary*)dictionary {
-    if (!dictionary) {
-        return nil;
-    }
-    NSError *e;
-    NSData *currentData = [NSJSONSerialization dataWithJSONObject:dictionary options:kNilOptions error:&e];
-    if (!e) {
-        return [[NSString alloc] initWithData:currentData encoding:NSUTF8StringEncoding];
-    }
-    return nil;
-}
-
 // For App
 - (void) pullABData:(NSMutableDictionary *)experimentsAndVariationsPair
             success:(void(^)(id))successBlock
             failure:(void(^)(NSError *))failureBlock
       isSynchronous:(BOOL)synchronous {
-    
-    NSString *currentStr = [self convertDictionaryToString:experimentsAndVariationsPair];
     
     NSString *url = [NSString stringWithFormat:@"%@%@/mobile", kProtocol,VAO_DOMAIN];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -88,13 +74,11 @@ NSTimer *_timer;
     parameters[@"u"] = [VAODeviceInfo getUUID];
     parameters[@"r"] =  @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
     
-    if (currentStr) {
-        parameters[@"k"] = currentStr;
+    if ([experimentsAndVariationsPair toString]) {
+        parameters[@"k"] = [experimentsAndVariationsPair toString];
     }
     
-    
     VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
-
     if (synchronous) {
         [VAOLogger info:@"Synchronously Downloading Campaigns"];
         NSError *error;
@@ -177,9 +161,7 @@ NSTimer *_timer;
                                   @"dt": [VAODeviceInfo deviceType],
                                   @"os": [[UIDevice currentDevice] systemVersion]
                                   };
-    
-    NSString *extraData = [self convertDictionaryToString:extraParams];
-    
+        
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"experiment_id"] = params[@"expId"];
     parameters[@"account_id"] = VAOSDKInfo.accountID;
@@ -187,7 +169,7 @@ NSTimer *_timer;
     parameters[@"u"] = [VAODeviceInfo getUUID];
     parameters[@"s"] = [VAOSDKInfo sessionCount];
     parameters[@"random"] = @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
-    parameters[@"ed"] = extraData;
+    parameters[@"ed"] = [extraParams toString];
     
     if(isRender == NO) {
         parameters[@"goal_id"] = params[@"goalId"];
