@@ -15,6 +15,7 @@
 #include <sys/types.h>
 #include <sys/sysctl.h>
 #include "VAOSDKInfo.h"
+#import "VAOLogger.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 

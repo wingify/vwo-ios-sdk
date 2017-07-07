@@ -10,6 +10,7 @@
 #import "VAORavenClient.h"
 #import "VAORavenClient_Private.h"
 #import "VAORavenConfig.h"
+#import "VAOLogger.h"
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>

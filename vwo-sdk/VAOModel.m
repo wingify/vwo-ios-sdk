@@ -11,6 +11,7 @@
 #import "VAOController.h"
 #import "VAORavenClient.h"
 #import "VAOSDKInfo.h"
+#import "VAOLogger.h"
 
 @implementation VAOModel
 

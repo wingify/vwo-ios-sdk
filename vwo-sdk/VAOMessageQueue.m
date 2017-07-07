@@ -8,8 +8,8 @@
 
 #import "VAOMessageQueue.h"
 
-const NSTimeInterval kTimerInterval = 20.0;
-const NSUInteger kQueueThreshold = 5;
+NSTimeInterval kTimerIntervalMQ = 20.0;
+NSUInteger kQueueThreshold = 5;
 
 @implementation VAOMessageQueue {
     NSTimer *timer;
@@ -29,7 +29,7 @@ const NSUInteger kQueueThreshold = 5;
 -(instancetype)init {
     self = [super init];
     if (self) {
-        timer = [NSTimer scheduledTimerWithTimeInterval:kTimerInterval
+        timer = [NSTimer scheduledTimerWithTimeInterval:kTimerIntervalMQ
                                                  target:self
                                                selector:@selector(timerActivity)
                                                userInfo:nil

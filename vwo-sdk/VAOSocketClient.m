@@ -10,6 +10,7 @@
 #import "VAOSIOSocket.h"
 #import "VAOController.h"
 #import "VAOSDKInfo.h"
+#import "VAOLogger.h"
 
 #define kSocketIP @"https://mobilepreview.vwo.com:443"
 @implementation VAOSocketClient{

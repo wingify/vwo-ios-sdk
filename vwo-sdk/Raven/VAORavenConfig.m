@@ -7,6 +7,7 @@
 //
 
 #import "VAORavenConfig.h"
+#import "VAOLogger.h"
 
 @implementation VAORavenConfig
 

@@ -10,6 +10,7 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "socket.io.js.h"
 #import <CommonCrypto/CommonCrypto.h>
+#import "VAOLogger.h"
 
 #ifdef __IPHONE_8_0
 #import <WebKit/WebKit.h>

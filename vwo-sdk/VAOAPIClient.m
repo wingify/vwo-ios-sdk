@@ -13,10 +13,12 @@
 #import "VAOAFHTTPRequestOperationManager+Synchronous.h"
 #import "VAOSDKInfo.h"
 #import "VAODeviceInfo.h"
+#import "NSDictionary+VWO.h"
+#import "VAOLogger.h"
 
 NSString * const kProtocol = @"https://";
-const NSTimeInterval kTimerInterval = 20.0;
-const NSUInteger kPendingMessagesThreshold = 3;
+NSTimeInterval kTimerInterval = 20.0;
+NSUInteger kPendingMessagesThreshold = 3;
 
 // For queqeing of messages to be sent.
 static NSInteger _transitId;

@@ -8,6 +8,7 @@
 
 #import "VAOGoogleAnalytics.h"
 #import "VAORavenClient.h"
+#import "VAOLogger.h"
 
 @implementation VAOGoogleAnalytics {
     id defaultTracker;
