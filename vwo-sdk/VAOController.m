@@ -43,6 +43,17 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
 + (void)initializeAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock {
     [[self sharedInstance] updateCampaignInfo];
     [[self sharedInstance] downloadCampaignAsynchronously:async withCallback:completionBlock];
+    [[self sharedInstance] addBackgroundListeners];
+}
+
+-(void)addBackgroundListeners {
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self
+                           selector:@selector(applicationDidEnterBackground)
+                               name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(applicationWillEnterForeground)
+                               name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 + (instancetype)sharedInstance{
@@ -99,6 +110,9 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     }
 }
 
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)downloadCampaignAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock {
     

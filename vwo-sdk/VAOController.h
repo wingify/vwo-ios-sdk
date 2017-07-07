@@ -15,8 +15,6 @@
 
 + (instancetype)sharedInstance;
 + (void)initializeAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock;
-- (void)applicationDidEnterBackground;
-- (void)applicationWillEnterForeground;
 - (void)applicationDidEnterPreviewMode;
 - (void)applicationDidExitPreviewMode;
 - (void)preview:(NSDictionary *)changes;

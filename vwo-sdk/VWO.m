@@ -43,17 +43,7 @@
         }
         
         [VAOController initializeAsynchronously:async withCallback:completionBlock];
-            
-        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-        [notificationCenter addObserver:[VAOController sharedInstance]
-                               selector:@selector(applicationDidEnterBackground)
-                                   name:UIApplicationDidEnterBackgroundNotification object:nil];
-        [notificationCenter addObserver:[VAOController sharedInstance]
-                               selector:@selector(applicationWillEnterForeground)
-                                   name:UIApplicationWillEnterForegroundNotification object:nil];
-
         NSLog(@"VWO Initialized");
-
     });
 }
 
@@ -70,10 +60,6 @@
                                                       tags:tags];
     
     [VAORavenClient setSharedClient:client];
-}
-
--(void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 + (void)launchForAPIKey:(NSString *) key {
