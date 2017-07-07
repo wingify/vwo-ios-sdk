@@ -61,10 +61,9 @@ NSTimer *_timer;
 }
 
 // For App
-- (void) pullABData:(NSMutableDictionary *)experimentsAndVariationsPair
-            success:(void(^)(id))successBlock
-            failure:(void(^)(NSError *))failureBlock
-      isSynchronous:(BOOL)synchronous {
+- (void) pullABDataSynchronously:(BOOL)isSynchronous
+                         success:(void(^)(id))successBlock
+                         failure:(void(^)(NSError *))failureBlock {
     
     NSString *url = [NSString stringWithFormat:@"%@%@/mobile", kProtocol,VAO_DOMAIN];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -75,13 +74,14 @@ NSTimer *_timer;
     parameters[@"os"] = [[UIDevice currentDevice] systemVersion];
     parameters[@"u"] = [VAODeviceInfo getUUID];
     parameters[@"r"] =  @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
-    
+
+    NSDictionary *experimentsAndVariationsPair = [[VAOModel sharedInstance] getCurrentExperimentsVariationPairs];
     if ([experimentsAndVariationsPair toString]) {
         parameters[@"k"] = [experimentsAndVariationsPair toString];
     }
     
     VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
-    if (synchronous) {
+    if (isSynchronous) {
         [VAOLogger info:@"Synchronously Downloading Campaigns"];
         NSError *error;
         id data = [manager syncGET:url

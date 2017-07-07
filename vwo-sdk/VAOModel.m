@@ -42,18 +42,15 @@ NSMutableDictionary *campaigns;
 }
 
 - (void)downLoadCampaignInfoAsynchronously:(BOOL)async
-                   withCurrentCampaignInfo:(NSMutableDictionary *) currentPairs
                                 completion:(void(^)(NSMutableArray *info))completionBlock {
-        
-    [[VAOAPIClient sharedInstance] pullABData:currentPairs success:^(NSMutableArray *array) {
-        [VAOLogger info:[NSString stringWithFormat:@"Array: %@", array]];
-        
+
+    [[VAOAPIClient sharedInstance] pullABDataSynchronously:!async success:^(NSMutableArray *array) {
         if (completionBlock) {
             completionBlock(array);
         }
     } failure:^(NSError *error) {
         [VAOLogger errorStr:[NSString stringWithFormat:@"Failed to connect to the VAO server to download AB logs. %@\n", error]];
-    } isSynchronous:!async];
+    }];
 }
 
 - (NSString *)campaignInfoPath {

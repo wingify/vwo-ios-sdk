@@ -16,7 +16,6 @@
 + (instancetype)sharedInstance;
 
 - (void)downLoadCampaignInfoAsynchronously:(BOOL)async
-                   withCurrentCampaignInfo:(NSMutableDictionary *) currentPairs
                                 completion:(void(^)(NSMutableArray *info))completionBlock;
 
 - (NSArray *)loadMessages;

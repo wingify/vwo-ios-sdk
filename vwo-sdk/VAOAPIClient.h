@@ -19,10 +19,9 @@
 - (void)stopTimer;
 
 // For App
-- (void) pullABData:(NSMutableDictionary *)experimentsAndVariationsPair
-            success:(void(^)(id))successBlock
-            failure:(void(^)(NSError *))failureBlock
-      isSynchronous:(BOOL)synchronous;
+- (void) pullABDataSynchronously:(BOOL)isSynchronous
+                         success:(void(^)(id))successBlock
+                         failure:(void(^)(NSError *))failureBlock;
 
 - (void) pushVariationRenderWithExperimentId:(NSInteger)experimentId
                                  variationId:(NSString *)variationId;
