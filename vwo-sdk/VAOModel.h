@@ -10,14 +10,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VAOCampaign.h"
 
 @interface VAOModel : NSObject
 
+@property (atomic) NSMutableArray<VAOCampaign *> *campaignList;
+
 + (instancetype)sharedInstance;
-
-- (void)downLoadCampaignInfoAsynchronously:(BOOL)async
-                                completion:(void(^)(NSMutableArray *info))completionBlock;
-
+- (void)updateCampaignList:(NSArray *)allCampaignDict;
 - (NSArray *)loadMessages;
 - (void)saveCampaignInfo:(NSDictionary *)campaignInfo;
 - (NSMutableDictionary*)getCampaignInfo;

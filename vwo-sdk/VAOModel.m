@@ -41,16 +41,13 @@ NSMutableDictionary *campaigns;
     return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOUserCampaigns.plist"];
 }
 
-- (void)downLoadCampaignInfoAsynchronously:(BOOL)async
-                                completion:(void(^)(NSMutableArray *info))completionBlock {
-
-    [[VAOAPIClient sharedInstance] pullABDataAsynchronously:async success:^(NSMutableArray *array) {
-        if (completionBlock) {
-            completionBlock(array);
-        }
-    } failure:^(NSError *error) {
-        [VAOLogger errorStr:[NSString stringWithFormat:@"Failed to connect to the VAO server to download AB logs. %@\n", error]];
-    }];
+/// Creates NSArray of Type VAOCampaign and stores in self.campaignList
+- (void)updateCampaignList:(NSArray *)allCampaignDict {
+    self.campaignList = [NSMutableArray new];
+    for (NSDictionary *campaignDict in allCampaignDict) {
+        VAOCampaign *aCampaign = [[VAOCampaign alloc] initWithDictionary:campaignDict];
+        if (aCampaign) [self.campaignList addObject:aCampaign];
+    }
 }
 
 - (NSString *)campaignInfoPath {

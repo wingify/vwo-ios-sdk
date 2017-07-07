@@ -119,14 +119,17 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
     _remoteDataDownloading = YES;
 
-    [[VAOModel sharedInstance] downLoadCampaignInfoAsynchronously:async completion:^(NSMutableArray *info) {
+    [[VAOAPIClient sharedInstance] pullABDataAsynchronously:async success:^(id responseObject) {
         _lastUpdateTime = currentTime;
         _remoteDataDownloading = NO;
 
-        [self _updateCampaignInfo:info];
+//        [self _updateCampaignInfo:info];
+        [[VAOModel sharedInstance] updateCampaignList:responseObject];
         if (completionBlock) {
             completionBlock();
         }
+    } failure:^(NSError *error) {
+        [VAOLogger errorStr:[NSString stringWithFormat:@"Failed to connect to the VAO server to download AB logs. %@\n", error]];
     }];
 }
 
