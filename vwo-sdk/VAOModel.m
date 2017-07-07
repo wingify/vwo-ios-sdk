@@ -44,7 +44,7 @@ NSMutableDictionary *campaigns;
 - (void)downLoadCampaignInfoAsynchronously:(BOOL)async
                                 completion:(void(^)(NSMutableArray *info))completionBlock {
 
-    [[VAOAPIClient sharedInstance] pullABDataSynchronously:!async success:^(NSMutableArray *array) {
+    [[VAOAPIClient sharedInstance] pullABDataAsynchronously:async success:^(NSMutableArray *array) {
         if (completionBlock) {
             completionBlock(array);
         }

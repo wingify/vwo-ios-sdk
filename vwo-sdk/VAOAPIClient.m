@@ -61,7 +61,7 @@ NSTimer *_timer;
 }
 
 // For App
-- (void) pullABDataSynchronously:(BOOL)isSynchronous
+- (void) pullABDataAsynchronously:(BOOL)isAsync
                          success:(void(^)(id))successBlock
                          failure:(void(^)(NSError *))failureBlock {
     
@@ -81,20 +81,7 @@ NSTimer *_timer;
     }
     
     VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
-    if (isSynchronous) {
-        [VAOLogger info:@"Synchronously Downloading Campaigns"];
-        NSError *error;
-        id data = [manager syncGET:url
-                               parameters:parameters
-                                operation:NULL
-                                    error:&error];
-        if (successBlock && !error) {
-            successBlock(data);
-        } else if(failureBlock){
-            failureBlock(error);
-        }
-        
-    } else {
+    if (isAsync) {
         [VAOLogger info:@"ASynchronously Downloading Campaigns"];
         [manager GET:url parameters:parameters success:^(VAOAFHTTPRequestOperation *operation, id responseObject) {
             if (successBlock) {
@@ -105,6 +92,16 @@ NSTimer *_timer;
                 failureBlock(error);
             }
         }];
+    }
+    else {
+        [VAOLogger info:@"Synchronously Downloading Campaigns"];
+        NSError *error;
+        id data = [manager syncGET:url parameters:parameters operation:NULL error:&error];
+        if (successBlock && !error) {
+            successBlock(data);
+        } else if(failureBlock){
+            failureBlock(error);
+        }
     }
 }
 
