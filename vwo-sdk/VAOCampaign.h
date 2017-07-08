@@ -15,12 +15,12 @@ typedef NS_ENUM(NSInteger, CampaignStatus) {
     CampaignStatusExcluded
 };
 
-@interface VAOCampaign : NSObject
+@interface VAOCampaign : NSObject<NSCoding>
 
-@property (nonatomic, assign) int id;
+@property (nonatomic, assign) int iD;
 @property (atomic) NSString *name;
 @property (nonatomic, assign) BOOL trackUserOnLaunch;
-@property (nonatomic, assign) CampaignStatus status;
+@property (nonatomic, assign) CampaignStatus campaignStatus;
 @property VAOVariation *variation;
 @property NSArray<VAOGoal *> *goals;
 @property NSDictionary *segmentObjects;

@@ -19,18 +19,18 @@ static NSString * kVariation            = @"variations";
 
 @implementation VAOCampaign
 
-- (instancetype)initWithId:(int)iD
+- (instancetype)initWithID:(int)iD
                     name:(NSString *)name
        trackUesrOnLaunch:(BOOL) trackUserOnLaunch
-                  status:(CampaignStatus)status
+                  campaignStatus:(CampaignStatus)campaignStatus
           segmentObjects:(NSDictionary *)segmentObjects
                    goals:(NSArray<VAOGoal *>*)goals
                variation:(VAOVariation *)variation {
     if (self = [super init]) {
-        self.id = iD;
+        self.iD = iD;
         self.name = name;
         self.trackUserOnLaunch = trackUserOnLaunch;
-        self.status = status;
+        self.campaignStatus = campaignStatus;
         self.segmentObjects = segmentObjects;
         self.goals = goals;
         self.variation = variation;
@@ -49,12 +49,12 @@ static NSString * kVariation            = @"variations";
     NSDictionary *segmentObjects = campaignDict[kSegmentObject];
 
     // Status
-    CampaignStatus status = CampaignStatusRunning;
+    CampaignStatus campaignStatus = CampaignStatusRunning;
     NSString *statusString = [campaignDict[kStatus] stringValue];
     if ([statusString isEqualToString:@"RUNNING"]) {
-        status = CampaignStatusRunning;
+        campaignStatus = CampaignStatusRunning;
     } else if ([statusString isEqualToString:@"EXCLUED"]) {
-        status = CampaignStatusExcluded;
+        campaignStatus = CampaignStatusExcluded;
     }
 
     //Goals
@@ -69,6 +69,30 @@ static NSString * kVariation            = @"variations";
     VAOVariation *variation = [[VAOVariation alloc] initWithDictionary:campaignDict[kVariation]];
     if (variation) [self setVariation:variation];
 
-    return [self initWithId:iD name:name trackUesrOnLaunch:trackUserOnLaunch status:status segmentObjects:segmentObjects goals:goals variation:variation];
+    return [self initWithID:iD name:name trackUesrOnLaunch:trackUserOnLaunch campaignStatus:campaignStatus segmentObjects:segmentObjects goals:goals variation:variation];
 }
+
+#pragma mark - NSCoding
+
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
+    int iD = [aDecoder decodeIntForKey:kId];
+    NSString *name = [aDecoder decodeObjectForKey:kName];
+    BOOL track = [aDecoder decodeBoolForKey:kTrackUserOnLaunch];
+    CampaignStatus status = [aDecoder decodeIntegerForKey:kStatus];
+    NSDictionary *segmenObjects = [aDecoder decodeObjectForKey:kSegmentObject];
+    NSArray<VAOGoal *>* goals = [aDecoder decodeObjectForKey:kGoals];
+    VAOVariation *variation = [aDecoder decodeObjectForKey:kVariation];
+    return [self initWithID:iD name:name trackUesrOnLaunch:track campaignStatus:status segmentObjects:segmenObjects goals:goals variation:variation];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeInt:self.iD forKey:kId];
+    [aCoder encodeObject:self.name forKey:kName];
+    [aCoder encodeBool:self.trackUserOnLaunch forKey:kTrackUserOnLaunch];
+    [aCoder encodeInteger:self.campaignStatus forKey:kStatus];
+    [aCoder encodeObject:self.segmentObjects forKey:kSegmentObject];
+    [aCoder encodeObject:self.goals forKey:kGoals];
+    [aCoder encodeObject:self.variation forKey:kVariation];
+}
+
 @end
