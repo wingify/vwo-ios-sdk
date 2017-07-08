@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VAOVariation : NSObject
+@interface VAOVariation : NSObject<NSCoding>
 
 @property(nonatomic, assign) int id;
 @property(atomic) NSString *name;
