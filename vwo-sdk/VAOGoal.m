@@ -15,24 +15,47 @@ static NSString * kType = @"type";
 
 @implementation VAOGoal
 
-- (instancetype)initWithDictionary:(NSDictionary *) goalDict {
+- (instancetype)initWithId:(int) id identifier:(NSString *)identifier type:(GoalType) type {
     self = [super init];
     if (self) {
-        if ([goalDict hasKeys:@[kId, kIdentifier]]) {
-            [self setId:[goalDict[kId] intValue]];
-            [self setIdentifier:kIdentifier];
-
-            NSString *typeString = goalDict[kType];
-            if ([typeString isEqualToString:@"@CUSTOM_GOAL"]) {
-                [self setType:GoalTypeCustom];
-            } else if([typeString isEqualToString:@"REVENUE_TRACKING"]) {
-                [self setType:GoalTypeRevenue];
-            }
-        } else {
-            return nil;
-        }
+        self.id = id;
+        self.identifier = identifier;
+        self.type = type;
     }
     return self;
+}
+
+- (nullable instancetype)initWithDictionary:(NSDictionary *) goalDict {
+    if ([goalDict hasKeys:@[kId, kIdentifier]]) {
+        int id = [goalDict[kId] intValue];
+        NSString *identifier = goalDict[kIdentifier];
+
+        GoalType type = GoalTypeCustom;
+        if ([goalDict[kType] isEqualToString:@"@CUSTOM_GOAL"]) type = GoalTypeCustom;
+        else if([goalDict[kType] isEqualToString:@"REVENUE_TRACKING"]) type = GoalTypeRevenue;
+
+        return [self initWithId:id identifier:identifier type:type];
+    } else {
+        return nil;
+    }
+}
+
+-(NSString *)description {
+    return [NSString stringWithFormat:@"GOAL: %@", self.identifier];
+}
+
+#pragma mark - NSCoding
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
+    int id = [aDecoder decodeIntForKey:kId];
+    NSString *identifier = [aDecoder decodeObjectForKey:kIdentifier];
+    GoalType type = [aDecoder decodeIntegerForKey:kType];
+    return [self initWithId:id identifier:identifier type:type];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeInt:self.id forKey:kId];
+    [aCoder encodeObject:self.identifier forKey:kIdentifier];
+    [aCoder encodeInteger:self.type forKey:kType];
 }
 
 @end
