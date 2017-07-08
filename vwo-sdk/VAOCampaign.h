@@ -10,10 +10,10 @@
 #import "VAOGoal.h"
 #import "VAOVariation.h"
 
-typedef enum {
+typedef NS_ENUM(NSInteger, CampaignStatus) {
     CampaignStatusRunning,
     CampaignStatusExcluded
-} CampaignStatus;
+};
 
 @interface VAOCampaign : NSObject
 
@@ -22,7 +22,7 @@ typedef enum {
 @property (nonatomic, assign) BOOL trackUserOnLaunch;
 @property (nonatomic, assign) CampaignStatus status;
 @property VAOVariation *variation;
-@property NSMutableArray<VAOGoal *> *goals;
+@property NSArray<VAOGoal *> *goals;
 @property NSDictionary *segmentObjects;
 
 - (instancetype)initWithDictionary:(NSDictionary *) campaignDict;
