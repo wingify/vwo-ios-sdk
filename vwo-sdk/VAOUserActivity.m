@@ -1,0 +1,57 @@
+//
+//  VAOUserActivity.m
+//  Pods
+//
+//  Created by Kaunteya Suryawanshi on 09/07/17.
+//
+//
+
+#import "VAOUserActivity.h"
+
+static NSString * kTracking = @"tracking";
+static NSString * kGoalsMarked = @"goalsMarked";
+
+@implementation VAOUserActivity
+
+/// Stores "campaignId : "variationID" in User Activity["tracking"]
++ (void)trackUserForCampaign:(VAOCampaign *)campaign {
+    NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
+    NSNumber *variationID = [NSNumber numberWithInt:campaign.variation.id];
+    NSMutableDictionary *userDict = [self dictionary];
+    userDict[kTracking][campaignID] = variationID;
+    [userDict writeToFile:[self filePath] atomically:YES];
+}
+
+/// Stores "campaignID : goalID" in User Activity["goalsMarked"]
++ (void)markGoalConversion:(VAOGoal *)goal forCampaign:(VAOCampaign *)campaign {
+    NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
+    NSNumber *goalID = [NSNumber numberWithInt:goal.id];
+    NSMutableDictionary *userDict = [self dictionary];
+    userDict[kGoalsMarked][campaignID] = goalID;
+    [userDict writeToFile:[self filePath] atomically:YES];
+}
+
++ (NSMutableDictionary *)dictionary {
+    [self createFile];//Exists if already exists
+    return [NSMutableDictionary dictionaryWithContentsOfFile:[self filePath]];
+}
+
++ (NSString *)filePath  {
+    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOActivity.plist"];
+}
+
++ (void)createFile {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[self filePath]]) {
+        return;
+    }
+    NSMutableDictionary *activityDict = [NSMutableDictionary new];
+    activityDict[kTracking] = @{};
+    activityDict[kGoalsMarked] = @{};
+    [activityDict writeToFile:[self filePath] atomically:YES];
+}
+
++ (void)log {
+    NSLog(@"USER ACTIVITY %@", [self dictionary]);
+}
+
+@end
