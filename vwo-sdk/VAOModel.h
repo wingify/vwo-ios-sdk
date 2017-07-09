@@ -15,7 +15,7 @@
 @interface VAOModel : NSObject
 
 @property (atomic) NSMutableArray<VAOCampaign *> *campaignList;
-
+- (void)trackUserForCampaign:(VAOCampaign *)campaign;
 + (instancetype)sharedInstance;
 - (void)updateCampaignListFromNetworkResponse:(NSArray *)allCampaignDict;
 - (NSArray *)loadMessages;

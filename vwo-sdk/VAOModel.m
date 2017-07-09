@@ -56,10 +56,16 @@ NSMutableDictionary *campaigns;
         //then inform backend and store in UserActivity
         if (![VAOUserActivity isTrackingUserForCampaign:campaign] &&
             campaign.trackUserOnLaunch) {
-            [VAOUserActivity trackUserForCampaign:campaign];
-            //TODO: Network activity pending. Send tracking info to Network
+            [self trackUserForCampaign:campaign];
         }
     }
+}
+
+/// Sends network request to mark user tracking for campaign
+/// Sets "campaignId : variation id" in persistance store
+- (void)trackUserForCampaign:(VAOCampaign *)campaign {
+    //TODO: Network activity pending. Send tracking info to Network
+    [VAOUserActivity trackUserForCampaign:campaign];
 }
 
 + (NSString *)campaignInfoPath {

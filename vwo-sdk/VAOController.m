@@ -630,7 +630,14 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
 
     for (VAOCampaign *campaign in campaignList) {
         id variation = [campaign variationForKey:key];
-        if (variation) return [variation copy];
+        if (variation) {
+            //If campaign has key and `trackUserOnLaunch` is not enabled
+            //then start tracking User and return the variation for key.
+            if (!campaign.trackUserOnLaunch) {
+                [[VAOModel sharedInstance] trackUserForCampaign:campaign];
+            }
+            return [variation copy];
+        }
     }
     return nil;
 }

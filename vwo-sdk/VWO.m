@@ -80,9 +80,7 @@
 
 + (id)variationForKey:(NSString*)key defaultObject:(id)defaultObject {
     id object = [self variationForKey:key];
-    if (!object) {
-        return defaultObject;
-    }
+    if (!object) return defaultObject;
     return object;
 }
 
