@@ -17,7 +17,7 @@
 @property (atomic) NSMutableArray<VAOCampaign *> *campaignList;
 
 + (instancetype)sharedInstance;
-- (void)updateCampaignList:(NSArray *)allCampaignDict;
+- (void)updateCampaignListFromNetworkResponse:(NSArray *)allCampaignDict;
 - (NSArray *)loadMessages;
 - (void)saveCampaignInfo:(NSDictionary *)campaignInfo;
 - (NSMutableDictionary*)getCampaignInfo;

@@ -43,7 +43,7 @@ NSMutableDictionary *campaigns;
 }
 
 /// Creates NSArray of Type VAOCampaign and stores in self.campaignList
-- (void)updateCampaignList:(NSArray *)allCampaignDict {
+- (void)updateCampaignListFromNetworkResponse:(NSArray *)allCampaignDict {
     self.campaignList = [NSMutableArray new];
     for (NSDictionary *campaignDict in allCampaignDict) {
         VAOCampaign *aCampaign = [[VAOCampaign alloc] initWithDictionary:campaignDict];

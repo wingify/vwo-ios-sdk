@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
         _remoteDataDownloading = NO;
 
 //        [self _updateCampaignInfo:info];
-        [[VAOModel sharedInstance] updateCampaignList:responseObject];
+        [[VAOModel sharedInstance] updateCampaignListFromNetworkResponse:responseObject];
         if (completionBlock) {
             completionBlock();
         }
