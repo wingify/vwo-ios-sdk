@@ -12,6 +12,7 @@
 #import "VAORavenClient.h"
 #import "VAOSDKInfo.h"
 #import "VAOLogger.h"
+#import "VAOUserActivity.h"
 
 @implementation VAOModel
 
@@ -44,10 +45,20 @@ NSMutableDictionary *campaigns;
 
 /// Creates NSArray of Type VAOCampaign and stores in self.campaignList
 - (void)updateCampaignListFromNetworkResponse:(NSArray *)allCampaignDict {
-    self.campaignList = [NSMutableArray new];
     for (NSDictionary *campaignDict in allCampaignDict) {
         VAOCampaign *aCampaign = [[VAOCampaign alloc] initWithDictionary:campaignDict];
         if (aCampaign) [self.campaignList addObject:aCampaign];
+    }
+
+    //Persist User tracking for all the valid campaigns
+    for (VAOCampaign *campaign in self.campaignList) {
+        //If user is not already being tracked and trackUserOnLaunch is enabled
+        //then inform backend and store in UserActivity
+        if (![VAOUserActivity isTrackingUserForCampaign:campaign] &&
+            campaign.trackUserOnLaunch) {
+            [VAOUserActivity trackUserForCampaign:campaign];
+            //TODO: Network activity pending. Send tracking info to Network
+        }
     }
 }
 
@@ -122,9 +133,7 @@ NSMutableDictionary *campaigns;
     }
     return dictionary;
 }
-- (void)makePartOfExperiment {
-    
-}
+
 /**
     maintain list of expid-varid
     find exp-id for key,
