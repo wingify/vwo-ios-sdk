@@ -28,6 +28,7 @@ NSMutableDictionary *campaigns;
 
 - (id)init {
     if (self = [super init]) {
+        self.campaignList = [[VAOModel loadCampaignsFromFile] mutableCopy];
         NSString *campaignsPlist = [self userCampaignsPath];
         campaigns = [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithContentsOfFile:campaignsPlist]];
         if ([[campaigns allKeys] count] > 0) {
@@ -50,13 +51,24 @@ NSMutableDictionary *campaigns;
     }
 }
 
-- (NSString *)campaignInfoPath {
++ (NSString *)campaignInfoPath {
     return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOCampaignInfo.plist"];
 }
 
 - (NSMutableDictionary*)getCampaignInfo {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:[self campaignInfoPath]];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:[VAOModel campaignInfoPath]];
     return dict;
+}
+
+- (void)serializeCampaigns {
+    NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:self.campaignList];
+    [archivedData writeToFile:[VAOModel campaignInfoPath] atomically:YES];
+    NSLog(@"CAmpaign info written to File %@", [VAOModel campaignInfoPath]);
+}
+
++ (nullable NSArray<VAOCampaign *> *)loadCampaignsFromFile {
+    NSData *archivedData = [NSData dataWithContentsOfFile:[self campaignInfoPath]];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
 }
 
 - (void)saveCampaignInfo:(NSDictionary *)campaignInfo {
@@ -65,7 +77,7 @@ NSMutableDictionary *campaigns;
      * Original values, in particular, may not be serializable at all, e.g., images.
      */
     @try {
-        [campaignInfo writeToFile:[self campaignInfoPath] atomically:YES];
+        [campaignInfo writeToFile:[VAOModel campaignInfoPath] atomically:YES];
     }
     @catch (NSException *exception) {
         [VAOLogger exception:exception];
@@ -110,7 +122,9 @@ NSMutableDictionary *campaigns;
     }
     return dictionary;
 }
-
+- (void)makePartOfExperiment {
+    
+}
 /**
     maintain list of expid-varid
     find exp-id for key,
