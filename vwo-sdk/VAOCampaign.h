@@ -25,7 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSArray<VAOGoal *> *goals;
 @property NSDictionary *segmentObjects;
 
-- (instancetype)initWithDictionary:(NSDictionary *) campaignDict;
+- (nullable instancetype)initWithDictionary:(NSDictionary *) campaignDict;
 - (nullable id)variationForKey:(NSString*)key;
+- (nullable VAOGoal *)goalForidentifier:(NSString *)identifier;
 @end
 NS_ASSUME_NONNULL_END

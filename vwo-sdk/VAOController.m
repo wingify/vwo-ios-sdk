@@ -16,6 +16,7 @@
 #include <sys/sysctl.h>
 #include "VAOSDKInfo.h"
 #import "VAOLogger.h"
+#import "VAOUserActivity.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -568,12 +569,31 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
 
 #pragma mark Goal
 
-- (void)markConversionForGoal:(NSString*)goal withValue:(NSNumber*)value {
+- (void)markConversionForGoal:(NSString*)goalIdentifier withValue:(NSNumber*)value {
     
     if (_previewMode) {
-        [[VAOSocketClient sharedInstance] goalTriggeredWithName:goal];
+        [[VAOSocketClient sharedInstance] goalTriggeredWithName:goalIdentifier];
         return;
     }
+    
+    //Check if the goal is already marked
+    NSArray<VAOCampaign *> *campaignList = [[VAOModel sharedInstance] campaignList];
+    for (VAOCampaign *campaign in campaignList) {
+        VAOGoal *matchedGoal = [campaign goalForidentifier:goalIdentifier];
+        if ([VAOUserActivity isGoalMarked:matchedGoal]) {
+            NSLog(@"Goal already marked");
+            return;
+        }
+    }
+    
+    for (VAOCampaign *campaign in campaignList) {
+        if ([VAOUserActivity isTrackingUserForCampaign:campaign]) {
+            VAOGoal *matchedGoal = [campaign goalForidentifier:goalIdentifier];
+            [[VAOModel sharedInstance] markGoalConversion:matchedGoal];
+        }
+    }
+    
+    
 
     // find for each experiment, whether goal is present or not
     for (NSString *expId in [_campaignInfo allKeys]) {
@@ -587,7 +607,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
         NSDictionary *experiment = _campaignInfo[expId];
         NSString *variationId = [experiment valueForKey:@"variationId"];
         NSArray *goalsArray = [experiment objectForKey:@"goals"];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"identifier == %@", goal];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"identifier == %@", goalIdentifier];
         
         NSArray *filteredGoalsArray = [goalsArray filteredArrayUsingPredicate:predicate];
         if (filteredGoalsArray.count == 0) {
@@ -607,7 +627,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
                                                                     revenue:value];
                 
                 if (experiment[@"UA"]) {
-                    [[VAOGoogleAnalytics sharedInstance] goalTriggeredWithName:goal
+                    [[VAOGoogleAnalytics sharedInstance] goalTriggeredWithName:goalIdentifier
                                                                         goalId:goalIdAsString
                                                                      goalValue:value
                                                                 experimentName:experiment[@"name"]

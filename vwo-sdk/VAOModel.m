@@ -68,6 +68,11 @@ NSMutableDictionary *campaigns;
     [VAOUserActivity trackUserForCampaign:campaign];
 }
 
+- (void)markGoalConversion:(VAOGoal *)goal {
+    //TODO: Network activity pending. Send tracking info to Network
+    [VAOUserActivity markGoalConversion:goal];
+}
+
 + (NSString *)campaignInfoPath {
     return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOCampaignInfo.plist"];
 }

@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "VAOCampaign.h"
 
+NS_ASSUME_NONNULL_BEGIN
 @interface VAOUserActivity : NSObject
 
 + (BOOL)isTrackingUserForCampaign:(VAOCampaign *)campaign;
 + (void)trackUserForCampaign:(VAOCampaign *)campaign;
-+ (void)markGoalConversion:(VAOGoal *)goal forCampaign:(VAOCampaign *)campaign;
++ (void)markGoalConversion:(VAOGoal *)goal;
++ (BOOL)isGoalMarked:(VAOGoal *)goal;
 + (void)log;
 
 @end
+NS_ASSUME_NONNULL_END

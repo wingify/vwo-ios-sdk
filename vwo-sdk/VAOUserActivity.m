@@ -38,6 +38,20 @@ static NSString * kGoalsMarked = @"goalsMarked";
     [userDict writeToFile:[self filePath] atomically:YES];
 }
 
++ (void)markGoalConversion:(VAOGoal *)goal {
+    NSMutableDictionary *userDict = [self dictionary];
+    NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)userDict[kGoalsMarked]];
+    [set addObject:[NSNumber numberWithInt:goal.id]];
+    userDict[kGoalsMarked] = [set allObjects];
+    [userDict writeToFile:[self filePath] atomically:YES];
+}
+
++ (BOOL)isGoalMarked:(VAOGoal *)goal {
+    NSMutableDictionary *userDict = [self dictionary];
+    NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)userDict[kGoalsMarked]];
+    return [set containsObject:[NSNumber numberWithInt:goal.id]];
+}
+
 + (NSMutableDictionary *)dictionary {
     [self createFile];//Exists if already exists
     return [NSMutableDictionary dictionaryWithContentsOfFile:[self filePath]];
@@ -53,7 +67,7 @@ static NSString * kGoalsMarked = @"goalsMarked";
     }
     NSMutableDictionary *activityDict = [NSMutableDictionary new];
     activityDict[kTracking] = @{};
-    activityDict[kGoalsMarked] = @{};
+    activityDict[kGoalsMarked] = @[];
     [activityDict writeToFile:[self filePath] atomically:YES];
 }
 
