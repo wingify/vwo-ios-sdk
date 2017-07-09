@@ -11,6 +11,7 @@
 
 @interface VAOUserActivity : NSObject
 
++ (BOOL)isTrackingUserForCampaign:(VAOCampaign *)campaign;
 + (void)trackUserForCampaign:(VAOCampaign *)campaign;
 + (void)markGoalConversion:(VAOGoal *)goal forCampaign:(VAOCampaign *)campaign;
 + (void)log;

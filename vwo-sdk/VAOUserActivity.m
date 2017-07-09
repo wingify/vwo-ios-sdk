@@ -13,6 +13,13 @@ static NSString * kGoalsMarked = @"goalsMarked";
 
 @implementation VAOUserActivity
 
++ (BOOL)isTrackingUserForCampaign:(VAOCampaign *)campaign {
+    NSMutableDictionary *userDict = [self dictionary];
+    NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
+    return (userDict[kTracking][campaignID] != nil &&
+            [userDict[kTracking][campaignID] intValue] == campaign.variation.id);
+}
+
 /// Stores "campaignId : "variationID" in User Activity["tracking"]
 + (void)trackUserForCampaign:(VAOCampaign *)campaign {
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
