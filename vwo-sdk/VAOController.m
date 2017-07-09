@@ -570,10 +570,6 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
 
 - (void)markConversionForGoal:(NSString*)goal withValue:(NSNumber*)value {
     
-    if (!goal) {
-        NSLog(@"VWO: Please provide a valid goal");
-    }
-    
     if (_previewMode) {
         [[VAOSocketClient sharedInstance] goalTriggeredWithName:goal];
         return;
