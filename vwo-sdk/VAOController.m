@@ -625,25 +625,14 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     }
 }
 
+- (id)variationForKey:(NSString*)key {
+    NSMutableArray<VAOCampaign *> *campaignList = [[VAOModel sharedInstance] campaignList];
 
-- (id)objectForKey:(NSString*)key {
-    @try {
-        for (NSString *expId in [_campaignInfo allKeys]) {
-            NSDictionary *experiment = _campaignInfo[expId];
-            
-            if ([experiment[@"json"] isKindOfClass:[NSDictionary class]]) {
-                NSDictionary *thisExpJSON = experiment[@"json"];
-                if (thisExpJSON[key]) {
-                    return [thisExpJSON[key] copy];
-                }
-            }
-            
-        }
-        return nil;
+    for (VAOCampaign *campaign in campaignList) {
+        id variation = [campaign variationForKey:key];
+        if (variation) return [variation copy];
     }
-    @catch (NSException *exception) {
-        [VAOLogger exception:exception];
-    }
+    return nil;
 }
 
 - (void)trackUserInCampaign:(NSString*)key {

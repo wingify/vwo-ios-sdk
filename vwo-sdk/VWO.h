@@ -5,7 +5,7 @@
  */
 
 #import <Foundation/Foundation.h>
-
+NS_ASSUME_NONNULL_BEGIN
 @interface VWO : NSObject
 /**
  *  Launch VWO
@@ -31,7 +31,7 @@
  *  It searches all the available campaigns, identifies the campaign and returns object for the specified key
  *  By default user is made part of the identified campaign, unless you call 'trackUserManually' method BEFORE initialisation.
  */
-+ (id)variationForKey:(NSString*)key;
++ (nullable id)variationForKey:(NSString*)key;
 
 /**
  *  Behaves in the same manner as 'objectForKey', it returns defaultObject instead of nil when:
@@ -40,7 +40,7 @@
  *  - if internet connection is not available
  *  - in case of any error
  */
-+ (id)variationForKey:(NSString*)key defaultObject:(id)defaultObject;
++ (nullable id)variationForKey:(NSString*)key defaultObject:(id)defaultObject;
 
 /**
  *  Triggers goal for the specified goal string
@@ -78,3 +78,4 @@
 + (NSString*)sdkVersion;
 
 @end
+NS_ASSUME_NONNULL_END

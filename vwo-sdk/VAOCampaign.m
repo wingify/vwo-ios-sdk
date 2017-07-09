@@ -72,6 +72,11 @@ static NSString * kVariation            = @"variations";
     return [self initWithID:iD name:name trackUesrOnLaunch:trackUserOnLaunch campaignStatus:campaignStatus segmentObjects:segmentObjects goals:goals variation:variation];
 }
 
+- (nullable id)variationForKey:(NSString*)key {
+    NSDictionary *changes = self.variation.changes;
+    return changes[key];//If key does not exist NSDictionary returns nil
+}
+
 #pragma mark - NSCoding
 
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {

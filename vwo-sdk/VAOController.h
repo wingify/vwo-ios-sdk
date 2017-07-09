@@ -24,6 +24,6 @@
 - (void)markConversionForGoal:(NSString*)goal withValue:(NSNumber*)value;
 
 // json Methods
-- (id)objectForKey:(NSString*)key;
+- (id)variationForKey:(NSString*)key;
 - (void)trackUserInCampaign:(NSString*)key;
 @end

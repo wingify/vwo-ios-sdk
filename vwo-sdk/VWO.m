@@ -75,13 +75,13 @@
 }
 
 + (id)variationForKey:(NSString*)key {
-    return [[VAOController sharedInstance] objectForKey:key];
+    return [[VAOController sharedInstance] variationForKey:key];
 }
 
 + (id)variationForKey:(NSString*)key defaultObject:(id)defaultObject {
     id object = [self variationForKey:key];
     if (!object) {
-        object = defaultObject;
+        return defaultObject;
     }
     return object;
 }

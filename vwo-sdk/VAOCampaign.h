@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger, CampaignStatus) {
     CampaignStatusRunning,
     CampaignStatusExcluded
 };
-
+NS_ASSUME_NONNULL_BEGIN
 @interface VAOCampaign : NSObject<NSCoding>
 
 @property (nonatomic, assign) int iD;
@@ -26,5 +26,6 @@ typedef NS_ENUM(NSInteger, CampaignStatus) {
 @property NSDictionary *segmentObjects;
 
 - (instancetype)initWithDictionary:(NSDictionary *) campaignDict;
-
+- (nullable id)variationForKey:(NSString*)key;
 @end
+NS_ASSUME_NONNULL_END
