@@ -23,8 +23,7 @@
                           success:(void(^)(id))successBlock
                           failure:(void(^)(NSError *))failureBlock;
 
-- (void) pushVariationRenderWithExperimentId:(NSInteger)experimentId
-                                 variationId:(NSString *)variationId;
+- (void)makeUserPartOfCampaign:(NSInteger)campaignID forVariation:(NSString *)variationId;
 
 - (void) pushGoalConversionWithGoalId:(NSInteger)goalId
                          experimentId:(NSInteger)experimentId

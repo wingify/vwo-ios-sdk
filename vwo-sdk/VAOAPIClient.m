@@ -105,8 +105,8 @@ NSTimer *_timer;
     }
 }
 
-- (void) pushVariationRenderWithExperimentId:(NSInteger)experimentId variationId:(NSString *)variationId{
-    [self callMethod:@"render" withParameters:@{@"expId": @(experimentId), @"varId": variationId}];
+- (void)makeUserPartOfCampaign:(NSInteger)campaignID forVariation:(NSString *)variationId {
+    [self callMethod:@"render" withParameters:@{@"expId": @(campaignID), @"varId": variationId}];
 }
 
 - (void) pushGoalConversionWithGoalId:(NSInteger)goalId

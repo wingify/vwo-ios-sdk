@@ -64,8 +64,9 @@ NSMutableDictionary *campaigns;
 /// Sends network request to mark user tracking for campaign
 /// Sets "campaignId : variation id" in persistance store
 - (void)trackUserForCampaign:(VAOCampaign *)campaign {
-    //TODO: Network activity pending. Send tracking info to Network
     [VAOUserActivity trackUserForCampaign:campaign];
+    NSString *variationID = [NSString stringWithFormat:@"%d", campaign.variation.id];
+    [[VAOAPIClient sharedInstance] makeUserPartOfCampaign:campaign.iD forVariation:variationID];
 }
 
 - (void)markGoalConversion:(VAOGoal *)goal {
@@ -165,8 +166,7 @@ NSMutableDictionary *campaigns;
             [VAOLogger exception:exception];
         }
         if ([variationId isEqualToString:@"0"] == NO) {
-            [[VAOAPIClient sharedInstance] pushVariationRenderWithExperimentId:[experimentId integerValue]
-                                                                   variationId:variationId];
+//            [[VAOAPIClient sharedInstance]pushVariationRenderWithExperimentId:[experimentId integerValue] variationId:variationId];
         }
     }
 }
