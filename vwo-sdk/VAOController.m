@@ -16,7 +16,7 @@
 #include <sys/sysctl.h>
 #include "VAOSDKInfo.h"
 #import "VAOLogger.h"
-#import "VAOUserActivity.h"
+#import "VAOPersistantStore.h"
 
 static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
@@ -150,14 +150,14 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     NSArray<VAOCampaign *> *campaignList = [[VAOModel sharedInstance] campaignList];
     for (VAOCampaign *campaign in campaignList) {
         VAOGoal *matchedGoal = [campaign goalForidentifier:goalIdentifier];
-        if ([VAOUserActivity isGoalMarked:matchedGoal]) {
+        if ([VAOPersistantStore isGoalMarked:matchedGoal]) {
             NSLog(@"Goal already marked");
             return;
         }
     }
     
     for (VAOCampaign *campaign in campaignList) {
-        if ([VAOUserActivity isTrackingUserForCampaign:campaign]) {
+        if ([VAOPersistantStore isTrackingUserForCampaign:campaign]) {
             VAOGoal *matchedGoal = [campaign goalForidentifier:goalIdentifier];
             [[VAOModel sharedInstance] markGoalConversion:matchedGoal inCampaign:campaign withValue:value];
         }

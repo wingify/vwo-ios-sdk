@@ -1,17 +1,17 @@
 //
-//  VAOUserActivity.m
+//  VAOPersistantStore.m
 //  Pods
 //
 //  Created by Kaunteya Suryawanshi on 09/07/17.
 //
 //
 
-#import "VAOUserActivity.h"
+#import "VAOPersistantStore.h"
 
 static NSString * kTracking = @"tracking";
 static NSString * kGoalsMarked = @"goalsMarked";
 
-@implementation VAOUserActivity
+@implementation VAOPersistantStore
 
 + (BOOL)isTrackingUserForCampaign:(VAOCampaign *)campaign {
     NSMutableDictionary *userDict = [self dictionary];

@@ -12,7 +12,7 @@
 #import "VAORavenClient.h"
 #import "VAOSDKInfo.h"
 #import "VAOLogger.h"
-#import "VAOUserActivity.h"
+#import "VAOPersistantStore.h"
 #import "VWOSegmentEvaluator.h"
 
 @implementation VAOModel
@@ -64,7 +64,7 @@ NSMutableDictionary *campaigns;
     for (VAOCampaign *campaign in self.campaignList) {
         //If user is not already being tracked and trackUserOnLaunch is enabled
         //then inform backend and store in UserActivity
-        if (![VAOUserActivity isTrackingUserForCampaign:campaign] &&
+        if (![VAOPersistantStore isTrackingUserForCampaign:campaign] &&
             campaign.trackUserOnLaunch) {
             [self trackUserForCampaign:campaign];
         }
@@ -74,13 +74,13 @@ NSMutableDictionary *campaigns;
 /// Sends network request to mark user tracking for campaign
 /// Sets "campaignId : variation id" in persistance store
 - (void)trackUserForCampaign:(VAOCampaign *)campaign {
-    [VAOUserActivity trackUserForCampaign:campaign];
+    [VAOPersistantStore trackUserForCampaign:campaign];
     NSString *variationID = [NSString stringWithFormat:@"%d", campaign.variation.id];
     [[VAOAPIClient sharedInstance] makeUserPartOfCampaign:campaign.iD forVariation:variationID];
 }
 
 - (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number {
-    [VAOUserActivity markGoalConversion:goal];
+    [VAOPersistantStore markGoalConversion:goal];
     [[VAOAPIClient sharedInstance] markConversionForGoalId:goal.id experimentId:campaign.iD variationId:campaign.variation.id revenue:number];
 }
 

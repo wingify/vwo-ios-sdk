@@ -1,5 +1,5 @@
 //
-//  VAOUserActivity.h
+//  VAOPersistantStore.h
 //  Pods
 //
 //  Created by Kaunteya Suryawanshi on 09/07/17.
@@ -10,7 +10,7 @@
 #import "VAOCampaign.h"
 
 NS_ASSUME_NONNULL_BEGIN
-@interface VAOUserActivity : NSObject
+@interface VAOPersistantStore : NSObject
 
 + (BOOL)isTrackingUserForCampaign:(VAOCampaign *)campaign;
 + (void)trackUserForCampaign:(VAOCampaign *)campaign;
