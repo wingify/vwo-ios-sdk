@@ -10,4 +10,7 @@
 
 @interface VWOSegmentEvaluator : NSObject
 
+/// This method will receive content of "segment_object"
++ (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment;
+
 @end

@@ -9,6 +9,7 @@
 #import "VWOSegmentEvaluator.h"
 #import <UIKit/UIKit.h>
 #import "VAORavenClient.h"
+#import "VAOSDKInfo.h"
 
 typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeCustomVariable=7,
@@ -18,12 +19,41 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeHourOfTheDay=4,
     SegmentationTypeLocation=5
 };
+
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
+static NSString * kType = @"type";
+static NSString * kPartialSegments = @"partialSegments";
+static NSString * kSegmentCode = @"segment_code";
+static NSString * kDevice = @"device";
+static NSString * kReturningVisitor = @"returning_visitor";
 
 @implementation VWOSegmentEvaluator
 
-- (BOOL)evaluateCustomSegmentation:(NSArray*)segmentObjects {
++ (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment {
+    if ([segment[kType] isEqualToString:@"custom"]) {
+        NSArray *partialSegments = (NSArray *)segment[kPartialSegments];
+        return [self evaluateCustomSegmentation:partialSegments];
+    } else if ([segment[kType] isEqualToString:@"predefined"]) {
+        return [self evaluatePredefinedSegmentation:segment[kSegmentCode]];
+    }
+    return YES;
+}
+
++ (BOOL)evaluatePredefinedSegmentation:(NSDictionary*)segmentObject {
+    if ([segmentObject[kDevice] isEqualToString:@"iPad"] &&
+        ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)) {
+        return YES;
+    } else if ([segmentObject[kDevice] isEqualToString:@"iPhone"] &&
+               ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone)) {
+        return YES;
+    } else if (segmentObject[kReturningVisitor]) {
+        return ([VAOSDKInfo isReturningVisitor] == [segmentObject[kReturningVisitor] boolValue]);
+    }
+    return NO;
+}
+
++ (BOOL)evaluateCustomSegmentation:(NSArray*)segmentObjects {
 
     NSMutableArray *stack = [NSMutableArray array];
     @try {
@@ -44,10 +74,9 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
             NSString *lOperandValue = segment[@"lOperandValue"];
             SegmentationType segmentType = [segment[@"type"] intValue];
 
-            //1
-            // evaluate
+            //TODO: Custom Variables not supported yet.
             BOOL currentValue = [self evaluateSegmentForOperand:operandValue lOperand:lOperandValue operator:operator customVariables:nil type:segmentType];
-            //2
+
             if (logicalOperator && leftParenthesis) {
                 [stack addObject:logicalOperator];
             } else if (logicalOperator) {
@@ -62,12 +91,10 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
                 }
             }
 
-            //3
             if (leftParenthesis) {
                 [stack addObject:@"("];
             }
 
-            //4
             if (rightParenthesis) {
                 [stack removeLastObject];
 
@@ -99,7 +126,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
 }
 
 
--(BOOL)evaluateSegmentForOperand:(NSArray *)operand
++(BOOL)evaluateSegmentForOperand:(NSArray *)operand
               lOperand:(NSString *)lOperand
               operator:(int)operator
        customVariables:(NSDictionary *)customVariables
