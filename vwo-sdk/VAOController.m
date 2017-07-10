@@ -18,8 +18,6 @@
 #import "VAOLogger.h"
 #import "VAOUserActivity.h"
 
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-
 static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
 @implementation VAOController {

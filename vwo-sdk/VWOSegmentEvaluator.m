@@ -127,10 +127,10 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
 
 +(BOOL)evaluateSegmentForOperand:(NSArray *)operand
-              lOperand:(NSString *)lOperand
-              operator:(int)operator
-       customVariables:(NSDictionary *)customVariables
-                  type:(SegmentationType)segmentType {
+                        lOperand:(NSString *)lOperand
+                        operator:(int)operator
+                 customVariables:(NSDictionary *)customVariables
+                            type:(SegmentationType)segmentType {
 
     // remove null values
     NSMutableArray *newoperandValue = [NSMutableArray arrayWithArray:operand];
