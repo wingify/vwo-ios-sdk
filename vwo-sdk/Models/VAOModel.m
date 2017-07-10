@@ -13,6 +13,7 @@
 #import "VAOSDKInfo.h"
 #import "VAOLogger.h"
 #import "VAOUserActivity.h"
+#import "VWOSegmentEvaluator.h"
 
 @implementation VAOModel
 
@@ -47,7 +48,16 @@ NSMutableDictionary *campaigns;
 - (void)updateCampaignListFromNetworkResponse:(NSArray *)allCampaignDict {
     for (NSDictionary *campaignDict in allCampaignDict) {
         VAOCampaign *aCampaign = [[VAOCampaign alloc] initWithDictionary:campaignDict];
-        if (aCampaign) [self.campaignList addObject:aCampaign];
+        if (aCampaign) {
+            if (aCampaign.trackUserOnLaunch) {
+                NSDictionary *segmentObject = aCampaign.segmentObject;
+                if (segmentObject && [VWOSegmentEvaluator canUserBePartOfCampaignForSegment:segmentObject]) {
+                    [self.campaignList addObject:aCampaign];
+                }
+            } else {
+                [self.campaignList addObject:aCampaign];
+            }
+        }
     }
 
     //Persist User tracking for all the valid campaigns
