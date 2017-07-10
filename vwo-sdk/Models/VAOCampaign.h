@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CampaignStatus campaignStatus;
 @property VAOVariation *variation;
 @property NSArray<VAOGoal *> *goals;
-@property NSDictionary *segmentObjects;
+@property (nullable) NSDictionary *segmentObject;
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *) campaignDict;
 - (nullable id)variationForKey:(NSString*)key;
