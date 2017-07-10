@@ -16,7 +16,7 @@
 
 @property (atomic) NSMutableArray<VAOCampaign *> *campaignList;
 - (void)trackUserForCampaign:(VAOCampaign *)campaign;
-- (void)markGoalConversion:(VAOGoal *)goal;
+- (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number;
 + (instancetype)sharedInstance;
 - (void)updateCampaignListFromNetworkResponse:(NSArray *)allCampaignDict;
 - (NSArray *)loadMessages;

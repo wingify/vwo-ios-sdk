@@ -109,12 +109,12 @@ NSTimer *_timer;
     [self callMethod:@"render" withParameters:@{@"expId": @(campaignID), @"varId": variationId}];
 }
 
-- (void) pushGoalConversionWithGoalId:(NSInteger)goalId
-                         experimentId:(NSInteger)experimentId
-                          variationId:(NSString *)variationId
-                              revenue:(NSNumber*)revenue {
+- (void) markConversionForGoalId:(NSInteger)goalId
+                    experimentId:(NSInteger)experimentId
+                     variationId:(NSInteger)variationId
+                         revenue:(NSNumber *)revenue {
     
-    NSMutableDictionary *params = [@{@"goalId": @(goalId), @"expId":@(experimentId), @"varId": variationId} mutableCopy];
+    NSMutableDictionary *params = [@{@"goalId": @(goalId), @"expId":@(experimentId), @"varId": @(variationId)} mutableCopy];
     params[@"revenue"] = revenue;
 
     [self callMethod:@"goal" withParameters:params];

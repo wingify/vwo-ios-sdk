@@ -589,54 +589,7 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     for (VAOCampaign *campaign in campaignList) {
         if ([VAOUserActivity isTrackingUserForCampaign:campaign]) {
             VAOGoal *matchedGoal = [campaign goalForidentifier:goalIdentifier];
-            [[VAOModel sharedInstance] markGoalConversion:matchedGoal];
-        }
-    }
-    
-    
-
-    // find for each experiment, whether goal is present or not
-    for (NSString *expId in [_campaignInfo allKeys]) {
-        
-        // check if user is part of this experiment
-        if ([[VAOModel sharedInstance] hasBeenPartOfExperiment:expId] == NO) {
-            // user has not been part of this experiment, so no need to check and trigger goal
-            continue;
-        }
-        
-        NSDictionary *experiment = _campaignInfo[expId];
-        NSString *variationId = [experiment valueForKey:@"variationId"];
-        NSArray *goalsArray = [experiment objectForKey:@"goals"];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"identifier == %@", goalIdentifier];
-        
-        NSArray *filteredGoalsArray = [goalsArray filteredArrayUsingPredicate:predicate];
-        if (filteredGoalsArray.count == 0) {
-            continue;
-        }
-        for (NSDictionary *goalDictionary in filteredGoalsArray) {
-            // goal exists for this experiment
-            
-            NSInteger goalId = [goalDictionary[@"id"] integerValue];
-            NSString *goalIdAsString = [NSString stringWithFormat:@"%li", (long)goalId];
-            BOOL shouldTriggerGoal = [[VAOModel sharedInstance] shouldTriggerGoal:goalIdAsString forExperiment:expId];
-            
-            if (shouldTriggerGoal) {
-                [[VAOAPIClient sharedInstance] pushGoalConversionWithGoalId:goalId
-                                                               experimentId:[expId integerValue]
-                                                                variationId:variationId
-                                                                    revenue:value];
-                
-                if (experiment[@"UA"]) {
-                    [[VAOGoogleAnalytics sharedInstance] goalTriggeredWithName:goalIdentifier
-                                                                        goalId:goalIdAsString
-                                                                     goalValue:value
-                                                                experimentName:experiment[@"name"]
-                                                                  experimentId:expId
-                                                                 variationName:experiment[@"variationName"]
-                                                                   variationId:variationId];
-                }
-            }
-
+            [[VAOModel sharedInstance] markGoalConversion:matchedGoal inCampaign:campaign withValue:value];
         }
     }
 }

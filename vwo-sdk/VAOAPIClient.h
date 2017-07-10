@@ -25,9 +25,9 @@
 
 - (void)makeUserPartOfCampaign:(NSInteger)campaignID forVariation:(NSString *)variationId;
 
-- (void) pushGoalConversionWithGoalId:(NSInteger)goalId
-                         experimentId:(NSInteger)experimentId
-                          variationId:(NSString *)variationId
-                              revenue:(NSNumber*)revenue;
+- (void) markConversionForGoalId:(NSInteger)goalId
+                    experimentId:(NSInteger)experimentId
+                     variationId:(NSInteger)variationId
+                         revenue:(NSNumber *)revenue;
 
 @end

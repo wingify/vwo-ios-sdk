@@ -69,9 +69,11 @@ NSMutableDictionary *campaigns;
     [[VAOAPIClient sharedInstance] makeUserPartOfCampaign:campaign.iD forVariation:variationID];
 }
 
-- (void)markGoalConversion:(VAOGoal *)goal {
+- (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number {
     //TODO: Network activity pending. Send tracking info to Network
     [VAOUserActivity markGoalConversion:goal];
+
+    [[VAOAPIClient sharedInstance] markConversionForGoalId:goal.id experimentId:campaign.iD variationId:campaign.variation.id revenue:number];
 }
 
 + (NSString *)campaignInfoPath {
