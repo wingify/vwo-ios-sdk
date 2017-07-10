@@ -13,10 +13,10 @@
 
 @interface VAOController : NSObject
 
+@property (assign) BOOL previewMode;
+
 + (instancetype)sharedInstance;
 + (void)initializeAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock;
-- (void)applicationDidEnterPreviewMode;
-- (void)applicationDidExitPreviewMode;
 - (void)preview:(NSDictionary *)changes;
 - (void)setValue:(NSString*)value forCustomVariable:(NSString*)variable;
 - (void)trackUserManually;

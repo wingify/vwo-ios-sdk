@@ -47,7 +47,7 @@
     
     socket.onDisconnect = ^{
         [VAOLogger info:@"Socket disconnected"];
-        [[VAOController sharedInstance] applicationDidExitPreviewMode];
+        [[VAOController sharedInstance] setPreviewMode:NO];
     };
     
     socket.onConnectError = ^(NSDictionary *error) {
@@ -60,7 +60,7 @@
     
     [socket on:@"browser_connect" callback:^(SIOParameterArray *arguments) {
         [VAOLogger info:@"In browser connect"];
-        [[VAOController sharedInstance] applicationDidEnterPreviewMode];
+        [[VAOController sharedInstance] setPreviewMode:YES];
         id object = [arguments firstObject];
         if (object && object[@"name"]) {
             NSLog(@"VWO: In preview mode. Connected with:%@", object[@"name"]);
@@ -69,7 +69,7 @@
 
     [socket on:@"browser_disconnect" callback:^(SIOParameterArray *arguments) {
         [VAOLogger info:@"In preview mode. Disconnected"];
-        [[VAOController sharedInstance] applicationDidExitPreviewMode];
+        [[VAOController sharedInstance] setPreviewMode:NO];
     }];
     
     [socket on:@"receive_variation" callback:^(SIOParameterArray *arguments) {

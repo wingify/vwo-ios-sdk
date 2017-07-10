@@ -25,7 +25,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 @implementation VAOController {
     BOOL _remoteDataDownloading;
     NSTimeInterval _lastUpdateTime;
-    BOOL _previewMode;
     BOOL _trackUserManually;
     NSMutableDictionary *_campaignInfo; // holds the set of changes to be applied to various UI elements
     NSMutableDictionary *_activeGoals;
@@ -61,7 +60,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     if (self = [super init]) {
         _remoteDataDownloading = NO;
         _lastUpdateTime = 0;
-        _previewMode = NO;
+        self.previewMode = NO;
         _trackUserManually = NO;
         _activeGoals = [[NSMutableDictionary alloc] init];
         customVariables = [NSMutableDictionary dictionary];
@@ -84,7 +83,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 }
 
 - (void)applicationDidEnterBackground {
-    if(_previewMode == NO) {
+    if(!self.previewMode) {
         _lastUpdateTime = [NSDate timeIntervalSinceReferenceDate];
         [[VAOAPIClient sharedInstance] stopTimer];
     }
@@ -123,18 +122,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     }];
 }
 
-- (void)applicationDidEnterPreviewMode {
-    _previewMode = YES;
-}
-
-- (void)applicationDidExitPreviewMode{
-    _previewMode = NO;
-    
-    // we should load
-    [self updateCampaignInfo];
-}
-
-
 - (void)trackUserManually {
     _trackUserManually = YES;
 }
@@ -156,7 +143,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
 - (void)markConversionForGoal:(NSString*)goalIdentifier withValue:(NSNumber*)value {
     
-    if (_previewMode) {
+    if (self.previewMode) {
         [[VAOSocketClient sharedInstance] goalTriggeredWithName:goalIdentifier];
         return;
     }
