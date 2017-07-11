@@ -92,14 +92,6 @@
     [[VAOController sharedInstance] markConversionForGoal:goal withValue:[NSNumber numberWithDouble:value]];
 }
 
-+ (void)trackUserManually {
-    [[VAOController sharedInstance] trackUserManually];
-}
-
-+ (void)trackUserInCampaign:(NSString*)key {
-    [[VAOController sharedInstance] trackUserInCampaign:key];
-}
-
 + (void)setValue:(NSString*)value forCustomVariable:(NSString*)variable {
     [[VAOController sharedInstance] setValue:value forCustomVariable:variable];
 }

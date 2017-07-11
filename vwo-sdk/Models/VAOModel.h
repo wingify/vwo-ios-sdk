@@ -15,16 +15,16 @@
 @interface VAOModel : NSObject
 
 @property (atomic) NSMutableArray<VAOCampaign *> *campaignList;
+
++ (instancetype)sharedInstance;
 - (void)trackUserForCampaign:(VAOCampaign *)campaign;
 - (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number;
-+ (instancetype)sharedInstance;
 - (void)updateCampaignListFromNetworkResponse:(NSArray *)allCampaignDict;
-- (NSArray *)loadMessages;
-- (void)saveCampaignInfo:(NSDictionary *)campaignInfo;
+- (NSArray *)loadMessagesFromFile;
+
 - (NSMutableDictionary*)getCampaignInfo;
 - (void)saveMessages:(NSArray *)messages;
-- (BOOL)hasBeenPartOfExperiment:(NSString*)experimentId;
-- (void)checkAndMakePartOfExperiment:(NSString*)experimentId variationId:(NSString*)variationId;
-- (BOOL)shouldTriggerGoal:(NSString*)goalId forExperiment:(NSString*)experimentId;
-- (NSMutableDictionary*)getCurrentExperimentsVariationPairs;
+
+- (NSDictionary*)getCurrentCampaignVariationPairs;
+
 @end

@@ -55,19 +55,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)markConversionForGoal:(NSString*)goal withValue:(double)value;
 
 /**
- *  If you call 'trackUserManually' before calling launch method then
- *  a user IS NOT automatically made part of campaign.
- *  You should call 'trackUserInCampaign' when you want to include a user in a campaign.
- */
-+ (void)trackUserManually;
-
-/**
- *  It searches all the available campaigns, identifies the campaign and make user part of that campaign.
- *  A user is counted only once for a particular campaign.
- */
-+ (void)trackUserInCampaign:(NSString*)key;
-
-/**
  *  Set Value for custom variable defined on VWO
  */
 + (void)setValue:(NSString*)value forCustomVariable:(NSString*)variable;

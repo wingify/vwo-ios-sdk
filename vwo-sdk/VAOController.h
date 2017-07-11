@@ -19,11 +19,7 @@
 + (void)initializeAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock;
 - (void)preview:(NSDictionary *)changes;
 - (void)setValue:(NSString*)value forCustomVariable:(NSString*)variable;
-- (void)trackUserManually;
-// Goals
 - (void)markConversionForGoal:(NSString*)goal withValue:(NSNumber*)value;
-
-// json Methods
 - (id)variationForKey:(NSString*)key;
-- (void)trackUserInCampaign:(NSString*)key;
+
 @end

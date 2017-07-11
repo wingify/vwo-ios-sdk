@@ -40,7 +40,7 @@ NSTimer *_timer;
 
 - (void)schedule {
     _transitId = (NSInteger) [[NSDate date] timeIntervalSinceReferenceDate];
-    _pendingMessages = [NSMutableArray arrayWithArray:[[VAOModel sharedInstance] loadMessages]];
+    _pendingMessages = [NSMutableArray arrayWithArray:[[VAOModel sharedInstance] loadMessagesFromFile]];
     _transittingMessages = [NSMutableArray array];
     
     // fire first call early on to clear any pending data from last time the application was run.
@@ -75,11 +75,7 @@ NSTimer *_timer;
     parameters[@"os"] = [[UIDevice currentDevice] systemVersion];
     parameters[@"u"] = [VAODeviceInfo getUUID];
     parameters[@"r"] =  @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
-
-    NSDictionary *experimentsAndVariationsPair = [[VAOModel sharedInstance] getCurrentExperimentsVariationPairs];
-    if ([experimentsAndVariationsPair toString]) {
-        parameters[@"k"] = [experimentsAndVariationsPair toString];
-    }
+    parameters[@"k"] = [[[VAOModel sharedInstance] getCurrentCampaignVariationPairs] toString];
     
     VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
     if (isAsync) {

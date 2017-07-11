@@ -23,9 +23,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 @implementation VAOController {
     BOOL _remoteDataDownloading;
     NSTimeInterval _lastUpdateTime;
-    BOOL _trackUserManually;
     NSMutableDictionary *_campaignInfo; // holds the set of changes to be applied to various UI elements
-    NSMutableDictionary *_activeGoals;
     NSMutableDictionary *customVariables;
 }
 
@@ -59,8 +57,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         _remoteDataDownloading = NO;
         _lastUpdateTime = 0;
         self.previewMode = NO;
-        _trackUserManually = NO;
-        _activeGoals = [[NSMutableDictionary alloc] init];
         customVariables = [NSMutableDictionary dictionary];
     }
     return self;
@@ -120,11 +116,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     }];
 }
 
-- (void)trackUserManually {
-    _trackUserManually = YES;
-}
-
-
 /**
  * This replaces the _meta with the passed in changes
  * In preview mode, we only provide the preview changes and do not provide meta of currently running experiments
@@ -136,8 +127,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     _campaignInfo = [NSMutableDictionary dictionary];
     _campaignInfo[experimentId] = @{@"variationId":variationId, @"json":changes[@"json"]};
 }
-
-#pragma mark Goal
 
 - (void)markConversionForGoal:(NSString*)goalIdentifier withValue:(NSNumber*)value {
     
@@ -181,47 +170,4 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     return nil;
 }
 
-- (void)trackUserInCampaign:(NSString*)key {
-    if(_trackUserManually == NO) {
-        return;
-    }
-    
-    @try {
-        for (NSString *expId in [_campaignInfo allKeys]) {
-            NSDictionary *experiment = _campaignInfo[expId];
-            
-            if ([experiment[@"json"] isKindOfClass:[NSDictionary class]]) {
-                NSDictionary *thisExpJSON = experiment[@"json"];
-                if (thisExpJSON[key]) {
-                    [self checkAndtrackUserForExperiment:expId forCampaign:experiment];
-                    return;
-                }
-            }
-            
-        }
-    }
-    @catch (NSException *exception) {
-        [VAOLogger exception:exception];
-    }
-}
-
-- (void)checkAndtrackUserForExperiment:(NSString*)expId forCampaign:(NSDictionary*)experiment {
-    if ([[VAOModel sharedInstance] hasBeenPartOfExperiment:expId]) {
-        return;
-    }
-    
-    // make user part of this experiment
-    [[VAOModel sharedInstance] checkAndMakePartOfExperiment:expId
-                                                variationId:experiment[@"variationId"]];
-    
-    // if UA integration is enabled
-    if (experiment[@"UA"]) {
-        NSNumber *dimension = (experiment[@"UA"][@"s"] ? experiment[@"UA"][@"s"]: @1);
-        [[VAOGoogleAnalytics sharedInstance] experimentWithName:experiment[@"name"]
-                                                   experimentId:expId
-                                                  variationName:(experiment[@"variationName"] ? experiment[@"variationName"] : @"variation-name")
-                                                    variationId:experiment[@"variationId"]
-                                                      dimension:dimension];
-    }
-}
 @end
