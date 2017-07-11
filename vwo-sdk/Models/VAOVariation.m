@@ -25,14 +25,14 @@ static NSString * kChanges = @"changes";
 }
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *) variationDict {
-    if ([variationDict hasKeys:@[kId, kName]]) {
-        int id = [variationDict[kId] intValue];
-        NSString *name = variationDict[kName];
-        NSDictionary *changes = variationDict[kChanges];
-        return [self initWith:id name:name changes:changes];
-    } else {
+    if (![variationDict hasKeys:@[kId, kName]]) {
+        NSLog(@"Variation Keys missing");
         return nil;
     }
+    int id = [variationDict[kId] intValue];
+    NSString *name = variationDict[kName];
+    NSDictionary *changes = variationDict[kChanges];
+    return [self initWith:id name:name changes:changes];
 }
 
 -(BOOL)isControl {

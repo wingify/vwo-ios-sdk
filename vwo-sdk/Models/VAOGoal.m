@@ -26,18 +26,18 @@ static NSString * kType = @"type";
 }
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *) goalDict {
-    if ([goalDict hasKeys:@[kId, kIdentifier]]) {
-        int id = [goalDict[kId] intValue];
-        NSString *identifier = goalDict[kIdentifier];
-
-        GoalType type = GoalTypeCustom;
-        if ([goalDict[kType] isEqualToString:@"@CUSTOM_GOAL"]) type = GoalTypeCustom;
-        else if([goalDict[kType] isEqualToString:@"REVENUE_TRACKING"]) type = GoalTypeRevenue;
-
-        return [self initWithId:id identifier:identifier type:type];
-    } else {
+    if (![goalDict hasKeys:@[kId, kIdentifier]]) {
+        NSLog(@"GOAL Keys missing");
         return nil;
     }
+    int id = [goalDict[kId] intValue];
+    NSString *identifier = goalDict[kIdentifier];
+
+    GoalType type = GoalTypeCustom;
+    if ([goalDict[kType] isEqualToString:@"@CUSTOM_GOAL"]) type = GoalTypeCustom;
+    else if([goalDict[kType] isEqualToString:@"REVENUE_TRACKING"]) type = GoalTypeRevenue;
+
+    return [self initWithId:id identifier:identifier type:type];
 }
 
 -(NSString *)description {

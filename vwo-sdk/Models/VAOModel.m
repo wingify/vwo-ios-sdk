@@ -39,21 +39,29 @@
 
 /// Creates NSArray of Type VAOCampaign and stores in self.campaignList
 - (void)updateCampaignListFromDictionary:(NSArray *)allCampaignDict {
+
     for (NSDictionary *campaignDict in allCampaignDict) {
         VAOCampaign *aCampaign = [[VAOCampaign alloc] initWithDictionary:campaignDict];
-        if (aCampaign) {
-            if (aCampaign.trackUserOnLaunch) {
-                NSDictionary *segmentObject = aCampaign.segmentObject;
-                if (segmentObject && [VWOSegmentEvaluator canUserBePartOfCampaignForSegment:segmentObject]) {
-                    [self.campaignList addObject:aCampaign];
-                    NSLog(@"Campaign added %@", aCampaign.name);
-                }
-            } else {
-                [self.campaignList addObject:aCampaign];
-                NSLog(@"Campaign added %@", aCampaign.name);
-            }
-        } else {
+        if (!aCampaign) {
             NSLog(@"ERROR: Invalid campaign received %@", campaignDict);
+            continue;
+        }
+        if (aCampaign.trackUserOnLaunch) {
+            NSDictionary *segmentObject = aCampaign.segmentObject;
+            if (segmentObject) {
+                if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:segmentObject]) {
+                    [self.campaignList addObject:aCampaign];
+                    NSLog(@"1Campaign added %@", aCampaign.name);
+                } else { //Segmentation failed
+                    NSLog(@"User cannot be part of campaign. Segment fail");
+                }
+            } else { //There is no segmentation defined for campaign. Add unconditionally
+                [self.campaignList addObject:aCampaign];
+                NSLog(@"2Campaign added %@", aCampaign.name);
+            }
+        } else {//Unconditionally add when NOT trackUserOnLaunch
+            [self.campaignList addObject:aCampaign];
+            NSLog(@"3Campaign added %@", aCampaign.name);
         }
     }
 

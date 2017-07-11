@@ -39,8 +39,9 @@ static NSString * kVariation            = @"variations";
 }
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *) campaignDict {
-    NSArray *mustHaveKeys = @[kId, kName, kTrackUserOnLaunch, kStatus, kSegmentObject, kGoals, kVariation];
+    NSArray *mustHaveKeys = @[kId, kName, kTrackUserOnLaunch, kStatus, kGoals, kVariation];
     if (![campaignDict hasKeys:mustHaveKeys]) {
+        NSLog(@"Campaign Keys missing %@", [campaignDict allKeys]);
         return nil;
     }
     int iD = [campaignDict[kId] intValue];
