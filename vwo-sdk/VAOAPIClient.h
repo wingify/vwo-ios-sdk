@@ -14,7 +14,7 @@
 @interface VAOAPIClient : NSObject
 
 + (instancetype)sharedInstance;
-- (void)schedule;
+- (void)initializeAndStartTimer;
 - (void)startTimer;
 - (void)stopTimer;
 

@@ -7,7 +7,6 @@
 //
 
 #import "VWO.h"
-#import "VAOAPIClient.h"
 #import "VAOModel.h"
 #import "VAOController.h"
 #import "VAORavenClient.h"
@@ -35,8 +34,6 @@
         
         // set up sentry exception handling
         [self setupSentry:VAOSDKInfo.accountID];
-        
-        [[VAOAPIClient sharedInstance] schedule];
 
         if ([VAODeviceInfo isAttachedToDebugger]) {
             [[VAOSocketClient sharedInstance] launch];

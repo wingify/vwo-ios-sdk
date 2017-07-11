@@ -38,7 +38,7 @@ NSTimer *_timer;
     return instance;
 }
 
-- (void)schedule {
+- (void)initializeAndStartTimer {
     _transitId = (NSInteger) [[NSDate date] timeIntervalSinceReferenceDate];
     _pendingMessages = [NSMutableArray arrayWithArray:[[VAOModel sharedInstance] loadMessagesFromFile]];
     _transittingMessages = [NSMutableArray array];
