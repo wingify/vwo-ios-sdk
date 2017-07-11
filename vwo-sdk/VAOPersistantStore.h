@@ -14,8 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)isTrackingUserForCampaign:(VAOCampaign *)campaign;
 + (void)trackUserForCampaign:(VAOCampaign *)campaign;
+
 + (void)markGoalConversion:(VAOGoal *)goal;
 + (BOOL)isGoalMarked:(VAOGoal *)goal;
+
++ (NSUInteger)sessionCount;
++ (void)incrementSessionCount;
+
++ (void)setReturningUser:(BOOL)isReturning;
++ (BOOL)returningUser;
+
 + (void)log;
 
 @end
