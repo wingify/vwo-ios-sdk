@@ -44,13 +44,13 @@ static NSString * kVariation            = @"variations";
         return nil;
     }
     int iD = [campaignDict[kId] intValue];
-    NSString * name = [campaignDict[kName] stringValue];
+    NSString * name = campaignDict[kName];
     BOOL trackUserOnLaunch = [campaignDict[kTrackUserOnLaunch] boolValue];
     NSDictionary *segmentObject = campaignDict[kSegmentObject];
 
     // Status
     CampaignStatus campaignStatus = CampaignStatusRunning;
-    NSString *statusString = [campaignDict[kStatus] stringValue];
+    NSString *statusString = campaignDict[kStatus];
     if ([statusString isEqualToString:@"RUNNING"]) {
         campaignStatus = CampaignStatusRunning;
     } else if ([statusString isEqualToString:@"EXCLUED"]) {
