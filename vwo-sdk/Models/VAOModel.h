@@ -19,7 +19,7 @@
 + (instancetype)sharedInstance;
 - (void)trackUserForCampaign:(VAOCampaign *)campaign;
 - (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number;
-- (void)updateCampaignListFromNetworkResponse:(NSArray *)allCampaignDict;
+- (void)updateCampaignListFromDictionary:(NSArray *)allCampaignDict;
 - (NSArray *)loadMessagesFromFile;
 
 - (NSMutableDictionary*)getCampaignInfo;

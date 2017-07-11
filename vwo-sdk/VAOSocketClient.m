@@ -37,7 +37,6 @@
 -(void)initMethods {
     __weak id socket_ = socket;
     socket.onConnect = ^{
-        [VAOLogger info:[NSString stringWithFormat:@"[[UIDevice currentDevice] name] = %@", [[UIDevice currentDevice] name]]];
         NSDictionary *dict  = @{@"name":[[UIDevice currentDevice] name],
                                 @"type": @"iOS",
                                 @"appKey": VAOSDKInfo.appKey};

@@ -107,13 +107,11 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     [[VAOAPIClient sharedInstance] pullABDataAsynchronously:async success:^(id responseObject) {
         _lastUpdateTime = currentTime;
         _remoteDataDownloading = NO;
-
-        [[VAOModel sharedInstance] updateCampaignListFromNetworkResponse:responseObject];
-        if (completionBlock) {
-            completionBlock();
-        }
+        NSLog(@"%lu campaigns received", (NSUInteger)[(NSArray *) responseObject count]);
+        [[VAOModel sharedInstance] updateCampaignListFromDictionary:responseObject];
+        if (completionBlock) completionBlock();
     } failure:^(NSError *error) {
-        [VAOLogger errorStr:[NSString stringWithFormat:@"Failed to connect to the VAO server to download AB logs. %@\n", error]];
+        NSLog(@"ABData failed %@", error.localizedDescription);
     }];
 }
 

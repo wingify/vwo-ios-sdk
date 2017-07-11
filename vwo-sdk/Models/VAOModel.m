@@ -38,7 +38,7 @@
 }
 
 /// Creates NSArray of Type VAOCampaign and stores in self.campaignList
-- (void)updateCampaignListFromNetworkResponse:(NSArray *)allCampaignDict {
+- (void)updateCampaignListFromDictionary:(NSArray *)allCampaignDict {
     for (NSDictionary *campaignDict in allCampaignDict) {
         VAOCampaign *aCampaign = [[VAOCampaign alloc] initWithDictionary:campaignDict];
         if (aCampaign) {
@@ -46,10 +46,14 @@
                 NSDictionary *segmentObject = aCampaign.segmentObject;
                 if (segmentObject && [VWOSegmentEvaluator canUserBePartOfCampaignForSegment:segmentObject]) {
                     [self.campaignList addObject:aCampaign];
+                    NSLog(@"Campaign added %@", aCampaign.name);
                 }
             } else {
                 [self.campaignList addObject:aCampaign];
+                NSLog(@"Campaign added %@", aCampaign.name);
             }
+        } else {
+            NSLog(@"ERROR: Invalid campaign received %@", campaignDict);
         }
     }
 
