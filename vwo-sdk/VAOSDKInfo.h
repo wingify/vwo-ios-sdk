@@ -16,8 +16,5 @@
 @property (class, readonly) NSString *accountID;
 
 + (void)setAppKeyID:(NSString *) key;
-+ (void)incrementSessionCount;
-+ (NSNumber *)sessionCount;
-+ (BOOL)isReturningVisitor;
-+ (void)setReturningVisitor:(BOOL) isReturningVisitor;
+
 @end

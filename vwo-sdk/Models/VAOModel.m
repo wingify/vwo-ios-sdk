@@ -34,7 +34,7 @@ NSMutableDictionary *campaigns;
         NSString *campaignsPlist = [self userCampaignsPath];
         campaigns = [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithContentsOfFile:campaignsPlist]];
         if ([[campaigns allKeys] count] > 0) {
-            [VAOSDKInfo setReturningVisitor:YES];
+
         }
     }
     return self;
@@ -74,6 +74,7 @@ NSMutableDictionary *campaigns;
 /// Sends network request to mark user tracking for campaign
 /// Sets "campaignId : variation id" in persistance store
 - (void)trackUserForCampaign:(VAOCampaign *)campaign {
+    if (![VAOPersistantStore returningUser]) [VAOPersistantStore setReturningUser:YES];
     [VAOPersistantStore trackUserForCampaign:campaign];
     NSString *variationID = [NSString stringWithFormat:@"%d", campaign.variation.id];
     [[VAOAPIClient sharedInstance] makeUserPartOfCampaign:campaign.iD forVariation:variationID];

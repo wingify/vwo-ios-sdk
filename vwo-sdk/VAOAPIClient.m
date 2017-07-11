@@ -15,6 +15,7 @@
 #import "VAODeviceInfo.h"
 #import "NSDictionary+VWO.h"
 #import "VAOLogger.h"
+#import "VAOPersistantStore.h"
 
 NSString * const kProtocol = @"https://";
 NSTimeInterval kTimerInterval = 20.0;
@@ -155,7 +156,7 @@ NSTimer *_timer;
     parameters[@"account_id"] = VAOSDKInfo.accountID;
     parameters[@"combination"] = params[@"varId"];
     parameters[@"u"] = [VAODeviceInfo getUUID];
-    parameters[@"s"] = [VAOSDKInfo sessionCount];
+    parameters[@"s"] = @([VAOPersistantStore sessionCount]);
     parameters[@"random"] = @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
     parameters[@"ed"] = [extraParams toString];
     

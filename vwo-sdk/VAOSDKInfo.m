@@ -7,9 +7,7 @@
 //
 
 #import "VAOSDKInfo.h"
-
-static NSString *kDefSessionCount = @"VWOSessionCount";
-static NSString *kDefReturningVisitor = @"VWOReturningVisitor";
+#import "VAOPersistantStore.h"
 
 static NSString *appKey;
 static NSString *accountId;
@@ -29,7 +27,7 @@ static NSString *accountId;
     }
     appKey = separatedArray[0];
     accountId = separatedArray[1];
-    [self incrementSessionCount];
+    [VAOPersistantStore incrementSessionCount];
 }
 
 + (NSString *)appKey {
@@ -39,24 +37,5 @@ static NSString *accountId;
 + (NSString *)accountID {
     return accountId;
 }
-
-+ (void)incrementSessionCount {
-    NSInteger sessionCount = [[NSUserDefaults standardUserDefaults] integerForKey:kDefSessionCount];
-    sessionCount += 1;
-    [[NSUserDefaults standardUserDefaults] setInteger:sessionCount forKey: kDefSessionCount];
-}
-
-+ (NSNumber *)sessionCount {
-    NSInteger num = [[NSUserDefaults standardUserDefaults] integerForKey: kDefSessionCount];
-    return [NSNumber numberWithInteger:num];
-}
-
-+ (void) setReturningVisitor:(BOOL) isReturningVisitor {
-    return [[NSUserDefaults standardUserDefaults] setBool:isReturningVisitor forKey: kDefReturningVisitor];
-}
-
-+ (BOOL)isReturningVisitor {
-    return [[NSUserDefaults standardUserDefaults] boolForKey: kDefReturningVisitor];
-};
 
 @end

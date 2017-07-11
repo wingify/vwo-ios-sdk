@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "VAORavenClient.h"
 #import "VAOSDKInfo.h"
+#import "VAOPersistantStore.h"
 
 typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeCustomVariable=7,
@@ -48,7 +49,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
                ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone)) {
         return YES;
     } else if (segmentObject[kReturningVisitor]) {
-        return ([VAOSDKInfo isReturningVisitor] == [segmentObject[kReturningVisitor] boolValue]);
+        return ([VAOPersistantStore returningUser] == [segmentObject[kReturningVisitor] boolValue]);
     }
     return NO;
 }
