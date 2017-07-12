@@ -20,6 +20,7 @@
 NSString * const kProtocol = @"http://";
 NSTimeInterval kTimerInterval = 20.0;
 NSUInteger kPendingMessagesThreshold = 3;
+static NSString *kDomain = @"dacdn.vwo.com";
 
 // For queqeing of messages to be sent.
 static NSInteger _transitId;
@@ -66,10 +67,10 @@ NSTimer *_timer;
                          success:(void(^)(id))successBlock
                          failure:(void(^)(NSError *))failureBlock {
     
-    NSString *url = [NSString stringWithFormat:@"%@%@/mobile", kProtocol,VAO_DOMAIN];
+    NSString *url = [NSString stringWithFormat:@"%@%@/mobile", kProtocol,kDomain];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"a"] = VAOSDKInfo.accountID;
-    parameters[@"v"] = VWO_SDK_VERSION,
+    parameters[@"v"] = [VAOSDKInfo sdkVersion],
     parameters[@"i"] = VAOSDKInfo.appKey;
     parameters[@"dt"] = [VAODeviceInfo deviceType];
     parameters[@"os"] = [[UIDevice currentDevice] systemVersion];
@@ -137,10 +138,10 @@ NSTimer *_timer;
     BOOL isRender = [message[@"method"] isEqualToString:@"render"];
     NSString *appVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
 
-    NSString *url = [NSString stringWithFormat:@"%@%@/%@.gif", kProtocol, VAO_DOMAIN, isRender ? @"l"  :@"c"];
+    NSString *url = [NSString stringWithFormat:@"%@%@/%@.gif", kProtocol, kDomain, isRender ? @"l"  :@"c"];
 
     NSDictionary *extraParams = @{@"lt": message[@"timestamp"],
-                                  @"v": VWO_SDK_VERSION,
+                                  @"v": [VAOSDKInfo sdkVersion],
                                   @"i": VAOSDKInfo.appKey,
                                   @"av": appVersion,
                                   @"dt": [VAODeviceInfo deviceType],

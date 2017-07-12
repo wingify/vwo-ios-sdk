@@ -9,23 +9,6 @@
     #import <UIKit/UIKit.h>
 #endif
 
-//#define VAO_DOMAIN @"192.168.1.12"
-#define VAO_DOMAIN @"dacdn.vwo.com"
-#define VAO_DEVICE_VERIFY_DOMAIN @"dacdn.vwo.com"
-#define VAO_PREVIEW_DOMAIN @"dacdn.vwo.com"
-
-#define VAO_EDITOR_TCP_HOST @"pyhub.vwo.com"
-#define VAO_EDITOR_TCP_PORT 8889
-#define VWO_SDK_VERSION @"1.5.0"
-
-#define VAO_SESSION_KEY @"vaoSession"
-
-#if defined(DEBUG) || TARGET_IPHONE_SIMULATOR
-extern void VAOLogImpl(const char *functionName, int lineNumber, NSString *format, ...) NS_FORMAT_FUNCTION(3,4);
-#define VAOLog(fmt, ...) VAOLogImpl(__FUNCTION__, __LINE__, fmt, ##__VA_ARGS__)
-#else
-#define VAOLog(fmt, ...)
-#endif
 
 #ifndef TARGET_OS_IOS
 #define TARGET_OS_IOS TARGET_OS_IPHONE
