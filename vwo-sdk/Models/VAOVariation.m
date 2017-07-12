@@ -15,7 +15,7 @@ static NSString * kChanges = @"changes";
 
 @implementation VAOVariation
 
-- (instancetype)initWith:(int)id name:(NSString *)name changes:(NSDictionary *)changes {
+- (instancetype)initWith:(int)id name:(NSString *)name changes:(NSDictionary * _Nullable)changes {
     if (self = [self init]) {
         self.id  = id;
         self.name = name;
@@ -24,7 +24,7 @@ static NSString * kChanges = @"changes";
     return self;
 }
 
-- (nullable instancetype)initWithDictionary:(NSDictionary *) variationDict {
+- (instancetype)initWithDictionary:(NSDictionary *) variationDict {
     if (![variationDict hasKeys:@[kId, kName]]) {
         NSLog(@"Variation Keys missing");
         return nil;

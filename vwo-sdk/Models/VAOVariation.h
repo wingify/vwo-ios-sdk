@@ -8,14 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VAOVariation : NSObject<NSCoding>
 
 @property(nonatomic, assign) int id;
 @property(atomic) NSString *name;
-@property(atomic) NSDictionary *changes;
+@property(atomic, nullable) NSDictionary *changes;
 
-- (instancetype)initWithDictionary:(NSDictionary *) variationDict;
+- (nullable instancetype)initWithDictionary:(NSDictionary *) variationDict;
 
--(BOOL)isControl;
+- (BOOL)isControl;
 
 @end
+NS_ASSUME_NONNULL_END

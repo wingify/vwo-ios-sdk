@@ -51,17 +51,17 @@
             if (segmentObject) {
                 if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:segmentObject]) {
                     [self.campaignList addObject:aCampaign];
-                    NSLog(@"Campaign1 (%@) added", aCampaign.name);
+                    NSLog(@"Campaign1 (%@) added,(%@)", aCampaign.name, aCampaign.variation.name);
                 } else { //Segmentation failed
                     NSLog(@"User cannot be part of campaign. Segment fail");
                 }
             } else { //There is no segmentation defined for campaign. Add unconditionally
                 [self.campaignList addObject:aCampaign];
-                NSLog(@"Campaign2 (%@) added", aCampaign.name);
+                NSLog(@"Campaign2 (%@) added (%@)", aCampaign.name, aCampaign.variation.name);
             }
         } else {//Unconditionally add when NOT trackUserOnLaunch
             [self.campaignList addObject:aCampaign];
-            NSLog(@"Campaign3 (%@) added", aCampaign.name);
+            NSLog(@"Campaign3 (%@) added (%@)", aCampaign.name, aCampaign.variation.name);
         }
     }
 
@@ -71,6 +71,7 @@
         //then inform backend and store in UserActivity
         if (![VAOPersistantStore isTrackingUserForCampaign:campaign] &&
             campaign.trackUserOnLaunch) {
+            NSLog(@"Track user for Campaign %@", campaign.name);
             [self trackUserForCampaign:campaign];
         }
     }
