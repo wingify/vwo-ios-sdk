@@ -28,7 +28,7 @@
 
 - (id)init {
     if (self = [super init]) {
-        self.campaignList = [[VAOModel loadCampaignsFromFile] mutableCopy];
+        self.campaignList = [NSMutableArray new];
     }
     return self;
 }
