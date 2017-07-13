@@ -25,7 +25,7 @@ static NSString * kType = @"type";
     return self;
 }
 
-- (nullable instancetype)initWithDictionary:(NSDictionary *) goalDict {
+- (instancetype)initWithDictionary:(NSDictionary *) goalDict {
     if (![goalDict hasKeys:@[kId, kIdentifier]]) {
         NSLog(@"GOAL Keys missing");
         return nil;

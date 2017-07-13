@@ -10,11 +10,12 @@
 #import "VAOGoal.h"
 #import "VAOVariation.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSInteger, CampaignStatus) {
     CampaignStatusRunning,
     CampaignStatusExcluded
 };
-NS_ASSUME_NONNULL_BEGIN
 @interface VAOCampaign : NSObject<NSCoding>
 
 @property (nonatomic, assign) int iD;

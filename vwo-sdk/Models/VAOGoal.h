@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, GoalType) {
     GoalTypeCustom,
     GoalTypeRevenue
@@ -19,6 +20,7 @@ typedef NS_ENUM(NSInteger, GoalType) {
 @property NSString *identifier;
 @property (nonatomic, assign) GoalType type;
 
-- (instancetype)initWithDictionary:(NSDictionary *) goalDict;
+- (nullable instancetype)initWithDictionary:(NSDictionary *) goalDict;
 
 @end
+NS_ASSUME_NONNULL_END

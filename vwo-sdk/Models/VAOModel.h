@@ -12,6 +12,8 @@
 #import <Foundation/Foundation.h>
 #import "VAOCampaign.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VAOModel : NSObject
 
 @property (atomic) NSMutableArray<VAOCampaign *> *campaignList;
@@ -26,3 +28,4 @@
 - (void)saveMessages:(NSArray *)messages;
 
 @end
+NS_ASSUME_NONNULL_END
