@@ -132,14 +132,4 @@
     }
 }
 
-- (NSMutableDictionary*)getCurrentCampaignVariationPairs {
-    NSMutableDictionary *campaignVariationPairs = [NSMutableDictionary new];
-    for (VAOCampaign *campaign in self.campaignList) {
-        NSString *campaignId = [NSString stringWithFormat:@"%d", campaign.iD];
-        NSString *variationId = [NSString stringWithFormat:@"%d", campaign.variation.id];
-        campaignVariationPairs[campaignId] = variationId;
-    }
-    return campaignVariationPairs;
-}
-
 @end

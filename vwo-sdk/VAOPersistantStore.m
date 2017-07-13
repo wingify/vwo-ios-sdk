@@ -35,6 +35,11 @@ static NSString * kReturningUser = @"returningUser";
     [userDict writeToFile:[self filePath] atomically:YES];
 }
 
++ (NSDictionary *)campaignVariationPairs {
+    NSDictionary *userDict = [self dictionary];
+    return userDict[kTracking];
+}
+
 /// Stores "campaignID : goalID" in User Activity["goalsMarked"]
 + (void)markGoalConversion:(VAOGoal *)goal forCampaign:(VAOCampaign *)campaign {
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];

@@ -25,6 +25,4 @@
 - (NSMutableDictionary*)getCampaignInfo;
 - (void)saveMessages:(NSArray *)messages;
 
-- (NSDictionary*)getCurrentCampaignVariationPairs;
-
 @end

@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isTrackingUserForCampaign:(VAOCampaign *)campaign;
 + (void)trackUserForCampaign:(VAOCampaign *)campaign;
 
++ (NSDictionary *)campaignVariationPairs;
+
 + (void)markGoalConversion:(VAOGoal *)goal;
 + (BOOL)isGoalMarked:(VAOGoal *)goal;
 

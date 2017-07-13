@@ -76,7 +76,7 @@ NSTimer *_timer;
     parameters[@"os"] = [[UIDevice currentDevice] systemVersion];
     parameters[@"u"] = [VAODeviceInfo getUUID];
     parameters[@"r"] =  @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
-    parameters[@"k"] = [[[VAOModel sharedInstance] getCurrentCampaignVariationPairs] toString];
+    parameters[@"k"] =  [[VAOPersistantStore campaignVariationPairs] toString];
     
     VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
     if (isAsync) {
