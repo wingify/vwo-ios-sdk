@@ -71,7 +71,7 @@
         //then inform backend and store in UserActivity
         if (![VAOPersistantStore isTrackingUserForCampaign:campaign] &&
             campaign.trackUserOnLaunch) {
-            NSLog(@"Track user for Campaign %@", campaign.name);
+            NSLog(@"Track user for %@", campaign.description);
             [self trackUserForCampaign:campaign];
         }
     }
