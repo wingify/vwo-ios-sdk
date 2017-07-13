@@ -18,9 +18,7 @@
     if([defaults stringForKey:@"useAccount"] == nil) {
         [defaults setObject:@"10" forKey:@"useAccount"];
     }
-    [VWO launchForAPIKey:@""];
-    [VWO variationForKey:""]
-    [VWO launchForAPIKey:@"<appID>-<accountID>"];
+    [VWO launchForAPIKey:@"43cbeae465aa589edb40911ff6c75a08-1"];
     
     return YES;
 }

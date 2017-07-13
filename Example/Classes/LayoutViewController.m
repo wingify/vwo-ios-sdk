@@ -83,7 +83,7 @@
 
 -(void)setupVariation{
     @try {
-        NSString *layout = [VWO variationForKey:@"layout" defaultObject:@"list"];
+        NSString *layout = [VWO variationForKey:@"layout" defaultValue:@"list"];
         
         [self.variationCollectionView reloadData];
         self.variationLabel.text = [NSString stringWithFormat:@"Variation (layout in %@)", layout];
@@ -220,7 +220,7 @@
     if (collectionView == self.controlCollectionView) {
         return CGSizeMake(cellWidth, cellHeight);
     } else {
-        NSString *layout = [VWO variationForKey:@"layout" defaultObject:@"list"];
+        NSString *layout = [VWO variationForKey:@"layout" defaultValue:@"list"];
         if([layout isEqualToString:@"grid"]) {
             cellWidth = cellWidth/2;
         }
