@@ -88,6 +88,11 @@ static NSString * kVariation            = @"variations";
     }
     return nil;
 }
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"{{[%@ (%d)] [%@ (%d)]}}", self.name, self.iD, self.variation.name, self.variation.id];
+}
+
 #pragma mark - NSCoding
 
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
