@@ -38,7 +38,6 @@
 }
 
 -(void)setupVariation{
-
     [self.variationSignin setTitle:[VWO variationForKey:@"sign-in-text" defaultValue:@"Login"] forState:UIControlStateNormal];
     [self.variationSignup setTitle:[VWO variationForKey:@"sign-up-text" defaultValue:@"or Sign Up"] forState:UIControlStateNormal];
     
