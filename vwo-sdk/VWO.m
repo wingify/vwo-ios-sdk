@@ -50,7 +50,7 @@
     NSDictionary *tags = [NSDictionary dictionaryWithObjectsAndKeys:accountId, @"VAO Account Id", nil];
     NSDictionary *extra = [NSDictionary dictionaryWithObjectsAndKeys:bunldeId, @"Bundle Identifier",
                            appName, @"App Name",
-                           [self sdkVersion], @"SDK Version", nil];
+                           [self version], @"SDK Version", nil];
     
     VAORavenClient *client = [VAORavenClient clientWithDSN:@"https://c3f6ba4cf03548f3bd90066dd182a649:6d6d9593d15944849cc9f8d88ccf1fb0@sentry.io/41858"
                                                      extra:extra
@@ -75,9 +75,9 @@
     return [[VAOController sharedInstance] variationForKey:key];
 }
 
-+ (id)variationForKey:(NSString*)key defaultObject:(id)defaultObject {
++ (id)variationForKey:(NSString*)key defaultValue:(id)defaultValue {
     id object = [self variationForKey:key];
-    if (!object) return defaultObject;
+    if (!object) return defaultValue;
     return object;
 }
 
@@ -89,11 +89,11 @@
     [[VAOController sharedInstance] markConversionForGoal:goal withValue:[NSNumber numberWithDouble:value]];
 }
 
-+ (void)setValue:(NSString*)value forCustomVariable:(NSString*)variable {
++ (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value {
     [[VAOController sharedInstance] setValue:value forCustomVariable:variable];
 }
 
-+ (NSString*)sdkVersion {
++ (NSString*)version {
     return [VAOSDKInfo sdkVersion];
 }
 @end

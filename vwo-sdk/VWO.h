@@ -11,27 +11,27 @@ NS_ASSUME_NONNULL_BEGIN
  *  Launch VWO
  *  Call VWO's server asynchronously to fetch settings
  */
-+ (void)launchForAPIKey:(NSString *) key;
++ (void)launchForAPIKey:(NSString *) key NS_SWIFT_NAME(launch(apiKey:));
 
 /**
  *  Launch VWO
  *  Call VWO's server Asynchronously
  *  It will call passed in code block on completion (success or error)
  */
-+ (void)launchForAPIKey:(NSString *) key completion:(void(^)(void))completionBlock;
++ (void)launchForAPIKey:(NSString *) key completion:(void(^)(void))completionBlock NS_SWIFT_NAME(launch(apiKey:completion:));
 
 /**
  *  Launch VWO
  *  Call VWO's server Synchronously
  *  Application will pause until settings are fetched or timed out
  */
-+ (void)launchSynchronouslyForAPIKey: (NSString *) key;
++ (void)launchSynchronouslyForAPIKey: (NSString *) key NS_SWIFT_NAME(launchSynchronously(apiKey:));
 
 /**
  *  It searches all the available campaigns, identifies the campaign and returns object for the specified key
  *  By default user is made part of the identified campaign, unless you call 'trackUserManually' method BEFORE initialisation.
  */
-+ (nullable id)variationForKey:(NSString*)key;
++ (nullable id)variationForKey:(NSString*)key NS_SWIFT_NAME(variationFor(key:));
 
 /**
  *  Behaves in the same manner as 'objectForKey', it returns defaultObject instead of nil when:
@@ -40,29 +40,29 @@ NS_ASSUME_NONNULL_BEGIN
  *  - if internet connection is not available
  *  - in case of any error
  */
-+ (nullable id)variationForKey:(NSString*)key defaultObject:(id)defaultObject;
++ (nullable id)variationForKey:(NSString*)key defaultValue:(id)defaultValue NS_SWIFT_NAME(variationFor(key:defaultValue:));
 
 /**
  *  Triggers goal for the specified goal string
  *  Each goal is only counted once
  */
-+ (void)markConversionForGoal:(NSString*)goal;
++ (void)markConversionForGoal:(NSString*)goal NS_SWIFT_NAME(markConversionFor(goal:));
 
 /**
  *  Triggers goal with the value for the specified goal string
  *  Each goal is only counted once
  */
-+ (void)markConversionForGoal:(NSString*)goal withValue:(double)value;
++ (void)markConversionForGoal:(NSString*)goal withValue:(double)value NS_SWIFT_NAME(markConversionFor(goal:value:));
 
 /**
  *  Set Value for custom variable defined on VWO
  */
-+ (void)setValue:(NSString*)value forCustomVariable:(NSString*)variable;
++ (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value NS_SWIFT_NAME(setCustom(variable:value:));
 
 /**
- *  Retruns VWO SDK version
+ *  Returns VWO SDK version
  */
-+ (NSString*)sdkVersion;
++ (NSString*)version;
 
 @end
 NS_ASSUME_NONNULL_END
