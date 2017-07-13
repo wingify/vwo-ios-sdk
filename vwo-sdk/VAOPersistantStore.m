@@ -16,10 +16,14 @@ static NSString * kReturningUser = @"returningUser";
 @implementation VAOPersistantStore
 
 + (BOOL)isTrackingUserForCampaign:(VAOCampaign *)campaign {
-    NSMutableDictionary *userDict = [self dictionary];
+    NSDictionary *userDict = [self dictionary];
+    NSDictionary *trackingDict = userDict[kTracking];
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
-    return (userDict[kTracking][campaignID] != nil &&
-            [userDict[kTracking][campaignID] intValue] == campaign.variation.id);
+
+    if (trackingDict[campaignID] == nil) {
+        return NO;
+    }
+    return [trackingDict[campaignID] intValue] == campaign.variation.id;
 }
 
 /// Stores "campaignId : "variationID" in User Activity["tracking"]
