@@ -51,17 +51,17 @@
             if (segmentObject) {
                 if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:segmentObject]) {
                     [self.campaignList addObject:aCampaign];
-                    NSLog(@"1 %@", aCampaign.description);
+                    NSLog(@"Adding1 %@", aCampaign.description);
                 } else { //Segmentation failed
                     NSLog(@"User cannot be part of campaign. Segment fail");
                 }
             } else { //There is no segmentation defined for campaign. Add unconditionally
                 [self.campaignList addObject:aCampaign];
-                NSLog(@"2 %@", aCampaign.description);
+                NSLog(@"Adding2 %@", aCampaign.description);
             }
         } else {//Unconditionally add when NOT trackUserOnLaunch
             [self.campaignList addObject:aCampaign];
-            NSLog(@"3 %@", aCampaign.description);
+            NSLog(@"Adding3 %@", aCampaign.description);
         }
     }
 
