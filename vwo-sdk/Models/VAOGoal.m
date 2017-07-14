@@ -41,7 +41,7 @@ static NSString * kType = @"type";
 }
 
 -(NSString *)description {
-    return [NSString stringWithFormat:@"GOAL: %@", self.identifier];
+    return [NSString stringWithFormat:@"GOAL: %@(%d)", self.identifier, self.iD];
 }
 
 #pragma mark - NSCoding

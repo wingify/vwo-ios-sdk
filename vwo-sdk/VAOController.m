@@ -138,16 +138,20 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     NSArray<VAOCampaign *> *campaignList = [[VAOModel sharedInstance] campaignList];
     for (VAOCampaign *campaign in campaignList) {
         VAOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
-        if ([VAOPersistantStore isGoalMarked:matchedGoal]) {
-            NSLog(@"Goal already marked");
-            return;
+        if (matchedGoal) {
+            if ([VAOPersistantStore isGoalMarked:matchedGoal]) {
+                NSLog(@"%@ already marked", matchedGoal);
+                return;
+            }
         }
     }
     
     for (VAOCampaign *campaign in campaignList) {
         if ([VAOPersistantStore isTrackingUserForCampaign:campaign]) {
             VAOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
-            [[VAOModel sharedInstance] markGoalConversion:matchedGoal inCampaign:campaign withValue:value];
+            if (matchedGoal) {
+                [[VAOModel sharedInstance] markGoalConversion:matchedGoal inCampaign:campaign withValue:value];
+            }
         }
     }
 }
