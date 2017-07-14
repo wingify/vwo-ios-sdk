@@ -137,7 +137,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     //Check if the goal is already marked
     NSArray<VAOCampaign *> *campaignList = [[VAOModel sharedInstance] campaignList];
     for (VAOCampaign *campaign in campaignList) {
-        VAOGoal *matchedGoal = [campaign goalForidentifier:goalIdentifier];
+        VAOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
         if ([VAOPersistantStore isGoalMarked:matchedGoal]) {
             NSLog(@"Goal already marked");
             return;
@@ -146,7 +146,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     
     for (VAOCampaign *campaign in campaignList) {
         if ([VAOPersistantStore isTrackingUserForCampaign:campaign]) {
-            VAOGoal *matchedGoal = [campaign goalForidentifier:goalIdentifier];
+            VAOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
             [[VAOModel sharedInstance] markGoalConversion:matchedGoal inCampaign:campaign withValue:value];
         }
     }

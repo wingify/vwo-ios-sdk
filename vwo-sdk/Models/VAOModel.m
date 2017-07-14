@@ -69,7 +69,6 @@
     for (VAOCampaign *campaign in self.campaignList) {
         if (campaign.trackUserOnLaunch &&
             ![VAOPersistantStore isTrackingUserForCampaign:campaign]) {
-            NSLog(@"Track user for %@", campaign.description);
             [self trackUserForCampaign:campaign];
         }
     }
@@ -78,6 +77,7 @@
 /// Sends network request to mark user tracking for campaign
 /// Sets "campaignId : variation id" in persistance store
 - (void)trackUserForCampaign:(VAOCampaign *)campaign {
+    NSLog(@"Track user for %@", campaign.description);
     if (![VAOPersistantStore returningUser]) [VAOPersistantStore setReturningUser:YES];
     [VAOPersistantStore trackUserForCampaign:campaign];
     NSString *variationID = [NSString stringWithFormat:@"%d", campaign.variation.iD];
@@ -85,6 +85,7 @@
 }
 
 - (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number {
+    NSLog(@"Marking goal %@ (%d)", goal.identifier, goal.iD);
     [VAOPersistantStore markGoalConversion:goal];
     [[VAOAPIClient sharedInstance] markConversionForGoalId:goal.iD experimentId:campaign.iD variationId:campaign.variation.iD revenue:number];
 }
