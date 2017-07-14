@@ -157,10 +157,8 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
     for (VAOCampaign *campaign in campaignList) {
         id variation = [campaign variationForKey:key];
-        if (variation) {
-            //If campaign has key and `trackUserOnLaunch` is not enabled
-            //then start tracking User and return the variation for key.
-            if (!campaign.trackUserOnLaunch) {
+        if (variation) { //If variation Key is present in Campaign
+            if (![VAOPersistantStore isTrackingUserForCampaign:campaign]) {
                 [[VAOModel sharedInstance] trackUserForCampaign:campaign];
             }
             return [variation copy];

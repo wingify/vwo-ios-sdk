@@ -65,12 +65,10 @@
         }
     }
 
-    //Persist User tracking for all the valid campaigns
+    //Track users for campaigns that have trackUserOnLaunch enabled
     for (VAOCampaign *campaign in self.campaignList) {
-        //If user is not already being tracked and trackUserOnLaunch is enabled
-        //then inform backend and store in UserActivity
-        if (![VAOPersistantStore isTrackingUserForCampaign:campaign] &&
-            campaign.trackUserOnLaunch) {
+        if (campaign.trackUserOnLaunch &&
+            ![VAOPersistantStore isTrackingUserForCampaign:campaign]) {
             NSLog(@"Track user for %@", campaign.description);
             [self trackUserForCampaign:campaign];
         }
