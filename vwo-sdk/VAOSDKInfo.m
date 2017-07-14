@@ -27,7 +27,6 @@ static NSString *accountId;
     }
     appKey = separatedArray[0];
     accountId = separatedArray[1];
-    [VAOPersistantStore incrementSessionCount];
 }
 
 + (NSString *)appKey {
