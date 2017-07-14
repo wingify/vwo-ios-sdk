@@ -80,13 +80,13 @@
 - (void)trackUserForCampaign:(VAOCampaign *)campaign {
     if (![VAOPersistantStore returningUser]) [VAOPersistantStore setReturningUser:YES];
     [VAOPersistantStore trackUserForCampaign:campaign];
-    NSString *variationID = [NSString stringWithFormat:@"%d", campaign.variation.id];
+    NSString *variationID = [NSString stringWithFormat:@"%d", campaign.variation.iD];
     [[VAOAPIClient sharedInstance] makeUserPartOfCampaign:campaign.iD forVariation:variationID];
 }
 
 - (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number {
     [VAOPersistantStore markGoalConversion:goal];
-    [[VAOAPIClient sharedInstance] markConversionForGoalId:goal.id experimentId:campaign.iD variationId:campaign.variation.id revenue:number];
+    [[VAOAPIClient sharedInstance] markConversionForGoalId:goal.iD experimentId:campaign.iD variationId:campaign.variation.iD revenue:number];
 }
 
 + (NSString *)campaignInfoPath {

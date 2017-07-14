@@ -15,10 +15,10 @@ static NSString * kType = @"type";
 
 @implementation VAOGoal
 
-- (instancetype)initWithId:(int) id identifier:(NSString *)identifier type:(GoalType) type {
+- (instancetype)initWithId:(int) iD identifier:(NSString *)identifier type:(GoalType) type {
     self = [super init];
     if (self) {
-        self.id = id;
+        self.iD = iD;
         self.identifier = identifier;
         self.type = type;
     }
@@ -53,7 +53,7 @@ static NSString * kType = @"type";
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeInt:self.id forKey:kId];
+    [aCoder encodeInt:self.iD forKey:kId];
     [aCoder encodeObject:self.identifier forKey:kIdentifier];
     [aCoder encodeInteger:self.type forKey:kType];
 }

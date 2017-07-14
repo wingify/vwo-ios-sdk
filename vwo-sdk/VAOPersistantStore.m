@@ -23,13 +23,13 @@ static NSString * kReturningUser = @"returningUser";
     if (trackingDict[campaignID] == nil) {
         return NO;
     }
-    return [trackingDict[campaignID] intValue] == campaign.variation.id;
+    return [trackingDict[campaignID] intValue] == campaign.variation.iD;
 }
 
 /// Stores "campaignId : "variationID" in User Activity["tracking"]
 + (void)trackUserForCampaign:(VAOCampaign *)campaign {
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
-    NSNumber *variationID = [NSNumber numberWithInt:campaign.variation.id];
+    NSNumber *variationID = [NSNumber numberWithInt:campaign.variation.iD];
     NSMutableDictionary *userDict = [self dictionary];
     userDict[kTracking][campaignID] = variationID;
     [userDict writeToFile:[self filePath] atomically:YES];
@@ -43,7 +43,7 @@ static NSString * kReturningUser = @"returningUser";
 /// Stores "campaignID : goalID" in User Activity["goalsMarked"]
 + (void)markGoalConversion:(VAOGoal *)goal forCampaign:(VAOCampaign *)campaign {
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
-    NSNumber *goalID = [NSNumber numberWithInt:goal.id];
+    NSNumber *goalID = [NSNumber numberWithInt:goal.iD];
     NSMutableDictionary *userDict = [self dictionary];
     userDict[kGoalsMarked][campaignID] = goalID;
     [self writeToFile:userDict];
@@ -52,7 +52,7 @@ static NSString * kReturningUser = @"returningUser";
 + (void)markGoalConversion:(VAOGoal *)goal {
     NSMutableDictionary *userDict = [self dictionary];
     NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)userDict[kGoalsMarked]];
-    [set addObject:[NSNumber numberWithInt:goal.id]];
+    [set addObject:[NSNumber numberWithInt:goal.iD]];
     userDict[kGoalsMarked] = [set allObjects];
     [self writeToFile:userDict];
 }
@@ -60,7 +60,7 @@ static NSString * kReturningUser = @"returningUser";
 + (BOOL)isGoalMarked:(VAOGoal *)goal {
     NSMutableDictionary *userDict = [self dictionary];
     NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)userDict[kGoalsMarked]];
-    return [set containsObject:[NSNumber numberWithInt:goal.id]];
+    return [set containsObject:[NSNumber numberWithInt:goal.iD]];
 }
 
 + (void)incrementSessionCount {

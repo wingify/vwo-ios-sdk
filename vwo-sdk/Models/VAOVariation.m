@@ -15,9 +15,9 @@ static NSString * kChanges = @"changes";
 
 @implementation VAOVariation
 
-- (instancetype)initWith:(int)id name:(NSString *)name changes:(NSDictionary * _Nullable)changes {
+- (instancetype)initWith:(int)iD name:(NSString *)name changes:(NSDictionary * _Nullable)changes {
     if (self = [self init]) {
-        self.id  = id;
+        self.iD  = iD;
         self.name = name;
         self.changes = changes;
     }
@@ -29,27 +29,27 @@ static NSString * kChanges = @"changes";
         NSLog(@"Variation Keys missing");
         return nil;
     }
-    int id = [variationDict[kId] intValue];
+    int iD = [variationDict[kId] intValue];
     NSString *name = variationDict[kName];
     NSDictionary *changes = variationDict[kChanges];
-    return [self initWith:id name:name changes:changes];
+    return [self initWith:iD name:name changes:changes];
 }
 
 -(BOOL)isControl {
-    return (self.id == 1);
+    return (self.iD == 1);
 }
 
 #pragma mark - NSCoding
 
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
-    int id = [aDecoder decodeIntForKey:kId];
+    int iD = [aDecoder decodeIntForKey:kId];
     NSString *name = [aDecoder decodeObjectForKey:kName];
     NSDictionary *changes = [aDecoder decodeObjectForKey:kChanges];
-    return [self initWith:id name:name changes:changes];
+    return [self initWith:iD name:name changes:changes];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeInt:self.id forKey:kId];
+    [aCoder encodeInt:self.iD forKey:kId];
     [aCoder encodeObject:self.name forKey:kName];
     [aCoder encodeObject:self.changes forKey:kChanges];
 }
