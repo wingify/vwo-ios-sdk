@@ -83,7 +83,7 @@ static NSString * kVariation            = @"variations";
 - (nullable VAOGoal *)goalForidentifier:(NSString *)identifier {
     for (VAOGoal *goal in self.goals) {
         if ([goal.identifier isEqualToString:identifier]) {
-            return [goal copy];
+            return goal;
         }
     }
     return nil;
