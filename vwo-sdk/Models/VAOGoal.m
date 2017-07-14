@@ -58,4 +58,13 @@ static NSString * kType = @"type";
     [aCoder encodeInteger:self.type forKey:kType];
 }
 
+#pragma mark - NSCopying
+-(id)copyWithZone:(NSZone *)zone {
+    VAOGoal *copy = [[[self class] allocWithZone:zone] init];
+    copy.iD = self.iD;
+    copy.type = self.type;
+    copy.identifier = [self.identifier copyWithZone:zone];
+    return copy;
+}
+
 @end

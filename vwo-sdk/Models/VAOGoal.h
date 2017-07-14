@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger, GoalType) {
     GoalTypeRevenue
 };
 
-@interface VAOGoal : NSObject<NSCoding>
+@interface VAOGoal : NSObject<NSCoding, NSCopying>
 
 @property(nonatomic, assign) int iD;
 @property NSString *identifier;
