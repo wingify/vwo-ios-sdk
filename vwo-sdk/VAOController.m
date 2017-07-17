@@ -107,7 +107,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     [[VAOAPIClient sharedInstance] pullABDataAsynchronously:async success:^(id responseObject) {
         _lastUpdateTime = currentTime;
         _remoteDataDownloading = NO;
-        NSLog(@"%lu campaigns received", (NSUInteger)[(NSArray *) responseObject count]);
+        NSLog(@"%lu campaigns received", (unsigned long)[(NSArray *) responseObject count]);
         [(NSArray *) responseObject writeToFile:[VAOController campaignInfoPath] atomically:YES];
         [[VAOModel sharedInstance] updateCampaignListFromDictionary:responseObject];
         if (completionBlock) completionBlock();
