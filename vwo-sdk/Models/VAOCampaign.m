@@ -26,6 +26,9 @@ static NSString * kVariation            = @"variations";
           segmentObject:(nullable NSDictionary *)segmentObject
                    goals:(NSArray<VAOGoal *>*)goals
                variation:(VAOVariation *)variation {
+    NSParameterAssert(name);
+    NSParameterAssert(goals);
+    NSParameterAssert(variation);
     if (self = [super init]) {
         self.iD = iD;
         self.name = name;
@@ -39,6 +42,7 @@ static NSString * kVariation            = @"variations";
 }
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *) campaignDict {
+    NSParameterAssert(campaignDict);
     NSArray *mustHaveKeys = @[kId, kName, kTrackUserOnLaunch, kStatus, kGoals, kVariation];
     if (![campaignDict hasKeys:mustHaveKeys]) {
         NSLog(@"Campaign Keys missing %@", [campaignDict allKeys]);
@@ -74,6 +78,7 @@ static NSString * kVariation            = @"variations";
 }
 
 - (nullable id)variationForKey:(NSString*)key {
+    NSParameterAssert(key);
     if (self.variation.isControl) return nil;
     NSDictionary *changes = self.variation.changes;
     if (changes == nil) return nil;
@@ -81,6 +86,7 @@ static NSString * kVariation            = @"variations";
 }
 
 - (nullable VAOGoal *)goalForIdentifier:(NSString *)identifier {
+    NSParameterAssert(identifier);
     for (VAOGoal *goal in self.goals) {
         if ([goal.identifier isEqualToString:identifier]) {
             return goal;

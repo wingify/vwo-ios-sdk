@@ -16,6 +16,7 @@ static NSString * kType = @"type";
 @implementation VAOGoal
 
 - (instancetype)initWithId:(int) iD identifier:(NSString *)identifier type:(GoalType) type {
+    NSParameterAssert(identifier);
     self = [super init];
     if (self) {
         self.iD = iD;
@@ -26,6 +27,7 @@ static NSString * kType = @"type";
 }
 
 - (instancetype)initWithDictionary:(NSDictionary *) goalDict {
+    NSParameterAssert(goalDict);
     if (![goalDict hasKeys:@[kId, kIdentifier]]) {
         NSLog(@"GOAL Keys missing");
         return nil;

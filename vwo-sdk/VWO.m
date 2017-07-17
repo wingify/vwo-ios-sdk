@@ -60,36 +60,44 @@
 }
 
 + (void)launchForAPIKey:(NSString *) key {
+    NSParameterAssert(key);
     [self setUpForKey:key isAsync:YES completion:nil];
 }
 
 + (void)launchForAPIKey:(NSString *) key completion:(void(^)(void))completionBlock {
+    NSParameterAssert(key);
     [self setUpForKey:key isAsync:YES completion:completionBlock];
 }
 
 + (void)launchSynchronouslyForAPIKey:(NSString *) key {
+    NSParameterAssert(key);
     [self setUpForKey:key isAsync:NO completion:nil];
 }
 
 + (id)variationForKey:(NSString*)key {
+    NSParameterAssert(key);
     return [[VAOController sharedInstance] variationForKey:key];
 }
 
 + (id)variationForKey:(NSString*)key defaultValue:(id)defaultValue {
+    NSParameterAssert(key);
     id object = [self variationForKey:key];
     if (!object) return defaultValue;
     return object;
 }
 
 + (void)markConversionForGoal:(NSString*)goal {
+    NSParameterAssert(goal);
     [[VAOController sharedInstance] markConversionForGoal:goal withValue:nil];
 }
 
 + (void)markConversionForGoal:(NSString*)goal withValue:(double)value {
+    NSParameterAssert(goal);
     [[VAOController sharedInstance] markConversionForGoal:goal withValue:[NSNumber numberWithDouble:value]];
 }
 
 + (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value {
+    NSParameterAssert(variable);
     [[VAOController sharedInstance] setValue:value forCustomVariable:variable];
 }
 

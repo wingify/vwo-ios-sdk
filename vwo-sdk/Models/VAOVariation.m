@@ -16,6 +16,7 @@ static NSString * kChanges = @"changes";
 @implementation VAOVariation
 
 - (instancetype)initWith:(int)iD name:(NSString *)name changes:(NSDictionary * _Nullable)changes {
+    NSParameterAssert(name);
     if (self = [self init]) {
         self.iD  = iD;
         self.name = name;
