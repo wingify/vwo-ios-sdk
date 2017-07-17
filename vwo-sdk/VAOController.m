@@ -110,7 +110,8 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         if ([[NSFileManager defaultManager] fileExistsAtPath:[VAOController campaignInfoPath]]) {
             NSLog(@"Network failed %@", error.localizedDescription);
             NSLog(@"LOADING CACHED RESPONSE");
-            [NSArray arrayWithContentsOfFile:[VAOController campaignInfoPath]];
+            NSArray *cachedCampaings = [NSArray arrayWithContentsOfFile:[VAOController campaignInfoPath]];
+            [VAOModel.sharedInstance updateCampaignListFromDictionary:cachedCampaings];
         } else {
             NSLog(@"ABData failed. File not available %@", error.localizedDescription);
         }
