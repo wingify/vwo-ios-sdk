@@ -12,7 +12,6 @@
 
 @interface VAODeviceInfo : NSObject
 
-+ (NSString *)deviceType;
 + (BOOL)isAttachedToDebugger;
-
++ (NSString *)platformName;
 @end
