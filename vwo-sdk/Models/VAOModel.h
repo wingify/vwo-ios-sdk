@@ -24,7 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateCampaignListFromDictionary:(NSArray *)allCampaignDict;
 - (NSArray *)loadMessagesFromFile;
 
-- (NSMutableDictionary*)getCampaignInfo;
 - (void)saveMessages:(NSArray *)messages;
 
 @end

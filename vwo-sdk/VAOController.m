@@ -30,7 +30,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 + (void)initializeAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock {
     [VAOPersistantStore incrementSessionCount];
     [[VAOAPIClient sharedInstance] initializeAndStartTimer];
-    [[self sharedInstance] updateCampaignInfo];
     [[self sharedInstance] downloadCampaignAsynchronously:async withCallback:completionBlock];
     [[self sharedInstance] addBackgroundListeners];
 }
@@ -62,10 +61,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         customVariables = [NSMutableDictionary dictionary];
     }
     return self;
-}
-
-- (void)updateCampaignInfo {
-    _campaignInfo = [[VAOModel sharedInstance] getCampaignInfo];
 }
 
 - (void)setValue:(NSString*)value forCustomVariable:(NSString*)variable {
@@ -100,6 +95,10 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
++ (NSString *) campaignInfoPath {
+    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOCampaignInfo.plist"];
+}
+
 - (void)downloadCampaignAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock {
     
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
@@ -109,10 +108,17 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         _lastUpdateTime = currentTime;
         _remoteDataDownloading = NO;
         NSLog(@"%lu campaigns received", (NSUInteger)[(NSArray *) responseObject count]);
+        [(NSArray *) responseObject writeToFile:[VAOController campaignInfoPath] atomically:YES];
         [[VAOModel sharedInstance] updateCampaignListFromDictionary:responseObject];
         if (completionBlock) completionBlock();
     } failure:^(NSError *error) {
-        NSLog(@"ABData failed %@", error.localizedDescription);
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[VAOController campaignInfoPath]]) {
+            NSLog(@"Network failed %@", error.localizedDescription);
+            NSLog(@"LOADING CACHED RESPONSE");
+            [NSArray arrayWithContentsOfFile:[VAOController campaignInfoPath]];
+        } else {
+            NSLog(@"ABData failed. File not available %@", error.localizedDescription);
+        }
     }];
 }
 

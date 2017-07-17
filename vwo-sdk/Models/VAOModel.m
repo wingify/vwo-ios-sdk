@@ -90,26 +90,6 @@
     [[VAOAPIClient sharedInstance] markConversionForGoalId:goal.iD experimentId:campaign.iD variationId:campaign.variation.iD revenue:number];
 }
 
-+ (NSString *)campaignInfoPath {
-    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOCampaignInfo.plist"];
-}
-
-- (NSMutableDictionary*)getCampaignInfo {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithContentsOfFile:[VAOModel campaignInfoPath]];
-    return dict;
-}
-
-- (void)serializeCampaigns {
-    NSData *archivedData = [NSKeyedArchiver archivedDataWithRootObject:self.campaignList];
-    [archivedData writeToFile:[VAOModel campaignInfoPath] atomically:YES];
-    NSLog(@"CAmpaign info written to File %@", [VAOModel campaignInfoPath]);
-}
-
-+ (nullable NSArray<VAOCampaign *> *)loadCampaignsFromFile {
-    NSData *archivedData = [NSData dataWithContentsOfFile:[self campaignInfoPath]];
-    return [NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
-}
-
 - (NSString *) pendingMessagesPath {
     return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOPendingMessages.plist"];
 }
