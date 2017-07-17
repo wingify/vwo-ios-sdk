@@ -12,6 +12,7 @@ static NSString * kTracking = @"tracking";
 static NSString * kGoalsMarked = @"goalsMarked";
 static NSString * kSessionCount = @"sessionCount";
 static NSString * kReturningUser = @"returningUser";
+static NSString * kUUID = @"UUID";
 
 @implementation VAOPersistantStore
 
@@ -85,6 +86,11 @@ static NSString * kReturningUser = @"returningUser";
     return [userDict[kReturningUser] boolValue];
 }
 
++ (NSString *)UUID {
+    NSMutableDictionary *userDict = [self dictionary];
+    return userDict[kUUID];
+}
+
 #pragma mark - Core
 //[self filePath] must not appear above this
 
@@ -111,6 +117,8 @@ static NSString * kReturningUser = @"returningUser";
     activityDict[kGoalsMarked] = @[];
     activityDict[kSessionCount] = @(0);
     activityDict[kReturningUser] = @(NO);
+    NSString *UUID = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    activityDict[kUUID] = UUID;
     [self writeToFile:activityDict];
 }
 

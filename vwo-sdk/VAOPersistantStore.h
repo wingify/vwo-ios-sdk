@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)setReturningUser:(BOOL)isReturning;
 + (BOOL)returningUser;
 
++ (NSString *)UUID;
+
 + (void)log;
 
 @end

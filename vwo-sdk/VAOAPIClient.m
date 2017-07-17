@@ -74,7 +74,7 @@ NSTimer *_timer;
     parameters[@"i"] = VAOSDKInfo.appKey;
     parameters[@"dt"] = [VAODeviceInfo deviceType];
     parameters[@"os"] = [[UIDevice currentDevice] systemVersion];
-    parameters[@"u"] = [VAODeviceInfo getUUID];
+    parameters[@"u"] =  VAOPersistantStore.UUID;
     parameters[@"r"] =  @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
     parameters[@"k"] =  [[VAOPersistantStore campaignVariationPairs] toString];
     
@@ -152,7 +152,7 @@ NSTimer *_timer;
     parameters[@"experiment_id"] = params[@"expId"];
     parameters[@"account_id"] = VAOSDKInfo.accountID;
     parameters[@"combination"] = params[@"varId"];
-    parameters[@"u"] = [VAODeviceInfo getUUID];
+    parameters[@"u"] =  VAOPersistantStore.UUID;
     parameters[@"s"] = @([VAOPersistantStore sessionCount]);
     parameters[@"random"] = @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
     parameters[@"ed"] = [extraParams toString];

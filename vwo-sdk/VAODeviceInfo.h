@@ -14,6 +14,5 @@
 
 + (NSString *)deviceType;
 + (BOOL)isAttachedToDebugger;
-+ (NSString *)getUUID;
 
 @end
