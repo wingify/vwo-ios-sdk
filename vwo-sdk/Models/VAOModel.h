@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface VAOModel : NSObject
 
 @property (atomic) NSMutableArray<VAOCampaign *> *campaignList;
+@property NSMutableDictionary<NSString *, NSString *> *customVariables;
 
 + (instancetype)sharedInstance;
 - (void)trackUserForCampaign:(VAOCampaign *)campaign;

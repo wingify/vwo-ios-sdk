@@ -63,14 +63,9 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     return self;
 }
 
-- (void)setValue:(NSString*)value forCustomVariable:(NSString*)variable {
-    if(!value || !variable) return;
-    @try {
-        [customVariables setObject:value forKey:variable];
-    }
-    @catch (NSException *exception) {
-        [VAOLogger exception:exception];
-    }
+- (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value {
+    NSLog(@"Setting %@ = %@", variable, value);
+    VAOModel.sharedInstance.customVariables[variable] = value;
 }
 
 - (void)applicationDidEnterBackground {

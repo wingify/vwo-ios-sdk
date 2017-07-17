@@ -11,6 +11,7 @@
 #import "VAORavenClient.h"
 #import "VAOSDKInfo.h"
 #import "VAOPersistantStore.h"
+#import "VAOModel.h"
 
 typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeCustomVariable=7,
@@ -290,11 +291,8 @@ static NSString * kReturningVisitor = @"returning_visitor";
         }
         case SegmentationTypeCustomVariable: {
             NSString *targetValue = [operand firstObject];
-            NSString *currentValue = [customVariables objectForKey:lOperand];
-            if (!currentValue) {
-                toReturn = NO;
-                return toReturn;
-            }
+            NSString *currentValue = VAOModel.sharedInstance.customVariables[lOperand];
+            if (!currentValue) return NO;
 
             //        [nil range]
             switch (operator) {

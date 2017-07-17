@@ -29,6 +29,7 @@
 - (id)init {
     if (self = [super init]) {
         self.campaignList = [NSMutableArray new];
+        _customVariables = [NSMutableDictionary new];
     }
     return self;
 }

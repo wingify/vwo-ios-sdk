@@ -98,7 +98,8 @@
 
 + (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value {
     NSParameterAssert(variable);
-    [[VAOController sharedInstance] setValue:value forCustomVariable:variable];
+    NSParameterAssert(value);
+    [VAOController.sharedInstance setCustomVariable:variable withValue:value];
 }
 
 + (NSString*)version {
