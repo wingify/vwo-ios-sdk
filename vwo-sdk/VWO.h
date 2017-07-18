@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Set Value for custom variable defined on VWO
  */
-+ (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value NS_SWIFT_NAME(setCustom(variable:value:));
++ (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:));
 
 /**
  *  Returns VWO SDK version
