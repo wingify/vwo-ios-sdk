@@ -22,6 +22,27 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeLocation=5
 };
 
+typedef NS_ENUM(NSInteger, OperatorType) {
+    OperatorTypeIsEqualToCaseInsensitive    = 1,
+    OperatorTypeIsNotEqualToCaseInsensitive = 2,
+    OperatorTypeIsEqualToCaseSensitive      = 3,
+    OperatorTypeIsNotEqualToCaseSensitive   = 4,
+    OperatorTypeMatchesRegexCaseInsensitive = 5,
+    OperatorTypeMatchesRegexCaseSensitive   = 6,
+    OperatorTypeContains                    = 7,
+    OperatorTypeDoesNotContain              = 8,
+    OperatorTypeIsBlank                     = 9,
+    OperatorTypeIsNotBlank                  = 10,
+    OperatorTypeIsEqualTo                   = 11,
+    OperatorTypeIsNotEqualTo                = 12,
+    OperatorTypeStartsWith                  = 13,
+    OperatorTypeEndsWith                    = 14,
+    OperatorTypeGreaterThan                 = 15,
+    OperatorTypeLessThan                    = 16,
+    OperatorTypeConverted                   = 17,
+    OperatorTypeNotConverted                = 18,
+};
+
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 static NSString * kType = @"type";
