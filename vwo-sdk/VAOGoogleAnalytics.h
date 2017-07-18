@@ -8,19 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VAOGoogleAnalytics : NSObject
-+ (id)sharedInstance;
-- (void)goalTriggeredWithName:(NSString*)goalName
-                       goalId:(NSString*)goalId
-                    goalValue:(NSNumber*)goalValue
-               experimentName:(NSString*)expName
-                 experimentId:(NSString*)expId
-                variationName:(NSString*)varName
-                  variationId:(NSString*)varId;
+NS_ASSUME_NONNULL_BEGIN
 
-- (void)experimentWithName:(NSString*)expName
-              experimentId:(NSString*)expId
-             variationName:(NSString*)varName
-               variationId:(NSString*)varId
-                 dimension:(NSNumber*)dimValue;
+@class VAOCampaign, VAOGoal;
+
+@interface VAOGoogleAnalytics : NSObject
+
++ (id)sharedInstance;
+- (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number;
+- (void)makeUserPartOfCampaign:(VAOCampaign *) campaign;
+
 @end
+
+NS_ASSUME_NONNULL_END

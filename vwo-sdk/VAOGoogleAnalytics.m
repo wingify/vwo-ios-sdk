@@ -9,6 +9,7 @@
 #import "VAOGoogleAnalytics.h"
 #import "VAORavenClient.h"
 #import "VAOLogger.h"
+#import "VAOCampaign.h"
 
 @implementation VAOGoogleAnalytics {
     id defaultTracker;
@@ -136,21 +137,20 @@
     return dictionary;
 }
 
-- (void)goalTriggeredWithName:(NSString*)goalName goalId:(NSString*)goalId goalValue:(NSNumber*)goalValue experimentName:(NSString*)expName experimentId:(NSString*)expId variationName:(NSString*)varName variationId:(NSString*)varId {
-    
-    NSString *category = [NSString stringWithFormat:@"VWO Goal - %@ - %@", expName, expId];
-    NSString *action = [NSString stringWithFormat:@"%@ - %@", goalName, goalId];
-    NSString *label = [NSString stringWithFormat:@"%@ - %@", varName, varId];
-    
-    [self triggerEventWithCategory:category eventAction:action eventLabel:label eventValue:goalValue dimensionName:nil dimensionValue:nil];
+- (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number {
+    NSString *category = [NSString stringWithFormat:@"VWO Goal - %@ - %d", campaign.name, campaign.iD];
+    NSString *action = [NSString stringWithFormat:@"%@ - %d", goal.identifier, goal.iD];
+    NSString *label = [NSString stringWithFormat:@"%@ - %d", campaign.variation.name, campaign.variation.iD];
+
+    [self triggerEventWithCategory:category eventAction:action eventLabel:label eventValue:number dimensionName:nil dimensionValue:nil];
 }
 
-- (void)experimentWithName:(NSString*)expName experimentId:(NSString*)expId variationName:(NSString*)varName variationId:(NSString*)varId dimension:(NSNumber*)dimValue {
-    NSString *category = [NSString stringWithFormat:@"VWO Campaign - %@ - %@", expName, expId];
-    NSString *action = [NSString stringWithFormat:@"%@ - %@", expName, expId];
-    NSString *label = [NSString stringWithFormat:@"%@ - %@", varName, varId];
-    NSString *dimName = [NSString stringWithFormat:@"CampId:%@, VarName:%@", expId, varName];
-    
-    [self triggerEventWithCategory:category eventAction:action eventLabel:label eventValue:nil dimensionName:dimName dimensionValue:dimValue];
+- (void)makeUserPartOfCampaign:(VAOCampaign *) campaign {
+    NSString *category = [NSString stringWithFormat:@"VWO Campaign - %@ - %d", campaign.name, campaign.iD];
+    NSString *action = [NSString stringWithFormat:@"%@ - %d", campaign.name, campaign.iD];
+    NSString *label = [NSString stringWithFormat:@"%@ - %d", campaign.variation.name, campaign.variation.iD];
+    NSString *dimName = [NSString stringWithFormat:@"CampId:%d, VarName:%@", campaign.iD, campaign.variation.name];
+
+    [self triggerEventWithCategory:category eventAction:action eventLabel:label eventValue:nil dimensionName:dimName dimensionValue:campaign.gaDimension];
 }
 @end
