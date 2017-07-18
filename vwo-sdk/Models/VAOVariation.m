@@ -8,6 +8,7 @@
 
 #import "VAOVariation.h"
 #import "NSDictionary+VWO.h"
+#import "VAORavenClient.h"
 
 static NSString * kId = @"id";
 static NSString * kName = @"name";
@@ -30,6 +31,7 @@ static NSString * kChanges = @"changes";
     NSArray *missingKeys = [variationDict keysMissingFrom:@[kId, kName]];
     if (missingKeys.count > 0) {
         NSLog(@"Variation Keys missing %@", [missingKeys componentsJoinedByString:@", "]);
+        VAORavenCaptureMessage(@"Variation Keys missing %@", [missingKeys componentsJoinedByString:@", "]);
         return nil;
     }
 

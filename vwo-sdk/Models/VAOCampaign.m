@@ -8,6 +8,7 @@
 
 #import "VAOCampaign.h"
 #import "NSDictionary+VWO.h"
+#import "VAORavenClient.h"
 
 static NSString * kId                   = @"id";
 static NSString * kName                 = @"name";
@@ -47,6 +48,7 @@ static NSString * kVariation            = @"variations";
     NSArray *missingKeys = [campaignDict keysMissingFrom:mustHaveKeys];
     if (missingKeys.count > 0) {
         NSLog(@"Campaign Keys missing %@", [missingKeys componentsJoinedByString:@", "]);
+        VAORavenCaptureMessage(@"Campaign Keys missing %@", [missingKeys componentsJoinedByString:@", "]);
         return nil;
     }
 
