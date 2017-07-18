@@ -14,6 +14,7 @@
 #import "VAOLogger.h"
 #import "VAOPersistantStore.h"
 #import "VWOSegmentEvaluator.h"
+#import "VAOGoogleAnalytics.h"
 
 @implementation VAOModel
 
@@ -84,6 +85,7 @@
     [VAOPersistantStore trackUserForCampaign:campaign];
     NSString *variationID = [NSString stringWithFormat:@"%d", campaign.variation.iD];
     [[VAOAPIClient sharedInstance] makeUserPartOfCampaign:campaign.iD forVariation:variationID];
+    [VAOGoogleAnalytics.sharedInstance makeUserPartOfCampaign:campaign];
 }
 
 - (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number {
@@ -92,6 +94,7 @@
     NSLog(@"Marking goal %@ (%d)", goal.identifier, goal.iD);
     [VAOPersistantStore markGoalConversion:goal];
     [[VAOAPIClient sharedInstance] markConversionForGoalId:goal.iD experimentId:campaign.iD variationId:campaign.variation.iD revenue:number];
+    [VAOGoogleAnalytics.sharedInstance markGoalConversion:goal inCampaign:campaign withValue:number];
 }
 
 - (NSString *) pendingMessagesPath {
