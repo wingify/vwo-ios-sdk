@@ -26,10 +26,13 @@ static NSString * kChanges = @"changes";
 }
 
 - (instancetype)initWithDictionary:(NSDictionary *) variationDict {
-    if (![variationDict hasKeys:@[kId, kName]]) {
-        NSLog(@"Variation Keys missing");
+
+    NSArray *missingKeys = [variationDict keysMissingFrom:@[kId, kName]];
+    if (missingKeys.count > 0) {
+        NSLog(@"Variation Keys missing %@", [missingKeys componentsJoinedByString:@", "]);
         return nil;
     }
+
     int iD = [variationDict[kId] intValue];
     NSString *name = variationDict[kName];
     NSDictionary *changes = variationDict[kChanges];

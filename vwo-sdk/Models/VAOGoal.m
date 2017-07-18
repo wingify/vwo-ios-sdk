@@ -28,10 +28,13 @@ static NSString * kType = @"type";
 
 - (instancetype)initWithDictionary:(NSDictionary *) goalDict {
     NSParameterAssert(goalDict);
-    if (![goalDict hasKeys:@[kId, kIdentifier]]) {
-        NSLog(@"GOAL Keys missing");
+
+    NSArray *missingKeys = [goalDict keysMissingFrom:@[kId, kIdentifier]];
+    if (missingKeys.count > 0) {
+        NSLog(@"GOAL Keys missing %@", [missingKeys componentsJoinedByString:@", "]);
         return nil;
     }
+
     int id = [goalDict[kId] intValue];
     NSString *identifier = goalDict[kIdentifier];
 

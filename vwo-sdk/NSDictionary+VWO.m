@@ -18,13 +18,9 @@
     return nil;
 }
 
-/// Returns YES only if it contains all the keys in parameter
-- (BOOL)hasKeys:(NSArray<NSString *> *)keys {
-    for (NSString *key in keys) {
-        if ([self objectForKey:key] == nil) {
-            return NO;
-        }
-    }
-    return YES;
+- (NSArray<NSString *>*) keysMissingFrom:(NSArray<NSString *> *)mustHaveKeys {
+    NSMutableArray *mustHaveKeysMutable = mustHaveKeys.mutableCopy;
+    [mustHaveKeysMutable removeObjectsInArray:self.allKeys];
+    return mustHaveKeysMutable;
 }
 @end

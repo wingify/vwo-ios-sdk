@@ -44,10 +44,12 @@ static NSString * kVariation            = @"variations";
 - (nullable instancetype)initWithDictionary:(NSDictionary *) campaignDict {
     NSParameterAssert(campaignDict);
     NSArray *mustHaveKeys = @[kId, kName, kTrackUserOnLaunch, kStatus, kGoals, kVariation];
-    if (![campaignDict hasKeys:mustHaveKeys]) {
-        NSLog(@"Campaign Keys missing %@", [campaignDict allKeys]);
+    NSArray *missingKeys = [campaignDict keysMissingFrom:mustHaveKeys];
+    if (missingKeys.count > 0) {
+        NSLog(@"Campaign Keys missing %@", [missingKeys componentsJoinedByString:@", "]);
         return nil;
     }
+
     int iD = [campaignDict[kId] intValue];
     NSString * name = campaignDict[kName];
     BOOL trackUserOnLaunch = [campaignDict[kTrackUserOnLaunch] boolValue];
