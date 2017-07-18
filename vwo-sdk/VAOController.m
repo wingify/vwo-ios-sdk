@@ -23,7 +23,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 @implementation VAOController {
     BOOL _remoteDataDownloading;
     NSTimeInterval _lastUpdateTime;
-    NSMutableDictionary *_campaignInfo; // holds the set of changes to be applied to various UI elements
+    NSMutableDictionary *previewInfo; // holds the set of changes to be used during preview mode
     NSMutableDictionary *customVariables;
 }
 
@@ -125,11 +125,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
  * In preview mode, we only provide the preview changes and do not provide meta of currently running experiments
  */
 - (void)preview:(NSDictionary *)changes {
-    // convert changes dictionary to our usable format
-    NSString *experimentId = [NSString stringWithFormat:@"%i", arc4random()];
-    NSString *variationId = [NSString stringWithFormat:@"%@", [changes objectForKey:@"variationId"]];
-    _campaignInfo = [NSMutableDictionary dictionary];
-    _campaignInfo[experimentId] = @{@"variationId":variationId, @"json":changes[@"json"]};
+    previewInfo = changes[@"json"];
 }
 
 - (void)markConversionForGoal:(NSString*)goalIdentifier withValue:(NSNumber*)value {
@@ -162,6 +158,13 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 }
 
 - (id)variationForKey:(NSString*)key {
+    if (self.previewMode) {
+        if(key && previewInfo) {
+            return previewInfo[key];
+        }
+        return nil;
+    }
+    
     NSMutableArray<VAOCampaign *> *campaignList = [[VAOModel sharedInstance] campaignList];
 
     for (VAOCampaign *campaign in campaignList) {
