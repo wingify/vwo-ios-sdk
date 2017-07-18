@@ -114,6 +114,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
             NSArray *cachedCampaings = [NSArray arrayWithContentsOfFile:[VAOController campaignInfoPath]];
             [VAOModel.sharedInstance updateCampaignListFromDictionary:cachedCampaings];
         } else {
+            VAORavenCaptureNetworkError(error);
             NSLog(@"ABData failed. File not available %@", error.localizedDescription);
         }
     }];
