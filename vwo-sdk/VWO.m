@@ -81,6 +81,7 @@
 
 + (id)variationForKey:(NSString*)key defaultValue:(id)defaultValue {
     NSParameterAssert(key);
+    NSParameterAssert(defaultValue);
     id object = [self variationForKey:key];
     if (!object) return defaultValue;
     return object;

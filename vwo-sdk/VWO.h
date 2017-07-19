@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  - if internet connection is not available
  *  - in case of any error
  */
-+ (nullable id)variationForKey:(NSString*)key defaultValue:(id)defaultValue NS_SWIFT_NAME(variationFor(key:defaultValue:));
++ (id)variationForKey:(NSString*)key defaultValue:(id)defaultValue NS_SWIFT_NAME(variationFor(key:defaultValue:));
 
 /**
  *  Triggers goal for the specified goal string
