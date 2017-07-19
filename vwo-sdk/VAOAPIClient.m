@@ -20,7 +20,7 @@
 NSString * const kProtocol = @"http://";
 NSTimeInterval kTimerInterval = 20.0;
 NSUInteger kPendingMessagesThreshold = 3;
-static NSString *kDomain = @"dacdn.vwo.com";
+static NSString *kDomain = @"dacdn.visualwebsiteoptimizer.com";
 
 // For queqeing of messages to be sent.
 static NSInteger _transitId;
