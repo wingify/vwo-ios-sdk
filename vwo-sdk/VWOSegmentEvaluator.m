@@ -76,29 +76,29 @@ static NSString * kReturningVisitor = @"returning_visitor";
     return NO;
 }
 
-+ (BOOL)evaluateCustomSegmentation:(NSArray*)segmentObjects {
++ (BOOL)evaluateCustomSegmentation:(NSArray*)partialSegments {
 
     NSMutableArray *stack = [NSMutableArray array];
     @try {
 
-        for (NSDictionary *segment in segmentObjects) {
-            BOOL leftParenthesis = [segment[@"lBracket"] boolValue];
-            BOOL rightParenthesis = [segment[@"rBracket"] boolValue];
-            int operator = [segment[@"operator"] intValue];
-            NSString *logicalOperator = segment[@"prevLogicalOperator"];
+        for (NSDictionary *partialSegment in partialSegments) {
+            BOOL leftParenthesis = [partialSegment[@"lBracket"] boolValue];
+            BOOL rightParenthesis = [partialSegment[@"rBracket"] boolValue];
+            int operator = [partialSegment[@"operator"] intValue];
+            NSString *logicalOperator = partialSegment[@"prevLogicalOperator"];
 
             NSArray *operandValue;
-            if ([segment[@"rOperandValue"] isKindOfClass:[NSArray class]]) {
-                operandValue = segment[@"rOperandValue"];
+            if ([partialSegment[@"rOperandValue"] isKindOfClass:[NSArray class]]) {
+                operandValue = partialSegment[@"rOperandValue"];
             } else {
-                operandValue = [NSArray arrayWithObject:segment[@"rOperandValue"]];
+                operandValue = [NSArray arrayWithObject:partialSegment[@"rOperandValue"]];
             }
 
-            NSString *lOperandValue = segment[@"lOperandValue"];
-            SegmentationType segmentType = [segment[@"type"] intValue];
+            NSString *lOperandValue = partialSegment[@"lOperandValue"];
+            SegmentationType segmentType = [partialSegment[@"type"] intValue];
 
             //TODO: Custom Variables not supported yet.
-            BOOL currentValue = [self evaluateSegmentForOperand:operandValue lOperand:lOperandValue operator:operator customVariables:nil type:segmentType];
+            BOOL currentValue = [self evaluateSegmentForOperand:operandValue lOperand:lOperandValue operator:operator type:segmentType];
 
             if (logicalOperator && leftParenthesis) {
                 [stack addObject:logicalOperator];
@@ -152,7 +152,6 @@ static NSString * kReturningVisitor = @"returning_visitor";
 +(BOOL)evaluateSegmentForOperand:(NSArray *)operand
                         lOperand:(NSString *)lOperand
                         operator:(int)operator
-                 customVariables:(NSDictionary *)customVariables
                             type:(SegmentationType)segmentType {
 
     // remove null values
