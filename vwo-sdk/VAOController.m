@@ -17,6 +17,7 @@
 #include "VAOSDKInfo.h"
 #import "VAOLogger.h"
 #import "VAOPersistantStore.h"
+#import "VWOSegmentEvaluator.h"
 
 static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
@@ -170,10 +171,16 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     for (VAOCampaign *campaign in campaignList) {
         id variation = [campaign variationForKey:key];
         if (variation) { //If variation Key is present in Campaign
-            if (![VAOPersistantStore isTrackingUserForCampaign:campaign]) {
-                [[VAOModel sharedInstance] trackUserForCampaign:campaign];
+            if ([VAOPersistantStore isTrackingUserForCampaign:campaign]) {
+                // already tracking
+                return [variation copy];
+            } else {
+                // check for segmentation
+                if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:campaign.segmentObject]) {
+                    [[VAOModel sharedInstance] trackUserForCampaign:campaign];
+                    return [variation copy];
+                }
             }
-            return [variation copy];
         }
     }
     return nil;

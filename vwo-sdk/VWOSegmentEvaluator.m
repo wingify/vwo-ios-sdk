@@ -54,6 +54,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
 @implementation VWOSegmentEvaluator
 
 + (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment {
+    if (!segment) return YES;
     if ([segment[kType] isEqualToString:@"custom"]) {
         NSArray *partialSegments = (NSArray *)segment[kPartialSegments];
         return [self evaluateCustomSegmentation:partialSegments];
@@ -79,75 +80,67 @@ static NSString * kReturningVisitor = @"returning_visitor";
 + (BOOL)evaluateCustomSegmentation:(NSArray*)partialSegments {
 
     NSMutableArray *stack = [NSMutableArray array];
-    @try {
+    for (NSDictionary *partialSegment in partialSegments) {
+        BOOL leftParenthesis = [partialSegment[@"lBracket"] boolValue];
+        BOOL rightParenthesis = [partialSegment[@"rBracket"] boolValue];
+        int operator = [partialSegment[@"operator"] intValue];
+        NSString *logicalOperator = partialSegment[@"prevLogicalOperator"];
 
-        for (NSDictionary *partialSegment in partialSegments) {
-            BOOL leftParenthesis = [partialSegment[@"lBracket"] boolValue];
-            BOOL rightParenthesis = [partialSegment[@"rBracket"] boolValue];
-            int operator = [partialSegment[@"operator"] intValue];
-            NSString *logicalOperator = partialSegment[@"prevLogicalOperator"];
+        NSArray *operandValue;
+        if ([partialSegment[@"rOperandValue"] isKindOfClass:[NSArray class]]) {
+            operandValue = partialSegment[@"rOperandValue"];
+        } else {
+            operandValue = [NSArray arrayWithObject:partialSegment[@"rOperandValue"]];
+        }
 
-            NSArray *operandValue;
-            if ([partialSegment[@"rOperandValue"] isKindOfClass:[NSArray class]]) {
-                operandValue = partialSegment[@"rOperandValue"];
+        NSString *lOperandValue = partialSegment[@"lOperandValue"];
+        SegmentationType segmentType = [partialSegment[@"type"] intValue];
+
+        //TODO: Custom Variables not supported yet.
+        BOOL currentValue = [self evaluateSegmentForOperand:operandValue lOperand:lOperandValue operator:operator type:segmentType];
+
+        if (logicalOperator && leftParenthesis) {
+            [stack addObject:logicalOperator];
+        } else if (logicalOperator) {
+            BOOL leftVariable = [[stack lastObject] boolValue];
+            [stack removeLastObject];
+
+            // apply operator to these two
+            if ([logicalOperator isEqualToString:@"AND"]) {
+                currentValue = (leftVariable && currentValue);
             } else {
-                operandValue = [NSArray arrayWithObject:partialSegment[@"rOperandValue"]];
+                currentValue = (leftVariable || currentValue);
             }
+        }
 
-            NSString *lOperandValue = partialSegment[@"lOperandValue"];
-            SegmentationType segmentType = [partialSegment[@"type"] intValue];
+        if (leftParenthesis) {
+            [stack addObject:@"("];
+        }
 
-            //TODO: Custom Variables not supported yet.
-            BOOL currentValue = [self evaluateSegmentForOperand:operandValue lOperand:lOperandValue operator:operator type:segmentType];
+        if (rightParenthesis) {
+            [stack removeLastObject];
 
-            if (logicalOperator && leftParenthesis) {
-                [stack addObject:logicalOperator];
-            } else if (logicalOperator) {
+            while ((stack.count > 0) && ![[stack lastObject] isEqualToString:@")"]) {
+                NSString *stackLogicalOperator = [stack lastObject];
+                [stack removeLastObject];
+
                 BOOL leftVariable = [[stack lastObject] boolValue];
                 [stack removeLastObject];
 
                 // apply operator to these two
-                if ([logicalOperator isEqualToString:@"AND"]) {
+                if ([stackLogicalOperator isEqualToString:@"AND"]) {
                     currentValue = (leftVariable && currentValue);
                 } else {
                     currentValue = (leftVariable || currentValue);
                 }
+
             }
-
-            if (leftParenthesis) {
-                [stack addObject:@"("];
-            }
-
-            if (rightParenthesis) {
-                [stack removeLastObject];
-
-                while ((stack.count > 0) && ![[stack lastObject] isEqualToString:@")"]) {
-                    NSString *stackLogicalOperator = [stack lastObject];
-                    [stack removeLastObject];
-
-                    BOOL leftVariable = [[stack lastObject] boolValue];
-                    [stack removeLastObject];
-
-                    // apply operator to these two
-                    if ([stackLogicalOperator isEqualToString:@"AND"]) {
-                        currentValue = (leftVariable && currentValue);
-                    } else {
-                        currentValue = (leftVariable || currentValue);
-                    }
-
-                }
-            }
-
-            [stack addObject:[NSNumber numberWithBool:currentValue]];
         }
-    }
-    @catch (NSException *exception) {
-    }
-    @finally {
-        return [[stack lastObject] boolValue];
-    }
-}
 
+        [stack addObject:[NSNumber numberWithBool:currentValue]];
+    }
+    return [[stack lastObject] boolValue];
+}
 
 +(BOOL)evaluateSegmentForOperand:(NSArray *)operand
                         lOperand:(NSString *)lOperand
