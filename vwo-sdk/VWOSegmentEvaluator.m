@@ -12,6 +12,7 @@
 #import "VAOSDKInfo.h"
 #import "VAOPersistantStore.h"
 #import "VAOModel.h"
+#import "NSCalendar+VWO.h"
 
 typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeCustomVariable=7,
@@ -196,65 +197,31 @@ static NSString * kReturningVisitor = @"returning_visitor";
             }
             break;
         }
+
         case SegmentationTypeDayOfWeek: {
-            // day of week
-            NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-            NSDateComponents *comps = [gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]];
-            NSInteger weekday = [comps weekday];
+            NSInteger currentDayOfWeek = [NSCalendar dayOfWeek];
+            BOOL contains = [operand containsObject:[NSNumber numberWithInteger:currentDayOfWeek]];
 
-            // start from sunday = 0
-            weekday = weekday - 1;
-
-            // set default to YES in case of NOT equal to
-            if (operator == 12) {
-                toReturn = YES;
-            }
-
-            if ([operand containsObject:[NSNumber numberWithInteger:weekday]]) {
-                if (operator == 11) {
-                    toReturn = YES;
-                } else if (operator == 12) {
-                    toReturn = NO;
-                }
-            }
-            break;
+            return ((contains && operator == OperatorTypeIsEqualTo) ||
+                    (!contains && operator == OperatorTypeIsNotEqualTo));
         }
+
         case SegmentationTypeHourOfTheDay: {
-            NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-            NSDateComponents *comps = [gregorian components:NSCalendarUnitHour fromDate:[NSDate date]];
-            NSInteger hourOfDay = [comps hour];
+            NSInteger hourOfTheDay = [NSCalendar hourOfTheDay];
+            BOOL contains = [operand containsObject:[NSNumber numberWithInteger:hourOfTheDay]];
 
-            // set default to YES in case of NOT equal to
-            if (operator == 12) {
-                toReturn = YES;
-            }
-
-            if ([operand containsObject:[NSNumber numberWithInteger:hourOfDay]]) {
-                if (operator == 11) {
-                    toReturn = YES;
-                } else if (operator == 12) {
-                    toReturn = NO;
-                }
-            }
-            break;
+            return ((contains && operator == OperatorTypeIsEqualTo) ||
+                    (!contains && operator == OperatorTypeIsNotEqualTo));
         }
+
         case SegmentationTypeLocation: {
             NSString *country = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
+            BOOL contains = [operand containsObject:country];
 
-            // set default to YES in case of NOT equal to
-            if (operator == 12) {
-                toReturn = YES;
-            }
-
-            if (([operand containsObject:country])) {
-                if (operator == 11) {
-                    toReturn = YES;
-                } else if (operator == 12) {
-                    toReturn = NO;
-                }
-            }
-            break;
+            return ((contains && operator == OperatorTypeIsEqualTo) ||
+                    (!contains && operator == OperatorTypeIsNotEqualTo));
         }
+
         case SegmentationTypeAppVersion: {
             // App Version
             NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
