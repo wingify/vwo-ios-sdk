@@ -55,11 +55,11 @@ NSUInteger kQueueThreshold = 5;
 -(void)flushMessages {
     inTransition = YES;
     //Send all messages in message queue
-    for (NSDictionary *message in queue) {
+//    for (NSDictionary *message in queue) {
 //        [NetworkManager sendMessage:message completion:^{
 //            mark message as sent;
 //        }];
-    }
+//    }
     
     //Remove all the messages that are marked as sent
     inTransition = NO;
