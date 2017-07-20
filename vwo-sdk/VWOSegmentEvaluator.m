@@ -90,12 +90,9 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
         NSArray *operandValue;
         if ([partialSegment[@"rOperandValue"] isKindOfClass:[NSArray class]]) {
-            operandValue = partialSegment[@"rOperandValue"];
-            // Remove null values
-            NSMutableArray *newoperandValue = [NSMutableArray arrayWithArray:operand];
+            NSMutableArray *newoperandValue = partialSegment[@"rOperandValue"];
             [newoperandValue removeObjectIdenticalTo:[NSNull null]];
-            operand = newoperandValue;
-
+            operandValue = newoperandValue;
         } else {
             operandValue = [NSArray arrayWithObject:partialSegment[@"rOperandValue"]];
         }
@@ -159,7 +156,6 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
     switch (segmentType) {
         case SegmentationTypeiOSVersion: {
-//            NSString *version = @"9.4";//Test input
             NSString *version = [VAODeviceInfo iOSVersionMinor:YES patch:NO];
 
             // Equal or greater
@@ -255,7 +251,6 @@ static NSString * kReturningVisitor = @"returning_visitor";
             NSLog(@"Invalid segment received %ld", (long)segmentType);
             return NO;
     }
-    return NO;
 }
 
 @end
