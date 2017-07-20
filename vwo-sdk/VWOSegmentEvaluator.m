@@ -90,9 +90,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
         NSArray *operandValue;
         if ([partialSegment[@"rOperandValue"] isKindOfClass:[NSArray class]]) {
-            NSMutableArray *newoperandValue = partialSegment[@"rOperandValue"];
-            [newoperandValue removeObjectIdenticalTo:[NSNull null]];
-            operandValue = newoperandValue;
+            operandValue = partialSegment[@"rOperandValue"];
         } else {
             operandValue = [NSArray arrayWithObject:partialSegment[@"rOperandValue"]];
         }

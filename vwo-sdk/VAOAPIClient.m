@@ -17,7 +17,7 @@
 #import "VAOLogger.h"
 #import "VAOPersistantStore.h"
 
-NSString * const kProtocol = @"http://";
+NSString * const kProtocol = @"https://";
 NSTimeInterval kTimerInterval = 20.0;
 NSUInteger kPendingMessagesThreshold = 3;
 static NSString *kDomain = @"dacdn.visualwebsiteoptimizer.com";
