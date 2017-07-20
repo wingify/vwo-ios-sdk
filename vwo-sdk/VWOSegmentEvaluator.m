@@ -13,6 +13,7 @@
 #import "VAOPersistantStore.h"
 #import "VAOModel.h"
 #import "NSCalendar+VWO.h"
+#import "VAODeviceInfo.h"
 
 typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeCustomVariable=7,
@@ -90,6 +91,11 @@ static NSString * kReturningVisitor = @"returning_visitor";
         NSArray *operandValue;
         if ([partialSegment[@"rOperandValue"] isKindOfClass:[NSArray class]]) {
             operandValue = partialSegment[@"rOperandValue"];
+            // Remove null values
+            NSMutableArray *newoperandValue = [NSMutableArray arrayWithArray:operand];
+            [newoperandValue removeObjectIdenticalTo:[NSNull null]];
+            operand = newoperandValue;
+
         } else {
             operandValue = [NSArray arrayWithObject:partialSegment[@"rOperandValue"]];
         }
@@ -97,7 +103,6 @@ static NSString * kReturningVisitor = @"returning_visitor";
         NSString *lOperandValue = partialSegment[@"lOperandValue"];
         SegmentationType segmentType = [partialSegment[@"type"] intValue];
 
-        //TODO: Custom Variables not supported yet.
         BOOL currentValue = [self evaluateSegmentForOperand:operandValue lOperand:lOperandValue operator:operator type:segmentType];
 
         if (logicalOperator && leftParenthesis) {
@@ -148,54 +153,25 @@ static NSString * kReturningVisitor = @"returning_visitor";
                         operator:(int)operator
                             type:(SegmentationType)segmentType {
 
-    // Remove null values
-    NSMutableArray *newoperandValue = [NSMutableArray arrayWithArray:operand];
-    [newoperandValue removeObjectIdenticalTo:[NSNull null]];
-    operand = newoperandValue;
     if (operand.count == 0) {
         return YES;
     }
 
     switch (segmentType) {
         case SegmentationTypeiOSVersion: {
-            BOOL toReturn = NO;
-            NSString *currentVersion = [[UIDevice currentDevice] systemVersion];
-            // consider only x.y version
-            //TODO: fix this
-            //Wont work since major version of the release now contain two digit numbers
-            if (currentVersion.length > 3) {
-                currentVersion = [currentVersion substringToIndex:3];
-            } else if (currentVersion.length == 1) {
-                currentVersion = [currentVersion stringByAppendingString:@".0"];
+//            NSString *version = @"9.4";//Test input
+            NSString *version = [VAODeviceInfo iOSVersionMinor:YES patch:NO];
+
+            // Equal or greater
+            if ([operand.lastObject hasPrefix:@">="] && [operand.lastObject hasSuffix:version]) {
+                BOOL greaterOrEqual = NO;
+                greaterOrEqual = ([[[UIDevice currentDevice] systemVersion] compare:version options:NSNumericSearch] != NSOrderedAscending);
+                return ((greaterOrEqual && operator == OperatorTypeIsEqualTo ) ||
+                        (!greaterOrEqual && operator == OperatorTypeIsNotEqualTo));
             }
-
-
-            if ([operand containsObject:currentVersion]) {
-                if (operator == 11) {
-                    toReturn = YES;
-                } else if (operator == 12) {
-                    toReturn = NO;
-                }
-            } else {
-                // iterate
-                if (operator == 12) {
-                    toReturn = YES;
-                }
-
-                for (NSString *version in operand) {
-                    if (version && ([version rangeOfString:@">="].location != NSNotFound)) {
-                        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO([version substringFromIndex:2])) {
-                            if (operator == 11) {
-                                toReturn = YES;
-                            } else if (operator == 12) {
-                                toReturn = NO;
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-            break;
+            BOOL contains = [operand containsObject:version];
+            return ((contains && operator == OperatorTypeIsEqualTo ) ||
+                    (!contains && operator == OperatorTypeIsNotEqualTo));
         }
 
         case SegmentationTypeDayOfWeek: {
@@ -223,8 +199,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
         }
 
         case SegmentationTypeAppVersion: {
-            NSDictionary *infoDictionary = [NSBundle.mainBundle infoDictionary];
-            NSString *currentVersion = infoDictionary[@"CFBundleShortVersionString"];
+            NSString *currentVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
             NSString *targetVersion = [operand firstObject];
             switch (operator) {
                 case OperatorTypeMatchesRegexCaseInsensitive:
@@ -244,7 +219,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
                 default:
                     NSLog(@"Invalid operator received for AppVersion");
-                    break;
+                    return NO;
             }
             break;
         }
