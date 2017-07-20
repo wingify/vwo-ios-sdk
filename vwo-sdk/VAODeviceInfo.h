@@ -14,4 +14,5 @@
 
 + (BOOL)isAttachedToDebugger;
 + (NSString *)platformName;
++ (NSString *)iOSVersionMinor:(BOOL) minor patch:(BOOL)patch;
 @end

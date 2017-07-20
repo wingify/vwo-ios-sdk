@@ -44,6 +44,32 @@ static NSString *kDefUUID = @"vaoUUID";
     return debuggerIsAttached;
 }
 
+/**
+ Current Version 10.3.2
+ YES YES returns 10.3.2
+ YES NO returns 10.3
+ NO NO returns 10
+ */
++ (NSString *)iOSVersionMinor:(BOOL) minor patch:(BOOL)patch {
+    if (!minor && patch) {
+        NSAssert(false, @"Minor false and assert true not allowed");
+    }
+    NSArray *currentArray = [UIDevice.currentDevice.systemVersion componentsSeparatedByString:@"."];
+    NSMutableString *formattedVersion = [NSMutableString new];
+    if (currentArray.firstObject) {
+        [formattedVersion appendString:currentArray.firstObject];
+        if (minor && currentArray.count > 1) {
+            [formattedVersion appendString:@"."];
+            [formattedVersion appendString:currentArray[1]];
+            if (patch && currentArray.count > 2) {
+                [formattedVersion appendString:@"."];
+                [formattedVersion appendString:currentArray[2]];
+            }
+        }
+    }
+    return formattedVersion;
+}
+
 /// Device name like iPhone 5s, iPhone 6+
 + (NSString *)platformName {
     struct utsname systemInfo;
