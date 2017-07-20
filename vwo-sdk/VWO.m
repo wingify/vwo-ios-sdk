@@ -59,19 +59,19 @@
     [VAORavenClient setSharedClient:client];
 }
 
-+ (void)launchForAPIKey:(NSString *) key {
-    NSParameterAssert(key);
-    [self setUpForKey:key isAsync:YES completion:nil];
++ (void)launchForAPIKey:(NSString *) apiKey {
+    NSParameterAssert(apiKey);
+    [self setUpForKey:apiKey isAsync:YES completion:nil];
 }
 
-+ (void)launchForAPIKey:(NSString *) key completion:(void(^)(void))completionBlock {
-    NSParameterAssert(key);
-    [self setUpForKey:key isAsync:YES completion:completionBlock];
++ (void)launchForAPIKey:(NSString *) apiKey completion:(void(^)(void))completion {
+    NSParameterAssert(apiKey);
+    [self setUpForKey:apiKey isAsync:YES completion:completion];
 }
 
-+ (void)launchSynchronouslyForAPIKey:(NSString *) key {
-    NSParameterAssert(key);
-    [self setUpForKey:key isAsync:NO completion:nil];
++ (void)launchSynchronouslyForAPIKey:(NSString *) apiKey {
+    NSParameterAssert(apiKey);
+    [self setUpForKey:apiKey isAsync:NO completion:nil];
 }
 
 + (id)variationForKey:(NSString*)key {
@@ -97,10 +97,10 @@
     [[VAOController sharedInstance] markConversionForGoal:goal withValue:[NSNumber numberWithDouble:value]];
 }
 
-+ (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value {
-    NSParameterAssert(variable);
++ (void)setCustomVariable:(NSString *)key withValue:(NSString *)value {
+    NSParameterAssert(key);
     NSParameterAssert(value);
-    [VAOController.sharedInstance setCustomVariable:variable withValue:value];
+    [VAOController.sharedInstance setCustomVariable:key withValue:value];
 }
 
 + (NSString*)version {
