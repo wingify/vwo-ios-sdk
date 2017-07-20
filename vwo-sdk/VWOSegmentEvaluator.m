@@ -148,7 +148,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
                         operator:(int)operator
                             type:(SegmentationType)segmentType {
 
-    // remove null values
+    // Remove null values
     NSMutableArray *newoperandValue = [NSMutableArray arrayWithArray:operand];
     [newoperandValue removeObjectIdenticalTo:[NSNull null]];
     operand = newoperandValue;
@@ -156,9 +156,9 @@ static NSString * kReturningVisitor = @"returning_visitor";
         return YES;
     }
 
-    BOOL toReturn = NO;
     switch (segmentType) {
         case SegmentationTypeiOSVersion: {
+            BOOL toReturn = NO;
             NSString *currentVersion = [[UIDevice currentDevice] systemVersion];
             // consider only x.y version
             //TODO: fix this
@@ -223,103 +223,64 @@ static NSString * kReturningVisitor = @"returning_visitor";
         }
 
         case SegmentationTypeAppVersion: {
-            // App Version
-            NSDictionary *infoDictionary = [[NSBundle mainBundle]infoDictionary];
+            NSDictionary *infoDictionary = [NSBundle.mainBundle infoDictionary];
             NSString *currentVersion = infoDictionary[@"CFBundleShortVersionString"];
             NSString *targetVersion = [operand firstObject];
             switch (operator) {
-                case 5: {
-                    if([currentVersion rangeOfString:targetVersion options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound) {
-                        toReturn = YES;
-                    }
+                case OperatorTypeMatchesRegexCaseInsensitive:
+                    return ([currentVersion rangeOfString:targetVersion options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound);
 
+                case OperatorTypeContains:
+                    return [currentVersion rangeOfString:targetVersion].location != NSNotFound;
+
+                case OperatorTypeIsEqualTo:
+                    return [targetVersion isEqualToString:currentVersion];
+
+                case OperatorTypeIsNotEqualTo:
+                    return ![targetVersion isEqualToString:currentVersion];
+
+                case OperatorTypeStartsWith:
+                    return [currentVersion hasPrefix:targetVersion];
+
+                default:
+                    NSLog(@"Invalid operator received for AppVersion");
                     break;
-                }
-
-                case 7: {  // Contains
-                    if ([currentVersion rangeOfString:targetVersion].location != NSNotFound) {
-                        toReturn = YES;
-                    }
-                    break;
-                }
-
-                case 11: {  // is equal to
-                    if ([targetVersion isEqualToString:currentVersion]) {
-                        toReturn = YES;
-                    }
-                    break;
-                }
-
-                case 12: {  // is NOT equal to
-                    if ([targetVersion isEqualToString:currentVersion] == NO) {
-                        toReturn = YES;
-                    }
-                    break;
-                }
-
-                case 13: {  // starts with
-                    NSRange range =  [currentVersion rangeOfString:targetVersion];
-                    if (range.location == 0) {
-                        toReturn = YES;
-                    }
-
-                    break;
-                }
-                default: break;
             }
             break;
         }
+
         case SegmentationTypeCustomVariable: {
-            NSString *targetValue = [operand firstObject];
             NSString *currentValue = VAOModel.sharedInstance.customVariables[lOperand];
             if (!currentValue) return NO;
 
-            //        [nil range]
+            NSString *targetValue = [operand firstObject];
             switch (operator) {
-                case 5: {
-                    if([currentValue rangeOfString:targetValue options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound) {
-                        toReturn = YES;
-                    }
+                case OperatorTypeMatchesRegexCaseInsensitive:
+                    return ([currentValue rangeOfString:targetValue options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound);
 
-                    break;
-                }
+                case OperatorTypeContains:
+                    return [currentValue rangeOfString:targetValue].location != NSNotFound;
 
-                case 7: {  // Contains
-                    if ([currentValue rangeOfString:targetValue].location != NSNotFound) {
-                        toReturn = YES;
-                    }
-                    break;
-                }
+                case OperatorTypeIsEqualTo:
+                    return [currentValue isEqualToString:targetValue];
 
-                case 11: {  // is equal to
-                    if ([targetValue isEqualToString:currentValue]) {
-                        toReturn = YES;
-                    }
-                    break;
-                }
+                case OperatorTypeIsNotEqualTo:
+                    return ![currentValue isEqualToString:targetValue];
 
-                case 12: {  // is NOT equal to
-                    if ([targetValue isEqualToString:currentValue] == NO) {
-                        toReturn = YES;
-                    }
-                    break;
-                }
+                case OperatorTypeStartsWith:
+                    return [currentValue hasPrefix:targetValue];
 
-                case 13: {  // starts with
-                    NSRange range =  [currentValue rangeOfString:targetValue];
-                    if (range.location == 0) {
-                        toReturn = YES;
-                    }
-                    
-                    break;
-                }
-                default: break;
+                default:
+                    NSLog(@"Invalid operator received for Custom Variable");
+                    return NO;
             }
             break;
         }
-        default: break;
-    }    
-    return toReturn;
+        default:
+            NSLog(@"Invalid segment received %ld", (long)segmentType);
+            return NO;
+    }
+    return NO;
 }
 
 @end
