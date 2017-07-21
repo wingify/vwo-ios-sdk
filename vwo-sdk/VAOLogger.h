@@ -8,14 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VAOLogger : NSObject
+/// General Information Logs
+void VAOLogInfo(NSString *format, ...);
 
-@property (nonatomic, assign, getter=isEnabled) BOOL enabled;
+/// Warnings. Execution is not halted
+void VAOLogWarning(NSString *format, ...);
 
-+ (void)debug: (NSString *) debug;
-+ (void)info:(NSString *) info;
-+ (void)warning:(NSString *) warning;
-+ (void)error:(NSError *) error;
-+ (void)exception:(NSException *)exception;
-+ (void)errorStr:(NSString *) error;
-@end
+/// Error. Execution will be halted
+void VAOLogError(NSString *format, ...);
+
+/// Logic error. This must not go in release
+/// Would crash in development mode.
+/// Print in release mode.
+void VAOLogException(NSString *format, ...);

@@ -7,7 +7,6 @@
 //
 
 #import "VAOGoogleAnalytics.h"
-#import "VAORavenClient.h"
 #import "VAOLogger.h"
 #import "VAOCampaign.h"
 
@@ -18,7 +17,7 @@
 + (instancetype)sharedInstance {
     Class class =  NSClassFromString(@"GAI");
     if (class == nil) {
-        [VAOLogger info:@"COULD NOT FIND GAI CLASS. RETURNING..."];
+        VAOLogError(@"GAI class not found. RETURNING...");
         return nil;
     }
     
@@ -87,7 +86,7 @@
         }
     }
     @catch (NSException *exception) {
-        [VAOLogger exception:exception];
+        VAOLogError(@"GA Exception {%@}", exception.description);
     }
 }
 

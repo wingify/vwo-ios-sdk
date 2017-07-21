@@ -8,12 +8,12 @@
 
 #import "VWOSegmentEvaluator.h"
 #import <UIKit/UIKit.h>
-#import "VAORavenClient.h"
 #import "VAOSDKInfo.h"
 #import "VAOPersistantStore.h"
 #import "VAOModel.h"
 #import "NSCalendar+VWO.h"
 #import "VAODeviceInfo.h"
+#import "VAOLogger.h"
 
 typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeCustomVariable=7,
@@ -212,7 +212,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
                     return [currentVersion hasPrefix:targetVersion];
 
                 default:
-                    NSLog(@"Invalid operator received for AppVersion");
+                    VAOLogException(@"Invalid operator received for AppVersion %d", operator);
                     return NO;
             }
             break;
@@ -240,13 +240,13 @@ static NSString * kReturningVisitor = @"returning_visitor";
                     return [currentValue hasPrefix:targetValue];
 
                 default:
-                    NSLog(@"Invalid operator received for Custom Variable");
+                    VAOLogException(@"Invalid operator received for Custom Variable %d", operator);
                     return NO;
             }
             break;
         }
         default:
-            NSLog(@"Invalid segment received %ld", (long)segmentType);
+            VAOLogException(@"Invalid segment received %ld", (long)segmentType);
             return NO;
     }
 }

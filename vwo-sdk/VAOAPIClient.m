@@ -80,7 +80,7 @@ NSTimer *_timer;
     
     VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
     if (isAsync) {
-        [VAOLogger info:@"ASynchronously Downloading Campaigns"];
+        VAOLogInfo(@"Asynchronously Downloading Campaigns");
         [manager GET:url parameters:parameters success:^(VAOAFHTTPRequestOperation *operation, id responseObject) {
             if (successBlock) {
                 successBlock(responseObject);
@@ -92,7 +92,7 @@ NSTimer *_timer;
         }];
     }
     else {
-        [VAOLogger info:@"Synchronously Downloading Campaigns"];
+        VAOLogInfo(@"Synchronously Downloading Campaigns");
         NSError *error;
         id data = [manager syncGET:url parameters:parameters operation:NULL error:&error];
         if (successBlock && !error) {
@@ -171,7 +171,7 @@ NSTimer *_timer;
             successBlock(transitId);
         }
     } failure:^(VAOAFHTTPRequestOperation *operation, NSError *error) {
-        [VAOLogger error:error];
+        VAOLogWarning(@"Network failed [%@]", error.localizedDescription);
         if (operation.response.statusCode == 200) {
             if (successBlock) {
                 successBlock(transitId);

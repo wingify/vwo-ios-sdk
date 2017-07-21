@@ -8,7 +8,7 @@
 
 #import "VAOCampaign.h"
 #import "NSDictionary+VWO.h"
-#import "VAORavenClient.h"
+#import "VAOLogger.h"
 
 static NSString * kId                   = @"id";
 static NSString * kName                 = @"name";
@@ -50,8 +50,7 @@ static NSString * kgaDimension           = @"gaDimesion";
     NSArray *mustHaveKeys = @[kId, kName, kTrackUserOnLaunch, kStatus, kGoals, kVariation];
     NSArray *missingKeys = [campaignDict keysMissingFrom:mustHaveKeys];
     if (missingKeys.count > 0) {
-        NSLog(@"Campaign Keys missing %@", [missingKeys componentsJoinedByString:@", "]);
-        VAORavenCaptureMessage(@"Campaign Keys missing %@", [missingKeys componentsJoinedByString:@", "]);
+        VAOLogException(@"Keys missing [%@] for Campaign JSON {%@}", [missingKeys componentsJoinedByString:@", "], campaignDict);
         return nil;
     }
 

@@ -9,45 +9,35 @@
 #import "VAOLogger.h"
 #import "VAORavenClient.h"
 
-@implementation VAOLogger
-
-+ (instancetype)sharedManager {
-    static VAOLogger *_sharedInstance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedInstance = [[self alloc] init];
-        _sharedInstance.enabled = TRUE;
-    });
-
-    return _sharedInstance;
+void VAOLogInfo(NSString *format, ...) {
+    va_list argList;
+    va_start(argList, format);
+    NSString* formattedMessage = [[NSString alloc] initWithFormat: format arguments: argList];
+    va_end(argList);
+    printf("VWO info: %s\n", [formattedMessage UTF8String]);
 }
 
-+ (void)debug: (NSString *) debug {
-   NSLog(@"%@", debug);
-}
-+ (void)info:(NSString *) info {
-    NSLog(@"%@", info);
-}
-
-+ (void)warning:(NSString *) warning {
-    NSLog(@"WARNING: %@", warning);
+void VAOLogWarning(NSString *format, ...) {
+    va_list argList;
+    va_start(argList, format);
+    NSString* formattedMessage = [[NSString alloc] initWithFormat: format arguments: argList];
+    va_end(argList);
+    printf("VWO WARN: %s\n", [formattedMessage UTF8String]);
 }
 
-+ (void)error:(NSError *) error {
-    NSLog(@"ERROR: %@", error);
-    //Send to sentry
+void VAOLogError(NSString *format, ...) {
+    va_list argList;
+    va_start(argList, format);
+    NSString* formattedMessage = [[NSString alloc] initWithFormat: format arguments: argList];
+    va_end(argList);
+    printf("VWO ERR: %s\n", [formattedMessage UTF8String]);
 }
 
-+ (void)errorStr:(NSString *) error {
-    NSLog(@"ERROR: %@", error);
-    //Send to sentry
+void VAOLogException(NSString *format, ...) {
+    va_list argList;
+    va_start(argList, format);
+    NSString* formattedMessage = [[NSString alloc] initWithFormat: format arguments: argList];
+    va_end(argList);
+    [VAORavenClient.sharedClient captureMessage:formattedMessage];
+    assert(false);//Stops execution
 }
-
-+ (void)exception:(NSException *)exception {
-    VAORavenCaptureException(exception);
-    NSException *selfException = [[NSException alloc] initWithName:NSStringFromSelector(_cmd) reason:[exception description] userInfo:exception.userInfo];
-    VAORavenCaptureException(selfException);
-}
-
-
-@end

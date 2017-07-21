@@ -45,47 +45,46 @@
     };
     
     socket.onDisconnect = ^{
-        [VAOLogger info:@"Socket disconnected"];
+        VAOLogInfo(@"Socket disconnected");
         [[VAOController sharedInstance] setPreviewMode:NO];
     };
     
     socket.onConnectError = ^(NSDictionary *error) {
-        [VAOLogger errorStr:[NSString stringWithFormat:@"error in connection = %@", error]];
+        VAOLogError(@"socket.onConnectError error {%@}", error);
     };
     
     socket.onError = ^(NSDictionary *error) {
-        [VAOLogger errorStr:[NSString stringWithFormat:@"error = %@", error]];
+        VAOLogInfo(@"Socket error %@", error);
     };
     
     [socket on:@"browser_connect" callback:^(SIOParameterArray *arguments) {
-        [VAOLogger info:@"In browser connect"];
+        VAOLogInfo(@"Socket browser connected");
         [[VAOController sharedInstance] setPreviewMode:YES];
         id object = [arguments firstObject];
         if (object && object[@"name"]) {
-            NSLog(@"VWO: In preview mode. Connected with:%@", object[@"name"]);
+            VAOLogInfo(@"Preview mode: Connected with: {%@}", object[@"name"]);
         }
     }];
 
     [socket on:@"browser_disconnect" callback:^(SIOParameterArray *arguments) {
-        [VAOLogger info:@"In preview mode. Disconnected"];
+        VAOLogInfo(@"Preview mode Disconnected");
         [[VAOController sharedInstance] setPreviewMode:NO];
     }];
     
     [socket on:@"receive_variation" callback:^(SIOParameterArray *arguments) {
-        [VAOLogger info:[NSString stringWithFormat:@"receive_variation arugments = %@", arguments]];
+        VAOLogInfo(@"Variation received: {%@}", arguments);
         id expObject = [arguments firstObject];
         
         // check for sanity of expObject
         if (!expObject || !expObject[@"variationId"]) {
-            [VAOLogger info:@"Received variation error"];
+            VAOLogError(@"Received variation error");
         }
         
         [socket emit:@"receive_variation_success" args:[NSArray arrayWithObject:@{@"variationId":expObject[@"variationId"]}]];
         
         if (arguments.count) {
             [[VAOController sharedInstance] preview:[arguments firstObject]];
-            
-            NSLog(@"VWO: In preview mode. Variation Received :%@", [arguments firstObject][@"json"]);
+            VAOLogInfo(@"VWO: In preview mode. Variation Received :%@", [arguments firstObject][@"json"]);
         }
     }];
 }

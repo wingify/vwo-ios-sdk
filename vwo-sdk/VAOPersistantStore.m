@@ -122,8 +122,4 @@ static NSString * kUUID = @"UUID";
     [self writeToFile:activityDict];
 }
 
-+ (void)log {
-    NSLog(@"USER ACTIVITY %@", [self dictionary]);
-}
-
 @end

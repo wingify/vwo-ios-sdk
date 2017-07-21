@@ -9,7 +9,6 @@
 #import "VAOModel.h"
 #import "VAOAPIClient.h"
 #import "VAOController.h"
-#import "VAORavenClient.h"
 #import "VAOSDKInfo.h"
 #import "VAOLogger.h"
 #import "VAOPersistantStore.h"
@@ -45,19 +44,19 @@
     for (NSDictionary *campaignDict in allCampaignDict) {
         VAOCampaign *aCampaign = [[VAOCampaign alloc] initWithDictionary:campaignDict];
         if (!aCampaign) {
-            NSLog(@"ERROR: Invalid campaign received %@", campaignDict);
+            VAOLogException(@"Invalid campaign received {%@}", campaignDict);
             continue;
         }
         if (aCampaign.trackUserOnLaunch) {
             if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
                 [self.campaignList addObject:aCampaign];
-                NSLog(@"Adding1 %@", aCampaign.description);
+                VAOLogInfo(@"Adding %@", aCampaign.description);
             } else { //Segmentation failed
-                NSLog(@"User cannot be part of campaign.%@", aCampaign);
+                VAOLogInfo(@"User cannot be part of campaign %@", aCampaign);
             }
         } else {//Unconditionally add when NOT trackUserOnLaunch
             [self.campaignList addObject:aCampaign];
-            NSLog(@"Adding3 %@", aCampaign.description);
+            VAOLogInfo(@"Adding %@", aCampaign.description);
         }
     }
 
@@ -74,7 +73,7 @@
 /// Sets "campaignId : variation id" in persistance store
 - (void)trackUserForCampaign:(VAOCampaign *)campaign {
     NSParameterAssert(campaign);
-    NSLog(@"Track user for %@", campaign.description);
+    VAOLogInfo(@"Track user for %@", campaign.description);
     if (![VAOPersistantStore returningUser]) [VAOPersistantStore setReturningUser:YES];
     [VAOPersistantStore trackUserForCampaign:campaign];
     NSString *variationID = [NSString stringWithFormat:@"%d", campaign.variation.iD];
@@ -87,7 +86,7 @@
 - (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number {
     NSParameterAssert(goal);
     NSParameterAssert(campaign);
-    NSLog(@"Marking goal %@ (%d)", goal.identifier, goal.iD);
+    VAOLogInfo(@"Marking goal %@ (%d)", goal.identifier, goal.iD);
     [VAOPersistantStore markGoalConversion:goal];
     [[VAOAPIClient sharedInstance] markConversionForGoalId:goal.iD experimentId:campaign.iD variationId:campaign.variation.iD revenue:number];
     if (campaign.gaDimension) {
@@ -104,16 +103,7 @@
 }
 
 - (void)saveMessages:(NSArray *)messages {
-    @try {
-
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            [messages writeToFile:[self pendingMessagesPath] atomically:YES];
-        });
-
-    }
-    @catch (NSException *exception) {
-        [VAOLogger exception:exception];
-    }
+    [messages writeToFile:[self pendingMessagesPath] atomically:YES];
 }
 
 @end

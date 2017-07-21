@@ -40,7 +40,6 @@
         }
         
         [VAOController initializeAsynchronously:async withCallback:completionBlock];
-        NSLog(@"VWO Initialized");
     });
 }
 

@@ -28,7 +28,5 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)UUID;
 
-+ (void)log;
-
 @end
 NS_ASSUME_NONNULL_END

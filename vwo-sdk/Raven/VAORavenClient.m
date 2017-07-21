@@ -7,7 +7,6 @@
 //
 
 #import <sys/utsname.h>
-#import "VAORavenClient.h"
 #import "VAORavenClient_Private.h"
 #import "VAORavenConfig.h"
 #import "VAOLogger.h"
@@ -123,14 +122,14 @@ void vaoexceptionHandler(NSException *exception) {
     self = [super init];
     if (self) {
         if (DSN)
-            _config = [[VAORavenConfig alloc] init];
+        _config = [[VAORavenConfig alloc] init];
         _extra = extra;
         _logger = logger;
         self.tags = tags;
-        
+
         // Parse DSN
         if (_config && ![_config setDSN:DSN]) {
-            [VAOLogger errorStr:[NSString stringWithFormat:@"Invalid DSN %@!", DSN]];
+            VAOLogWarning(@"Invalid DSN %@!", DSN);
             return nil;
         }
     }
@@ -387,8 +386,7 @@ void vaoexceptionHandler(NSException *exception) {
 
 - (void)sendJSON:(NSData *)JSON {
     if (!self.config) {
-        [VAOLogger errorStr:[NSString stringWithFormat:@"Sentry JSON (DSN not configured, will not be sent):\n%@\n",[[NSString alloc] initWithData:JSON encoding:NSUTF8StringEncoding]]];
-
+        VAOLogWarning(@"DSN not configured, cannot send JSON :\n%@\n",[[NSString alloc] initWithData:JSON encoding:NSUTF8StringEncoding]);
         return;
     }
     
@@ -410,7 +408,7 @@ void vaoexceptionHandler(NSException *exception) {
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (data) {
         } else {
-            [VAOLogger errorStr:[NSString stringWithFormat:@"Connection failed! Error - %@ %@", [connectionError localizedDescription], [[connectionError userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]]];
+            VAOLogWarning(@"Connection failed! Error - %@ %@", [connectionError localizedDescription], [[connectionError userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
         }
     }];
 }

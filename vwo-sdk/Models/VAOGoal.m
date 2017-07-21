@@ -8,7 +8,7 @@
 
 #import "VAOGoal.h"
 #import "NSDictionary+VWO.h"
-#import "VAORavenClient.h"
+#import "VAOLogger.h"
 
 static NSString * kId = @"id";
 static NSString * kIdentifier = @"identifier";
@@ -32,8 +32,7 @@ static NSString * kType = @"type";
 
     NSArray *missingKeys = [goalDict keysMissingFrom:@[kId, kIdentifier]];
     if (missingKeys.count > 0) {
-        NSLog(@"GOAL Keys missing %@", [missingKeys componentsJoinedByString:@", "]);
-        VAORavenCaptureMessage(@"GOAL Keys missing %@", [missingKeys componentsJoinedByString:@", "]);
+        VAOLogException(@"Keys missing [%@] for Goal JSON {%@}", [missingKeys componentsJoinedByString:@", "], goalDict);
         return nil;
     }
 

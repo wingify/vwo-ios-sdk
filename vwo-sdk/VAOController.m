@@ -11,7 +11,6 @@
 #import "VAOAPIClient.h"
 #import "VAOSocketClient.h"
 #import "VAOGoogleAnalytics.h"
-#import "VAORavenClient.h"
 #include <sys/types.h>
 #include <sys/sysctl.h>
 #include "VAOSDKInfo.h"
@@ -65,7 +64,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 }
 
 - (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value {
-    NSLog(@"Setting %@ = %@", variable, value);
+    VAOLogInfo(@"Setting %@ = %@", variable, value);
     VAOModel.sharedInstance.customVariables[variable] = value;
 }
 
@@ -103,20 +102,18 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     [[VAOAPIClient sharedInstance] pullABDataAsynchronously:async success:^(id responseObject) {
         _lastUpdateTime = currentTime;
         _remoteDataDownloading = NO;
-        NSLog(@"%lu campaigns received", (unsigned long)[(NSArray *) responseObject count]);
+        VAOLogInfo(@"%lu campaigns received", (unsigned long)[(NSArray *) responseObject count]);
         [(NSArray *) responseObject writeToFile:[VAOController campaignInfoPath] atomically:YES];
         [[VAOModel sharedInstance] updateCampaignListFromDictionary:responseObject];
         if (completionBlock) completionBlock();
     } failure:^(NSError *error) {
         if ([[NSFileManager defaultManager] fileExistsAtPath:[VAOController campaignInfoPath]]) {
-            NSLog(@"Network failed %@", error.localizedDescription);
-            [VAORavenClient.sharedClient captureMessage:@"Network failed"];
-            NSLog(@"LOADING CACHED RESPONSE");
+            VAOLogWarning(@"Network failed {%@}", error.localizedDescription);
+            VAOLogInfo(@"LOADING CACHED RESPONSE");
             NSArray *cachedCampaings = [NSArray arrayWithContentsOfFile:[VAOController campaignInfoPath]];
             [VAOModel.sharedInstance updateCampaignListFromDictionary:cachedCampaings];
         } else {
-            VAORavenCaptureNetworkError(error);
-            NSLog(@"ABData failed. File not available %@", error.localizedDescription);
+            VAOLogWarning(@"Campaigns fetch failed. Cache not available {%@}", error.localizedDescription);
         }
     }];
 }
@@ -142,7 +139,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         VAOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
         if (matchedGoal) {
             if ([VAOPersistantStore isGoalMarked:matchedGoal]) {
-                NSLog(@"%@ already marked", matchedGoal);
+                VAOLogInfo(@"%@ already marked", matchedGoal);
                 return;
             }
         }

@@ -16,7 +16,7 @@
     
     NSMutableArray *pathComponents = [[DSNURL pathComponents] mutableCopy];
     if (![pathComponents count]) {
-        [VAOLogger errorStr:@"Missing path"];
+        VAOLogException(@"Path Missing %@", DSN);
         return NO;
     }
     
@@ -52,6 +52,4 @@
     return YES;
 }
 
-
 @end
-
