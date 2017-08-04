@@ -24,7 +24,10 @@
  * See if we can call it in main(), before we call UIApplicationMain()? (see:
  * https://developer.apple.com/library/ios/documentation/iphone/conceptual/iphoneosprogrammingguide/ManagingYourApplicationsFlow/ManagingYourApplicationsFlow.html#//apple_ref/doc/uid/TP40007072-CH4-SW7 )
  */
-+ (void)setUpForKey:(NSString *) key isAsync:(BOOL) async completion:(void (^)(void))completionBlock {
++ (void)setUpForKey:(NSString *) key
+            isAsync:(BOOL) async
+         completion:(void (^)(void))completionBlock
+            failure:(void (^)(void))failureBlock {
     static VWO *instance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
@@ -38,8 +41,8 @@
         if ([VAODeviceInfo isAttachedToDebugger]) {
             [[VAOSocketClient sharedInstance] launch];
         }
-        
-        [VAOController initializeAsynchronously:async withCallback:completionBlock];
+
+        [VAOController initializeAsynchronously:async withCallback:completionBlock failure:failureBlock];
     });
 }
 
@@ -60,17 +63,22 @@
 
 + (void)launchForAPIKey:(NSString *) apiKey {
     NSParameterAssert(apiKey);
-    [self setUpForKey:apiKey isAsync:YES completion:nil];
+    [self setUpForKey:apiKey isAsync:YES completion:nil failure:nil];
 }
 
 + (void)launchForAPIKey:(NSString *) apiKey completion:(void(^)(void))completion {
     NSParameterAssert(apiKey);
-    [self setUpForKey:apiKey isAsync:YES completion:completion];
+    [self setUpForKey:apiKey isAsync:YES completion:completion failure:nil];
+}
+
++ (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion failure:(void (^)(void))failureBlock {
+    NSParameterAssert(apiKey);
+    [self setUpForKey:apiKey isAsync:YES completion:completion failure:failureBlock];
 }
 
 + (void)launchSynchronouslyForAPIKey:(NSString *) apiKey {
     NSParameterAssert(apiKey);
-    [self setUpForKey:apiKey isAsync:NO completion:nil];
+    [self setUpForKey:apiKey isAsync:NO completion:nil failure:nil];
 }
 
 + (id)variationForKey:(NSString*)key {

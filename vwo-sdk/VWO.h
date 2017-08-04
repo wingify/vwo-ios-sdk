@@ -31,6 +31,19 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion NS_SWIFT_NAME(launch(apiKey:completion:));
 
 /**
+ Asynchronously fetch campaign settings
+
+ This method is typically invoked in your application:didFinishLaunchingWithOptions: method.
+
+ @param apiKey Unique developer ApiKey provided by VWO.
+
+ @param completion A block object to be executed when campaign settings are fetched successfully.
+ 
+ @param failure A block object to be executed when there was error while fetching campaign settings
+ */
++ (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion failure:(void (^)(void))failureBlock NS_SWIFT_NAME(launch(apiKey:completion:failure:));
+
+/**
  `Synchronously` fetch campaign settings
 
  This method is typically invoked in your application:didFinishLaunchingWithOptions: method.

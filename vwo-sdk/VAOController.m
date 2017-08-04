@@ -27,10 +27,12 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     NSMutableDictionary *customVariables;
 }
 
-+ (void)initializeAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock {
++ (void)initializeAsynchronously:(BOOL)async
+                    withCallback:(void (^)(void))completionBlock
+                         failure:(void (^)(void))failureBlock {
     [VAOPersistantStore incrementSessionCount];
     [[VAOAPIClient sharedInstance] initializeAndStartTimer];
-    [[self sharedInstance] downloadCampaignAsynchronously:async withCallback:completionBlock];
+    [[self sharedInstance] downloadCampaignAsynchronously:async withCallback:completionBlock failure:failureBlock];
     [[self sharedInstance] addBackgroundListeners];
 }
 
@@ -82,7 +84,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         if(currentTime - _lastUpdateTime < kMinUpdateTimeGap){
             return;
         }
-        [self downloadCampaignAsynchronously:YES withCallback:nil];
+        [self downloadCampaignAsynchronously:YES withCallback:nil failure:nil];
     }
 }
 
@@ -94,7 +96,9 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOCampaignInfo.plist"];
 }
 
-- (void)downloadCampaignAsynchronously:(BOOL)async withCallback:(void (^)(void))completionBlock {
+- (void)downloadCampaignAsynchronously:(BOOL)async
+                          withCallback:(void (^)(void))completionBlock
+                               failure:(void (^)(void))failureBlock {
     
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
     _remoteDataDownloading = YES;
@@ -114,6 +118,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
             [VAOModel.sharedInstance updateCampaignListFromDictionary:cachedCampaings];
         } else {
             VAOLogWarning(@"Campaigns fetch failed. Cache not available {%@}", error.localizedDescription);
+            if (failureBlock) failureBlock();
         }
     }];
 }
