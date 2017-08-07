@@ -8,7 +8,7 @@ VWO is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```
-pod 'VWO'
+pod 'VWO', '~>2.0.0-beta1
 ```
 
 ## iOS Version Support
