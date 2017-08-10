@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param completion A block object to be executed when campaign settings are fetched successfully.
  
- @param failure A block object to be executed when there was error while fetching campaign settings
+ @param failureBlock A block object to be executed when there was error while fetching campaign settings
  */
 + (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion failure:(void (^)(void))failureBlock NS_SWIFT_NAME(launch(apiKey:completion:failure:));
 

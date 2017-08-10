@@ -9,6 +9,10 @@
 #import "VAOLogger.h"
 #import "VAORavenClient.h"
 
+//enum LogLevel {
+//    case none, info, warning, error
+//};
+
 void VAOLogInfo(NSString *format, ...) {
     va_list argList;
     va_start(argList, format);

@@ -17,10 +17,10 @@
 #import "VAOLogger.h"
 #import "VAOPersistantStore.h"
 
-NSString * const kProtocol = @"https://";
-NSTimeInterval kTimerInterval = 20.0;
+NSString * const kProtocol           = @"https://";
+NSTimeInterval kTimerInterval        = 20.0;
 NSUInteger kPendingMessagesThreshold = 3;
-static NSString *kDomain = @"dacdn.visualwebsiteoptimizer.com";
+static NSString *kDomain             = @"dacdn.visualwebsiteoptimizer.com";
 
 // For queqeing of messages to be sent.
 static NSInteger _transitId;
@@ -67,17 +67,17 @@ NSTimer *_timer;
                          success:(void(^)(id))successBlock
                          failure:(void(^)(NSError *))failureBlock {
     
-    NSString *url = [NSString stringWithFormat:@"%@%@/mobile", kProtocol,kDomain];
+    NSString *url                   = [NSString stringWithFormat:@"%@%@/mobile", kProtocol,kDomain];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    parameters[@"a"] = VAOSDKInfo.accountID;
-    parameters[@"v"] = [VAOSDKInfo sdkVersion],
-    parameters[@"i"] = VAOSDKInfo.appKey;
-    parameters[@"dt"] = [VAODeviceInfo platformName];
-    parameters[@"os"] = [[UIDevice currentDevice] systemVersion];
-    parameters[@"u"] =  VAOPersistantStore.UUID;
-    parameters[@"r"] =  @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
-    parameters[@"k"] =  [[VAOPersistantStore campaignVariationPairs] toString];
-    
+    parameters[@"a"]                = VAOSDKInfo.accountID;
+    parameters[@"v"]                = [VAOSDKInfo sdkVersion],
+    parameters[@"i"]                = VAOSDKInfo.appKey;
+    parameters[@"dt"]               = [VAODeviceInfo platformName];
+    parameters[@"os"]               = [[UIDevice currentDevice] systemVersion];
+    parameters[@"u"]                = VAOPersistantStore.UUID;
+    parameters[@"r"]                = @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
+    parameters[@"k"]                = [[VAOPersistantStore campaignVariationPairs] toString];
+
     VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
     if (isAsync) {
         VAOLogInfo(@"Asynchronously Downloading Campaigns");
@@ -119,9 +119,10 @@ NSTimer *_timer;
 }
 
 - (void)callMethod:(NSString *)method withParameters:(NSDictionary *)params{
-    NSString *transitId = [VAOAPIClient allocateTransitId];
-    NSNumber *timestamp = @([[NSDate date] timeIntervalSince1970]);
-    NSDictionary *message = @{@"method":method, @"params":params, @"timestamp":timestamp, @"id":transitId};
+    NSString *transitId   = [VAOAPIClient allocateTransitId];
+    NSNumber *timestamp   = @([[NSDate date] timeIntervalSince1970]);
+    NSDictionary *message = @{@"method" : method, @"params" : params, @"timestamp" : timestamp, @"id" : transitId};
+
     [_pendingMessages addObject:message];
     [[VAOModel sharedInstance] saveMessages:[_pendingMessages copy]];
     if(_pendingMessages.count >= kPendingMessagesThreshold){
@@ -133,30 +134,30 @@ NSTimer *_timer;
           onSuccess:(void (^)(NSString *))successBlock
           onFailure:(void (^)(NSError *, NSString*))failureBlock {
     
-    NSString *transitId = message[@"id"];
+    NSString *transitId  = message[@"id"];
     NSDictionary *params = message[@"params"];
-    BOOL isRender = [message[@"method"] isEqualToString:@"render"];
+    BOOL isRender        = [message[@"method"] isEqualToString:@"render"];
     NSString *appVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
 
     NSString *url = [NSString stringWithFormat:@"%@%@/%@.gif", kProtocol, kDomain, isRender ? @"l"  :@"c"];
 
-    NSDictionary *extraParams = @{@"lt": message[@"timestamp"],
-                                  @"v": [VAOSDKInfo sdkVersion],
-                                  @"i": VAOSDKInfo.appKey,
-                                  @"av": appVersion,
-                                  @"dt": [VAODeviceInfo platformName],
-                                  @"os": [[UIDevice currentDevice] systemVersion]
+    NSDictionary *extraParams = @{@"lt" : message[@"timestamp"],
+                                  @"v"  : [VAOSDKInfo sdkVersion],
+                                  @"i"  : VAOSDKInfo.appKey,
+                                  @"av" : appVersion,
+                                  @"dt" : [VAODeviceInfo platformName],
+                                  @"os" : [[UIDevice currentDevice] systemVersion]
                                   };
         
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"experiment_id"] = params[@"expId"];
-    parameters[@"account_id"] = VAOSDKInfo.accountID;
-    parameters[@"combination"] = params[@"varId"];
-    parameters[@"u"] =  VAOPersistantStore.UUID;
-    parameters[@"s"] = @([VAOPersistantStore sessionCount]);
-    parameters[@"random"] = @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
-    parameters[@"ed"] = [extraParams toString];
-    
+    parameters[@"account_id"]    = VAOSDKInfo.accountID;
+    parameters[@"combination"]   = params[@"varId"];
+    parameters[@"u"]             = VAOPersistantStore.UUID;
+    parameters[@"s"]             = @([VAOPersistantStore sessionCount]);
+    parameters[@"random"]        = @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
+    parameters[@"ed"]            = [extraParams toString];
+
     if(isRender == NO) {
         parameters[@"goal_id"] = params[@"goalId"];
         if(params[@"revenue"]) {
@@ -181,13 +182,9 @@ NSTimer *_timer;
                 failureBlock(error, transitId);
             }
         }
-
     }];
 }
 
-/**
- * Timer operation to send messages to VAO server.
- */
 - (void)sendAllPendingMessages {
     for (NSDictionary *message in _pendingMessages) {
         

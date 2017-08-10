@@ -9,6 +9,7 @@
 #import "NSDictionary+VWO.h"
 
 @implementation NSDictionary (VWO)
+
 - (nullable NSString*)toString {
     NSError *error;
     NSData *currentData = [NSJSONSerialization dataWithJSONObject:self options:kNilOptions error:&error];
@@ -23,4 +24,5 @@
     [mustHaveKeysMutable removeObjectsInArray:self.allKeys];
     return mustHaveKeysMutable;
 }
+
 @end
