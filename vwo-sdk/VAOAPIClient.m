@@ -172,12 +172,12 @@ NSTimer *_timer;
             successBlock(transitId);
         }
     } failure:^(VAOAFHTTPRequestOperation *operation, NSError *error) {
-        VAOLogWarning(@"Network failed [%@]", error.localizedDescription);
         if (operation.response.statusCode == 200) {
             if (successBlock) {
                 successBlock(transitId);
             }
         } else {
+            VAOLogWarning(@"Network failed [%@]", error.localizedDescription);
             if (failureBlock) {
                 failureBlock(error, transitId);
             }
