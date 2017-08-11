@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, VWOLogLevel) {
+    VWOLogLevelNone,
+    VWOLogLevelDebug,
+    VWOLogLevelInfo,
+    VWOLogLevelWarning,
+    VWOLogLevelError,
+};
+
 /// General Information Logs
 void VAOLogInfo(NSString *format, ...);
 

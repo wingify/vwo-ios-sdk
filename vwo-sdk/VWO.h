@@ -5,6 +5,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "VAOLogger.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -113,6 +114,13 @@ NS_ASSUME_NONNULL_BEGIN
  
  */
 + (void)setCustomVariable:(NSString *)key withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:));
+
+/**
+ Sets the LogLevel
+ 
+ Granularity of the Logs can be set.
+ */
++ (void)setLogLevel:(VWOLogLevel)level;
 
 /**
  *  VWO SDK version
