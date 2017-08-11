@@ -110,6 +110,10 @@
     [VAOController.sharedInstance setCustomVariable:key withValue:value];
 }
 
++ (void)setLogLevel:(VWOLogLevel)level {
+    
+}
+
 + (NSString*)version {
     return [VAOSDKInfo sdkVersion];
 }
