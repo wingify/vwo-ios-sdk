@@ -66,7 +66,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 }
 
 - (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value {
-    VAOLogInfo(@"Setting %@ = %@", variable, value);
+    VAOLogInfo(@"Set variable: %@ = %@", variable, value);
     VAOModel.sharedInstance.customVariables[variable] = value;
 }
 
@@ -112,8 +112,8 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         if (completionBlock) completionBlock();
     } failure:^(NSError *error) {
         if ([[NSFileManager defaultManager] fileExistsAtPath:[VAOController campaignInfoPath]]) {
-            VAOLogWarning(@"Network failed {%@}", error.localizedDescription);
-            VAOLogInfo(@"LOADING CACHED RESPONSE");
+            VAOLogWarning(@"Network failed while fetching campaigns {%@}", error.localizedDescription);
+            VAOLogInfo(@"Loading Cached Response");
             NSArray *cachedCampaings = [NSArray arrayWithContentsOfFile:[VAOController campaignInfoPath]];
             [VAOModel.sharedInstance updateCampaignListFromDictionary:cachedCampaings];
         } else {
@@ -123,10 +123,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     }];
 }
 
-/**
- * This replaces the _meta with the passed in changes
- * In preview mode, we only provide the preview changes and do not provide meta of currently running experiments
- */
 - (void)preview:(NSDictionary *)changes {
     previewInfo = changes[@"json"];
 }
@@ -134,6 +130,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 - (void)markConversionForGoal:(NSString*)goalIdentifier withValue:(NSNumber*)value {
     
     if (self.previewMode) {
+        //FIXME: Value not being sent
         [[VAOSocketClient sharedInstance] goalTriggeredWithName:goalIdentifier];
         return;
     }
@@ -144,7 +141,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         VAOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
         if (matchedGoal) {
             if ([VAOPersistantStore isGoalMarked:matchedGoal]) {
-                VAOLogInfo(@"%@ already marked", matchedGoal);
+                VAOLogDebug(@"%@ already marked. Will not be marked again", matchedGoal);
                 return;
             }
         }

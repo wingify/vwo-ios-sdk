@@ -16,12 +16,12 @@
 #import "VAOLogger.h"
 
 typedef NS_ENUM(NSInteger, SegmentationType) {
-    SegmentationTypeCustomVariable=7,
-    SegmentationTypeAppVersion=6,
-    SegmentationTypeiOSVersion=1,
-    SegmentationTypeDayOfWeek=3,
-    SegmentationTypeHourOfTheDay=4,
-    SegmentationTypeLocation=5
+    SegmentationTypeCustomVariable = 7,
+    SegmentationTypeAppVersion     = 6,
+    SegmentationTypeiOSVersion     = 1,
+    SegmentationTypeDayOfWeek      = 3,
+    SegmentationTypeHourOfTheDay   = 4,
+    SegmentationTypeLocation       = 5
 };
 
 typedef NS_ENUM(NSInteger, OperatorType) {
@@ -44,8 +44,6 @@ typedef NS_ENUM(NSInteger, OperatorType) {
     OperatorTypeConverted                   = 17,
     OperatorTypeNotConverted                = 18,
 };
-
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 static NSString * kType = @"type";
 static NSString * kPartialSegments = @"partialSegments";

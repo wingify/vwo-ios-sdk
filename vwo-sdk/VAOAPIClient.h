@@ -11,6 +11,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class VAOCampaign;
+
 @interface VAOAPIClient : NSObject
 
 + (instancetype)sharedInstance;
@@ -23,7 +25,8 @@
                           success:(void(^)(id))successBlock
                           failure:(void(^)(NSError *))failureBlock;
 
-- (void)makeUserPartOfCampaign:(NSInteger)campaignID forVariation:(NSString *)variationId;
+
+- (void)makeUserPartOfCampaign:(VAOCampaign *)campaign;
 
 - (void) markConversionForGoalId:(NSInteger)goalId
                     experimentId:(NSInteger)experimentId

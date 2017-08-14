@@ -45,7 +45,7 @@
     };
     
     socket.onDisconnect = ^{
-        VAOLogInfo(@"Socket disconnected");
+        VAOLogDebug(@"Socket disconnected");
         [[VAOController sharedInstance] setPreviewMode:NO];
     };
     
@@ -54,7 +54,7 @@
     };
     
     socket.onError = ^(NSDictionary *error) {
-        VAOLogInfo(@"Socket error %@", error);
+        VAOLogError(@"Socket: %@", error);
     };
     
     [socket on:@"browser_connect" callback:^(SIOParameterArray *arguments) {
@@ -62,7 +62,7 @@
         [[VAOController sharedInstance] setPreviewMode:YES];
         id object = [arguments firstObject];
         if (object && object[@"name"]) {
-            VAOLogInfo(@"Preview mode: Connected with: {%@}", object[@"name"]);
+            VAOLogInfo(@"Preview mode: Connected with: '%@'", object[@"name"]);
         }
     }];
 
@@ -84,19 +84,20 @@
         
         if (arguments.count) {
             [[VAOController sharedInstance] preview:[arguments firstObject]];
-            VAOLogInfo(@"VWO: In preview mode. Variation Received :%@", [arguments firstObject][@"json"]);
+            VAOLogInfo(@"VWO: In preview mode. Variation Received: %@", [arguments firstObject][@"json"]);
         }
     }];
 }
 
 - (void)goalTriggeredWithName:(NSString*)goal {
-    NSDictionary *dict = @{@"goal":goal};
+    VAOLogInfo(@"Goal {%@} triggered for Socket connection", goal);
+    NSDictionary *dict = @{ @"goal" : goal };
     [socket emit:@"goal_triggered" args:[NSArray arrayWithObject:dict]];
 }
 
 - (void)goalTriggeredWithName:(NSString*)goal withValue:(double)value {
-    NSDictionary *dict = @{@"goal":goal,
-                           @"value":@(value)};
+    VAOLogInfo(@"Goal {%@} triggered for Socket with value %lf", goal, value);
+    NSDictionary *dict = @{ @"goal" : goal, @"value" : @(value) };
     [socket emit:@"goal_triggered" args:[NSArray arrayWithObject:dict]];
 }
 

@@ -18,12 +18,6 @@
 
 @implementation VWO
 
-/**
- * Call to this function kickstarts VWO. This should be called as early as possible in application life cycle.
- * Currently, it gets called in  application:willFinishLaunchingWithOptions:
- * See if we can call it in main(), before we call UIApplicationMain()? (see:
- * https://developer.apple.com/library/ios/documentation/iphone/conceptual/iphoneosprogrammingguide/ManagingYourApplicationsFlow/ManagingYourApplicationsFlow.html#//apple_ref/doc/uid/TP40007072-CH4-SW7 )
- */
 + (void)setUpForKey:(NSString *) key
             isAsync:(BOOL) async
          completion:(void (^)(void))completionBlock
@@ -41,7 +35,8 @@
         if ([VAODeviceInfo isAttachedToDebugger]) {
             [[VAOSocketClient sharedInstance] launch];
         }
-
+        VAOLogInfo(@"Initializing VWO");
+        VAOLogDebug(@"Key: %@", key);
         [VAOController initializeAsynchronously:async withCallback:completionBlock failure:failureBlock];
     });
 }
