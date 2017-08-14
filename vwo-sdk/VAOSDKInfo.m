@@ -21,12 +21,17 @@ static NSString *accountId;
 
 + (void)setAppKeyID:(NSString *) key {
     NSArray<NSString *> *separatedArray = [key componentsSeparatedByString:@"-"];
-    if ([separatedArray count] != 2) {
-        //TODO: Log Error - invalid key
-        return;
-    }
+    [self validateAPIKey:key];
+
     appKey = separatedArray[0];
     accountId = separatedArray[1];
+}
+
+///Key must be in format `[32Chars]-[NUMS]`
++ (void)validateAPIKey:(NSString * )apiKey {
+    NSArray<NSString *> *key_id = [apiKey componentsSeparatedByString:@"-"];
+    NSAssert(key_id.count == 2, @"Invalid key");
+    NSAssert(key_id.firstObject.length == 32, @"Invalid key");
 }
 
 + (NSString *)appKey {
