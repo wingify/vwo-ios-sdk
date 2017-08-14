@@ -80,7 +80,7 @@ NSTimer *_timer;
 
     VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
     if (isAsync) {
-        VAOLogInfo(@"Asynchronously Downloading Campaigns");
+        VAOLogDebug(@"Asynchronously Downloading Campaigns");
         [manager GET:url parameters:parameters success:^(VAOAFHTTPRequestOperation *operation, id responseObject) {
             if (successBlock) {
                 successBlock(responseObject);
@@ -92,7 +92,7 @@ NSTimer *_timer;
         }];
     }
     else {
-        VAOLogInfo(@"Synchronously Downloading Campaigns");
+        VAOLogDebug(@"Synchronously Downloading Campaigns");
         NSError *error;
         id data = [manager syncGET:url parameters:parameters operation:NULL error:&error];
         if (successBlock && !error) {
@@ -103,15 +103,17 @@ NSTimer *_timer;
     }
 }
 
-- (void)makeUserPartOfCampaign:(NSInteger)campaignID forVariation:(NSString *)variationId {
-    [self callMethod:@"render" withParameters:@{@"expId": @(campaignID), @"varId": variationId}];
+- (void)makeUserPartOfCampaign:(VAOCampaign *)campaign {
+    NSString *variationID = [NSString stringWithFormat:@"%d", campaign.variation.iD];
+    [self callMethod:@"render" withParameters:@{@"expId": @(campaign.iD), @"varId": variationID}];
 }
 
 - (void) markConversionForGoalId:(NSInteger)goalId
                     experimentId:(NSInteger)experimentId
                      variationId:(NSInteger)variationId
                          revenue:(NSNumber *)revenue {
-    
+
+    VAOLogInfo(@"Mark Goal conversion '%@' in campaign '%@'", goalId, experimentId);
     NSMutableDictionary *params = [@{@"goalId": @(goalId), @"expId":@(experimentId), @"varId": @(variationId)} mutableCopy];
     params[@"revenue"] = revenue;
 
@@ -173,6 +175,7 @@ NSTimer *_timer;
         }
     } failure:^(VAOAFHTTPRequestOperation *operation, NSError *error) {
         if (operation.response.statusCode == 200) {
+            VAOLogDebug(@"Network success %@", url);
             if (successBlock) {
                 successBlock(transitId);
             }
@@ -187,16 +190,15 @@ NSTimer *_timer;
 
 - (void)sendAllPendingMessages {
     for (NSDictionary *message in _pendingMessages) {
-        
+
         if ([_transittingMessages containsObject:message[@"id"]]) {
             // message is already being sent
             continue;
         }
-        
+
         // add this message to transitting messages list
         [_transittingMessages addObject:[message[@"id"] copy]];
-        
-        
+
         [self sendMessage:message onSuccess:^(NSString *transitId) {
             for(int i = 0; i < _pendingMessages.count; i++){
                 if([transitId isEqualToString:_pendingMessages[i][@"id"]]){

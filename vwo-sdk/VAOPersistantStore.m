@@ -94,7 +94,7 @@ static NSString * kUUID = @"UUID";
 #pragma mark - Core
 //[self filePath] must not appear above this
 
-/// All publicly exposed methods must access PersistantStore only this this dictionary
+/// All publicly exposed methods must access PersistantStore using this dictionary
 + (NSMutableDictionary *)dictionary {
     [self createFile];//Exists if already exists
     return [NSMutableDictionary dictionaryWithContentsOfFile:[self filePath]];

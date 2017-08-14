@@ -40,7 +40,6 @@
 
 /// Creates NSArray of Type VAOCampaign and stores in self.campaignList
 - (void)updateCampaignListFromDictionary:(NSArray *)allCampaignDict {
-
     for (NSDictionary *campaignDict in allCampaignDict) {
         VAOCampaign *aCampaign = [[VAOCampaign alloc] initWithDictionary:campaignDict];
         if (!aCampaign) {
@@ -50,13 +49,13 @@
         if (aCampaign.trackUserOnLaunch) {
             if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
                 [self.campaignList addObject:aCampaign];
-                VAOLogInfo(@"Adding %@", aCampaign.description);
+                VAOLogInfo(@"Campaign: '%@' Variation: '%@'", aCampaign.name, aCampaign.variation.name);
             } else { //Segmentation failed
-                VAOLogInfo(@"User cannot be part of campaign %@", aCampaign);
+                VAOLogInfo(@"User cannot be part of campaign: '%@'", aCampaign);
             }
         } else {//Unconditionally add when NOT trackUserOnLaunch
             [self.campaignList addObject:aCampaign];
-            VAOLogInfo(@"Adding %@", aCampaign.description);
+            VAOLogInfo(@"Campaign: '%@' Variation: '%@'", aCampaign.name, aCampaign.variation.name);
         }
     }
 
@@ -73,11 +72,10 @@
 /// Sets "campaignId : variation id" in persistance store
 - (void)trackUserForCampaign:(VAOCampaign *)campaign {
     NSParameterAssert(campaign);
-    VAOLogInfo(@"Track user for %@", campaign.description);
+    VAOLogInfo(@"Making user part of campaign: '%@'", campaign.name);
     if (![VAOPersistantStore returningUser]) [VAOPersistantStore setReturningUser:YES];
     [VAOPersistantStore trackUserForCampaign:campaign];
-    NSString *variationID = [NSString stringWithFormat:@"%d", campaign.variation.iD];
-    [[VAOAPIClient sharedInstance] makeUserPartOfCampaign:campaign.iD forVariation:variationID];
+    [VAOAPIClient.sharedInstance makeUserPartOfCampaign:campaign];
     if (campaign.gaDimension) {
         [VAOGoogleAnalytics.sharedInstance makeUserPartOfCampaign:campaign];
     }
@@ -86,7 +84,7 @@
 - (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number {
     NSParameterAssert(goal);
     NSParameterAssert(campaign);
-    VAOLogInfo(@"Marking goal %@ (%d)", goal.identifier, goal.iD);
+    VAOLogInfo(@"Marking goal: '%@' (%d)", goal.identifier, goal.iD);
     [VAOPersistantStore markGoalConversion:goal];
     [[VAOAPIClient sharedInstance] markConversionForGoalId:goal.iD experimentId:campaign.iD variationId:campaign.variation.iD revenue:number];
     if (campaign.gaDimension) {

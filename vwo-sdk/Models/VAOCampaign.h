@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, CampaignStatus) {
     CampaignStatusRunning,
     CampaignStatusExcluded
 };
+
 @interface VAOCampaign : NSObject<NSCoding>
 
 @property (nonatomic, assign) int iD;
@@ -31,4 +32,5 @@ typedef NS_ENUM(NSInteger, CampaignStatus) {
 - (nullable id)variationForKey:(NSString*)key;
 - (nullable VAOGoal *)goalForIdentifier:(NSString *)identifier;
 @end
+
 NS_ASSUME_NONNULL_END

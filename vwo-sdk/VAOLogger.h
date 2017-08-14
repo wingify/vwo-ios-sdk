@@ -16,6 +16,9 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
     VWOLogLevelError,
 };
 
+/// Debug logs
+void VAOLogDebug(NSString *format, ...);
+
 /// General Information Logs
 void VAOLogInfo(NSString *format, ...);
 
