@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSCalendar(VWO)
 
-+ (NSInteger)dayOfWeek;
-+ (NSInteger)hourOfTheDay;
+@property (class, readonly, nonatomic) NSInteger dayOfWeek;
+@property (class, readonly, nonatomic) NSInteger hourOfTheDay;
 
 @end
 

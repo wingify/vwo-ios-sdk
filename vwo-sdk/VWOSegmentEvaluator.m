@@ -165,16 +165,14 @@ static NSString * kReturningVisitor = @"returning_visitor";
         }
 
         case SegmentationTypeDayOfWeek: {
-            NSInteger currentDayOfWeek = [NSCalendar dayOfWeek];
-            BOOL contains = [operand containsObject:[NSNumber numberWithInteger:currentDayOfWeek]];
+            BOOL contains = [operand containsObject:[NSNumber numberWithInteger:NSCalendar.dayOfWeek]];
 
             return ((contains && operator == OperatorTypeIsEqualTo) ||
                     (!contains && operator == OperatorTypeIsNotEqualTo));
         }
 
         case SegmentationTypeHourOfTheDay: {
-            NSInteger hourOfTheDay = [NSCalendar hourOfTheDay];
-            BOOL contains = [operand containsObject:[NSNumber numberWithInteger:hourOfTheDay]];
+            BOOL contains = [operand containsObject:[NSNumber numberWithInteger:NSCalendar.hourOfTheDay]];
 
             return ((contains && operator == OperatorTypeIsEqualTo) ||
                     (!contains && operator == OperatorTypeIsNotEqualTo));
