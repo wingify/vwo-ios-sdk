@@ -10,9 +10,9 @@
 #import "NSDictionary+VWO.h"
 #import "VAOLogger.h"
 
-static NSString * kId = @"id";
+static NSString * kId         = @"id";
+static NSString * kType       = @"type";
 static NSString * kIdentifier = @"identifier";
-static NSString * kType = @"type";
 
 @implementation VAOGoal
 
@@ -20,9 +20,9 @@ static NSString * kType = @"type";
     NSParameterAssert(identifier);
     self = [super init];
     if (self) {
-        self.iD = iD;
+        self.iD         = iD;
         self.identifier = identifier;
-        self.type = type;
+        self.type       = type;
     }
     return self;
 }
@@ -52,9 +52,9 @@ static NSString * kType = @"type";
 
 #pragma mark - NSCoding
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
-    int id = [aDecoder decodeIntForKey:kId];
+    int id               = [aDecoder decodeIntForKey:kId];
     NSString *identifier = [aDecoder decodeObjectForKey:kIdentifier];
-    GoalType type = [aDecoder decodeIntegerForKey:kType];
+    GoalType type        = [aDecoder decodeIntegerForKey:kType];
     return [self initWithId:id identifier:identifier type:type];
 }
 
@@ -66,9 +66,9 @@ static NSString * kType = @"type";
 
 #pragma mark - NSCopying
 -(id)copyWithZone:(NSZone *)zone {
-    VAOGoal *copy = [[[self class] allocWithZone:zone] init];
-    copy.iD = self.iD;
-    copy.type = self.type;
+    VAOGoal *copy   = [[[self class] allocWithZone:zone] init];
+    copy.iD         = self.iD;
+    copy.type       = self.type;
     copy.identifier = [self.identifier copyWithZone:zone];
     return copy;
 }

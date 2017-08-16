@@ -11,9 +11,6 @@
 #import "VAOAPIClient.h"
 #import "VAOSocketClient.h"
 #import "VAOGoogleAnalytics.h"
-#include <sys/types.h>
-#include <sys/sysctl.h>
-#include "VAOSDKInfo.h"
 #import "VAOLogger.h"
 #import "VAOPersistantStore.h"
 #import "VWOSegmentEvaluator.h"

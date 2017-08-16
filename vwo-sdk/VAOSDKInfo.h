@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-//Any information that is related to VWO will be handled by this class
+NS_ASSUME_NONNULL_BEGIN
+
+//TODO: Rename to VAOSDK
 @interface VAOSDKInfo : NSObject
 
+//TODO: Rename to version
 @property (class, readonly) NSString *sdkVersion;
 @property (class, readonly) NSString *appKey;
 @property (class, readonly) NSString *accountID;
@@ -18,3 +21,5 @@
 + (void)setAppKeyID:(NSString *) key;
 
 @end
+
+NS_ASSUME_NONNULL_END

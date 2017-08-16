@@ -7,7 +7,6 @@
 //
 
 #import "VAOSDKInfo.h"
-#import "VAOPersistantStore.h"
 
 static NSString *appKey;
 static NSString *accountId;

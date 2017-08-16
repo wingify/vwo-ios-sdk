@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-//Any static information that is specific to device will be handled by this class
+NS_ASSUME_NONNULL_BEGIN
 
 @interface VAODeviceInfo : NSObject
 
 + (BOOL)isAttachedToDebugger;
 + (NSString *)platformName;
 + (NSString *)iOSVersionMinor:(BOOL) minor patch:(BOOL)patch;
+
 @end
+
+NS_ASSUME_NONNULL_END

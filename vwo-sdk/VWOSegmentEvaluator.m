@@ -7,8 +7,6 @@
 //
 
 #import "VWOSegmentEvaluator.h"
-#import <UIKit/UIKit.h>
-#import "VAOSDKInfo.h"
 #import "VAOPersistantStore.h"
 #import "VAOModel.h"
 #import "NSCalendar+VWO.h"
@@ -45,10 +43,10 @@ typedef NS_ENUM(NSInteger, OperatorType) {
     OperatorTypeNotConverted                = 18,
 };
 
-static NSString * kType = @"type";
-static NSString * kPartialSegments = @"partialSegments";
-static NSString * kSegmentCode = @"segment_code";
-static NSString * kDevice = @"device";
+static NSString * kType             = @"type";
+static NSString * kPartialSegments  = @"partialSegments";
+static NSString * kSegmentCode      = @"segment_code";
+static NSString * kDevice           = @"device";
 static NSString * kReturningVisitor = @"returning_visitor";
 
 @implementation VWOSegmentEvaluator

@@ -8,8 +8,6 @@
 
 #import "VAOModel.h"
 #import "VAOAPIClient.h"
-#import "VAOController.h"
-#import "VAOSDKInfo.h"
 #import "VAOLogger.h"
 #import "VAOPersistantStore.h"
 #import "VWOSegmentEvaluator.h"

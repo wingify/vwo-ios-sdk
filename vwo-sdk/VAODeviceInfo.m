@@ -11,15 +11,12 @@
 #import <sys/types.h>
 #import <sys/sysctl.h>
 
-static NSString *kDefUUID = @"vaoUUID";
+@implementation VAODeviceInfo 
 
-@implementation VAODeviceInfo
-
-
+/// Tells if the Device is connected to Xcode
 /// Taken from https://github.com/plausiblelabs/plcrashreporter/blob/2dd862ce049e6f43feb355308dfc710f3af54c4d/Source/Crash%20Demo/main.m#L96
 + (BOOL)isAttachedToDebugger {
 
-    //TODO: Make this local variable
     static BOOL debuggerIsAttached = NO;
 
     static dispatch_once_t debuggerPredicate;
