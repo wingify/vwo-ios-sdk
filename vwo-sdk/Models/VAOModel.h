@@ -21,10 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sharedInstance;
 - (void)trackUserForCampaign:(VAOCampaign *)campaign;
-- (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number;
+- (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *)number;
 - (void)updateCampaignListFromDictionary:(NSArray *)allCampaignDict;
-- (NSArray *)loadMessagesFromFile;
-
 - (void)saveMessages:(NSArray *)messages;
 
 @end

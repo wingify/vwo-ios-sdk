@@ -12,6 +12,7 @@
 #import "VAOPersistantStore.h"
 #import "VWOSegmentEvaluator.h"
 #import "VAOGoogleAnalytics.h"
+#import "VAOFile.h"
 
 @implementation VAOModel
 
@@ -75,7 +76,7 @@
     }
 }
 
-- (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number {
+- (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *)number {
     NSParameterAssert(goal);
     NSParameterAssert(campaign);
     VAOLogInfo(@"Marking goal: '%@' (%d)", goal.identifier, goal.iD);
@@ -86,16 +87,8 @@
     }
 }
 
-- (NSString *) pendingMessagesPath {
-    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOPendingMessages.plist"];
-}
-
-- (NSArray *)loadMessagesFromFile {
-    return [NSArray arrayWithContentsOfFile:[self pendingMessagesPath]];
-}
-
 - (void)saveMessages:(NSArray *)messages {
-    [messages writeToFile:[self pendingMessagesPath] atomically:YES];
+    [messages writeToURL:VAOFile.messagesPath atomically:YES];
 }
 
 @end

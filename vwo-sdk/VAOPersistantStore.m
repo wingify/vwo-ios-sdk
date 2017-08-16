@@ -8,12 +8,13 @@
 
 #import "VAOPersistantStore.h"
 #import "VAOCampaign.h"
+#import "VAOFile.h"
 
-static NSString * kTracking = @"tracking";
-static NSString * kGoalsMarked = @"goalsMarked";
-static NSString * kSessionCount = @"sessionCount";
+static NSString * kTracking      = @"tracking";
+static NSString * kGoalsMarked   = @"goalsMarked";
+static NSString * kSessionCount  = @"sessionCount";
 static NSString * kReturningUser = @"returningUser";
-static NSString * kUUID = @"UUID";
+static NSString * kUUID          = @"UUID";
 
 @implementation VAOPersistantStore
 
@@ -34,7 +35,7 @@ static NSString * kUUID = @"UUID";
     NSNumber *variationID = [NSNumber numberWithInt:campaign.variation.iD];
     NSMutableDictionary *userDict = [self dictionary];
     userDict[kTracking][campaignID] = variationID;
-    [userDict writeToFile:[self filePath] atomically:YES];
+    [self writeToFile:userDict];
 }
 
 + (NSDictionary *)campaignVariationPairs {
@@ -98,19 +99,15 @@ static NSString * kUUID = @"UUID";
 /// All publicly exposed methods must access PersistantStore using this dictionary
 + (NSMutableDictionary *)dictionary {
     [self createFile];//Exists if already exists
-    return [NSMutableDictionary dictionaryWithContentsOfFile:[self filePath]];
+    return [NSMutableDictionary dictionaryWithContentsOfURL:VAOFile.activityPath];
 }
 
 + (void)writeToFile:(NSDictionary *) dict{
-    [dict writeToFile:[self filePath] atomically:YES];
-}
-
-+ (NSString *)filePath  {
-    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOActivity.plist"];
+    [dict writeToURL:VAOFile.activityPath atomically:YES];
 }
 
 + (void)createFile {
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[self filePath]]) {
+    if ([NSFileManager.defaultManager fileExistsAtPath:VAOFile.activityPath.path]) {
         return;
     }
     NSMutableDictionary *activityDict = [NSMutableDictionary new];
