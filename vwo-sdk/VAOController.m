@@ -89,29 +89,29 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-+ (NSString *) campaignInfoPath {
-    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOCampaignInfo.plist"];
-}
-
 - (void)downloadCampaignAsynchronously:(BOOL)async
                           withCallback:(void (^)(void))completionBlock
                                failure:(void (^)(void))failureBlock {
-    
+
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
     _remoteDataDownloading = YES;
+
+    NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+    NSString *campaignCachePath = [cachePath stringByAppendingPathComponent:@"VWOCampaignInfo.plist"];
 
     [[VAOAPIClient sharedInstance] pullABDataAsynchronously:async success:^(id responseObject) {
         _lastUpdateTime = currentTime;
         _remoteDataDownloading = NO;
+
         VAOLogInfo(@"%lu campaigns received", (unsigned long)[(NSArray *) responseObject count]);
-        [(NSArray *) responseObject writeToFile:[VAOController campaignInfoPath] atomically:YES];
+        [(NSArray *) responseObject writeToFile:campaignCachePath atomically:YES];
         [[VAOModel sharedInstance] updateCampaignListFromDictionary:responseObject];
         if (completionBlock) completionBlock();
     } failure:^(NSError *error) {
-        if ([[NSFileManager defaultManager] fileExistsAtPath:[VAOController campaignInfoPath]]) {
+        if ([[NSFileManager defaultManager] fileExistsAtPath:campaignCachePath]) {
             VAOLogWarning(@"Network failed while fetching campaigns {%@}", error.localizedDescription);
             VAOLogInfo(@"Loading Cached Response");
-            NSArray *cachedCampaings = [NSArray arrayWithContentsOfFile:[VAOController campaignInfoPath]];
+            NSArray *cachedCampaings = [NSArray arrayWithContentsOfFile:campaignCachePath];
             [VAOModel.sharedInstance updateCampaignListFromDictionary:cachedCampaings];
         } else {
             VAOLogWarning(@"Campaigns fetch failed. Cache not available {%@}", error.localizedDescription);
