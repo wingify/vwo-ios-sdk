@@ -15,6 +15,7 @@
 #import "NSDictionary+VWO.h"
 #import "VAOLogger.h"
 #import "VAOPersistantStore.h"
+#import "VAOFile.h"
 
 NSString * const kProtocol           = @"https://";
 NSTimeInterval kTimerInterval        = 20.0;
@@ -40,7 +41,7 @@ NSTimer *_timer;
 
 - (void)initializeAndStartTimer {
     _transitId = (NSInteger) [[NSDate date] timeIntervalSinceReferenceDate];
-    _pendingMessages = [NSMutableArray arrayWithArray:[[VAOModel sharedInstance] loadMessagesFromFile]];
+    _pendingMessages = [NSMutableArray arrayWithContentsOfURL:VAOFile.messagesPath];
     _transittingMessages = [NSMutableArray array];
     
     // fire first call early on to clear any pending data from last time the application was run.

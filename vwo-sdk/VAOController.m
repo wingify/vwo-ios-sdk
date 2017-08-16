@@ -14,6 +14,7 @@
 #import "VAOLogger.h"
 #import "VAOPersistantStore.h"
 #import "VWOSegmentEvaluator.h"
+#import "VAOFile.h"
 
 static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
@@ -95,23 +96,20 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
     _remoteDataDownloading = YES;
-
-    NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
-    NSString *campaignCachePath = [cachePath stringByAppendingPathComponent:@"VWOCampaignInfo.plist"];
-
+    
     [[VAOAPIClient sharedInstance] pullABDataAsynchronously:async success:^(id responseObject) {
         _lastUpdateTime = currentTime;
         _remoteDataDownloading = NO;
 
         VAOLogInfo(@"%lu campaigns received", (unsigned long)[(NSArray *) responseObject count]);
-        [(NSArray *) responseObject writeToFile:campaignCachePath atomically:YES];
+        [(NSArray *) responseObject writeToURL:VAOFile.campaignCachePath atomically:YES];
         [[VAOModel sharedInstance] updateCampaignListFromDictionary:responseObject];
         if (completionBlock) completionBlock();
     } failure:^(NSError *error) {
-        if ([[NSFileManager defaultManager] fileExistsAtPath:campaignCachePath]) {
+        if ([[NSFileManager defaultManager] fileExistsAtPath:VAOFile.campaignCachePath.path]) {
             VAOLogWarning(@"Network failed while fetching campaigns {%@}", error.localizedDescription);
             VAOLogInfo(@"Loading Cached Response");
-            NSArray *cachedCampaings = [NSArray arrayWithContentsOfFile:campaignCachePath];
+            NSArray *cachedCampaings = [NSArray arrayWithContentsOfURL:VAOFile.campaignCachePath];
             [VAOModel.sharedInstance updateCampaignListFromDictionary:cachedCampaings];
         } else {
             VAOLogWarning(@"Campaigns fetch failed. Cache not available {%@}", error.localizedDescription);
