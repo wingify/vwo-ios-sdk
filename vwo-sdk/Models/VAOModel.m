@@ -32,10 +32,6 @@
     return self;
 }
 
-- (NSString*)userCampaignsPath {
-    return [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/VWOUserCampaigns.plist"];
-}
-
 /// Creates NSArray of Type VAOCampaign and stores in self.campaignList
 - (void)updateCampaignListFromDictionary:(NSArray *)allCampaignDict {
     for (NSDictionary *campaignDict in allCampaignDict) {
