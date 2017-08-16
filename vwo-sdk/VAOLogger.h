@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, VWOLogLevel) {
-    VWOLogLevelNone,
     VWOLogLevelDebug,
     VWOLogLevelInfo,
     VWOLogLevelWarning,
     VWOLogLevelError,
+    VWOLogLevelNone,
 };
 
 /// Debug logs
