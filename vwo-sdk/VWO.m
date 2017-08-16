@@ -42,7 +42,7 @@ static VWOLogLevel kLogLevel = VWOLogLevelInfo;
         // set up sentry exception handling
         [self setupSentry:VAOSDKInfo.accountID];
 
-        if ([VAODeviceInfo isAttachedToDebugger]) {
+        if (VAODeviceInfo.isAttachedToDebugger) {
             [[VAOSocketClient sharedInstance] launch];
         }
         VAOLogInfo(@"Initializing VWO");

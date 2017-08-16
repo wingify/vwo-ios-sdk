@@ -65,13 +65,13 @@ NSTimer *_timer;
 - (void) pullABDataAsynchronously:(BOOL)isAsync
                          success:(void(^)(id))successBlock
                          failure:(void(^)(NSError *))failureBlock {
-    
+
     NSString *url                   = [NSString stringWithFormat:@"%@%@/mobile", kProtocol,kDomain];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"a"]                = VAOSDKInfo.accountID;
     parameters[@"v"]                = [VAOSDKInfo sdkVersion],
     parameters[@"i"]                = VAOSDKInfo.appKey;
-    parameters[@"dt"]               = [VAODeviceInfo platformName];
+    parameters[@"dt"]               = VAODeviceInfo.platformName;
     parameters[@"os"]               = [[UIDevice currentDevice] systemVersion];
     parameters[@"u"]                = VAOPersistantStore.UUID;
     parameters[@"r"]                = @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
@@ -146,7 +146,7 @@ NSTimer *_timer;
                                   @"v"  : [VAOSDKInfo sdkVersion],
                                   @"i"  : VAOSDKInfo.appKey,
                                   @"av" : appVersion,
-                                  @"dt" : [VAODeviceInfo platformName],
+                                  @"dt" : VAODeviceInfo.platformName,
                                   @"os" : [[UIDevice currentDevice] systemVersion]
                                   };
         
