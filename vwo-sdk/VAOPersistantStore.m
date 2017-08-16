@@ -7,6 +7,7 @@
 //
 
 #import "VAOPersistantStore.h"
+#import "VAOCampaign.h"
 
 static NSString * kTracking = @"tracking";
 static NSString * kGoalsMarked = @"goalsMarked";

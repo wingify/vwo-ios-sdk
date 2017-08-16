@@ -10,8 +10,8 @@
 #import "NSDictionary+VWO.h"
 #import "VAOLogger.h"
 
-static NSString * kId = @"id";
-static NSString * kName = @"name";
+static NSString * kId      = @"id";
+static NSString * kName    = @"name";
 static NSString * kChanges = @"changes";
 
 @implementation VAOVariation
@@ -19,23 +19,22 @@ static NSString * kChanges = @"changes";
 - (instancetype)initWith:(int)iD name:(NSString *)name changes:(NSDictionary * _Nullable)changes {
     NSParameterAssert(name);
     if (self = [self init]) {
-        self.iD  = iD;
-        self.name = name;
+        self.iD      = iD;
+        self.name    = name;
         self.changes = changes;
     }
     return self;
 }
 
 - (instancetype)initWithDictionary:(NSDictionary *) variationDict {
-
     NSArray *missingKeys = [variationDict keysMissingFrom:@[kId, kName]];
     if (missingKeys.count > 0) {
         VAOLogException(@"Keys missing [%@] for Variation JSON %@", [missingKeys componentsJoinedByString:@", "], variationDict);
         return nil;
     }
 
-    int iD = [variationDict[kId] intValue];
-    NSString *name = variationDict[kName];
+    int iD                = [variationDict[kId] intValue];
+    NSString *name        = variationDict[kName];
     NSDictionary *changes = variationDict[kChanges];
     return [self initWith:iD name:name changes:changes];
 }
@@ -47,8 +46,8 @@ static NSString * kChanges = @"changes";
 #pragma mark - NSCoding
 
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
-    int iD = [aDecoder decodeIntForKey:kId];
-    NSString *name = [aDecoder decodeObjectForKey:kName];
+    int iD                = [aDecoder decodeIntForKey:kId];
+    NSString *name        = [aDecoder decodeObjectForKey:kName];
     NSDictionary *changes = [aDecoder decodeObjectForKey:kChanges];
     return [self initWith:iD name:name changes:changes];
 }

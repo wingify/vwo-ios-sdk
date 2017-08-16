@@ -13,12 +13,12 @@
 #import "VAOLogger.h"
 
 #define kSocketIP @"https://mobilepreview.vwo.com:443"
+
 @implementation VAOSocketClient{
     VAOSIOSocket *socket;
 }
 
 + (instancetype)sharedInstance{
-    
     static VAOSocketClient *instance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{

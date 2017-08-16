@@ -17,4 +17,5 @@
 - (void)launch;
 - (void)goalTriggeredWithName:(NSString*)goal;
 - (void)goalTriggeredWithName:(NSString*)goal withValue:(double)value;
+
 @end

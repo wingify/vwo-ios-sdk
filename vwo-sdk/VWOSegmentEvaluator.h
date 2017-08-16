@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VWOSegmentEvaluator : NSObject
 
 /// This method will receive content of "segment_object"
 + (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment;
 
 @end
+
+NS_ASSUME_NONNULL_END

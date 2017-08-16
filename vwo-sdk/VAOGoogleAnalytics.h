@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface VAOGoogleAnalytics : NSObject
 
 + (id)sharedInstance;
-- (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *) number;
-- (void)makeUserPartOfCampaign:(VAOCampaign *) campaign;
+- (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *)number;
+- (void)makeUserPartOfCampaign:(VAOCampaign *)campaign;
 
 @end
 
