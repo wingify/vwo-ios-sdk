@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         createSlideViewController()
-        
+        VWO.logLevel = .info
         if let apiKey = UserDefaults.standard.string(forKey: keyVWOApiKey) {
             VWO.launchSynchronously(apiKey: apiKey)
         }
