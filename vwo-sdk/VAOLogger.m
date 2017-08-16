@@ -8,8 +8,10 @@
 
 #import "VAOLogger.h"
 #import "VAORavenClient.h"
+#import "VWO.h"
 
 void VAOLogDebug(NSString *format, ...) {
+    if (VWO.logLevel > VWOLogLevelDebug) return;
     va_list argList;
     va_start(argList, format);
     NSString* formattedMessage = [[NSString alloc] initWithFormat: format arguments: argList];
@@ -18,6 +20,7 @@ void VAOLogDebug(NSString *format, ...) {
 }
 
 void VAOLogInfo(NSString *format, ...) {
+    if (VWO.logLevel > VWOLogLevelInfo) return;
     va_list argList;
     va_start(argList, format);
     NSString* formattedMessage = [[NSString alloc] initWithFormat: format arguments: argList];
@@ -26,6 +29,7 @@ void VAOLogInfo(NSString *format, ...) {
 }
 
 void VAOLogWarning(NSString *format, ...) {
+    if (VWO.logLevel > VWOLogLevelWarning) return;
     va_list argList;
     va_start(argList, format);
     NSString* formattedMessage = [[NSString alloc] initWithFormat: format arguments: argList];
@@ -34,6 +38,7 @@ void VAOLogWarning(NSString *format, ...) {
 }
 
 void VAOLogError(NSString *format, ...) {
+    if (VWO.logLevel > VWOLogLevelError) return;
     va_list argList;
     va_start(argList, format);
     NSString* formattedMessage = [[NSString alloc] initWithFormat: format arguments: argList];

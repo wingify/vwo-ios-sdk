@@ -16,7 +16,17 @@
 #import "VAOSDKInfo.h"
 #import "VAODeviceInfo.h"
 
+static VWOLogLevel kLogLevel = VWOLogLevelInfo;
+
 @implementation VWO
+
++ (VWOLogLevel)logLevel {
+    return kLogLevel;
+}
+
++ (void)setLogLevel:(VWOLogLevel)level {
+    kLogLevel = level;
+}
 
 + (void)setUpForKey:(NSString *) key
             isAsync:(BOOL) async
@@ -25,10 +35,10 @@
     static VWO *instance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
-                
+
         instance = [[self alloc] init];
         [VAOSDKInfo setAppKeyID:key];
-        
+
         // set up sentry exception handling
         [self setupSentry:VAOSDKInfo.accountID];
 
@@ -103,10 +113,6 @@
     NSParameterAssert(key);
     NSParameterAssert(value);
     [VAOController.sharedInstance setCustomVariable:key withValue:value];
-}
-
-+ (void)setLogLevel:(VWOLogLevel)level {
-    
 }
 
 + (NSString*)version {
