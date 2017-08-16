@@ -40,7 +40,7 @@ static VWOLogLevel kLogLevel = VWOLogLevelInfo;
         [VAOSDKInfo setAppKeyID:key];
 
         // set up sentry exception handling
-        [self setupSentry:VAOSDKInfo.accountID];
+        [self setupSentry];
 
         if (VAODeviceInfo.isAttachedToDebugger) {
             [[VAOSocketClient sharedInstance] launch];
@@ -51,18 +51,18 @@ static VWOLogLevel kLogLevel = VWOLogLevelInfo;
     });
 }
 
-+ (void)setupSentry:(NSString*)accountId {
-    NSString *bunldeId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
-    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-    NSDictionary *tags = [NSDictionary dictionaryWithObjectsAndKeys:accountId, @"VAO Account Id", nil];
-    NSDictionary *extra = [NSDictionary dictionaryWithObjectsAndKeys:bunldeId, @"Bundle Identifier",
-                           appName, @"App Name",
-                           [self version], @"SDK Version", nil];
-    
-    VAORavenClient *client = [VAORavenClient clientWithDSN:@"https://c3f6ba4cf03548f3bd90066dd182a649:6d6d9593d15944849cc9f8d88ccf1fb0@sentry.io/41858"
-                                                     extra:extra
-                                                      tags:tags];
-    
++ (void)setupSentry {
+    NSDictionary *tags = @{@"VWO Account id" : VAOSDKInfo.accountID,
+                           @"SDK Version" : VAOSDKInfo.sdkVersion};
+
+    //CFBundleDisplayName & CFBundleIdentifier can be nil
+    NSMutableDictionary *extras = [NSMutableDictionary new];
+    extras[@"App Name"] = NSBundle.mainBundle.infoDictionary[@"CFBundleDisplayName"];
+    extras[@"BundleID"] = NSBundle.mainBundle.infoDictionary[@"CFBundleIdentifier"];
+
+    NSString *DSN = @"https://c3f6ba4cf03548f3bd90066dd182a649:6d6d9593d15944849cc9f8d88ccf1fb0@sentry.io/41858";
+    VAORavenClient *client = [VAORavenClient clientWithDSN:DSN extra:extras tags:tags];
+
     [VAORavenClient setSharedClient:client];
 }
 
