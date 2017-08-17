@@ -20,10 +20,9 @@
 - (void)startTimer;
 - (void)stopTimer;
 
-// For App
-- (void) pullABDataAsynchronously:(BOOL)isAsync
-                          success:(void(^)(id))successBlock
-                          failure:(void(^)(NSError *))failureBlock;
+- (void) fetchCampaigns:(BOOL)isAsync
+                success:(void(^)(id))successBlock
+                failure:(void(^)(NSError *))failureBlock;
 
 
 - (void)makeUserPartOfCampaign:(VAOCampaign *)campaign;

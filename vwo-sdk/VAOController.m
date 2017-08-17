@@ -26,8 +26,8 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 }
 
 + (void)initializeAsynchronously:(BOOL)async
-                    withCallback:(void (^)(void))completionBlock
-                         failure:(void (^)(void))failureBlock {
+                    withCallback:(void(^)(void))completionBlock
+                         failure:(void(^)(void))failureBlock {
     [VAOPersistantStore incrementSessionCount];
     [[VAOAPIClient sharedInstance] initializeAndStartTimer];
     [[self sharedInstance] downloadCampaignAsynchronously:async withCallback:completionBlock failure:failureBlock];
@@ -71,12 +71,12 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 - (void)applicationDidEnterBackground {
     if(!self.previewMode) {
         _lastUpdateTime = [NSDate timeIntervalSinceReferenceDate];
-        [[VAOAPIClient sharedInstance] stopTimer];
+        [VAOAPIClient.sharedInstance stopTimer];
     }
 }
 
 - (void)applicationWillEnterForeground {
-    [[VAOAPIClient sharedInstance] startTimer];
+    [VAOAPIClient.sharedInstance startTimer];
     if(_remoteDataDownloading == NO) {
         NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
         if(currentTime - _lastUpdateTime < kMinUpdateTimeGap){
@@ -96,17 +96,17 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
     _remoteDataDownloading = YES;
-    
-    [[VAOAPIClient sharedInstance] pullABDataAsynchronously:async success:^(id responseObject) {
+
+    [VAOAPIClient.sharedInstance fetchCampaigns:async success:^(id responseObject) {
         _lastUpdateTime = currentTime;
         _remoteDataDownloading = NO;
 
         VAOLogInfo(@"%lu campaigns received", (unsigned long)[(NSArray *) responseObject count]);
         [(NSArray *) responseObject writeToURL:VAOFile.campaignCachePath atomically:YES];
-        [[VAOModel sharedInstance] updateCampaignListFromDictionary:responseObject];
+        [VAOModel.sharedInstance updateCampaignListFromDictionary:responseObject];
         if (completionBlock) completionBlock();
     } failure:^(NSError *error) {
-        if ([[NSFileManager defaultManager] fileExistsAtPath:VAOFile.campaignCachePath.path]) {
+        if ([NSFileManager.defaultManager fileExistsAtPath:VAOFile.campaignCachePath.path]) {
             VAOLogWarning(@"Network failed while fetching campaigns {%@}", error.localizedDescription);
             VAOLogInfo(@"Loading Cached Response");
             NSArray *cachedCampaings = [NSArray arrayWithContentsOfURL:VAOFile.campaignCachePath];
@@ -125,8 +125,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 - (void)markConversionForGoal:(NSString*)goalIdentifier withValue:(NSNumber*)value {
     
     if (self.previewMode) {
-        //FIXME: Value not being sent
-        [[VAOSocketClient sharedInstance] goalTriggeredWithName:goalIdentifier];
+        [VAOSocketClient.sharedInstance goalTriggered:goalIdentifier withValue:value];
         return;
     }
     
