@@ -97,16 +97,9 @@ class MenuVC : UIViewController {
     }
     
     private func clearVWOFiles() {
-        let deleteFiles = [
-            "\(NSHomeDirectory())/Documents/VWOPendingMessages.plist",
-            "\(NSHomeDirectory())/Documents/VWOActivity.plist",
-            "\(NSHomeDirectory())/Documents/VWOCampaignInfo.plist",
-        ]
-        deleteFiles.forEach { (filePath) in
-            if FileManager.default.fileExists(atPath: filePath) {
-                try? FileManager.default.removeItem(atPath: filePath)
-            }
-        }
+        try? FileManager.default.removeItem(at: VAOFile.activityPath)
+        try? FileManager.default.removeItem(at: VAOFile.campaignCachePath)
+        try? FileManager.default.removeItem(at: VAOFile.messagesPath)
     }
 
     private func showAbout() {
