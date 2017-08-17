@@ -16,7 +16,7 @@
 #import "VAOSDKInfo.h"
 #import "VAODeviceInfo.h"
 
-static VWOLogLevel kLogLevel = VWOLogLevelInfo;
+static VWOLogLevel kLogLevel = VWOLogLevelError;
 
 @implementation VWO
 
