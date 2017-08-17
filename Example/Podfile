@@ -4,7 +4,7 @@
 target 'VWODemoApp' do
   use_frameworks!
   pod 'SlideMenuControllerSwift'
-  pod 'VWO', :path => '../' #'2.0.0-beta1'
+  pod 'VWO', :path => '../'
   pod 'FLEX', '~> 2.0'
 
 end
