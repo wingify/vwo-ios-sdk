@@ -89,15 +89,10 @@
     }];
 }
 
-- (void)goalTriggeredWithName:(NSString*)goal {
-    VAOLogInfo(@"Goal {%@} triggered for Socket connection", goal);
-    NSDictionary *dict = @{ @"goal" : goal };
-    [socket emit:@"goal_triggered" args:[NSArray arrayWithObject:dict]];
-}
-
-- (void)goalTriggeredWithName:(NSString*)goal withValue:(double)value {
-    VAOLogInfo(@"Goal {%@} triggered for Socket with value %lf", goal, value);
-    NSDictionary *dict = @{ @"goal" : goal, @"value" : @(value) };
+- (void)goalTriggered:(NSString *)identifier withValue:(NSNumber *)value {
+    VAOLogInfo(@"Goal '%@' triggered for Socket with value %@", identifier, value);
+    NSMutableDictionary *dict = [@{ @"goal" : identifier } mutableCopy];
+    dict[@"value"] = value;//Does not set if value is nil
     [socket emit:@"goal_triggered" args:[NSArray arrayWithObject:dict]];
 }
 

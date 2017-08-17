@@ -17,8 +17,8 @@
 
 + (instancetype)sharedInstance;
 + (void)initializeAsynchronously:(BOOL)async
-                    withCallback:(void (^)(void))completionBlock
-                         failure:(void (^)(void))failureBlock;
+                    withCallback:(void(^)(void))completionBlock
+                         failure:(void(^)(void))failureBlock;
 - (void)preview:(NSDictionary *)changes;
 - (void)markConversionForGoal:(NSString *)goal withValue:(NSNumber *)value;
 - (id)variationForKey:(NSString *)key;

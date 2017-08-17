@@ -15,7 +15,6 @@
 
 + (instancetype)sharedInstance;
 - (void)launch;
-- (void)goalTriggeredWithName:(NSString*)goal;
-- (void)goalTriggeredWithName:(NSString*)goal withValue:(double)value;
+- (void)goalTriggered:(NSString *)identifier withValue:(NSNumber *)value;
 
 @end

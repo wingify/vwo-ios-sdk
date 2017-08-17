@@ -22,7 +22,7 @@ NSTimeInterval kTimerInterval        = 20.0;
 NSUInteger kPendingMessagesThreshold = 3;
 static NSString *kDomain             = @"dacdn.visualwebsiteoptimizer.com";
 
-// For queqeing of messages to be sent.
+// For queuing of messages to be sent.
 static NSInteger _transitId;
 NSMutableArray *_pendingMessages;
 NSMutableArray *_transittingMessages;
@@ -63,20 +63,20 @@ NSTimer *_timer;
 }
 
 // For App
-- (void) pullABDataAsynchronously:(BOOL)isAsync
-                         success:(void(^)(id))successBlock
-                         failure:(void(^)(NSError *))failureBlock {
+- (void) fetchCampaigns:(BOOL)isAsync
+                success:(void(^)(id))successBlock
+                failure:(void(^)(NSError *))failureBlock {
 
     NSString *url                   = [NSString stringWithFormat:@"%@%@/mobile", kProtocol,kDomain];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"a"]                = VAOSDKInfo.accountID;
-    parameters[@"v"]                = [VAOSDKInfo sdkVersion],
+    parameters[@"v"]                = VAOSDKInfo.sdkVersion;
     parameters[@"i"]                = VAOSDKInfo.appKey;
     parameters[@"dt"]               = VAODeviceInfo.platformName;
-    parameters[@"os"]               = [[UIDevice currentDevice] systemVersion];
+    parameters[@"os"]               = UIDevice.currentDevice.systemVersion;
     parameters[@"u"]                = VAOPersistantStore.UUID;
     parameters[@"r"]                = @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
-    parameters[@"k"]                = [[VAOPersistantStore campaignVariationPairs] toString];
+    parameters[@"k"]                = VAOPersistantStore.campaignVariationPairs.toString;
 
     VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
     if (isAsync) {
@@ -139,16 +139,16 @@ NSTimer *_timer;
     NSString *transitId  = message[@"id"];
     NSDictionary *params = message[@"params"];
     BOOL isRender        = [message[@"method"] isEqualToString:@"render"];
-    NSString *appVersion = [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"];
+    NSString *appVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
 
     NSString *url = [NSString stringWithFormat:@"%@%@/%@.gif", kProtocol, kDomain, isRender ? @"l"  :@"c"];
 
     NSDictionary *extraParams = @{@"lt" : message[@"timestamp"],
-                                  @"v"  : [VAOSDKInfo sdkVersion],
+                                  @"v"  : VAOSDKInfo.sdkVersion,
                                   @"i"  : VAOSDKInfo.appKey,
                                   @"av" : appVersion,
                                   @"dt" : VAODeviceInfo.platformName,
-                                  @"os" : [[UIDevice currentDevice] systemVersion]
+                                  @"os" : UIDevice.currentDevice.systemVersion
                                   };
         
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
