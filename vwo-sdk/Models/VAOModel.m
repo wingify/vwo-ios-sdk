@@ -11,7 +11,6 @@
 #import "VAOLogger.h"
 #import "VAOPersistantStore.h"
 #import "VWOSegmentEvaluator.h"
-#import "VAOGoogleAnalytics.h"
 #import "VAOFile.h"
 
 @implementation VAOModel
@@ -71,9 +70,6 @@
     if (![VAOPersistantStore returningUser]) [VAOPersistantStore setReturningUser:YES];
     [VAOPersistantStore trackUserForCampaign:campaign];
     [VAOAPIClient.sharedInstance makeUserPartOfCampaign:campaign];
-    if (campaign.gaDimension) {
-        [VAOGoogleAnalytics.sharedInstance makeUserPartOfCampaign:campaign];
-    }
 }
 
 - (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *)number {
@@ -82,9 +78,6 @@
     VAOLogInfo(@"Marking goal: '%@' (%d)", goal.identifier, goal.iD);
     [VAOPersistantStore markGoalConversion:goal];
     [[VAOAPIClient sharedInstance] markConversionForGoalId:goal.iD experimentId:campaign.iD variationId:campaign.variation.iD revenue:number];
-    if (campaign.gaDimension) {
-        [VAOGoogleAnalytics.sharedInstance markGoalConversion:goal inCampaign:campaign withValue:number];
-    }
 }
 
 - (void)saveMessages:(NSArray *)messages {

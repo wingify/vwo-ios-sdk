@@ -26,11 +26,11 @@ typedef NS_ENUM(NSInteger, CampaignStatus) {
 @property VAOVariation *variation;
 @property NSArray<VAOGoal *> *goals;
 @property (nullable) NSDictionary *segmentObject;
-@property (nullable) NSNumber *gaDimension;
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *) campaignDict;
 - (nullable id)variationForKey:(NSString*)key;
 - (nullable VAOGoal *)goalForIdentifier:(NSString *)identifier;
+
 @end
 
 NS_ASSUME_NONNULL_END

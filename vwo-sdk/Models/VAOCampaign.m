@@ -17,18 +17,16 @@ static NSString * kStatus               = @"status";
 static NSString * kSegmentObject        = @"segment_object";
 static NSString * kGoals                = @"goals";
 static NSString * kVariation            = @"variations";
-static NSString * kgaDimension          = @"gaDimesion";
 
 @implementation VAOCampaign
 
 - (instancetype)initWithID:(int)iD
-                    name:(NSString *)name
-       trackUesrOnLaunch:(BOOL) trackUserOnLaunch
-                  campaignStatus:(CampaignStatus)campaignStatus
-          segmentObject:(nullable NSDictionary *)segmentObject
-                   goals:(NSArray<VAOGoal *>*)goals
-               variation:(VAOVariation *)variation
-               gaDimension:(NSNumber *)gaDimension {
+                      name:(NSString *)name
+         trackUesrOnLaunch:(BOOL) trackUserOnLaunch
+            campaignStatus:(CampaignStatus)campaignStatus
+             segmentObject:(nullable NSDictionary *)segmentObject
+                     goals:(NSArray<VAOGoal *>*)goals
+                 variation:(VAOVariation *)variation {
     NSParameterAssert(name);
     NSParameterAssert(goals);
     NSParameterAssert(variation);
@@ -40,7 +38,6 @@ static NSString * kgaDimension          = @"gaDimesion";
         self.segmentObject     = segmentObject;
         self.goals             = goals;
         self.variation         = variation;
-        self.gaDimension       = gaDimension;
     }
     return [self init];
 }
@@ -58,7 +55,6 @@ static NSString * kgaDimension          = @"gaDimesion";
     NSString * name             = campaignDict[kName];
     BOOL trackUserOnLaunch      = [campaignDict[kTrackUserOnLaunch] boolValue];
     NSDictionary *segmentObject = campaignDict[kSegmentObject];
-    NSNumber *gaDimension       = campaignDict[@"UA"][@"s"];
 
     // Status
     CampaignStatus campaignStatus = CampaignStatusRunning;
@@ -81,7 +77,7 @@ static NSString * kgaDimension          = @"gaDimesion";
     VAOVariation *variation = [[VAOVariation alloc] initWithDictionary:campaignDict[kVariation]];
     if (variation) [self setVariation:variation];
 
-    return [self initWithID:iD name:name trackUesrOnLaunch:trackUserOnLaunch campaignStatus:campaignStatus segmentObject:segmentObject goals:goals variation:variation gaDimension:gaDimension];
+    return [self initWithID:iD name:name trackUesrOnLaunch:trackUserOnLaunch campaignStatus:campaignStatus segmentObject:segmentObject goals:goals variation:variation];
 }
 
 - (nullable id)variationForKey:(NSString*)key {
@@ -116,8 +112,7 @@ static NSString * kgaDimension          = @"gaDimesion";
     NSDictionary *segmentObject = [aDecoder decodeObjectForKey:kSegmentObject];
     NSArray<VAOGoal *>* goals   = [aDecoder decodeObjectForKey:kGoals];
     VAOVariation *variation     = [aDecoder decodeObjectForKey:kVariation];
-    NSNumber *gaDimesion        = [aDecoder decodeObjectForKey:kgaDimension];
-    return [self initWithID:iD name:name trackUesrOnLaunch:track campaignStatus:status segmentObject:segmentObject goals:goals variation:variation gaDimension:gaDimesion];
+    return [self initWithID:iD name:name trackUesrOnLaunch:track campaignStatus:status segmentObject:segmentObject goals:goals variation:variation];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -128,7 +123,6 @@ static NSString * kgaDimension          = @"gaDimesion";
     [aCoder encodeObject:self.segmentObject forKey:kSegmentObject];
     [aCoder encodeObject:self.goals forKey:kGoals];
     [aCoder encodeObject:self.variation forKey:kVariation];
-    [aCoder encodeObject:self.gaDimension forKey:kgaDimension];
 }
 
 @end
