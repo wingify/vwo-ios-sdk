@@ -16,6 +16,7 @@
 		E31E98111F2B520000841E86 /* Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E98101F2B520000841E86 /* Extras.swift */; };
 		E36B5CA81F28EB32000338B8 /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B5CA71F28EB32000338B8 /* ContainerVC.swift */; };
 		E36B5CAA1F290CAF000338B8 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B5CA91F290CAF000338B8 /* NavigationController.swift */; };
+		E3A59CBE1F4C0C8E00848F0A /* Objc_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A59CBD1F4C0C8E00848F0A /* Objc_Test.m */; };
 		E3AE935E1F27AF4D00228BBE /* GridCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AE935D1F27AF4D00228BBE /* GridCellView.swift */; };
 		E3CBFF131F275BC70035CD05 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CBFF121F275BC70035CD05 /* MenuVC.swift */; };
 		E3CBFF151F2764D80035CD05 /* ListGridVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CBFF141F2764D80035CD05 /* ListGridVC.swift */; };
@@ -37,6 +38,9 @@
 		E31E98101F2B520000841E86 /* Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extras.swift; sourceTree = "<group>"; };
 		E36B5CA71F28EB32000338B8 /* ContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
 		E36B5CA91F290CAF000338B8 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		E3A59CBB1F4C0C8E00848F0A /* VWODemoApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VWODemoApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		E3A59CBC1F4C0C8E00848F0A /* Objc_Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Objc_Test.h; sourceTree = "<group>"; };
+		E3A59CBD1F4C0C8E00848F0A /* Objc_Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Objc_Test.m; sourceTree = "<group>"; };
 		E3AE935D1F27AF4D00228BBE /* GridCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridCellView.swift; sourceTree = "<group>"; };
 		E3CBFF121F275BC70035CD05 /* MenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		E3CBFF141F2764D80035CD05 /* ListGridVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGridVC.swift; sourceTree = "<group>"; };
@@ -96,6 +100,8 @@
 			children = (
 				E31C31961F2737DF00B6D6D8 /* AppDelegate.swift */,
 				E36B5CA91F290CAF000338B8 /* NavigationController.swift */,
+				E3A59CBC1F4C0C8E00848F0A /* Objc_Test.h */,
+				E3A59CBD1F4C0C8E00848F0A /* Objc_Test.m */,
 				E36B5CA71F28EB32000338B8 /* ContainerVC.swift */,
 				E3CBFF121F275BC70035CD05 /* MenuVC.swift */,
 				E31E98101F2B520000841E86 /* Extras.swift */,
@@ -105,6 +111,7 @@
 				E31C319D1F2737DF00B6D6D8 /* Assets.xcassets */,
 				E31C319F1F2737DF00B6D6D8 /* LaunchScreen.storyboard */,
 				E31C31A21F2737DF00B6D6D8 /* Info.plist */,
+				E3A59CBB1F4C0C8E00848F0A /* VWODemoApp-Bridging-Header.h */,
 			);
 			path = VWODemoApp;
 			sourceTree = "<group>";
@@ -164,6 +171,7 @@
 					E31C31921F2737DF00B6D6D8 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = DBN26NC8KE;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -270,6 +278,7 @@
 				E3AE935E1F27AF4D00228BBE /* GridCellView.swift in Sources */,
 				E3CBFF151F2764D80035CD05 /* ListGridVC.swift in Sources */,
 				E3CBFF131F275BC70035CD05 /* MenuVC.swift in Sources */,
+				E3A59CBE1F4C0C8E00848F0A /* Objc_Test.m in Sources */,
 				E31E98111F2B520000841E86 /* Extras.swift in Sources */,
 				E3CBFF171F2765890035CD05 /* LoginVC.swift in Sources */,
 			);
@@ -397,12 +406,15 @@
 			baseConfigurationReference = B26FD206F49B32656B518A0A /* Pods-VWODemoApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = DBN26NC8KE;
 				INFOPLIST_FILE = VWODemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wingify.VWODemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VWODemoApp/VWODemoApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -412,12 +424,14 @@
 			baseConfigurationReference = DFEC344E5C3056F5B97A6802 /* Pods-VWODemoApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = DBN26NC8KE;
 				INFOPLIST_FILE = VWODemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wingify.VWODemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VWODemoApp/VWODemoApp-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

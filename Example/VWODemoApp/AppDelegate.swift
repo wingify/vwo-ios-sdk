@@ -26,6 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let apiKey = UserDefaults.standard.string(forKey: keyVWOApiKey) {
             VWO.launchSynchronously(apiKey: apiKey)
         }
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.VWOUserStartedTrackingInCampaign, object: nil, queue: nil) { (notification) in
+            let info = notification.userInfo
+            Swift.print("Started tracking \(String(describing: info))")
+        }
         return true
     }
 
