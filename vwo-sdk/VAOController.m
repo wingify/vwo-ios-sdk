@@ -28,7 +28,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 + (void)initializeAsynchronously:(BOOL)async
                     withCallback:(void(^)(void))completionBlock
                          failure:(void(^)(void))failureBlock {
-    [VAOPersistantStore incrementSessionCount];
+    VAOPersistantStore.sessionCount += 1;
     [[VAOAPIClient sharedInstance] initializeAndStartTimer];
     [[self sharedInstance] downloadCampaignAsynchronously:async withCallback:completionBlock failure:failureBlock];
     [[self sharedInstance] addBackgroundListeners];

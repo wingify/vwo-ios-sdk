@@ -71,7 +71,7 @@
     VAOLogInfo(@"Making user part of campaign: '%@'", campaign.name);
 
     // Set User to be returning if not already set.
-    if (![VAOPersistantStore returningUser]) [VAOPersistantStore setReturningUser:YES];
+    if (!VAOPersistantStore.isReturningUser) VAOPersistantStore.returningUser = YES;
 
     [VAOPersistantStore trackUserForCampaign:campaign];
     [VAOAPIClient.sharedInstance makeUserPartOfCampaign:campaign];

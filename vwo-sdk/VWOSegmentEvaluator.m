@@ -70,7 +70,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
                ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone)) {
         return YES;
     } else if (segmentObject[kReturningVisitor]) {
-        return ([VAOPersistantStore returningUser] == [segmentObject[kReturningVisitor] boolValue]);
+        return (VAOPersistantStore.isReturningUser == [segmentObject[kReturningVisitor] boolValue]);
     }
     return NO;
 }

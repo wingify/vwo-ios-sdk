@@ -14,21 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VAOPersistantStore : NSObject
 
+@property (class, readonly) NSDictionary *campaignVariationPairs;
+@property (class, assign) NSUInteger sessionCount;
+@property (class, assign, getter=isReturningUser) BOOL returningUser;
+@property (class, readonly) NSString *UUID;
+
 + (BOOL)isTrackingUserForCampaign:(VAOCampaign *)campaign;
 + (void)trackUserForCampaign:(VAOCampaign *)campaign;
 
-+ (NSDictionary *)campaignVariationPairs;
-
 + (void)markGoalConversion:(VAOGoal *)goal;
 + (BOOL)isGoalMarked:(VAOGoal *)goal;
-
-+ (NSUInteger)sessionCount;
-+ (void)incrementSessionCount;
-
-+ (void)setReturningUser:(BOOL)isReturning;
-+ (BOOL)returningUser;
-
-+ (NSString *)UUID;
 
 @end
 NS_ASSUME_NONNULL_END

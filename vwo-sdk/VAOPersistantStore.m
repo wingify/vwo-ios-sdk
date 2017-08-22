@@ -66,9 +66,9 @@ static NSString * kUUID          = @"UUID";
     return [set containsObject:[NSNumber numberWithInt:goal.iD]];
 }
 
-+ (void)incrementSessionCount {
++ (void)setSessionCount:(NSUInteger)count {
     NSMutableDictionary *userDict = [self dictionary];
-    userDict[kSessionCount] = @([userDict[kSessionCount] longValue] + 1);
+    userDict[kSessionCount] = [NSNumber numberWithUnsignedInteger:count];
     [self writeToFile:userDict];
 }
 
@@ -79,11 +79,11 @@ static NSString * kUUID          = @"UUID";
 
 + (void)setReturningUser:(BOOL)isReturning {
     NSMutableDictionary *userDict = [self dictionary];
-    userDict[kReturningUser] = @(isReturning);
+    userDict[kReturningUser] = [NSNumber numberWithBool:isReturning];
     [self writeToFile:userDict];
 }
 
-+ (BOOL)returningUser {
++ (BOOL)isReturningUser {
     NSMutableDictionary *userDict = [self dictionary];
     return [userDict[kReturningUser] boolValue];
 }
