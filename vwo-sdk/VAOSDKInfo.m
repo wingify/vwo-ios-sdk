@@ -28,9 +28,8 @@ static NSString *accountId;
 
 ///Key must be in format `[32Chars]-[NUMS]`
 + (void)validateAPIKey:(NSString * )apiKey {
-    NSArray<NSString *> *key_id = [apiKey componentsSeparatedByString:@"-"];
-    NSAssert(key_id.count == 2, @"Invalid key");
-    NSAssert(key_id.firstObject.length == 32, @"Invalid key");
+    NSAssert([apiKey componentsSeparatedByString:@"-"].count == 2, @"Invalid key");
+    NSAssert([apiKey componentsSeparatedByString:@"-"].firstObject.length == 32, @"Invalid key");
 }
 
 + (NSString *)appKey {
