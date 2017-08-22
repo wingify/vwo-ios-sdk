@@ -102,27 +102,4 @@ static NSString * kVariation            = @"variations";
     return [NSString stringWithFormat:@"{{[%@ (%d)] [%@ (%d)]}}", self.name, self.iD, self.variation.name, self.variation.iD];
 }
 
-#pragma mark - NSCoding
-
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
-    int iD                      = [aDecoder decodeIntForKey:kId];
-    NSString *name              = [aDecoder decodeObjectForKey:kName];
-    BOOL track                  = [aDecoder decodeBoolForKey:kTrackUserOnLaunch];
-    CampaignStatus status       = [aDecoder decodeIntegerForKey:kStatus];
-    NSDictionary *segmentObject = [aDecoder decodeObjectForKey:kSegmentObject];
-    NSArray<VAOGoal *>* goals   = [aDecoder decodeObjectForKey:kGoals];
-    VAOVariation *variation     = [aDecoder decodeObjectForKey:kVariation];
-    return [self initWithID:iD name:name trackUserOnLaunch:track campaignStatus:status segmentObject:segmentObject goals:goals variation:variation];
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeInt:self.iD forKey:kId];
-    [aCoder encodeObject:self.name forKey:kName];
-    [aCoder encodeBool:self.trackUserOnLaunch forKey:kTrackUserOnLaunch];
-    [aCoder encodeInteger:self.campaignStatus forKey:kStatus];
-    [aCoder encodeObject:self.segmentObject forKey:kSegmentObject];
-    [aCoder encodeObject:self.goals forKey:kGoals];
-    [aCoder encodeObject:self.variation forKey:kVariation];
-}
-
 @end

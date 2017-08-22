@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VAOVariation : NSObject<NSCoding>
+@interface VAOVariation : NSObject
 
 @property(nonatomic, assign) int iD;
 @property(atomic) NSString *name;

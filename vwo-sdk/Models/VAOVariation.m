@@ -43,19 +43,4 @@ static NSString * kChanges = @"changes";
     return (self.iD == 1);
 }
 
-#pragma mark - NSCoding
-
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
-    int iD                = [aDecoder decodeIntForKey:kId];
-    NSString *name        = [aDecoder decodeObjectForKey:kName];
-    NSDictionary *changes = [aDecoder decodeObjectForKey:kChanges];
-    return [self initWith:iD name:name changes:changes];
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeInt:self.iD forKey:kId];
-    [aCoder encodeObject:self.name forKey:kName];
-    [aCoder encodeObject:self.changes forKey:kChanges];
-}
-
 @end

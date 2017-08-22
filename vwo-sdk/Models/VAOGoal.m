@@ -50,27 +50,4 @@ static NSString * kIdentifier = @"identifier";
     return [NSString stringWithFormat:@"GOAL: %@(%d)", self.identifier, self.iD];
 }
 
-#pragma mark - NSCoding
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
-    int id               = [aDecoder decodeIntForKey:kId];
-    NSString *identifier = [aDecoder decodeObjectForKey:kIdentifier];
-    GoalType type        = [aDecoder decodeIntegerForKey:kType];
-    return [self initWithId:id identifier:identifier type:type];
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeInt:self.iD forKey:kId];
-    [aCoder encodeObject:self.identifier forKey:kIdentifier];
-    [aCoder encodeInteger:self.type forKey:kType];
-}
-
-#pragma mark - NSCopying
--(id)copyWithZone:(NSZone *)zone {
-    VAOGoal *copy   = [[[self class] allocWithZone:zone] init];
-    copy.iD         = self.iD;
-    copy.type       = self.type;
-    copy.identifier = [self.identifier copyWithZone:zone];
-    return copy;
-}
-
 @end

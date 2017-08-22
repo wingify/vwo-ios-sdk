@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, CampaignStatus) {
     CampaignStatusExcluded
 };
 
-@interface VAOCampaign : NSObject<NSCoding>
+@interface VAOCampaign : NSObject
 
 @property (nonatomic, assign) int iD;
 @property (atomic) NSString *name;
