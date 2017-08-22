@@ -12,6 +12,8 @@
 #import "VAOPersistantStore.h"
 #import "VWOSegmentEvaluator.h"
 #import "VAOFile.h"
+#import "VAOCampaign.h"
+#import "VWO.h"
 
 @implementation VAOModel
 
@@ -67,9 +69,20 @@
 - (void)trackUserForCampaign:(VAOCampaign *)campaign {
     NSParameterAssert(campaign);
     VAOLogInfo(@"Making user part of campaign: '%@'", campaign.name);
+
+    // Set User to be returning if not already set.
     if (![VAOPersistantStore returningUser]) [VAOPersistantStore setReturningUser:YES];
+
     [VAOPersistantStore trackUserForCampaign:campaign];
     [VAOAPIClient.sharedInstance makeUserPartOfCampaign:campaign];
+
+    NSDictionary *campaignInfo = @{
+                                   @"campaignName"  : campaign.name.copy,
+                                   @"campaignID"    : [NSNumber numberWithInt: campaign.iD],
+                                   @"variationName" : campaign.variation.name,
+                                   @"variationID"   : [NSNumber numberWithInt: campaign.variation.iD],
+                                   };
+    [NSNotificationCenter.defaultCenter postNotificationName:VWOUserStartedTrackingInCampaignNotification object:nil userInfo:campaignInfo];
 }
 
 - (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *)number {

@@ -16,6 +16,7 @@
 #import "VAOLogger.h"
 #import "VAOPersistantStore.h"
 #import "VAOFile.h"
+#import "VAOCampaign.h"
 
 NSString * const kProtocol           = @"https://";
 NSTimeInterval kTimerInterval        = 20.0;

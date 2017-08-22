@@ -14,6 +14,7 @@
 #import "VAOPersistantStore.h"
 #import "VWOSegmentEvaluator.h"
 #import "VAOFile.h"
+#import "VAOCampaign.h"
 
 static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 

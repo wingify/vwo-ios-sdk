@@ -10,7 +10,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "VAOCampaign.h"
+
+@class VAOCampaign, VAOGoal;
 
 NS_ASSUME_NONNULL_BEGIN
 

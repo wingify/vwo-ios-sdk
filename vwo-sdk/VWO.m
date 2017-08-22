@@ -17,6 +17,7 @@
 #import "VAODeviceInfo.h"
 
 static VWOLogLevel kLogLevel = VWOLogLevelError;
+NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStartedTrackingInCampaignNotification";
 
 @implementation VWO
 
