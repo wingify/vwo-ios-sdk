@@ -52,5 +52,6 @@ void VAOLogException(NSString *format, ...) {
     NSString* formattedMessage = [[NSString alloc] initWithFormat: format arguments: argList];
     va_end(argList);
     [VAORavenClient.sharedClient captureMessage:formattedMessage];
+    NSLog(@"VWO EXCEPTION: %s\n", [formattedMessage UTF8String]);
     assert(false);//Stops execution
 }

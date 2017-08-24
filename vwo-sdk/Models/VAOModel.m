@@ -77,10 +77,10 @@
     [VAOAPIClient.sharedInstance makeUserPartOfCampaign:campaign];
 
     NSDictionary *campaignInfo = @{
-                                   @"campaign_name"  : campaign.name.copy,
-                                   @"campaign_id"    : [NSNumber numberWithInt: campaign.iD],
-                                   @"variation_name" : campaign.variation.name.copy,
-                                   @"variation_id"   : [NSNumber numberWithInt: campaign.variation.iD],
+                                   @"vwo_campaign_name"  : campaign.name.copy,
+                                   @"vwo_campaign_id"    : [NSString stringWithFormat:@"%d", campaign.iD],
+                                   @"vwo_variation_name" : campaign.variation.name.copy,
+                                   @"vwo_variation_id"   : [NSString stringWithFormat:@"%d", campaign.variation.iD],
                                    };
     [NSNotificationCenter.defaultCenter postNotificationName:VWOUserStartedTrackingInCampaignNotification object:nil userInfo:campaignInfo];
 }
