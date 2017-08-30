@@ -114,7 +114,7 @@ NSTimer *_timer;
                      variationId:(NSInteger)variationId
                          revenue:(NSNumber *)revenue {
 
-    VAOLogInfo(@"Mark Goal conversion '%@' in campaign '%@'", goalId, experimentId);
+    VAOLogInfo(@"Mark Goal conversion '%d' in campaign '%d'", goalId, experimentId);
     NSMutableDictionary *params = [@{@"goalId": @(goalId), @"expId":@(experimentId), @"varId": @(variationId)} mutableCopy];
     params[@"revenue"] = revenue;
 
