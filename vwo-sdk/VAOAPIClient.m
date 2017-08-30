@@ -43,6 +43,10 @@ NSTimer *_timer;
 - (void)initializeAndStartTimer {
     _transitId = (NSInteger) [[NSDate date] timeIntervalSinceReferenceDate];
     _pendingMessages = [NSMutableArray arrayWithContentsOfURL:VAOFile.messagesPath];
+    if (_pendingMessages == nil) {
+        _pendingMessages = [NSMutableArray array];
+    }
+    
     _transittingMessages = [NSMutableArray array];
     
     // fire first call early on to clear any pending data from last time the application was run.
