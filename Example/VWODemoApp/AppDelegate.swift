@@ -22,13 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         createSlideViewController()
-        VWO.logLevel = .info
+        VWO.logLevel = .debug
         if let apiKey = UserDefaults.standard.string(forKey: keyVWOApiKey) {
             VWO.launchSynchronously(apiKey: apiKey)
-        }
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.VWOUserStartedTrackingInCampaign, object: nil, queue: nil) { (notification) in
-            let info = notification.userInfo!
-//            Swift.print("Started tracking \(info))")
         }
         return true
     }
