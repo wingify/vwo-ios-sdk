@@ -67,7 +67,7 @@ class ContainerVC: UIViewController {
         addVC(side: .left, vc: LoginVC.makeViewFor(type: .email))
 
         // Right
-        let variation = VWO.variationFor(key: "login", defaultValue: "plain") as! String
+        let variation = VWO.variationFor(key: "login", defaultValue: "email") as! String
         let variationType = LoginType(rawValue: variation) ?? .email
         navController.variationLabel.text = "(\(variationType.navDecription))"
         addVC(side: .right, vc: LoginVC.makeViewFor(type: variationType))
