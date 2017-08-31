@@ -19,8 +19,8 @@
 static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
 @implementation VAOController {
-    BOOL _remoteDataDownloading;
-    NSTimeInterval _lastUpdateTime;
+    BOOL remoteDataDownloading;
+    NSTimeInterval lastUpdateTime;
     NSMutableDictionary *previewInfo; // holds the set of changes to be used during preview mode
     NSMutableDictionary *customVariables;
 }
@@ -29,19 +29,19 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
                     withCallback:(void(^)(void))completionBlock
                          failure:(void(^)(void))failureBlock {
     VAOPersistantStore.sessionCount += 1;
-    [[VAOAPIClient sharedInstance] initializeAndStartTimer];
+    [VAOAPIClient.sharedInstance initializeAndStartTimer];
     [[self sharedInstance] downloadCampaignAsynchronously:async withCallback:completionBlock failure:failureBlock];
     [[self sharedInstance] addBackgroundListeners];
 }
 
--(void)addBackgroundListeners {
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver:self
-                           selector:@selector(applicationDidEnterBackground)
-                               name:UIApplicationDidEnterBackgroundNotification object:nil];
-    [notificationCenter addObserver:self
-                           selector:@selector(applicationWillEnterForeground)
-                               name:UIApplicationWillEnterForegroundNotification object:nil];
+- (void)addBackgroundListeners {
+    NSNotificationCenter *notification = NSNotificationCenter.defaultCenter;
+    [notification addObserver:self
+                     selector:@selector(applicationDidEnterBackground)
+                         name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [notification addObserver:self
+                     selector:@selector(applicationWillEnterForeground)
+                         name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 + (instancetype)sharedInstance{
@@ -55,10 +55,10 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
 - (id)init {
     if (self = [super init]) {
-        _remoteDataDownloading = NO;
-        _lastUpdateTime = 0;
-        self.previewMode = NO;
-        customVariables = [NSMutableDictionary dictionary];
+        remoteDataDownloading = NO;
+        lastUpdateTime        = 0;
+        self.previewMode      = NO;
+        customVariables       = [NSMutableDictionary new];
     }
     return self;
 }
@@ -70,16 +70,16 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
 - (void)applicationDidEnterBackground {
     if(!self.previewMode) {
-        _lastUpdateTime = [NSDate timeIntervalSinceReferenceDate];
+        lastUpdateTime = NSDate.timeIntervalSinceReferenceDate;
         [VAOAPIClient.sharedInstance stopTimer];
     }
 }
 
 - (void)applicationWillEnterForeground {
     [VAOAPIClient.sharedInstance startTimer];
-    if(_remoteDataDownloading == NO) {
-        NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
-        if(currentTime - _lastUpdateTime < kMinUpdateTimeGap){
+    if(remoteDataDownloading == NO) {
+        NSTimeInterval currentTime = NSDate.timeIntervalSinceReferenceDate;
+        if(currentTime - lastUpdateTime < kMinUpdateTimeGap){
             return;
         }
         [self downloadCampaignAsynchronously:YES withCallback:nil failure:nil];
@@ -87,19 +87,19 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 }
 
 -(void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
 - (void)downloadCampaignAsynchronously:(BOOL)async
                           withCallback:(void (^)(void))completionBlock
                                failure:(void (^)(void))failureBlock {
 
-    NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
-    _remoteDataDownloading = YES;
+    NSTimeInterval currentTime = NSDate.timeIntervalSinceReferenceDate;
+    remoteDataDownloading      = YES;
 
     [VAOAPIClient.sharedInstance fetchCampaigns:async success:^(id responseObject) {
-        _lastUpdateTime = currentTime;
-        _remoteDataDownloading = NO;
+        lastUpdateTime        = currentTime;
+        remoteDataDownloading = NO;
 
         VAOLogInfo(@"%lu campaigns received", (unsigned long)[(NSArray *) responseObject count]);
         [(NSArray *) responseObject writeToURL:VAOFile.campaignCache atomically:YES];
@@ -128,9 +128,9 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         [VAOSocketClient.sharedInstance goalTriggered:goalIdentifier withValue:value];
         return;
     }
-    
+
     //Check if the goal is already marked
-    NSArray<VAOCampaign *> *campaignList = [[VAOModel sharedInstance] campaignList];
+    NSArray<VAOCampaign *> *campaignList = VAOModel.sharedInstance.campaignList;
     for (VAOCampaign *campaign in campaignList) {
         VAOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
         if (matchedGoal) {
@@ -146,21 +146,21 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         if ([VAOPersistantStore isTrackingUserForCampaign:campaign]) {
             VAOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
             if (matchedGoal) {
-                [[VAOModel sharedInstance] markGoalConversion:matchedGoal inCampaign:campaign withValue:value];
+                [VAOModel.sharedInstance markGoalConversion:matchedGoal inCampaign:campaign withValue:value];
             }
         }
     }
 }
 
-- (id)variationForKey:(NSString*)key {
+- (id)variationForKey:(NSString *)key {
     if (self.previewMode) {
         if(key && previewInfo) {
             return previewInfo[key];
         }
         return nil;
     }
-    
-    NSMutableArray<VAOCampaign *> *campaignList = [[VAOModel sharedInstance] campaignList];
+
+    NSMutableArray<VAOCampaign *> *campaignList = VAOModel.sharedInstance.campaignList;
 
     for (VAOCampaign *campaign in campaignList) {
         id variation = [campaign variationForKey:key];
@@ -171,7 +171,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
             } else {
                 // check for segmentation
                 if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:campaign.segmentObject]) {
-                    [[VAOModel sharedInstance] trackUserForCampaign:campaign];
+                    [VAOModel.sharedInstance trackUserForCampaign:campaign];
                     return [variation copy];
                 }
             }

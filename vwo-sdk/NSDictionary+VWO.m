@@ -10,7 +10,7 @@
 
 @implementation NSDictionary (VWO)
 
-- (nullable NSString*)toString {
+- (nullable NSString *)toString {
     NSError *error;
     NSData *currentData = [NSJSONSerialization dataWithJSONObject:self options:kNilOptions error:&error];
     if (!error) {
@@ -19,7 +19,7 @@
     return nil;
 }
 
-- (NSArray<NSString *>*) keysMissingFrom:(NSArray<NSString *> *)mustHaveKeys {
+- (NSArray<NSString *> *) keysMissingFrom:(NSArray<NSString *> *)mustHaveKeys {
     NSMutableArray *mustHaveKeysMutable = mustHaveKeys.mutableCopy;
     [mustHaveKeysMutable removeObjectsInArray:self.allKeys];
     return mustHaveKeysMutable;

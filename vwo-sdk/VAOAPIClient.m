@@ -41,7 +41,7 @@ NSTimer *_timer;
 }
 
 - (void)initializeAndStartTimer {
-    _transitId = (NSInteger) [[NSDate date] timeIntervalSinceReferenceDate];
+    _transitId = (NSInteger) NSDate.timeIntervalSinceReferenceDate;
     _pendingMessages = [NSMutableArray new];
     if ([NSFileManager.defaultManager fileExistsAtPath:VAOFile.messages.path]) {
         _pendingMessages = [NSMutableArray arrayWithContentsOfURL:VAOFile.messages];
@@ -129,7 +129,7 @@ NSTimer *_timer;
     NSDictionary *message = @{@"method" : method, @"params" : params, @"timestamp" : timestamp, @"id" : transitId};
 
     [_pendingMessages addObject:message];
-    [[VAOModel sharedInstance] saveMessages:[_pendingMessages copy]];
+    [VAOModel.sharedInstance saveMessages:[_pendingMessages copy]];
     if(_pendingMessages.count >= kPendingMessagesThreshold){
         [self sendAllPendingMessages];
     }
@@ -154,12 +154,12 @@ NSTimer *_timer;
                                   @"os" : UIDevice.currentDevice.systemVersion
                                   };
         
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
     parameters[@"experiment_id"] = params[@"expId"];
     parameters[@"account_id"]    = VAOSDKInfo.accountID;
     parameters[@"combination"]   = params[@"varId"];
     parameters[@"u"]             = VAOPersistantStore.UUID;
-    parameters[@"s"]             = @([VAOPersistantStore sessionCount]);
+    parameters[@"s"]             = @(VAOPersistantStore.sessionCount);
     parameters[@"random"]        = @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
     parameters[@"ed"]            = [extraParams toString];
 
