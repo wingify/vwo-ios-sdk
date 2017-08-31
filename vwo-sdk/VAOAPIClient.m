@@ -42,7 +42,10 @@ NSTimer *_timer;
 
 - (void)initializeAndStartTimer {
     _transitId = (NSInteger) [[NSDate date] timeIntervalSinceReferenceDate];
-    _pendingMessages = [NSMutableArray arrayWithContentsOfURL:VAOFile.messagesPath];
+    _pendingMessages = [NSMutableArray new];
+    if ([NSFileManager.defaultManager fileExistsAtPath:VAOFile.messagesPath.path]) {
+        _pendingMessages = [NSMutableArray arrayWithContentsOfURL:VAOFile.messagesPath];
+    }
     _transittingMessages = [NSMutableArray array];
     
     // fire first call early on to clear any pending data from last time the application was run.
@@ -114,7 +117,6 @@ NSTimer *_timer;
                      variationId:(NSInteger)variationId
                          revenue:(NSNumber *)revenue {
 
-    VAOLogInfo(@"Mark Goal conversion '%@' in campaign '%@'", goalId, experimentId);
     NSMutableDictionary *params = [@{@"goalId": @(goalId), @"expId":@(experimentId), @"varId": @(variationId)} mutableCopy];
     params[@"revenue"] = revenue;
 
@@ -176,7 +178,7 @@ NSTimer *_timer;
         }
     } failure:^(VAOAFHTTPRequestOperation *operation, NSError *error) {
         if (operation.response.statusCode == 200) {
-            VAOLogDebug(@"Network success %@", url);
+            VAOLogDebug(@"Network success %@", operation.response.URL.absoluteString);
             if (successBlock) {
                 successBlock(transitId);
             }

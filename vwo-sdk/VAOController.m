@@ -135,12 +135,13 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         VAOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
         if (matchedGoal) {
             if ([VAOPersistantStore isGoalMarked:matchedGoal]) {
-                VAOLogDebug(@"%@ already marked. Will not be marked again", matchedGoal);
+                VAOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
                 return;
             }
         }
     }
-    
+
+    // Mark goal(One goal can be present in multiple campaigns
     for (VAOCampaign *campaign in campaignList) {
         if ([VAOPersistantStore isTrackingUserForCampaign:campaign]) {
             VAOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];

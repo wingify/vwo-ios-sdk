@@ -47,7 +47,7 @@ static NSString * kIdentifier = @"identifier";
 }
 
 -(NSString *)description {
-    return [NSString stringWithFormat:@"GOAL: %@(%d)", self.identifier, self.iD];
+    return [NSString stringWithFormat:@"%@(%d)", self.identifier, self.iD];
 }
 
 @end

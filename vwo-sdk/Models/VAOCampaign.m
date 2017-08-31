@@ -99,7 +99,7 @@ static NSString * kVariation            = @"variations";
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"{{[%@ (%d)] [%@ (%d)]}}", self.name, self.iD, self.variation.name, self.variation.iD];
+    return [NSString stringWithFormat:@"%@(%d)", self.name, self.iD];
 }
 
 @end

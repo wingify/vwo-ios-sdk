@@ -43,4 +43,9 @@ static NSString * kChanges = @"changes";
     return (self.iD == 1);
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@(%d)", self.name, self.iD];
+}
+
+
 @end
