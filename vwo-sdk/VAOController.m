@@ -162,22 +162,22 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
     NSMutableArray<VAOCampaign *> *campaignList = VAOModel.sharedInstance.campaignList;
 
+    id finalVariation = nil;
     for (VAOCampaign *campaign in campaignList) {
         id variation = [campaign variationForKey:key];
-        if (variation) { //If variation Key is present in Campaign
-            if ([VAOPersistantStore isTrackingUserForCampaign:campaign]) {
-                // already tracking
-                return [variation copy];
-            } else {
-                // check for segmentation
+
+        //If variation Key is present in Campaign
+        if (variation) {
+            finalVariation = variation;
+            if (![VAOPersistantStore isTrackingUserForCampaign:campaign]) {
+                // If campaign is not already tracked; check if it can be part of campaign.
                 if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:campaign.segmentObject]) {
                     [VAOModel.sharedInstance trackUserForCampaign:campaign];
-                    return [variation copy];
                 }
             }
         }
     }
-    return nil;
+    return finalVariation;
 }
 
 @end
