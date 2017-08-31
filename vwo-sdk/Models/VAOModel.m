@@ -94,7 +94,7 @@
 }
 
 - (void)saveMessages:(NSArray *)messages {
-    [messages writeToURL:VAOFile.messagesPath atomically:YES];
+    [messages writeToURL:VAOFile.messages atomically:YES];
 }
 
 @end

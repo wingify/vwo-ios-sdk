@@ -43,8 +43,8 @@ NSTimer *_timer;
 - (void)initializeAndStartTimer {
     _transitId = (NSInteger) [[NSDate date] timeIntervalSinceReferenceDate];
     _pendingMessages = [NSMutableArray new];
-    if ([NSFileManager.defaultManager fileExistsAtPath:VAOFile.messagesPath.path]) {
-        _pendingMessages = [NSMutableArray arrayWithContentsOfURL:VAOFile.messagesPath];
+    if ([NSFileManager.defaultManager fileExistsAtPath:VAOFile.messages.path]) {
+        _pendingMessages = [NSMutableArray arrayWithContentsOfURL:VAOFile.messages];
     }
     _transittingMessages = [NSMutableArray array];
     

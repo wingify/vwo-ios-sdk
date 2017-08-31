@@ -11,7 +11,7 @@
 
 @implementation VAOFile
 
-+ (NSURL *)activityPath {
++ (NSURL *)activity {
     NSError *error;
     NSURL *path = [NSFileManager.defaultManager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
     if (error != nil) {
@@ -20,7 +20,7 @@
     return [path URLByAppendingPathComponent:@"VWOActivity.plist"];
 }
 
-+ (NSURL *)messagesPath {
++ (NSURL *)messages {
     NSError *error;
     NSURL *path = [NSFileManager.defaultManager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
     if (error != nil) {
@@ -29,7 +29,7 @@
     return [path URLByAppendingPathComponent:@"VWOPendingMessages.plist"];
 }
 
-+ (NSURL *)campaignCachePath {
++ (NSURL *)campaignCache {
     NSError *error;
     NSURL *path = [NSFileManager.defaultManager URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
     if (error != nil) {

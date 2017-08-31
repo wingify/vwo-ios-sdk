@@ -99,15 +99,15 @@ static NSString * kUUID          = @"UUID";
 /// All publicly exposed methods must access PersistantStore using this dictionary
 + (NSMutableDictionary *)dictionary {
     [self createFile];//Exists if already exists
-    return [NSMutableDictionary dictionaryWithContentsOfURL:VAOFile.activityPath];
+    return [NSMutableDictionary dictionaryWithContentsOfURL:VAOFile.activity];
 }
 
 + (void)writeToFile:(NSDictionary *) dict{
-    [dict writeToURL:VAOFile.activityPath atomically:YES];
+    [dict writeToURL:VAOFile.activity atomically:YES];
 }
 
 + (void)createFile {
-    if ([NSFileManager.defaultManager fileExistsAtPath:VAOFile.activityPath.path]) {
+    if ([NSFileManager.defaultManager fileExistsAtPath:VAOFile.activity.path]) {
         return;
     }
     NSMutableDictionary *activityDict = [NSMutableDictionary new];

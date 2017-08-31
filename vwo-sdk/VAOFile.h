@@ -10,8 +10,8 @@
 
 @interface VAOFile : NSObject
 
-@property (class, readonly, copy) NSURL *activityPath;
-@property (class, readonly, copy) NSURL *messagesPath;
-@property (class, readonly, copy) NSURL *campaignCachePath;
+@property (class, readonly, copy) NSURL *activity;
+@property (class, readonly, copy) NSURL *messages;
+@property (class, readonly, copy) NSURL *campaignCache;
 
 @end

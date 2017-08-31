@@ -102,14 +102,14 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         _remoteDataDownloading = NO;
 
         VAOLogInfo(@"%lu campaigns received", (unsigned long)[(NSArray *) responseObject count]);
-        [(NSArray *) responseObject writeToURL:VAOFile.campaignCachePath atomically:YES];
+        [(NSArray *) responseObject writeToURL:VAOFile.campaignCache atomically:YES];
         [VAOModel.sharedInstance updateCampaignListFromDictionary:responseObject];
         if (completionBlock) completionBlock();
     } failure:^(NSError *error) {
-        if ([NSFileManager.defaultManager fileExistsAtPath:VAOFile.campaignCachePath.path]) {
+        if ([NSFileManager.defaultManager fileExistsAtPath:VAOFile.campaignCache.path]) {
             VAOLogWarning(@"Network failed while fetching campaigns {%@}", error.localizedDescription);
             VAOLogInfo(@"Loading Cached Response");
-            NSArray *cachedCampaings = [NSArray arrayWithContentsOfURL:VAOFile.campaignCachePath];
+            NSArray *cachedCampaings = [NSArray arrayWithContentsOfURL:VAOFile.campaignCache];
             [VAOModel.sharedInstance updateCampaignListFromDictionary:cachedCampaings];
         } else {
             VAOLogWarning(@"Campaigns fetch failed. Cache not available {%@}", error.localizedDescription);
