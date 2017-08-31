@@ -97,9 +97,9 @@ class MenuVC : UIViewController {
     }
     
     private func clearVWOFiles() {
-        try? FileManager.default.removeItem(at: VAOFile.activityPath)
-        try? FileManager.default.removeItem(at: VAOFile.campaignCachePath)
-        try? FileManager.default.removeItem(at: VAOFile.messagesPath)
+        try? FileManager.default.removeItem(at: VAOFile.activity)
+        try? FileManager.default.removeItem(at: VAOFile.campaignCache)
+        try? FileManager.default.removeItem(at: VAOFile.messages)
     }
 
     private func showAbout() {
