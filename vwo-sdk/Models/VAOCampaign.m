@@ -82,7 +82,6 @@ static NSString * kVariation            = @"variations";
 
 - (nullable id)variationForKey:(NSString*)key {
     NSParameterAssert(key);
-    if (self.variation.isControl) return nil;
     NSDictionary *changes = self.variation.changes;
     if (changes == nil) return nil;
     return changes[key];//If key does not exist NSDictionary returns nil

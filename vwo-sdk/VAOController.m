@@ -177,6 +177,10 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
             }
         }
     }
+    if (finalVariation == [NSNull null]) {
+//        finalVariation can be NSNull is Control is assigned to campaign
+        return nil;
+    }
     return finalVariation;
 }
 

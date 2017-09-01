@@ -11,6 +11,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface VAOController : NSObject
 
 @property (assign) BOOL previewMode;
@@ -21,7 +23,9 @@
                          failure:(void(^)(void))failureBlock;
 - (void)preview:(NSDictionary *)changes;
 - (void)markConversionForGoal:(NSString *)goal withValue:(NSNumber *)value;
-- (id)variationForKey:(NSString *)key;
+- (nullable id)variationForKey:(NSString *)key;
 - (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value;
 
 @end
+
+NS_ASSUME_NONNULL_END
