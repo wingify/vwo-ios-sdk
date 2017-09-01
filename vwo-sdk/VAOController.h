@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
                     withCallback:(void(^)(void))completionBlock
                          failure:(void(^)(void))failureBlock;
 - (void)preview:(NSDictionary *)changes;
-- (void)markConversionForGoal:(NSString *)goal withValue:(NSNumber *)value;
+- (void)markConversionForGoal:(NSString *)goal withValue:(nullable NSNumber *)value;
 - (nullable id)variationForKey:(NSString *)key;
 - (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value;
 
