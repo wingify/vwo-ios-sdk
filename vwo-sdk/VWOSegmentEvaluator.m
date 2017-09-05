@@ -151,17 +151,18 @@ static NSString * kReturningVisitor = @"returning_visitor";
     switch (segmentType) {
         case SegmentationTypeiOSVersion: {
             NSString *version = [VAODeviceInfo iOSVersionMinor:YES patch:NO];
-
-            // Equal or greater
-            if ([operand.lastObject hasPrefix:@">="] && [operand.lastObject hasSuffix:version]) {
-                BOOL greaterOrEqual = NO;
-                greaterOrEqual = ([[[UIDevice currentDevice] systemVersion] compare:version options:NSNumericSearch] != NSOrderedAscending);
-                return ((greaterOrEqual && operator == OperatorTypeIsEqualTo ) ||
-                        (!greaterOrEqual && operator == OperatorTypeIsNotEqualTo));
+            NSString *targetVersion = [operand firstObject];
+            NSComparisonResult result = [version compare:targetVersion options:NSNumericSearch];
+            switch (operator) {
+                case OperatorTypeIsEqualTo: return result == NSOrderedSame;
+                case OperatorTypeIsNotEqualTo: return result != NSOrderedSame;
+                case OperatorTypeGreaterThan: return result == NSOrderedDescending;
+                case OperatorTypeLessThan: return result == NSOrderedAscending;
+                default:
+                    VAOLogException(@"Invalid operator received for iOSVersion %d", operator);
+                    return NO;
             }
-            BOOL contains = [operand containsObject:version];
-            return ((contains && operator == OperatorTypeIsEqualTo ) ||
-                    (!contains && operator == OperatorTypeIsNotEqualTo));
+            break;
         }
 
         case SegmentationTypeDayOfWeek: {
