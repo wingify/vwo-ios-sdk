@@ -101,7 +101,14 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     id responseObject = [VAOAPIClient.sharedInstance fetchCampaignsSynchronouslyForTimeout:timeout error:&error];
     remoteDataDownloading = NO;
     if (error) {
-        VAOLogError(@"%@", error.localizedDescription);
+        if ([NSFileManager.defaultManager fileExistsAtPath:VAOFile.campaignCache.path]) {
+            VAOLogWarning(@"%@", error.localizedDescription);
+            VAOLogInfo(@"Loading Cached Response");
+            NSArray *cachedCampaings = [NSArray arrayWithContentsOfURL:VAOFile.campaignCache];
+            [VAOModel.sharedInstance updateCampaignListFromDictionary:cachedCampaings];
+        } else {
+            VAOLogError(@"Campaigns fetch failed. Cache not available {%@}", error.localizedDescription);
+        }
         return;
     }
     lastUpdateTime  = NSDate.timeIntervalSinceReferenceDate;
@@ -130,7 +137,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
             NSArray *cachedCampaings = [NSArray arrayWithContentsOfURL:VAOFile.campaignCache];
             [VAOModel.sharedInstance updateCampaignListFromDictionary:cachedCampaings];
         } else {
-            VAOLogWarning(@"Campaigns fetch failed. Cache not available {%@}", error.localizedDescription);
+            VAOLogError(@"Campaigns fetch failed. Cache not available {%@}", error.localizedDescription);
             if (failureBlock) failureBlock();
         }
     }];
