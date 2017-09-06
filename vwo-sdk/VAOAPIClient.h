@@ -20,10 +20,11 @@
 - (void)startTimer;
 - (void)stopTimer;
 
-- (void) fetchCampaigns:(BOOL)isAsync
-                success:(void(^)(id))successBlock
-                failure:(void(^)(NSError *))failureBlock;
+- (void) fetchCampaignsAsynchronouslyOnSuccess:(void(^)(id))successBlock
+                                       failure:(void(^)(NSError *))failureBlock;
 
+- (id)fetchCampaignsSynchronouslyForTimeout:(NSTimeInterval)timeout
+                                      error:(NSError *__autoreleasing *)error;
 
 - (void)makeUserPartOfCampaign:(VAOCampaign *)campaign;
 

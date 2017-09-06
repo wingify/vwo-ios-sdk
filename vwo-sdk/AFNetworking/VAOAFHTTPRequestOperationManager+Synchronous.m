@@ -35,15 +35,7 @@
     return responseObject;
 }
 
-- (id)syncGET:(NSString *)URLString
-   parameters:(NSDictionary *)parameters
-    operation:(VAOAFHTTPRequestOperation *__autoreleasing *)operationPtr
-        error:(NSError *__autoreleasing *)outError
-{
-    return [self synchronouslyPerformMethod:@"GET" URLString:URLString parameters:parameters timeout: 2.0 operation:operationPtr error:outError];
-}
-
-- (id)syncronousGET:(NSString *)URLString
+- (id)synchronousGET:(NSString *)URLString
          parameters:(NSDictionary *)parameters
             timeout: (NSTimeInterval)timeout
               error:(NSError *__autoreleasing *)outError {

@@ -66,11 +66,8 @@ NSTimer *_timer;
     _timer = nil;
 }
 
-// For App
-- (void) fetchCampaigns:(BOOL)isAsync
-                success:(void(^)(id))successBlock
+- (void) fetchCampaignsAsynchronouslyOnSuccess:(void(^)(id))successBlock
                 failure:(void(^)(NSError *))failureBlock {
-
     NSString *url                   = [NSString stringWithFormat:@"%@%@/mobile", kProtocol,kDomain];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     parameters[@"a"]                = VAOSDKInfo.accountID;
@@ -83,28 +80,35 @@ NSTimer *_timer;
     parameters[@"k"]                = VAOPersistantStore.campaignVariationPairs.toString;
 
     VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
-    if (isAsync) {
-        VAOLogDebug(@"Asynchronously Downloading Campaigns");
-        [manager GET:url parameters:parameters success:^(VAOAFHTTPRequestOperation *operation, id responseObject) {
-            if (successBlock) {
-                successBlock(responseObject);
-            }
-        } failure:^(VAOAFHTTPRequestOperation *operation, NSError *error) {
-            if (failureBlock) {
-                failureBlock(error);
-            }
-        }];
-    }
-    else {
-        VAOLogDebug(@"Synchronously Downloading Campaigns");
-        NSError *error;
-        id data = [manager syncGET:url parameters:parameters operation:NULL error:&error];
-        if (successBlock && !error) {
-            successBlock(data);
-        } else if(failureBlock){
+    VAOLogDebug(@"Asynchronously Downloading Campaigns");
+    [manager GET:url parameters:parameters success:^(VAOAFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) {
+            successBlock(responseObject);
+        }
+    } failure:^(VAOAFHTTPRequestOperation *operation, NSError *error) {
+        if (failureBlock) {
             failureBlock(error);
         }
-    }
+    }];
+}
+
+- (id)fetchCampaignsSynchronouslyForTimeout:(NSTimeInterval)timeout
+                                      error:(NSError *__autoreleasing *)error {
+    NSString *url                   = [NSString stringWithFormat:@"%@%@/mobile", kProtocol,kDomain];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    parameters[@"a"]                = VAOSDKInfo.accountID;
+    parameters[@"v"]                = VAOSDKInfo.sdkVersion;
+    parameters[@"i"]                = VAOSDKInfo.appKey;
+    parameters[@"dt"]               = VAODeviceInfo.platformName;
+    parameters[@"os"]               = UIDevice.currentDevice.systemVersion;
+    parameters[@"u"]                = VAOPersistantStore.UUID;
+    parameters[@"r"]                = @(((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1));
+    parameters[@"k"]                = VAOPersistantStore.campaignVariationPairs.toString;
+
+    VAOAFHTTPRequestOperationManager *manager = [VAOAFHTTPRequestOperationManager manager];
+    VAOLogDebug(@"Synchronously Downloading Campaigns");
+    id data = [manager synchronousGET:url parameters:parameters timeout:timeout error:error];
+    return data;
 }
 
 - (void)makeUserPartOfCampaign:(VAOCampaign *)campaign {

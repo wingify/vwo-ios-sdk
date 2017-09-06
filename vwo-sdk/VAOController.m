@@ -25,13 +25,18 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     NSMutableDictionary *customVariables;
 }
 
-+ (void)initializeAsynchronously:(BOOL)async
+- (void)initializeAsynchronously:(BOOL)async
+                         timeout:(NSTimeInterval)timeout
                     withCallback:(void(^)(void))completionBlock
                          failure:(void(^)(void))failureBlock {
     VAOPersistantStore.sessionCount += 1;
     [VAOAPIClient.sharedInstance initializeAndStartTimer];
-    [[self sharedInstance] downloadCampaignAsynchronously:async withCallback:completionBlock failure:failureBlock];
-    [[self sharedInstance] addBackgroundListeners];
+    if (async) {
+        [self fetchCampaignsAsynchronouslyWithCallback:completionBlock failure:failureBlock];
+    } else {
+        [self fetchCampaignsSynchronouslyForTimeout:timeout];
+    }
+    [self addBackgroundListeners];
 }
 
 - (void)addBackgroundListeners {
@@ -82,7 +87,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         if(currentTime - lastUpdateTime < kMinUpdateTimeGap){
             return;
         }
-        [self downloadCampaignAsynchronously:YES withCallback:nil failure:nil];
+        [self fetchCampaignsAsynchronouslyWithCallback:nil failure:nil];
     }
 }
 
@@ -90,15 +95,28 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
-- (void)downloadCampaignAsynchronously:(BOOL)async
-                          withCallback:(void (^)(void))completionBlock
+- (void)fetchCampaignsSynchronouslyForTimeout:(NSTimeInterval)timeout {
+    remoteDataDownloading = YES;
+    NSError *error;
+    id responseObject = [VAOAPIClient.sharedInstance fetchCampaignsSynchronouslyForTimeout:timeout error:&error];
+    remoteDataDownloading = NO;
+    if (error) {
+        VAOLogError(@"%@", error.localizedDescription);
+        return;
+    }
+    lastUpdateTime  = NSDate.timeIntervalSinceReferenceDate;
+    VAOLogInfo(@"%lu campaigns received", (unsigned long)[(NSArray *) responseObject count]);
+    [(NSArray *) responseObject writeToURL:VAOFile.campaignCache atomically:YES];
+    [VAOModel.sharedInstance updateCampaignListFromDictionary:responseObject];
+}
+
+- (void)fetchCampaignsAsynchronouslyWithCallback:(void (^)(void))completionBlock
                                failure:(void (^)(void))failureBlock {
 
-    NSTimeInterval currentTime = NSDate.timeIntervalSinceReferenceDate;
     remoteDataDownloading      = YES;
 
-    [VAOAPIClient.sharedInstance fetchCampaigns:async success:^(id responseObject) {
-        lastUpdateTime        = currentTime;
+    [VAOAPIClient.sharedInstance fetchCampaignsAsynchronouslyOnSuccess:^(id responseObject) {
+        lastUpdateTime        = NSDate.timeIntervalSinceReferenceDate;
         remoteDataDownloading = NO;
 
         VAOLogInfo(@"%lu campaigns received", (unsigned long)[(NSArray *) responseObject count]);

@@ -9,12 +9,8 @@
 #import "VAOAFHTTPRequestOperationManager.h"
 
 @interface VAOAFHTTPRequestOperationManager (Synchronous)
-- (id)syncGET:(NSString *)path
-   parameters:(NSDictionary *)parameters
-    operation:(VAOAFHTTPRequestOperation *__autoreleasing *)operationPtr
-        error:(NSError *__autoreleasing *)outError;
 
-- (id)syncronousGET:(NSString *)URLString
+- (id)synchronousGET:(NSString *)URLString
          parameters:(NSDictionary *)parameters
             timeout: (NSTimeInterval)timeout
               error:(NSError *__autoreleasing *)outError;

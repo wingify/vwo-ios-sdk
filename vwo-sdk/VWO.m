@@ -31,6 +31,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 
 + (void)setUpForKey:(NSString *) key
             isAsync:(BOOL) async
+            timeout:(NSTimeInterval)timeout
          completion:(void (^)(void))completionBlock
             failure:(void (^)(void))failureBlock {
     static VWO *instance = nil;
@@ -48,7 +49,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
         }
         VAOLogInfo(@"Initializing VWO");
         VAOLogDebug(@"Key: %@", key);
-        [VAOController initializeAsynchronously:async withCallback:completionBlock failure:failureBlock];
+        [VAOController.sharedInstance initializeAsynchronously:async timeout:timeout withCallback:completionBlock failure:failureBlock];
     });
 }
 
@@ -69,22 +70,22 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 
 + (void)launchForAPIKey:(NSString *) apiKey {
     NSParameterAssert(apiKey);
-    [self setUpForKey:apiKey isAsync:YES completion:nil failure:nil];
+    [self setUpForKey:apiKey isAsync:YES timeout:0 completion:nil failure:nil];
 }
 
 + (void)launchForAPIKey:(NSString *) apiKey completion:(void(^)(void))completion {
     NSParameterAssert(apiKey);
-    [self setUpForKey:apiKey isAsync:YES completion:completion failure:nil];
+    [self setUpForKey:apiKey isAsync:YES timeout:0 completion:completion failure:nil];
 }
 
 + (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion failure:(void (^)(void))failureBlock {
     NSParameterAssert(apiKey);
-    [self setUpForKey:apiKey isAsync:YES completion:completion failure:failureBlock];
+    [self setUpForKey:apiKey isAsync:YES timeout:0 completion:completion failure:failureBlock];
 }
 
-+ (void)launchSynchronouslyForAPIKey:(NSString *) apiKey {
++ (void)launchSynchronouslyForAPIKey:(NSString *) apiKey timeout:(NSTimeInterval)timeout {
     NSParameterAssert(apiKey);
-    [self setUpForKey:apiKey isAsync:NO completion:nil failure:nil];
+    [self setUpForKey:apiKey isAsync:NO timeout:timeout completion:nil failure:nil];
 }
 
 + (id)variationForKey:(NSString*)key {

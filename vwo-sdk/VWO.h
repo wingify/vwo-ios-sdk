@@ -62,7 +62,7 @@ FOUNDATION_EXPORT NSString * const VWOUserStartedTrackingInCampaignNotification;
  
  @see launchForAPIKey:
  */
-+ (void)launchSynchronouslyForAPIKey:(NSString *)apiKey NS_SWIFT_NAME(launchSynchronously(apiKey:));
++ (void)launchSynchronouslyForAPIKey:(NSString *) apiKey timeout:(NSTimeInterval)timeout NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:));
 
 /**
  Fetches variation for given key

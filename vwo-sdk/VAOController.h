@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign) BOOL previewMode;
 
 + (instancetype)sharedInstance;
-+ (void)initializeAsynchronously:(BOOL)async
+- (void)initializeAsynchronously:(BOOL)async
+                         timeout:(NSTimeInterval)timeout
                     withCallback:(void(^)(void))completionBlock
                          failure:(void(^)(void))failureBlock;
 - (void)preview:(NSDictionary *)changes;
