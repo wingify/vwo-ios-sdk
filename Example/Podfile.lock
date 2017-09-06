@@ -1,7 +1,7 @@
 PODS:
   - FLEX (2.4.0)
   - SlideMenuControllerSwift (3.0.2)
-  - VWO (2.0.0-beta3)
+  - VWO (2.0.0-beta4)
 
 DEPENDENCIES:
   - FLEX (~> 2.0)
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   SlideMenuControllerSwift: 16001e1fd9963fd089fa6c91dbe18d4c148f0ce9
-  VWO: 806fa686c867bbb1c1b212e2ea71c5591d4937a8
+  VWO: 2a9f6dac742c3ef3e3248d3db1a4bdee3b2a51f3
 
 PODFILE CHECKSUM: 5bbfff34156cfb2f52782de6091213fd05dc6ded
 
