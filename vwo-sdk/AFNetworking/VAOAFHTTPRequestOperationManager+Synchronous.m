@@ -12,11 +12,12 @@
 - (id)synchronouslyPerformMethod:(NSString *)method
                        URLString:(NSString *)URLString
                       parameters:(NSDictionary *)parameters
+                         timeout: (NSTimeInterval)timeout
                        operation:(VAOAFHTTPRequestOperation *__autoreleasing *)operationPtr
                            error:(NSError *__autoreleasing *)outError {
-    
+
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:nil];
-    [request setTimeoutInterval:2.0];
+    [request setTimeoutInterval:timeout];
     
     VAOAFHTTPRequestOperation *op = [self HTTPRequestOperationWithRequest:request
                                                                success:nil
@@ -39,40 +40,15 @@
     operation:(VAOAFHTTPRequestOperation *__autoreleasing *)operationPtr
         error:(NSError *__autoreleasing *)outError
 {
-    return [self synchronouslyPerformMethod:@"GET" URLString:URLString parameters:parameters operation:operationPtr error:outError];
+    return [self synchronouslyPerformMethod:@"GET" URLString:URLString parameters:parameters timeout: 2.0 operation:operationPtr error:outError];
 }
 
-/*
-- (id)syncPOST:(NSString *)URLString
-    parameters:(NSDictionary *)parameters
-     operation:(VAOAFHTTPRequestOperation *__autoreleasing *) operationPtr
-         error:(NSError *__autoreleasing *) outError
-{
-    return [self synchronouslyPerformMethod:@"POST" URLString:URLString parameters:parameters operation:operationPtr error:outError];
+- (id)syncronousGET:(NSString *)URLString
+         parameters:(NSDictionary *)parameters
+            timeout: (NSTimeInterval)timeout
+              error:(NSError *__autoreleasing *)outError {
+
+    return [self synchronouslyPerformMethod:@"GET" URLString:URLString parameters:parameters timeout:timeout operation:nil error:outError];
 }
 
-- (id)syncPUT:(NSString *)URLString
-   parameters:(NSDictionary *)parameters
-    operation:(VAOAFHTTPRequestOperation *__autoreleasing *) operationPtr
-        error:(NSError *__autoreleasing *) outError
-{
-    return [self synchronouslyPerformMethod:@"PUT" URLString:URLString parameters:parameters operation:operationPtr error:outError];
-}
-
-- (id)syncDELETE:(NSString *)URLString
-      parameters:(NSDictionary *)parameters
-       operation:(VAOAFHTTPRequestOperation *__autoreleasing *) operationPtr
-           error:(NSError *__autoreleasing *) outError
-{
-    return [self synchronouslyPerformMethod:@"DELETE" URLString:URLString parameters:parameters operation:operationPtr error:outError];
-}
-
-- (id)syncPATCH:(NSString *)URLString
-     parameters:(NSDictionary *)parameters
-      operation:(VAOAFHTTPRequestOperation *__autoreleasing *) operationPtr
-          error:(NSError *__autoreleasing *) outError
-{
-    return [self synchronouslyPerformMethod:@"PATCH" URLString:URLString parameters:parameters operation:operationPtr error:outError];
-}
- */
 @end
