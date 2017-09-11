@@ -36,32 +36,35 @@
 
 /// Creates NSArray of Type VAOCampaign and stores in self.campaignList
 - (void)updateCampaignListFromDictionary:(NSArray *)allCampaignDict {
+
     for (NSDictionary *campaignDict in allCampaignDict) {
         VAOCampaign *aCampaign = [[VAOCampaign alloc] initWithDictionary:campaignDict];
-        if (!aCampaign) {
-            VAOLogException(@"Invalid campaign received {%@}", campaignDict);
+        if (!aCampaign) continue;
+
+        if (aCampaign.campaignStatus == CampaignStatusExcluded) {
+            [self trackUserForCampaign:aCampaign];
             continue;
         }
-        if (aCampaign.campaignStatus != CampaignStatusRunning) {
-            continue;
-        }
-        if (aCampaign.trackUserOnLaunch) {
-            if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
+
+        if (aCampaign.campaignStatus == CampaignStatusRunning) {
+            if (aCampaign.trackUserOnLaunch) {
+                if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
+                    [self.campaignList addObject:aCampaign];
+                    VAOLogInfo(@"Received Campaign: '%@' Variation: '%@'", aCampaign, aCampaign.variation);
+                } else { //Segmentation failed
+                    VAOLogInfo(@"User cannot be part of campaign: '%@'", aCampaign);
+                }
+            } else {//Unconditionally add when NOT trackUserOnLaunch
                 [self.campaignList addObject:aCampaign];
                 VAOLogInfo(@"Received Campaign: '%@' Variation: '%@'", aCampaign, aCampaign.variation);
-            } else { //Segmentation failed
-                VAOLogInfo(@"User cannot be part of campaign: '%@'", aCampaign);
             }
-        } else {//Unconditionally add when NOT trackUserOnLaunch
-            [self.campaignList addObject:aCampaign];
-            VAOLogInfo(@"Received Campaign: '%@' Variation: '%@'", aCampaign, aCampaign.variation);
         }
     }
 
+    //TODO: Put in above loop, else put the reason of separtate loop
     //Track users for campaigns that have trackUserOnLaunch enabled
     for (VAOCampaign *campaign in self.campaignList) {
-        if (campaign.trackUserOnLaunch &&
-            ![VAOPersistantStore isTrackingUserForCampaign:campaign]) {
+        if (campaign.trackUserOnLaunch) {
             [self trackUserForCampaign:campaign];
         }
     }
@@ -70,6 +73,10 @@
 /// Sends network request to mark user tracking for campaign
 /// Sets "campaignId : variation id" in persistance store
 - (void)trackUserForCampaign:(VAOCampaign *)campaign {
+    if ([VAOPersistantStore isTrackingUserForCampaign:campaign]) {
+        // Return if already tracking
+        return;
+    }
     NSParameterAssert(campaign);
     VAOLogInfo(@"Making user part of Campaign: '%@'", campaign);
 
@@ -77,15 +84,19 @@
     if (!VAOPersistantStore.isReturningUser) VAOPersistantStore.returningUser = YES;
 
     [VAOPersistantStore trackUserForCampaign:campaign];
-    [VAOAPIClient.sharedInstance makeUserPartOfCampaign:campaign];
 
-    NSDictionary *campaignInfo = @{
-                                   @"vwo_campaign_name"  : campaign.name.copy,
-                                   @"vwo_campaign_id"    : [NSString stringWithFormat:@"%d", campaign.iD],
-                                   @"vwo_variation_name" : campaign.variation.name.copy,
-                                   @"vwo_variation_id"   : [NSString stringWithFormat:@"%d", campaign.variation.iD],
-                                   };
-    [NSNotificationCenter.defaultCenter postNotificationName:VWOUserStartedTrackingInCampaignNotification object:nil userInfo:campaignInfo];
+    //Send network request and notification only if the campaign is running
+    if (campaign.campaignStatus == CampaignStatusRunning) {
+        [VAOAPIClient.sharedInstance makeUserPartOfCampaign:campaign];
+
+        NSDictionary *campaignInfo = @{
+                                       @"vwo_campaign_name"  : campaign.name.copy,
+                                       @"vwo_campaign_id"    : [NSString stringWithFormat:@"%d", campaign.iD],
+                                       @"vwo_variation_name" : campaign.variation.name.copy,
+                                       @"vwo_variation_id"   : [NSString stringWithFormat:@"%d", campaign.variation.iD],
+                                       };
+        [NSNotificationCenter.defaultCenter postNotificationName:VWOUserStartedTrackingInCampaignNotification object:nil userInfo:campaignInfo];
+    }
 }
 
 - (void)markGoalConversion:(VAOGoal *)goal inCampaign:(VAOCampaign *)campaign withValue:(NSNumber *)number {

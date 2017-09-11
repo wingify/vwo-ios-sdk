@@ -32,9 +32,10 @@ static NSString * kUUID          = @"UUID";
 /// Stores "campaignId : "variationID" in User Activity["tracking"]
 + (void)trackUserForCampaign:(VAOCampaign *)campaign {
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
-    NSNumber *variationID = [NSNumber numberWithInt:campaign.variation.iD];
+    int variationID = campaign.campaignStatus == CampaignStatusExcluded ? 0 : campaign.variation.iD;
+
     NSMutableDictionary *userDict = [self dictionary];
-    userDict[kTracking][campaignID] = variationID;
+    userDict[kTracking][campaignID] = [NSNumber numberWithInt:variationID];
     [self writeToFile:userDict];
 }
 
