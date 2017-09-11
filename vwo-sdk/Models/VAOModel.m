@@ -42,6 +42,9 @@
             VAOLogException(@"Invalid campaign received {%@}", campaignDict);
             continue;
         }
+        if (aCampaign.campaignStatus != CampaignStatusRunning) {
+            continue;
+        }
         if (aCampaign.trackUserOnLaunch) {
             if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
                 [self.campaignList addObject:aCampaign];

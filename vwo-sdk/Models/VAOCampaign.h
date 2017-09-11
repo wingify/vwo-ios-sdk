@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, CampaignStatus) {
     CampaignStatusRunning,
-    CampaignStatusExcluded
+    CampaignStatusExcluded,
+    CampaignStatusPaused
 };
 
 @interface VAOCampaign : NSObject

@@ -20,64 +20,64 @@ static NSString * kVariation            = @"variations";
 
 @implementation VAOCampaign
 
-- (instancetype)initWithID:(int)iD
-                      name:(NSString *)name
-         trackUserOnLaunch:(BOOL) trackUserOnLaunch
-            campaignStatus:(CampaignStatus)campaignStatus
-             segmentObject:(nullable NSDictionary *)segmentObject
-                     goals:(NSArray<VAOGoal *>*)goals
-                 variation:(VAOVariation *)variation {
-    NSParameterAssert(name);
-    NSParameterAssert(goals);
-    NSParameterAssert(variation);
-    if (self = [super init]) {
-        self.iD                = iD;
-        self.name              = name;
-        self.trackUserOnLaunch = trackUserOnLaunch;
-        self.campaignStatus    = campaignStatus;
-        self.segmentObject     = segmentObject;
-        self.goals             = goals;
-        self.variation         = variation;
-    }
-    return [self init];
-}
-
 - (nullable instancetype)initWithDictionary:(NSDictionary *) campaignDict {
     NSParameterAssert(campaignDict);
-    NSArray *mustHaveKeys = @[kId, kName, kTrackUserOnLaunch, kStatus, kGoals, kVariation];
+
+    // Campaign ID and status are the must have keys for any type of campaign
+    NSArray *mustHaveKeys = @[kId, kStatus];
     NSArray *missingKeys  = [campaignDict keysMissingFrom:mustHaveKeys];
     if (missingKeys.count > 0) {
         VAOLogException(@"Keys missing [%@] for Campaign JSON {%@}", [missingKeys componentsJoinedByString:@", "], campaignDict);
         return nil;
     }
 
-    int iD                      = [campaignDict[kId] intValue];
-    NSString * name             = campaignDict[kName];
-    BOOL trackUserOnLaunch      = [campaignDict[kTrackUserOnLaunch] boolValue];
-    NSDictionary *segmentObject = campaignDict[kSegmentObject];
+    if (self = [super init]) {
+        self.iD = [campaignDict[kId] intValue];
+    }
+
+    NSString *statusString = campaignDict[kStatus];
+
+    if ([statusString isEqualToString:@"EXCLUED"]) {
+        self.campaignStatus = CampaignStatusExcluded;
+        return self;
+    }
+
+    if([statusString isEqualToString:@"PAUSED"]) {
+        self.campaignStatus = CampaignStatusPaused;
+        return self;
+    }
 
     // Status
-    CampaignStatus campaignStatus = CampaignStatusRunning;
-    NSString *statusString = campaignDict[kStatus];
     if ([statusString isEqualToString:@"RUNNING"]) {
-        campaignStatus = CampaignStatusRunning;
-    } else if ([statusString isEqualToString:@"EXCLUED"]) {
-        campaignStatus = CampaignStatusExcluded;
+
+        //Check key validity only if the campaigns are running
+        NSArray *mustHaveKeys = @[kName, kTrackUserOnLaunch, kGoals, kVariation];
+        NSArray *missingKeys  = [campaignDict keysMissingFrom:mustHaveKeys];
+        if (missingKeys.count > 0) {
+            VAOLogException(@"Keys missing [%@] for Running Campaign JSON {%@}", [missingKeys componentsJoinedByString:@", "], campaignDict);
+            return nil;
+        }
+
+        self.campaignStatus    = CampaignStatusRunning;
+        self.name              = campaignDict[kName];
+        self.trackUserOnLaunch = [campaignDict[kTrackUserOnLaunch] boolValue];
+        self.segmentObject     = campaignDict[kSegmentObject];
+
+        //Goals
+        NSMutableArray<VAOGoal *>*goals = [NSMutableArray new];
+        NSArray *goalsDict = campaignDict[kGoals];
+        for (NSDictionary *goalDict in goalsDict) {
+            VAOGoal *goal = [[VAOGoal alloc] initWithDictionary:goalDict];
+            if (goal) [goals addObject:goal];
+        }
+        self.goals = goals;
+
+        //Variation
+        VAOVariation *variation = [[VAOVariation alloc] initWithDictionary:campaignDict[kVariation]];
+        if (variation) self.variation = variation;
+        return self;
     }
-
-    //Goals
-    NSMutableArray<VAOGoal *>*goals = [NSMutableArray new];
-    NSArray *goalsDict = campaignDict[kGoals];
-    for (NSDictionary *goalDict in goalsDict) {
-        VAOGoal *goal = [[VAOGoal alloc] initWithDictionary:goalDict];
-        if (goal) [goals addObject:goal];
-    }
-
-    //Variation
-    VAOVariation *variation = [[VAOVariation alloc] initWithDictionary:campaignDict[kVariation]];
-    if (variation) [self setVariation:variation];
-
-    return [self initWithID:iD name:name trackUserOnLaunch:trackUserOnLaunch campaignStatus:campaignStatus segmentObject:segmentObject goals:goals variation:variation];
+    return nil;
 }
 
 - (nullable id)variationForKey:(NSString*)key {
