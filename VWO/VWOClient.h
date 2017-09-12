@@ -15,6 +15,9 @@ FOUNDATION_EXPORT NSString * const VWOUserStartedTrackingInCampaignNotification;
 
 @interface VWO : NSObject
 
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 /**
  * Set logLevel for the VWO. Default VWOLogLevelError
  */
