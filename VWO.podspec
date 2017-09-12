@@ -10,7 +10,6 @@ s.source           = { :git => "https://github.com/wingify/vwo-ios-sdk.git", :ta
 s.social_media_url = "http://twitter.com/wingify"
 s.platform     	   = :ios, '8.0'
 s.requires_arc 	   = true
-s.source_files     = 'vwo-sdk/**/*.{m,h}'
-s.xcconfig 		   = { 'OTHER_LDFLAGS' => '-ObjC' }
-s.prefix_header_file = 'vwo-sdk/VWO-Prefix.pch'
+s.source_files     = 'VWO/**/*.{m,h}'
+
 end
