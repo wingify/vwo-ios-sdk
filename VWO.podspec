@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name             = "VWO"
-s.version          = "2.0.0-beta5"
+s.version          = "2.0.0-beta6"
 s.summary          = "VWO SDK for A/B Testing iOS apps."
 s.description      = "VWO iOS SDK enables you to A/B test mobile apps."
 s.homepage         = "http://vwo.com"
