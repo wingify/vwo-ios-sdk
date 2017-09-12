@@ -112,7 +112,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         return;
     }
     lastUpdateTime  = NSDate.timeIntervalSinceReferenceDate;
-    VAOLogInfo(@"%lu campaigns received", (unsigned long)[(NSArray *) responseObject count]);
     [(NSArray *) responseObject writeToURL:VAOFile.campaignCache atomically:YES];
     [VAOModel.sharedInstance updateCampaignListFromDictionary:responseObject];
 }
@@ -126,7 +125,6 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
         lastUpdateTime        = NSDate.timeIntervalSinceReferenceDate;
         remoteDataDownloading = NO;
 
-        VAOLogInfo(@"%lu campaigns received", (unsigned long)[(NSArray *) responseObject count]);
         [(NSArray *) responseObject writeToURL:VAOFile.campaignCache atomically:YES];
         [VAOModel.sharedInstance updateCampaignListFromDictionary:responseObject];
         if (completionBlock) completionBlock();
