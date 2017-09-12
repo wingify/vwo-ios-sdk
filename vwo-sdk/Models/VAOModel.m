@@ -78,7 +78,6 @@
         return;
     }
     NSParameterAssert(campaign);
-    VAOLogInfo(@"Making user part of Campaign: '%@'", campaign);
 
     // Set User to be returning if not already set.
     if (!VAOPersistantStore.isReturningUser) VAOPersistantStore.returningUser = YES;
@@ -87,6 +86,7 @@
 
     //Send network request and notification only if the campaign is running
     if (campaign.campaignStatus == CampaignStatusRunning) {
+        VAOLogInfo(@"Making user part of Campaign: '%@'", campaign);
         [VAOAPIClient.sharedInstance makeUserPartOfCampaign:campaign];
 
         NSDictionary *campaignInfo = @{
