@@ -15,7 +15,7 @@ static NSString *accountId;
 
 + (NSString *)sdkVersion {
     //TODO: Put it in persistent storage or plist
-    return @"2.0.0-beta6";
+    return @"2.0.0-beta7";
 }
 
 + (void)setAppKeyID:(NSString *) key {
