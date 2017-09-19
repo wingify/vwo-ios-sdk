@@ -12,8 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VWOMessageQueue : NSObject
 
-+ (instancetype)sharedInstance;
--(void)pushMessage:(NSDictionary *) message;
+@property (readonly) NSUInteger count;
+@property (nullable, readonly) NSDictionary *peek;
+
+- (instancetype)initwithFileURL:(NSURL *)fileURL;
+- (void)enqueue:(NSDictionary *)object;
+- (void)removeFirst;
+
 
 @end
 

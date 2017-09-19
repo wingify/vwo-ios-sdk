@@ -13,5 +13,8 @@
 @property (class, readonly, copy) NSURL *activity;
 @property (class, readonly, copy) NSURL *messages;
 @property (class, readonly, copy) NSURL *campaignCache;
+@property (class, readonly, copy) NSURL *messageQueue;
+@property (class, readonly, copy) NSURL *failedMessageQueue;
+
 
 @end

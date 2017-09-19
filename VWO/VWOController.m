@@ -16,6 +16,9 @@
 #import "VWOFile.h"
 #import "VWOCampaign.h"
 #import <UIKit/UIKit.h>
+#import "VWOMessageQueue.h"
+#import "VWOFile.h"
+#import "NSURLSession+Synchronous.h"
 
 static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
@@ -24,6 +27,8 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     NSTimeInterval lastUpdateTime;
     NSMutableDictionary *previewInfo; // holds the set of changes to be used during preview mode
     NSMutableDictionary *customVariables;
+    VWOMessageQueue *messageQueue;
+    NSTimer *messageQueueFlushtimer;
 }
 
 - (void)initializeAsynchronously:(BOOL)async
@@ -37,7 +42,44 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     } else {
         [self fetchCampaignsSynchronouslyForTimeout:timeout];
     }
+    messageQueue = [[VWOMessageQueue alloc] initwithFileURL:VWOFile.messageQueue];
+    messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:20 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        [self flushQueue:messageQueue];
+    }];
     [self addBackgroundListeners];
+}
+
+static NSString *const kWaitTill = @"waitTill";
+static NSString *const kURL = @"url";
+
+- (void)flushQueue:(VWOMessageQueue *)queue {
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSUInteger count = queue.count;
+        while (count > 0) {
+            NSDictionary *urlDict = queue.peek;
+            if (urlDict == nil) continue;
+
+            // If now has not crossed WaitTill time then dont consider this message
+            if (urlDict[kWaitTill] != nil) {
+                NSTimeInterval now = NSDate.date.timeIntervalSince1970;
+                if (now < [urlDict[kWaitTill] doubleValue]) {
+                    continue;
+                }
+            }
+            NSString *url = urlDict[kURL];
+            NSError *error = nil;
+            NSURLResponse *response = nil;
+            [NSURLSession.sharedSession sendSynchronousDataTaskWithURL:[NSURL URLWithString:url] returningResponse:&response error:&error];
+            //If no internet connection break; No need to process other messages in queue
+            if (response != nil) {
+                NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+                if (statusCode == 200) {
+                    [queue removeFirst];
+                }
+            }
+            
+        }
+    });
 }
 
 - (void)addBackgroundListeners {
@@ -92,7 +134,7 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     }
 }
 
--(void)dealloc{
+- (void)dealloc{
     [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 

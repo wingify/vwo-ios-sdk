@@ -7,62 +7,67 @@
 //
 
 #import "VWOMessageQueue.h"
+#import "VWOCampaign.h"
+#import "VWOGoal.h"
 
 NSTimeInterval kTimerIntervalMQ = 20.0;
 NSUInteger kQueueThreshold = 5;
 
-@implementation VWOMessageQueue {
-    NSTimer *timer;
-    NSMutableArray *queue;
-    BOOL inTransition;
-}
+@interface VWOMessageQueue ()
 
-+ (instancetype)sharedInstance {
-    static VWOMessageQueue *instance = nil;
-    static dispatch_once_t oncePredicate;
-    dispatch_once(&oncePredicate, ^{
-        instance = [[self alloc] init];
-    });
-    return instance;
-}
+@property NSURL *fileURL;
+@property (nonatomic) dispatch_queue_t queue;
 
--(instancetype)init {
-    self = [super init];
+@end
+
+@implementation VWOMessageQueue
+
+- (instancetype)initwithFileURL:(NSURL *)fileURL {
+    self = [self init];
     if (self) {
-        timer = [NSTimer scheduledTimerWithTimeInterval:kTimerIntervalMQ
-                                                 target:self
-                                               selector:@selector(timerActivity)
-                                               userInfo:nil
-                                                repeats:YES];
-        queue = [NSMutableArray array];//TODO: Check if there are any messages in file
-        inTransition = NO;
+        self.fileURL = fileURL;
+
+        if (![NSFileManager.defaultManager fileExistsAtPath:fileURL.path]){
+            [@[] writeToURL:fileURL atomically:true];
+        }
+
+        _queue = dispatch_queue_create("vwo.messages", DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
 }
 
-- (void)timerActivity {
-    [self flushMessages];
+- (void)enqueue:(NSDictionary *)object {
+    dispatch_barrier_async(_queue, ^{
+        NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:_fileURL];
+        [array addObject:object];
+        [array writeToURL:_fileURL atomically:YES];
+    });
 }
 
--(void)pushMessage:(NSDictionary *) message {
-    [queue addObject:message];
-    
-    if (queue.count > kQueueThreshold) {
-        [self flushMessages];
-    }
+- (void)removeFirst {
+    dispatch_barrier_async(_queue, ^{
+        NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:_fileURL];
+        if (array.count == 0) { return;}
+        [array removeObjectAtIndex:0];
+        [array writeToURL:_fileURL atomically:YES];
+    });
 }
 
--(void)flushMessages {
-    inTransition = YES;
-    //Send all messages in message queue
-//    for (NSDictionary *message in queue) {
-//        [NetworkManager sendMessage:message completion:^{
-//            mark message as sent;
-//        }];
-//    }
-    
-    //Remove all the messages that are marked as sent
-    inTransition = NO;
+- (NSDictionary *)peek {
+    __block NSDictionary *firstObject;
+    dispatch_sync(_queue, ^{
+        NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:_fileURL];
+        firstObject = array.firstObject;
+    });
+    return firstObject;
+}
+
+- (NSUInteger) count {
+    __block NSUInteger count;
+    dispatch_sync(_queue, ^{
+        count = [NSArray arrayWithContentsOfURL:_fileURL].count;
+    });
+    return count;
 }
 
 @end

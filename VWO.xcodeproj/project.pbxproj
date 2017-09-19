@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E35484F51F713C2E00E14D2E /* NSURLSession+Synchronous.h in Headers */ = {isa = PBXBuildFile; fileRef = E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */; };
+		E35484F61F713C2E00E14D2E /* NSURLSession+Synchronous.m in Sources */ = {isa = PBXBuildFile; fileRef = E35484F41F713C2E00E14D2E /* NSURLSession+Synchronous.m */; };
 		E39814E01F6288C80035D519 /* VWO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39814D61F6288C80035D519 /* VWO.framework */; };
 		E39814E51F6288C80035D519 /* VWOTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E39814E41F6288C80035D519 /* VWOTests.m */; };
 		E39814E71F6288C80035D519 /* VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E39814D91F6288C80035D519 /* VWO.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -73,6 +75,8 @@
 		E398159B1F6293BC0035D519 /* NSCalendar+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815971F6293BC0035D519 /* NSCalendar+VWO.m */; };
 		E398159C1F6293BC0035D519 /* NSDictionary+VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815981F6293BC0035D519 /* NSDictionary+VWO.h */; };
 		E398159D1F6293BC0035D519 /* NSDictionary+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815991F6293BC0035D519 /* NSDictionary+VWO.m */; };
+		E3D5F7FD1F6BD86C0011C43C /* VWOMakeURL.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D5F7FB1F6BD86C0011C43C /* VWOMakeURL.h */; };
+		E3D5F7FE1F6BD86C0011C43C /* VWOMakeURL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D5F7FC1F6BD86C0011C43C /* VWOMakeURL.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +92,8 @@
 /* Begin PBXFileReference section */
 		E319151E1F67F1B900FC1695 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E31915231F6802D500FC1695 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSession+Synchronous.h"; sourceTree = "<group>"; };
+		E35484F41F713C2E00E14D2E /* NSURLSession+Synchronous.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSession+Synchronous.m"; sourceTree = "<group>"; };
 		E39814D61F6288C80035D519 /* VWO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VWO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39814D91F6288C80035D519 /* VWO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWO.h; sourceTree = "<group>"; };
 		E39814DA1F6288C80035D519 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -101,10 +107,10 @@
 		E398151B1F6290EB0035D519 /* VWOAFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VWOAFHTTPRequestOperation.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E398151C1F6290EB0035D519 /* VWOAFHTTPRequestOperationManager+Synchronous.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "VWOAFHTTPRequestOperationManager+Synchronous.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		E398151D1F6290EB0035D519 /* VWOAFHTTPRequestOperationManager+Synchronous.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "VWOAFHTTPRequestOperationManager+Synchronous.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		E398151E1F6290EB0035D519 /* VWOAFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VWOAFHTTPRequestOperationManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		E398151E1F6290EB0035D519 /* VWOAFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VWOAFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
 		E398151F1F6290EB0035D519 /* VWOAFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOAFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
 		E39815201F6290EB0035D519 /* VWOAFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOAFHTTPSessionManager.h; sourceTree = "<group>"; };
-		E39815211F6290EB0035D519 /* VWOAFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VWOAFHTTPSessionManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		E39815211F6290EB0035D519 /* VWOAFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VWOAFHTTPSessionManager.m; sourceTree = "<group>"; };
 		E39815221F6290EB0035D519 /* VWOAFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOAFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		E39815231F6290EB0035D519 /* VWOAFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOAFNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		E39815241F6290EB0035D519 /* VWOAFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOAFSecurityPolicy.h; sourceTree = "<group>"; };
@@ -112,7 +118,7 @@
 		E39815261F6290EB0035D519 /* VWOAFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOAFURLConnectionOperation.h; sourceTree = "<group>"; };
 		E39815271F6290EB0035D519 /* VWOAFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOAFURLConnectionOperation.m; sourceTree = "<group>"; };
 		E39815281F6290EB0035D519 /* VWOAFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOAFURLRequestSerialization.h; sourceTree = "<group>"; };
-		E39815291F6290EB0035D519 /* VWOAFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VWOAFURLRequestSerialization.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		E39815291F6290EB0035D519 /* VWOAFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VWOAFURLRequestSerialization.m; sourceTree = "<group>"; };
 		E398152A1F6290EB0035D519 /* VWOAFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOAFURLResponseSerialization.h; sourceTree = "<group>"; };
 		E398152B1F6290EB0035D519 /* VWOAFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VWOAFURLResponseSerialization.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E398152C1F6290EB0035D519 /* VWOAFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VWOAFURLSessionManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -157,6 +163,8 @@
 		E39815971F6293BC0035D519 /* NSCalendar+VWO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+VWO.m"; sourceTree = "<group>"; };
 		E39815981F6293BC0035D519 /* NSDictionary+VWO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+VWO.h"; sourceTree = "<group>"; };
 		E39815991F6293BC0035D519 /* NSDictionary+VWO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VWO.m"; sourceTree = "<group>"; };
+		E3D5F7FB1F6BD86C0011C43C /* VWOMakeURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOMakeURL.h; sourceTree = "<group>"; };
+		E3D5F7FC1F6BD86C0011C43C /* VWOMakeURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOMakeURL.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +212,8 @@
 				E39814F11F628B340035D519 /* VWOClient.m */,
 				E39815711F6291960035D519 /* VWOAPIClient.h */,
 				E39815721F6291960035D519 /* VWOAPIClient.m */,
+				E3D5F7FB1F6BD86C0011C43C /* VWOMakeURL.h */,
+				E3D5F7FC1F6BD86C0011C43C /* VWOMakeURL.m */,
 				E39815731F6291960035D519 /* VWOController.h */,
 				E39815741F6291960035D519 /* VWOController.m */,
 				E398158B1F6291B50035D519 /* VWOSocketClient.h */,
@@ -306,6 +316,8 @@
 				E39815971F6293BC0035D519 /* NSCalendar+VWO.m */,
 				E39815981F6293BC0035D519 /* NSDictionary+VWO.h */,
 				E39815991F6293BC0035D519 /* NSDictionary+VWO.m */,
+				E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */,
+				E35484F41F713C2E00E14D2E /* NSURLSession+Synchronous.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -349,6 +361,7 @@
 				E39815871F6291970035D519 /* VWOPersistantStore.h in Headers */,
 				E39815321F6290EB0035D519 /* VWOAFHTTPRequestOperationManager.h in Headers */,
 				E398152E1F6290EB0035D519 /* VWOAFHTTPRequestOperation.h in Headers */,
+				E35484F51F713C2E00E14D2E /* NSURLSession+Synchronous.h in Headers */,
 				E39815631F6291680035D519 /* VWORavenClient_Private.h in Headers */,
 				E398155F1F6291680035D519 /* VWOVariation.h in Headers */,
 				E398155D1F6291680035D519 /* VWOModel.h in Headers */,
@@ -359,6 +372,7 @@
 				E39815931F6291C10035D519 /* VWOSegmentEvaluator.h in Headers */,
 				E39815341F6290EB0035D519 /* VWOAFHTTPSessionManager.h in Headers */,
 				E39814F21F628B340035D519 /* VWOClient.h in Headers */,
+				E3D5F7FD1F6BD86C0011C43C /* VWOMakeURL.h in Headers */,
 				E398157D1F6291970035D519 /* VWOAPIClient.h in Headers */,
 				E398159C1F6293BC0035D519 /* NSDictionary+VWO.h in Headers */,
 				E39815661F6291680035D519 /* socket.io.js.h in Headers */,
@@ -474,6 +488,7 @@
 				E39814F31F628B340035D519 /* VWOClient.m in Sources */,
 				E39815651F6291680035D519 /* VWORavenConfig.m in Sources */,
 				E39815941F6291C10035D519 /* VWOSegmentEvaluator.m in Sources */,
+				E35484F61F713C2E00E14D2E /* NSURLSession+Synchronous.m in Sources */,
 				E398159D1F6293BC0035D519 /* NSDictionary+VWO.m in Sources */,
 				E39815861F6291970035D519 /* VWOLogger.m in Sources */,
 				E398153B1F6290EB0035D519 /* VWOAFURLConnectionOperation.m in Sources */,
@@ -490,6 +505,7 @@
 				E398155A1F6291680035D519 /* VWOGoal.m in Sources */,
 				E39815351F6290EB0035D519 /* VWOAFHTTPSessionManager.m in Sources */,
 				E398155E1F6291680035D519 /* VWOModel.m in Sources */,
+				E3D5F7FE1F6BD86C0011C43C /* VWOMakeURL.m in Sources */,
 				E39815331F6290EB0035D519 /* VWOAFHTTPRequestOperationManager.m in Sources */,
 				E39815801F6291970035D519 /* VWOController.m in Sources */,
 				E39815371F6290EB0035D519 /* VWOAFNetworkReachabilityManager.m in Sources */,
@@ -632,6 +648,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = VWO/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -650,6 +667,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = VWO/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
