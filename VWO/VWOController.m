@@ -52,12 +52,14 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
 
 static NSString *const kWaitTill = @"waitTill";
 static NSString *const kURL = @"url";
+static NSString *const kRetryCount = @"retry";
 
+// Sends request on all the url on a background thread
 - (void)flushQueue:(VWOMessageQueue *)queue {
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSUInteger count = queue.count;
         while (count > 0) {
-            NSDictionary *urlDict = queue.peek;
+            NSMutableDictionary *urlDict = [queue.peek mutableCopy];
 
             // Queue is empty
             if (urlDict == nil) continue;
@@ -75,19 +77,25 @@ static NSString *const kURL = @"url";
             NSURLResponse *response = nil;
             [NSURLSession.sharedSession sendSynchronousDataTaskWithURL:[NSURL URLWithString:url] returningResponse:&response error:&error];
 
+            [queue removeFirst];
+
             //If No internet connection break; No need to process other messages in queue
-            if (error.code == NSURLErrorNotConnectedToInternet) {
+            if (error != nil && error.code == NSURLErrorNotConnectedToInternet) {
                 break;
+                //Note: If there is other error but response status is 200, still it might be a successful request
             }
 
             if (response != nil) {
+                // Failure is confirmed only when status is not 200
                 NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
-                if (statusCode == 200) {
-                    [queue removeFirst];
+                if (statusCode != 200) {
+                    urlDict[kRetryCount] = @([urlDict[kRetryCount] intValue] + 1);
+                    [queue enqueue:urlDict];
                 }
             }
+
             count -= 1;
-        }//whileßß
+        }//while
     });
 }
 
