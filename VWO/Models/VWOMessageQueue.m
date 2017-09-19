@@ -22,7 +22,7 @@ NSUInteger kQueueThreshold = 5;
 
 @implementation VWOMessageQueue
 
-- (instancetype)initwithFileURL:(NSURL *)fileURL {
+- (instancetype)initWithFileURL:(NSURL *)fileURL {
     self = [self init];
     if (self) {
         self.fileURL = fileURL;

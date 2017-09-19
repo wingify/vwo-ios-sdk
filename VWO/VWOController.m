@@ -42,7 +42,8 @@ static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
     } else {
         [self fetchCampaignsSynchronouslyForTimeout:timeout];
     }
-    messageQueue = [[VWOMessageQueue alloc] initwithFileURL:VWOFile.messageQueue];
+
+    messageQueue = [[VWOMessageQueue alloc] initWithFileURL:VWOFile.messageQueue];
     messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:20 repeats:YES block:^(NSTimer * _Nonnull timer) {
         [self flushQueue:messageQueue];
     }];
@@ -57,28 +58,36 @@ static NSString *const kURL = @"url";
         NSUInteger count = queue.count;
         while (count > 0) {
             NSDictionary *urlDict = queue.peek;
+
+            // Queue is empty
             if (urlDict == nil) continue;
 
-            // If now has not crossed WaitTill time then dont consider this message
+            // If now() < WaitTill time then dont consider this message
             if (urlDict[kWaitTill] != nil) {
                 NSTimeInterval now = NSDate.date.timeIntervalSince1970;
                 if (now < [urlDict[kWaitTill] doubleValue]) {
                     continue;
                 }
             }
+
             NSString *url = urlDict[kURL];
             NSError *error = nil;
             NSURLResponse *response = nil;
             [NSURLSession.sharedSession sendSynchronousDataTaskWithURL:[NSURL URLWithString:url] returningResponse:&response error:&error];
-            //If no internet connection break; No need to process other messages in queue
+
+            //If No internet connection break; No need to process other messages in queue
+            if (error.code == NSURLErrorNotConnectedToInternet) {
+                break;
+            }
+
             if (response != nil) {
                 NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
                 if (statusCode == 200) {
                     [queue removeFirst];
                 }
             }
-            
-        }
+            count -= 1;
+        }//whileßß
     });
 }
 

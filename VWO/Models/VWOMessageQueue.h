@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSUInteger count;
 @property (nullable, readonly) NSDictionary *peek;
 
-- (instancetype)initwithFileURL:(NSURL *)fileURL;
+- (instancetype)initWithFileURL:(NSURL *)fileURL;
 - (void)enqueue:(NSDictionary *)object;
 - (void)removeFirst;
 
