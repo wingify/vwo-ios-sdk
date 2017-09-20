@@ -71,7 +71,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 
 + (id)variationForKey:(NSString*)key {
     NSParameterAssert(key);
-    return [[VWOController sharedInstance] variationForKey:key];
+    return [VWOController.sharedInstance variationForKey:key];
 }
 
 + (id)variationForKey:(NSString*)key defaultValue:(id)defaultValue {
@@ -84,12 +84,12 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 
 + (void)markConversionForGoal:(NSString*)goal {
     NSParameterAssert(goal);
-    [[VWOController sharedInstance] markConversionForGoal:goal withValue:nil];
+    [VWOController.sharedInstance markConversionForGoal:goal withValue:nil];
 }
 
 + (void)markConversionForGoal:(NSString*)goal withValue:(double)value {
     NSParameterAssert(goal);
-    [[VWOController sharedInstance] markConversionForGoal:goal withValue:[NSNumber numberWithDouble:value]];
+    [VWOController.sharedInstance markConversionForGoal:goal withValue:[NSNumber numberWithDouble:value]];
 }
 
 + (void)setCustomVariable:(NSString *)key withValue:(NSString *)value {

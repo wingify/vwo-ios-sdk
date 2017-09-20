@@ -47,7 +47,7 @@
     
     socket.onDisconnect = ^{
         VWOLogDebug(@"Socket disconnected");
-        [[VWOController sharedInstance] setPreviewMode:NO];
+        [VWOController.sharedInstance setPreviewMode:NO];
     };
     
     socket.onConnectError = ^(NSDictionary *error) {
@@ -60,7 +60,7 @@
     
     [socket on:@"browser_connect" callback:^(SIOParameterArray *arguments) {
         VWOLogInfo(@"Socket browser connected");
-        [[VWOController sharedInstance] setPreviewMode:YES];
+        [VWOController.sharedInstance setPreviewMode:YES];
         id object = [arguments firstObject];
         if (object && object[@"name"]) {
             VWOLogInfo(@"Preview mode: Connected with: '%@'", object[@"name"]);
@@ -69,7 +69,7 @@
 
     [socket on:@"browser_disconnect" callback:^(SIOParameterArray *arguments) {
         VWOLogInfo(@"Preview mode Disconnected");
-        [[VWOController sharedInstance] setPreviewMode:NO];
+        [VWOController.sharedInstance setPreviewMode:NO];
     }];
     
     [socket on:@"receive_variation" callback:^(SIOParameterArray *arguments) {
@@ -84,7 +84,7 @@
         [socket emit:@"receive_variation_success" args:[NSArray arrayWithObject:@{@"variationId":expObject[@"variationId"]}]];
         
         if (arguments.count) {
-            [[VWOController sharedInstance] preview:[arguments firstObject]];
+            [VWOController.sharedInstance preview:[arguments firstObject]];
             VWOLogInfo(@"VWO: In preview mode. Variation Received: %@", [arguments firstObject][@"json"]);
         }
     }];
