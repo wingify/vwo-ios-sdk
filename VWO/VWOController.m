@@ -162,7 +162,7 @@ static NSString *const kRetryCount = @"retry";
                     VWOLogDebug(@"Re inserting message with retry count %@", urlDict[kRetryCount]);
                     [queue enqueue:urlDict];
                 } else {
-                    VWOLogInfo(@"Successfully sent message");
+                    VWOLogInfo(@"Successfully sent message %d", statusCode);
                 }
             }
 
@@ -247,7 +247,6 @@ static NSString *const kRetryCount = @"retry";
                                    };
     [NSNotificationCenter.defaultCenter postNotificationName:VWOUserStartedTrackingInCampaignNotification object:nil userInfo:campaignInfo];
 }
-
 
 - (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value {
     VWOLogInfo(@"Set variable: %@ = %@", variable, value);
