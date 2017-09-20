@@ -8,7 +8,6 @@
 
 #import "VWOClient.h"
 
-#import "VWOModel.h"
 #import "VWOController.h"
 #import "VWORavenClient.h"
 #import "VWOSocketClient.h"

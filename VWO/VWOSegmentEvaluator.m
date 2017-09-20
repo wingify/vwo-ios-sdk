@@ -8,7 +8,6 @@
 
 #import "VWOSegmentEvaluator.h"
 #import "VWOPersistantStore.h"
-#import "VWOModel.h"
 #import "NSCalendar+VWO.h"
 #import "VWODeviceInfo.h"
 #import "VWOLogger.h"
@@ -52,11 +51,11 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
 @implementation VWOSegmentEvaluator
 
-+ (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment {
++ (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment customVariables:(NSDictionary *)customVariable {
     if (!segment) return YES;
     if ([segment[kType] isEqualToString:@"custom"]) {
         NSArray *partialSegments = (NSArray *)segment[kPartialSegments];
-        return [self evaluateCustomSegmentation:partialSegments];
+        return [self evaluateCustomSegmentation:partialSegments customVariable:customVariable];
     } else if ([segment[kType] isEqualToString:@"predefined"]) {
         return [self evaluatePredefinedSegmentation:segment[kSegmentCode]];
     }
@@ -76,7 +75,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
     return NO;
 }
 
-+ (BOOL)evaluateCustomSegmentation:(NSArray*)partialSegments {
++ (BOOL)evaluateCustomSegmentation:(NSArray*)partialSegments customVariable:(NSDictionary *)customVariable{
 
     NSMutableArray *stack = [NSMutableArray array];
     for (NSDictionary *partialSegment in partialSegments) {
@@ -95,7 +94,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
         NSString *lOperandValue = partialSegment[@"lOperandValue"];
         SegmentationType segmentType = [partialSegment[@"type"] intValue];
 
-        BOOL currentValue = [self evaluateSegmentForOperand:operandValue lOperand:lOperandValue operator:operator type:segmentType];
+        BOOL currentValue = [self evaluateSegmentForOperand:operandValue lOperand:lOperandValue operator:operator type:segmentType customVariable:customVariable];
 
         if (logicalOperator && leftParenthesis) {
             [stack addObject:logicalOperator];
@@ -143,7 +142,8 @@ static NSString * kReturningVisitor = @"returning_visitor";
 +(BOOL)evaluateSegmentForOperand:(NSArray *)operand
                         lOperand:(NSString *)lOperand
                         operator:(int)operator
-                            type:(SegmentationType)segmentType {
+                            type:(SegmentationType)segmentType
+                 customVariable:(NSDictionary *)customVariable{
 
     if (operand.count == 0) {
         return YES;
@@ -215,7 +215,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
         }
 
         case SegmentationTypeCustomVariable: {
-            NSString *currentValue = VWOModel.sharedInstance.customVariables[lOperand];
+            NSString *currentValue = customVariable[lOperand];
             if (!currentValue) return NO;
 
             NSString *targetValue = [operand firstObject];
@@ -248,3 +248,4 @@ static NSString * kReturningVisitor = @"returning_visitor";
 }
 
 @end
+

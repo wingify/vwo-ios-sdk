@@ -24,7 +24,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     return [NSString stringWithFormat:@"%f", ((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1)];
 }
 
-+ (NSDictionary *)extraParameters:(NSDate *)date {
++ (NSDictionary *)extraParametersWithDate:(NSDate *)date {
     return @{@"lt" : [NSString stringWithFormat:@"%f", date.timeIntervalSince1970],
              @"v"  : VWOSDK.version,
              @"i"  : VWOSDK.appKey,
@@ -67,7 +67,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
                      [NSURLQueryItem queryItemWithName:@"u" value:VWOPersistantStore.UUID],
                      [NSURLQueryItem queryItemWithName:@"s" value: [NSString stringWithFormat:@"%lu", (unsigned long)VWOPersistantStore.sessionCount]],
                      [NSURLQueryItem queryItemWithName:@"random" value: [self randomNumber]],
-                     [NSURLQueryItem queryItemWithName:@"ed" value: [self extraParameters:date].toString],
+                     [NSURLQueryItem queryItemWithName:@"ed" value: [self extraParametersWithDate:date].toString],
                      ]];
     return components.URL;
 }
@@ -87,7 +87,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
                      [NSURLQueryItem queryItemWithName:@"u" value:VWOPersistantStore.UUID],
                      [NSURLQueryItem queryItemWithName:@"s" value: [NSString stringWithFormat:@"%lu", (unsigned long)VWOPersistantStore.sessionCount]],
                      [NSURLQueryItem queryItemWithName:@"random" value: [self randomNumber]],
-                     [NSURLQueryItem queryItemWithName:@"ed" value: [self extraParameters:date].toString],
+                     [NSURLQueryItem queryItemWithName:@"ed" value: [self extraParametersWithDate:date].toString],
                      [NSURLQueryItem queryItemWithName:@"goal_id" value: [NSString stringWithFormat:@"%d", goal.iD]],
                      ]];
 
