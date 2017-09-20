@@ -54,7 +54,7 @@ NSTimer *_timer;
 
 - (void) startTimer {
     _timer = [NSTimer scheduledTimerWithTimeInterval:kTimerInterval
-                                              target:[VWOAPIClient sharedInstance]
+                                              target:VWOAPIClient.sharedInstance
                                             selector:@selector(sendAllPendingMessages)
                                             userInfo:nil
                                              repeats:YES];
@@ -214,7 +214,7 @@ NSTimer *_timer;
                     // but here it is ok as we are breaking from iteration right after deletion.
                     [_pendingMessages removeObjectAtIndex:i];
                     [_transittingMessages removeObjectIdenticalTo:transitId];
-                    [[VWOModel sharedInstance] saveMessages:[_pendingMessages copy]];
+                    [VWOModel.sharedInstance saveMessages:[_pendingMessages copy]];
                     break;
                 }
             }

@@ -103,7 +103,7 @@
     NSParameterAssert(campaign);
     VWOLogInfo(@"Marking Goal: '%@'", goal);
     [VWOPersistantStore markGoalConversion:goal];
-    [[VWOAPIClient sharedInstance] markConversionForGoalId:goal.iD experimentId:campaign.iD variationId:campaign.variation.iD revenue:number];
+    [VWOAPIClient.sharedInstance markConversionForGoalId:goal.iD experimentId:campaign.iD variationId:campaign.variation.iD revenue:number];
 }
 
 - (void)saveMessages:(NSArray *)messages {

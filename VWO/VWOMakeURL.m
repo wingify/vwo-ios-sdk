@@ -65,7 +65,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
                      [NSURLQueryItem queryItemWithName:@"account_id" value:VWOSDK.accountID],
                      [NSURLQueryItem queryItemWithName:@"combination" value:[NSString stringWithFormat:@"%d", campaign.variation.iD]],
                      [NSURLQueryItem queryItemWithName:@"u" value:VWOPersistantStore.UUID],
-                     [NSURLQueryItem queryItemWithName:@"s" value: [NSString stringWithFormat:@"%lu", VWOPersistantStore.sessionCount]],
+                     [NSURLQueryItem queryItemWithName:@"s" value: [NSString stringWithFormat:@"%lu", (unsigned long)VWOPersistantStore.sessionCount]],
                      [NSURLQueryItem queryItemWithName:@"random" value: [self randomNumber]],
                      [NSURLQueryItem queryItemWithName:@"ed" value: [self extraParameters:date].toString],
                      ]];
@@ -85,7 +85,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
                      [NSURLQueryItem queryItemWithName:@"account_id" value:VWOSDK.accountID],
                      [NSURLQueryItem queryItemWithName:@"combination" value:[NSString stringWithFormat:@"%d", campaign.variation.iD]],
                      [NSURLQueryItem queryItemWithName:@"u" value:VWOPersistantStore.UUID],
-                     [NSURLQueryItem queryItemWithName:@"s" value: [NSString stringWithFormat:@"%lu", VWOPersistantStore.sessionCount]],
+                     [NSURLQueryItem queryItemWithName:@"s" value: [NSString stringWithFormat:@"%lu", (unsigned long)VWOPersistantStore.sessionCount]],
                      [NSURLQueryItem queryItemWithName:@"random" value: [self randomNumber]],
                      [NSURLQueryItem queryItemWithName:@"ed" value: [self extraParameters:date].toString],
                      [NSURLQueryItem queryItemWithName:@"goal_id" value: [NSString stringWithFormat:@"%d", goal.iD]],

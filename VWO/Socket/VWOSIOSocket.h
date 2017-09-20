@@ -27,9 +27,9 @@ typedef NSArray SIOParameterArray;
 + (void)socketWithHost:(NSString *)hostURL reconnectAutomatically:(BOOL)reconnectAutomatically attemptLimit:(NSInteger)attempts withDelay:(NSTimeInterval)reconnectionDelay maximumDelay:(NSTimeInterval)maximumDelay timeout:(NSTimeInterval)timeout withTransports:(NSArray *)transports response:(void(^)(VWOSIOSocket *socket))response;
 
 // Event responders
-@property (nonatomic, copy) void (^onConnect)();
+@property (nonatomic, copy) void (^onConnect)(void);
 @property (nonatomic, copy) void (^onConnectError)(NSDictionary *errorInfo);
-@property (nonatomic, copy) void (^onDisconnect)();
+@property (nonatomic, copy) void (^onDisconnect)(void);
 @property (nonatomic, copy) void (^onError)(NSDictionary *errorInfo);
 
 @property (nonatomic, copy) void (^onReconnect)(NSInteger numberOfAttempts);
