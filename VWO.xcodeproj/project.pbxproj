@@ -175,7 +175,6 @@
 				E39815421F6291680035D519 /* Models */,
 				E398154D1F6291680035D519 /* Raven */,
 				E39815531F6291680035D519 /* Socket */,
-				E39815191F6290EB0035D519 /* AFNetworking */,
 				E39814DA1F6288C80035D519 /* Info.plist */,
 				E39814F41F628CAA0035D519 /* VWO.podspec */,
 				E319151E1F67F1B900FC1695 /* README.md */,
@@ -191,13 +190,6 @@
 				E39814E61F6288C80035D519 /* Info.plist */,
 			);
 			path = VWOTests;
-			sourceTree = "<group>";
-		};
-		E39815191F6290EB0035D519 /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AFNetworking;
 			sourceTree = "<group>";
 		};
 		E39815421F6291680035D519 /* Models */ = {
