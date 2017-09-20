@@ -34,9 +34,11 @@ static NSString *const kRetryCount = @"retry";
 @end
 
 @implementation VWOController {
-    NSMutableDictionary *previewInfo; // holds the set of changes to be used during preview mode
+    //TODO: Move this to header file. Use this directly from VWOSocketClient
+    NSMutableDictionary *previewInfo;
     VWOMessageQueue *messageQueue;
     NSTimer *messageQueueFlushtimer;
+    NSTimer *reloadCampaignsTimer;
 }
 
 - (id)init {
@@ -104,6 +106,16 @@ static NSString *const kRetryCount = @"retry";
     [notification addObserver:self
                      selector:@selector(applicationWillEnterForeground)
                          name:UIApplicationWillEnterForegroundNotification object:nil];
+}
+
+- (void)applicationDidEnterBackground {
+    VWOLogDebug(@"applicationDidEnterBackground");
+}
+
+- (void)applicationWillEnterForeground {
+    VWOLogDebug(@"applicationWillEnterForeground");
+    //TODO: Start timer
+    // IF campaign info is 1 hr old refetch it
 }
 
 // Sends request on all the url on a background thread
@@ -216,7 +228,8 @@ static NSString *const kRetryCount = @"retry";
 
     //Send network request and notification only if the campaign is running
     if (campaign.status == CampaignStatusRunning) {
-        VWOLogDebug(@"%@ is running. Adding to Queue. Sending notification");
+        VWOLogDebug(@"%@ is running. Adding to Queue. Sending notification", campaign
+                    );
         NSURL *url = [VWOMakeURL forMakingUserPartOfCampaign:campaign dateTime:NSDate.date];
         [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
 
@@ -239,14 +252,6 @@ static NSString *const kRetryCount = @"retry";
 - (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value {
     VWOLogInfo(@"Set variable: %@ = %@", variable, value);
     _customVariables[variable] = value;
-}
-
-- (void)applicationDidEnterBackground {
-}
-
-- (void)applicationWillEnterForeground {
-    //TODO: Start timer
-    // IF campaign info is 1 hr old refetch it
 }
 
 - (void)dealloc{
