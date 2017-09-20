@@ -62,6 +62,7 @@ static NSString *const kRetryCount = @"retry";
                          timeout:(NSTimeInterval)timeout
                     withCallback:(void(^)(void))completionBlock
                          failure:(void(^)(void))failureBlock {
+    VWOLogInfo(@"Controller initialised");
     VWOPersistantStore.sessionCount += 1;
     if (async) {
         [self fetchCampaignsAsynchronouslyWithCallback:completionBlock failure:failureBlock];
@@ -78,6 +79,7 @@ static NSString *const kRetryCount = @"retry";
 }
 
 - (void)setupSentry {
+    VWOLogDebug(@"Sentry setup");
     NSDictionary *tags = @{@"VWO Account id" : VWOSDK.accountID,
                            @"SDK Version" : VWOSDK.version};
 
@@ -93,6 +95,7 @@ static NSString *const kRetryCount = @"retry";
 }
 
 - (void)addBackgroundListeners {
+    VWOLogDebug(@"Background listeners added");
     NSNotificationCenter *notification = NSNotificationCenter.defaultCenter;
     [notification addObserver:self
                      selector:@selector(applicationDidEnterBackground)
@@ -192,6 +195,7 @@ static NSString *const kRetryCount = @"retry";
 /// Sends network request to mark user tracking for campaign
 /// Sets "campaignId : variation id" in persistance store
 - (void)trackUserForCampaign:(VWOCampaign *)campaign {
+    VWOLogDebug(@"Controller: trackUserForCampaign");
     NSParameterAssert(campaign);
     if ([VWOPersistantStore isTrackingUserForCampaign:campaign]) {
         // Return if already tracking
@@ -199,13 +203,15 @@ static NSString *const kRetryCount = @"retry";
     }
 
     // Set User to be returning if not already set.
-    if (!VWOPersistantStore.isReturningUser) VWOPersistantStore.returningUser = YES;
+    if (!VWOPersistantStore.isReturningUser) {
+        VWOLogDebug(@"Setting returning user");
+        VWOPersistantStore.returningUser = YES;
+    }
 
     [VWOPersistantStore trackUserForCampaign:campaign];
 
     //Send network request and notification only if the campaign is running
     if (campaign.status == CampaignStatusRunning) {
-        VWOLogInfo(@"Making user part of Campaign: '%@'", campaign);
 
         NSURL *url = [VWOMakeURL forMakingUserPartOfCampaign:campaign dateTime:NSDate.date];
         [messageQueue enqueue:@{kURL : url, kRetryCount : @(0)}];
@@ -215,7 +221,7 @@ static NSString *const kRetryCount = @"retry";
 }
 
 - (void)sendNotificationUserStartedTracking:(VWOCampaign *)campaign {
-    VWOLogInfo(@"Sending notfication user started tracking %@", campaign);
+    VWOLogInfo(@"Controller: Sending notfication user started tracking %@", campaign);
     //Note: All values in campaignInfo dictionary must be in string format
     NSDictionary *campaignInfo = @{@"vwo_campaign_name"  : campaign.name.copy,
                                    @"vwo_campaign_id"    : [NSString stringWithFormat:@"%d", campaign.iD],
@@ -244,7 +250,7 @@ static NSString *const kRetryCount = @"retry";
 }
 
 - (void)fetchCampaignsSynchronouslyForTimeout:(NSTimeInterval)timeout {
-
+    VWOLogDebug(@"fetchCampaignsSynchronouslyForTimeout");
     NSURLRequest *request = [NSURLRequest requestWithURL:VWOMakeURL.forFetchingCampaigns cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeout];
 
     NSError *error = nil;
@@ -264,14 +270,13 @@ static NSString *const kRetryCount = @"retry";
     }
     NSError *jsonerror;
     NSArray *responseArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror];
-
     [responseArray writeToURL:VWOFile.campaignCache atomically:YES];
     [self updateCampaignListFromDictionary:responseArray];
 }
 
 - (void)fetchCampaignsAsynchronouslyWithCallback:(void (^)(void))completionBlock
                                failure:(void (^)(void))failureBlock {
-
+    VWOLogDebug(@"fetchCampaignsAsynchronouslyWithCallback");
     [NSURLSession.sharedSession dataTaskWithURL:VWOMakeURL.forFetchingCampaigns completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
             if ([NSFileManager.defaultManager fileExistsAtPath:VWOFile.campaignCache.path]) {
@@ -298,6 +303,7 @@ static NSString *const kRetryCount = @"retry";
 }
 
 - (void)markConversionForGoal:(NSString*)goalIdentifier withValue:(NSNumber*)value {
+    VWOLogDebug(@"Controller markConersionForGoal");
     if (self.previewMode) {
         [VWOSocketClient.sharedInstance goalTriggered:goalIdentifier withValue:value];
         return;
