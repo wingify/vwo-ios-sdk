@@ -9,7 +9,6 @@
 #import "VWOClient.h"
 
 #import "VWOController.h"
-#import "VWORavenClient.h"
 #import "VWOSocketClient.h"
 #import <sys/types.h>
 #import <sys/sysctl.h>
@@ -41,9 +40,6 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
         instance = [[self alloc] init];
         [VWOSDK setAppKeyID:key];
 
-        // set up sentry exception handling
-        [self setupSentry];
-
         if (VWODeviceInfo.isAttachedToDebugger) {
             [[VWOSocketClient sharedInstance] launch];
         }
@@ -51,21 +47,6 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
         VWOLogDebug(@"Key: %@", key);
         [VWOController.sharedInstance initializeAsynchronously:async timeout:timeout withCallback:completionBlock failure:failureBlock];
     });
-}
-
-+ (void)setupSentry {
-    NSDictionary *tags = @{@"VWO Account id" : VWOSDK.accountID,
-                           @"SDK Version" : VWOSDK.version};
-
-    //CFBundleDisplayName & CFBundleIdentifier can be nil
-    NSMutableDictionary *extras = [NSMutableDictionary new];
-    extras[@"App Name"] = NSBundle.mainBundle.infoDictionary[@"CFBundleDisplayName"];
-    extras[@"BundleID"] = NSBundle.mainBundle.infoDictionary[@"CFBundleIdentifier"];
-
-    NSString *DSN = @"https://c3f6ba4cf03548f3bd90066dd182a649:6d6d9593d15944849cc9f8d88ccf1fb0@sentry.io/41858";
-    VWORavenClient *client = [VWORavenClient clientWithDSN:DSN extra:extras tags:tags];
-
-    [VWORavenClient setSharedClient:client];
 }
 
 + (void)launchForAPIKey:(NSString *) apiKey {

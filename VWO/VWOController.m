@@ -19,10 +19,11 @@
 #import "NSURLSession+Synchronous.h"
 #import "VWO.h"
 #import "VWOMakeURL.h"
+#import "VWORavenClient.h"
+#import "VWOSDK.h"
 
-static const NSTimeInterval kMinUpdateTimeGap = 60*60; // seconds in 1 hour
-static NSString *const kWaitTill = @"waitTill";
-static NSString *const kURL = @"url";
+static NSString *const kWaitTill   = @"waitTill";
+static NSString *const kURL        = @"url";
 static NSString *const kRetryCount = @"retry";
 
 @interface VWOController ()
@@ -33,8 +34,6 @@ static NSString *const kRetryCount = @"retry";
 @end
 
 @implementation VWOController {
-    BOOL remoteDataDownloading;
-    NSTimeInterval lastUpdateTime;
     NSMutableDictionary *previewInfo; // holds the set of changes to be used during preview mode
     VWOMessageQueue *messageQueue;
     NSTimer *messageQueueFlushtimer;
@@ -42,10 +41,10 @@ static NSString *const kRetryCount = @"retry";
 
 - (id)init {
     if (self = [super init]) {
-        remoteDataDownloading = NO;
-        lastUpdateTime        = 0;
-        self.previewMode      = NO;
-        _customVariables       = [NSMutableDictionary new];
+        self.previewMode = NO;
+        _customVariables = [NSMutableDictionary new];
+        _campaignList    = [NSMutableArray new];
+        _customVariables = [NSMutableDictionary new];
     }
     return self;
 }
@@ -55,8 +54,6 @@ static NSString *const kRetryCount = @"retry";
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         instance = [[self alloc] init];
-        instance.campaignList = [NSMutableArray new];
-        instance.customVariables = [NSMutableDictionary new];
     });
     return instance;
 }
@@ -77,6 +74,22 @@ static NSString *const kRetryCount = @"retry";
         [self flushQueue:messageQueue];
     }];
     [self addBackgroundListeners];
+    [self setupSentry];
+}
+
+- (void)setupSentry {
+    NSDictionary *tags = @{@"VWO Account id" : VWOSDK.accountID,
+                           @"SDK Version" : VWOSDK.version};
+
+    //CFBundleDisplayName & CFBundleIdentifier can be nil
+    NSMutableDictionary *extras = [NSMutableDictionary new];
+    extras[@"App Name"] = NSBundle.mainBundle.infoDictionary[@"CFBundleDisplayName"];
+    extras[@"BundleID"] = NSBundle.mainBundle.infoDictionary[@"CFBundleIdentifier"];
+
+    NSString *DSN = @"https://c3f6ba4cf03548f3bd90066dd182a649:6d6d9593d15944849cc9f8d88ccf1fb0@sentry.io/41858";
+    VWORavenClient *client = [VWORavenClient clientWithDSN:DSN extra:extras tags:tags];
+
+    [VWORavenClient setSharedClient:client];
 }
 
 - (void)addBackgroundListeners {
@@ -219,9 +232,6 @@ static NSString *const kRetryCount = @"retry";
 }
 
 - (void)applicationDidEnterBackground {
-    if(!self.previewMode) {
-        lastUpdateTime = NSDate.timeIntervalSinceReferenceDate;
-    }
 }
 
 - (void)applicationWillEnterForeground {
