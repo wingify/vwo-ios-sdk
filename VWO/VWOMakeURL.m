@@ -61,7 +61,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     [components setPath:@"/l.gif"];
     [components
      setQueryItems:@[
-                     [NSURLQueryItem queryItemWithName:@"experiment_id" value:VWOSDK.accountID],
+                     [NSURLQueryItem queryItemWithName:@"experiment_id" value:[NSString stringWithFormat:@"%d", campaign.iD]],
                      [NSURLQueryItem queryItemWithName:@"account_id" value:VWOSDK.accountID],
                      [NSURLQueryItem queryItemWithName:@"combination" value:[NSString stringWithFormat:@"%d", campaign.variation.iD]],
                      [NSURLQueryItem queryItemWithName:@"u" value:VWOPersistantStore.UUID],
@@ -81,7 +81,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 
     [components
      setQueryItems:@[
-                     [NSURLQueryItem queryItemWithName:@"experiment_id" value:VWOSDK.accountID],
+                     [NSURLQueryItem queryItemWithName:@"experiment_id" value:[NSString stringWithFormat:@"%d", campaign.iD]],
                      [NSURLQueryItem queryItemWithName:@"account_id" value:VWOSDK.accountID],
                      [NSURLQueryItem queryItemWithName:@"combination" value:[NSString stringWithFormat:@"%d", campaign.variation.iD]],
                      [NSURLQueryItem queryItemWithName:@"u" value:VWOPersistantStore.UUID],

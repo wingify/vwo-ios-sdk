@@ -41,17 +41,18 @@ NSUInteger kQueueThreshold = 5;
     VWOLogDebug(@"QUEUE Enqueue : %@", object);
     dispatch_barrier_async(_queue, ^{
         NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:_fileURL];
+        assert(array != nil);
         [array addObject:object];
         [array writeToURL:_fileURL atomically:YES];
     });
 }
 
 - (void)removeFirst {
-    VWOLogDebug(@"QUEUE removeFirst : %@");
+    VWOLogDebug(@"QUEUE removeFirst");
     dispatch_barrier_async(_queue, ^{
         NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:_fileURL];
         if (array.count == 0) {
-            VWOLogInfo(@"Trying to remove from empty queue. NOP");
+            VWOLogException(@"Trying to remove from empty queue. NOP");
             return;
         }
         [array removeObjectAtIndex:0];
@@ -74,7 +75,7 @@ NSUInteger kQueueThreshold = 5;
     dispatch_sync(_queue, ^{
         count = [NSArray arrayWithContentsOfURL:_fileURL].count;
     });
-    VWOLogDebug(@"QUEUE count %t", count);
+    VWOLogDebug(@"QUEUE count %lu", count);
     return count;
 }
 

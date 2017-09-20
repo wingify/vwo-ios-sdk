@@ -64,18 +64,19 @@ static NSString *const kRetryCount = @"retry";
                          failure:(void(^)(void))failureBlock {
     VWOLogInfo(@"Controller initialised");
     VWOPersistantStore.sessionCount += 1;
-    if (async) {
-        [self fetchCampaignsAsynchronouslyWithCallback:completionBlock failure:failureBlock];
-    } else {
-        [self fetchCampaignsSynchronouslyForTimeout:timeout];
-    }
+    [self addBackgroundListeners];
+    [self setupSentry];
 
     messageQueue = [[VWOMessageQueue alloc] initWithFileURL:VWOFile.messageQueue];
     messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:20 repeats:YES block:^(NSTimer * _Nonnull timer) {
         [self flushQueue:messageQueue];
     }];
-    [self addBackgroundListeners];
-    [self setupSentry];
+
+    if (async) {
+        [self fetchCampaignsAsynchronouslyWithCallback:completionBlock failure:failureBlock];
+    } else {
+        [self fetchCampaignsSynchronouslyForTimeout:timeout];
+    }
 }
 
 - (void)setupSentry {
@@ -110,7 +111,7 @@ static NSString *const kRetryCount = @"retry";
     VWOLogInfo(@"Sending all messages in queue");
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSUInteger count = queue.count;
-        VWOLogDebug(@"Total messages in queue %t", count);
+        VWOLogDebug(@"Total messages in queue %d", count);
         while (count > 0) {
             NSMutableDictionary *urlDict = [queue.peek mutableCopy];
 
@@ -140,7 +141,7 @@ static NSString *const kRetryCount = @"retry";
             }
 
             [queue removeFirst];
-
+            assert(response != nil);
             if (response != nil) {
                 // Failure is confirmed only when status is not 200
                 NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
@@ -148,6 +149,8 @@ static NSString *const kRetryCount = @"retry";
                     urlDict[kRetryCount] = @([urlDict[kRetryCount] intValue] + 1);
                     VWOLogDebug(@"Re inserting message with retry count %@", urlDict[kRetryCount]);
                     [queue enqueue:urlDict];
+                } else {
+                    VWOLogInfo(@"Successfully sent message");
                 }
             }
 
@@ -195,16 +198,17 @@ static NSString *const kRetryCount = @"retry";
 /// Sends network request to mark user tracking for campaign
 /// Sets "campaignId : variation id" in persistance store
 - (void)trackUserForCampaign:(VWOCampaign *)campaign {
-    VWOLogDebug(@"Controller: trackUserForCampaign");
+    VWOLogDebug(@"Controller: trackUserForCampaign %@", campaign);
     NSParameterAssert(campaign);
     if ([VWOPersistantStore isTrackingUserForCampaign:campaign]) {
         // Return if already tracking
+        VWOLogDebug(@"Controller: Returning. Already tracking %@", campaign);
         return;
     }
 
     // Set User to be returning if not already set.
     if (!VWOPersistantStore.isReturningUser) {
-        VWOLogDebug(@"Setting returning user");
+        VWOLogDebug(@"Setting returningUser=YES");
         VWOPersistantStore.returningUser = YES;
     }
 
@@ -212,9 +216,9 @@ static NSString *const kRetryCount = @"retry";
 
     //Send network request and notification only if the campaign is running
     if (campaign.status == CampaignStatusRunning) {
-
+        VWOLogDebug(@"%@ is running. Adding to Queue. Sending notification");
         NSURL *url = [VWOMakeURL forMakingUserPartOfCampaign:campaign dateTime:NSDate.date];
-        [messageQueue enqueue:@{kURL : url, kRetryCount : @(0)}];
+        [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
 
         [self sendNotificationUserStartedTracking:campaign];
     }
@@ -277,7 +281,7 @@ static NSString *const kRetryCount = @"retry";
 - (void)fetchCampaignsAsynchronouslyWithCallback:(void (^)(void))completionBlock
                                failure:(void (^)(void))failureBlock {
     VWOLogDebug(@"fetchCampaignsAsynchronouslyWithCallback");
-    [NSURLSession.sharedSession dataTaskWithURL:VWOMakeURL.forFetchingCampaigns completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[NSURLSession.sharedSession dataTaskWithURL:VWOMakeURL.forFetchingCampaigns completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
             if ([NSFileManager.defaultManager fileExistsAtPath:VWOFile.campaignCache.path]) {
                 VWOLogWarning(@"Network failed while fetching campaigns {%@}", error.localizedDescription);
@@ -295,7 +299,7 @@ static NSString *const kRetryCount = @"retry";
         [responseArray writeToURL:VWOFile.campaignCache atomically:YES];
         [self updateCampaignListFromDictionary:responseArray];
         if (completionBlock) completionBlock();
-    }];
+    }] resume];
 }
 
 - (void)preview:(NSDictionary *)changes {
@@ -327,7 +331,7 @@ static NSString *const kRetryCount = @"retry";
             if (matchedGoal) {
                 [VWOPersistantStore markGoalConversion:matchedGoal];
                 NSURL *url = [VWOMakeURL forMarkingGoal:campaign goal:matchedGoal dateTime:NSDate.date withValue:value];
-                [messageQueue enqueue:@{kURL : url, kRetryCount : @(0)}];
+                [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
             }
         }
     }
