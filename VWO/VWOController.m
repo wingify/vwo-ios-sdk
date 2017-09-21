@@ -26,13 +26,18 @@ static NSString *const kWaitTill   = @"waitTill";
 static NSString *const kURL        = @"url";
 static NSString *const kRetryCount = @"retry";
 
+@interface VWOController()
+
+@property (atomic) NSArray<VWOCampaign *> *campaignList;
+
+@end
+
 @implementation VWOController {
     //TODO: Move this to header file. Use this directly from VWOSocketClient
     NSMutableDictionary *previewInfo;
     VWOMessageQueue *messageQueue;
     NSTimer *reloadCampaignsTimer;
     NSTimer *messageQueueFlushtimer;
-    NSMutableArray<VWOCampaign *> *campaignList;
     NSMutableDictionary<NSString *, NSString *> *customVariables;
 }
 
@@ -40,7 +45,7 @@ static NSString *const kRetryCount = @"retry";
     if (self = [super init]) {
         self.previewMode = NO;
         customVariables = [NSMutableDictionary new];
-        campaignList    = [NSMutableArray new];
+        _campaignList    = [NSMutableArray new];
         customVariables = [NSMutableDictionary new];
     }
     return self;
@@ -109,8 +114,7 @@ static NSString *const kRetryCount = @"retry";
 
 - (void)applicationWillEnterForeground {
     VWOLogDebug(@"applicationWillEnterForeground");
-    //TODO: Start timer
-    // IF campaign info is 1 hr old refetch it
+    [self fetchCampaignsAsynchronouslyWithCallback:nil failure:nil];
 }
 
 // Sends request on all the url on a background thread
@@ -169,6 +173,7 @@ static NSString *const kRetryCount = @"retry";
 /// Creates NSArray of Type VWOCampaign and stores in self.campaignList
 - (void)updateCampaignListFromDictionary:(NSArray *)allCampaignDict {
     VWOLogInfo(@"Updating campaignList from URL response");
+    NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (NSDictionary *campaignDict in allCampaignDict) {
         VWOCampaign *aCampaign = [[VWOCampaign alloc] initWithDictionary:campaignDict];
         if (!aCampaign) continue;
@@ -181,21 +186,23 @@ static NSString *const kRetryCount = @"retry";
         if (aCampaign.status == CampaignStatusRunning) {
             if (aCampaign.trackUserOnLaunch) {
                 if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject customVariables:customVariables]) {
-                    [campaignList addObject:aCampaign];
+                    [newCampaignList addObject:aCampaign];
                     VWOLogInfo(@"Received Campaign: '%@' Variation: '%@'", aCampaign, aCampaign.variation);
                 } else { //Segmentation failed
                     VWOLogInfo(@"User cannot be part of campaign: '%@'", aCampaign);
                 }
             } else {//Unconditionally add when NOT trackUserOnLaunch
-                [campaignList addObject:aCampaign];
+                [newCampaignList addObject:aCampaign];
                 VWOLogInfo(@"Received Campaign: '%@' Variation: '%@'", aCampaign, aCampaign.variation);
             }
         }
     }
+    _campaignList = newCampaignList;
+    VWOLogDebug(@"Total Campaigns %d", _campaignList.count);
 
     //TODO: Put in above loop, else put the reason of separtate loop
     //Track users for campaigns that have trackUserOnLaunch enabled
-    for (VWOCampaign *campaign in campaignList) {
+    for (VWOCampaign *campaign in _campaignList) {
         if (campaign.trackUserOnLaunch) {
             [self trackUserForCampaign:campaign];
         }
@@ -253,7 +260,7 @@ static NSString *const kRetryCount = @"retry";
 }
 
 - (void)fetchCampaignsSynchronouslyForTimeout:(NSTimeInterval)timeout {
-    VWOLogDebug(@"fetchCampaignsSynchronouslyForTimeout");
+    VWOLogDebug(@"fetchCampaignsSynchronouslyForTimeout %f", timeout);
     NSURLRequest *request = [NSURLRequest requestWithURL:VWOMakeURL.forFetchingCampaigns cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeout];
 
     NSError *error = nil;
@@ -313,7 +320,7 @@ static NSString *const kRetryCount = @"retry";
     }
 
     //Check if the goal is already marked
-    for (VWOCampaign *campaign in campaignList) {
+    for (VWOCampaign *campaign in _campaignList) {
         VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
         if (matchedGoal) {
             if ([VWOPersistantStore isGoalMarked:matchedGoal]) {
@@ -324,7 +331,7 @@ static NSString *const kRetryCount = @"retry";
     }
 
     // Mark goal(One goal can be present in multiple campaigns
-    for (VWOCampaign *campaign in campaignList) {
+    for (VWOCampaign *campaign in _campaignList) {
         if ([VWOPersistantStore isTrackingUserForCampaign:campaign]) {
             VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
             if (matchedGoal) {
@@ -345,7 +352,7 @@ static NSString *const kRetryCount = @"retry";
     }
 
     id finalVariation = nil;
-    for (VWOCampaign *campaign in campaignList) {
+    for (VWOCampaign *campaign in _campaignList) {
         id variation = [campaign variationForKey:key];
 
         //If variation Key is present in Campaign
