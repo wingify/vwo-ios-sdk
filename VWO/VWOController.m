@@ -26,27 +26,22 @@ static NSString *const kWaitTill   = @"waitTill";
 static NSString *const kURL        = @"url";
 static NSString *const kRetryCount = @"retry";
 
-@interface VWOController ()
-
-@property (atomic) NSMutableArray<VWOCampaign *> *campaignList;
-@property NSMutableDictionary<NSString *, NSString *> *customVariables;
-
-@end
-
 @implementation VWOController {
     //TODO: Move this to header file. Use this directly from VWOSocketClient
     NSMutableDictionary *previewInfo;
     VWOMessageQueue *messageQueue;
-    NSTimer *messageQueueFlushtimer;
     NSTimer *reloadCampaignsTimer;
+    NSTimer *messageQueueFlushtimer;
+    NSMutableArray<VWOCampaign *> *campaignList;
+    NSMutableDictionary<NSString *, NSString *> *customVariables;
 }
 
 - (id)init {
     if (self = [super init]) {
         self.previewMode = NO;
-        _customVariables = [NSMutableDictionary new];
-        _campaignList    = [NSMutableArray new];
-        _customVariables = [NSMutableDictionary new];
+        customVariables = [NSMutableDictionary new];
+        campaignList    = [NSMutableArray new];
+        customVariables = [NSMutableDictionary new];
     }
     return self;
 }
@@ -185,14 +180,14 @@ static NSString *const kRetryCount = @"retry";
 
         if (aCampaign.status == CampaignStatusRunning) {
             if (aCampaign.trackUserOnLaunch) {
-                if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject customVariables:_customVariables]) {
-                    [self.campaignList addObject:aCampaign];
+                if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject customVariables:customVariables]) {
+                    [campaignList addObject:aCampaign];
                     VWOLogInfo(@"Received Campaign: '%@' Variation: '%@'", aCampaign, aCampaign.variation);
                 } else { //Segmentation failed
                     VWOLogInfo(@"User cannot be part of campaign: '%@'", aCampaign);
                 }
             } else {//Unconditionally add when NOT trackUserOnLaunch
-                [self.campaignList addObject:aCampaign];
+                [campaignList addObject:aCampaign];
                 VWOLogInfo(@"Received Campaign: '%@' Variation: '%@'", aCampaign, aCampaign.variation);
             }
         }
@@ -200,7 +195,7 @@ static NSString *const kRetryCount = @"retry";
 
     //TODO: Put in above loop, else put the reason of separtate loop
     //Track users for campaigns that have trackUserOnLaunch enabled
-    for (VWOCampaign *campaign in self.campaignList) {
+    for (VWOCampaign *campaign in campaignList) {
         if (campaign.trackUserOnLaunch) {
             [self trackUserForCampaign:campaign];
         }
@@ -250,7 +245,7 @@ static NSString *const kRetryCount = @"retry";
 
 - (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value {
     VWOLogInfo(@"Set variable: %@ = %@", variable, value);
-    _customVariables[variable] = value;
+    customVariables[variable] = value;
 }
 
 - (void)dealloc{
@@ -318,7 +313,7 @@ static NSString *const kRetryCount = @"retry";
     }
 
     //Check if the goal is already marked
-    for (VWOCampaign *campaign in _campaignList) {
+    for (VWOCampaign *campaign in campaignList) {
         VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
         if (matchedGoal) {
             if ([VWOPersistantStore isGoalMarked:matchedGoal]) {
@@ -329,7 +324,7 @@ static NSString *const kRetryCount = @"retry";
     }
 
     // Mark goal(One goal can be present in multiple campaigns
-    for (VWOCampaign *campaign in _campaignList) {
+    for (VWOCampaign *campaign in campaignList) {
         if ([VWOPersistantStore isTrackingUserForCampaign:campaign]) {
             VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
             if (matchedGoal) {
@@ -350,14 +345,14 @@ static NSString *const kRetryCount = @"retry";
     }
 
     id finalVariation = nil;
-    for (VWOCampaign *campaign in _campaignList) {
+    for (VWOCampaign *campaign in campaignList) {
         id variation = [campaign variationForKey:key];
 
         //If variation Key is present in Campaign
         if (variation) {
             finalVariation = variation;
             // If campaign is not already tracked; check if it can be part of campaign.
-            if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:campaign.segmentObject customVariables:_customVariables]) {
+            if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:campaign.segmentObject customVariables:customVariables]) {
                 [self trackUserForCampaign:campaign];
             }
 
