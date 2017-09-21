@@ -350,7 +350,7 @@ static NSString *const kRetryCount = @"retry";
         }
     }
     if (finalVariation == [NSNull null]) {
-//        finalVariation can be NSNull if Control is assigned to campaign
+        // finalVariation can be NSNull if Control is assigned to campaign
         return nil;
     }
     return finalVariation;
