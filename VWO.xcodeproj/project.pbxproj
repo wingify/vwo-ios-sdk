@@ -33,8 +33,8 @@
 		E39815681F6291680035D519 /* VWOSIOSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815561F6291680035D519 /* VWOSIOSocket.m */; };
 		E398157F1F6291970035D519 /* VWOController.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815731F6291960035D519 /* VWOController.h */; };
 		E39815801F6291970035D519 /* VWOController.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815741F6291960035D519 /* VWOController.m */; };
-		E39815811F6291970035D519 /* VWODeviceInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815751F6291970035D519 /* VWODeviceInfo.h */; };
-		E39815821F6291970035D519 /* VWODeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815761F6291970035D519 /* VWODeviceInfo.m */; };
+		E39815811F6291970035D519 /* VWODevice.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815751F6291970035D519 /* VWODevice.h */; };
+		E39815821F6291970035D519 /* VWODevice.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815761F6291970035D519 /* VWODevice.m */; };
 		E39815831F6291970035D519 /* VWOFile.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815771F6291970035D519 /* VWOFile.h */; };
 		E39815841F6291970035D519 /* VWOFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815781F6291970035D519 /* VWOFile.m */; };
 		E39815851F6291970035D519 /* VWOLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815791F6291970035D519 /* VWOLogger.h */; };
@@ -97,8 +97,8 @@
 		E39815561F6291680035D519 /* VWOSIOSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOSIOSocket.m; sourceTree = "<group>"; };
 		E39815731F6291960035D519 /* VWOController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOController.h; sourceTree = "<group>"; };
 		E39815741F6291960035D519 /* VWOController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOController.m; sourceTree = "<group>"; };
-		E39815751F6291970035D519 /* VWODeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWODeviceInfo.h; path = Helpers/VWODeviceInfo.h; sourceTree = "<group>"; };
-		E39815761F6291970035D519 /* VWODeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = VWODeviceInfo.m; path = Helpers/VWODeviceInfo.m; sourceTree = "<group>"; };
+		E39815751F6291970035D519 /* VWODevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWODevice.h; path = Helpers/VWODevice.h; sourceTree = "<group>"; };
+		E39815761F6291970035D519 /* VWODevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = VWODevice.m; path = Helpers/VWODevice.m; sourceTree = "<group>"; };
 		E39815771F6291970035D519 /* VWOFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWOFile.h; path = Helpers/VWOFile.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		E39815781F6291970035D519 /* VWOFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = VWOFile.m; path = Helpers/VWOFile.m; sourceTree = "<group>"; };
 		E39815791F6291970035D519 /* VWOLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWOLogger.h; path = Helpers/VWOLogger.h; sourceTree = "<group>"; };
@@ -245,8 +245,8 @@
 		E39815F71F62A13A0035D519 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				E39815751F6291970035D519 /* VWODeviceInfo.h */,
-				E39815761F6291970035D519 /* VWODeviceInfo.m */,
+				E39815751F6291970035D519 /* VWODevice.h */,
+				E39815761F6291970035D519 /* VWODevice.m */,
 				E39815771F6291970035D519 /* VWOFile.h */,
 				E39815781F6291970035D519 /* VWOFile.m */,
 				E39815791F6291970035D519 /* VWOLogger.h */,
@@ -270,7 +270,7 @@
 				E39815851F6291970035D519 /* VWOLogger.h in Headers */,
 				E39815591F6291680035D519 /* VWOGoal.h in Headers */,
 				E39815611F6291680035D519 /* VWORavenClient.h in Headers */,
-				E39815811F6291970035D519 /* VWODeviceInfo.h in Headers */,
+				E39815811F6291970035D519 /* VWODevice.h in Headers */,
 				E398155B1F6291680035D519 /* VWOMessageQueue.h in Headers */,
 				E398159A1F6293BC0035D519 /* NSCalendar+VWO.h in Headers */,
 				E39815571F6291680035D519 /* VWOCampaign.h in Headers */,
@@ -399,7 +399,7 @@
 				E35484F61F713C2E00E14D2E /* NSURLSession+Synchronous.m in Sources */,
 				E398159D1F6293BC0035D519 /* NSDictionary+VWO.m in Sources */,
 				E39815861F6291970035D519 /* VWOLogger.m in Sources */,
-				E39815821F6291970035D519 /* VWODeviceInfo.m in Sources */,
+				E39815821F6291970035D519 /* VWODevice.m in Sources */,
 				E398159B1F6293BC0035D519 /* NSCalendar+VWO.m in Sources */,
 				E39815621F6291680035D519 /* VWORavenClient.m in Sources */,
 				E39815881F6291970035D519 /* VWOPersistantStore.m in Sources */,

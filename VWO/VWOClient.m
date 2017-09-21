@@ -13,7 +13,7 @@
 #import <sys/types.h>
 #import <sys/sysctl.h>
 #import "VWOSDK.h"
-#import "VWODeviceInfo.h"
+#import "VWODevice.h"
 #import "VWOSegmentEvaluator.h"
 
 static VWOLogLevel kLogLevel = VWOLogLevelError;
@@ -41,7 +41,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
         instance = [[self alloc] init];
         [VWOSDK setAppKeyID:key];
 
-        if (VWODeviceInfo.isAttachedToDebugger) {
+        if (VWODevice.isAttachedToDebugger) {
             [[VWOSocketClient sharedInstance] launch];
         }
         VWOLogInfo(@"Initializing VWO");

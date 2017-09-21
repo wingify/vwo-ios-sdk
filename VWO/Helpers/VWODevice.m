@@ -1,18 +1,18 @@
 //
-//  VWODeviceInfo.m
+//  VWODevice.m
 //  Pods
 //
 //  Created by Kaunteya Suryawanshi on 27/06/17.
 //
 //
 
-#import "VWODeviceInfo.h"
+#import "VWODevice.h"
 #import <sys/utsname.h>
 #import <sys/types.h>
 #import <sys/sysctl.h>
 #import <UIKit/UIKit.h>
 
-@implementation VWODeviceInfo 
+@implementation VWODevice
 
 /// Tells if the Device is connected to Xcode
 /// Taken from https://github.com/plausiblelabs/plcrashreporter/blob/2dd862ce049e6f43feb355308dfc710f3af54c4d/Source/Crash%20Demo/main.m#L96

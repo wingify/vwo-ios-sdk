@@ -8,7 +8,6 @@
 
 #import "VWOMakeURL.h"
 #import "VWOSDK.h"
-#import "VWODeviceInfo.h"
 #import "VWOPersistantStore.h"
 #import <UIKit/UIKit.h>
 #import "NSDictionary+VWO.h"

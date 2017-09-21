@@ -9,7 +9,7 @@
 #import "VWOSegmentEvaluator.h"
 #import "VWOPersistantStore.h"
 #import "NSCalendar+VWO.h"
-#import "VWODeviceInfo.h"
+#import "VWODevice.h"
 #import "VWOLogger.h"
 #import <UIKit/UIKit.h>
 
@@ -158,7 +158,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
     switch (segmentType) {
         case SegmentationTypeiOSVersion: {
-            NSString *version = [VWODeviceInfo iOSVersionMinor:YES patch:NO];
+            NSString *version = [VWODevice iOSVersionMinor:YES patch:NO];
             NSString *targetVersion = [operand firstObject];
             NSComparisonResult result = [version compare:targetVersion options:NSNumericSearch];
             switch (operator) {

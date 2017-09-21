@@ -1,5 +1,5 @@
 //
-//  VWODeviceInfo.h
+//  VWODevice.h
 //  Pods
 //
 //  Created by Kaunteya Suryawanshi on 27/06/17.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VWODeviceInfo : NSObject
+@interface VWODevice : NSObject
 
 @property (class, readonly, nonatomic) BOOL isAttachedToDebugger;
 + (NSString *)iOSVersionMinor:(BOOL) minor patch:(BOOL)patch;
