@@ -14,6 +14,7 @@
 #import <sys/sysctl.h>
 #import "VWOSDK.h"
 #import "VWODeviceInfo.h"
+#import "VWOSegmentEvaluator.h"
 
 static VWOLogLevel kLogLevel = VWOLogLevelError;
 NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStartedTrackingInCampaignNotification";
@@ -95,7 +96,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 + (void)setCustomVariable:(NSString *)key withValue:(NSString *)value {
     NSParameterAssert(key);
     NSParameterAssert(value);
-    [VWOController.sharedInstance setCustomVariable:key withValue:value];
+    VWOController.sharedInstance.segmentEvaluator.customVariables[key] = value;
 }
 
 + (NSString*)version {

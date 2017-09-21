@@ -11,11 +11,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class VWOSegmentEvaluator;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface VWOController : NSObject
 
 @property (assign) BOOL previewMode;
+@property VWOSegmentEvaluator *segmentEvaluator;
 
 + (instancetype)sharedInstance;
 - (void)initializeAsynchronously:(BOOL)async
@@ -25,7 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)preview:(NSDictionary *)changes;
 - (void)markConversionForGoal:(NSString *)goal withValue:(nullable NSNumber *)value;
 - (nullable id)variationForKey:(NSString *)key;
-- (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value;
 
 @end
 

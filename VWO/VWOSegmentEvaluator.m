@@ -51,18 +51,26 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
 @implementation VWOSegmentEvaluator
 
-+ (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment customVariables:(NSDictionary *)customVariable {
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _customVariables = [NSMutableDictionary new];
+    }
+    return self;
+}
+
+- (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment {
     if (!segment) return YES;
     if ([segment[kType] isEqualToString:@"custom"]) {
         NSArray *partialSegments = (NSArray *)segment[kPartialSegments];
-        return [self evaluateCustomSegmentation:partialSegments customVariable:customVariable];
+        return [self evaluateCustomSegmentation:partialSegments];
     } else if ([segment[kType] isEqualToString:@"predefined"]) {
         return [self evaluatePredefinedSegmentation:segment[kSegmentCode]];
     }
     return YES;
 }
 
-+ (BOOL)evaluatePredefinedSegmentation:(NSDictionary*)segmentObject {
+- (BOOL)evaluatePredefinedSegmentation:(NSDictionary*)segmentObject {
     if ([segmentObject[kDevice] isEqualToString:@"iPad"] &&
         ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)) {
         return YES;
@@ -75,7 +83,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
     return NO;
 }
 
-+ (BOOL)evaluateCustomSegmentation:(NSArray*)partialSegments customVariable:(NSDictionary *)customVariable{
+- (BOOL)evaluateCustomSegmentation:(NSArray*)partialSegments {
 
     NSMutableArray *stack = [NSMutableArray array];
     for (NSDictionary *partialSegment in partialSegments) {
@@ -94,7 +102,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
         NSString *lOperandValue = partialSegment[@"lOperandValue"];
         SegmentationType segmentType = [partialSegment[@"type"] intValue];
 
-        BOOL currentValue = [self evaluateSegmentForOperand:operandValue lOperand:lOperandValue operator:operator type:segmentType customVariable:customVariable];
+        BOOL currentValue = [self evaluateSegmentForOperand:operandValue lOperand:lOperandValue operator:operator type:segmentType];
 
         if (logicalOperator && leftParenthesis) {
             [stack addObject:logicalOperator];
@@ -139,11 +147,10 @@ static NSString * kReturningVisitor = @"returning_visitor";
     return [[stack lastObject] boolValue];
 }
 
-+(BOOL)evaluateSegmentForOperand:(NSArray *)operand
+-(BOOL)evaluateSegmentForOperand:(NSArray *)operand
                         lOperand:(NSString *)lOperand
                         operator:(int)operator
-                            type:(SegmentationType)segmentType
-                 customVariable:(NSDictionary *)customVariable{
+                            type:(SegmentationType)segmentType {
 
     if (operand.count == 0) {
         return YES;
@@ -215,7 +222,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
         }
 
         case SegmentationTypeCustomVariable: {
-            NSString *currentValue = customVariable[lOperand];
+            NSString *currentValue = _customVariables[lOperand];
             if (!currentValue) return NO;
 
             NSString *targetValue = [operand firstObject];

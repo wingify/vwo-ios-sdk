@@ -38,15 +38,13 @@ static NSString *const kRetryCount = @"retry";
     VWOMessageQueue *messageQueue;
     NSTimer *reloadCampaignsTimer;
     NSTimer *messageQueueFlushtimer;
-    NSMutableDictionary<NSString *, NSString *> *customVariables;
 }
 
 - (id)init {
     if (self = [super init]) {
         self.previewMode = NO;
-        customVariables = [NSMutableDictionary new];
         _campaignList    = [NSMutableArray new];
-        customVariables = [NSMutableDictionary new];
+        _segmentEvaluator = [VWOSegmentEvaluator new];
     }
     return self;
 }
@@ -128,11 +126,6 @@ static NSString *const kRetryCount = @"retry";
     [NSNotificationCenter.defaultCenter postNotificationName:VWOUserStartedTrackingInCampaignNotification object:nil userInfo:campaignInfo];
 }
 
-- (void)setCustomVariable:(NSString *)variable withValue:(NSString *)value {
-    VWOLogInfo(@"Set variable: %@ = %@", variable, value);
-    customVariables[variable] = value;
-}
-
 - (void)fetchCampaignsSynchronouslyForTimeout:(NSTimeInterval)timeout {
     VWOLogDebug(@"fetchCampaignsSynchronouslyForTimeout %f", timeout);
     NSURLRequest *request = [NSURLRequest requestWithURL:VWOMakeURL.forFetchingCampaigns cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeout];
@@ -197,7 +190,7 @@ static NSString *const kRetryCount = @"retry";
 
         if (aCampaign.status == CampaignStatusRunning) {
             if (aCampaign.trackUserOnLaunch) {
-                if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject customVariables:customVariables]) {
+                if ([_segmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
                     [newCampaignList addObject:aCampaign];
                     VWOLogInfo(@"Received Campaign: '%@' Variation: '%@'", aCampaign, aCampaign.variation);
                 } else { //Segmentation failed
@@ -351,10 +344,9 @@ static NSString *const kRetryCount = @"retry";
         if (variation) {
             finalVariation = variation;
             // If campaign is not already tracked; check if it can be part of campaign.
-            if ([VWOSegmentEvaluator canUserBePartOfCampaignForSegment:campaign.segmentObject customVariables:customVariables]) {
+            if ([_segmentEvaluator canUserBePartOfCampaignForSegment:campaign.segmentObject]) {
                 [self trackUserForCampaign:campaign];
             }
-
         }
     }
     if (finalVariation == [NSNull null]) {
