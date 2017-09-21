@@ -31,11 +31,11 @@
 - (void)launch {
     [VWOSIOSocket socketWithHost:kSocketIP response: ^(VWOSIOSocket *remoteSocket) {
         socket = remoteSocket;
-        [self initMethods];
+        [self startListeners];
     }];
 }
 
--(void)initMethods {
+-(void)startListeners {
     __weak id socket_ = socket;
     socket.onConnect = ^{
         NSDictionary *dict  = @{@"name":[[UIDevice currentDevice] name],
@@ -47,7 +47,7 @@
     
     socket.onDisconnect = ^{
         VWOLogDebug(@"Socket disconnected");
-        [VWOController.sharedInstance setPreviewMode:NO];
+        VWOController.sharedInstance.previewMode = NO;
     };
     
     socket.onConnectError = ^(NSDictionary *error) {
@@ -60,7 +60,7 @@
     
     [socket on:@"browser_connect" callback:^(SIOParameterArray *arguments) {
         VWOLogInfo(@"Socket browser connected");
-        [VWOController.sharedInstance setPreviewMode:YES];
+        VWOController.sharedInstance.previewMode = YES;
         id object = [arguments firstObject];
         if (object && object[@"name"]) {
             VWOLogInfo(@"Preview mode: Connected with: '%@'", object[@"name"]);
@@ -69,7 +69,7 @@
 
     [socket on:@"browser_disconnect" callback:^(SIOParameterArray *arguments) {
         VWOLogInfo(@"Preview mode Disconnected");
-        [VWOController.sharedInstance setPreviewMode:NO];
+        VWOController.sharedInstance.previewMode = NO;
     }];
     
     [socket on:@"receive_variation" callback:^(SIOParameterArray *arguments) {
