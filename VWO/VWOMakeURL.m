@@ -29,7 +29,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
              @"v"  : VWOSDK.version,
              @"i"  : VWOSDK.appKey,
              @"av" : NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"],
-             @"dt" : VWODeviceInfo.platformName,
+             @"dt" : UIDevice.currentDevice.name,
              @"os" : UIDevice.currentDevice.systemVersion
              };
 }
@@ -43,7 +43,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     [components setPath:@"/mobile"];
     [components
      setQueryItems:@[[NSURLQueryItem queryItemWithName:@"a" value:VWOSDK.accountID],
-                     [NSURLQueryItem queryItemWithName:@"dt" value:VWODeviceInfo.platformName],
+                     [NSURLQueryItem queryItemWithName:@"dt" value:UIDevice.currentDevice.name],
                      [NSURLQueryItem queryItemWithName:@"i" value:VWOSDK.appKey],
                      [NSURLQueryItem queryItemWithName:@"k" value:VWOPersistantStore.campaignVariationPairs.toString],
                      [NSURLQueryItem queryItemWithName:@"os" value:UIDevice.currentDevice.systemVersion],
