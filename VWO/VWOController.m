@@ -25,6 +25,9 @@
 static NSString *const kWaitTill   = @"waitTill";
 static NSString *const kURL        = @"url";
 static NSString *const kRetryCount = @"retry";
+static NSTimeInterval kMessageQueueFlushInterval = 20;
+static NSTimeInterval kWaitTillInterval = 15*60; // 15 mins
+static NSTimeInterval kMaxInitialRetryCount = 3;
 
 @interface VWOController()
 
@@ -68,7 +71,7 @@ static NSString *const kRetryCount = @"retry";
     [self setupSentry];
 
     messageQueue = [[VWOMessageQueue alloc] initWithFileURL:VWOFile.messageQueue];
-    messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:20 repeats:YES block:^(NSTimer * _Nonnull timer) {
+    messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:kMessageQueueFlushInterval repeats:YES block:^(NSTimer * _Nonnull timer) {
         [self flushQueue:messageQueue];
     }];
 
@@ -286,7 +289,7 @@ static NSString *const kRetryCount = @"retry";
 
             // Queue is empty
             if (urlDict == nil) continue;
-            VWOLogDebug(@"Trying message %t", count);
+            VWOLogDebug(@"Trying message %d", count);
             // If now() < WaitTill time then dont consider this message
             if (urlDict[kWaitTill] != nil) {
                 NSTimeInterval now = NSDate.date.timeIntervalSince1970;
@@ -304,25 +307,28 @@ static NSString *const kRetryCount = @"retry";
 
             //If No internet connection break; No need to process other messages in queue
             if (error != nil && error.code == NSURLErrorNotConnectedToInternet) {
-                VWOLogInfo(@"No internet connection. Aborting queue flush");
+                VWOLogInfo(@"No internet connection. Aborting queue flush operation");
                 break;
                 //Note: If there is other error but response status is 200, still it might be a successful request
             }
 
             [queue removeFirst];
             assert(response != nil);
-            if (response != nil) {
-                // Failure is confirmed only when status is not 200
-                NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
-                if (statusCode != 200) {
-                    urlDict[kRetryCount] = @([urlDict[kRetryCount] intValue] + 1);
-                    VWOLogDebug(@"Re inserting message with retry count %@", urlDict[kRetryCount]);
-                    [queue enqueue:urlDict];
-                } else {
-                    VWOLogInfo(@"Successfully sent message %d", statusCode);
-                }
-            }
+            // Failure is confirmed only when status is not 200
+            NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+            if (statusCode != 200) {
+                urlDict[kRetryCount] = @([urlDict[kRetryCount] intValue] + 1);
 
+                //If retry count is greater than
+                if ([urlDict[kRetryCount] intValue] >= kMaxInitialRetryCount) {
+                    VWOLogDebug(@"Adding wait till %@", [NSDate.date dateByAddingTimeInterval:kWaitTillInterval]);
+                    urlDict[kWaitTill] = [NSDate.date dateByAddingTimeInterval:kWaitTillInterval];
+                }
+                VWOLogDebug(@"Re inserting message with retry count %@", urlDict[kRetryCount]);
+                [queue enqueue:urlDict];
+            } else {
+                VWOLogInfo(@"Successfully sent message %d", statusCode);
+            }
             count -= 1;
         }//while
     });
