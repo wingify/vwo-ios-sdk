@@ -66,7 +66,6 @@ NSUInteger kQueueThreshold = 5;
         NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:_fileURL];
         firstObject = array.firstObject;
     });
-    VWOLogDebug(@"QUEUE peek %@", firstObject);
     return firstObject;
 }
 
