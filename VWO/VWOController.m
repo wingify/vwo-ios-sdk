@@ -230,7 +230,7 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
     }
 
     // Set User to be returning if not already set.
-    if (!VWOActivity.isReturningUser) {
+    if (!VWOActivity.isReturningUser && VWOActivity.sessionCount > 1) {
         VWOLogDebug(@"Setting returningUser=YES");
         VWOActivity.returningUser = YES;
     }
