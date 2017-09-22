@@ -9,7 +9,7 @@
 #import "VWOController.h"
 #import "VWOSocketClient.h"
 #import "VWOLogger.h"
-#import "VWOPersistantStore.h"
+#import "VWOActivity.h"
 #import "VWOSegmentEvaluator.h"
 #import "VWOFile.h"
 #import "VWOCampaign.h"
@@ -22,12 +22,12 @@
 #import "VWORavenClient.h"
 #import "VWOSDK.h"
 
-static NSString *const kWaitTill   = @"waitTill";
-static NSString *const kURL        = @"url";
-static NSString *const kRetryCount = @"retry";
+static NSString *const kWaitTill                 = @"waitTill";
+static NSString *const kURL                      = @"url";
+static NSString *const kRetryCount               = @"retry";
 static NSTimeInterval kMessageQueueFlushInterval = 20;
-static NSTimeInterval kWaitTillInterval = 15*60; // 15 mins
-static NSTimeInterval kMaxInitialRetryCount = 3;
+static NSTimeInterval kWaitTillInterval          = 15*60; // 15 mins
+static NSTimeInterval kMaxInitialRetryCount      = 3;
 
 @interface VWOController()
 
@@ -57,6 +57,7 @@ static NSTimeInterval kMaxInitialRetryCount = 3;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         instance = [[self alloc] init];
+        [VWOActivity setDefaultValues];
     });
     return instance;
 }
@@ -66,7 +67,7 @@ static NSTimeInterval kMaxInitialRetryCount = 3;
                     withCallback:(void(^)(void))completionBlock
                          failure:(void(^)(void))failureBlock {
     VWOLogInfo(@"Controller initialised");
-    VWOPersistantStore.sessionCount += 1;
+    VWOActivity.sessionCount += 1;
     [self addBackgroundListeners];
     [self setupSentry];
 
@@ -222,19 +223,19 @@ static NSTimeInterval kMaxInitialRetryCount = 3;
 - (void)trackUserForCampaign:(VWOCampaign *)campaign {
     VWOLogDebug(@"Controller: trackUserForCampaign %@", campaign);
     NSParameterAssert(campaign);
-    if ([VWOPersistantStore isTrackingUserForCampaign:campaign]) {
+    if ([VWOActivity isTrackingUserForCampaign:campaign]) {
         // Return if already tracking
         VWOLogDebug(@"Controller: Returning. Already tracking %@", campaign);
         return;
     }
 
     // Set User to be returning if not already set.
-    if (!VWOPersistantStore.isReturningUser) {
+    if (!VWOActivity.isReturningUser) {
         VWOLogDebug(@"Setting returningUser=YES");
-        VWOPersistantStore.returningUser = YES;
+        VWOActivity.returningUser = YES;
     }
 
-    [VWOPersistantStore trackUserForCampaign:campaign];
+    [VWOActivity trackUserForCampaign:campaign];
 
     //Send network request and notification only if the campaign is running
     if (campaign.status == CampaignStatusRunning) {
@@ -258,7 +259,7 @@ static NSTimeInterval kMaxInitialRetryCount = 3;
     for (VWOCampaign *campaign in _campaignList) {
         VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
         if (matchedGoal) {
-            if ([VWOPersistantStore isGoalMarked:matchedGoal]) {
+            if ([VWOActivity isGoalMarked:matchedGoal]) {
                 VWOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
                 return;
             }
@@ -267,10 +268,10 @@ static NSTimeInterval kMaxInitialRetryCount = 3;
 
     // Mark goal(One goal can be present in multiple campaigns
     for (VWOCampaign *campaign in _campaignList) {
-        if ([VWOPersistantStore isTrackingUserForCampaign:campaign]) {
+        if ([VWOActivity isTrackingUserForCampaign:campaign]) {
             VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
             if (matchedGoal) {
-                [VWOPersistantStore markGoalConversion:matchedGoal];
+                [VWOActivity markGoalConversion:matchedGoal];
                 NSURL *url = [VWOMakeURL forMarkingGoal:campaign goal:matchedGoal dateTime:NSDate.date withValue:value];
                 [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
             }

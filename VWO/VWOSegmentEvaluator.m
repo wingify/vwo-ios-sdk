@@ -7,7 +7,7 @@
 //
 
 #import "VWOSegmentEvaluator.h"
-#import "VWOPersistantStore.h"
+#import "VWOActivity.h"
 #import "NSCalendar+VWO.h"
 #import "VWODevice.h"
 #import "VWOLogger.h"
@@ -78,7 +78,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
                ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone)) {
         return YES;
     } else if (segmentObject[kReturningVisitor]) {
-        return (VWOPersistantStore.isReturningUser == [segmentObject[kReturningVisitor] boolValue]);
+        return (VWOActivity.isReturningUser == [segmentObject[kReturningVisitor] boolValue]);
     }
     return NO;
 }

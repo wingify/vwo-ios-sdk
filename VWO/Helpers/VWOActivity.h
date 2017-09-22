@@ -1,5 +1,5 @@
 //
-//  VWOPersistantStore.h
+//  VWOActivity.h
 //  Pods
 //
 //  Created by Kaunteya Suryawanshi on 09/07/17.
@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VWOPersistantStore : NSObject
+@interface VWOActivity : NSObject
 
 @property (class, readonly) NSDictionary *campaignVariationPairs;
 @property (class, assign) NSUInteger sessionCount;
@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)markGoalConversion:(VWOGoal *)goal;
 + (BOOL)isGoalMarked:(VWOGoal *)goal;
+
++ (void)setDefaultValues;
 
 @end
 NS_ASSUME_NONNULL_END
