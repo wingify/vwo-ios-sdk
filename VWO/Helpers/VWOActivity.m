@@ -34,8 +34,10 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 + (void)trackUserForCampaign:(VWOCampaign *)campaign {
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
     int variationID = campaign.status == CampaignStatusExcluded ? 0 : campaign.variation.iD;
-    NSMutableDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey];
-    activityDict[kTracking][campaignID] = [NSNumber numberWithInt:variationID];
+    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey] mutableCopy];
+    NSMutableDictionary *trackingDict = [activityDict[kTracking] mutableCopy];
+    trackingDict[campaignID] = [NSNumber numberWithInt:variationID];
+    activityDict[kTracking] = trackingDict;
     [NSUserDefaults.standardUserDefaults setObject:activityDict forKey:kUserDefaultsKey];
 }
 
@@ -48,13 +50,13 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 + (void)markGoalConversion:(VWOGoal *)goal forCampaign:(VWOCampaign *)campaign {
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
     NSNumber *goalID = [NSNumber numberWithInt:goal.iD];
-    NSMutableDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey];
+    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey] mutableCopy];
     activityDict[kGoalsMarked][campaignID] = goalID;
     [NSUserDefaults.standardUserDefaults setObject:activityDict forKey:kUserDefaultsKey];
 }
 
 + (void)markGoalConversion:(VWOGoal *)goal {
-    NSMutableDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey];
+    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey] mutableCopy];
     NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)activityDict[kGoalsMarked]];
     [set addObject:[NSNumber numberWithInt:goal.iD]];
     activityDict[kGoalsMarked] = set.allObjects;
@@ -68,7 +70,7 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 }
 
 + (void)setSessionCount:(NSUInteger)count {
-    NSMutableDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey];
+    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey] mutableCopy];
     activityDict[kSessionCount] = [NSNumber numberWithUnsignedInteger:count];
     [NSUserDefaults.standardUserDefaults setObject:activityDict forKey:kUserDefaultsKey];
 }
@@ -79,7 +81,7 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 }
 
 + (void)setReturningUser:(BOOL)isReturning {
-    NSMutableDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey];
+    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey] mutableCopy];
     activityDict[kReturningUser] = [NSNumber numberWithBool:isReturning];
     [NSUserDefaults.standardUserDefaults setObject:activityDict forKey:kUserDefaultsKey];
 }
