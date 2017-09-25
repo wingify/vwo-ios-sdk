@@ -29,6 +29,7 @@ static NSString *const kRetryCount               = @"retry";
 static NSTimeInterval kMessageQueueFlushInterval = 20;
 static NSTimeInterval kWaitTillInterval          = 15*60; // 15 mins
 static NSTimeInterval kMaxInitialRetryCount      = 3;
+static NSTimeInterval const defaultReqTimeout    = 60;
 
 @interface VWOController()
 
@@ -42,16 +43,10 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
     VWOMessageQueue *messageQueue;
     NSTimer *reloadCampaignsTimer;
     NSTimer *messageQueueFlushtimer;
+    dispatch_queue_t _vwoQueue;
 }
 
-- (id)init {
-    if (self = [super init]) {
-        self.previewMode = NO;
-        _campaignList    = [NSMutableArray new];
-        _segmentEvaluator = [VWOSegmentEvaluator new];
-    }
-    return self;
-}
+#pragma mark - Public methods
 
 + (instancetype)sharedInstance{
     static VWOController *instance = nil;
@@ -63,17 +58,25 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
     return instance;
 }
 
-- (void)initializeAsynchronously:(BOOL)async
-                         timeout:(NSTimeInterval)timeout
-                    withCallback:(void(^)(void))completionBlock
-                         failure:(void(^)(void))failureBlock {
-    VWOLogInfo(@"Controller initialised");
++ (dispatch_queue_t) taskQueue {
+    return VWOController.sharedInstance->_vwoQueue;
+}
+
+- (void)launchWithAPIKey:(NSString *)apiKey
+             withTimeout:(NSNumber *)timeout
+            withCallback:(void(^)(void))completionBlock
+                 failure:(void(^)(void))failureBlock {
+    VWOLogInfo(@"Inititlizing VWO %@", dispatch_get_current_queue());
+    [VWOSDK setAppKeyID:apiKey];
     VWOActivity.sessionCount += 1;
     [self addBackgroundListeners];
     [self setupSentry];
 
     if (VWODevice.isAttachedToDebugger) {
-        [[VWOSocketClient sharedInstance] launch];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //UIWebKit is used. Hence dispatched on main Queue
+            [[VWOSocketClient sharedInstance] launch];
+        });
     }
 
     messageQueue = [[VWOMessageQueue alloc] initWithFileURL:VWOFile.messageQueue];
@@ -81,11 +84,82 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
         [self flushQueue:messageQueue];
     }];
 
-    if (async) {
-        [self fetchCampaignsAsynchronouslyWithCallback:completionBlock failure:failureBlock];
-    } else {
-        [self fetchCampaignsSynchronouslyForTimeout:timeout];
+    [self fetchCampaignsSynchronouslyForTimeout:timeout withCallback:completionBlock failure:failureBlock];
+}
+
+- (void)markConversionForGoal:(NSString*)goalIdentifier withValue:(NSNumber*)value {
+    VWOLogDebug(@"Controller markConersionForGoal");
+    if (self.previewMode) {
+        [VWOSocketClient.sharedInstance goalTriggered:goalIdentifier withValue:value];
+        return;
     }
+
+        //Check if the goal is already marked
+    for (VWOCampaign *campaign in _campaignList) {
+        VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
+        if (matchedGoal) {
+            if ([VWOActivity isGoalMarked:matchedGoal]) {
+                VWOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
+                return;
+            }
+        }
+    }
+
+        // Mark goal(One goal can be present in multiple campaigns
+    for (VWOCampaign *campaign in _campaignList) {
+        if ([VWOActivity isTrackingUserForCampaign:campaign]) {
+            VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
+            if (matchedGoal) {
+                [VWOActivity markGoalConversion:matchedGoal];
+                NSURL *url = [VWOURL forMarkingGoal:campaign goal:matchedGoal dateTime:NSDate.date withValue:value];
+                [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
+            }
+        }
+    }
+}
+
+- (id)variationForKey:(NSString *)key {
+    if (self.previewMode) {
+        if(key && previewInfo) {
+            return previewInfo[key];
+        }
+        return nil;
+    }
+
+    id finalVariation = nil;
+    for (VWOCampaign *campaign in _campaignList) {
+        id variation = [campaign variationForKey:key];
+
+            //If variation Key is present in Campaign
+        if (variation) {
+            finalVariation = variation;
+                // If campaign is not already tracked; check if it can be part of campaign.
+            if ([_segmentEvaluator canUserBePartOfCampaignForSegment:campaign.segmentObject]) {
+                [self trackUserForCampaign:campaign];
+            }
+        }
+    }
+    if (finalVariation == [NSNull null]) {
+        // finalVariation can be NSNull if Control is assigned to campaign
+        return nil;
+    }
+    return finalVariation;
+}
+
+- (void)preview:(NSDictionary *)changes {
+    previewInfo = changes[@"json"];
+}
+
+#pragma mark - Private methods
+
+- (id)init {
+    if (self = [super init]) {
+        self.previewMode = NO;
+        _campaignList    = [NSMutableArray new];
+        _segmentEvaluator = [VWOSegmentEvaluator new];
+        _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
+    }
+    return self;
 }
 
 - (void)setupSentry {
@@ -108,20 +182,15 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
     VWOLogDebug(@"Background listeners added");
     NSNotificationCenter *notification = NSNotificationCenter.defaultCenter;
     [notification addObserver:self
-                     selector:@selector(applicationDidEnterBackground)
-                         name:UIApplicationDidEnterBackgroundNotification object:nil];
-    [notification addObserver:self
                      selector:@selector(applicationWillEnterForeground)
                          name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
-- (void)applicationDidEnterBackground {
-    VWOLogDebug(@"applicationDidEnterBackground");
-}
-
 - (void)applicationWillEnterForeground {
     VWOLogDebug(@"applicationWillEnterForeground");
-    [self fetchCampaignsAsynchronouslyWithCallback:nil failure:nil];
+    dispatch_barrier_async(VWOController.taskQueue, ^{
+        [self fetchCampaignsSynchronouslyForTimeout:nil withCallback:nil failure:nil];
+    });
 }
 
 - (void)sendNotificationUserStartedTracking:(VWOCampaign *)campaign {
@@ -135,9 +204,12 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
     [NSNotificationCenter.defaultCenter postNotificationName:VWOUserStartedTrackingInCampaignNotification object:nil userInfo:campaignInfo];
 }
 
-- (void)fetchCampaignsSynchronouslyForTimeout:(NSTimeInterval)timeout {
-    VWOLogDebug(@"fetchCampaignsSynchronouslyForTimeout %f", timeout);
-    NSURLRequest *request = [NSURLRequest requestWithURL:VWOURL.forFetchingCampaigns cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeout];
+- (void)fetchCampaignsSynchronouslyForTimeout:(NSNumber *)timeout
+                                 withCallback:(void (^)(void))completionBlock
+                                      failure:(void (^)(void))failureBlock {
+    VWOLogDebug(@"fetchCampaigns");
+    NSTimeInterval timeOutInterval = timeout == nil ? defaultReqTimeout : timeout.doubleValue;
+    NSURLRequest *request = [NSURLRequest requestWithURL:VWOURL.forFetchingCampaigns cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeOutInterval];
 
     NSError *error = nil;
     NSURLResponse *response = nil;
@@ -158,30 +230,7 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
     NSArray *responseArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror];
     [responseArray writeToURL:VWOFile.campaignCache atomically:YES];
     [self updateCampaignListFromDictionary:responseArray];
-}
-
-- (void)fetchCampaignsAsynchronouslyWithCallback:(void (^)(void))completionBlock
-                               failure:(void (^)(void))failureBlock {
-    VWOLogDebug(@"fetchCampaignsAsynchronouslyWithCallback");
-    [[NSURLSession.sharedSession dataTaskWithURL:VWOURL.forFetchingCampaigns completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
-            if ([NSFileManager.defaultManager fileExistsAtPath:VWOFile.campaignCache.path]) {
-                VWOLogWarning(@"Network failed while fetching campaigns {%@}", error.localizedDescription);
-                VWOLogInfo(@"Loading Cached Response");
-                NSArray *cachedCampaings = [NSArray arrayWithContentsOfURL:VWOFile.campaignCache];
-                [self updateCampaignListFromDictionary:cachedCampaings];
-            } else {
-                VWOLogError(@"Campaigns fetch failed. Cache not available {%@}", error.localizedDescription);
-                if (failureBlock) failureBlock();
-            }
-            return;
-        }
-        NSError *jsonerror;
-        NSArray *responseArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror];
-        [responseArray writeToURL:VWOFile.campaignCache atomically:YES];
-        [self updateCampaignListFromDictionary:responseArray];
-        if (completionBlock) completionBlock();
-    }] resume];
+    if (completionBlock) completionBlock();
 }
 
 /// Creates NSArray of Type VWOCampaign and stores in self.campaignList
@@ -244,8 +293,7 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
 
     //Send network request and notification only if the campaign is running
     if (campaign.status == CampaignStatusRunning) {
-        VWOLogDebug(@"%@ is running. Adding to Queue. Sending notification", campaign
-                    );
+        VWOLogDebug(@"%@ is running. Adding to Queue. Sending notification", campaign);
         NSURL *url = [VWOURL forMakingUserPartOfCampaign:campaign dateTime:NSDate.date];
         [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
 
@@ -253,41 +301,10 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
     }
 }
 
-- (void)markConversionForGoal:(NSString*)goalIdentifier withValue:(NSNumber*)value {
-    VWOLogDebug(@"Controller markConersionForGoal");
-    if (self.previewMode) {
-        [VWOSocketClient.sharedInstance goalTriggered:goalIdentifier withValue:value];
-        return;
-    }
-
-    //Check if the goal is already marked
-    for (VWOCampaign *campaign in _campaignList) {
-        VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
-        if (matchedGoal) {
-            if ([VWOActivity isGoalMarked:matchedGoal]) {
-                VWOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
-                return;
-            }
-        }
-    }
-
-    // Mark goal(One goal can be present in multiple campaigns
-    for (VWOCampaign *campaign in _campaignList) {
-        if ([VWOActivity isTrackingUserForCampaign:campaign]) {
-            VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
-            if (matchedGoal) {
-                [VWOActivity markGoalConversion:matchedGoal];
-                NSURL *url = [VWOURL forMarkingGoal:campaign goal:matchedGoal dateTime:NSDate.date withValue:value];
-                [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
-            }
-        }
-    }
-}
-
 // Sends request on all the url on a background thread
 - (void)flushQueue:(VWOMessageQueue *)queue {
     VWOLogInfo(@"Sending all messages in queue");
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSUInteger count = queue.count;
         VWOLogDebug(@"Total messages in queue %d", count);
         while (count > 0) {
@@ -338,38 +355,6 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
             count -= 1;
         }//while
     });
-}
-
-- (id)variationForKey:(NSString *)key {
-    if (self.previewMode) {
-        if(key && previewInfo) {
-            return previewInfo[key];
-        }
-        return nil;
-    }
-
-    id finalVariation = nil;
-    for (VWOCampaign *campaign in _campaignList) {
-        id variation = [campaign variationForKey:key];
-
-        //If variation Key is present in Campaign
-        if (variation) {
-            finalVariation = variation;
-            // If campaign is not already tracked; check if it can be part of campaign.
-            if ([_segmentEvaluator canUserBePartOfCampaignForSegment:campaign.segmentObject]) {
-                [self trackUserForCampaign:campaign];
-            }
-        }
-    }
-    if (finalVariation == [NSNull null]) {
-        // finalVariation can be NSNull if Control is assigned to campaign
-        return nil;
-    }
-    return finalVariation;
-}
-
-- (void)preview:(NSDictionary *)changes {
-    previewInfo = changes[@"json"];
 }
 
 - (void)dealloc{
