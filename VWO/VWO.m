@@ -34,16 +34,12 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
             timeout:(NSTimeInterval)timeout
          completion:(void (^)(void))completionBlock
             failure:(void (^)(void))failureBlock {
-    static VWO *instance = nil;
+
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
 
-        instance = [[self alloc] init];
         [VWOSDK setAppKeyID:key];
 
-        if (VWODevice.isAttachedToDebugger) {
-            [[VWOSocketClient sharedInstance] launch];
-        }
         VWOLogInfo(@"Initializing VWO");
         VWOLogDebug(@"Key: %@", key);
         [VWOController.sharedInstance initializeAsynchronously:async timeout:timeout withCallback:completionBlock failure:failureBlock];

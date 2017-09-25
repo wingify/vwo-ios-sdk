@@ -21,6 +21,7 @@
 #import "VWOURL.h"
 #import "VWORavenClient.h"
 #import "VWOSDK.h"
+#import "VWODevice.h"
 
 static NSString *const kWaitTill                 = @"waitTill";
 static NSString *const kURL                      = @"url";
@@ -70,6 +71,10 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
     VWOActivity.sessionCount += 1;
     [self addBackgroundListeners];
     [self setupSentry];
+
+    if (VWODevice.isAttachedToDebugger) {
+        [[VWOSocketClient sharedInstance] launch];
+    }
 
     messageQueue = [[VWOMessageQueue alloc] initWithFileURL:VWOFile.messageQueue];
     messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:kMessageQueueFlushInterval repeats:YES block:^(NSTimer * _Nonnull timer) {
