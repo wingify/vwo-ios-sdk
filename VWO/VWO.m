@@ -1,12 +1,12 @@
 //
-//  VWOClient.m
+//  VWO.m
 //  VWO
 //
-//  Created by Kaunteya Suryawanshi on 08/09/17.
+//  Created by Kaunteya Suryawanshi on 22/09/17.
 //  Copyright © 2017 vwo. All rights reserved.
 //
 
-#import "VWOClient.h"
+#import "VWO.h"
 
 #import "VWOController.h"
 #import "VWOSocketClient.h"

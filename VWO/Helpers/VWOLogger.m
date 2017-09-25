@@ -8,7 +8,7 @@
 
 #import "VWOLogger.h"
 #import "VWORavenClient.h"
-#import "VWOClient.h"
+#import "VWO.h"
 
 void VWOLogDebug(NSString *format, ...) {
     if (VWO.logLevel > VWOLogLevelDebug) return;
