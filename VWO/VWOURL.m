@@ -1,12 +1,12 @@
 //
-//  VWOMakeURL.m
+//  VWOURL.m
 //  VWO
 //
 //  Created by Kaunteya Suryawanshi on 15/09/17.
 //  Copyright © 2017 vwo. All rights reserved.
 //
 
-#import "VWOMakeURL.h"
+#import "VWOURL.h"
 #import "VWOSDK.h"
 #import "VWOActivity.h"
 #import <UIKit/UIKit.h>
@@ -17,7 +17,7 @@
 static NSString *const kScheme = @"https";
 static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 
-@implementation VWOMakeURL
+@implementation VWOURL
 
 + (NSString *) randomNumber {
     return [NSString stringWithFormat:@"%f", ((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1)];

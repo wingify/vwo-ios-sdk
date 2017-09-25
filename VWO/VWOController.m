@@ -18,7 +18,7 @@
 #import "VWOFile.h"
 #import "NSURLSession+Synchronous.h"
 #import "VWO.h"
-#import "VWOMakeURL.h"
+#import "VWOURL.h"
 #import "VWORavenClient.h"
 #import "VWOSDK.h"
 
@@ -132,7 +132,7 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
 
 - (void)fetchCampaignsSynchronouslyForTimeout:(NSTimeInterval)timeout {
     VWOLogDebug(@"fetchCampaignsSynchronouslyForTimeout %f", timeout);
-    NSURLRequest *request = [NSURLRequest requestWithURL:VWOMakeURL.forFetchingCampaigns cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeout];
+    NSURLRequest *request = [NSURLRequest requestWithURL:VWOURL.forFetchingCampaigns cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeout];
 
     NSError *error = nil;
     NSURLResponse *response = nil;
@@ -158,7 +158,7 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
 - (void)fetchCampaignsAsynchronouslyWithCallback:(void (^)(void))completionBlock
                                failure:(void (^)(void))failureBlock {
     VWOLogDebug(@"fetchCampaignsAsynchronouslyWithCallback");
-    [[NSURLSession.sharedSession dataTaskWithURL:VWOMakeURL.forFetchingCampaigns completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[NSURLSession.sharedSession dataTaskWithURL:VWOURL.forFetchingCampaigns completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
             if ([NSFileManager.defaultManager fileExistsAtPath:VWOFile.campaignCache.path]) {
                 VWOLogWarning(@"Network failed while fetching campaigns {%@}", error.localizedDescription);
@@ -241,7 +241,7 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
     if (campaign.status == CampaignStatusRunning) {
         VWOLogDebug(@"%@ is running. Adding to Queue. Sending notification", campaign
                     );
-        NSURL *url = [VWOMakeURL forMakingUserPartOfCampaign:campaign dateTime:NSDate.date];
+        NSURL *url = [VWOURL forMakingUserPartOfCampaign:campaign dateTime:NSDate.date];
         [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
 
         [self sendNotificationUserStartedTracking:campaign];
@@ -272,7 +272,7 @@ static NSTimeInterval kMaxInitialRetryCount      = 3;
             VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
             if (matchedGoal) {
                 [VWOActivity markGoalConversion:matchedGoal];
-                NSURL *url = [VWOMakeURL forMarkingGoal:campaign goal:matchedGoal dateTime:NSDate.date withValue:value];
+                NSURL *url = [VWOURL forMarkingGoal:campaign goal:matchedGoal dateTime:NSDate.date withValue:value];
                 [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
             }
         }

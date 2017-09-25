@@ -1,5 +1,5 @@
 //
-//  VWOMakeURL.h
+//  VWOURL.h
 //  VWO
 //
 //  Created by Kaunteya Suryawanshi on 15/09/17.
@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class VWOCampaign, VWOGoal;
 
-@interface VWOMakeURL : NSObject
+@interface VWOURL : NSObject
 
 + (NSURL *)forFetchingCampaigns;
 + (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign dateTime:(NSDate *)date;
