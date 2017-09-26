@@ -26,8 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 //NSDictionary
 - (void)enqueue:(NSDictionary *)object;
 
-- (void)removeFirst;
-
+- (nullable NSDictionary *) dequeue;
 
 @end
 

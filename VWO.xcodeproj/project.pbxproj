@@ -101,7 +101,7 @@
 		E39815741F6291960035D519 /* VWOController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOController.m; sourceTree = "<group>"; };
 		E39815751F6291970035D519 /* VWODevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWODevice.h; path = Helpers/VWODevice.h; sourceTree = "<group>"; };
 		E39815761F6291970035D519 /* VWODevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = VWODevice.m; path = Helpers/VWODevice.m; sourceTree = "<group>"; };
-		E39815771F6291970035D519 /* VWOFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWOFile.h; path = Helpers/VWOFile.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		E39815771F6291970035D519 /* VWOFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWOFile.h; path = Helpers/VWOFile.h; sourceTree = "<group>"; };
 		E39815781F6291970035D519 /* VWOFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = VWOFile.m; path = Helpers/VWOFile.m; sourceTree = "<group>"; };
 		E39815791F6291970035D519 /* VWOLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWOLogger.h; path = Helpers/VWOLogger.h; sourceTree = "<group>"; };
 		E398157A1F6291970035D519 /* VWOLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = VWOLogger.m; path = Helpers/VWOLogger.m; sourceTree = "<group>"; };

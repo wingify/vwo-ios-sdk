@@ -66,7 +66,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
              withTimeout:(NSNumber *)timeout
             withCallback:(void(^)(void))completionBlock
                  failure:(void(^)(void))failureBlock {
-    VWOLogInfo(@"Inititlizing VWO %@", dispatch_get_current_queue());
+    VWOLogInfo(@"Inititlizing VWO");
     [VWOSDK setAppKeyID:apiKey];
     VWOActivity.sessionCount += 1;
     [self addBackgroundListeners];
@@ -308,21 +308,22 @@ static NSTimeInterval const defaultReqTimeout    = 60;
         NSUInteger count = queue.count;
         VWOLogDebug(@"Total messages in queue %d", count);
         while (count > 0) {
-            NSMutableDictionary *urlDict = [queue.peek mutableCopy];
+            NSMutableDictionary *firstObject = [queue.peek mutableCopy];
 
-            // Queue is empty
-            if (urlDict == nil) continue;
+            NSAssert(firstObject != nil, @"queue.peek is giving invalid results");
             VWOLogDebug(@"Trying message %d", count);
             // If now() < WaitTill time then dont consider this message
-            if (urlDict[kWaitTill] != nil) {
+            if (firstObject[kWaitTill] != nil) {
                 NSTimeInterval now = NSDate.date.timeIntervalSince1970;
-                if (now < [urlDict[kWaitTill] doubleValue]) {
-                    VWOLogDebug(@"Not sending. Waiting for time %@", [NSDate dateWithTimeIntervalSince1970:[urlDict[kWaitTill] doubleValue]]);
+                if (now < [firstObject[kWaitTill] doubleValue]) {
+                    VWOLogDebug(@"Not sending. Waiting for time %@", [NSDate dateWithTimeIntervalSince1970:[firstObject[kWaitTill] doubleValue]]);
+                    NSDictionary *first = queue.dequeue;
+                    [queue enqueue:first];
                     continue;
                 }
             }
 
-            NSString *url = urlDict[kURL];
+            NSString *url = firstObject[kURL];
             NSError *error = nil;
             NSURLResponse *response = nil;
             VWOLogDebug(@"Sending request %@", url);
@@ -335,20 +336,21 @@ static NSTimeInterval const defaultReqTimeout    = 60;
                 //Note: If there is other error but response status is 200, still it might be a successful request
             }
 
-            [queue removeFirst];
-            assert(response != nil);
+            [queue dequeue];
+            NSAssert(response != nil, @"Response cannot be nil here");
+
             // Failure is confirmed only when status is not 200
             NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
             if (statusCode != 200) {
-                urlDict[kRetryCount] = @([urlDict[kRetryCount] intValue] + 1);
+                firstObject[kRetryCount] = @([firstObject[kRetryCount] intValue] + 1);
 
                 //If retry count is greater than
-                if ([urlDict[kRetryCount] intValue] >= kMaxInitialRetryCount) {
+                if ([firstObject[kRetryCount] intValue] >= kMaxInitialRetryCount) {
                     VWOLogDebug(@"Adding wait till %@", [NSDate.date dateByAddingTimeInterval:kWaitTillInterval]);
-                    urlDict[kWaitTill] = [NSDate.date dateByAddingTimeInterval:kWaitTillInterval];
+                    firstObject[kWaitTill] = [NSDate.date dateByAddingTimeInterval:kWaitTillInterval];
                 }
-                VWOLogDebug(@"Re inserting message with retry count %@", urlDict[kRetryCount]);
-                [queue enqueue:urlDict];
+                VWOLogDebug(@"Re inserting message with retry count %@", firstObject[kRetryCount]);
+                [queue enqueue:firstObject];
             } else {
                 VWOLogInfo(@"Successfully sent message %d", statusCode);
             }

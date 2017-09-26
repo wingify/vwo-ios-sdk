@@ -47,17 +47,20 @@ NSUInteger kQueueThreshold = 5;
     });
 }
 
-- (void)removeFirst {
-    VWOLogDebug(@"QUEUE removeFirst");
-    dispatch_barrier_async(_queue, ^{
+- (NSDictionary *)dequeue {
+    __block NSDictionary *firstObject = nil;
+    dispatch_barrier_sync(_queue, ^{
         NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:_fileURL];
         if (array.count == 0) {
             VWOLogException(@"Trying to remove from empty queue. NOP");
             return;
         }
+
+        firstObject = array.firstObject;
         [array removeObjectAtIndex:0];
         [array writeToURL:_fileURL atomically:YES];
     });
+    return firstObject;
 }
 
 - (NSDictionary *)peek {

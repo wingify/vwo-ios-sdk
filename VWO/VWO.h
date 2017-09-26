@@ -6,11 +6,19 @@
 //  Copyright © 2017 vwo. All rights reserved.
 //
 
-#import "VWOLogger.h"
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT NSString * const VWOUserStartedTrackingInCampaignNotification;
+
+typedef NS_ENUM(NSInteger, VWOLogLevel) {
+    VWOLogLevelDebug,
+    VWOLogLevelInfo,
+    VWOLogLevelWarning,
+    VWOLogLevelError,
+    VWOLogLevelNone,
+};
 
 @interface VWO : NSObject
 
