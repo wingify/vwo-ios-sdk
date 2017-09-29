@@ -88,7 +88,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 }
 
 - (void)markConversionForGoal:(NSString*)goalIdentifier withValue:(NSNumber*)value {
-    VWOLogDebug(@"Controller markConersionForGoal");
+    VWOLogDebug(@"Controller markConversionForGoal");
     if (self.previewMode) {
         [VWOSocketClient.sharedInstance goalTriggered:goalIdentifier withValue:value];
         return;
@@ -215,6 +215,12 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     NSURLResponse *response = nil;
     NSData *data = [NSURLSession.sharedSession sendSynchronousDataTaskWithRequest:request returningResponse:&response error:&error];
 
+        // Failure is confirmed only when status is not 200
+    NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+    if (statusCode >= 500 && statusCode <=599) {
+        //Do nothing for server error
+        return;
+    }
     if (error) {
         if ([NSFileManager.defaultManager fileExistsAtPath:VWOFile.campaignCache.path]) {
             VWOLogWarning(@"%@", error.localizedDescription);
