@@ -47,6 +47,19 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
  @param apiKey Unique developer ApiKey provided by VWO.
 
  @param completion A block object to be executed when campaign settings are fetched successfully.
+
+ @note Completion block is not invoked on the main queue. It is developers responsibility to dispatch the code in the appropriate queue.
+ For any UI update the completion must be explicitly dispatched on the main queue.
+
+ @code
+ [VWO launchForAPIKey:apiKey completion:^{
+     dispatch_async(dispatch_get_main_queue(), ^{
+         [activityIndicator stopAnimating];
+         uiLabel.text = "New Value";
+     });
+ }];
+ @endcode
+
  */
 + (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion NS_SWIFT_NAME(launch(apiKey:completion:));
 
