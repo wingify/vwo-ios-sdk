@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @param completion A block object to be executed when campaign settings are fetched successfully.
 
- @note Completion block is not invoked on the main queue. It is developers responsibility to dispatch the code in the appropriate queue.
+ @warning Completion block is not invoked on the main queue. It is developers responsibility to dispatch the code in the appropriate queue.
  For any UI update the completion must be explicitly dispatched on the main queue.
 
  @code
