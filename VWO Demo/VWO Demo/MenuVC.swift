@@ -95,10 +95,15 @@ class MenuVC : UIViewController {
     }
     
     private func clearVWOFiles() {
-        //TODO: Remove files manually
-//        try? FileManager.default.removeItem(at: VAOFile.activity)
-//        try? FileManager.default.removeItem(at: VAOFile.campaignCache)
-//        try? FileManager.default.removeItem(at: VAOFile.messages)
+        UserDefaults.standard.removeObject(forKey: "vwo.09cde70ba7a94aff9d843b1b846a79a7")
+
+        if let path = Bundle.main.path(forResource: "VWOMessages1", ofType: "plist") {
+            try? FileManager.default.removeItem(atPath: path)
+        }
+
+        if let path = Bundle.main.path(forResource: "VWOCampaigns", ofType: "plist") {
+            try? FileManager.default.removeItem(atPath: path)
+        }
     }
 
     private func showAbout() {
