@@ -8,7 +8,6 @@
 
 #import "VWOActivity.h"
 #import "VWOCampaign.h"
-#import "VWOFile.h"
 
 static NSString * kTracking        = @"tracking";
 static NSString * kGoalsMarked     = @"goalsMarked";
