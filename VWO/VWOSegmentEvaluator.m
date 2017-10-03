@@ -70,7 +70,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
     return YES;
 }
 
-- (BOOL)evaluatePredefinedSegmentation:(NSDictionary*)segmentObject {
+- (BOOL)evaluatePredefinedSegmentation:(NSDictionary *)segmentObject {
     if ([segmentObject[kDevice] isEqualToString:@"iPad"] &&
         ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)) {
         return YES;
@@ -83,7 +83,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
     return NO;
 }
 
-- (BOOL)evaluateCustomSegmentation:(NSArray*)partialSegments {
+- (BOOL)evaluateCustomSegmentation:(NSArray *)partialSegments {
 
     NSMutableArray *stack = [NSMutableArray array];
     for (NSDictionary *partialSegment in partialSegments) {
@@ -147,7 +147,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
     return [[stack lastObject] boolValue];
 }
 
--(BOOL)evaluateSegmentForOperand:(NSArray *)operand
+- (BOOL)evaluateSegmentForOperand:(NSArray *)operand
                         lOperand:(NSString *)lOperand
                         operator:(int)operator
                             type:(SegmentationType)segmentType {

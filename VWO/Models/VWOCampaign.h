@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, CampaignStatus) {
 @property (nullable) NSDictionary *segmentObject;
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *) campaignDict;
-- (nullable id)variationForKey:(NSString*)key;
+- (nullable id)variationForKey:(NSString *)key;
 - (nullable VWOGoal *)goalForIdentifier:(NSString *)identifier;
 
 @end

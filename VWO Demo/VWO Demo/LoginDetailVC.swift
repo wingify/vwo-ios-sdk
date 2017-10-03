@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class LoginDetailVC: UIViewController {
     @IBOutlet weak var labelField: UILabel!
     @IBOutlet weak var imageField: UIImageView!

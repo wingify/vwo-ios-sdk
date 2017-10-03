@@ -80,7 +80,7 @@ static NSString * kVariation            = @"variations";
     return nil;
 }
 
-- (nullable id)variationForKey:(NSString*)key {
+- (nullable id)variationForKey:(NSString *)key {
     NSParameterAssert(key);
     NSDictionary *changes = self.variation.changes;
     if (changes == nil) return nil;

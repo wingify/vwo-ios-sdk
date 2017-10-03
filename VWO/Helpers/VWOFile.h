@@ -16,5 +16,4 @@
 @property (class, readonly, copy) NSURL *messageQueue;
 @property (class, readonly, copy) NSURL *failedMessageQueue;
 
-
 @end

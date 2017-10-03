@@ -57,7 +57,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     });
 }
 
-+ (id)variationForKey:(NSString*)key {
++ (id)variationForKey:(NSString *)key {
     NSParameterAssert(key);
     __block id object;
     dispatch_barrier_sync(VWOController.taskQueue, ^{
@@ -66,7 +66,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     return object;
 }
 
-+ (id)variationForKey:(NSString*)key defaultValue:(id)defaultValue {
++ (id)variationForKey:(NSString *)key defaultValue:(id)defaultValue {
     NSParameterAssert(key);
     NSParameterAssert(defaultValue);
     __block id object;
@@ -77,14 +77,14 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     return object;
 }
 
-+ (void)markConversionForGoal:(NSString*)goal {
++ (void)markConversionForGoal:(NSString *)goal {
     NSParameterAssert(goal);
     dispatch_barrier_async(VWOController.taskQueue, ^{
         [VWOController.sharedInstance markConversionForGoal:goal withValue:nil];
     });
 }
 
-+ (void)markConversionForGoal:(NSString*)goal withValue:(double)value {
++ (void)markConversionForGoal:(NSString *)goal withValue:(double)value {
     NSParameterAssert(goal);
     dispatch_barrier_async(VWOController.taskQueue, ^{
         [VWOController.sharedInstance markConversionForGoal:goal withValue:[NSNumber numberWithDouble:value]];
@@ -99,7 +99,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     });
 }
 
-+ (NSString*)version {
++ (NSString *)version {
     return VWOSDK.version;
 }
 

@@ -12,7 +12,6 @@
 /// Logic error. This must not go in release
 void VWOLogException(NSString *format, ...);
 
-
 static NSObject *loggingLockObject;
 #define MAKE_LOG_FUNCTION(FUNCTION_NAME, LEVEL, LEVEL_SHORT_NAME) \
 static inline void FUNCTION_NAME(NSString *format, ...) { \

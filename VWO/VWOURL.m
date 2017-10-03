@@ -77,7 +77,6 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     [components setHost:kHost];
     [components setPath:@"/c.gif"];
 
-
     [components
      setQueryItems:@[
                      [NSURLQueryItem queryItemWithName:@"experiment_id" value:[NSString stringWithFormat:@"%d", campaign.iD]],

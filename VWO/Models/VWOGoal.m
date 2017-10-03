@@ -46,7 +46,7 @@ static NSString * kIdentifier = @"identifier";
     return [self initWithId:id identifier:identifier type:type];
 }
 
--(NSString *)description {
+- (NSString *)description {
     return [NSString stringWithFormat:@"%@(id: %d)", self.identifier, self.iD];
 }
 

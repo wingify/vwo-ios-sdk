@@ -16,7 +16,6 @@ typedef enum {
     kRavenLogLevelDebugFatal
 } RavenLogLevel;
 
-
 @interface VWORavenClient : NSObject
 
 @property (strong, nonatomic) NSDictionary *extra;
@@ -90,7 +89,7 @@ typedef enum {
 - (void)captureException:(NSException *)exception;
 - (void)captureException:(NSException *)exception sendNow:(BOOL)sendNow;
 - (void)captureException:(NSException *)exception additionalExtra:(NSDictionary *)additionalExtra additionalTags:(NSDictionary *)additionalTags sendNow:(BOOL)sendNow;
-- (void)captureException:(NSException*)exception method:(const char*)method file:(const char*)file line:(NSInteger)line sendNow:(BOOL)sendNow;
+- (void)captureException:(NSException *)exception method:(const char *)method file:(const char *)file line:(NSInteger)line sendNow:(BOOL)sendNow;
 - (void)setupExceptionHandler;
 
 @end

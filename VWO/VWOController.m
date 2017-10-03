@@ -87,7 +87,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     [self fetchCampaignsSynchronouslyForTimeout:timeout withCallback:completionBlock failure:failureBlock];
 }
 
-- (void)markConversionForGoal:(NSString*)goalIdentifier withValue:(NSNumber*)value {
+- (void)markConversionForGoal:(NSString *)goalIdentifier withValue:(NSNumber *)value {
     VWOLogDebug(@"Controller markConversionForGoal");
     if (self.previewMode) {
         [VWOSocketClient.sharedInstance goalTriggered:goalIdentifier withValue:value];

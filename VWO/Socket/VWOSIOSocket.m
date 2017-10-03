@@ -62,7 +62,7 @@ static NSString *SIOMD5(NSString *string) {
                        response: response];
 }
 
-+ (void)socketWithHost:(NSString *)hostURL reconnectAutomatically:(BOOL)reconnectAutomatically attemptLimit:(NSInteger)attempts withDelay:(NSTimeInterval)reconnectionDelay maximumDelay:(NSTimeInterval)maximumDelay timeout:(NSTimeInterval)timeout withTransports:(NSArray*)transports response:(void (^)(VWOSIOSocket *))response {
++ (void)socketWithHost:(NSString *)hostURL reconnectAutomatically:(BOOL)reconnectAutomatically attemptLimit:(NSInteger)attempts withDelay:(NSTimeInterval)reconnectionDelay maximumDelay:(NSTimeInterval)maximumDelay timeout:(NSTimeInterval)timeout withTransports:(NSArray *)transports response:(void (^)(VWOSIOSocket *))response {
     VWOSIOSocket *socket = [[VWOSIOSocket alloc] init];
     if (!socket) {
         dispatch_async(dispatch_get_main_queue(), ^{

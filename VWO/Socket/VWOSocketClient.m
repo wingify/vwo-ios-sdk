@@ -35,7 +35,7 @@
     }];
 }
 
--(void)startListeners {
+- (void)startListeners {
     __weak id socket_ = socket;
     socket.onConnect = ^{
         NSDictionary *dict  = @{@"name":[[UIDevice currentDevice] name],

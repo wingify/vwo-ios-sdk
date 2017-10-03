@@ -26,7 +26,6 @@
     return self;
 }
 
-
 - (NSDictionary *)makeDictionary:(NSString *)message {
     struct utsname systemInfo;
     uname(&systemInfo);

@@ -26,7 +26,7 @@ public struct SlideMenuOptions {
     public static var contentViewDrag: Bool = false
     public static var shadowOpacity: CGFloat = 0.0
     public static var shadowRadius: CGFloat = 0.0
-    public static var shadowOffset: CGSize = CGSize(width: 0,height: 0)
+    public static var shadowOffset: CGSize = CGSize(width: 0, height: 0)
     public static var panFromBezel: Bool = true
     public static var animationDuration: CGFloat = 0.4
     public static var animationOptions: UIViewAnimationOptions = []

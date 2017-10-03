@@ -386,7 +386,7 @@ void VWOexceptionHandler(NSException *exception) {
 
 - (void)sendJSON:(NSData *)JSON {
     if (!self.config) {
-        VWOLogWarning(@"DSN not configured, cannot send JSON :\n%@\n",[[NSString alloc] initWithData:JSON encoding:NSUTF8StringEncoding]);
+        VWOLogWarning(@"DSN not configured, cannot send JSON :\n%@\n", [[NSString alloc] initWithData:JSON encoding:NSUTF8StringEncoding]);
         return;
     }
     

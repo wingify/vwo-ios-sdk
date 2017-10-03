@@ -44,13 +44,12 @@ static NSString * kChanges = @"changes";
     return [self initWith:iD name:name changes:changes];
 }
 
--(BOOL)isControl {
+- (BOOL)isControl {
     return (self.iD == 1);
 }
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@(id: %d)", self.name, self.iD];
 }
-
 
 @end

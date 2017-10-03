@@ -102,7 +102,7 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @see variationForKey:defaultValue:
  */
-+ (nullable id)variationForKey:(NSString*)key NS_SWIFT_NAME(variationFor(key:));
++ (nullable id)variationForKey:(NSString *)key NS_SWIFT_NAME(variationFor(key:));
 
 /**
  Fetch variation for given key
@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @return variation if available else `defaultValue`
  */
-+ (id)variationForKey:(NSString*)key defaultValue:(id)defaultValue NS_SWIFT_NAME(variationFor(key:defaultValue:));
++ (id)variationForKey:(NSString *)key defaultValue:(id)defaultValue NS_SWIFT_NAME(variationFor(key:defaultValue:));
 
 /**
  Triggers goal for given identifier
@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @note Every goal is marked once
  */
-+ (void)markConversionForGoal:(NSString*)goal NS_SWIFT_NAME(markConversionFor(goal:));
++ (void)markConversionForGoal:(NSString *)goal NS_SWIFT_NAME(markConversionFor(goal:));
 
 /**
  Triggers goal with a Value for given identifier
@@ -135,7 +135,7 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @note Every goal is marked once
  */
-+ (void)markConversionForGoal:(NSString*)goal withValue:(double)value NS_SWIFT_NAME(markConversionFor(goal:value:));
++ (void)markConversionForGoal:(NSString *)goal withValue:(double)value NS_SWIFT_NAME(markConversionFor(goal:value:));
 
 /**
  Sets key value pair.
@@ -152,7 +152,7 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 /**
  *  VWO SDK version
  */
-+ (NSString*)version;
++ (NSString *)version;
 
 @end
 NS_ASSUME_NONNULL_END
