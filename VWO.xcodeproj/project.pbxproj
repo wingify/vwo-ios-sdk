@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E31714C41F838BB10036CF07 /* VWODevice.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815761F6291970035D519 /* VWODevice.m */; };
+		E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31714C61F838C2F0036CF07 /* VWOTests.swift */; };
 		E35484F51F713C2E00E14D2E /* NSURLSession+Synchronous.h in Headers */ = {isa = PBXBuildFile; fileRef = E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */; };
 		E35484F61F713C2E00E14D2E /* NSURLSession+Synchronous.m in Sources */ = {isa = PBXBuildFile; fileRef = E35484F41F713C2E00E14D2E /* NSURLSession+Synchronous.m */; };
 		E36AC7191F75614E0041ACDF /* VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E36AC7181F75614E0041ACDF /* VWO.m */; };
@@ -67,6 +69,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E31714C51F838C2F0036CF07 /* VWOTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VWOTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		E31714C61F838C2F0036CF07 /* VWOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOTests.swift; sourceTree = "<group>"; };
 		E319151E1F67F1B900FC1695 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E31915231F6802D500FC1695 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSession+Synchronous.h"; sourceTree = "<group>"; };
@@ -186,7 +190,9 @@
 			isa = PBXGroup;
 			children = (
 				E39814E41F6288C80035D519 /* VWOTests.m */,
+				E31714C61F838C2F0036CF07 /* VWOTests.swift */,
 				E39814E61F6288C80035D519 /* Info.plist */,
+				E31714C51F838C2F0036CF07 /* VWOTests-Bridging-Header.h */,
 			);
 			path = VWOTests;
 			sourceTree = "<group>";
@@ -351,6 +357,7 @@
 					E39814DE1F6288C80035D519 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = DBN26NC8KE;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -424,7 +431,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E31714C41F838BB10036CF07 /* VWODevice.m in Sources */,
 				E39814E51F6288C80035D519 /* VWOTests.m in Sources */,
+				E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,6 +574,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -584,28 +594,36 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
 		E39814EE1F6288C80035D519 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = DBN26NC8KE;
 				INFOPLIST_FILE = VWOTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWOTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VWOTests/VWOTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
 		E39814EF1F6288C80035D519 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = DBN26NC8KE;
 				INFOPLIST_FILE = VWOTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWOTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VWOTests/VWOTests-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

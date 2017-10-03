@@ -49,7 +49,7 @@
  NO NO returns 10
  */
 + (NSString *)iOSVersionMinor:(BOOL) minor patch:(BOOL)patch {
-    NSAssert(patch && !minor == false, @"Patch without minor not allowed");
+    NSAssert((patch && !minor) == false, @"Patch without minor not allowed");
     NSArray *currentArray = [UIDevice.currentDevice.systemVersion componentsSeparatedByString:@"."];
     NSMutableString *formattedVersion = [NSMutableString new];
     if (currentArray.firstObject) {
