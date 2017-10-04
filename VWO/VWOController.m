@@ -27,7 +27,7 @@ static NSString *const kWaitTill                 = @"waitTill";
 static NSString *const kURL                      = @"url";
 static NSString *const kRetryCount               = @"retry";
 static NSTimeInterval kMessageQueueFlushInterval = 20;
-static NSTimeInterval kWaitTillInterval          = 15*60; // 15 mins
+static NSTimeInterval kWaitTillInterval          = 15 * 60; // 15 mins
 static NSTimeInterval kMaxInitialRetryCount      = 3;
 static NSTimeInterval const defaultReqTimeout    = 60;
 
@@ -241,6 +241,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 
 /// Creates NSArray of Type VWOCampaign and stores in self.campaignList
 - (void)updateCampaignListFromDictionary:(NSArray *)allCampaignDict {
+    NSParameterAssert(allCampaignDict);
     VWOLogInfo(@"Updating campaignList from URL response");
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (NSDictionary *campaignDict in allCampaignDict) {
