@@ -64,7 +64,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
              withTimeout:(NSNumber *)timeout
             withCallback:(void(^)(void))completionBlock
                  failure:(void(^)(void))failureBlock {
-    VWOLogInfo(@"Inititlizing VWO");
+    VWOLogInfo(@"Initializing VWO");
     [VWOSDK setAppKeyID:apiKey];
     VWOActivity.sessionCount += 1;
     [self addBackgroundListeners];
@@ -78,10 +78,11 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     }
 
     messageQueue = [[VWOMessageQueue alloc] initWithFileURL:VWOFile.messageQueue];
-    messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:kMessageQueueFlushInterval repeats:YES block:^(NSTimer * _Nonnull timer) {
-        [self flushQueue:messageQueue];
-    }];
-
+    dispatch_async(dispatch_get_main_queue(), ^{
+        messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:kMessageQueueFlushInterval repeats:YES block:^(NSTimer * _Nonnull timer) {
+            [self flushQueue:messageQueue];
+        }];
+    });
     [self fetchCampaignsSynchronouslyForTimeout:timeout withCallback:completionBlock failure:failureBlock];
 }
 
