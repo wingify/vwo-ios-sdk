@@ -79,7 +79,7 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @param failureBlock A block object to be executed when there was error while fetching campaign settings
  */
-+ (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion failure:(void (^)(void))failureBlock NS_SWIFT_NAME(launch(apiKey:completion:failure:));
++ (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion failure:(void (^)(NSString *error))failureBlock NS_SWIFT_NAME(launch(apiKey:completion:failure:));
 
 /**
  `Synchronously` fetch campaign settings

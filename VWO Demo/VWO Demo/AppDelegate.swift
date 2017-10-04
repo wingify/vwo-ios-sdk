@@ -36,12 +36,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             container.activityIndicator.startAnimating()
             VWO.logLevel = .debug
             Swift.print("Launching VWO-\(VWO.version())")
-            VWO.launch(apiKey: apiKey) {
+            VWO.launch(apiKey: apiKey, completion: {
                 DispatchQueue.main.async {
                     container.activityIndicator.stopAnimating()
                 }
                 Swift.print("VWO launched in demo app")
-            }
+            }, failure: { (errorString) in
+                DispatchQueue.main.async {
+                    container.activityIndicator.stopAnimating()
+                }
+                Swift.print("Failed \(errorString)")
+
+            })
         }
     }
 

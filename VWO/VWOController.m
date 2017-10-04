@@ -63,7 +63,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 - (void)launchWithAPIKey:(NSString *)apiKey
              withTimeout:(NSNumber *)timeout
             withCallback:(void(^)(void))completionBlock
-                 failure:(void(^)(void))failureBlock {
+                 failure:(void(^)(NSString *error))failureBlock {
     VWOLogInfo(@"Initializing VWO");
     [VWOSDK setAppKeyID:apiKey];
     VWOActivity.sessionCount += 1;
@@ -201,7 +201,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 
 - (void)fetchCampaignsSynchronouslyForTimeout:(NSNumber *)timeout
                                  withCallback:(void (^)(void))completionBlock
-                                      failure:(void (^)(void))failureBlock {
+                                      failure:(void (^)(NSString *error))failureBlock {
     VWOLogDebug(@"fetchCampaigns URL(%@)", VWOURL.forFetchingCampaigns.absoluteString);
     NSTimeInterval timeOutInterval = timeout == nil ? defaultReqTimeout : timeout.doubleValue;
     NSURLRequest *request = [NSURLRequest requestWithURL:VWOURL.forFetchingCampaigns cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeOutInterval];
@@ -214,7 +214,9 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
 
     if(statusCode >= 400 && statusCode <=499) {
-        if (failureBlock) failureBlock();
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        VWOLogError(@"Client side error %@", json[@"message"]);
+        if (failureBlock) failureBlock(json[@"message"]);
         return;
     }
 

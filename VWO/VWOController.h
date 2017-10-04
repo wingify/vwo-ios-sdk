@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)launchWithAPIKey:(NSString *)apiKey
              withTimeout:(nullable NSNumber *)timeout
                  withCallback:(nullable void(^)(void))completionBlock
-                      failure:(nullable void(^)(void))failureBlock;
+                      failure:(nullable void(^)(NSString *))failureBlock;
 
 - (void)markConversionForGoal:(NSString *)goal withValue:(nullable NSNumber *)value;
 - (nullable id)variationForKey:(NSString *)key;
