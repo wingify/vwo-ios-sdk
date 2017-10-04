@@ -211,6 +211,12 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 
         // Failure is confirmed only when status is not 200
     NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+
+    if(statusCode >= 400 && statusCode <=499) {
+        if (failureBlock) failureBlock();
+        return;
+    }
+
     if (statusCode >= 500 && statusCode <=599) {
         //Do nothing for server error
         return;
