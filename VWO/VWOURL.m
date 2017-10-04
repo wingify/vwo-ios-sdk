@@ -17,6 +17,18 @@
 static NSString *const kScheme = @"https";
 static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 
+@implementation NSDictionary (NSURLQueryItem)
+- (NSArray<NSURLQueryItem *> *)toQueryItems {
+    NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray new];
+    for (NSString *key in self) {
+        NSAssert([self[key] isKindOfClass:[NSString class]], @"Query item can only have string");
+        NSURLQueryItem *item = [NSURLQueryItem queryItemWithName:key value:self[key]];
+        [queryItems addObject:item];
+    }
+    return queryItems;
+}
+@end
+
 @implementation VWOURL
 
 + (NSString *) randomNumber {
@@ -40,16 +52,18 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     [components setScheme:kScheme];
     [components setHost:kHost];
     [components setPath:@"/mobile"];
-    [components
-     setQueryItems:@[[NSURLQueryItem queryItemWithName:@"a" value:VWOSDK.accountID],
-                     [NSURLQueryItem queryItemWithName:@"dt" value:UIDevice.currentDevice.name],
-                     [NSURLQueryItem queryItemWithName:@"i" value:VWOSDK.appKey],
-                     [NSURLQueryItem queryItemWithName:@"k" value:VWOActivity.campaignVariationPairs.toString],
-                     [NSURLQueryItem queryItemWithName:@"os" value:UIDevice.currentDevice.systemVersion],
-                     [NSURLQueryItem queryItemWithName:@"r" value: [self randomNumber]],
-                     [NSURLQueryItem queryItemWithName:@"u" value:VWOActivity.UUID],
-                     [NSURLQueryItem queryItemWithName:@"v" value:VWOSDK.version],
-                     ]];
+    NSDictionary *paramDict =
+    @{@"api-version": @"2",
+      @"a"          : VWOSDK.accountID,
+      @"dt"         : UIDevice.currentDevice.name,
+      @"i"          : VWOSDK.appKey,
+      @"k"          : VWOActivity.campaignVariationPairs.toString,
+      @"os"         : UIDevice.currentDevice.systemVersion,
+      @"r"          : [self randomNumber],
+      @"u"          : VWOActivity.UUID,
+      @"v"          : VWOSDK.version
+      };
+    components.queryItems = [paramDict toQueryItems];
     return components.URL;
 }
 
@@ -58,16 +72,16 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     [components setScheme:kScheme];
     [components setHost:kHost];
     [components setPath:@"/l.gif"];
-    [components
-     setQueryItems:@[
-                     [NSURLQueryItem queryItemWithName:@"experiment_id" value:[NSString stringWithFormat:@"%d", campaign.iD]],
-                     [NSURLQueryItem queryItemWithName:@"account_id" value:VWOSDK.accountID],
-                     [NSURLQueryItem queryItemWithName:@"combination" value:[NSString stringWithFormat:@"%d", campaign.variation.iD]],
-                     [NSURLQueryItem queryItemWithName:@"u" value:VWOActivity.UUID],
-                     [NSURLQueryItem queryItemWithName:@"s" value: [NSString stringWithFormat:@"%lu", (unsigned long)VWOActivity.sessionCount]],
-                     [NSURLQueryItem queryItemWithName:@"random" value: [self randomNumber]],
-                     [NSURLQueryItem queryItemWithName:@"ed" value: [self extraParametersWithDate:date].toString],
-                     ]];
+    NSDictionary *paramDict =
+    @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
+      @"account_id"   : VWOSDK.accountID,
+      @"combination"  : [NSString stringWithFormat:@"%d", campaign.variation.iD],
+      @"u"            : VWOActivity.UUID,
+      @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)VWOActivity.sessionCount],
+      @"random"       : [self randomNumber],
+      @"ed"           : [self extraParametersWithDate:date].toString
+      };
+    components.queryItems = [paramDict toQueryItems];
     return components.URL;
 }
 
@@ -77,20 +91,20 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     [components setHost:kHost];
     [components setPath:@"/c.gif"];
 
-    [components
-     setQueryItems:@[
-                     [NSURLQueryItem queryItemWithName:@"experiment_id" value:[NSString stringWithFormat:@"%d", campaign.iD]],
-                     [NSURLQueryItem queryItemWithName:@"account_id" value:VWOSDK.accountID],
-                     [NSURLQueryItem queryItemWithName:@"combination" value:[NSString stringWithFormat:@"%d", campaign.variation.iD]],
-                     [NSURLQueryItem queryItemWithName:@"u" value:VWOActivity.UUID],
-                     [NSURLQueryItem queryItemWithName:@"s" value: [NSString stringWithFormat:@"%lu", (unsigned long)VWOActivity.sessionCount]],
-                     [NSURLQueryItem queryItemWithName:@"random" value: [self randomNumber]],
-                     [NSURLQueryItem queryItemWithName:@"ed" value: [self extraParametersWithDate:date].toString],
-                     [NSURLQueryItem queryItemWithName:@"goal_id" value: [NSString stringWithFormat:@"%d", goal.iD]],
-                     ]];
+    NSDictionary *paramDict =
+    @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
+      @"account_id"   : VWOSDK.accountID,
+      @"combination"  : [NSString stringWithFormat:@"%d", campaign.variation.iD],
+      @"u"            : VWOActivity.UUID,
+      @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)VWOActivity.sessionCount],
+      @"random"       : [self randomNumber],
+      @"ed"           : [self extraParametersWithDate:date].toString,
+      @"goal_id"      : [NSString stringWithFormat:@"%d", goal.iD],
+      };
+    components.queryItems = [paramDict toQueryItems];
 
     if (goalValue != nil) {
-        NSMutableArray *queryItems = [components mutableCopy];
+        NSMutableArray<NSURLQueryItem *> *queryItems = [components.queryItems mutableCopy];
         [queryItems addObject:[NSURLQueryItem queryItemWithName:@"r" value: [NSString stringWithFormat:@"%@", goalValue]]];
         components.queryItems = queryItems;
     }
@@ -99,3 +113,4 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 }
 
 @end
+
