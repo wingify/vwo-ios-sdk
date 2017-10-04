@@ -43,9 +43,9 @@
 - (void)startListeners {
     __weak id socket_ = _socket;
     _socket.onConnect = ^{
-        NSDictionary *dict  = @{@"name":[[UIDevice currentDevice] name],
-                                @"type": @"iOS",
-                                @"appKey": VWOSDK.appKey};
+        NSDictionary *dict = @{@"name" : [[UIDevice currentDevice] name],
+                               @"type" : @"iOS",
+                               @"appKey" : VWOSDK.appKey};
 
         [socket_ emit:@"register_mobile" args:[NSArray arrayWithObject:dict]];
     };

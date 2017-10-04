@@ -11,7 +11,6 @@
 #import "NSCalendar+VWO.h"
 #import "VWODevice.h"
 #import "VWOLogger.h"
-#import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeCustomVariable = 7,
@@ -71,11 +70,9 @@ static NSString * kReturningVisitor = @"returning_visitor";
 }
 
 - (BOOL)evaluatePredefinedSegmentation:(NSDictionary *)segmentObject {
-    if ([segmentObject[kDevice] isEqualToString:@"iPad"] &&
-        (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)) {
+    if ([segmentObject[kDevice] isEqualToString:@"iPad"] && VWODevice.isPad) {
         return YES;
-    } else if ([segmentObject[kDevice] isEqualToString:@"iPhone"] &&
-               (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone)) {
+    } else if ([segmentObject[kDevice] isEqualToString:@"iPhone"] && VWODevice.isiPhone) {
         return YES;
     } else if (segmentObject[kReturningVisitor]) {
         return (VWOActivity.isReturningUser == [segmentObject[kReturningVisitor] boolValue]);

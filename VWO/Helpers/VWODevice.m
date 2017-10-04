@@ -42,6 +42,26 @@
     return debuggerIsAttached;
 }
 
++ (BOOL)isiPhone {
+    return (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone);
+}
+
++ (BOOL)isPad {
+    return (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad);
+}
+
++ (NSString *)deviceName {
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    NSString *deviceModel = [NSString stringWithCString:systemInfo.machine
+                                               encoding:NSUTF8StringEncoding];
+    return deviceModel;
+}
+
++ (NSString *)iOSVersion {
+    return UIDevice.currentDevice.systemVersion;
+}
+
 /**
  Current Version 10.3.2
  YES YES returns 10.3.2

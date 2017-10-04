@@ -9,10 +9,10 @@
 #import "VWOURL.h"
 #import "VWOSDK.h"
 #import "VWOActivity.h"
-#import <UIKit/UIKit.h>
 #import "NSDictionary+VWO.h"
 #import "VWOCampaign.h"
 #import "VWOGoal.h"
+#import "VWODevice.h"
 
 static NSString *const kScheme = @"https";
 static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
@@ -39,9 +39,9 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     return @{@"lt" : [NSString stringWithFormat:@"%f", date.timeIntervalSince1970],
              @"v"  : VWOSDK.version,
              @"i"  : VWOSDK.appKey,
-             @"av" : NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"],
-             @"dt" : UIDevice.currentDevice.name,
-             @"os" : UIDevice.currentDevice.systemVersion
+             @"av" : NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"],//App version
+             @"dt" : VWODevice.deviceName,//Device Type
+             @"os" : VWODevice.iOSVersion
              };
 }
 
@@ -55,10 +55,10 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     NSDictionary *paramDict =
     @{@"api-version": @"2",
       @"a"          : VWOSDK.accountID,
-      @"dt"         : UIDevice.currentDevice.name,
+      @"dt"         : VWODevice.deviceName,
       @"i"          : VWOSDK.appKey,
       @"k"          : VWOActivity.campaignVariationPairs.toString,
-      @"os"         : UIDevice.currentDevice.systemVersion,
+      @"os"         : VWODevice.iOSVersion,
       @"r"          : [self randomNumber],
       @"u"          : VWOActivity.UUID,
       @"v"          : VWOSDK.version
@@ -71,7 +71,8 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     NSURLComponents *components = [NSURLComponents new];
     [components setScheme:kScheme];
     [components setHost:kHost];
-    [components setPath:@"/l.gif"];
+    [components setPath:@"/track-user"];
+
     NSDictionary *paramDict =
     @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
       @"account_id"   : VWOSDK.accountID,
@@ -89,7 +90,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     NSURLComponents *components = [NSURLComponents new];
     [components setScheme:kScheme];
     [components setHost:kHost];
-    [components setPath:@"/c.gif"];
+    [components setPath:@"/track-goal"];
 
     NSDictionary *paramDict =
     @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
