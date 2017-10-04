@@ -20,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, readonly) dispatch_queue_t taskQueue;
 
 @property VWOSegmentEvaluator *segmentEvaluator;
-@property (assign) BOOL isInitialized;
 @property NSDictionary *previewInfo;
 
 + (instancetype)shared;

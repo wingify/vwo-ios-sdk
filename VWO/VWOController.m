@@ -42,6 +42,8 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     NSTimer *reloadCampaignsTimer;
     NSTimer *messageQueueFlushtimer;
     dispatch_queue_t _vwoQueue;
+    BOOL _initialised;
+
 }
 
 #pragma mark - Public methods
@@ -64,6 +66,10 @@ static NSTimeInterval const defaultReqTimeout    = 60;
              withTimeout:(NSNumber *)timeout
             withCallback:(void(^)(void))completionBlock
                  failure:(void(^)(NSString *error))failureBlock {
+    if (_initialised) {
+        VWOLogWarning(@"VWO already initialised");
+        return;
+    }
     VWOLogInfo(@"Initializing VWO");
     [VWOSDK setAppKeyID:apiKey];
     VWOActivity.sessionCount += 1;
@@ -83,10 +89,17 @@ static NSTimeInterval const defaultReqTimeout    = 60;
             [self flushQueue:messageQueue];
         }];
     });
-    [self fetchCampaignsSynchronouslyForTimeout:timeout withCallback:completionBlock failure:failureBlock];
+    [self fetchCampaignsSynchronouslyForTimeout:timeout withCallback:^{
+        _initialised = true;
+        completionBlock();
+    } failure:failureBlock];
 }
 
 - (void)markConversionForGoal:(NSString *)goalIdentifier withValue:(NSNumber *)value {
+    if (!_initialised) {
+        VWOLogError(@"VWO must be launched first!");
+        return;
+    }
     VWOLogDebug(@"Controller markConversionForGoal");
 
     if (VWOSocketClient.shared.isEnabled) {
@@ -119,6 +132,10 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 }
 
 - (id)variationForKey:(NSString *)key {
+    if (!_initialised) {
+        VWOLogWarning(@"VWO must be launched first!!");
+        return nil;
+    }
     if (VWOSocketClient.shared.isEnabled) {
         if(key && _previewInfo != nil) {
             return _previewInfo[key];
