@@ -39,6 +39,7 @@ static NSString * kVariation            = @"variations";
 
     if ([statusString isEqualToString:@"EXCLUDED"]) {
         self.status = CampaignStatusExcluded;
+        self.name   = campaignDict[kName];
         return self;
     }
 

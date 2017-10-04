@@ -201,7 +201,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 - (void)fetchCampaignsSynchronouslyForTimeout:(NSNumber *)timeout
                                  withCallback:(void (^)(void))completionBlock
                                       failure:(void (^)(void))failureBlock {
-    VWOLogDebug(@"fetchCampaigns %@", VWOURL.forFetchingCampaigns.absoluteString);
+    VWOLogDebug(@"fetchCampaigns URL(%@)", VWOURL.forFetchingCampaigns.absoluteString);
     NSTimeInterval timeOutInterval = timeout == nil ? defaultReqTimeout : timeout.doubleValue;
     NSURLRequest *request = [NSURLRequest requestWithURL:VWOURL.forFetchingCampaigns cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeOutInterval];
 
