@@ -72,10 +72,10 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
 - (BOOL)evaluatePredefinedSegmentation:(NSDictionary *)segmentObject {
     if ([segmentObject[kDevice] isEqualToString:@"iPad"] &&
-        ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)) {
+        (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)) {
         return YES;
     } else if ([segmentObject[kDevice] isEqualToString:@"iPhone"] &&
-               ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone)) {
+               (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone)) {
         return YES;
     } else if (segmentObject[kReturningVisitor]) {
         return (VWOActivity.isReturningUser == [segmentObject[kReturningVisitor] boolValue]);
@@ -107,7 +107,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
         if (logicalOperator && leftParenthesis) {
             [stack addObject:logicalOperator];
         } else if (logicalOperator) {
-            BOOL leftVariable = [[stack lastObject] boolValue];
+            BOOL leftVariable = [stack.lastObject boolValue];
             [stack removeLastObject];
 
             // apply operator to these two
@@ -125,11 +125,11 @@ static NSString * kReturningVisitor = @"returning_visitor";
         if (rightParenthesis) {
             [stack removeLastObject];
 
-            while ((stack.count > 0) && ![[stack lastObject] isEqualToString:@")"]) {
-                NSString *stackLogicalOperator = [stack lastObject];
+            while ((stack.count > 0) && ![stack.lastObject isEqualToString:@")"]) {
+                NSString *stackLogicalOperator = stack.lastObject;
                 [stack removeLastObject];
 
-                BOOL leftVariable = [[stack lastObject] boolValue];
+                BOOL leftVariable = [stack.lastObject boolValue];
                 [stack removeLastObject];
 
                 // apply operator to these two
@@ -144,7 +144,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
         [stack addObject:[NSNumber numberWithBool:currentValue]];
     }
-    return [[stack lastObject] boolValue];
+    return [stack.lastObject boolValue];
 }
 
 - (BOOL)evaluateSegmentForOperand:(NSArray *)operand
@@ -159,7 +159,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
     switch (segmentType) {
         case SegmentationTypeiOSVersion: {
             NSString *version = [VWODevice iOSVersionMinor:YES patch:NO];
-            NSString *targetVersion = [operand firstObject];
+            NSString *targetVersion = operand.firstObject;
             NSComparisonResult result = [version compare:targetVersion options:NSNumericSearch];
             switch (operator) {
                 case OperatorTypeIsEqualTo: return result == NSOrderedSame;
@@ -188,7 +188,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
         }
 
         case SegmentationTypeLocation: {
-            NSString *country = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
+            NSString *country = [NSLocale.currentLocale objectForKey:NSLocaleCountryCode];
             BOOL contains = [operand containsObject:country];
 
             return ((contains && operator == OperatorTypeIsEqualTo) ||
@@ -197,7 +197,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
         case SegmentationTypeAppVersion: {
             NSString *currentVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
-            NSString *targetVersion = [operand firstObject];
+            NSString *targetVersion = operand.firstObject;
             switch (operator) {
                 case OperatorTypeMatchesRegexCaseInsensitive:
                     return ([currentVersion rangeOfString:targetVersion options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound);
@@ -225,7 +225,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
             NSString *currentValue = _customVariables[lOperand];
             if (!currentValue) return NO;
 
-            NSString *targetValue = [operand firstObject];
+            NSString *targetValue = operand.firstObject;
             switch (operator) {
                 case OperatorTypeMatchesRegexCaseInsensitive:
                     return ([currentValue rangeOfString:targetValue options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound);

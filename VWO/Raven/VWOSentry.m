@@ -30,15 +30,15 @@
     struct utsname systemInfo;
     uname(&systemInfo);
     return @{
-      @"event_id" : [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""],
+      @"event_id" : [NSUUID.UUID.UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@""],
       @"level" : @"fatal",
       @"message": message,
       @"platform" : @"objc",
       @"project" : @"41858",
       @"stacktrace" : @{},
-      @"timestamp" : [_dateFormatter stringFromDate:[NSDate date]],
+      @"timestamp" : [_dateFormatter stringFromDate:NSDate.date],
       @"tags": @{
-              @"Build version" : [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],
+              @"Build version" :  NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"],
               @"Device model"  : [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding],
               @"OS version"    : UIDevice.currentDevice.systemVersion,
               @"SDK Version"   : VWOSDK.version,
@@ -54,7 +54,7 @@
 - (void)logEvent:(NSString *)message {
     NSString *header = [NSString stringWithFormat:
                         @"Sentry sentry_version=4, sentry_client=raven-objc/0.5.0, sentry_timestamp=%ld, sentry_key=c3f6ba4cf03548f3bd90066dd182a649, sentry_secret=6d6d9593d15944849cc9f8d88ccf1fb0",
-                        (long)[NSDate timeIntervalSinceReferenceDate]];
+                        (long)NSDate.timeIntervalSinceReferenceDate];
 
     NSDictionary *body = [self makeDictionary:message];
     NSData *data = [NSJSONSerialization dataWithJSONObject:body options:0 error:nil];

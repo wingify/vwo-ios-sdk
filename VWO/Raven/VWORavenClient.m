@@ -32,7 +32,7 @@ static VWORavenClient *sharedClient = nil;
 @implementation VWORavenClient
 
 void VWOexceptionHandler(NSException *exception) {
-	[[VWORavenClient sharedClient] captureException:exception sendNow:NO];
+	[VWORavenClient.sharedClient captureException:exception sendNow:NO];
 }
 
 #pragma mark - Setters and getters
@@ -56,7 +56,7 @@ void VWOexceptionHandler(NSException *exception) {
     NSMutableDictionary *mTags = [[NSMutableDictionary alloc] initWithDictionary:tags];
 
     if (withDefaultValues && ![mTags objectForKey:@"Build version"]) {
-        NSString *buildVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        NSString *buildVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
         if (buildVersion) {
             [mTags setObject:buildVersion forKey:@"Build version"];
         }
@@ -64,7 +64,7 @@ void VWOexceptionHandler(NSException *exception) {
 
 #if TARGET_OS_IPHONE
     if (withDefaultValues && ![mTags objectForKey:@"OS version"]) {
-        NSString *osVersion = [[UIDevice currentDevice] systemVersion];
+        NSString *osVersion = UIDevice.currentDevice.systemVersion;
         [mTags setObject:osVersion forKey:@"OS version"];
     }
 
@@ -202,16 +202,16 @@ void VWOexceptionHandler(NSException *exception) {
     
     if (!sendNow) {
         // We can't send this message to Sentry now, e.g. because the error was network related and the user may not have a data connection So, save it into NSUserDefaults.
-        NSArray *reports = [[NSUserDefaults standardUserDefaults] objectForKey:VWOuserDefaultsKey];
+        NSArray *reports = [NSUserDefaults.standardUserDefaults objectForKey:VWOuserDefaultsKey];
         if (reports != nil) {
             NSMutableArray *reportsCopy = [reports mutableCopy];
             [reportsCopy addObject:data];
-            [[NSUserDefaults standardUserDefaults] setObject:reportsCopy forKey:VWOuserDefaultsKey];
+            [NSUserDefaults.standardUserDefaults setObject:reportsCopy forKey:VWOuserDefaultsKey];
         } else {
             reports = [NSArray arrayWithObject:data];
-            [[NSUserDefaults standardUserDefaults] setObject:reports forKey:VWOuserDefaultsKey];
+            [NSUserDefaults.standardUserDefaults setObject:reports forKey:VWOuserDefaultsKey];
         }
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [NSUserDefaults.standardUserDefaults synchronize];
     } else {
         [self sendDictionary:data];
     }
@@ -252,7 +252,7 @@ void VWOexceptionHandler(NSException *exception) {
     if (!sendNow) {
         // We can't send this exception to Sentry now, e.g. because the app is killed before the
         // connection can be made. So, save it into NSUserDefaults.
-        NSArray *reports = [[NSUserDefaults standardUserDefaults] objectForKey:VWOuserDefaultsKey];
+        NSArray *reports = [NSUserDefaults.standardUserDefaults objectForKey:VWOuserDefaultsKey];
         if (reports != nil) {
             NSMutableArray *reportsCopy = [reports mutableCopy];
             [reportsCopy addObject:data];
@@ -301,16 +301,16 @@ void VWOexceptionHandler(NSException *exception) {
     if (!sendNow) {
         // We can't send this exception to Sentry now, e.g. because the app is killed before the
         // connection can be made. So, save it into NSUserDefaults.
-        NSArray *reports = [[NSUserDefaults standardUserDefaults] objectForKey:VWOuserDefaultsKey];
+        NSArray *reports = [NSUserDefaults.standardUserDefaults objectForKey:VWOuserDefaultsKey];
         if (reports != nil) {
             NSMutableArray *reportsCopy = [reports mutableCopy];
             [reportsCopy addObject:data];
-            [[NSUserDefaults standardUserDefaults] setObject:reportsCopy forKey:VWOuserDefaultsKey];
+            [NSUserDefaults.standardUserDefaults setObject:reportsCopy forKey:VWOuserDefaultsKey];
         } else {
             reports = [NSArray arrayWithObject:data];
-            [[NSUserDefaults standardUserDefaults] setObject:reports forKey:VWOuserDefaultsKey];
+            [NSUserDefaults.standardUserDefaults setObject:reports forKey:VWOuserDefaultsKey];
         }
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [NSUserDefaults.standardUserDefaults synchronize];
     } else {
         [self sendDictionary:data];
     }
@@ -320,13 +320,13 @@ void VWOexceptionHandler(NSException *exception) {
     NSSetUncaughtExceptionHandler(&VWOexceptionHandler);
 
     // Process saved crash reports
-    NSArray *reports = [[NSUserDefaults standardUserDefaults] objectForKey:VWOuserDefaultsKey];
+    NSArray *reports = [NSUserDefaults.standardUserDefaults objectForKey:VWOuserDefaultsKey];
     if (reports != nil && [reports count]) {
         for (NSDictionary *data in reports) {
             [self sendDictionary:data];
         }
-        [[NSUserDefaults standardUserDefaults] setObject:[NSArray array] forKey:VWOuserDefaultsKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [NSUserDefaults.standardUserDefaults setObject:[NSArray array] forKey:VWOuserDefaultsKey];
+        [NSUserDefaults.standardUserDefaults synchronize];
     }
 }
 
@@ -363,7 +363,7 @@ void VWOexceptionHandler(NSException *exception) {
     return [NSDictionary dictionaryWithObjectsAndKeys:
             [self generateUUID], @"event_id",
             self.config.projectId ?: @"", @"project",
-            [self.dateFormatter stringFromDate:[NSDate date]], @"timestamp",
+            [self.dateFormatter stringFromDate:NSDate.date], @"timestamp",
             kVWORavenLogLevelArray[level], @"level",
             @"objc", @"platform",
             self.user ?: @"", @"user",
@@ -393,7 +393,7 @@ void VWOexceptionHandler(NSException *exception) {
     NSString *header = [NSString stringWithFormat:@"Sentry sentry_version=%@, sentry_client=%@, sentry_timestamp=%ld, sentry_key=%@, sentry_secret=%@",
                         VWOsentryProtocol,
                         VWOsentryClient,
-                        (long)[NSDate timeIntervalSinceReferenceDate],
+                        (long)NSDate.timeIntervalSinceReferenceDate,
                         self.config.publicKey,
                         self.config.secretKey];
 

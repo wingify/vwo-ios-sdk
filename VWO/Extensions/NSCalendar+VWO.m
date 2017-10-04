@@ -12,8 +12,8 @@
 
 + (NSInteger)dayOfWeek {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents *dateComponents = [gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]];
-    NSInteger weekday = [dateComponents weekday];
+    NSDateComponents *dateComponents = [gregorian components:NSCalendarUnitWeekday fromDate:NSDate.date];
+    NSInteger weekday = dateComponents.weekday;
 
     // start from sunday = 0
     return weekday - 1;
@@ -21,8 +21,8 @@
 
 + (NSInteger)hourOfTheDay {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents *dateComponents = [gregorian components:NSCalendarUnitHour fromDate:[NSDate date]];
-    return [dateComponents hour];
+    NSDateComponents *dateComponents = [gregorian components:NSCalendarUnitHour fromDate:NSDate.date];
+    return dateComponents.hour;
 }
 
 @end

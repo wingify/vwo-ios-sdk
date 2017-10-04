@@ -22,7 +22,7 @@
     
     [pathComponents removeObjectAtIndex:0]; // always remove the first slash
     
-    self.projectId = [pathComponents lastObject]; // project id is the last element of the path
+    self.projectId = pathComponents.lastObject; // project id is the last element of the path
 
     if (!self.projectId) {
         return NO;

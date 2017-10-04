@@ -96,7 +96,7 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 }
 
 + (void)setDefaultValues {
-    NSString *UUID = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    NSString *UUID = [NSUUID.UUID.UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@""];
     NSDictionary *defaults = @{
                                kTracking :  @{},
                                kGoalsMarked :  @[],
