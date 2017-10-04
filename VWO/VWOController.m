@@ -38,8 +38,6 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 @end
 
 @implementation VWOController {
-    //TODO: Move this to header file. Use this directly from VWOSocketClient
-    NSMutableDictionary *previewInfo;
     VWOMessageQueue *messageQueue;
     NSTimer *reloadCampaignsTimer;
     NSTimer *messageQueueFlushtimer;
@@ -75,7 +73,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     if (VWODevice.isAttachedToDebugger) {
         dispatch_async(dispatch_get_main_queue(), ^{
             //UIWebKit is used. Hence dispatched on main Queue
-            [[VWOSocketClient sharedInstance] launch];
+            [VWOSocketClient.shared launch];
         });
     }
 
@@ -89,8 +87,9 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 
 - (void)markConversionForGoal:(NSString *)goalIdentifier withValue:(NSNumber *)value {
     VWOLogDebug(@"Controller markConversionForGoal");
-    if (self.previewMode) {
-        [VWOSocketClient.sharedInstance goalTriggered:goalIdentifier withValue:value];
+
+    if (VWOSocketClient.shared.isEnabled) {
+        [VWOSocketClient.shared goalTriggered:goalIdentifier withValue:value];
         return;
     }
 
@@ -119,9 +118,9 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 }
 
 - (id)variationForKey:(NSString *)key {
-    if (self.previewMode) {
-        if(key && previewInfo) {
-            return previewInfo[key];
+    if (VWOSocketClient.shared.isEnabled) {
+        if(key && _previewInfo != nil) {
+            return _previewInfo[key];
         }
         return nil;
     }
@@ -146,15 +145,10 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     return finalVariation;
 }
 
-- (void)preview:(NSDictionary *)changes {
-    previewInfo = changes[@"json"];
-}
-
 #pragma mark - Private methods
 
 - (id)init {
     if (self = [super init]) {
-        self.previewMode = NO;
         _campaignList    = [NSMutableArray new];
         _segmentEvaluator = [VWOSegmentEvaluator new];
         _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);

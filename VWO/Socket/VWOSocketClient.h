@@ -13,7 +13,9 @@
 
 @interface VWOSocketClient : NSObject
 
-+ (instancetype)sharedInstance;
+@property (assign, getter=isEnabled) BOOL enabled;
+
++ (instancetype)shared;
 - (void)launch;
 - (void)goalTriggered:(NSString *)identifier withValue:(NSNumber *)value;
 

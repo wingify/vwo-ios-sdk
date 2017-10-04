@@ -19,9 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (class, readonly) dispatch_queue_t taskQueue;
 
-@property (assign) BOOL previewMode;
 @property VWOSegmentEvaluator *segmentEvaluator;
 @property (assign) BOOL isInitialized;
+@property NSDictionary *previewInfo;
 
 + (instancetype)sharedInstance;
 
@@ -32,7 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)markConversionForGoal:(NSString *)goal withValue:(nullable NSNumber *)value;
 - (nullable id)variationForKey:(NSString *)key;
-- (void)preview:(NSDictionary *)changes;
 
 @end
 

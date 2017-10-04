@@ -15,29 +15,34 @@
 
 #define kSocketIP @"https://mobilepreview.vwo.com:443"
 
-@implementation VWOSocketClient{
-    VWOSIOSocket *socket;
-}
+@interface VWOSocketClient()
 
-+ (instancetype)sharedInstance{
+@property VWOSIOSocket *socket;
+
+@end
+
+@implementation VWOSocketClient
+
++ (instancetype)shared {
     static VWOSocketClient *instance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         instance = [[self alloc] init];
+        instance.enabled = NO;
     });
     return instance;
 }
 
 - (void)launch {
     [VWOSIOSocket socketWithHost:kSocketIP response: ^(VWOSIOSocket *remoteSocket) {
-        socket = remoteSocket;
+        _socket = remoteSocket;
         [self startListeners];
     }];
 }
 
 - (void)startListeners {
-    __weak id socket_ = socket;
-    socket.onConnect = ^{
+    __weak id socket_ = _socket;
+    _socket.onConnect = ^{
         NSDictionary *dict  = @{@"name":[[UIDevice currentDevice] name],
                                 @"type": @"iOS",
                                 @"appKey": VWOSDK.appKey};
@@ -45,34 +50,34 @@
         [socket_ emit:@"register_mobile" args:[NSArray arrayWithObject:dict]];
     };
     
-    socket.onDisconnect = ^{
+    _socket.onDisconnect = ^{
         VWOLogDebug(@"Socket disconnected");
-        VWOController.sharedInstance.previewMode = NO;
+        _enabled = NO;
     };
     
-    socket.onConnectError = ^(NSDictionary *error) {
+    _socket.onConnectError = ^(NSDictionary *error) {
         VWOLogError(@"socket.onConnectError error {%@}", error);
     };
     
-    socket.onError = ^(NSDictionary *error) {
+    _socket.onError = ^(NSDictionary *error) {
         VWOLogError(@"Socket: %@", error);
     };
     
-    [socket on:@"browser_connect" callback:^(SIOParameterArray *arguments) {
+    [_socket on:@"browser_connect" callback:^(SIOParameterArray *arguments) {
         VWOLogInfo(@"Socket browser connected");
-        VWOController.sharedInstance.previewMode = YES;
+        _enabled = YES;
         id object = [arguments firstObject];
         if (object && object[@"name"]) {
             VWOLogInfo(@"Preview mode: Connected with: '%@'", object[@"name"]);
         }
     }];
 
-    [socket on:@"browser_disconnect" callback:^(SIOParameterArray *arguments) {
+    [_socket on:@"browser_disconnect" callback:^(SIOParameterArray *arguments) {
         VWOLogInfo(@"Preview mode Disconnected");
-        VWOController.sharedInstance.previewMode = NO;
+        _enabled = NO;
     }];
     
-    [socket on:@"receive_variation" callback:^(SIOParameterArray *arguments) {
+    [_socket on:@"receive_variation" callback:^(SIOParameterArray *arguments) {
         VWOLogInfo(@"Variation received: {%@}", arguments);
         id expObject = [arguments firstObject];
         
@@ -81,10 +86,11 @@
             VWOLogError(@"Received variation error");
         }
         
-        [socket emit:@"receive_variation_success" args:[NSArray arrayWithObject:@{@"variationId":expObject[@"variationId"]}]];
+        [_socket emit:@"receive_variation_success" args:[NSArray arrayWithObject:@{@"variationId":expObject[@"variationId"]}]];
         
-        if (arguments.count) {
-            [VWOController.sharedInstance preview:[arguments firstObject]];
+        if (arguments.count > 0) {
+            NSDictionary *changes = ((NSDictionary *)arguments.firstObject)[@"json"];
+            VWOController.sharedInstance.previewInfo = changes;
             VWOLogInfo(@"VWO: In preview mode. Variation Received: %@", [arguments firstObject][@"json"]);
         }
     }];
@@ -94,7 +100,7 @@
     VWOLogInfo(@"Goal '%@' triggered for Socket with value %@", identifier, value);
     NSMutableDictionary *dict = [@{ @"goal" : identifier } mutableCopy];
     dict[@"value"] = value;//Does not set if value is nil
-    [socket emit:@"goal_triggered" args:[NSArray arrayWithObject:dict]];
+    [_socket emit:@"goal_triggered" args:[NSArray arrayWithObject:dict]];
 }
 
 @end
