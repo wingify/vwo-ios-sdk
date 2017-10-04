@@ -26,9 +26,14 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 + (instancetype)new NS_UNAVAILABLE;
 
 /**
- * Set logLevel for the VWO. Default VWOLogLevelError
+  Set logLevel for the VWO. Default VWOLogLevelError
  */
 @property (class, nonatomic) VWOLogLevel logLevel;
+
+/**
+ VWO SDK version
+ */
+@property (class, nonatomic, readonly) NSString *version;
 
 /**
  Asynchronously to fetch campaign settings
@@ -148,11 +153,6 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  */
 + (void)setCustomVariable:(NSString *)key withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:));
-
-/**
- *  VWO SDK version
- */
-+ (NSString *)version;
 
 @end
 NS_ASSUME_NONNULL_END

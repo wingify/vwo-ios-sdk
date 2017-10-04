@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let container = slideVC.mainViewController as! ContainerVC
             container.activityIndicator.startAnimating()
             VWO.logLevel = .debug
+            Swift.print("Launching VWO-\(VWO.version())")
             VWO.launch(apiKey: apiKey) {
                 DispatchQueue.main.async {
                     container.activityIndicator.stopAnimating()
