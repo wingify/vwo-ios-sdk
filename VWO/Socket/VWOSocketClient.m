@@ -90,7 +90,7 @@
         
         if (arguments.count > 0) {
             NSDictionary *changes = ((NSDictionary *)arguments.firstObject)[@"json"];
-            VWOController.sharedInstance.previewInfo = changes;
+            VWOController.shared.previewInfo = changes;
             VWOLogInfo(@"VWO: In preview mode. Variation Received: %@", [arguments firstObject][@"json"]);
         }
     }];

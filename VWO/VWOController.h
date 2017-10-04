@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign) BOOL isInitialized;
 @property NSDictionary *previewInfo;
 
-+ (instancetype)sharedInstance;
++ (instancetype)shared;
 
 - (void)launchWithAPIKey:(NSString *)apiKey
              withTimeout:(nullable NSNumber *)timeout

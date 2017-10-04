@@ -46,7 +46,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 
 #pragma mark - Public methods
 
-+ (instancetype)sharedInstance{
++ (instancetype)shared{
     static VWOController *instance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
@@ -57,7 +57,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 }
 
 + (dispatch_queue_t) taskQueue {
-    return VWOController.sharedInstance->_vwoQueue;
+    return VWOController.shared->_vwoQueue;
 }
 
 - (void)launchWithAPIKey:(NSString *)apiKey

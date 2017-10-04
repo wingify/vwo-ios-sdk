@@ -32,28 +32,28 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 + (void)launchForAPIKey:(NSString *) apiKey {
     NSParameterAssert(apiKey);
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        [VWOController.sharedInstance launchWithAPIKey:apiKey withTimeout:nil withCallback:nil failure:nil];
+        [VWOController.shared launchWithAPIKey:apiKey withTimeout:nil withCallback:nil failure:nil];
     });
 }
 
 + (void)launchForAPIKey:(NSString *) apiKey completion:(void(^)(void))completion {
     NSParameterAssert(apiKey);
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        [VWOController.sharedInstance launchWithAPIKey:apiKey withTimeout:nil withCallback:completion failure:nil];
+        [VWOController.shared launchWithAPIKey:apiKey withTimeout:nil withCallback:completion failure:nil];
     });
 }
 
 + (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion failure:(void (^)(void))failureBlock {
     NSParameterAssert(apiKey);
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        [VWOController.sharedInstance launchWithAPIKey:apiKey withTimeout:nil withCallback:completion failure:failureBlock];
+        [VWOController.shared launchWithAPIKey:apiKey withTimeout:nil withCallback:completion failure:failureBlock];
     });
 }
 
 + (void)launchSynchronouslyForAPIKey:(NSString *) apiKey timeout:(NSTimeInterval)timeout {
     NSParameterAssert(apiKey);
     dispatch_barrier_sync(VWOController.taskQueue, ^{
-        [VWOController.sharedInstance launchWithAPIKey:apiKey withTimeout:@(timeout) withCallback:nil failure:nil];
+        [VWOController.shared launchWithAPIKey:apiKey withTimeout:@(timeout) withCallback:nil failure:nil];
     });
 }
 
@@ -61,7 +61,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     NSParameterAssert(key);
     __block id object;
     dispatch_barrier_sync(VWOController.taskQueue, ^{
-        object = [VWOController.sharedInstance variationForKey:key];;
+        object = [VWOController.shared variationForKey:key];;
     });
     return object;
 }
@@ -71,7 +71,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     NSParameterAssert(defaultValue);
     __block id object;
     dispatch_barrier_sync(VWOController.taskQueue, ^{
-        object = [VWOController.sharedInstance variationForKey:key];;
+        object = [VWOController.shared variationForKey:key];;
     });
     if (!object) object = defaultValue;
     return object;
@@ -80,14 +80,14 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 + (void)markConversionForGoal:(NSString *)goal {
     NSParameterAssert(goal);
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        [VWOController.sharedInstance markConversionForGoal:goal withValue:nil];
+        [VWOController.shared markConversionForGoal:goal withValue:nil];
     });
 }
 
 + (void)markConversionForGoal:(NSString *)goal withValue:(double)value {
     NSParameterAssert(goal);
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        [VWOController.sharedInstance markConversionForGoal:goal withValue:[NSNumber numberWithDouble:value]];
+        [VWOController.shared markConversionForGoal:goal withValue:[NSNumber numberWithDouble:value]];
     });
 }
 
@@ -95,7 +95,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     NSParameterAssert(key);
     NSParameterAssert(value);
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        VWOController.sharedInstance.segmentEvaluator.customVariables[key] = value;
+        VWOController.shared.segmentEvaluator.customVariables[key] = value;
     });
 }
 
