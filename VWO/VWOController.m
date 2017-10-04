@@ -201,7 +201,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 - (void)fetchCampaignsSynchronouslyForTimeout:(NSNumber *)timeout
                                  withCallback:(void (^)(void))completionBlock
                                       failure:(void (^)(void))failureBlock {
-    VWOLogDebug(@"fetchCampaigns");
+    VWOLogDebug(@"fetchCampaigns %@", VWOURL.forFetchingCampaigns.absoluteString);
     NSTimeInterval timeOutInterval = timeout == nil ? defaultReqTimeout : timeout.doubleValue;
     NSURLRequest *request = [NSURLRequest requestWithURL:VWOURL.forFetchingCampaigns cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeOutInterval];
 
@@ -257,6 +257,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
             if (aCampaign.trackUserOnLaunch) {
                 if ([_segmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
                     [newCampaignList addObject:aCampaign];
+                    [self trackUserForCampaign:aCampaign];
                     VWOLogInfo(@"Received Campaign: '%@' Variation: '%@'", aCampaign, aCampaign.variation);
                 } else { //Segmentation failed
                     VWOLogInfo(@"User cannot be part of campaign: '%@'", aCampaign);
@@ -269,14 +270,6 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     }
     _campaignList = newCampaignList;
     VWOLogDebug(@"Total Campaigns %d", _campaignList.count);
-
-    //TODO: Put in above loop, else put the reason of separtate loop
-    //Track users for campaigns that have trackUserOnLaunch enabled
-    for (VWOCampaign *campaign in _campaignList) {
-        if (campaign.trackUserOnLaunch) {
-            [self trackUserForCampaign:campaign];
-        }
-    }
 }
 
 /// Sends network request to mark user tracking for campaign
