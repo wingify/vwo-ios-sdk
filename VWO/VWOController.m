@@ -23,7 +23,11 @@
 static NSString *const kWaitTill                 = @"waitTill";
 static NSString *const kURL                      = @"url";
 static NSString *const kRetryCount               = @"retry";
+#ifdef VWO_DEBUG
+static NSTimeInterval kMessageQueueFlushInterval = 5;
+#else
 static NSTimeInterval kMessageQueueFlushInterval = 20;
+#endif
 static NSTimeInterval kWaitTillInterval          = 15 * 60; // 15 mins
 static NSTimeInterval kMaxInitialRetryCount      = 3;
 static NSTimeInterval const defaultReqTimeout    = 60;
