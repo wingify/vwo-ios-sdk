@@ -14,9 +14,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VWOURL : NSObject
 
-+ (NSURL *)forFetchingCampaigns;
-+ (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign dateTime:(NSDate *)date;
-+ (NSURL *)forMarkingGoal:(VWOCampaign *)campaign goal:(VWOGoal *)goal dateTime:(NSDate *)date withValue:(NSNumber *)goalValue;
++ (NSURL *)forFetchingCampaignsAccountID:(NSString *)accountID
+                                  appKey:(NSString *)appKey
+                              sdkVersion:(NSString *)sdkVersion;
+
++ (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign
+                             accountID:(NSString *)accountID
+                                appKey:(NSString *)appKey
+                              dateTime:(NSDate *)date
+                            sdkVersion:(NSString *)sdkVersion;
+
++ (NSURL *)forMarkingGoal:(VWOGoal *)goal
+                withValue:(NSNumber *)goalValue
+                 campaign:(VWOCampaign *)campaign
+                 dateTime:(NSDate *)date
+                accountID:(NSString *)accountID
+                   appKey:(NSString *)appKey
+               sdkVersion:(NSString *)sdkVersion;
 
 @end
 

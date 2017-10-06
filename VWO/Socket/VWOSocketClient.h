@@ -16,7 +16,7 @@
 @property (assign, getter=isEnabled) BOOL enabled;
 
 + (instancetype)shared;
-- (void)launch;
+- (void)launchAppKey:(NSString *)appKey;
 - (void)goalTriggered:(NSString *)identifier withValue:(NSNumber *)value;
 
 @end

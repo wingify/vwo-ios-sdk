@@ -7,7 +7,6 @@
 //
 
 #import "VWOURL.h"
-#import "VWOSDK.h"
 #import "VWOActivity.h"
 #import "NSDictionary+VWO.h"
 #import "VWOCampaign.h"
@@ -35,10 +34,10 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     return [NSString stringWithFormat:@"%f", ((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1)];
 }
 
-+ (NSDictionary *)extraParametersWithDate:(NSDate *)date {
++ (NSDictionary *)extraParametersWithDate:(NSDate *)date appKey:(NSString *)appKey sdkVersion:(NSString *)sdkVersion {
     return @{@"lt" : [NSString stringWithFormat:@"%f", date.timeIntervalSince1970],
-             @"v"  : VWOSDK.version,
-             @"i"  : VWOSDK.appKey,
+             @"v"  : sdkVersion,
+             @"i"  : appKey,
              @"av" : NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"],//App version
              @"dt" : VWODevice.deviceName,//Device Type
              @"os" : VWODevice.iOSVersion
@@ -47,27 +46,33 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 
 #pragma mark - Public Methods
 
-+ (NSURL *)forFetchingCampaigns {
++ (NSURL *)forFetchingCampaignsAccountID:(NSString *)accountID
+                         appKey:(NSString *)appKey
+                     sdkVersion:(NSString *)sdkVersion {
     NSURLComponents *components = [NSURLComponents new];
     [components setScheme:kScheme];
     [components setHost:kHost];
     [components setPath:@"/mobile"];
     NSDictionary *paramDict =
     @{@"api-version": @"2",
-      @"a"          : VWOSDK.accountID,
+      @"a"          : accountID,
       @"dt"         : VWODevice.deviceName,
-      @"i"          : VWOSDK.appKey,
+      @"i"          : appKey,
       @"k"          : VWOActivity.campaignVariationPairs.toString,
       @"os"         : VWODevice.iOSVersion,
       @"r"          : [self randomNumber],
       @"u"          : VWOActivity.UUID,
-      @"v"          : VWOSDK.version
+      @"v"          : sdkVersion
       };
     components.queryItems = [paramDict toQueryItems];
     return components.URL;
 }
 
-+ (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign dateTime:(NSDate *)date {
++ (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign
+                             accountID:(NSString *)accountID
+                                appKey:(NSString *)appKey
+                              dateTime:(NSDate *)date
+                            sdkVersion:(NSString *)sdkVersion {
     NSURLComponents *components = [NSURLComponents new];
     [components setScheme:kScheme];
     [components setHost:kHost];
@@ -75,18 +80,24 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 
     NSDictionary *paramDict =
     @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
-      @"account_id"   : VWOSDK.accountID,
+      @"account_id"   : accountID,
       @"combination"  : [NSString stringWithFormat:@"%d", campaign.variation.iD],
       @"u"            : VWOActivity.UUID,
       @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)VWOActivity.sessionCount],
       @"random"       : [self randomNumber],
-      @"ed"           : [self extraParametersWithDate:date].toString
+      @"ed"           : [self extraParametersWithDate:date appKey:appKey sdkVersion:sdkVersion].toString
       };
     components.queryItems = [paramDict toQueryItems];
     return components.URL;
 }
 
-+ (NSURL *)forMarkingGoal:(VWOCampaign *)campaign goal:(VWOGoal *)goal dateTime:(NSDate *)date withValue:(NSNumber *)goalValue {
++ (NSURL *)forMarkingGoal:(VWOGoal *)goal
+                withValue:(NSNumber *)goalValue
+                 campaign:(VWOCampaign *)campaign
+                 dateTime:(NSDate *)date
+                accountID:(NSString *)accountID
+                   appKey:(NSString *)appKey
+               sdkVersion:(NSString *)sdkVersion {
     NSURLComponents *components = [NSURLComponents new];
     [components setScheme:kScheme];
     [components setHost:kHost];
@@ -94,12 +105,12 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 
     NSDictionary *paramDict =
     @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
-      @"account_id"   : VWOSDK.accountID,
+      @"account_id"   : accountID,
       @"combination"  : [NSString stringWithFormat:@"%d", campaign.variation.iD],
       @"u"            : VWOActivity.UUID,
       @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)VWOActivity.sessionCount],
       @"random"       : [self randomNumber],
-      @"ed"           : [self extraParametersWithDate:date].toString,
+      @"ed"           : [self extraParametersWithDate:date appKey:appKey sdkVersion:sdkVersion].toString,
       @"goal_id"      : [NSString stringWithFormat:@"%d", goal.iD],
       };
     components.queryItems = [paramDict toQueryItems];

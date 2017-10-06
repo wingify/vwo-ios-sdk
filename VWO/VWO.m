@@ -12,7 +12,6 @@
 #import "VWOSocketClient.h"
 #import <sys/types.h>
 #import <sys/sysctl.h>
-#import "VWOSDK.h"
 #import "VWODevice.h"
 #import "VWOSegmentEvaluator.h"
 
@@ -100,7 +99,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 }
 
 + (NSString *)version {
-    return VWOSDK.version;
+    return kSDKversion;
 }
 
 @end

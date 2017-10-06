@@ -9,7 +9,6 @@
 #import "VWOSocketClient.h"
 #import "VWOSIOSocket.h"
 #import "VWOController.h"
-#import "VWOSDK.h"
 #import "VWOLogger.h"
 #import <UIKit/UIKit.h>
 
@@ -33,19 +32,19 @@
     return instance;
 }
 
-- (void)launch {
+- (void)launchAppKey:(NSString *)appKey {
     [VWOSIOSocket socketWithHost:kSocketIP response: ^(VWOSIOSocket *remoteSocket) {
         _socket = remoteSocket;
-        [self startListeners];
+        [self startListenersAppKey:appKey];
     }];
 }
 
-- (void)startListeners {
+- (void)startListenersAppKey:(NSString *)appKey {
     __weak id socket_ = _socket;
     _socket.onConnect = ^{
         NSDictionary *dict = @{@"name" : [[UIDevice currentDevice] name],
                                @"type" : @"iOS",
-                               @"appKey" : VWOSDK.appKey};
+                               @"appKey" : appKey};
 
         [socket_ emit:@"register_mobile" args:[NSArray arrayWithObject:dict]];
     };
