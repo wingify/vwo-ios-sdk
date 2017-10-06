@@ -77,6 +77,20 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @param completion A block object to be executed when campaign settings are fetched successfully.
 
+ @warning Completion & Failure blocks are not invoked on the main queue. It is developers responsibility to dispatch the code in the appropriate queue.
+ For any UI update the completion must be explicitly dispatched on the main queue.
+
+ @code
+ [VWO launchForAPIKey:apiKey completion:^{
+     dispatch_async(dispatch_get_main_queue(), ^{
+         [activityIndicator stopAnimating];
+         uiLabel.text = "New Value";
+     });
+ } failure:^(NSString * _Nonnull error) {
+     NSLog(@"Error %@", error);
+ }];
+ @endcode
+
  @param failureBlock A block object to be executed when there was error while fetching campaign settings
  */
 + (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion failure:(void (^)(NSString *error))failureBlock NS_SWIFT_NAME(launch(apiKey:completion:failure:));
