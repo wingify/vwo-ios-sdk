@@ -10,7 +10,6 @@
 #import "VWOSocketClient.h"
 #import "VWOLogger.h"
 #import "VWOSegmentEvaluator.h"
-#import "VWOFile.h"
 #import "VWOCampaign.h"
 #import <UIKit/UIKit.h>
 #import "VWOMessageQueue.h"
