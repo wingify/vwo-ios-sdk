@@ -8,6 +8,7 @@
 
 #import "VWOConfig.h"
 #import "VWOCampaign.h"
+#import "VWOLogger.h"
 
 static NSString * kTracking        = @"tracking";
 static NSString * kGoalsMarked     = @"goalsMarked";
@@ -25,21 +26,26 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
         [self setDefaultValues];
         _accountID = accountID;
         _appKey = appKey;
-        sdkVersion = sdkVersion;
+        _sdkVersion = sdkVersion;
     }
     return self;
 }
 
 - (void)setDefaultValues {
+    if ([NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey] != nil) {
+        return;
+    }
+    VWOLogDebug(@"Setting default values for first launch");
     NSString *UUID = [NSUUID.UUID.UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@""];
     NSDictionary *defaults = @{
-                               kTracking :  @{},
-                               kGoalsMarked :  @[],
-                               kSessionCount :  @(0),
-                               kReturningUser :  @(NO),
-                               kUUID : UUID
+                               kTracking     : @{},
+                               kGoalsMarked  : @[],
+                               kSessionCount : @(0),
+                               kReturningUser: @(NO),
+                               kUUID         : UUID
                                };
     [NSUserDefaults.standardUserDefaults registerDefaults:@{kUserDefaultsKey : defaults}];
+    VWOLogDebug(@"UUID %@", UUID);
 }
 
 - (BOOL)isTrackingUserForCampaign:(VWOCampaign *)campaign {
