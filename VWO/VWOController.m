@@ -74,7 +74,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     _config = [[VWOConfig alloc] initWithAccountID:separatedArray[1] appKey:separatedArray[0] sdkVersion:kSDKversion];
 
     _config.sessionCount += 1;
-    [self addBackgroundListeners];
+    [self addBackgroundForeGroundListeners];
     [self setupSentry];
 
     if (VWODevice.isAttachedToDebugger) {
@@ -191,7 +191,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     [VWORavenClient setSharedClient:client];
 }
 
-- (void)addBackgroundListeners {
+- (void)addBackgroundForeGroundListeners {
     VWOLogDebug(@"Background listeners added");
     NSNotificationCenter *notification = NSNotificationCenter.defaultCenter;
     [notification addObserver:self
