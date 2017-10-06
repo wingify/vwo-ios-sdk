@@ -20,6 +20,7 @@
 #import "VWOURL.h"
 #import "VWORavenClient.h"
 #import "VWODevice.h"
+#import "VWOConfig.h"
 
 static NSString *const kWaitTill                 = @"waitTill";
 static NSString *const kURL                      = @"url";
@@ -28,6 +29,7 @@ static NSTimeInterval kMessageQueueFlushInterval = 20;
 static NSTimeInterval kWaitTillInterval          = 15 * 60; // 15 mins
 static NSTimeInterval kMaxInitialRetryCount      = 3;
 static NSTimeInterval const defaultReqTimeout    = 60;
+static NSString *kSDKversion                     = @"2.0.0-beta7";
 
 @interface VWOController()
 
@@ -40,8 +42,6 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     NSTimer *messageQueueFlushtimer;
     dispatch_queue_t _vwoQueue;
     BOOL _initialised;
-    NSString *appKey;
-    NSString *accountId;
 }
 
 #pragma mark - Public methods
@@ -64,12 +64,19 @@ static NSTimeInterval const defaultReqTimeout    = 60;
              withTimeout:(NSNumber *)timeout
             withCallback:(void(^)(void))completionBlock
                  failure:(void(^)(NSString *error))failureBlock {
+
+    NSAssert([apiKey componentsSeparatedByString:@"-"].count == 2, @"Invalid key");
+    NSAssert([apiKey componentsSeparatedByString:@"-"].firstObject.length == 32, @"Invalid key");
+
     if (_initialised) {
         VWOLogWarning(@"VWO already initialised");
         return;
     }
     VWOLogInfo(@"Initializing VWO");
-    [self setAPIKey:apiKey];
+    NSArray<NSString *> *separatedArray = [apiKey componentsSeparatedByString:@"-"];
+
+    _config = [[VWOConfig alloc] initWithAccountID:separatedArray[1] appKey:separatedArray[0] sdkVersion:kSDKversion];
+
     VWOActivity.sessionCount += 1;
     [self addBackgroundListeners];
     [self setupSentry];
@@ -77,7 +84,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     if (VWODevice.isAttachedToDebugger) {
         dispatch_async(dispatch_get_main_queue(), ^{
             //UIWebKit is used. Hence dispatched on main Queue
-            [VWOSocketClient.shared launchAppKey:appKey];
+            [VWOSocketClient.shared launchAppKey:_config.appKey];
         });
     }
 
@@ -122,7 +129,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
             VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
             if (matchedGoal) {
                 [VWOActivity markGoalConversion:matchedGoal];
-                NSURL *url = [VWOURL forMarkingGoal:matchedGoal withValue:value campaign:campaign dateTime:NSDate.date accountID:accountId appKey:appKey sdkVersion:kSDKversion];
+                NSURL *url = [VWOURL forMarkingGoal:matchedGoal withValue:value campaign:campaign dateTime:NSDate.date config:_config];
                 [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
             }
         }
@@ -172,19 +179,10 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     return self;
 }
 
-- (void)setAPIKey:(NSString *)key {
-    NSAssert([key componentsSeparatedByString:@"-"].count == 2, @"Invalid key");
-    NSAssert([key componentsSeparatedByString:@"-"].firstObject.length == 32, @"Invalid key");
-
-    NSArray<NSString *> *separatedArray = [key componentsSeparatedByString:@"-"];
-    appKey = separatedArray[0];
-    accountId = separatedArray[1];
-}
-
 - (void)setupSentry {
     VWOLogDebug(@"Sentry setup");
-    NSDictionary *tags = @{@"VWO Account id" : accountId,
-                           @"SDK Version" : kSDKversion};
+    NSDictionary *tags = @{@"VWO Account id" : _config.accountID,
+                           @"SDK Version" : _config.sdkVersion};
 
     //CFBundleDisplayName & CFBundleIdentifier can be nil
     NSMutableDictionary *extras = [NSMutableDictionary new];
@@ -226,7 +224,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 - (void)fetchCampaignsSynchronouslyForTimeout:(NSNumber *)timeout
                                  withCallback:(void (^)(void))completionBlock
                                       failure:(void (^)(NSString *error))failureBlock {
-    NSURL *url = [VWOURL forFetchingCampaignsAccountID:accountId appKey:appKey sdkVersion:kSDKversion];
+    NSURL *url = [VWOURL forFetchingCampaignsConfig:_config];
     VWOLogDebug(@"fetchCampaigns URL(%@)", url.absoluteString);
     NSTimeInterval timeOutInterval = timeout == nil ? defaultReqTimeout : timeout.doubleValue;
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeOutInterval];
@@ -322,7 +320,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     //Send network request and notification only if the campaign is running
     if (campaign.status == CampaignStatusRunning) {
         VWOLogDebug(@"%@ is running. Adding to Queue. Sending notification", campaign);
-        NSURL *url = [VWOURL forMakingUserPartOfCampaign:campaign accountID:accountId appKey:appKey dateTime:NSDate.date sdkVersion:kSDKversion];
+        NSURL *url = [VWOURL forMakingUserPartOfCampaign:campaign config:_config dateTime:NSDate.date];
         [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
 
         [self sendNotificationUserStartedTracking:campaign];

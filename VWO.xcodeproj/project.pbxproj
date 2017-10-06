@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E31714C41F838BB10036CF07 /* VWODevice.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815761F6291970035D519 /* VWODevice.m */; };
 		E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31714C61F838C2F0036CF07 /* VWOTests.swift */; };
+		E344B2F01F87906900A4EEE6 /* VWOConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = E344B2EE1F87906900A4EEE6 /* VWOConfig.h */; };
+		E344B2F11F87906900A4EEE6 /* VWOConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E344B2EF1F87906900A4EEE6 /* VWOConfig.m */; };
 		E35484F51F713C2E00E14D2E /* NSURLSession+Synchronous.h in Headers */ = {isa = PBXBuildFile; fileRef = E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */; };
 		E35484F61F713C2E00E14D2E /* NSURLSession+Synchronous.m in Sources */ = {isa = PBXBuildFile; fileRef = E35484F41F713C2E00E14D2E /* NSURLSession+Synchronous.m */; };
 		E36AC7191F75614E0041ACDF /* VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E36AC7181F75614E0041ACDF /* VWO.m */; };
@@ -69,6 +71,8 @@
 		E31714C61F838C2F0036CF07 /* VWOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOTests.swift; sourceTree = "<group>"; };
 		E319151E1F67F1B900FC1695 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E31915231F6802D500FC1695 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		E344B2EE1F87906900A4EEE6 /* VWOConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOConfig.h; sourceTree = "<group>"; };
+		E344B2EF1F87906900A4EEE6 /* VWOConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOConfig.m; sourceTree = "<group>"; };
 		E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSession+Synchronous.h"; sourceTree = "<group>"; };
 		E35484F41F713C2E00E14D2E /* NSURLSession+Synchronous.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSession+Synchronous.m"; sourceTree = "<group>"; };
 		E36AC7181F75614E0041ACDF /* VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWO.m; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 				E36AC7181F75614E0041ACDF /* VWO.m */,
 				E39815731F6291960035D519 /* VWOController.h */,
 				E39815741F6291960035D519 /* VWOController.m */,
+				E344B2EE1F87906900A4EEE6 /* VWOConfig.h */,
+				E344B2EF1F87906900A4EEE6 /* VWOConfig.m */,
 				E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */,
 				E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */,
 				E39815911F6291C10035D519 /* VWOSegmentEvaluator.h */,
@@ -270,6 +276,7 @@
 				E39815811F6291970035D519 /* VWODevice.h in Headers */,
 				E398155B1F6291680035D519 /* VWOMessageQueue.h in Headers */,
 				E398159A1F6293BC0035D519 /* NSCalendar+VWO.h in Headers */,
+				E344B2F01F87906900A4EEE6 /* VWOConfig.h in Headers */,
 				E39815571F6291680035D519 /* VWOCampaign.h in Headers */,
 				E39815831F6291970035D519 /* VWOFile.h in Headers */,
 				E39815641F6291680035D519 /* VWORavenConfig.h in Headers */,
@@ -389,6 +396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E344B2F11F87906900A4EEE6 /* VWOConfig.m in Sources */,
 				E36AC7191F75614E0041ACDF /* VWO.m in Sources */,
 				E39815651F6291680035D519 /* VWORavenConfig.m in Sources */,
 				E39815941F6291C10035D519 /* VWOSegmentEvaluator.m in Sources */,

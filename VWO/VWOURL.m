@@ -12,6 +12,7 @@
 #import "VWOCampaign.h"
 #import "VWOGoal.h"
 #import "VWODevice.h"
+#import "VWOConfig.h"
 
 static NSString *const kScheme = @"https";
 static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
@@ -34,10 +35,10 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     return [NSString stringWithFormat:@"%f", ((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1)];
 }
 
-+ (NSDictionary *)extraParametersWithDate:(NSDate *)date appKey:(NSString *)appKey sdkVersion:(NSString *)sdkVersion {
++ (NSDictionary *)extraParametersWithDate:(NSDate *)date config:(VWOConfig *)config {
     return @{@"lt" : [NSString stringWithFormat:@"%f", date.timeIntervalSince1970],
-             @"v"  : sdkVersion,
-             @"i"  : appKey,
+             @"v"  : config.sdkVersion,
+             @"i"  : config.appKey,
              @"av" : NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"],//App version
              @"dt" : VWODevice.deviceName,//Device Type
              @"os" : VWODevice.iOSVersion
@@ -46,33 +47,29 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 
 #pragma mark - Public Methods
 
-+ (NSURL *)forFetchingCampaignsAccountID:(NSString *)accountID
-                         appKey:(NSString *)appKey
-                     sdkVersion:(NSString *)sdkVersion {
++ (NSURL *)forFetchingCampaignsConfig:(VWOConfig *)config {
     NSURLComponents *components = [NSURLComponents new];
     [components setScheme:kScheme];
     [components setHost:kHost];
     [components setPath:@"/mobile"];
     NSDictionary *paramDict =
     @{@"api-version": @"2",
-      @"a"          : accountID,
+      @"a"          : config.accountID,
       @"dt"         : VWODevice.deviceName,
-      @"i"          : appKey,
+      @"i"          : config.appKey,
       @"k"          : VWOActivity.campaignVariationPairs.toString,
       @"os"         : VWODevice.iOSVersion,
       @"r"          : [self randomNumber],
       @"u"          : VWOActivity.UUID,
-      @"v"          : sdkVersion
+      @"v"          : config.sdkVersion
       };
     components.queryItems = [paramDict toQueryItems];
     return components.URL;
 }
 
 + (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign
-                             accountID:(NSString *)accountID
-                                appKey:(NSString *)appKey
-                              dateTime:(NSDate *)date
-                            sdkVersion:(NSString *)sdkVersion {
+                                config:(VWOConfig *)config
+                              dateTime:(NSDate *)date {
     NSURLComponents *components = [NSURLComponents new];
     [components setScheme:kScheme];
     [components setHost:kHost];
@@ -80,12 +77,12 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 
     NSDictionary *paramDict =
     @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
-      @"account_id"   : accountID,
+      @"account_id"   : config.accountID,
       @"combination"  : [NSString stringWithFormat:@"%d", campaign.variation.iD],
       @"u"            : VWOActivity.UUID,
       @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)VWOActivity.sessionCount],
       @"random"       : [self randomNumber],
-      @"ed"           : [self extraParametersWithDate:date appKey:appKey sdkVersion:sdkVersion].toString
+      @"ed"           : [self extraParametersWithDate:date config:config].toString
       };
     components.queryItems = [paramDict toQueryItems];
     return components.URL;
@@ -95,9 +92,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
                 withValue:(NSNumber *)goalValue
                  campaign:(VWOCampaign *)campaign
                  dateTime:(NSDate *)date
-                accountID:(NSString *)accountID
-                   appKey:(NSString *)appKey
-               sdkVersion:(NSString *)sdkVersion {
+                   config:(VWOConfig *)config {
     NSURLComponents *components = [NSURLComponents new];
     [components setScheme:kScheme];
     [components setHost:kHost];
@@ -105,12 +100,12 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 
     NSDictionary *paramDict =
     @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
-      @"account_id"   : accountID,
+      @"account_id"   : config.accountID,
       @"combination"  : [NSString stringWithFormat:@"%d", campaign.variation.iD],
       @"u"            : VWOActivity.UUID,
       @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)VWOActivity.sessionCount],
       @"random"       : [self randomNumber],
-      @"ed"           : [self extraParametersWithDate:date appKey:appKey sdkVersion:sdkVersion].toString,
+      @"ed"           : [self extraParametersWithDate:date config:config].toString,
       @"goal_id"      : [NSString stringWithFormat:@"%d", goal.iD],
       };
     components.queryItems = [paramDict toQueryItems];

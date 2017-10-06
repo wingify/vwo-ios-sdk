@@ -14,6 +14,7 @@
 #import <sys/sysctl.h>
 #import "VWODevice.h"
 #import "VWOSegmentEvaluator.h"
+#import "VWOConfig.h"
 
 static VWOLogLevel kLogLevel = VWOLogLevelError;
 NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStartedTrackingInCampaignNotification";
@@ -99,7 +100,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 }
 
 + (NSString *)version {
-    return kSDKversion;
+    return VWOController.shared.config.sdkVersion;
 }
 
 @end

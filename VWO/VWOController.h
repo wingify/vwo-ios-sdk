@@ -11,11 +11,9 @@
 
 #import <Foundation/Foundation.h>
 
-@class VWOSegmentEvaluator;
+@class VWOSegmentEvaluator, VWOConfig;
 
 NS_ASSUME_NONNULL_BEGIN
-
-static NSString *kSDKversion                     = @"2.0.0-beta7";
 
 @interface VWOController : NSObject
 
@@ -24,6 +22,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 
 @property VWOSegmentEvaluator *segmentEvaluator;
 @property NSDictionary *previewInfo;
+@property VWOConfig *config;
 
 + (instancetype)shared;
 
