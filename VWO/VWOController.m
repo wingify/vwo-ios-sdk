@@ -9,7 +9,6 @@
 #import "VWOController.h"
 #import "VWOSocketClient.h"
 #import "VWOLogger.h"
-#import "VWOActivity.h"
 #import "VWOSegmentEvaluator.h"
 #import "VWOFile.h"
 #import "VWOCampaign.h"
@@ -51,7 +50,6 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         instance = [[self alloc] init];
-        [VWOActivity setDefaultValues];
     });
     return instance;
 }
@@ -74,10 +72,9 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     }
     VWOLogInfo(@"Initializing VWO");
     NSArray<NSString *> *separatedArray = [apiKey componentsSeparatedByString:@"-"];
-
     _config = [[VWOConfig alloc] initWithAccountID:separatedArray[1] appKey:separatedArray[0] sdkVersion:kSDKversion];
 
-    VWOActivity.sessionCount += 1;
+    _config.sessionCount += 1;
     [self addBackgroundListeners];
     [self setupSentry];
 
@@ -116,7 +113,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     for (VWOCampaign *campaign in _campaignList) {
         VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
         if (matchedGoal) {
-            if ([VWOActivity isGoalMarked:matchedGoal]) {
+            if ([_config isGoalMarked:matchedGoal]) {
                 VWOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
                 return;
             }
@@ -125,10 +122,10 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 
         // Mark goal(One goal can be present in multiple campaigns
     for (VWOCampaign *campaign in _campaignList) {
-        if ([VWOActivity isTrackingUserForCampaign:campaign]) {
+        if ([_config isTrackingUserForCampaign:campaign]) {
             VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
             if (matchedGoal) {
-                [VWOActivity markGoalConversion:matchedGoal];
+                [_config markGoalConversion:matchedGoal];
                 NSURL *url = [VWOURL forMarkingGoal:matchedGoal withValue:value campaign:campaign dateTime:NSDate.date config:_config];
                 [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
             }
@@ -156,7 +153,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
         if (variation) {
             finalVariation = variation;
                 // If campaign is not already tracked; check if it can be part of campaign.
-            if ([_segmentEvaluator canUserBePartOfCampaignForSegment:campaign.segmentObject]) {
+            if ([_segmentEvaluator canUserBePartOfCampaignForSegment:campaign.segmentObject config:_config]) {
                 [self trackUserForCampaign:campaign];
             }
         }
@@ -281,7 +278,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 
         if (aCampaign.status == CampaignStatusRunning) {
             if (aCampaign.trackUserOnLaunch) {
-                if ([_segmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
+                if ([_segmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject config:_config]) {
                     [newCampaignList addObject:aCampaign];
                     [self trackUserForCampaign:aCampaign];
                     VWOLogInfo(@"Received Campaign: '%@' Variation: '%@'", aCampaign, aCampaign.variation);
@@ -303,19 +300,19 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 - (void)trackUserForCampaign:(VWOCampaign *)campaign {
     VWOLogDebug(@"Controller: trackUserForCampaign %@", campaign);
     NSParameterAssert(campaign);
-    if ([VWOActivity isTrackingUserForCampaign:campaign]) {
+    if ([_config isTrackingUserForCampaign:campaign]) {
         // Return if already tracking
         VWOLogDebug(@"Controller: Returning. Already tracking %@", campaign);
         return;
     }
 
     // Set User to be returning if not already set.
-    if (!VWOActivity.isReturningUser && VWOActivity.sessionCount > 1) {
+    if (!_config.isReturningUser && _config.sessionCount > 1) {
         VWOLogDebug(@"Setting returningUser=YES");
-        VWOActivity.returningUser = YES;
+        _config.returningUser = YES;
     }
 
-    [VWOActivity trackUserForCampaign:campaign];
+    [_config trackUserForCampaign:campaign];
 
     //Send network request and notification only if the campaign is running
     if (campaign.status == CampaignStatusRunning) {

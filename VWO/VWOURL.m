@@ -7,7 +7,6 @@
 //
 
 #import "VWOURL.h"
-#import "VWOActivity.h"
 #import "NSDictionary+VWO.h"
 #import "VWOCampaign.h"
 #import "VWOGoal.h"
@@ -57,10 +56,10 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
       @"a"          : config.accountID,
       @"dt"         : VWODevice.deviceName,
       @"i"          : config.appKey,
-      @"k"          : VWOActivity.campaignVariationPairs.toString,
+      @"k"          : config.campaignVariationPairs.toString,
       @"os"         : VWODevice.iOSVersion,
       @"r"          : [self randomNumber],
-      @"u"          : VWOActivity.UUID,
+      @"u"          : config.UUID,
       @"v"          : config.sdkVersion
       };
     components.queryItems = [paramDict toQueryItems];
@@ -79,8 +78,8 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
       @"account_id"   : config.accountID,
       @"combination"  : [NSString stringWithFormat:@"%d", campaign.variation.iD],
-      @"u"            : VWOActivity.UUID,
-      @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)VWOActivity.sessionCount],
+      @"u"            : config.UUID,
+      @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)config.sessionCount],
       @"random"       : [self randomNumber],
       @"ed"           : [self extraParametersWithDate:date config:config].toString
       };
@@ -102,8 +101,8 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
     @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
       @"account_id"   : config.accountID,
       @"combination"  : [NSString stringWithFormat:@"%d", campaign.variation.iD],
-      @"u"            : VWOActivity.UUID,
-      @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)VWOActivity.sessionCount],
+      @"u"            : config.UUID,
+      @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)config.sessionCount],
       @"random"       : [self randomNumber],
       @"ed"           : [self extraParametersWithDate:date config:config].toString,
       @"goal_id"      : [NSString stringWithFormat:@"%d", goal.iD],

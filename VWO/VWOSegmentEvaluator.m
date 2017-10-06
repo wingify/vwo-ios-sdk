@@ -7,10 +7,10 @@
 //
 
 #import "VWOSegmentEvaluator.h"
-#import "VWOActivity.h"
 #import "NSCalendar+VWO.h"
 #import "VWODevice.h"
 #import "VWOLogger.h"
+#import "VWOConfig.h"
 
 typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeCustomVariable = 7,
@@ -58,24 +58,24 @@ static NSString * kReturningVisitor = @"returning_visitor";
     return self;
 }
 
-- (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment {
+- (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment config:(VWOConfig *)config {
     if (!segment) return YES;
     if ([segment[kType] isEqualToString:@"custom"]) {
         NSArray *partialSegments = (NSArray *)segment[kPartialSegments];
         return [self evaluateCustomSegmentation:partialSegments];
     } else if ([segment[kType] isEqualToString:@"predefined"]) {
-        return [self evaluatePredefinedSegmentation:segment[kSegmentCode]];
+        return [self evaluatePredefinedSegmentation:segment[kSegmentCode] config:config];
     }
     return YES;
 }
 
-- (BOOL)evaluatePredefinedSegmentation:(NSDictionary *)segmentObject {
+- (BOOL)evaluatePredefinedSegmentation:(NSDictionary *)segmentObject config:(VWOConfig *)config{
     if ([segmentObject[kDevice] isEqualToString:@"iPad"] && VWODevice.isPad) {
         return YES;
     } else if ([segmentObject[kDevice] isEqualToString:@"iPhone"] && VWODevice.isiPhone) {
         return YES;
     } else if (segmentObject[kReturningVisitor]) {
-        return (VWOActivity.isReturningUser == [segmentObject[kReturningVisitor] boolValue]);
+        return (config.isReturningUser == [segmentObject[kReturningVisitor] boolValue]);
     }
     return NO;
 }

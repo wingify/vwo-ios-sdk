@@ -42,8 +42,6 @@
 		E39815841F6291970035D519 /* VWOFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815781F6291970035D519 /* VWOFile.m */; };
 		E39815851F6291970035D519 /* VWOLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815791F6291970035D519 /* VWOLogger.h */; };
 		E39815861F6291970035D519 /* VWOLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E398157A1F6291970035D519 /* VWOLogger.m */; };
-		E39815871F6291970035D519 /* VWOActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = E398157B1F6291970035D519 /* VWOActivity.h */; };
-		E39815881F6291970035D519 /* VWOActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E398157C1F6291970035D519 /* VWOActivity.m */; };
 		E398158F1F6291B50035D519 /* VWOSocketClient.h in Headers */ = {isa = PBXBuildFile; fileRef = E398158B1F6291B50035D519 /* VWOSocketClient.h */; };
 		E39815901F6291B50035D519 /* VWOSocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E398158C1F6291B50035D519 /* VWOSocketClient.m */; };
 		E39815931F6291C10035D519 /* VWOSegmentEvaluator.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815911F6291C10035D519 /* VWOSegmentEvaluator.h */; };
@@ -107,8 +105,6 @@
 		E39815781F6291970035D519 /* VWOFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = VWOFile.m; path = Helpers/VWOFile.m; sourceTree = "<group>"; };
 		E39815791F6291970035D519 /* VWOLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWOLogger.h; path = Helpers/VWOLogger.h; sourceTree = "<group>"; };
 		E398157A1F6291970035D519 /* VWOLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = VWOLogger.m; path = Helpers/VWOLogger.m; sourceTree = "<group>"; };
-		E398157B1F6291970035D519 /* VWOActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWOActivity.h; path = Helpers/VWOActivity.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		E398157C1F6291970035D519 /* VWOActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VWOActivity.m; path = Helpers/VWOActivity.m; sourceTree = "<group>"; };
 		E398158B1F6291B50035D519 /* VWOSocketClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOSocketClient.h; sourceTree = "<group>"; };
 		E398158C1F6291B50035D519 /* VWOSocketClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOSocketClient.m; sourceTree = "<group>"; };
 		E39815911F6291C10035D519 /* VWOSegmentEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOSegmentEvaluator.h; sourceTree = "<group>"; };
@@ -256,8 +252,6 @@
 				E39815781F6291970035D519 /* VWOFile.m */,
 				E39815791F6291970035D519 /* VWOLogger.h */,
 				E398157A1F6291970035D519 /* VWOLogger.m */,
-				E398157B1F6291970035D519 /* VWOActivity.h */,
-				E398157C1F6291970035D519 /* VWOActivity.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -280,7 +274,6 @@
 				E39815571F6291680035D519 /* VWOCampaign.h in Headers */,
 				E39815831F6291970035D519 /* VWOFile.h in Headers */,
 				E39815641F6291680035D519 /* VWORavenConfig.h in Headers */,
-				E39815871F6291970035D519 /* VWOActivity.h in Headers */,
 				E35484F51F713C2E00E14D2E /* NSURLSession+Synchronous.h in Headers */,
 				E39815631F6291680035D519 /* VWORavenClient_Private.h in Headers */,
 				E398155F1F6291680035D519 /* VWOVariation.h in Headers */,
@@ -406,7 +399,6 @@
 				E39815821F6291970035D519 /* VWODevice.m in Sources */,
 				E398159B1F6293BC0035D519 /* NSCalendar+VWO.m in Sources */,
 				E39815621F6291680035D519 /* VWORavenClient.m in Sources */,
-				E39815881F6291970035D519 /* VWOActivity.m in Sources */,
 				E39815901F6291B50035D519 /* VWOSocketClient.m in Sources */,
 				E398155A1F6291680035D519 /* VWOGoal.m in Sources */,
 				E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */,

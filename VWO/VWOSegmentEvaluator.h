@@ -10,11 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class VWOConfig;
+
 @interface VWOSegmentEvaluator : NSObject
 
 @property NSMutableDictionary<NSString *, NSString *> *customVariables;
 
-- (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment;
+- (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment config:(VWOConfig *)config;
 
 @end
 
