@@ -15,7 +15,8 @@ void VWOLogException(NSString *format, ...) {
     NSString* formattedMessage = [[NSString alloc] initWithFormat: format arguments: argList];
     va_end(argList);
 #ifdef VWO_DEBUG
-    NSAssert(false, @"VWO EXCEPTION: %s\n", [formattedMessage UTF8String]);//Stops execution
+    // NSAssert will only work for objective c files. Hence NSCAssert
+    NSCAssert(false, @"VWO EXCEPTION: %s\n", [formattedMessage UTF8String]);//Stops execution
 #else
     [VWORavenClient.sharedClient captureMessage:formattedMessage];
 #endif

@@ -73,7 +73,12 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
         VWOLogWarning(@"VWO already initialised");
         return;
     }
+#ifdef VWO_DEBUG
+    VWOLogInfo(@"Initializing VWO with VWO_DEBUG");
+#else
     VWOLogInfo(@"Initializing VWO");
+#endif
+
     NSArray<NSString *> *separatedArray = [apiKey componentsSeparatedByString:@"-"];
     _config = [[VWOConfig alloc] initWithAccountID:separatedArray[1] appKey:separatedArray[0] sdkVersion:kSDKversion];
 
