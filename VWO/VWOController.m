@@ -113,6 +113,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     VWOLogDebug(@"Controller markConversionForGoal");
 
     if (VWOSocketClient.shared.isEnabled) {
+        VWOLogDebug(@"Marking goal on socket");
         [VWOSocketClient.shared goalTriggered:goalIdentifier withValue:value];
         return;
     }
@@ -143,7 +144,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 
 - (id)variationForKey:(NSString *)key {
     if (!_initialised) {
-        VWOLogWarning(@"VWO must be launched first!!");
+        VWOLogWarning(@"variationForKey %@ called before launching VWO", key);
         return nil;
     }
     if (VWOSocketClient.shared.isEnabled) {
