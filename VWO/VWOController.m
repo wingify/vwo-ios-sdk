@@ -340,17 +340,18 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSUInteger count = queue.count;
         VWOLogDebug(@"Total messages in queue %d", count);
-        while (count > 0) {
+        for (; count > 0; count -= 1) {
             NSMutableDictionary *firstObject = [queue.peek mutableCopy];
 
             NSAssert(firstObject != nil, @"queue.peek is giving invalid results");
-            VWOLogDebug(@"Trying message %d", count);
+            VWOLogDebug(@"Trying message at %d", count);
+
             // If now() < WaitTill time then dont consider this message
             if (firstObject[kWaitTill] != nil) {
                 NSTimeInterval now = NSDate.date.timeIntervalSince1970;
                 if (now < [firstObject[kWaitTill] doubleValue]) {
                     VWOLogDebug(@"Not sending. Waiting for time %@", [NSDate dateWithTimeIntervalSince1970:[firstObject[kWaitTill] doubleValue]]);
-                    NSDictionary *first = queue.dequeue;
+                    NSDictionary *first = queue.dequeue; // remove and insert again at back
                     [queue enqueue:first];
                     continue;
                 }
@@ -370,6 +371,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
             }
 
             [queue dequeue];
+                //TODO: Validate this.
             NSAssert(response != nil, @"Response cannot be nil here");
 
             // Failure is confirmed only when status is not 200
@@ -380,7 +382,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 
                 //If retry count is greater than
                 if (retryCount >= kMaxInitialRetryCount) {
-                    VWOLogDebug(@"Adding wait till %@", [NSDate.date dateByAddingTimeInterval:kWaitTillInterval]);
+                    VWOLogDebug(@"Adding key waitTill %@", [NSDate.date dateByAddingTimeInterval:kWaitTillInterval]);
                     firstObject[kWaitTill] = [NSDate.date dateByAddingTimeInterval:kWaitTillInterval];
                 }
                 VWOLogDebug(@"Re inserting message with retry count %@", firstObject[kRetryCount]);
@@ -388,8 +390,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
             } else {
                 VWOLogInfo(@"Successfully sent message %d", statusCode);
             }
-            count -= 1;
-        }//while
+        }//for
     });
 }
 
