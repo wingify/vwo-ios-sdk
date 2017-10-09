@@ -101,7 +101,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     });
     [self fetchCampaignsSynchronouslyForTimeout:timeout withCallback:^{
         _initialised = true;
-        completionBlock();
+        if (completionBlock) completionBlock();
     } failure:failureBlock];
 }
 
