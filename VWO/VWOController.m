@@ -30,6 +30,7 @@ static NSTimeInterval kMessageQueueFlushInterval = 20;
 #endif
 static NSTimeInterval kWaitTillInterval          = 15 * 60; // 15 mins
 static NSTimeInterval kMaxInitialRetryCount      = 3;
+static NSTimeInterval kMaxTotalRetryCount        = 10;
 static NSTimeInterval const defaultReqTimeout    = 60;
 static NSString *kSDKversion                     = @"2.0.0-beta7";
 
@@ -373,11 +374,12 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 
             // Failure is confirmed only when status is not 200
             NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
-            if (statusCode != 200) {
-                firstObject[kRetryCount] = @([firstObject[kRetryCount] intValue] + 1);
+            int retryCount = [firstObject[kRetryCount] intValue];
+            if (statusCode != 200 && retryCount < kMaxTotalRetryCount) {
+                firstObject[kRetryCount] = @(retryCount + 1);
 
                 //If retry count is greater than
-                if ([firstObject[kRetryCount] intValue] >= kMaxInitialRetryCount) {
+                if (retryCount >= kMaxInitialRetryCount) {
                     VWOLogDebug(@"Adding wait till %@", [NSDate.date dateByAddingTimeInterval:kWaitTillInterval]);
                     firstObject[kWaitTill] = [NSDate.date dateByAddingTimeInterval:kWaitTillInterval];
                 }
