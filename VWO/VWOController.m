@@ -28,8 +28,6 @@ static NSTimeInterval kMessageQueueFlushInterval = 5;
 #else
 static NSTimeInterval kMessageQueueFlushInterval = 20;
 #endif
-static NSTimeInterval kWaitTillInterval          = 15 * 60; // 15 mins
-static NSTimeInterval kMaxInitialRetryCount      = 3;
 static NSTimeInterval kMaxTotalRetryCount        = 10;
 static NSTimeInterval const defaultReqTimeout    = 60;
 static NSString *kSDKversion                     = @"2.0.0-beta7";
@@ -71,17 +69,18 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     NSAssert([apiKey componentsSeparatedByString:@"-"].firstObject.length == 32, @"Invalid key");
 
     if (_initialised) {
-        VWOLogWarning(@"VWO already initialised");
+        VWOLogWarning(@"VWO must not be initialised more than once");
         return;
     }
-#ifdef VWO_DEBUG
-    VWOLogInfo(@"Initializing VWO with VWO_DEBUG");
-#else
-    VWOLogInfo(@"Initializing VWO");
-#endif
 
-    NSArray<NSString *> *separatedArray = [apiKey componentsSeparatedByString:@"-"];
-    _config = [[VWOConfig alloc] initWithAccountID:separatedArray[1] appKey:separatedArray[0] sdkVersion:kSDKversion];
+    #ifdef VWO_DEBUG
+        VWOLogInfo(@"Initializing VWO with VWO_DEBUG");
+    #else
+        VWOLogInfo(@"Initializing VWO");
+    #endif
+
+    NSArray<NSString *> *splitKey = [apiKey componentsSeparatedByString:@"-"];
+    _config = [[VWOConfig alloc] initWithAccountID:splitKey[1] appKey:splitKey[0] sdkVersion:kSDKversion];
 
     _config.sessionCount += 1;
     [self addBackgroundForeGroundListeners];
@@ -89,17 +88,22 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 
     if (VWODevice.isAttachedToDebugger) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            //UIWebKit is used. Hence dispatched on main Queue
+                //UIWebKit is used. Hence dispatched on main Queue
             [VWOSocketClient.shared launchAppKey:_config.appKey];
         });
     }
 
+    // Initialise the queue and flush the persistance URLs
     messageQueue = [[VWOMessageQueue alloc] initWithFileURL:VWOFile.messageQueue];
+    [self flushQueue:messageQueue tryAll:true];
+
+    // Start timer. (Timer can be scheduled only on Main Thread)
     dispatch_async(dispatch_get_main_queue(), ^{
         messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:kMessageQueueFlushInterval repeats:YES block:^(NSTimer * _Nonnull timer) {
-            [self flushQueue:messageQueue];
+            [self flushQueue:messageQueue tryAll:false];
         }];
     });
+
     [self fetchCampaignsSynchronouslyForTimeout:timeout withCallback:^{
         _initialised = true;
         if (completionBlock) completionBlock();
@@ -240,10 +244,9 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     NSURLResponse *response = nil;
     NSData *data = [NSURLSession.sharedSession sendSynchronousDataTaskWithRequest:request returningResponse:&response error:&error];
 
-        // Failure is confirmed only when status is not 200
+    // Failure is confirmed only when status is not 200
     NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
-
-    if(statusCode >= 400 && statusCode <=499) {
+    if(statusCode >= 400 && statusCode <= 499) {
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         VWOLogError(@"Client side error %@", json[@"message"]);
         if (failureBlock) failureBlock(json[@"message"]);
@@ -305,8 +308,14 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     VWOLogDebug(@"Total Campaigns %d", _campaignList.count);
 }
 
-/// Sends network request to mark user tracking for campaign
-/// Sets "campaignId : variation id" in persistance store
+/**
+ Returns if the campaign is already tracked
+ Sets returning User if required
+ Stores campaign:variation pair in config
+ If campaign is running then enqueue in message queue and sends notification
+
+ @param campaign campaign that is to be tracked
+ */
 - (void)trackUserForCampaign:(VWOCampaign *)campaign {
     VWOLogDebug(@"Controller: trackUserForCampaign %@", campaign);
     NSParameterAssert(campaign);
@@ -334,8 +343,14 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     }
 }
 
-// Sends request on all the url on a background thread
-- (void)flushQueue:(VWOMessageQueue *)queue {
+/**
+ Flush all the URLS present in the Queue.
+ Internally its been dispatched on low priority background thread
+
+ @param queue queue that is to be flushed
+ @param tryAll If set will try to hit all the URLS irrespective of the error
+ */
+- (void)flushQueue:(VWOMessageQueue *)queue tryAll:(BOOL)tryAll {
     VWOLogInfo(@"Sending all messages in queue");
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSUInteger count = queue.count;
@@ -346,17 +361,6 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
             NSAssert(firstObject != nil, @"queue.peek is giving invalid results");
             VWOLogDebug(@"Trying message at %d", count);
 
-            // If now() < WaitTill time then dont consider this message
-            if (firstObject[kWaitTill] != nil) {
-                NSTimeInterval now = NSDate.date.timeIntervalSince1970;
-                if (now < [firstObject[kWaitTill] doubleValue]) {
-                    VWOLogDebug(@"Not sending. Waiting for time %@", [NSDate dateWithTimeIntervalSince1970:[firstObject[kWaitTill] doubleValue]]);
-                    NSDictionary *first = queue.dequeue; // remove and insert again at back
-                    [queue enqueue:first];
-                    continue;
-                }
-            }
-
             NSString *url = firstObject[kURL];
             NSError *error = nil;
             NSURLResponse *response = nil;
@@ -364,31 +368,22 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
             [NSURLSession.sharedSession sendSynchronousDataTaskWithURL:[NSURL URLWithString:url] returningResponse:&response error:&error];
 
             //If No internet connection break; No need to process other messages in queue
-            if (error != nil && error.code == NSURLErrorNotConnectedToInternet) {
-                VWOLogInfo(@"No internet connection. Aborting queue flush operation");
-                break;
-                //Note: If there is other error but response status is 200, still it might be a successful request
+            if (error != nil) {
+                VWOLogError(error.localizedDescription);
+                if (tryAll == false) break;
             }
-
-            [queue dequeue];
-                //TODO: Validate this.
-            NSAssert(response != nil, @"Response cannot be nil here");
 
             // Failure is confirmed only when status is not 200
             NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
             int retryCount = [firstObject[kRetryCount] intValue];
-            if (statusCode != 200 && retryCount < kMaxTotalRetryCount) {
-                firstObject[kRetryCount] = @(retryCount + 1);
-
-                //If retry count is greater than
-                if (retryCount >= kMaxInitialRetryCount) {
-                    VWOLogDebug(@"Adding key waitTill %@", [NSDate.date dateByAddingTimeInterval:kWaitTillInterval]);
-                    firstObject[kWaitTill] = [NSDate.date dateByAddingTimeInterval:kWaitTillInterval];
-                }
-                VWOLogDebug(@"Re inserting message with retry count %@", firstObject[kRetryCount]);
-                [queue enqueue:firstObject];
-            } else {
+            if (statusCode == 200 || retryCount > kMaxTotalRetryCount){
                 VWOLogInfo(@"Successfully sent message %d", statusCode);
+                [queue dequeue];
+            } else {
+                firstObject[kRetryCount] = @(retryCount + 1);
+                VWOLogDebug(@"Re inserting message with retry count %@", firstObject[kRetryCount]);
+                [queue dequeue];
+                [queue enqueue:firstObject];
             }
         }//for
     });
