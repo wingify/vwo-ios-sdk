@@ -83,7 +83,6 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     _config = [[VWOConfig alloc] initWithAccountID:splitKey[1] appKey:splitKey[0] sdkVersion:kSDKversion];
 
     _config.sessionCount += 1;
-    [self addBackgroundForeGroundListeners];
     [self setupSentry];
 
     if (VWODevice.isAttachedToDebugger) {
@@ -104,10 +103,42 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
         }];
     });
 
-    [self fetchCampaignsSynchronouslyForTimeout:timeout withCallback:^{
-        _initialised = true;
-        if (completionBlock) completionBlock();
-    } failure:failureBlock];
+    _campaignList = [self getCampaignListWithTimeout:timeout WithCallback:completionBlock failure:failureBlock];
+    for (VWOCampaign *campaign in _campaignList) {
+        VWOLogInfo(@"********* Got Campaigns %@", campaign);
+    }
+    if (_campaignList == nil) return;
+    _initialised = true;
+    [self trackUserForAllCampaignsOnLaunch:_campaignList];
+}
+
+
+/**
+ Fetch campaigns from network
+ If campaigns not available the returns campaigns from cache
+
+ @return Array of campaigns. nil if network returns 400. nil if campaign list not available on network and cache
+ */
+- (nullable NSArray<VWOCampaign *> *)getCampaignListWithTimeout:(NSNumber *)timeout
+                                          WithCallback:(void(^)(void))completionBlock
+                                               failure:(void(^)(NSString *error))failureBlock {
+    VWOLogInfo(@"getCampaignListWithTimeout");
+    NSString *errorString;
+    NSArray<NSDictionary *> *jsonArray = [self getCampaignsFromNetworkWithTimeout:timeout onFailure:&errorString];
+    if (errorString != nil) {
+        VWOLogError(errorString);
+        if (failureBlock) failureBlock(errorString);
+        return nil;
+    }
+    if (jsonArray == nil) jsonArray = [NSArray arrayWithContentsOfURL:VWOFile.campaignCache];
+    if (jsonArray == nil) {
+        VWOLogWarning(@"No campaigns available. No cache available");
+        return nil;
+    }
+    NSArray<VWOCampaign *> *allCampaigns = [self campaignsFromJSON:jsonArray];
+    NSArray<VWOCampaign *> *evaluatedCampaigns = [self segmentEvaluated:allCampaigns];
+    if (completionBlock) completionBlock();
+    return  evaluatedCampaigns;
 }
 
 - (void)markConversionForGoal:(NSString *)goalIdentifier withValue:(NSNumber *)value {
@@ -149,7 +180,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 
 - (id)variationForKey:(NSString *)key {
     if (!_initialised) {
-        VWOLogWarning(@"variationForKey %@ called before launching VWO", key);
+        VWOLogWarning(@"variationForKey(%@) called before launching VWO", key);
         return nil;
     }
     if (VWOSocketClient.shared.isEnabled) {
@@ -166,10 +197,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
             //If variation Key is present in Campaign
         if (variation) {
             finalVariation = variation;
-                // If campaign is not already tracked; check if it can be part of campaign.
-            if ([_segmentEvaluator canUserBePartOfCampaignForSegment:campaign.segmentObject config:_config]) {
-                [self trackUserForCampaign:campaign];
-            }
+            [self trackUserForCampaign:campaign];
         }
     }
     if (finalVariation == [NSNull null]) {
@@ -206,21 +234,6 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     [VWORavenClient setSharedClient:client];
 }
 
-- (void)addBackgroundForeGroundListeners {
-    VWOLogDebug(@"Background listeners added");
-    NSNotificationCenter *notification = NSNotificationCenter.defaultCenter;
-    [notification addObserver:self
-                     selector:@selector(applicationWillEnterForeground)
-                         name:UIApplicationWillEnterForegroundNotification object:nil];
-}
-
-- (void)applicationWillEnterForeground {
-    VWOLogDebug(@"applicationWillEnterForeground");
-    dispatch_barrier_async(VWOController.taskQueue, ^{
-        [self fetchCampaignsSynchronouslyForTimeout:nil withCallback:nil failure:nil];
-    });
-}
-
 - (void)sendNotificationUserStartedTracking:(VWOCampaign *)campaign {
     VWOLogInfo(@"Controller: Sending notfication user started tracking %@", campaign);
     //Note: All values in campaignInfo dictionary must be in string format
@@ -232,47 +245,73 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     [NSNotificationCenter.defaultCenter postNotificationName:VWOUserStartedTrackingInCampaignNotification object:nil userInfo:campaignInfo];
 }
 
-- (void)fetchCampaignsSynchronouslyForTimeout:(NSNumber *)timeout
-                                 withCallback:(void (^)(void))completionBlock
-                                      failure:(void (^)(NSString *error))failureBlock {
+/**
+ Creates and Array of VWOCampaign from campaign json array.
+
+ */
+- (NSArray <VWOCampaign *> *) campaignsFromJSON:(NSArray<NSDictionary *> *)jsonArray {
+    NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
+    for (NSDictionary *campaignDict in jsonArray) {
+        VWOCampaign *aCampaign = [[VWOCampaign alloc] initWithDictionary:campaignDict];
+        if (aCampaign) [newCampaignList addObject:aCampaign];
+    }
+    return newCampaignList;
+}
+
+/**
+ Evaluate all the campaigns using Segmentation
+ */
+- (NSArray <VWOCampaign *> *) segmentEvaluated:(NSArray <VWOCampaign *> *)allCampaigns {
+    NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
+    for (VWOCampaign *aCampaign in allCampaigns) {
+        if ([_segmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject config:_config]) {
+            [newCampaignList addObject:aCampaign];
+        }
+    }
+    return newCampaignList;
+}
+
+/**
+ Tracks all the campaigns that have `trackUserOnLaunch` enabled
+ Call this in launch method
+ */
+- (void)trackUserForAllCampaignsOnLaunch:(NSArray<VWOCampaign *> *) allCampaigns {
+    VWOLogInfo(@"trackUserForAllCampaignsOnLaunch");
+    for (VWOCampaign *aCampaign in allCampaigns) {
+        if (aCampaign.status == CampaignStatusExcluded) {
+            [_config trackUserForCampaign:aCampaign];
+            continue;
+        } else if (aCampaign.status == CampaignStatusRunning && aCampaign.trackUserOnLaunch) {
+            if ([_segmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject config:_config]) {
+                [self trackUserForCampaign:aCampaign];
+            }
+        }
+    }
+}
+
+- (nullable NSArray *)getCampaignsFromNetworkWithTimeout:(NSNumber *)timeout onFailure:(NSString **)errorString {
     NSURL *url = [VWOURL forFetchingCampaignsConfig:_config];
     VWOLogDebug(@"fetchCampaigns URL(%@)", url.absoluteString);
-    NSTimeInterval timeOutInterval = timeout == nil ? defaultReqTimeout : timeout.doubleValue;
+    NSTimeInterval timeOutInterval = (timeout == nil) ? defaultReqTimeout : timeout.doubleValue;
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeOutInterval];
 
     NSError *error = nil;
     NSURLResponse *response = nil;
     NSData *data = [NSURLSession.sharedSession sendSynchronousDataTaskWithRequest:request returningResponse:&response error:&error];
 
-    // Failure is confirmed only when status is not 200
     NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
     if(statusCode >= 400 && statusCode <= 499) {
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         VWOLogError(@"Client side error %@", json[@"message"]);
-        if (failureBlock) failureBlock(json[@"message"]);
-        return;
+        *errorString = json[@"message"];
+        return nil;
     }
+    if (statusCode >= 500 && statusCode <=599) return nil;
 
-    if (statusCode >= 500 && statusCode <=599) {
-        //Do nothing for server error
-        return;
-    }
-    if (error) {
-        if ([NSFileManager.defaultManager fileExistsAtPath:VWOFile.campaignCache.path]) {
-            VWOLogWarning(@"%@", error.localizedDescription);
-            VWOLogInfo(@"Loading Cached Response");
-            NSArray *cachedCampaings = [NSArray arrayWithContentsOfURL:VWOFile.campaignCache];
-            [self updateCampaignListFromDictionary:cachedCampaings];
-        } else {
-            VWOLogError(@"Campaigns fetch failed. Cache not available {%@}", error.localizedDescription);
-        }
-        return;
-    }
     NSError *jsonerror;
     NSArray *responseArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror];
-    [responseArray writeToURL:VWOFile.campaignCache atomically:YES];
-    [self updateCampaignListFromDictionary:responseArray];
-    if (completionBlock) completionBlock();
+    if (jsonerror != nil) return nil;
+    return responseArray;
 }
 
 /// Creates NSArray of Type VWOCampaign and stores in self.campaignList
@@ -310,37 +349,30 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 
 /**
  Returns if the campaign is already tracked
- Sets returning User if required
- Stores campaign:variation pair in config
- If campaign is running then enqueue in message queue and sends notification
+
+ Stores campaign:variation pair in _config
+
+ Enqueue in message queue and sends notification
 
  @param campaign campaign that is to be tracked
  */
 - (void)trackUserForCampaign:(VWOCampaign *)campaign {
-    VWOLogDebug(@"Controller: trackUserForCampaign %@", campaign);
     NSParameterAssert(campaign);
+    NSAssert(campaign.status == CampaignStatusRunning, @"Non running campaigns must not be tracked");
+
     if ([_config isTrackingUserForCampaign:campaign]) {
-        // Return if already tracking
         VWOLogDebug(@"Controller: Returning. Already tracking %@", campaign);
         return;
     }
-
-    // Set User to be returning if not already set.
-    if (!_config.isReturningUser && _config.sessionCount > 1) {
-        VWOLogDebug(@"Setting returningUser=YES");
-        _config.returningUser = YES;
-    }
+    VWOLogDebug(@"Controller: trackUserForCampaign %@", campaign);
 
     [_config trackUserForCampaign:campaign];
 
     //Send network request and notification only if the campaign is running
-    if (campaign.status == CampaignStatusRunning) {
-        VWOLogDebug(@"%@ is running. Adding to Queue. Sending notification", campaign);
-        NSURL *url = [VWOURL forMakingUserPartOfCampaign:campaign config:_config dateTime:NSDate.date];
-        [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
+    NSURL *url = [VWOURL forMakingUserPartOfCampaign:campaign config:_config dateTime:NSDate.date];
+    [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
 
-        [self sendNotificationUserStartedTracking:campaign];
-    }
+    [self sendNotificationUserStartedTracking:campaign];
 }
 
 /**

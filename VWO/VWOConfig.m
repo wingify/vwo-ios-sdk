@@ -61,6 +61,7 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 
     /// Stores "campaignId : "variationID" in User Activity["tracking"]
 - (void)trackUserForCampaign:(VWOCampaign *)campaign {
+    if (campaign.status == CampaignStatusRunning) [self updateIsReturningUser];
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
     int variationID = campaign.status == CampaignStatusExcluded ? 0 : campaign.variation.iD;
     NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey] mutableCopy];
@@ -68,6 +69,13 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
     trackingDict[campaignID] = [NSNumber numberWithInt:variationID];
     activityDict[kTracking] = trackingDict;
     [NSUserDefaults.standardUserDefaults setObject:activityDict forKey:kUserDefaultsKey];
+}
+
+- (void)updateIsReturningUser {
+    if (self.isReturningUser == false && self.sessionCount > 1) {
+        VWOLogDebug(@"Setting returningUser=YES");
+        self.returningUser = YES;
+    }
 }
 
 - (void)markGoalConversion:(VWOGoal *)goal {
