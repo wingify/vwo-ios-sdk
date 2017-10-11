@@ -24,11 +24,22 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
                        sdkVersion:(NSString *)sdkVersion {
     if (self = [super init]) {
         [self setDefaultValues];
-        _accountID = accountID;
-        _appKey = appKey;
+        _accountID  = accountID;
+        _appKey     = appKey;
         _sdkVersion = sdkVersion;
     }
     return self;
+}
+
+- (nullable id)objectForKey:(NSString *)key {
+    NSDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey];
+    return activityDict[key];
+}
+
+- (void)setObject:(nullable id)value forKey:(NSString *)key {
+    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey] mutableCopy];
+    activityDict[key] = value;
+    [NSUserDefaults.standardUserDefaults setObject:activityDict forKey:kUserDefaultsKey];
 }
 
 - (void)setDefaultValues {
@@ -44,85 +55,72 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
                                kReturningUser: @(NO),
                                kUUID         : UUID
                                };
+//    [NSUserDefaults.standardUserDefaults setObject:defaults forKey:kUserDefaultsKey];
     [NSUserDefaults.standardUserDefaults registerDefaults:@{kUserDefaultsKey : defaults}];
     VWOLogDebug(@"UUID %@", UUID);
 }
 
 - (BOOL)isTrackingUserForCampaign:(VWOCampaign *)campaign {
-    NSDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey];
-    NSDictionary *trackingDict = activityDict[kTracking];
+    NSDictionary *trackingDict = [self objectForKey:kTracking];
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
 
-    if (trackingDict[campaignID] == nil) {
-        return NO;
-    }
+    if (trackingDict[campaignID] == nil) return NO;
     return [trackingDict[campaignID] intValue] == campaign.variation.iD;
 }
 
     /// Stores "campaignId : "variationID" in User Activity["tracking"]
 - (void)trackUserForCampaign:(VWOCampaign *)campaign {
-    if (campaign.status == CampaignStatusRunning) [self updateIsReturningUser];
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
     int variationID = campaign.status == CampaignStatusExcluded ? 0 : campaign.variation.iD;
-    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey] mutableCopy];
-    NSMutableDictionary *trackingDict = [activityDict[kTracking] mutableCopy];
-    trackingDict[campaignID] = [NSNumber numberWithInt:variationID];
-    activityDict[kTracking] = trackingDict;
-    [NSUserDefaults.standardUserDefaults setObject:activityDict forKey:kUserDefaultsKey];
-}
 
-- (void)updateIsReturningUser {
-    if (self.isReturningUser == false && self.sessionCount > 1) {
-        VWOLogDebug(@"Setting returningUser=YES");
-        self.returningUser = YES;
-    }
+    NSMutableDictionary *trackingDict = [[self objectForKey:kTracking] mutableCopy];
+    trackingDict[campaignID] = [NSNumber numberWithInt:variationID];
+    [self setObject:trackingDict forKey:kTracking];
 }
 
 - (void)markGoalConversion:(VWOGoal *)goal {
-    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey] mutableCopy];
-    NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)activityDict[kGoalsMarked]];
+    NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)[self objectForKey:kGoalsMarked]];
     [set addObject:[NSNumber numberWithInt:goal.iD]];
-    activityDict[kGoalsMarked] = set.allObjects;
-    [NSUserDefaults.standardUserDefaults setObject:activityDict forKey:kUserDefaultsKey];
+    [self setObject:set.allObjects forKey:kGoalsMarked];
 }
 
 - (BOOL)isGoalMarked:(VWOGoal *)goal {
-    NSDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey];
-    NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)activityDict[kGoalsMarked]];
+    NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)[self objectForKey:kGoalsMarked]];
     return [set containsObject:[NSNumber numberWithInt:goal.iD]];
 }
 
 
 - (NSDictionary *)campaignVariationPairs {
-    NSDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey];
-    return activityDict[kTracking];
+    return [self objectForKey:kTracking];
 }
 
 - (NSString *)UUID {
-    NSDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey];
-    return activityDict[kUUID];
+    return [self objectForKey:kUUID];
 }
 
 - (void)setSessionCount:(NSUInteger)count {
-    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey] mutableCopy];
-    activityDict[kSessionCount] = [NSNumber numberWithUnsignedInteger:count];
-    [NSUserDefaults.standardUserDefaults setObject:activityDict forKey:kUserDefaultsKey];
+    [self setObject:@(count) forKey:kSessionCount];
+    [self updateIsReturningUser];
+}
+
+- (void)updateIsReturningUser {
+    NSDictionary *trackingDict = [self objectForKey:kTracking];
+    if (trackingDict.count > 0 && self.sessionCount > 1 && self.isReturningUser == NO) {
+        VWOLogDebug(@"Setting returningUser=YES");
+        self.returningUser = YES;
+    }
 }
 
 - (NSUInteger)sessionCount {
-    NSDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey];
-    return [activityDict[kSessionCount] integerValue];
+    return [[self objectForKey:kSessionCount] integerValue];
 }
 
 - (void)setReturningUser:(BOOL)isReturning {
-    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey] mutableCopy];
-    activityDict[kReturningUser] = [NSNumber numberWithBool:isReturning];
-    [NSUserDefaults.standardUserDefaults setObject:activityDict forKey:kUserDefaultsKey];
+    [self setObject:@(isReturning) forKey:kReturningUser];
 }
 
 - (BOOL)isReturningUser {
-    NSDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey];
-    return [activityDict[kReturningUser] boolValue];
+    return [[self objectForKey:kReturningUser] boolValue];
 }
 
 @end
