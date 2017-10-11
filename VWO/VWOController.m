@@ -350,10 +350,9 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
  @param tryAll If set will try to hit all the URLS irrespective of the error
  */
 - (void)flushQueue:(VWOMessageQueue *)queue tryAll:(BOOL)tryAll {
-    VWOLogInfo(@"Sending all messages in queue");
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSUInteger count = queue.count;
-        VWOLogDebug(@"Total messages in queue %d", count);
+        VWOLogDebug(@"Flush Queue. Count %d", count);
         for (; count > 0; count -= 1) {
             NSMutableDictionary *firstObject = [queue.peek mutableCopy];
 

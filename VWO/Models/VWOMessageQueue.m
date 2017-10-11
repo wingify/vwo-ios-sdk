@@ -77,7 +77,6 @@ NSUInteger kQueueThreshold = 5;
     dispatch_sync(_queue, ^{
         count = [NSArray arrayWithContentsOfURL:_fileURL].count;
     });
-    VWOLogDebug(@"QUEUE count %lu", count);
     return count;
 }
 
