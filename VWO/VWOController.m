@@ -105,7 +105,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 
     _campaignList = [self getCampaignListWithTimeout:timeout WithCallback:completionBlock failure:failureBlock];
     for (VWOCampaign *campaign in _campaignList) {
-        VWOLogInfo(@"********* Got Campaigns %@", campaign);
+        VWOLogInfo(@"Got Campaigns %@", campaign);
     }
     if (_campaignList == nil) return;
     _initialised = true;
@@ -312,39 +312,6 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     NSArray *responseArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror];
     if (jsonerror != nil) return nil;
     return responseArray;
-}
-
-/// Creates NSArray of Type VWOCampaign and stores in self.campaignList
-- (void)updateCampaignListFromDictionary:(NSArray *)allCampaignDict {
-    NSParameterAssert(allCampaignDict);
-    VWOLogInfo(@"Updating campaignList from URL response");
-    NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
-    for (NSDictionary *campaignDict in allCampaignDict) {
-        VWOCampaign *aCampaign = [[VWOCampaign alloc] initWithDictionary:campaignDict];
-        if (!aCampaign) continue;
-
-        if (aCampaign.status == CampaignStatusExcluded) {
-            [self trackUserForCampaign:aCampaign];
-            continue;
-        }
-
-        if (aCampaign.status == CampaignStatusRunning) {
-            if (aCampaign.trackUserOnLaunch) {
-                if ([_segmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject config:_config]) {
-                    [newCampaignList addObject:aCampaign];
-                    [self trackUserForCampaign:aCampaign];
-                    VWOLogInfo(@"Received Campaign: '%@' Variation: '%@'", aCampaign, aCampaign.variation);
-                } else { //Segmentation failed
-                    VWOLogInfo(@"User cannot be part of campaign: '%@'", aCampaign);
-                }
-            } else {//Unconditionally add when NOT trackUserOnLaunch
-                [newCampaignList addObject:aCampaign];
-                VWOLogInfo(@"Received Campaign: '%@' Variation: '%@'", aCampaign, aCampaign.variation);
-            }
-        }
-    }
-    _campaignList = newCampaignList;
-    VWOLogDebug(@"Total Campaigns %d", _campaignList.count);
 }
 
 /**
