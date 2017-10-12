@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VWOMessageQueue : NSObject
+@interface VWOQueue : NSObject
 
 @property (readonly) NSUInteger count;
 @property (nullable, readonly) NSDictionary *peek;

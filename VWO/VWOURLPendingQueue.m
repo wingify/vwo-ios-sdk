@@ -7,7 +7,7 @@
 //
 
 #import "VWOURLPendingQueue.h"
-#import "VWOMessageQueue.h"
+#import "VWOQueue.h"
 #import "NSURLSession+Synchronous.h"
 #import "VWOLogger.h"
 
@@ -16,7 +16,7 @@ static NSString *const kRetryCount        = @"retry";
 static NSTimeInterval kMaxTotalRetryCount = 10;
 
 @interface VWOURLPendingQueue ()
-@property (nonatomic) VWOMessageQueue *queue;
+@property (nonatomic) VWOQueue *queue;
 @end
 
 @implementation VWOURLPendingQueue
@@ -28,7 +28,7 @@ static NSTimeInterval kMaxTotalRetryCount = 10;
 - (instancetype)initWithFileURL:(NSURL *)fileURL {
     self = [self init];
     if (self) {
-        self.queue = [[VWOMessageQueue alloc] initWithFileURL:fileURL];
+        self.queue = [[VWOQueue alloc] initWithFileURL:fileURL];
     }
     return self;
 }

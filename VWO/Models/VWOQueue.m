@@ -6,19 +6,17 @@
 //
 //
 
-#import "VWOMessageQueue.h"
-#import "VWOCampaign.h"
-#import "VWOGoal.h"
+#import "VWOQueue.h"
 #import "VWOLogger.h"
 
-@interface VWOMessageQueue ()
+@interface VWOQueue ()
 
 @property NSURL *fileURL;
 @property (nonatomic) dispatch_queue_t queue;
 
 @end
 
-@implementation VWOMessageQueue
+@implementation VWOQueue
 
 - (instancetype)initWithFileURL:(NSURL *)fileURL {
     self = [self init];

@@ -316,8 +316,6 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
  Stores campaign:variation pair in _config
 
  Enqueue in message queue and sends notification
-
- @param campaign campaign that is to be tracked
  */
 - (void)trackUserForCampaign:(VWOCampaign *)campaign {
     NSParameterAssert(campaign);
