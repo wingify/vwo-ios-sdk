@@ -11,9 +11,6 @@
 #import "VWOGoal.h"
 #import "VWOLogger.h"
 
-NSTimeInterval kTimerIntervalMQ = 20.0;
-NSUInteger kQueueThreshold = 5;
-
 @interface VWOMessageQueue ()
 
 @property NSURL *fileURL;

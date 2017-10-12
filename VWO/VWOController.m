@@ -12,7 +12,7 @@
 #import "VWOSegmentEvaluator.h"
 #import "VWOCampaign.h"
 #import <UIKit/UIKit.h>
-#import "VWOMessageQueue.h"
+#import "VWOURLPendingQueue.h"
 #import "VWOFile.h"
 #import "NSURLSession+Synchronous.h"
 #import "VWOURL.h"
@@ -20,15 +20,11 @@
 #import "VWODevice.h"
 #import "VWOConfig.h"
 
-static NSString *const kWaitTill                 = @"waitTill";
-static NSString *const kURL                      = @"url";
-static NSString *const kRetryCount               = @"retry";
 #ifdef VWO_DEBUG
 static NSTimeInterval kMessageQueueFlushInterval = 5;
 #else
 static NSTimeInterval kMessageQueueFlushInterval = 20;
 #endif
-static NSTimeInterval kMaxTotalRetryCount        = 10;
 static NSTimeInterval const defaultReqTimeout    = 60;
 static NSString *kSDKversion                     = @"2.0.0-beta7";
 
@@ -39,7 +35,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 @end
 
 @implementation VWOController {
-    VWOMessageQueue *messageQueue;
+    VWOURLPendingQueue *pendingURLQueue;
     NSTimer *messageQueueFlushtimer;
     dispatch_queue_t _vwoQueue;
     BOOL _initialised;
@@ -93,13 +89,13 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     }
 
     // Initialise the queue and flush the persistance URLs
-    messageQueue = [[VWOMessageQueue alloc] initWithFileURL:VWOFile.messageQueue];
-    [self flushQueue:messageQueue tryAll:true];
+    pendingURLQueue = [VWOURLPendingQueue queueWithFileURL:VWOFile.messageQueue];
+    [pendingURLQueue flushSendAll:true];
 
     // Start timer. (Timer can be scheduled only on Main Thread)
     dispatch_async(dispatch_get_main_queue(), ^{
         messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:kMessageQueueFlushInterval repeats:YES block:^(NSTimer * _Nonnull timer) {
-            [self flushQueue:messageQueue tryAll:false];
+            [pendingURLQueue flushSendAll:false];
         }];
     });
 
@@ -172,7 +168,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
             if (matchedGoal) {
                 [_config markGoalConversion:matchedGoal];
                 NSURL *url = [VWOURL forMarkingGoal:matchedGoal withValue:value campaign:campaign dateTime:NSDate.date config:_config];
-                [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
+                [pendingURLQueue enqueue:url retryCount:0];
             }
         }
     }
@@ -261,11 +257,13 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 /**
  Evaluate all the campaigns using Segmentation
  */
-- (NSArray <VWOCampaign *> *) segmentEvaluated:(NSArray <VWOCampaign *> *)allCampaigns {
+- (NSArray <VWOCampaign *> *)segmentEvaluated:(NSArray <VWOCampaign *> *)allCampaigns {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (VWOCampaign *aCampaign in allCampaigns) {
         if ([_segmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject config:_config]) {
             [newCampaignList addObject:aCampaign];
+        } else {
+            VWOLogDebug(@"Campaign %@ did not pass segmentation", aCampaign);
         }
     }
     return newCampaignList;
@@ -282,9 +280,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
             [_config trackUserForCampaign:aCampaign];
             continue;
         } else if (aCampaign.status == CampaignStatusRunning && aCampaign.trackUserOnLaunch) {
-            if ([_segmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject config:_config]) {
-                [self trackUserForCampaign:aCampaign];
-            }
+            [self trackUserForCampaign:aCampaign];
         }
     }
 }
@@ -337,54 +333,9 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 
     //Send network request and notification only if the campaign is running
     NSURL *url = [VWOURL forMakingUserPartOfCampaign:campaign config:_config dateTime:NSDate.date];
-    [messageQueue enqueue:@{kURL : url.absoluteString, kRetryCount : @(0)}];
+    [pendingURLQueue enqueue:url retryCount:0];
 
     [self sendNotificationUserStartedTracking:campaign];
-}
-
-/**
- Flush all the URLS present in the Queue.
- Internally its been dispatched on low priority background thread
-
- @param queue queue that is to be flushed
- @param tryAll If set will try to hit all the URLS irrespective of the error
- */
-- (void)flushQueue:(VWOMessageQueue *)queue tryAll:(BOOL)tryAll {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        NSUInteger count = queue.count;
-        VWOLogDebug(@"Flush Queue. Count %d", count);
-        for (; count > 0; count -= 1) {
-            NSMutableDictionary *firstObject = [queue.peek mutableCopy];
-
-            NSAssert(firstObject != nil, @"queue.peek is giving invalid results");
-            VWOLogDebug(@"Trying message at %d", count);
-
-            NSString *url = firstObject[kURL];
-            NSError *error = nil;
-            NSURLResponse *response = nil;
-            VWOLogDebug(@"Sending request %@", url);
-            [NSURLSession.sharedSession sendSynchronousDataTaskWithURL:[NSURL URLWithString:url] returningResponse:&response error:&error];
-
-            //If No internet connection break; No need to process other messages in queue
-            if (error != nil) {
-                VWOLogError(error.localizedDescription);
-                if (tryAll == false) break;
-            }
-
-            // Failure is confirmed only when status is not 200
-            NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
-            int retryCount = [firstObject[kRetryCount] intValue];
-            if (statusCode == 200 || retryCount > kMaxTotalRetryCount){
-                VWOLogInfo(@"Successfully sent message %d", statusCode);
-                [queue dequeue];
-            } else {
-                firstObject[kRetryCount] = @(retryCount + 1);
-                VWOLogDebug(@"Re inserting message with retry count %@", firstObject[kRetryCount]);
-                [queue dequeue];
-                [queue enqueue:firstObject];
-            }
-        }//for
-    });
 }
 
 - (void)dealloc{
