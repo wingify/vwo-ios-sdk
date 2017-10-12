@@ -1,12 +1,12 @@
 //
-//  VWOURLPendingQueue.m
+//  VWOURLQueue.m
 //  VWO
 //
 //  Created by Kaunteya Suryawanshi on 12/10/17.
 //  Copyright © 2017 vwo. All rights reserved.
 //
 
-#import "VWOURLPendingQueue.h"
+#import "VWOURLQueue.h"
 #import "VWOQueue.h"
 #import "NSURLSession+Synchronous.h"
 #import "VWOLogger.h"
@@ -15,11 +15,11 @@ static NSString *const kURL               = @"url";
 static NSString *const kRetryCount        = @"retry";
 static NSTimeInterval kMaxTotalRetryCount = 10;
 
-@interface VWOURLPendingQueue ()
+@interface VWOURLQueue ()
 @property (nonatomic) VWOQueue *queue;
 @end
 
-@implementation VWOURLPendingQueue
+@implementation VWOURLQueue
 
 + (instancetype)queueWithFileURL:(NSURL *)fileURL {
     return [[self alloc] initWithFileURL:fileURL];

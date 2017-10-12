@@ -12,7 +12,7 @@
 #import "VWOSegmentEvaluator.h"
 #import "VWOCampaign.h"
 #import <UIKit/UIKit.h>
-#import "VWOURLPendingQueue.h"
+#import "VWOURLQueue.h"
 #import "VWOFile.h"
 #import "NSURLSession+Synchronous.h"
 #import "VWOURL.h"
@@ -35,7 +35,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 @end
 
 @implementation VWOController {
-    VWOURLPendingQueue *pendingURLQueue;
+    VWOURLQueue *pendingURLQueue;
     NSTimer *messageQueueFlushtimer;
     dispatch_queue_t _vwoQueue;
     BOOL _initialised;
@@ -89,7 +89,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
     }
 
     // Initialise the queue and flush the persistance URLs
-    pendingURLQueue = [VWOURLPendingQueue queueWithFileURL:VWOFile.messageQueue];
+    pendingURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.messageQueue];
     [pendingURLQueue flushSendAll:true];
 
     // Start timer. (Timer can be scheduled only on Main Thread)

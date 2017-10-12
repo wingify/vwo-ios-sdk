@@ -1,5 +1,5 @@
 //
-//  VWOURLPendingQueue.h
+//  VWOURLQueue.h
 //  VWO
 //
 //  Created by Kaunteya Suryawanshi on 12/10/17.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VWOURLPendingQueue : NSObject
+@interface VWOURLQueue : NSObject
 
 + (instancetype)queueWithFileURL:(NSURL *)fileURL;
 
