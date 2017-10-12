@@ -7,7 +7,6 @@
 //
 
 #import "VWOSegmentEvaluator.h"
-#import "NSCalendar+VWO.h"
 #import "VWODevice.h"
 #import "VWOLogger.h"
 #import "VWOConfig.h"
@@ -47,6 +46,21 @@ static NSString * kPartialSegments  = @"partialSegments";
 static NSString * kSegmentCode      = @"segment_code";
 static NSString * kDevice           = @"device";
 static NSString * kReturningVisitor = @"returning_visitor";
+
+@implementation NSCalendar(VWO)
++ (NSInteger)dayOfWeek {
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *dateComponents = [gregorian components:NSCalendarUnitWeekday fromDate:NSDate.date];
+    NSInteger weekday = dateComponents.weekday;
+    return weekday - 1; // start from sunday = 0
+}
+
++ (NSInteger)hourOfTheDay {
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *dateComponents = [gregorian components:NSCalendarUnitHour fromDate:NSDate.date];
+    return dateComponents.hour;
+}
+@end
 
 @implementation VWOSegmentEvaluator
 

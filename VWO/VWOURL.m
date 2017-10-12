@@ -7,7 +7,6 @@
 //
 
 #import "VWOURL.h"
-#import "NSDictionary+VWO.h"
 #import "VWOCampaign.h"
 #import "VWOGoal.h"
 #import "VWODevice.h"
@@ -17,6 +16,15 @@ static NSString *const kScheme = @"https";
 static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 
 @implementation NSDictionary (NSURLQueryItem)
+- (nullable NSString *)toString {
+    NSError *error;
+    NSData *currentData = [NSJSONSerialization dataWithJSONObject:self options:kNilOptions error:&error];
+    if (!error) {
+        return [[NSString alloc] initWithData:currentData encoding:NSUTF8StringEncoding];
+    }
+    return nil;
+}
+
 - (NSArray<NSURLQueryItem *> *)toQueryItems {
     NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray new];
     for (NSString *key in self) {

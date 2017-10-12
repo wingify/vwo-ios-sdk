@@ -10,15 +10,6 @@
 
 @implementation NSDictionary (VWO)
 
-- (nullable NSString *)toString {
-    NSError *error;
-    NSData *currentData = [NSJSONSerialization dataWithJSONObject:self options:kNilOptions error:&error];
-    if (!error) {
-        return [[NSString alloc] initWithData:currentData encoding:NSUTF8StringEncoding];
-    }
-    return nil;
-}
-
 - (NSArray<NSString *> *) keysMissingFrom:(NSArray<NSString *> *)mustHaveKeys {
     NSMutableArray *mustHaveKeysMutable = mustHaveKeys.mutableCopy;
     [mustHaveKeysMutable removeObjectsInArray:self.allKeys];

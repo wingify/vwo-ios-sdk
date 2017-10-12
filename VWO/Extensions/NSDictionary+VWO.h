@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSDictionary (VWO)
 
-- (nullable NSString *)toString;
-
 /**
  * Returns the keys that are not in dictionary but are in 'mustHaveKeys'
  *

@@ -48,8 +48,6 @@
 		E39815901F6291B50035D519 /* VWOSocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E398158C1F6291B50035D519 /* VWOSocketClient.m */; };
 		E39815931F6291C10035D519 /* VWOSegmentEvaluator.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815911F6291C10035D519 /* VWOSegmentEvaluator.h */; };
 		E39815941F6291C10035D519 /* VWOSegmentEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815921F6291C10035D519 /* VWOSegmentEvaluator.m */; };
-		E398159A1F6293BC0035D519 /* NSCalendar+VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815961F6293BC0035D519 /* NSCalendar+VWO.h */; };
-		E398159B1F6293BC0035D519 /* NSCalendar+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815971F6293BC0035D519 /* NSCalendar+VWO.m */; };
 		E398159C1F6293BC0035D519 /* NSDictionary+VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815981F6293BC0035D519 /* NSDictionary+VWO.h */; };
 		E398159D1F6293BC0035D519 /* NSDictionary+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815991F6293BC0035D519 /* NSDictionary+VWO.m */; };
 		E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */; };
@@ -113,8 +111,6 @@
 		E398158C1F6291B50035D519 /* VWOSocketClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOSocketClient.m; sourceTree = "<group>"; };
 		E39815911F6291C10035D519 /* VWOSegmentEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOSegmentEvaluator.h; sourceTree = "<group>"; };
 		E39815921F6291C10035D519 /* VWOSegmentEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOSegmentEvaluator.m; sourceTree = "<group>"; };
-		E39815961F6293BC0035D519 /* NSCalendar+VWO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+VWO.h"; sourceTree = "<group>"; };
-		E39815971F6293BC0035D519 /* NSCalendar+VWO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+VWO.m"; sourceTree = "<group>"; };
 		E39815981F6293BC0035D519 /* NSDictionary+VWO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+VWO.h"; sourceTree = "<group>"; };
 		E39815991F6293BC0035D519 /* NSDictionary+VWO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VWO.m"; sourceTree = "<group>"; };
 		E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOURL.h; sourceTree = "<group>"; };
@@ -239,8 +235,6 @@
 		E39815951F6293BC0035D519 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				E39815961F6293BC0035D519 /* NSCalendar+VWO.h */,
-				E39815971F6293BC0035D519 /* NSCalendar+VWO.m */,
 				E39815981F6293BC0035D519 /* NSDictionary+VWO.h */,
 				E39815991F6293BC0035D519 /* NSDictionary+VWO.m */,
 				E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */,
@@ -275,7 +269,6 @@
 				E39815611F6291680035D519 /* VWORavenClient.h in Headers */,
 				E39815811F6291970035D519 /* VWODevice.h in Headers */,
 				E398155B1F6291680035D519 /* VWOQueue.h in Headers */,
-				E398159A1F6293BC0035D519 /* NSCalendar+VWO.h in Headers */,
 				E388B6CE1F8F7D350023E11E /* VWOURLPendingQueue.h in Headers */,
 				E344B2F01F87906900A4EEE6 /* VWOConfig.h in Headers */,
 				E39815571F6291680035D519 /* VWOCampaign.h in Headers */,
@@ -404,7 +397,6 @@
 				E398159D1F6293BC0035D519 /* NSDictionary+VWO.m in Sources */,
 				E39815861F6291970035D519 /* VWOLogger.m in Sources */,
 				E39815821F6291970035D519 /* VWODevice.m in Sources */,
-				E398159B1F6293BC0035D519 /* NSCalendar+VWO.m in Sources */,
 				E39815621F6291680035D519 /* VWORavenClient.m in Sources */,
 				E39815901F6291B50035D519 /* VWOSocketClient.m in Sources */,
 				E398155A1F6291680035D519 /* VWOGoal.m in Sources */,
