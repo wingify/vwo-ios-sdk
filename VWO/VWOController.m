@@ -101,7 +101,7 @@ static NSString *kSDKversion                     = @"2.0.0-beta7";
 
     _campaignList = [self getCampaignListWithTimeout:timeout WithCallback:completionBlock failure:failureBlock];
     for (VWOCampaign *campaign in _campaignList) {
-        VWOLogInfo(@"Got Campaigns %@", campaign);
+        VWOLogInfo(@"Got Campaigns %@ with variation %@", campaign, campaign.variation);
     }
     if (_campaignList == nil) return;
     _initialised = true;
