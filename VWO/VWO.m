@@ -100,7 +100,11 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 }
 
 + (NSString *)version {
-    return VWOController.shared.config.sdkVersion;
+    __block NSString *version;
+    dispatch_barrier_async(VWOController.taskQueue, ^{
+        version = VWOController.shared.config.sdkVersion;
+    });
+    return version;
 }
 
 @end
