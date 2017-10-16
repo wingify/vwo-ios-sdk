@@ -53,30 +53,6 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @param completion A block object to be executed when campaign settings are fetched successfully.
 
- @warning Completion block is not invoked on the main queue. It is developers responsibility to dispatch the code in the appropriate queue.
- For any UI update the completion must be explicitly dispatched on the main queue.
-
- @code
- [VWO launchForAPIKey:apiKey completion:^{
-     dispatch_async(dispatch_get_main_queue(), ^{
-         [activityIndicator stopAnimating];
-         uiLabel.text = "New Value";
-     });
- }];
- @endcode
-
- */
-+ (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion NS_SWIFT_NAME(launch(apiKey:completion:));
-
-/**
- Asynchronously fetch campaign settings
-
- This method is typically invoked in your application:didFinishLaunchingWithOptions: method.
-
- @param apiKey Unique developer ApiKey provided by VWO.
-
- @param completion A block object to be executed when campaign settings are fetched successfully.
-
  @warning Completion & Failure blocks are not invoked on the main queue. It is developers responsibility to dispatch the code in the appropriate queue.
  For any UI update the completion must be explicitly dispatched on the main queue.
 
@@ -93,7 +69,7 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @param failureBlock A block object to be executed when there was error while fetching campaign settings
  */
-+ (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion failure:(void (^)(NSString *error))failureBlock NS_SWIFT_NAME(launch(apiKey:completion:failure:));
++ (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion failure:(nullable void (^)(NSString *error))failureBlock NS_SWIFT_NAME(launch(apiKey:completion:failure:));
 
 /**
  `Synchronously` fetch campaign settings
