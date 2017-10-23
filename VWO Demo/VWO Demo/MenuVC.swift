@@ -61,8 +61,10 @@ class MenuVC : UIViewController {
             let container = self.slideMenuController()?.mainViewController as! ContainerVC
             container.activityIndicator.startAnimating()
             VWO.launch(apiKey: apiKey, completion: {
-                container.activityIndicator.stopAnimating()
-                self.showAlert("Success", message: "API Key changed successfully.\n Old campaigns cleared", button: "OK")
+                DispatchQueue.main.async {
+                    container.activityIndicator.stopAnimating()
+                    self.showAlert("Success", message: "API Key changed successfully.\n Old campaigns cleared", button: "OK")
+                }
             }, failure: nil)
         })
         self.present(alert, animated: true, completion: nil)
