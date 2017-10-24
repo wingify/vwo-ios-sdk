@@ -59,7 +59,7 @@ static NSString * kVariation            = @"variations";
             return nil;
         }
 
-        self.status    = CampaignStatusRunning;
+        self.status            = CampaignStatusRunning;
         self.name              = campaignDict[kName];
         self.trackUserOnLaunch = [campaignDict[kTrackUserOnLaunch] boolValue];
         self.segmentObject     = campaignDict[kSegmentObject];

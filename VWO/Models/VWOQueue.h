@@ -16,15 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, readonly) NSDictionary *peek;
 
 + (instancetype)queueWithFileURL:(NSURL *)fileURL;
-// Enqueue only these types as NSArry.writeToFile only works for these types
-// NSString
-//NSData
-//NSDate
-//NSNumber
-//NSArray
-//NSDictionary
 - (void)enqueue:(NSDictionary *)object;
-
 - (nullable NSDictionary *) dequeue;
 
 @end

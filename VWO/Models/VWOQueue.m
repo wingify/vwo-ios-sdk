@@ -36,6 +36,8 @@
     return self;
 }
 
+    // Enqueue only these types as NSArry.writeToFile only works for these types
+    // NSString //NSData //NSDate //NSNumber //NSArray //NSDictionary
 - (void)enqueue:(NSDictionary *)object {
     VWOLogDebug(@"QUEUE Enqueue : %@", object);
     dispatch_barrier_async(_queue, ^{

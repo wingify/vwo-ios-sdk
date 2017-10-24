@@ -55,7 +55,6 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
                                kReturningUser: @(NO),
                                kUUID         : UUID
                                };
-//    [NSUserDefaults.standardUserDefaults setObject:defaults forKey:kUserDefaultsKey];
     [NSUserDefaults.standardUserDefaults registerDefaults:@{kUserDefaultsKey : defaults}];
     VWOLogDebug(@"UUID %@", UUID);
 }
@@ -88,7 +87,6 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
     NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)[self objectForKey:kGoalsMarked]];
     return [set containsObject:[NSNumber numberWithInt:goal.iD]];
 }
-
 
 - (NSDictionary *)campaignVariationPairs {
     return [self objectForKey:kTracking];

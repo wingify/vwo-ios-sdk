@@ -5,9 +5,6 @@
 //  Created by Wingify on 25/11/13.
 //  Copyright (c) 2013 Wingify Software Pvt. Ltd. All rights reserved.
 //
-//
-//  Controller (of MVC fame) for the whole SDK. This is the centerpiece of most decision making.
-//
 
 #import <Foundation/Foundation.h>
 
@@ -21,7 +18,6 @@ static NSString *kSDKversion = @"2.0.0-beta9";
 
 /// All the operations in controller are expected to happen on this queue
 @property (class, readonly) dispatch_queue_t taskQueue;
-
 @property VWOSegmentEvaluator *segmentEvaluator;
 @property NSDictionary *previewInfo;
 @property VWOConfig *config;

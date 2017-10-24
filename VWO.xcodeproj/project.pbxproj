@@ -85,11 +85,11 @@
 		E39814F41F628CAA0035D519 /* VWO.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VWO.podspec; sourceTree = SOURCE_ROOT; };
 		E39815431F6291680035D519 /* VWOCampaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOCampaign.h; sourceTree = "<group>"; };
 		E39815441F6291680035D519 /* VWOCampaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOCampaign.m; sourceTree = "<group>"; };
-		E39815451F6291680035D519 /* VWOGoal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VWOGoal.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		E39815461F6291680035D519 /* VWOGoal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VWOGoal.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		E39815451F6291680035D519 /* VWOGoal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VWOGoal.h; sourceTree = "<group>"; };
+		E39815461F6291680035D519 /* VWOGoal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VWOGoal.m; sourceTree = "<group>"; };
 		E39815471F6291680035D519 /* VWOQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VWOQueue.h; sourceTree = "<group>"; };
 		E39815481F6291680035D519 /* VWOQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VWOQueue.m; sourceTree = "<group>"; };
-		E398154B1F6291680035D519 /* VWOVariation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VWOVariation.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		E398154B1F6291680035D519 /* VWOVariation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VWOVariation.h; sourceTree = "<group>"; };
 		E398154C1F6291680035D519 /* VWOVariation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOVariation.m; sourceTree = "<group>"; };
 		E398154E1F6291680035D519 /* VWORavenClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWORavenClient.h; sourceTree = "<group>"; };
 		E398154F1F6291680035D519 /* VWORavenClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWORavenClient.m; sourceTree = "<group>"; };

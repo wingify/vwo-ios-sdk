@@ -21,16 +21,14 @@
 #import "VWOConfig.h"
 
 #ifdef VWO_DEBUG
-static NSTimeInterval kMessageQueueFlushInterval = 5;
+static NSTimeInterval kMessageQueueFlushInterval         = 5;
 #else
-static NSTimeInterval kMessageQueueFlushInterval = 20;
+static NSTimeInterval kMessageQueueFlushInterval         = 20;
 #endif
-static NSTimeInterval const defaultReqTimeout    = 60;
+static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
 @interface VWOController()
-
 @property (atomic) NSArray<VWOCampaign *> *campaignList;
-
 @end
 
 @implementation VWOController {
@@ -42,7 +40,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 
 #pragma mark - Public methods
 
-+ (instancetype)shared{
++ (instancetype)shared {
     static VWOController *instance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
@@ -69,7 +67,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     }
 
     #ifdef VWO_DEBUG
-        VWOLogInfo(@"Initializing VWO with VWO_DEBUG");
+        VWOLogInfo(@"Initializing VWO with ******  VWO_DEBUG *******");
     #else
         VWOLogInfo(@"Initializing VWO");
     #endif
@@ -98,7 +96,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
         }];
     });
 
-    _campaignList = [self getCampaignListWithTimeout:timeout WithCallback:completionBlock failure:failureBlock];
+    _campaignList = [self getCampaignListWithTimeout:timeout withCallback:completionBlock failure:failureBlock];
     for (VWOCampaign *campaign in _campaignList) {
         VWOLogInfo(@"Got Campaigns %@ with variation %@", campaign, campaign.variation);
     }
@@ -111,11 +109,11 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 /**
  Fetch campaigns from network
  If campaigns not available the returns campaigns from cache
-
+ @note completionblock and failureblocks are invoked only in this method
  @return Array of campaigns. nil if network returns 400. nil if campaign list not available on network and cache
  */
 - (nullable NSArray<VWOCampaign *> *)getCampaignListWithTimeout:(NSNumber *)timeout
-                                          WithCallback:(void(^)(void))completionBlock
+                                          withCallback:(void(^)(void))completionBlock
                                                failure:(void(^)(NSString *error))failureBlock {
     VWOLogInfo(@"getCampaignListWithTimeout");
     NSString *errorString;
@@ -128,6 +126,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     if (jsonArray == nil) jsonArray = [NSArray arrayWithContentsOfURL:VWOFile.campaignCache];
     if (jsonArray == nil) {
         VWOLogWarning(@"No campaigns available. No cache available");
+        if (failureBlock) failureBlock(errorString);
         return nil;
     }
     NSArray<VWOCampaign *> *allCampaigns = [self campaignsFromJSON:jsonArray];
@@ -149,7 +148,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
         return;
     }
 
-        //Check if the goal is already marked
+        //Check if the goal is already marked.
     for (VWOCampaign *campaign in _campaignList) {
         VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
         if (matchedGoal) {
@@ -160,7 +159,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
         }
     }
 
-        // Mark goal(One goal can be present in multiple campaigns
+        // Mark goal(Goal can be present in multiple campaigns
     for (VWOCampaign *campaign in _campaignList) {
         if ([_config isTrackingUserForCampaign:campaign]) {
             VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
@@ -192,7 +191,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
             //If variation Key is present in Campaign
         if (variation) {
             finalVariation = variation;
-            [self trackUserForCampaign:campaign];
+            if (campaign.trackUserOnLaunch == false) [self trackUserForCampaign:campaign];
         }
     }
     if (finalVariation == [NSNull null]) {
@@ -240,10 +239,6 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     [NSNotificationCenter.defaultCenter postNotificationName:VWOUserStartedTrackingInCampaignNotification object:nil userInfo:campaignInfo];
 }
 
-/**
- Creates and Array of VWOCampaign from campaign json array.
-
- */
 - (NSArray <VWOCampaign *> *) campaignsFromJSON:(NSArray<NSDictionary *> *)jsonArray {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (NSDictionary *campaignDict in jsonArray) {
@@ -253,9 +248,6 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     return newCampaignList;
 }
 
-/**
- Evaluate all the campaigns using Segmentation
- */
 - (NSArray <VWOCampaign *> *)segmentEvaluated:(NSArray <VWOCampaign *> *)allCampaigns {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (VWOCampaign *aCampaign in allCampaigns) {
@@ -268,10 +260,6 @@ static NSTimeInterval const defaultReqTimeout    = 60;
     return newCampaignList;
 }
 
-/**
- Tracks all the campaigns that have `trackUserOnLaunch` enabled
- Call this in launch method
- */
 - (void)trackUserForAllCampaignsOnLaunch:(NSArray<VWOCampaign *> *) allCampaigns {
     VWOLogInfo(@"trackUserForAllCampaignsOnLaunch");
     for (VWOCampaign *aCampaign in allCampaigns) {
@@ -287,7 +275,7 @@ static NSTimeInterval const defaultReqTimeout    = 60;
 - (nullable NSArray *)getCampaignsFromNetworkWithTimeout:(NSNumber *)timeout onFailure:(NSString **)errorString {
     NSURL *url = [VWOURL forFetchingCampaignsConfig:_config];
     VWOLogDebug(@"fetchCampaigns URL(%@)", url.absoluteString);
-    NSTimeInterval timeOutInterval = (timeout == nil) ? defaultReqTimeout : timeout.doubleValue;
+    NSTimeInterval timeOutInterval = (timeout == nil) ? defaultFetchCampaignsTimeout : timeout.doubleValue;
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeOutInterval];
 
     NSError *error = nil;
