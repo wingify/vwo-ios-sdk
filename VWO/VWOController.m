@@ -123,12 +123,21 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
         if (failureBlock) failureBlock(errorString);
         return nil;
     }
-    if (jsonArray == nil) jsonArray = [NSArray arrayWithContentsOfURL:VWOFile.campaignCache];
+
+    // If response is nil load contents from file, else write the response to file
     if (jsonArray == nil) {
-        VWOLogWarning(@"No campaigns available. No cache available");
-        if (failureBlock) failureBlock(errorString);
-        return nil;
+        jsonArray = [NSArray arrayWithContentsOfURL:VWOFile.campaignCache];
+        if (jsonArray == nil) {
+            VWOLogWarning(@"No campaigns available. No cache available");
+            if (failureBlock) failureBlock(errorString);
+            return nil;
+        }
+        VWOLogInfo(@"Loading from Cache");
+    } else {
+        [jsonArray writeToURL:VWOFile.campaignCache atomically:true];
+        VWOLogDebug(@"Updated cache");
     }
+
     NSArray<VWOCampaign *> *allCampaigns = [self campaignsFromJSON:jsonArray];
     NSArray<VWOCampaign *> *evaluatedCampaigns = [self segmentEvaluated:allCampaigns];
     if (completionBlock) completionBlock();
@@ -281,6 +290,8 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     NSError *error = nil;
     NSURLResponse *response = nil;
     NSData *data = [NSURLSession.sharedSession sendSynchronousDataTaskWithRequest:request returningResponse:&response error:&error];
+
+    if (data == nil) return nil;
 
     NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
     if(statusCode >= 400 && statusCode <= 499) {
