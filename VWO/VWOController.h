@@ -15,6 +15,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static NSString *kSDKversion = @"2.0.0-beta9";
+
 @interface VWOController : NSObject
 
 /// All the operations in controller are expected to happen on this queue

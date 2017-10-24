@@ -26,7 +26,6 @@ static NSTimeInterval kMessageQueueFlushInterval = 5;
 static NSTimeInterval kMessageQueueFlushInterval = 20;
 #endif
 static NSTimeInterval const defaultReqTimeout    = 60;
-static NSString *kSDKversion                     = @"2.0.0-beta9";
 
 @interface VWOController()
 
