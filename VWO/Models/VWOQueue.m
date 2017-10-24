@@ -18,6 +18,10 @@
 
 @implementation VWOQueue
 
++ (instancetype)queueWithFileURL:(NSURL *)fileURL {
+    return [[self alloc] initWithFileURL:fileURL];
+}
+
 - (instancetype)initWithFileURL:(NSURL *)fileURL {
     self = [self init];
     if (self) {

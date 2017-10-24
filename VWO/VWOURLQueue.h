@@ -11,13 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface VWOURLQueue : NSObject
-
 + (instancetype)queueWithFileURL:(NSURL *)fileURL;
-
 - (void)enqueue:(NSURL *)url retryCount:(int)retryCount;
-
 - (void)flushSendAll:(BOOL)sendAll;
-
 @end
 
 NS_ASSUME_NONNULL_END

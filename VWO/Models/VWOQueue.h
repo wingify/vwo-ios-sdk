@@ -15,9 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSUInteger count;
 @property (nullable, readonly) NSDictionary *peek;
 
-- (instancetype)initWithFileURL:(NSURL *)fileURL;
-
-/// Enqueue only these types as NSArry.writeToFile only works for these types
++ (instancetype)queueWithFileURL:(NSURL *)fileURL;
+// Enqueue only these types as NSArry.writeToFile only works for these types
 // NSString
 //NSData
 //NSDate

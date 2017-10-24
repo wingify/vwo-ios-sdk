@@ -28,7 +28,7 @@ static NSTimeInterval kMaxTotalRetryCount = 10;
 - (instancetype)initWithFileURL:(NSURL *)fileURL {
     self = [self init];
     if (self) {
-        self.queue = [[VWOQueue alloc] initWithFileURL:fileURL];
+        self.queue = [VWOQueue queueWithFileURL:fileURL];
     }
     return self;
 }
