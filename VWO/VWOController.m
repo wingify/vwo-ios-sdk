@@ -11,7 +11,6 @@
 #import "VWOLogger.h"
 #import "VWOSegmentEvaluator.h"
 #import "VWOCampaign.h"
-#import <UIKit/UIKit.h>
 #import "VWOURLQueue.h"
 #import "VWOFile.h"
 #import "NSURLSession+Synchronous.h"
