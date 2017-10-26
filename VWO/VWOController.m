@@ -116,26 +116,29 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
                                                failure:(void(^)(NSString *error))failureBlock {
     VWOLogInfo(@"getCampaignListWithTimeout");
     NSString *errorString;
-    NSArray<NSDictionary *> *jsonArray = [self getCampaignsFromNetworkWithTimeout:timeout onFailure:&errorString];
+    NSData *data = [self getCampaignsFromNetworkWithTimeout:timeout onFailure:&errorString];
+
     if (errorString != nil) {
         VWOLogError(errorString);
         if (failureBlock) failureBlock(errorString);
         return nil;
     }
 
-    // If response is nil load contents from file, else write the response to file
-    if (jsonArray == nil) {
-        jsonArray = [NSArray arrayWithContentsOfURL:VWOFile.campaignCache];
-        if (jsonArray == nil) {
+    if (data == nil) {
+        data = [NSData dataWithContentsOfURL:VWOFile.campaignCache];
+        if (data == nil) {
             VWOLogWarning(@"No campaigns available. No cache available");
             if (failureBlock) failureBlock(errorString);
             return nil;
         }
         VWOLogInfo(@"Loading from Cache");
     } else {
-        [jsonArray writeToURL:VWOFile.campaignCache atomically:true];
-        VWOLogDebug(@"Updated cache");
+        BOOL isIt = [data writeToURL:VWOFile.campaignCache atomically:YES];
+        VWOLogDebug(@"Updated cache %@", isIt ? @"success" : @"failed");
     }
+
+    NSError *jsonerror;
+    NSArray<NSDictionary *> *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror];
 
     NSArray<VWOCampaign *> *allCampaigns = [self campaignsFromJSON:jsonArray];
     NSArray<VWOCampaign *> *evaluatedCampaigns = [self segmentEvaluated:allCampaigns];
@@ -280,7 +283,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     }
 }
 
-- (nullable NSArray *)getCampaignsFromNetworkWithTimeout:(NSNumber *)timeout onFailure:(NSString **)errorString {
+- (nullable NSData *)getCampaignsFromNetworkWithTimeout:(NSNumber *)timeout onFailure:(NSString **)errorString {
     NSURL *url = [VWOURL forFetchingCampaignsConfig:_config];
     VWOLogDebug(@"fetchCampaigns URL(%@)", url.absoluteString);
     NSTimeInterval timeOutInterval = (timeout == nil) ? defaultFetchCampaignsTimeout : timeout.doubleValue;
@@ -300,11 +303,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
         return nil;
     }
     if (statusCode >= 500 && statusCode <=599) return nil;
-
-    NSError *jsonerror;
-    NSArray *responseArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror];
-    if (jsonerror != nil) return nil;
-    return responseArray;
+    return data;
 }
 
 /**
