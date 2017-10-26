@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         createSlideViewController()
         VWO.logLevel = .debug
         if let apiKey = UserDefaults.standard.string(forKey: keyVWOApiKey) {
+            UserDefaults.standard.set(apiKey, forKey: keyVWOApiKey)
             launchVWO(apiKey)
         }
 
