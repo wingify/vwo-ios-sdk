@@ -77,15 +77,15 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
     [self setObject:trackingDict forKey:kTracking];
 }
 
-- (void)markGoalConversion:(VWOGoal *)goal {
+- (void)markGoalConversion:(VWOGoal *)goal inCampaign:(VWOCampaign *)campaign {
     NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)[self objectForKey:kGoalsMarked]];
-    [set addObject:[NSNumber numberWithInt:goal.iD]];
+    [set addObject:[NSString stringWithFormat:@"%d:%d", campaign.iD, goal.iD]];
     [self setObject:set.allObjects forKey:kGoalsMarked];
 }
 
-- (BOOL)isGoalMarked:(VWOGoal *)goal {
+- (BOOL)isGoalMarked:(VWOGoal *)goal inCampaign:(VWOCampaign *)campaign {
     NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)[self objectForKey:kGoalsMarked]];
-    return [set containsObject:[NSNumber numberWithInt:goal.iD]];
+    return [set containsObject:[NSString stringWithFormat:@"%d:%d", campaign.iD, goal.iD]];
 }
 
 - (NSDictionary *)campaignVariationPairs {

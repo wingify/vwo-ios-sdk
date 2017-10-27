@@ -163,7 +163,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     for (VWOCampaign *campaign in _campaignList) {
         VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
         if (matchedGoal) {
-            if ([_config isGoalMarked:matchedGoal]) {
+            if ([_config isGoalMarked:matchedGoal inCampaign:campaign]) {
                 VWOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
                 return;
             }
@@ -175,7 +175,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
         if ([_config isTrackingUserForCampaign:campaign]) {
             VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
             if (matchedGoal) {
-                [_config markGoalConversion:matchedGoal];
+                [_config markGoalConversion:matchedGoal inCampaign:campaign];
                 NSURL *url = [VWOURL forMarkingGoal:matchedGoal withValue:value campaign:campaign dateTime:NSDate.date config:_config];
                 [pendingURLQueue enqueue:url retryCount:0];
             }

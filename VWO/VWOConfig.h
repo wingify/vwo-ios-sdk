@@ -30,8 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isTrackingUserForCampaign:(VWOCampaign *)campaign;
 - (void)trackUserForCampaign:(VWOCampaign *)campaign;
 
-- (void)markGoalConversion:(VWOGoal *)goal;
-- (BOOL)isGoalMarked:(VWOGoal *)goal;
+- (void)markGoalConversion:(VWOGoal *)goal inCampaign:(VWOCampaign *)campaign;
+- (BOOL)isGoalMarked:(VWOGoal *)goal inCampaign:(VWOCampaign *)campaign;
 
 @end
 
