@@ -177,7 +177,8 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
             if (matchedGoal) {
                 [_config markGoalConversion:matchedGoal inCampaign:campaign];
                 NSURL *url = [VWOURL forMarkingGoal:matchedGoal withValue:value campaign:campaign dateTime:NSDate.date config:_config];
-                [pendingURLQueue enqueue:url retryCount:0];
+                NSString *description = [NSString stringWithFormat:@"Goal %@", matchedGoal];
+                [pendingURLQueue enqueue:url retryCount:0 description:description];
             }
         }
     }
@@ -327,7 +328,8 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
     //Send network request and notification only if the campaign is running
     NSURL *url = [VWOURL forMakingUserPartOfCampaign:campaign config:_config dateTime:NSDate.date];
-    [pendingURLQueue enqueue:url retryCount:0];
+    NSString *description = [NSString stringWithFormat:@"Track user %@ %@", campaign, campaign.variation];
+    [pendingURLQueue enqueue:url retryCount:0 description:description];
 
     [self sendNotificationUserStartedTracking:campaign];
 }
