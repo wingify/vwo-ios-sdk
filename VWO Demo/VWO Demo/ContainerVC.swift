@@ -66,7 +66,7 @@ class ContainerVC: UIViewController {
         addVC(side: .left, vc: LoginVC.makeViewFor(type: .email))
 
         // Right
-        let variation = VWO.variationFor(key: "login", defaultValue: "email") as! String
+        let variation = (VWO.variationFor(key: "login") as? String) ?? "email"
         let variationType = LoginType(rawValue: variation) ?? .email
         navController.variationLabel.text = "(\(variationType.navDecription))"
         addVC(side: .right, vc: LoginVC.makeViewFor(type: variationType))
@@ -80,7 +80,7 @@ class ContainerVC: UIViewController {
         addVC(side: .left, vc: ListGridVC.makeViewFor(type: .list))
 
         // Right
-        let variation = VWO.variationFor(key: "layout", defaultValue: "list") as! String
+        let variation = (VWO.variationFor(key: "layout") as? String) ?? "list"
         let variationListType = ListType(rawValue: variation) ?? .list
         navController.variationLabel.text = "(\(variationListType.navDecription))"
         addVC(side: .right, vc: ListGridVC.makeViewFor(type: variationListType))
