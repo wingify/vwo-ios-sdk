@@ -120,7 +120,11 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
     if (errorString != nil) {
         VWOLogError(errorString);
-        if (failureBlock) failureBlock(errorString);
+        if (failureBlock) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                failureBlock(errorString);
+            });
+        }
         return nil;
     }
 
@@ -128,7 +132,11 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
         data = [NSData dataWithContentsOfURL:VWOFile.campaignCache];
         if (data == nil) {
             VWOLogWarning(@"No campaigns available. No cache available");
-            if (failureBlock) failureBlock(errorString);
+            if (failureBlock) {
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    failureBlock(errorString);
+                });
+            }
             return nil;
         }
         VWOLogInfo(@"Loading from Cache");
@@ -139,10 +147,15 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
     NSError *jsonerror;
     NSArray<NSDictionary *> *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror];
+    VWOLogDebug(@"%@", jsonArray);
 
     NSArray<VWOCampaign *> *allCampaigns = [self campaignsFromJSON:jsonArray];
     NSArray<VWOCampaign *> *evaluatedCampaigns = [self segmentEvaluated:allCampaigns];
-    if (completionBlock) completionBlock();
+    if (completionBlock) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            completionBlock();
+        });
+    }
     return  evaluatedCampaigns;
 }
 
