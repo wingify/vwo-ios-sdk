@@ -20,7 +20,11 @@
 	<string>1</string>
 	<key>NSPrincipalClass</key>
 	<string></string>
-	<key>name</key>
-	<string>Kaunteya123</string>
+	<key>vwoScheme</key>
+	<string>https</string>
+	<key>vwoHost</key>
+	<string>dacdn.visualwebsiteoptimizer.com</string>
+	<key>vwoQueueFlushTime</key>
+	<integer>20</integer>
 </dict>
 </plist>

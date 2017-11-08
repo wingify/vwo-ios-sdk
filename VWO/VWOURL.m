@@ -13,7 +13,8 @@
 #import "VWOConfig.h"
 #import "VWO.h"
 
-static NSString *const kScheme = @"https";
+//static NSString *const kScheme = @"https";
+static NSString *const kScheme = @"http";
 static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 
 @implementation NSDictionary (NSURLQueryItem)
