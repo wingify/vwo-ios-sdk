@@ -16,16 +16,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly) NSString *accountID;
 @property (readonly) NSString *appKey;
-@property (readonly) NSString *sdkVersion;
 
 @property (readonly) NSDictionary *campaignVariationPairs;
 @property (assign) NSUInteger sessionCount;
 @property (assign, getter=isReturningUser) BOOL returningUser;
 @property (readonly) NSString *UUID;
 
-- (instancetype)initWithAccountID:(NSString *)accountID
-                           appKey:(NSString *)appKey
-                       sdkVersion:(NSString *)sdkVersion;
+
++ (instancetype)configWithAPIKey:(NSString *)apiKey;
 
 - (BOOL)isTrackingUserForCampaign:(VWOCampaign *)campaign;
 - (void)trackUserForCampaign:(VWOCampaign *)campaign;

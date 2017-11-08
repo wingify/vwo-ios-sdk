@@ -57,9 +57,6 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
             withCallback:(void(^)(void))completionBlock
                  failure:(void(^)(NSString *error))failureBlock {
 
-    NSAssert([apiKey componentsSeparatedByString:@"-"].count == 2, @"Invalid key");
-    NSAssert([apiKey componentsSeparatedByString:@"-"].firstObject.length == 32, @"Invalid key");
-
     if (_initialised) {
         VWOLogWarning(@"VWO must not be initialised more than once");
         return;
@@ -71,9 +68,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
         VWOLogInfo(@"Initializing VWO");
     #endif
 
-    NSArray<NSString *> *splitKey = [apiKey componentsSeparatedByString:@"-"];
-    _config = [[VWOConfig alloc] initWithAccountID:splitKey[1] appKey:splitKey[0] sdkVersion:kSDKversion];
-
+    _config = [VWOConfig configWithAPIKey:apiKey];
     _config.sessionCount += 1;
     [self setupSentry];
 

@@ -11,6 +11,7 @@
 #import "VWOGoal.h"
 #import "VWODevice.h"
 #import "VWOConfig.h"
+#import "VWO.h"
 
 static NSString *const kScheme = @"https";
 static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
@@ -44,9 +45,9 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 
 + (NSDictionary *)extraParametersWithDate:(NSDate *)date config:(VWOConfig *)config {
     return @{@"lt" : [NSString stringWithFormat:@"%f", date.timeIntervalSince1970],
-             @"v"  : config.sdkVersion,
+             @"v"  : [[NSBundle bundleForClass:[VWO self]].infoDictionary[@"CFBundleVersion"] stringValue],
              @"i"  : config.appKey,
-             @"av" : NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"],//App version
+             @"av" : NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"],//App version //TODO: Handle for nil case
              @"dt" : VWODevice.deviceName,//Device Type
              @"os" : VWODevice.iOSVersion
              };
@@ -68,7 +69,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
       @"os"         : VWODevice.iOSVersion,
       @"r"          : [self randomNumber],
       @"u"          : config.UUID,
-      @"v"          : config.sdkVersion
+      @"v"          : [[NSBundle bundleForClass:[VWO self]].infoDictionary[@"CFBundleVersion"] stringValue]
       };
     components.queryItems = [paramDict toQueryItems];
     return components.URL;

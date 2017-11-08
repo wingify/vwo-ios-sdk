@@ -19,14 +19,19 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 
 @implementation VWOConfig
 
-- (instancetype)initWithAccountID:(NSString *)accountID
-                           appKey:(NSString *)appKey
-                       sdkVersion:(NSString *)sdkVersion {
++ (instancetype)configWithAPIKey:(NSString *)apiKey {
+    return [[self alloc] initWithAPIKey:apiKey];
+}
+
+- (instancetype)initWithAPIKey:(NSString *)apiKey {
+    NSAssert([apiKey componentsSeparatedByString:@"-"].count == 2, @"Invalid key");
+    NSAssert([apiKey componentsSeparatedByString:@"-"].firstObject.length == 32, @"Invalid key");
+
     if (self = [super init]) {
         [self setDefaultValues];
-        _accountID  = accountID;
-        _appKey     = appKey;
-        _sdkVersion = sdkVersion;
+        NSArray<NSString *> *splitKey = [apiKey componentsSeparatedByString:@"-"];
+        _appKey     = splitKey[0];
+        _accountID  = splitKey[1];
     }
     return self;
 }
