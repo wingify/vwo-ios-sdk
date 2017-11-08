@@ -21,9 +21,9 @@
 		E34D6BDE1F7E4D5E0094A905 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD51F7E4D5D0094A905 /* NavigationController.swift */; };
 		E34D6BDF1F7E4D5E0094A905 /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD61F7E4D5E0094A905 /* ContainerVC.swift */; };
 		E34D6BE01F7E4D5E0094A905 /* ListGridVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD71F7E4D5E0094A905 /* ListGridVC.swift */; };
+		E3D1C24C1FB301F100BBEAB9 /* VWO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D1C24B1FB301F100BBEAB9 /* VWO.framework */; };
+		E3D1C24D1FB301F100BBEAB9 /* VWO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3D1C24B1FB301F100BBEAB9 /* VWO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E3FFD9221F7E547B0025F6FD /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FFD9211F7E547B0025F6FD /* SlideMenuController.swift */; };
-		E3FFD9241F7E56210025F6FD /* VWO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3FFD9231F7E56210025F6FD /* VWO.framework */; };
-		E3FFD9251F7E56210025F6FD /* VWO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3FFD9231F7E56210025F6FD /* VWO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +43,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E3FFD9251F7E56210025F6FD /* VWO.framework in Embed Frameworks */,
+				E3D1C24D1FB301F100BBEAB9 /* VWO.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,8 +70,8 @@
 		E34D6BD61F7E4D5E0094A905 /* ContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
 		E34D6BD71F7E4D5E0094A905 /* ListGridVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGridVC.swift; sourceTree = "<group>"; };
 		E34D6BE21F7E512F0094A905 /* SlideMenuControllerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SlideMenuControllerSwift.framework; path = Carthage/Build/iOS/SlideMenuControllerSwift.framework; sourceTree = "<group>"; };
+		E3D1C24B1FB301F100BBEAB9 /* VWO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = VWO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3FFD9211F7E547B0025F6FD /* SlideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
-		E3FFD9231F7E56210025F6FD /* VWO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = VWO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3FFD9241F7E56210025F6FD /* VWO.framework in Frameworks */,
+				E3D1C24C1FB301F100BBEAB9 /* VWO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +96,7 @@
 		E34D6BA11F7E4BE40094A905 = {
 			isa = PBXGroup;
 			children = (
-				E3FFD9231F7E56210025F6FD /* VWO.framework */,
+				E3D1C24B1FB301F100BBEAB9 /* VWO.framework */,
 				E34D6BAC1F7E4BE40094A905 /* VWO Demo */,
 				E34D6BC11F7E4BE40094A905 /* VWO DemoTests */,
 				E34D6BAB1F7E4BE40094A905 /* Products */,
