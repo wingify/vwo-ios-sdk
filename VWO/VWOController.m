@@ -235,7 +235,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 - (void)setupSentry {
     VWOLogDebug(@"Sentry setup");
     NSDictionary *tags = @{@"VWO Account id" : _config.accountID,
-                           @"SDK Version" : _config.sdkVersion};
+                           @"SDK Version" : [NSBundle bundleForClass:[VWO self]].infoDictionary[@"CFBundleVersion"]};
 
     //CFBundleDisplayName & CFBundleIdentifier can be nil
     NSMutableDictionary *extras = [NSMutableDictionary new];

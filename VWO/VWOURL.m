@@ -13,10 +13,6 @@
 #import "VWOConfig.h"
 #import "VWO.h"
 
-//static NSString *const kScheme = @"https";
-static NSString *const kScheme = @"http";
-static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
-
 @implementation NSDictionary (NSURLQueryItem)
 - (nullable NSString *)toString {
     NSError *error;
@@ -38,6 +34,17 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 }
 @end
 
+@implementation NSURLComponents (VWO)
+    /// Creates URL component with scheme host and path. Eg: https://dacdn.visual.com/path
++(instancetype)vwoComponentForPath:(NSString *)path {
+    NSURLComponents *components = [NSURLComponents new];
+    [components setScheme:[NSBundle bundleForClass:VWO.self].infoDictionary[@"vwoScheme"]];
+    [components setHost:[NSBundle bundleForClass:VWO.self].infoDictionary[@"vwoHost"]];
+    [components setPath:path];
+    return components;
+}
+@end
+
 @implementation VWOURL
 
 + (NSString *) randomNumber {
@@ -46,7 +53,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 
 + (NSDictionary *)extraParametersWithDate:(NSDate *)date config:(VWOConfig *)config {
     return @{@"lt" : [NSString stringWithFormat:@"%f", date.timeIntervalSince1970],
-             @"v"  : [[NSBundle bundleForClass:[VWO self]].infoDictionary[@"CFBundleVersion"] stringValue],
+             @"v"  : [NSBundle bundleForClass:[VWO self]].infoDictionary[@"CFBundleVersion"],
              @"i"  : config.appKey,
              @"av" : NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"],//App version //TODO: Handle for nil case
              @"dt" : VWODevice.deviceName,//Device Type
@@ -57,10 +64,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 #pragma mark - Public Methods
 
 + (NSURL *)forFetchingCampaignsConfig:(VWOConfig *)config {
-    NSURLComponents *components = [NSURLComponents new];
-    [components setScheme:kScheme];
-    [components setHost:kHost];
-    [components setPath:@"/mobile"];
+    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile"];
     NSDictionary *paramDict =
     @{@"api-version": @"2",
       @"a"          : config.accountID,
@@ -70,7 +74,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
       @"os"         : VWODevice.iOSVersion,
       @"r"          : [self randomNumber],
       @"u"          : config.UUID,
-      @"v"          : [[NSBundle bundleForClass:[VWO self]].infoDictionary[@"CFBundleVersion"] stringValue]
+      @"v"          : [NSBundle bundleForClass:[VWO self]].infoDictionary[@"CFBundleVersion"]
       };
     components.queryItems = [paramDict toQueryItems];
     return components.URL;
@@ -79,11 +83,7 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
 + (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign
                                 config:(VWOConfig *)config
                               dateTime:(NSDate *)date {
-    NSURLComponents *components = [NSURLComponents new];
-    [components setScheme:kScheme];
-    [components setHost:kHost];
-    [components setPath:@"/track-user"];
-
+    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-user"];
     NSDictionary *paramDict =
     @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
       @"account_id"   : config.accountID,
@@ -102,31 +102,22 @@ static NSString *const kHost = @"dacdn.visualwebsiteoptimizer.com";
                  campaign:(VWOCampaign *)campaign
                  dateTime:(NSDate *)date
                    config:(VWOConfig *)config {
-    NSURLComponents *components = [NSURLComponents new];
-    [components setScheme:kScheme];
-    [components setHost:kHost];
-    [components setPath:@"/track-goal"];
-
-    NSDictionary *paramDict =
-    @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
-      @"account_id"   : config.accountID,
-      @"combination"  : [NSString stringWithFormat:@"%d", campaign.variation.iD],
-      @"u"            : config.UUID,
-      @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)config.sessionCount],
-      @"random"       : [self randomNumber],
-      @"ed"           : [self extraParametersWithDate:date config:config].toString,
-      @"goal_id"      : [NSString stringWithFormat:@"%d", goal.iD],
-      };
-    components.queryItems = [paramDict toQueryItems];
+    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-goal"];
+    NSMutableDictionary <NSString *, NSString *> *paramDict = [NSMutableDictionary new];
+    paramDict[@"experiment_id"] = [NSString stringWithFormat:@"%d", campaign.iD];
+    paramDict[@"account_id"]    = config.accountID;
+    paramDict[@"combination"]   = [NSString stringWithFormat:@"%d", campaign.variation.iD];
+    paramDict[@"u"]             = config.UUID;
+    paramDict[@"s"]             = [NSString stringWithFormat:@"%lu", (unsigned long)config.sessionCount];
+    paramDict[@"random"]        = [self randomNumber];
+    paramDict[@"ed"]            = [self extraParametersWithDate:date config:config].toString;
+    paramDict[@"goal_id"]       = [NSString stringWithFormat:@"%d", goal.iD];
 
     if (goalValue != nil) {
-        NSMutableArray<NSURLQueryItem *> *queryItems = [components.queryItems mutableCopy];
-        [queryItems addObject:[NSURLQueryItem queryItemWithName:@"r" value: [NSString stringWithFormat:@"%@", goalValue]]];
-        components.queryItems = queryItems;
+        paramDict[@"r"] = [NSString stringWithFormat:@"%@", goalValue];
     }
-
+    components.queryItems = [paramDict toQueryItems];
     return components.URL;
 }
 
 @end
-
