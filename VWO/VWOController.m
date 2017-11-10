@@ -85,9 +85,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
     // Start timer. (Timer can be scheduled only on Main Thread)
     dispatch_async(dispatch_get_main_queue(), ^{
-        messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:kMessageQueueFlushInterval repeats:YES block:^(NSTimer * _Nonnull timer) {
-            [pendingURLQueue flushSendAll:false];
-        }];
+        messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:kMessageQueueFlushInterval target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
     });
 
     _campaignList = [self getCampaignListWithTimeout:timeout withCallback:completionBlock failure:failureBlock];
@@ -99,6 +97,9 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     [self trackUserForAllCampaignsOnLaunch:_campaignList];
 }
 
+- (void) timerAction {
+    [pendingURLQueue flushSendAll:false];
+}
 
 /**
  Fetch campaigns from network
