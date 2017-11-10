@@ -72,7 +72,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     _config.sessionCount += 1;
     [self setupSentry];
 
-    if (VWODevice.isAttachedToDebugger) {
+    if (VWODevice.isAttachedToDebugger || [NSUserDefaults.standardUserDefaults objectForKey:@"vwo.enableSocket"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
                 //UIWebKit is used. Hence dispatched on main Queue
             [VWOSocketClient.shared launchAppKey:_config.appKey];
