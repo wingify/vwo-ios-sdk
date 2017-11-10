@@ -93,8 +93,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 }
 
 + (NSString *)version {
-    NSString *version = [NSBundle bundleForClass:[VWO self]].infoDictionary[@"CFBundleShortVersionString"];
-    return version;
+    return kSDKversion;
 }
 
 @end

@@ -15,16 +15,10 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.0-beta10</string>
+    <string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+    <string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSPrincipalClass</key>
 	<string></string>
-	<key>vwoScheme</key>
-	<string>https</string>
-	<key>vwoHost</key>
-	<string>dacdn.visualwebsiteoptimizer.com</string>
-	<key>vwoQueueFlushTime</key>
-	<integer>20</integer>
 </dict>
 </plist>

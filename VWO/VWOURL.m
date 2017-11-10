@@ -36,14 +36,16 @@
 
 @implementation NSURLComponents (VWO)
     /// Creates URL component with scheme host and path. Eg: https://dacdn.visual.com/path
-+(instancetype)vwoComponentForPath:(NSString *)path {
++ (instancetype)vwoComponentForPath:(NSString *)path {
     NSURLComponents *components = [NSURLComponents new];
-    [components setScheme:[NSBundle bundleForClass:VWO.self].infoDictionary[@"vwoScheme"]];
-    [components setHost:[NSBundle bundleForClass:VWO.self].infoDictionary[@"vwoHost"]];
+    [components setScheme:@"https"];
+    [components setHost:@"dacdn.visualwebsiteoptimizer.com"];
     [components setPath:path];
     return components;
 }
 @end
+
+static NSString *kSDKversionNumber = @"1";
 
 @implementation VWOURL
 
@@ -53,7 +55,7 @@
 
 + (NSDictionary *)extraParametersWithDate:(NSDate *)date config:(VWOConfig *)config {
     return @{@"lt" : [NSString stringWithFormat:@"%f", date.timeIntervalSince1970],
-             @"v"  : [NSBundle bundleForClass:[VWO self]].infoDictionary[@"CFBundleVersion"],
+             @"v"  : kSDKversionNumber,
              @"i"  : config.appKey,
              @"av" : NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"],//App version //TODO: Handle for nil case
              @"dt" : VWODevice.deviceName,//Device Type
@@ -74,7 +76,7 @@
       @"os"         : VWODevice.iOSVersion,
       @"r"          : [self randomNumber],
       @"u"          : config.UUID,
-      @"v"          : [NSBundle bundleForClass:[VWO self]].infoDictionary[@"CFBundleVersion"]
+      @"v"          : kSDKversionNumber
       };
     components.queryItems = [paramDict toQueryItems];
     return components.URL;
