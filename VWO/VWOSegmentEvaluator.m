@@ -10,6 +10,7 @@
 #import "VWODevice.h"
 #import "VWOLogger.h"
 #import "VWOConfig.h"
+#import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeCustomVariable = 7,
@@ -59,6 +60,24 @@ static NSString * kReturningVisitor = @"returning_visitor";
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *dateComponents = [gregorian components:NSCalendarUnitHour fromDate:NSDate.date];
     return dateComponents.hour;
+}
+@end
+
+@implementation NSString(Version)
+//Converts version in X.y format
+- (NSString *)toXDotY {
+    NSArray *currentArray = [self componentsSeparatedByString:@"."];
+    NSMutableString *formattedVersion = [NSMutableString new];
+    if (currentArray.firstObject) {
+        [formattedVersion appendString:currentArray.firstObject];
+    }
+    if (currentArray.count > 1) {
+        [formattedVersion appendString:@"."];
+        [formattedVersion appendString:currentArray[1]];
+    } else {
+        [formattedVersion appendString:@".0"];
+    }
+    return formattedVersion;
 }
 @end
 
@@ -169,7 +188,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
     switch (segmentType) {
         case SegmentationTypeiOSVersion: {
-            NSString *version = [VWODevice iOSVersionMinor:YES patch:NO];
+            NSString *version = [UIDevice.currentDevice.systemVersion toXDotY];
             NSString *targetVersion = operand.firstObject;
             NSComparisonResult result = [version compare:targetVersion options:NSNumericSearch];
             switch (operator) {

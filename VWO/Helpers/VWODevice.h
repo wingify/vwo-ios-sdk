@@ -22,8 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// iPhone 6,2
 @property (class, readonly, nonatomic) NSString *deviceName;
 
-+ (NSString *)iOSVersionMinor:(BOOL) minor patch:(BOOL)patch;
-
 @end
 
 NS_ASSUME_NONNULL_END

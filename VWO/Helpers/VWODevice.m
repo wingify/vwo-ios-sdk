@@ -62,28 +62,4 @@
     return UIDevice.currentDevice.systemVersion;
 }
 
-/**
- Current Version 10.3.2
- YES YES returns 10.3.2
- YES NO returns 10.3
- NO NO returns 10
- */
-+ (NSString *)iOSVersionMinor:(BOOL) minor patch:(BOOL)patch {
-    NSAssert((patch && !minor) == false, @"Patch without minor not allowed");
-    NSArray *currentArray = [UIDevice.currentDevice.systemVersion componentsSeparatedByString:@"."];
-    NSMutableString *formattedVersion = [NSMutableString new];
-    if (currentArray.firstObject) {
-        [formattedVersion appendString:currentArray.firstObject];
-        if (minor && currentArray.count > 1) {
-            [formattedVersion appendString:@"."];
-            [formattedVersion appendString:currentArray[1]];
-            if (patch && currentArray.count > 2) {
-                [formattedVersion appendString:@"."];
-                [formattedVersion appendString:currentArray[2]];
-            }
-        }
-    }
-    return formattedVersion;
-}
-
 @end
