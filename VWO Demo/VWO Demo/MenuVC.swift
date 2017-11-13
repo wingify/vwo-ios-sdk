@@ -76,7 +76,7 @@ class MenuVC : UIViewController {
         guard keyAnduserId.count == 2 else {
             return false
         }
-        guard keyAnduserId.first?.characters.count == 32 else {
+        guard keyAnduserId.first?.count == 32 else {
             return false
         }
         guard Int(keyAnduserId[1]) != nil else {
