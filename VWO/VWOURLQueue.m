@@ -11,10 +11,9 @@
 #import "NSURLSession+Synchronous.h"
 #import "VWOLogger.h"
 
-static NSString *const kURL               = @"url";
-static NSString *const kRetryCount        = @"retry";
-static NSString *const kDescription        = @"desc";
-static NSTimeInterval kMaxTotalRetryCount = 10;
+static NSString *const kURL         = @"url";
+static NSString *const kRetryCount  = @"retry";
+static NSString *const kDescription = @"desc";
 
 @interface VWOURLQueue ()
 @property (nonatomic) VWOQueue *queue;
@@ -42,10 +41,8 @@ static NSTimeInterval kMaxTotalRetryCount = 10;
 /**
  Flush all the URLS present in the Queue.
  Internally its been dispatched on low priority background thread
-
- @param sendAll If set will try to hit all the URLS irrespective of the error
  */
-- (void)flushSendAll:(BOOL)sendAll {
+- (void)flush {
     if (_isFlushing) return;
     _isFlushing = true;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -63,23 +60,23 @@ static NSTimeInterval kMaxTotalRetryCount = 10;
             [NSURLSession.sharedSession sendSynchronousDataTaskWithURL:[NSURL URLWithString:url] returningResponse:&response error:&error];
 
                 //If No internet connection break; No need to process other messages in queue
-            if (error != nil) {
-                VWOLogError(error.localizedDescription);
-                if (sendAll == false) {
-                    _isFlushing = false;
-                    break;
-                }
+            if (error.code == NSURLErrorNotConnectedToInternet) {
+                VWOLogWarning(@"No internet connection. Flush aborted");
+                _isFlushing = false;
+                break;
             }
-
                 // Failure is confirmed only when status is not 200
             NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
             int retryCount = [peekObject[kRetryCount] intValue];
-            if (statusCode == 200 || retryCount > kMaxTotalRetryCount){
+            if (statusCode == 200){
                 VWOLogInfo(@"Successfully sent message %d", statusCode);
                 [_queue dequeue];
+            } else if (retryCount <= 0) {
+                VWOLogInfo(@"Retry count exhausted %@", url);
+                [_queue dequeue];
             } else {
-                peekObject[kRetryCount] = @(retryCount + 1);
-                VWOLogDebug(@"Re inserting message with retry count %@", peekObject[kRetryCount]);
+                peekObject[kRetryCount] = @(retryCount - 1);
+                VWOLogDebug(@"Re inserting %@ with retry count %@",url, peekObject[kRetryCount]);
                 [_queue dequeue];
                 [_queue enqueue:peekObject];
             }

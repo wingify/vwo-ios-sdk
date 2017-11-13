@@ -81,7 +81,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
     // Initialise the queue and flush the persistance URLs
     pendingURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.messageQueue];
-    [pendingURLQueue flushSendAll:true];
+    [pendingURLQueue flush];
 
     // Start timer. (Timer can be scheduled only on Main Thread)
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -98,7 +98,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 }
 
 - (void) timerAction {
-    [pendingURLQueue flushSendAll:false];
+    [pendingURLQueue flush];
 }
 
 /**
@@ -188,7 +188,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
                 [_config markGoalConversion:matchedGoal inCampaign:campaign];
                 NSURL *url = [VWOURL forMarkingGoal:matchedGoal withValue:value campaign:campaign dateTime:NSDate.date config:_config];
                 NSString *description = [NSString stringWithFormat:@"Goal %@", matchedGoal];
-                [pendingURLQueue enqueue:url retryCount:0 description:description];
+                [pendingURLQueue enqueue:url retryCount:10 description:description];
             } else {
                 VWOLogWarning(@"Goal %@ not tracked for %@ as user is not tracked", matchedGoal, campaign);
             }
@@ -344,7 +344,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     //Send network request and notification only if the campaign is running
     NSURL *url = [VWOURL forMakingUserPartOfCampaign:campaign config:_config dateTime:NSDate.date];
     NSString *description = [NSString stringWithFormat:@"Track user %@ %@", campaign, campaign.variation];
-    [pendingURLQueue enqueue:url retryCount:0 description:description];
+    [pendingURLQueue enqueue:url retryCount:10 description:description];
 
     [self sendNotificationUserStartedTracking:campaign];
 }
