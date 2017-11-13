@@ -160,13 +160,14 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
         VWOLogError(@"VWO must be launched first!");
         return;
     }
-    VWOLogDebug(@"Controller markConversionForGoal");
 
     if (VWOSocketClient.shared.isEnabled) {
         VWOLogDebug(@"Marking goal on socket");
         [VWOSocketClient.shared goalTriggered:goalIdentifier withValue:value];
         return;
     }
+
+    VWOLogDebug(@"Controller markConversionForGoal %@", goalIdentifier);
 
         //Check if the goal is already marked.
     for (VWOCampaign *campaign in _campaignList) {
@@ -181,13 +182,15 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
         // Mark goal(Goal can be present in multiple campaigns
     for (VWOCampaign *campaign in _campaignList) {
-        if ([_config isTrackingUserForCampaign:campaign]) {
-            VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
-            if (matchedGoal) {
+        VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
+        if (matchedGoal) {
+            if ([_config isTrackingUserForCampaign:campaign]) {
                 [_config markGoalConversion:matchedGoal inCampaign:campaign];
                 NSURL *url = [VWOURL forMarkingGoal:matchedGoal withValue:value campaign:campaign dateTime:NSDate.date config:_config];
                 NSString *description = [NSString stringWithFormat:@"Goal %@", matchedGoal];
                 [pendingURLQueue enqueue:url retryCount:0 description:description];
+            } else {
+                VWOLogWarning(@"Goal %@ not tracked for %@ as user is not tracked", matchedGoal, campaign);
             }
         }
     }
@@ -200,8 +203,10 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     }
     if (VWOSocketClient.shared.isEnabled) {
         if(key && _previewInfo != nil) {
+            VWOLogInfo(@"Socket: got variation %@ for key %@", _previewInfo[key], key);
             return _previewInfo[key];
         }
+        VWOLogInfo(@"Socket: got variation nil for key %@", key);
         return nil;
     }
 
@@ -219,6 +224,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
         // finalVariation can be NSNull if Control is assigned to campaign
         return nil;
     }
+    VWOLogDebug(@"Got variation %@ for key %@", finalVariation, key);
     return finalVariation;
 }
 
