@@ -59,7 +59,7 @@
     };
     
     _socket.onError = ^(NSDictionary *error) {
-        VWOLogError(@"Socket: %@", error);
+        VWOLogError(@"Socket error");
     };
     
     [_socket on:@"browser_connect" callback:^(SIOParameterArray *arguments) {
