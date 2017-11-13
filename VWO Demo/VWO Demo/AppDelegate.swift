@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let container = slideVC.mainViewController as! ContainerVC
             container.activityIndicator.startAnimating()
             VWO.logLevel = .debug
+            UserDefaults.standard.set(true, forKey: "vwo.enableSocket")
             Swift.print("Launching VWO-\(VWO.version())")
             VWO.launch(apiKey: apiKey, completion: {
                 DispatchQueue.main.async {
