@@ -26,12 +26,16 @@ static NSTimeInterval kMessageQueueFlushInterval         = 20;
 #endif
 static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
-@interface VWOController()
+@interface VWOController() <VWOURLQueueDelegate>
 @property (atomic) NSArray<VWOCampaign *> *campaignList;
 @end
 
 @implementation VWOController {
     VWOURLQueue *pendingURLQueue;
+    
+    //URLS that are not successfully sent. Are loaded in failureQueue
+    //Failure queue is flushed only on app launch
+    VWOURLQueue *failedURLQueue;
     NSTimer *messageQueueFlushtimer;
     dispatch_queue_t _vwoQueue;
     BOOL _initialised;
@@ -81,7 +85,9 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
     // Initialise the queue and flush the persistance URLs
     pendingURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.messageQueue];
-    [pendingURLQueue flush];
+    pendingURLQueue.delegate = self;
+    failedURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.failedMessageQueue];
+    [failedURLQueue flush];
 
     // Start timer. (Timer can be scheduled only on Main Thread)
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -99,6 +105,13 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
 - (void) timerAction {
     [pendingURLQueue flush];
+}
+
+- (void)retryCountExhaustedPath:(NSURL *)path url:(NSURL *)url {
+    if ([pendingURLQueue.path isEqual:path]) {
+        VWOLogWarning(@"Adding %@ to FAILURE QUEUE", url);
+        [failedURLQueue enqueue:url retryCount:5 description:@""];
+    }
 }
 
 /**
@@ -138,7 +151,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
         VWOLogInfo(@"Loading from Cache");
     } else {
         BOOL isIt = [data writeToURL:VWOFile.campaignCache atomically:YES];
-        VWOLogDebug(@"Updated cache %@", isIt ? @"success" : @"failed");
+        VWOLogDebug(@"Cache updated: %@", isIt ? @"success" : @"failed");
     }
 
     NSError *jsonerror;

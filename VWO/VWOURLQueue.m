@@ -29,6 +29,7 @@ static NSString *const kDescription = @"desc";
 - (instancetype)initWithFileURL:(NSURL *)fileURL {
     self = [self init];
     if (self) {
+        self.path = fileURL;
         self.queue = [VWOQueue queueWithFileURL:fileURL];
     }
     return self;
@@ -53,11 +54,11 @@ static NSString *const kDescription = @"desc";
 
             NSMutableDictionary *peekObject = [_queue.peek mutableCopy];
 
-            NSString *url = peekObject[kURL];
+            NSURL *url =  [NSURL URLWithString:peekObject[kURL]];
             NSError *error = nil;
             NSURLResponse *response = nil;
             VWOLogDebug(@"Sending request %@", url);
-            [NSURLSession.sharedSession sendSynchronousDataTaskWithURL:[NSURL URLWithString:url] returningResponse:&response error:&error];
+            [NSURLSession.sharedSession sendSynchronousDataTaskWithURL:url returningResponse:&response error:&error];
 
                 //If No internet connection break; No need to process other messages in queue
             if (error.code == NSURLErrorNotConnectedToInternet) {
@@ -73,6 +74,7 @@ static NSString *const kDescription = @"desc";
                 [_queue dequeue];
             } else if (retryCount <= 0) {
                 VWOLogInfo(@"Retry count exhausted %@", url);
+                [self.delegate retryCountExhaustedPath:_path url:url];
                 [_queue dequeue];
             } else {
                 peekObject[kRetryCount] = @(retryCount - 1);

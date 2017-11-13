@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (class, readonly, copy) NSURL *campaignCache;
 @property (class, readonly, copy) NSURL *messageQueue;
+@property (class, readonly, copy) NSURL *failedMessageQueue;
 
 @end
 

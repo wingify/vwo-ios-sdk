@@ -26,7 +26,7 @@
     self = [self init];
     if (self) {
         self.fileURL = fileURL;
-        VWOLogDebug(@"QUEUE initialising");
+        VWOLogDebug(@"QUEUE initialising %@", fileURL.lastPathComponent);
         if (![NSFileManager.defaultManager fileExistsAtPath:fileURL.path]){
             [@[] writeToURL:fileURL atomically:true];
             VWOLogDebug(@"QUEUE File created : %@", fileURL);

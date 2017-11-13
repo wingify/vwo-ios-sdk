@@ -20,6 +20,15 @@
     return [path URLByAppendingPathComponent:@"VWOMessages.plist"];
 }
 
++ (NSURL *)failedMessageQueue {
+    NSError *error;
+    NSURL *path = [NSFileManager.defaultManager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
+    if (error != nil) {
+        VWOLogException(@"Unable to create file VWOMessagesfailed.plist");
+    }
+    return [path URLByAppendingPathComponent:@"VWOMessagesfailed.plist"];
+}
+
 + (NSURL *)campaignCache {
     NSError *error;
     NSURL *path = [NSFileManager.defaultManager URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
