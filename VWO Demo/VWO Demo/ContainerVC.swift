@@ -62,14 +62,16 @@ class ContainerVC: UIViewController {
         navController.titleLabel.text = "Onboarding Campaign"
 
         // Left
-        navController.controlLabel.text = "(\(LoginType.email.navDecription))"
-        addVC(side: .left, vc: LoginVC.makeViewFor(type: .email))
+        navController.controlLabel.text = "(Email)"
+        let leftLoginVC = LoginVC.makeView(hasSkip: false, hasSocialMedia: false)
+        addVC(side: .left, vc: leftLoginVC)
 
         // Right
-        let variation = (VWO.variationFor(key: "login") as? String) ?? "email"
-        let variationType = LoginType(rawValue: variation) ?? .email
-        navController.variationLabel.text = "(\(variationType.navDecription))"
-        addVC(side: .right, vc: LoginVC.makeViewFor(type: variationType))
+        let hasSkip: Bool = VWO.variationFor(key: "skip", defaultValue: false) as! Bool
+        let hasSocialMedia: Bool = VWO.variationFor(key: "socialMedia", defaultValue: false) as! Bool
+        navController.variationLabel.text = " (Email \(hasSkip ? ", Skip" : "")\(hasSocialMedia ? ", Social Media" : ""))"
+        let rightLoginVC = LoginVC.makeView(hasSkip: hasSkip, hasSocialMedia: hasSocialMedia)
+        addVC(side: .right, vc: rightLoginVC)
     }
 
     func showListGridView() {

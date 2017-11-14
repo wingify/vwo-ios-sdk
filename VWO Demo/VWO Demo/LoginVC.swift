@@ -9,45 +9,31 @@
 import UIKit
 import VWO
 
-enum LoginType: String {
-    case email, socialMedia, skip
-    var navDecription: String {
-        switch self {
-        case .email: return "Email"
-        case .socialMedia: return "Social Media"
-        case .skip: return "Skip"
-        }
-    }
-}
-
 class LoginVC: UIViewController {
-    var loginType: LoginType!
+    var hasSkip: Bool!, hasSocialMedia: Bool!
+
     var loginDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginDetail") as! LoginDetailVC
 
     @IBOutlet weak var mainStackViewField: UIStackView!
     @IBOutlet weak var socialMediaField: UIStackView!
     @IBOutlet weak var skipField: UIButton!
 
-    class func makeViewFor(type: LoginType) -> LoginVC {
+    class func makeView(hasSkip: Bool, hasSocialMedia: Bool) -> LoginVC {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "login") as! LoginVC
-        vc.loginType = type
+        vc.hasSkip = hasSkip
+        vc.hasSocialMedia = hasSocialMedia
         return vc
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        switch loginType! {
-        case .email:
+        if hasSocialMedia == false {
             mainStackViewField.removeArrangedSubview(socialMediaField)
             socialMediaField.removeFromSuperview()
+        }
+        if hasSkip == false {
             mainStackViewField.removeArrangedSubview(skipField)
             skipField.removeFromSuperview()
-        case .socialMedia:
-            mainStackViewField.removeArrangedSubview(skipField)
-            skipField.removeFromSuperview()
-        case .skip:
-            mainStackViewField.removeArrangedSubview(socialMediaField)
-            socialMediaField.removeFromSuperview()
         }
         self.view.addSubview(loginDetailVC.view)
         self.view.equalConstrains(subView: loginDetailVC.view)
