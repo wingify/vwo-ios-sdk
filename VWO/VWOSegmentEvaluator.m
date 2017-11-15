@@ -9,8 +9,6 @@
 #import "VWOSegmentEvaluator.h"
 #import "VWODevice.h"
 #import "VWOLogger.h"
-#import "VWOConfig.h"
-#import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeCustomVariable = 7,
@@ -48,17 +46,17 @@ static NSString * kSegmentCode      = @"segment_code";
 static NSString * kDevice           = @"device";
 static NSString * kReturningVisitor = @"returning_visitor";
 
-@implementation NSCalendar(VWO)
-+ (NSInteger)dayOfWeek {
+@implementation NSDate(VWO)
+- (NSInteger)dayOfWeek {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents *dateComponents = [gregorian components:NSCalendarUnitWeekday fromDate:NSDate.date];
+    NSDateComponents *dateComponents = [gregorian components:NSCalendarUnitWeekday fromDate:self];
     NSInteger weekday = dateComponents.weekday;
     return weekday - 1; // start from sunday = 0
 }
 
-+ (NSInteger)hourOfTheDay {
+- (NSInteger)hourOfTheDay {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents *dateComponents = [gregorian components:NSCalendarUnitHour fromDate:NSDate.date];
+    NSDateComponents *dateComponents = [gregorian components:NSCalendarUnitHour fromDate:self];
     return dateComponents.hour;
 }
 @end
@@ -83,32 +81,45 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
 @implementation VWOSegmentEvaluator
 
-- (instancetype)init {
+- (instancetype)initWithiOSVersion:(NSString *)iOSVersion
+                        appVersion:(NSString *)appVersion
+                              date:(NSDate *)date
+                       isReturning:(BOOL)isReturning
+                     appDeviceType:(VWOAppleDeviceType)deviceType
+                   customVariables:(NSDictionary *)customVariables {
+
     self = [super init];
     if (self) {
-        _customVariables = [NSMutableDictionary new];
+        self.iOSVersion = iOSVersion;
+        self.appVersion = appVersion;
+        self.date = date;
+        self.isReturning = isReturning;
+        self.appleDeviceType = deviceType;
+        self.customVariables = customVariables;
     }
     return self;
 }
 
-- (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment config:(VWOConfig *)config {
-    if (!segment) return YES;
+- (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment {
+    if (segment == nil) return YES;
     if ([segment[kType] isEqualToString:@"custom"]) {
         NSArray *partialSegments = (NSArray *)segment[kPartialSegments];
         return [self evaluateCustomSegmentation:partialSegments];
     } else if ([segment[kType] isEqualToString:@"predefined"]) {
-        return [self evaluatePredefinedSegmentation:segment[kSegmentCode] config:config];
+        return [self evaluatePredefinedSegmentation:segment[kSegmentCode]];
     }
     return YES;
 }
 
-- (BOOL)evaluatePredefinedSegmentation:(NSDictionary *)segmentObject config:(VWOConfig *)config{
-    if ([segmentObject[kDevice] isEqualToString:@"iPad"] && VWODevice.isPad) {
+- (BOOL)evaluatePredefinedSegmentation:(NSDictionary *)segmentObject {
+    if ([segmentObject[kDevice] isEqualToString:@"iPad"] &&
+        (self.appleDeviceType == VWOAppleDeviceTypeiPad)) {
         return YES;
-    } else if ([segmentObject[kDevice] isEqualToString:@"iPhone"] && VWODevice.isiPhone) {
+    } else if ([segmentObject[kDevice] isEqualToString:@"iPhone"] &&
+               (self.appleDeviceType == VWOAppleDeviceTypeiPhone)) {
         return YES;
     } else if (segmentObject[kReturningVisitor]) {
-        return (config.isReturningUser == [segmentObject[kReturningVisitor] boolValue]);
+        return (self.isReturning == [segmentObject[kReturningVisitor] boolValue]);
     }
     return NO;
 }
@@ -188,7 +199,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
     switch (segmentType) {
         case SegmentationTypeiOSVersion: {
-            NSString *version = [UIDevice.currentDevice.systemVersion toXDotY];
+            NSString *version = [self.iOSVersion toXDotY];
             NSString *targetVersion = operand.firstObject;
             NSComparisonResult result = [version compare:targetVersion options:NSNumericSearch];
             switch (operator) {
@@ -204,14 +215,15 @@ static NSString * kReturningVisitor = @"returning_visitor";
         }
 
         case SegmentationTypeDayOfWeek: {
-            BOOL contains = [operand containsObject:[NSNumber numberWithInteger:NSCalendar.dayOfWeek]];
+
+            BOOL contains = [operand containsObject:[NSNumber numberWithInteger:self.date.dayOfWeek]];
 
             return ((contains && operator == OperatorTypeIsEqualTo) ||
                     (!contains && operator == OperatorTypeIsNotEqualTo));
         }
 
         case SegmentationTypeHourOfTheDay: {
-            BOOL contains = [operand containsObject:[NSNumber numberWithInteger:NSCalendar.hourOfTheDay]];
+            BOOL contains = [operand containsObject:[NSNumber numberWithInteger:self.date.hourOfTheDay]];
 
             return ((contains && operator == OperatorTypeIsEqualTo) ||
                     (!contains && operator == OperatorTypeIsNotEqualTo));

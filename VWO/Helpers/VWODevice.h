@@ -8,13 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, VWOAppleDeviceType) {
+    VWOAppleDeviceTypeiPhone = 1,
+    VWOAppleDeviceTypeiPad = 2,
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface VWODevice : NSObject
 
 @property (class, readonly, nonatomic) BOOL isAttachedToDebugger;
-@property (class, readonly, nonatomic) BOOL isiPhone;
-@property (class, readonly, nonatomic) BOOL isPad;
+@property (class, readonly, nonatomic) VWOAppleDeviceType appleDeviceType;
 
 /// 11.0.2
 @property (class, readonly, nonatomic) NSString *iOSVersion;

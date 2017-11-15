@@ -88,7 +88,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     NSParameterAssert(key);
     NSParameterAssert(value);
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        VWOController.shared.segmentEvaluator.customVariables[key] = value;
+        VWOController.shared.customVariables[key] = value;
     });
 }
 

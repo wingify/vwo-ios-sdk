@@ -18,7 +18,7 @@ static NSString *kSDKversion = @"2.0.0-rc.1";
 
 /// All the operations in controller are expected to happen on this queue
 @property (class, readonly) dispatch_queue_t taskQueue;
-@property VWOSegmentEvaluator *segmentEvaluator;
+@property NSMutableDictionary<NSString *, NSString *> *customVariables;
 @property NSDictionary *previewInfo;
 @property VWOConfig *config;
 

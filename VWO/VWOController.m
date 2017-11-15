@@ -246,8 +246,8 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 - (id)init {
     if (self = [super init]) {
         _campaignList    = [NSMutableArray new];
-        _segmentEvaluator = [VWOSegmentEvaluator new];
-        _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
+        _customVariables = [NSMutableDictionary new];
+_vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
 }
@@ -290,8 +290,12 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
 - (NSArray <VWOCampaign *> *)segmentEvaluated:(NSArray <VWOCampaign *> *)allCampaigns {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
+
+    NSString *appVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
+
+    VWOSegmentEvaluator *evaluator = [[VWOSegmentEvaluator alloc] initWithiOSVersion:VWODevice.iOSVersion appVersion:appVersion date:NSDate.date isReturning:_config.isReturningUser appDeviceType:VWODevice.appleDeviceType customVariables:_customVariables];
     for (VWOCampaign *aCampaign in allCampaigns) {
-        if ([_segmentEvaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject config:_config]) {
+        if ([evaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
             [newCampaignList addObject:aCampaign];
         } else {
             VWOLogDebug(@"Campaign %@ did not pass segmentation", aCampaign);

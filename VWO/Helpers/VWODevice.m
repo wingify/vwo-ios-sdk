@@ -42,12 +42,13 @@
     return debuggerIsAttached;
 }
 
-+ (BOOL)isiPhone {
-    return (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone);
-}
-
-+ (BOOL)isPad {
-    return (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad);
++ (VWOAppleDeviceType)appleDeviceType {
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        return VWOAppleDeviceTypeiPhone;
+    }
+    return VWOAppleDeviceTypeiPad;
+//    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+//    }
 }
 
 + (NSString *)deviceName {

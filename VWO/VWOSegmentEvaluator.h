@@ -7,16 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VWODevice.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class VWOConfig;
-
 @interface VWOSegmentEvaluator : NSObject
 
-@property NSMutableDictionary<NSString *, NSString *> *customVariables;
+@property NSDictionary<NSString *, NSString *> *customVariables;
+@property VWOAppleDeviceType appleDeviceType;
+@property BOOL isReturning;
+@property NSDate *date;//for hour of the day and day of Week
+@property NSString *appVersion;
+@property NSString *iOSVersion;
 
-- (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment config:(VWOConfig *)config;
+- (instancetype)initWithiOSVersion:(NSString *)iOSVersion
+                        appVersion:(NSString *)appVersion
+                              date:(NSDate *)date
+                       isReturning:(BOOL)isReturning
+                     appDeviceType:(VWOAppleDeviceType)deviceType
+                   customVariables:(NSDictionary *)customVariables;
+
+- (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *)segment;
 
 @end
 
