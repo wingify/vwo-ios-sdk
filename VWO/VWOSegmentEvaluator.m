@@ -16,7 +16,6 @@ typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeiOSVersion     = 1,
     SegmentationTypeDayOfWeek      = 3,
     SegmentationTypeHourOfTheDay   = 4,
-    SegmentationTypeLocation       = 5
 };
 
 typedef NS_ENUM(NSInteger, OperatorType) {
@@ -224,14 +223,6 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
         case SegmentationTypeHourOfTheDay: {
             BOOL contains = [operand containsObject:[NSNumber numberWithInteger:self.date.hourOfTheDay]];
-
-            return ((contains && operator == OperatorTypeIsEqualTo) ||
-                    (!contains && operator == OperatorTypeIsNotEqualTo));
-        }
-
-        case SegmentationTypeLocation: {
-            NSString *country = [NSLocale.currentLocale objectForKey:NSLocaleCountryCode];
-            BOOL contains = [operand containsObject:country];
 
             return ((contains && operator == OperatorTypeIsEqualTo) ||
                     (!contains && operator == OperatorTypeIsNotEqualTo));
