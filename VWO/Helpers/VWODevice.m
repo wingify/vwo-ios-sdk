@@ -44,9 +44,9 @@
 
 + (VWOAppleDeviceType)appleDeviceType {
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        return VWOAppleDeviceTypeiPhone;
+        return VWOAppleDeviceTypeIPhone;
     }
-    return VWOAppleDeviceTypeiPad;
+    return VWOAppleDeviceTypeIPad;
 //    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
 //    }
 }

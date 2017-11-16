@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, VWOAppleDeviceType) {
-    VWOAppleDeviceTypeiPhone = 1,
-    VWOAppleDeviceTypeiPad = 2,
+    VWOAppleDeviceTypeIPhone = 1,
+    VWOAppleDeviceTypeIPad = 2,
 };
 
 NS_ASSUME_NONNULL_BEGIN
