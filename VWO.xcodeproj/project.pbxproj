@@ -50,6 +50,12 @@
 		E39815941F6291C10035D519 /* VWOSegmentEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815921F6291C10035D519 /* VWOSegmentEvaluator.m */; };
 		E398159C1F6293BC0035D519 /* NSDictionary+VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815981F6293BC0035D519 /* NSDictionary+VWO.h */; };
 		E398159D1F6293BC0035D519 /* NSDictionary+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815991F6293BC0035D519 /* NSDictionary+VWO.m */; };
+		E3D29F941FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */; };
+		E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D29F951FBD91B700A11C61 /* Extra.swift */; };
+		E3D29F981FBD928700A11C61 /* PredefinediPhone.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29F971FBD928700A11C61 /* PredefinediPhone.json */; };
+		E3D29F9A1FBDA29100A11C61 /* PredefinediPad.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29F991FBDA29100A11C61 /* PredefinediPad.json */; };
+		E3D29F9E1FBDA49B00A11C61 /* PredefinedNewUser.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */; };
+		E3D29FA01FBDA4C100A11C61 /* PredefinedReturningUser.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */; };
 		E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */; };
 		E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */; };
 /* End PBXBuildFile section */
@@ -113,6 +119,12 @@
 		E39815921F6291C10035D519 /* VWOSegmentEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOSegmentEvaluator.m; sourceTree = "<group>"; };
 		E39815981F6293BC0035D519 /* NSDictionary+VWO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+VWO.h"; sourceTree = "<group>"; };
 		E39815991F6293BC0035D519 /* NSDictionary+VWO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VWO.m"; sourceTree = "<group>"; };
+		E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOSegmentEvaluatorTests.swift; sourceTree = "<group>"; };
+		E3D29F951FBD91B700A11C61 /* Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extra.swift; sourceTree = "<group>"; };
+		E3D29F971FBD928700A11C61 /* PredefinediPhone.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PredefinediPhone.json; sourceTree = "<group>"; };
+		E3D29F991FBDA29100A11C61 /* PredefinediPad.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PredefinediPad.json; sourceTree = "<group>"; };
+		E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PredefinedNewUser.json; sourceTree = "<group>"; };
+		E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PredefinedReturningUser.json; sourceTree = "<group>"; };
 		E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOURL.h; sourceTree = "<group>"; };
 		E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOURL.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -187,6 +199,12 @@
 			children = (
 				E39814E41F6288C80035D519 /* VWOTests.m */,
 				E31714C61F838C2F0036CF07 /* VWOTests.swift */,
+				E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */,
+				E3D29F951FBD91B700A11C61 /* Extra.swift */,
+				E3D29F971FBD928700A11C61 /* PredefinediPhone.json */,
+				E3D29F991FBDA29100A11C61 /* PredefinediPad.json */,
+				E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */,
+				E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */,
 				E39814E61F6288C80035D519 /* Info.plist */,
 				E31714C51F838C2F0036CF07 /* VWOTests-Bridging-Header.h */,
 			);
@@ -379,6 +397,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3D29F9E1FBDA49B00A11C61 /* PredefinedNewUser.json in Resources */,
+				E3D29F981FBD928700A11C61 /* PredefinediPhone.json in Resources */,
+				E3D29F9A1FBDA29100A11C61 /* PredefinediPad.json in Resources */,
+				E3D29FA01FBDA4C100A11C61 /* PredefinedReturningUser.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,8 +437,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */,
 				E31714C41F838BB10036CF07 /* VWODevice.m in Sources */,
 				E39814E51F6288C80035D519 /* VWOTests.m in Sources */,
+				E3D29F941FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift in Sources */,
 				E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

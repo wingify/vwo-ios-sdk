@@ -1,0 +1,10 @@
+{
+    "segment_code": {
+        "device": "iPad"
+    },
+    "id": "88",
+    "type": "predefined",
+    "platform": "mobile-app",
+    "name": "iPad Users",
+    "description": "Segment for iPad users only"
+}
