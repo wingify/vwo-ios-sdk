@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
                               date:(NSDate *)date
                        isReturning:(BOOL)isReturning
                      appDeviceType:(VWOAppleDeviceType)deviceType
-                   customVariables:(NSDictionary *)customVariables;
+                   customVariables:(nullable NSDictionary *)customVariables;
 
 - (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *)segment;
 

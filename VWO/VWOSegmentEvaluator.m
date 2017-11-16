@@ -112,10 +112,10 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
 - (BOOL)evaluatePredefinedSegmentation:(NSDictionary *)segmentObject {
     if ([segmentObject[kDevice] isEqualToString:@"iPad"] &&
-        (self.appleDeviceType == VWOAppleDeviceTypeiPad)) {
+        (self.appleDeviceType == VWOAppleDeviceTypeIPad)) {
         return YES;
     } else if ([segmentObject[kDevice] isEqualToString:@"iPhone"] &&
-               (self.appleDeviceType == VWOAppleDeviceTypeiPhone)) {
+               (self.appleDeviceType == VWOAppleDeviceTypeIPhone)) {
         return YES;
     } else if (segmentObject[kReturningVisitor]) {
         return (self.isReturning == [segmentObject[kReturningVisitor] boolValue]);
