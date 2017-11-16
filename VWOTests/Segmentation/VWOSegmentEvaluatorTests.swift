@@ -34,7 +34,23 @@ class VWOSegmentEvaluatorTests: XCTestCase {
     }
 
     func testAppVersion() {
-        
+        let containsJSON = fromJSON(file: "AppVersionContains")
+        let equalToJSON = fromJSON(file: "AppVersionEqualTo")
+        let notEqualToJSON = fromJSON(file: "AppVersionNotEqualTo")
+        let regexJSON = fromJSON(file: "AppVersionRegex")
+        let startsWithJSON = fromJSON(file: "AppVersionStartsWith")
+
+        let evaluator = VWOSegmentEvaluator()
+        evaluator.appVersion = "1.2"
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: containsJSON))
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: equalToJSON))
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: notEqualToJSON))
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: regexJSON))
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: startsWithJSON))
+
+        evaluator.appVersion = "1.0"
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: equalToJSON))
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: notEqualToJSON))
     }
 
     func testPredefined() {

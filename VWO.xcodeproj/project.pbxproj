@@ -57,6 +57,11 @@
 		E3D29F9E1FBDA49B00A11C61 /* PredefinedNewUser.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */; };
 		E3D29FA01FBDA4C100A11C61 /* PredefinedReturningUser.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */; };
 		E3D29FA31FBDAC3E00A11C61 /* CustomVariable.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FA21FBDAC3E00A11C61 /* CustomVariable.json */; };
+		E3D29FA71FBDAE8A00A11C61 /* AppVersionRegex.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FA61FBDAE8A00A11C61 /* AppVersionRegex.json */; };
+		E3D29FAB1FBDAED400A11C61 /* AppVersionContains.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FAA1FBDAED400A11C61 /* AppVersionContains.json */; };
+		E3D29FAF1FBDAF1700A11C61 /* AppVersionEqualTo.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FAE1FBDAF1700A11C61 /* AppVersionEqualTo.json */; };
+		E3D29FB51FBDAF7400A11C61 /* AppVersionNotEqualTo.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FB41FBDAF7400A11C61 /* AppVersionNotEqualTo.json */; };
+		E3D29FB71FBDAF8C00A11C61 /* AppVersionStartsWith.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FB61FBDAF8C00A11C61 /* AppVersionStartsWith.json */; };
 		E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */; };
 		E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */; };
 /* End PBXBuildFile section */
@@ -127,6 +132,11 @@
 		E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PredefinedNewUser.json; sourceTree = "<group>"; };
 		E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PredefinedReturningUser.json; sourceTree = "<group>"; };
 		E3D29FA21FBDAC3E00A11C61 /* CustomVariable.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CustomVariable.json; sourceTree = "<group>"; };
+		E3D29FA61FBDAE8A00A11C61 /* AppVersionRegex.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppVersionRegex.json; sourceTree = "<group>"; };
+		E3D29FAA1FBDAED400A11C61 /* AppVersionContains.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppVersionContains.json; sourceTree = "<group>"; };
+		E3D29FAE1FBDAF1700A11C61 /* AppVersionEqualTo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppVersionEqualTo.json; sourceTree = "<group>"; };
+		E3D29FB41FBDAF7400A11C61 /* AppVersionNotEqualTo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppVersionNotEqualTo.json; sourceTree = "<group>"; };
+		E3D29FB61FBDAF8C00A11C61 /* AppVersionStartsWith.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppVersionStartsWith.json; sourceTree = "<group>"; };
 		E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOURL.h; sourceTree = "<group>"; };
 		E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOURL.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -281,6 +291,11 @@
 				E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */,
 				E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */,
 				E3D29FA21FBDAC3E00A11C61 /* CustomVariable.json */,
+				E3D29FA61FBDAE8A00A11C61 /* AppVersionRegex.json */,
+				E3D29FAA1FBDAED400A11C61 /* AppVersionContains.json */,
+				E3D29FAE1FBDAF1700A11C61 /* AppVersionEqualTo.json */,
+				E3D29FB41FBDAF7400A11C61 /* AppVersionNotEqualTo.json */,
+				E3D29FB61FBDAF8C00A11C61 /* AppVersionStartsWith.json */,
 			);
 			path = Segmentation;
 			sourceTree = "<group>";
@@ -408,8 +423,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3D29FAF1FBDAF1700A11C61 /* AppVersionEqualTo.json in Resources */,
+				E3D29FB71FBDAF8C00A11C61 /* AppVersionStartsWith.json in Resources */,
+				E3D29FA71FBDAE8A00A11C61 /* AppVersionRegex.json in Resources */,
+				E3D29FB51FBDAF7400A11C61 /* AppVersionNotEqualTo.json in Resources */,
 				E3D29F9E1FBDA49B00A11C61 /* PredefinedNewUser.json in Resources */,
 				E3D29F981FBD928700A11C61 /* PredefinediPhone.json in Resources */,
+				E3D29FAB1FBDAED400A11C61 /* AppVersionContains.json in Resources */,
 				E3D29F9A1FBDA29100A11C61 /* PredefinediPad.json in Resources */,
 				E3D29FA31FBDAC3E00A11C61 /* CustomVariable.json in Resources */,
 				E3D29FA01FBDA4C100A11C61 /* PredefinedReturningUser.json in Resources */,
