@@ -178,10 +178,8 @@ static NSString * kReturningVisitor = @"returning_visitor";
                 } else {
                     currentValue = (leftVariable || currentValue);
                 }
-
             }
         }
-
         [stack addObject:[NSNumber numberWithBool:currentValue]];
     }
     return [stack.lastObject boolValue];
@@ -214,38 +212,34 @@ static NSString * kReturningVisitor = @"returning_visitor";
         }
 
         case SegmentationTypeDayOfWeek: {
-
             BOOL contains = [operand containsObject:[NSNumber numberWithInteger:self.date.dayOfWeek]];
-
             return ((contains && operator == OperatorTypeIsEqualTo) ||
                     (!contains && operator == OperatorTypeIsNotEqualTo));
         }
 
         case SegmentationTypeHourOfTheDay: {
             BOOL contains = [operand containsObject:[NSNumber numberWithInteger:self.date.hourOfTheDay]];
-
             return ((contains && operator == OperatorTypeIsEqualTo) ||
                     (!contains && operator == OperatorTypeIsNotEqualTo));
         }
 
         case SegmentationTypeAppVersion: {
-            NSString *currentVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
             NSString *targetVersion = operand.firstObject;
             switch (operator) {
                 case OperatorTypeMatchesRegexCaseInsensitive:
-                    return ([currentVersion rangeOfString:targetVersion options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound);
+                    return ([_appVersion rangeOfString:targetVersion options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound);
 
                 case OperatorTypeContains:
-                    return [currentVersion rangeOfString:targetVersion].location != NSNotFound;
+                    return [_appVersion rangeOfString:targetVersion].location != NSNotFound;
 
                 case OperatorTypeIsEqualTo:
-                    return [targetVersion isEqualToString:currentVersion];
+                    return [targetVersion isEqualToString:_appVersion];
 
                 case OperatorTypeIsNotEqualTo:
-                    return ![targetVersion isEqualToString:currentVersion];
+                    return ![targetVersion isEqualToString:_appVersion];
 
                 case OperatorTypeStartsWith:
-                    return [currentVersion hasPrefix:targetVersion];
+                    return [_appVersion hasPrefix:targetVersion];
 
                 default:
                     VWOLogException(@"Invalid operator received for AppVersion %d", operator);
@@ -288,4 +282,3 @@ static NSString * kReturningVisitor = @"returning_visitor";
 }
 
 @end
-
