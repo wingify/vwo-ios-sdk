@@ -56,6 +56,7 @@
 		E3D29F9A1FBDA29100A11C61 /* PredefinediPad.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29F991FBDA29100A11C61 /* PredefinediPad.json */; };
 		E3D29F9E1FBDA49B00A11C61 /* PredefinedNewUser.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */; };
 		E3D29FA01FBDA4C100A11C61 /* PredefinedReturningUser.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */; };
+		E3D29FA31FBDAC3E00A11C61 /* CustomVariable.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FA21FBDAC3E00A11C61 /* CustomVariable.json */; };
 		E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */; };
 		E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */; };
 /* End PBXBuildFile section */
@@ -125,6 +126,7 @@
 		E3D29F991FBDA29100A11C61 /* PredefinediPad.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PredefinediPad.json; sourceTree = "<group>"; };
 		E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PredefinedNewUser.json; sourceTree = "<group>"; };
 		E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PredefinedReturningUser.json; sourceTree = "<group>"; };
+		E3D29FA21FBDAC3E00A11C61 /* CustomVariable.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CustomVariable.json; sourceTree = "<group>"; };
 		E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOURL.h; sourceTree = "<group>"; };
 		E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOURL.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -278,6 +280,7 @@
 				E3D29F991FBDA29100A11C61 /* PredefinediPad.json */,
 				E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */,
 				E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */,
+				E3D29FA21FBDAC3E00A11C61 /* CustomVariable.json */,
 			);
 			path = Segmentation;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				E3D29F9E1FBDA49B00A11C61 /* PredefinedNewUser.json in Resources */,
 				E3D29F981FBD928700A11C61 /* PredefinediPhone.json in Resources */,
 				E3D29F9A1FBDA29100A11C61 /* PredefinediPad.json in Resources */,
+				E3D29FA31FBDAC3E00A11C61 /* CustomVariable.json in Resources */,
 				E3D29FA01FBDA4C100A11C61 /* PredefinedReturningUser.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

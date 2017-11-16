@@ -23,8 +23,18 @@ class VWOSegmentEvaluatorTests: XCTestCase {
 
     override func tearDown() { super.tearDown() }
 
-    func testiOSVersion() {
-        XCTAssertEqual(VWODevice.deviceName, "x86_64")
+    func testCustomVariable() {
+        let evaluator = VWOSegmentEvaluator()
+        evaluator.customVariables = ["user" : "Paid"]
+        let json = fromJSON(file: "CustomVariable")
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: json))
+
+        evaluator.customVariables = ["user" : "free"]
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: json))
+    }
+
+    func testAppVersion() {
+        
     }
 
     func testPredefined() {
@@ -33,17 +43,20 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         let returingJSON = fromJSON(file: "PredefinedReturningUser")
         let newUserJSON = fromJSON(file: "PredefinedNewUser")
 
-        let segmentEvaluator1 = VWOSegmentEvaluator(iOSVersion: "11.0", appVersion: "1.2.3", date: Date(), isReturning: false, appDeviceType: .iPhone, customVariables: nil)
-        XCTAssert(segmentEvaluator1.canUserBePartOfCampaign(forSegment: iPhoneJSON))
-        XCTAssertFalse(segmentEvaluator1.canUserBePartOfCampaign(forSegment: iPadJSON))
-        XCTAssertFalse(segmentEvaluator1.canUserBePartOfCampaign(forSegment: returingJSON))
-        XCTAssert(segmentEvaluator1.canUserBePartOfCampaign(forSegment: newUserJSON))
+        let evaluator = VWOSegmentEvaluator()
+        evaluator.isReturning = false
+        evaluator.appleDeviceType = .iPhone
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: iPhoneJSON))
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: iPadJSON))
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: returingJSON))
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: newUserJSON))
 
-        let segmentEvaluator2 = VWOSegmentEvaluator(iOSVersion: "11.0", appVersion: "1.2.3", date: Date(), isReturning: true, appDeviceType: .iPad, customVariables: nil)
-        XCTAssertFalse(segmentEvaluator2.canUserBePartOfCampaign(forSegment: iPhoneJSON))
-        XCTAssert(segmentEvaluator2.canUserBePartOfCampaign(forSegment: iPadJSON))
-        XCTAssert(segmentEvaluator2.canUserBePartOfCampaign(forSegment: returingJSON))
-        XCTAssertFalse(segmentEvaluator2.canUserBePartOfCampaign(forSegment: newUserJSON))
+        evaluator.isReturning = true
+        evaluator.appleDeviceType = .iPad
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: iPhoneJSON))
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: iPadJSON))
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: returingJSON))
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: newUserJSON))
     }
 }
 

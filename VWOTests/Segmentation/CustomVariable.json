@@ -1,0 +1,11 @@
+{
+    "type": "custom",
+    "partialSegments": [
+                        {
+                        "type": "7",
+                        "operator": 5,
+                        "lOperandValue": "user",
+                        "rOperandValue": "Paid"
+                        }
+                        ]
+}
