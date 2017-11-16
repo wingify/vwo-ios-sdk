@@ -199,12 +199,8 @@
 			children = (
 				E39814E41F6288C80035D519 /* VWOTests.m */,
 				E31714C61F838C2F0036CF07 /* VWOTests.swift */,
-				E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */,
+				E3D29FA11FBDA85100A11C61 /* Segmentation */,
 				E3D29F951FBD91B700A11C61 /* Extra.swift */,
-				E3D29F971FBD928700A11C61 /* PredefinediPhone.json */,
-				E3D29F991FBDA29100A11C61 /* PredefinediPad.json */,
-				E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */,
-				E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */,
 				E39814E61F6288C80035D519 /* Info.plist */,
 				E31714C51F838C2F0036CF07 /* VWOTests-Bridging-Header.h */,
 			);
@@ -272,6 +268,18 @@
 				E398157A1F6291970035D519 /* VWOLogger.m */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		E3D29FA11FBDA85100A11C61 /* Segmentation */ = {
+			isa = PBXGroup;
+			children = (
+				E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */,
+				E3D29F971FBD928700A11C61 /* PredefinediPhone.json */,
+				E3D29F991FBDA29100A11C61 /* PredefinediPad.json */,
+				E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */,
+				E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */,
+			);
+			path = Segmentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
