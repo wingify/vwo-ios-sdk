@@ -3,11 +3,9 @@
     "partialSegments": [
                         {
                         "type": "3",
-                        "operator": 11,
+                        "operator": 12,
                         "rOperandValue": [
-                                          0,
-                                          3,
-                                          5
+                                          1
                                           ]
                         }
                         ]

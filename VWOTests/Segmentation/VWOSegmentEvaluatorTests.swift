@@ -79,6 +79,51 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: iOSVersionLessThan10_3))
     }
 
+
+    func testDayOfWeek(){
+        let format = DateFormatter(); format.dateFormat = "dd-MM-yyyy"
+        let sunday = format.date(from: "01-01-2017")!
+        let monday = format.date(from: "06-02-2017")!
+        let tuesday = format.date(from: "14-03-2017")!
+        let wednesday = format.date(from: "26-04-2017")!
+        let thursday = format.date(from: "18-05-2017")!
+        let friday = format.date(from: "23-06-2017")!
+        let saturday = format.date(from: "29-07-2017")!
+
+        let dayOfWeekSunday = fromJSON(file: "DayOfWeekSingle")
+        let dayOfWeekNotEqualMonday = fromJSON(file: "DayOfWeekSingleNotEqual")
+
+        let evaluator = VWOSegmentEvaluator()
+        evaluator.date = sunday
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekSunday))
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekNotEqualMonday))
+
+
+        let dayOfWeekSunWedFri = fromJSON(file: "DayOfWeekMultiple")
+        evaluator.date = sunday
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekSunWedFri))
+        evaluator.date = monday
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekSunWedFri))
+        evaluator.date = tuesday
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekSunWedFri))
+        evaluator.date = wednesday
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekSunWedFri))
+
+        let dayOfWeekNotEqualMonWedThur = fromJSON(file: "DayOfWeekMultipleNotEqualTo")
+        evaluator.date = sunday
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekNotEqualMonWedThur))
+        evaluator.date = monday
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekNotEqualMonWedThur))
+        evaluator.date = wednesday
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekNotEqualMonWedThur))
+        evaluator.date = thursday
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekNotEqualMonWedThur))
+        evaluator.date = friday
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekNotEqualMonWedThur))
+        evaluator.date = saturday
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekNotEqualMonWedThur))
+    }
+
     func testPredefined() {
         let iPhoneJSON = fromJSON(file: "PredefinediPhone")
         let iPadJSON = fromJSON(file: "PredefinediPad")

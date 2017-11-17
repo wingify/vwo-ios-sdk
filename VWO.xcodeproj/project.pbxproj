@@ -72,6 +72,8 @@
 		E3D29FC71FBEDAB300A11C61 /* NSDate+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D29FC51FBEDAB300A11C61 /* NSDate+VWO.m */; };
 		E3D29FCA1FBEDE2A00A11C61 /* NSString+VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D29FC81FBEDE2A00A11C61 /* NSString+VWO.h */; };
 		E3D29FCB1FBEDE2A00A11C61 /* NSString+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D29FC91FBEDE2A00A11C61 /* NSString+VWO.m */; };
+		E3D29FCD1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FCC1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json */; };
+		E3D29FCF1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FCE1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json */; };
 		E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */; };
 		E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */; };
 /* End PBXBuildFile section */
@@ -157,6 +159,8 @@
 		E3D29FC51FBEDAB300A11C61 /* NSDate+VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+VWO.m"; sourceTree = "<group>"; };
 		E3D29FC81FBEDE2A00A11C61 /* NSString+VWO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+VWO.h"; sourceTree = "<group>"; };
 		E3D29FC91FBEDE2A00A11C61 /* NSString+VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+VWO.m"; sourceTree = "<group>"; };
+		E3D29FCC1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DayOfWeekMultipleNotEqualTo.json; sourceTree = "<group>"; };
+		E3D29FCE1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DayOfWeekSingleNotEqual.json; sourceTree = "<group>"; };
 		E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOURL.h; sourceTree = "<group>"; };
 		E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOURL.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -325,7 +329,9 @@
 				E3D29FBC1FBECA9E00A11C61 /* iOSVersionGreaterThan.json */,
 				E3D29FBE1FBECAAB00A11C61 /* iOSVersionLessThan.json */,
 				E3D29FC01FBED57000A11C61 /* DayOfWeekSingle.json */,
+				E3D29FCE1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json */,
 				E3D29FC21FBED59B00A11C61 /* DayOfWeekMultiple.json */,
+				E3D29FCC1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json */,
 			);
 			path = Segmentation;
 			sourceTree = "<group>";
@@ -457,11 +463,13 @@
 			files = (
 				E3D29FAF1FBDAF1700A11C61 /* AppVersionEqualTo.json in Resources */,
 				E3D29FC11FBED57000A11C61 /* DayOfWeekSingle.json in Resources */,
+				E3D29FCD1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json in Resources */,
 				E3D29FBD1FBECA9E00A11C61 /* iOSVersionGreaterThan.json in Resources */,
 				E3D29FBF1FBECAAB00A11C61 /* iOSVersionLessThan.json in Resources */,
 				E3D29FB71FBDAF8C00A11C61 /* AppVersionStartsWith.json in Resources */,
 				E3D29FA71FBDAE8A00A11C61 /* AppVersionRegex.json in Resources */,
 				E3D29FB51FBDAF7400A11C61 /* AppVersionNotEqualTo.json in Resources */,
+				E3D29FCF1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json in Resources */,
 				E3D29F9E1FBDA49B00A11C61 /* PredefinedNewUser.json in Resources */,
 				E3D29F981FBD928700A11C61 /* PredefinediPhone.json in Resources */,
 				E3D29FC31FBED59B00A11C61 /* DayOfWeekMultiple.json in Resources */,
