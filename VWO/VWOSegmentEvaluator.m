@@ -10,6 +10,7 @@
 #import "VWODevice.h"
 #import "VWOLogger.h"
 #import "NSDate+VWO.h"
+#import "NSString+VWO.h"
 
 typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeCustomVariable = 7,
@@ -45,24 +46,6 @@ static NSString * kPartialSegments  = @"partialSegments";
 static NSString * kSegmentCode      = @"segment_code";
 static NSString * kDevice           = @"device";
 static NSString * kReturningVisitor = @"returning_visitor";
-
-@implementation NSString(Version)
-//Converts version in X.y format
-- (NSString *)toXDotY {
-    NSArray *currentArray = [self componentsSeparatedByString:@"."];
-    NSMutableString *formattedVersion = [NSMutableString new];
-    if (currentArray.firstObject) {
-        [formattedVersion appendString:currentArray.firstObject];
-    }
-    if (currentArray.count > 1) {
-        [formattedVersion appendString:@"."];
-        [formattedVersion appendString:currentArray[1]];
-    } else {
-        [formattedVersion appendString:@".0"];
-    }
-    return formattedVersion;
-}
-@end
 
 @implementation VWOSegmentEvaluator
 

@@ -1,5 +1,5 @@
 //
-//  NSDate+VWO.h
+//  NSString+VWO.h
 //  VWO
 //
 //  Created by Kaunteya Suryawanshi on 17/11/17.
@@ -10,10 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSDate (VWO)
+@interface NSString(VWO)
 
-@property (assign, readonly) NSInteger dayOfWeek;
-@property (assign, readonly) NSInteger hourOfTheDay;
+@property (readonly) NSString *toXDotY;
 
 @end
 
