@@ -1,0 +1,14 @@
+{
+    "type": "custom",
+    "partialSegments": [
+                        {
+                        "type": "3",
+                        "operator": 11,
+                        "rOperandValue": [
+                                          0,//Sunday
+                                          3,//Wed
+                                          5//Friday
+                                          ]
+                        }
+                        ]
+}

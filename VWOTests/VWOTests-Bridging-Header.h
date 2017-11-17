@@ -3,4 +3,5 @@
 //
 #import "VWODevice.h"
 #import "VWOSegmentEvaluator.h"
-
+#import "NSDate+VWO.h"
+#import "NSString+VWO.h"
