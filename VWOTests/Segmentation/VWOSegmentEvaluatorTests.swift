@@ -79,7 +79,6 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: iOSVersionLessThan10_3))
     }
 
-
     func testDayOfWeek(){
         let format = DateFormatter(); format.dateFormat = "dd-MM-yyyy"
         let sunday = format.date(from: "01-01-2017")!
@@ -122,6 +121,51 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekNotEqualMonWedThur))
         evaluator.date = saturday
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekNotEqualMonWedThur))
+    }
+
+    func testHourOfTheDay(){
+        let format = DateFormatter(); format.dateFormat = "dd-MM-yyyy HH:mm"
+        let evaluator = VWOSegmentEvaluator()
+
+        let hourOfTheDay6 = fromJSON(file: "HourOfTheDay")
+        evaluator.date = format.date(from: "01-01-2017 06:23")!
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDay6))
+        evaluator.date = format.date(from: "01-02-2017 16:13")!
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDay6))
+
+        let hourOfTheDayNotEqual16 = fromJSON(file: "HourOfTheDayNotEqual")
+        evaluator.date = format.date(from: "01-01-2017 16:23")!
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayNotEqual16))
+        evaluator.date = format.date(from: "01-01-2016 02:44")!
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayNotEqual16))
+
+
+        let hourOfTheDayMultiple4_6_20 = fromJSON(file: "HourOfTheDayMultiple")
+        evaluator.date = format.date(from: "01-01-2017 04:23")!
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultiple4_6_20))
+        evaluator.date = format.date(from: "01-01-2017 06:23")!
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultiple4_6_20))
+        evaluator.date = format.date(from: "01-01-2017 20:23")!
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultiple4_6_20))
+        evaluator.date = format.date(from: "01-01-2017 07:23")!
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultiple4_6_20))
+        evaluator.date = format.date(from: "01-01-2017 22:23")!
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultiple4_6_20))
+
+        let hourOfTheDayMultipleNotEqual2_14_16 = fromJSON(file: "HourOfTheDayMultipleNotEqual")
+        evaluator.date = format.date(from: "01-01-2017 04:23")!
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultipleNotEqual2_14_16))
+        evaluator.date = format.date(from: "01-01-2017 06:23")!
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultipleNotEqual2_14_16))
+        evaluator.date = format.date(from: "01-01-2017 20:23")!
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultipleNotEqual2_14_16))
+        evaluator.date = format.date(from: "01-01-2017 02:23")!
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultipleNotEqual2_14_16))
+        evaluator.date = format.date(from: "01-01-2017 14:23")!
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultipleNotEqual2_14_16))
+        evaluator.date = format.date(from: "01-01-2017 16:23")!
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultipleNotEqual2_14_16))
+
     }
 
     func testPredefined() {

@@ -74,6 +74,10 @@
 		E3D29FCB1FBEDE2A00A11C61 /* NSString+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D29FC91FBEDE2A00A11C61 /* NSString+VWO.m */; };
 		E3D29FCD1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FCC1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json */; };
 		E3D29FCF1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FCE1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json */; };
+		E3D29FD11FBEEC6A00A11C61 /* HourOfTheDay.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FD01FBEEC6A00A11C61 /* HourOfTheDay.json */; };
+		E3D29FD31FBEEC7900A11C61 /* HourOfTheDayNotEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FD21FBEEC7900A11C61 /* HourOfTheDayNotEqual.json */; };
+		E3D29FD51FBEEC8100A11C61 /* HourOfTheDayMultiple.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FD41FBEEC8100A11C61 /* HourOfTheDayMultiple.json */; };
+		E3D29FD71FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FD61FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json */; };
 		E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */; };
 		E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */; };
 /* End PBXBuildFile section */
@@ -161,6 +165,10 @@
 		E3D29FC91FBEDE2A00A11C61 /* NSString+VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+VWO.m"; sourceTree = "<group>"; };
 		E3D29FCC1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DayOfWeekMultipleNotEqualTo.json; sourceTree = "<group>"; };
 		E3D29FCE1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DayOfWeekSingleNotEqual.json; sourceTree = "<group>"; };
+		E3D29FD01FBEEC6A00A11C61 /* HourOfTheDay.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HourOfTheDay.json; sourceTree = "<group>"; };
+		E3D29FD21FBEEC7900A11C61 /* HourOfTheDayNotEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HourOfTheDayNotEqual.json; sourceTree = "<group>"; };
+		E3D29FD41FBEEC8100A11C61 /* HourOfTheDayMultiple.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HourOfTheDayMultiple.json; sourceTree = "<group>"; };
+		E3D29FD61FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HourOfTheDayMultipleNotEqual.json; sourceTree = "<group>"; };
 		E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOURL.h; sourceTree = "<group>"; };
 		E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOURL.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -332,6 +340,10 @@
 				E3D29FCE1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json */,
 				E3D29FC21FBED59B00A11C61 /* DayOfWeekMultiple.json */,
 				E3D29FCC1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json */,
+				E3D29FD01FBEEC6A00A11C61 /* HourOfTheDay.json */,
+				E3D29FD21FBEEC7900A11C61 /* HourOfTheDayNotEqual.json */,
+				E3D29FD41FBEEC8100A11C61 /* HourOfTheDayMultiple.json */,
+				E3D29FD61FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json */,
 			);
 			path = Segmentation;
 			sourceTree = "<group>";
@@ -461,10 +473,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3D29FD31FBEEC7900A11C61 /* HourOfTheDayNotEqual.json in Resources */,
 				E3D29FAF1FBDAF1700A11C61 /* AppVersionEqualTo.json in Resources */,
+				E3D29FD51FBEEC8100A11C61 /* HourOfTheDayMultiple.json in Resources */,
 				E3D29FC11FBED57000A11C61 /* DayOfWeekSingle.json in Resources */,
 				E3D29FCD1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json in Resources */,
 				E3D29FBD1FBECA9E00A11C61 /* iOSVersionGreaterThan.json in Resources */,
+				E3D29FD11FBEEC6A00A11C61 /* HourOfTheDay.json in Resources */,
 				E3D29FBF1FBECAAB00A11C61 /* iOSVersionLessThan.json in Resources */,
 				E3D29FB71FBDAF8C00A11C61 /* AppVersionStartsWith.json in Resources */,
 				E3D29FA71FBDAE8A00A11C61 /* AppVersionRegex.json in Resources */,
@@ -472,6 +487,7 @@
 				E3D29FCF1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json in Resources */,
 				E3D29F9E1FBDA49B00A11C61 /* PredefinedNewUser.json in Resources */,
 				E3D29F981FBD928700A11C61 /* PredefinediPhone.json in Resources */,
+				E3D29FD71FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json in Resources */,
 				E3D29FC31FBED59B00A11C61 /* DayOfWeekMultiple.json in Resources */,
 				E3D29FAB1FBDAED400A11C61 /* AppVersionContains.json in Resources */,
 				E3D29F9A1FBDA29100A11C61 /* PredefinediPad.json in Resources */,
