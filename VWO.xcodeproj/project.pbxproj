@@ -62,6 +62,10 @@
 		E3D29FAF1FBDAF1700A11C61 /* AppVersionEqualTo.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FAE1FBDAF1700A11C61 /* AppVersionEqualTo.json */; };
 		E3D29FB51FBDAF7400A11C61 /* AppVersionNotEqualTo.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FB41FBDAF7400A11C61 /* AppVersionNotEqualTo.json */; };
 		E3D29FB71FBDAF8C00A11C61 /* AppVersionStartsWith.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FB61FBDAF8C00A11C61 /* AppVersionStartsWith.json */; };
+		E3D29FB91FBECA6700A11C61 /* iOSVersionEqualTo.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FB81FBECA6700A11C61 /* iOSVersionEqualTo.json */; };
+		E3D29FBB1FBECA8800A11C61 /* iOSVersionNotEqualTo.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FBA1FBECA8800A11C61 /* iOSVersionNotEqualTo.json */; };
+		E3D29FBD1FBECA9E00A11C61 /* iOSVersionGreaterThan.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FBC1FBECA9E00A11C61 /* iOSVersionGreaterThan.json */; };
+		E3D29FBF1FBECAAB00A11C61 /* iOSVersionLessThan.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FBE1FBECAAB00A11C61 /* iOSVersionLessThan.json */; };
 		E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */; };
 		E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */; };
 /* End PBXBuildFile section */
@@ -137,6 +141,10 @@
 		E3D29FAE1FBDAF1700A11C61 /* AppVersionEqualTo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppVersionEqualTo.json; sourceTree = "<group>"; };
 		E3D29FB41FBDAF7400A11C61 /* AppVersionNotEqualTo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppVersionNotEqualTo.json; sourceTree = "<group>"; };
 		E3D29FB61FBDAF8C00A11C61 /* AppVersionStartsWith.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppVersionStartsWith.json; sourceTree = "<group>"; };
+		E3D29FB81FBECA6700A11C61 /* iOSVersionEqualTo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = iOSVersionEqualTo.json; sourceTree = "<group>"; };
+		E3D29FBA1FBECA8800A11C61 /* iOSVersionNotEqualTo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = iOSVersionNotEqualTo.json; sourceTree = "<group>"; };
+		E3D29FBC1FBECA9E00A11C61 /* iOSVersionGreaterThan.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = iOSVersionGreaterThan.json; sourceTree = "<group>"; };
+		E3D29FBE1FBECAAB00A11C61 /* iOSVersionLessThan.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = iOSVersionLessThan.json; sourceTree = "<group>"; };
 		E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOURL.h; sourceTree = "<group>"; };
 		E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOURL.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -296,6 +304,10 @@
 				E3D29FAE1FBDAF1700A11C61 /* AppVersionEqualTo.json */,
 				E3D29FB41FBDAF7400A11C61 /* AppVersionNotEqualTo.json */,
 				E3D29FB61FBDAF8C00A11C61 /* AppVersionStartsWith.json */,
+				E3D29FB81FBECA6700A11C61 /* iOSVersionEqualTo.json */,
+				E3D29FBA1FBECA8800A11C61 /* iOSVersionNotEqualTo.json */,
+				E3D29FBC1FBECA9E00A11C61 /* iOSVersionGreaterThan.json */,
+				E3D29FBE1FBECAAB00A11C61 /* iOSVersionLessThan.json */,
 			);
 			path = Segmentation;
 			sourceTree = "<group>";
@@ -424,6 +436,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3D29FAF1FBDAF1700A11C61 /* AppVersionEqualTo.json in Resources */,
+				E3D29FBD1FBECA9E00A11C61 /* iOSVersionGreaterThan.json in Resources */,
+				E3D29FBF1FBECAAB00A11C61 /* iOSVersionLessThan.json in Resources */,
 				E3D29FB71FBDAF8C00A11C61 /* AppVersionStartsWith.json in Resources */,
 				E3D29FA71FBDAE8A00A11C61 /* AppVersionRegex.json in Resources */,
 				E3D29FB51FBDAF7400A11C61 /* AppVersionNotEqualTo.json in Resources */,
@@ -432,6 +446,8 @@
 				E3D29FAB1FBDAED400A11C61 /* AppVersionContains.json in Resources */,
 				E3D29F9A1FBDA29100A11C61 /* PredefinediPad.json in Resources */,
 				E3D29FA31FBDAC3E00A11C61 /* CustomVariable.json in Resources */,
+				E3D29FB91FBECA6700A11C61 /* iOSVersionEqualTo.json in Resources */,
+				E3D29FBB1FBECA8800A11C61 /* iOSVersionNotEqualTo.json in Resources */,
 				E3D29FA01FBDA4C100A11C61 /* PredefinedReturningUser.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,0 +1,10 @@
+{
+    "type": "custom",
+    "partialSegments": [
+                        {
+                        "type": "1",
+                        "operator": 11,
+                        "rOperandValue": "10.3"
+                        }
+                        ]
+}

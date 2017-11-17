@@ -53,6 +53,32 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: notEqualToJSON))
     }
 
+    func testiOSVersion() {
+        let iOSVersionEqualTo10_3 = fromJSON(file: "iOSVersionEqualTo")
+        let iOSVersionNotEqualTo10_3 = fromJSON(file: "iOSVersionNotEqualTo")
+        let iOSVersionGreaterThan10_3 = fromJSON(file: "iOSVersionGreaterThan")
+        let iOSVersionLessThan10_3 = fromJSON(file: "iOSVersionLessThan")
+
+        let evaluator = VWOSegmentEvaluator()
+        evaluator.iOSVersion = "10.3"
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: iOSVersionEqualTo10_3))
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: iOSVersionNotEqualTo10_3))
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: iOSVersionGreaterThan10_3))
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: iOSVersionLessThan10_3))
+
+        evaluator.iOSVersion = "11.0"
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: iOSVersionEqualTo10_3))
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: iOSVersionNotEqualTo10_3))
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: iOSVersionGreaterThan10_3))
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: iOSVersionLessThan10_3))
+
+        evaluator.iOSVersion = "8.2"
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: iOSVersionEqualTo10_3))
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: iOSVersionNotEqualTo10_3))
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: iOSVersionGreaterThan10_3))
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: iOSVersionLessThan10_3))
+    }
+
     func testPredefined() {
         let iPhoneJSON = fromJSON(file: "PredefinediPhone")
         let iPadJSON = fromJSON(file: "PredefinediPad")
