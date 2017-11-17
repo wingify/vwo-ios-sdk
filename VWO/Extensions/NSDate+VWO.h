@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSDate_VWO : NSObject
+@interface NSDate (VWO)
 
 @property (assign) NSInteger dayOfWeek;
 @property (assign) NSInteger hourOfTheDay;
