@@ -9,6 +9,7 @@
 #import "VWOSegmentEvaluator.h"
 #import "VWODevice.h"
 #import "VWOLogger.h"
+#import "NSDate+VWO.h"
 
 typedef NS_ENUM(NSInteger, SegmentationType) {
     SegmentationTypeCustomVariable = 7,
@@ -44,21 +45,6 @@ static NSString * kPartialSegments  = @"partialSegments";
 static NSString * kSegmentCode      = @"segment_code";
 static NSString * kDevice           = @"device";
 static NSString * kReturningVisitor = @"returning_visitor";
-
-@implementation NSDate(VWO)
-- (NSInteger)dayOfWeek {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents *dateComponents = [gregorian components:NSCalendarUnitWeekday fromDate:self];
-    NSInteger weekday = dateComponents.weekday;
-    return weekday - 1; // start from sunday = 0
-}
-
-- (NSInteger)hourOfTheDay {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents *dateComponents = [gregorian components:NSCalendarUnitHour fromDate:self];
-    return dateComponents.hour;
-}
-@end
 
 @implementation NSString(Version)
 //Converts version in X.y format
