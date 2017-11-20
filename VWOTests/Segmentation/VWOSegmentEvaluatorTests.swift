@@ -189,5 +189,15 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: returingJSON))
         XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: newUserJSON))
     }
+
+    func testbasicAnd1() {
+        let evaluator = VWOSegmentEvaluator()
+        evaluator.customVariables = ["user" : "Paid"]
+        evaluator.iOSVersion = "10.2"
+
+        let and1JSON = fromJSON(file: "And1")
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: and1JSON))
+
+    }
 }
 
