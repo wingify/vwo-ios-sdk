@@ -17,6 +17,7 @@
 		E388B6CE1F8F7D350023E11E /* VWOURLQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = E388B6CC1F8F7D350023E11E /* VWOURLQueue.h */; };
 		E388B6CF1F8F7D350023E11E /* VWOURLQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E388B6CD1F8F7D350023E11E /* VWOURLQueue.m */; };
 		E3924B3C1FC2C2D8006A9EB2 /* And1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3924B3B1FC2C2D8006A9EB2 /* And1.json */; };
+		E3924B3E1FC2D8B7006A9EB2 /* And2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3924B3D1FC2D8B7006A9EB2 /* And2.json */; };
 		E39814E01F6288C80035D519 /* VWO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39814D61F6288C80035D519 /* VWO.framework */; };
 		E39814E51F6288C80035D519 /* VWOTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E39814E41F6288C80035D519 /* VWOTests.m */; };
 		E39814E71F6288C80035D519 /* VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E39814D91F6288C80035D519 /* VWO.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -106,6 +107,7 @@
 		E388B6CC1F8F7D350023E11E /* VWOURLQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOURLQueue.h; sourceTree = "<group>"; };
 		E388B6CD1F8F7D350023E11E /* VWOURLQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOURLQueue.m; sourceTree = "<group>"; };
 		E3924B3B1FC2C2D8006A9EB2 /* And1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = And1.json; sourceTree = "<group>"; };
+		E3924B3D1FC2D8B7006A9EB2 /* And2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = And2.json; sourceTree = "<group>"; };
 		E39814D61F6288C80035D519 /* VWO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VWO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39814D91F6288C80035D519 /* VWO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWO.h; sourceTree = "<group>"; };
 		E39814DA1F6288C80035D519 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				E3D29FD41FBEEC8100A11C61 /* HourOfTheDayMultiple.json */,
 				E3D29FD61FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json */,
 				E3924B3B1FC2C2D8006A9EB2 /* And1.json */,
+				E3924B3D1FC2D8B7006A9EB2 /* And2.json */,
 			);
 			path = Segmentation;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				E3D29FC11FBED57000A11C61 /* DayOfWeekSingle.json in Resources */,
 				E3D29FCD1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json in Resources */,
 				E3D29FBD1FBECA9E00A11C61 /* iOSVersionGreaterThan.json in Resources */,
+				E3924B3E1FC2D8B7006A9EB2 /* And2.json in Resources */,
 				E3D29FD11FBEEC6A00A11C61 /* HourOfTheDay.json in Resources */,
 				E3D29FBF1FBECAAB00A11C61 /* iOSVersionLessThan.json in Resources */,
 				E3D29FB71FBDAF8C00A11C61 /* AppVersionStartsWith.json in Resources */,

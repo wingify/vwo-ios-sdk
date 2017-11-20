@@ -11,7 +11,10 @@ import UIKit
 
 class VWOSegmentEvaluatorTests: XCTestCase {
 
-    func fromJSON(file: String) -> [String: Any] {
+    let dateHourformat = DateFormatter(format: "dd-MM-yyyy HH:mm");
+    let dateFormat = DateFormatter(format: "dd-MM-yyyy");
+
+    func JSONFrom(file: String) -> [String: Any] {
         let bundle = Bundle(for: type(of: self))
         let path = bundle.path(forResource: file, ofType: "json")!
         let url = URL(fileURLWithPath: path)
@@ -26,7 +29,7 @@ class VWOSegmentEvaluatorTests: XCTestCase {
     func testCustomVariable() {
         let evaluator = VWOSegmentEvaluator()
         evaluator.customVariables = ["user" : "Paid"]
-        let json = fromJSON(file: "CustomVariable")
+        let json = JSONFrom(file: "CustomVariable")
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: json))
 
         evaluator.customVariables = ["user" : "free"]
@@ -34,11 +37,11 @@ class VWOSegmentEvaluatorTests: XCTestCase {
     }
 
     func testAppVersion() {
-        let containsJSON = fromJSON(file: "AppVersionContains")
-        let equalToJSON = fromJSON(file: "AppVersionEqualTo")
-        let notEqualToJSON = fromJSON(file: "AppVersionNotEqualTo")
-        let regexJSON = fromJSON(file: "AppVersionRegex")
-        let startsWithJSON = fromJSON(file: "AppVersionStartsWith")
+        let containsJSON = JSONFrom(file: "AppVersionContains")
+        let equalToJSON = JSONFrom(file: "AppVersionEqualTo")
+        let notEqualToJSON = JSONFrom(file: "AppVersionNotEqualTo")
+        let regexJSON = JSONFrom(file: "AppVersionRegex")
+        let startsWithJSON = JSONFrom(file: "AppVersionStartsWith")
 
         let evaluator = VWOSegmentEvaluator()
         evaluator.appVersion = "1.2"
@@ -54,10 +57,10 @@ class VWOSegmentEvaluatorTests: XCTestCase {
     }
 
     func testiOSVersion() {
-        let iOSVersionEqualTo10_3 = fromJSON(file: "iOSVersionEqualTo")
-        let iOSVersionNotEqualTo10_3 = fromJSON(file: "iOSVersionNotEqualTo")
-        let iOSVersionGreaterThan10_3 = fromJSON(file: "iOSVersionGreaterThan")
-        let iOSVersionLessThan10_3 = fromJSON(file: "iOSVersionLessThan")
+        let iOSVersionEqualTo10_3 = JSONFrom(file: "iOSVersionEqualTo")
+        let iOSVersionNotEqualTo10_3 = JSONFrom(file: "iOSVersionNotEqualTo")
+        let iOSVersionGreaterThan10_3 = JSONFrom(file: "iOSVersionGreaterThan")
+        let iOSVersionLessThan10_3 = JSONFrom(file: "iOSVersionLessThan")
 
         let evaluator = VWOSegmentEvaluator()
         evaluator.iOSVersion = "10.3"
@@ -80,17 +83,16 @@ class VWOSegmentEvaluatorTests: XCTestCase {
     }
 
     func testDayOfWeek(){
-        let format = DateFormatter(); format.dateFormat = "dd-MM-yyyy"
-        let sunday = format.date(from: "01-01-2017")!
-        let monday = format.date(from: "06-02-2017")!
-        let tuesday = format.date(from: "14-03-2017")!
-        let wednesday = format.date(from: "26-04-2017")!
-        let thursday = format.date(from: "18-05-2017")!
-        let friday = format.date(from: "23-06-2017")!
-        let saturday = format.date(from: "29-07-2017")!
+        let sunday = dateFormat.date(from: "01-01-2017")!
+        let monday = dateFormat.date(from: "06-02-2017")!
+        let tuesday = dateFormat.date(from: "14-03-2017")!
+        let wednesday = dateFormat.date(from: "26-04-2017")!
+        let thursday = dateFormat.date(from: "18-05-2017")!
+        let friday = dateFormat.date(from: "23-06-2017")!
+        let saturday = dateFormat.date(from: "29-07-2017")!
 
-        let dayOfWeekSunday = fromJSON(file: "DayOfWeekSingle")
-        let dayOfWeekNotEqualMonday = fromJSON(file: "DayOfWeekSingleNotEqual")
+        let dayOfWeekSunday = JSONFrom(file: "DayOfWeekSingle")
+        let dayOfWeekNotEqualMonday = JSONFrom(file: "DayOfWeekSingleNotEqual")
 
         let evaluator = VWOSegmentEvaluator()
         evaluator.date = sunday
@@ -98,7 +100,7 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekNotEqualMonday))
 
 
-        let dayOfWeekSunWedFri = fromJSON(file: "DayOfWeekMultiple")
+        let dayOfWeekSunWedFri = JSONFrom(file: "DayOfWeekMultiple")
         evaluator.date = sunday
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekSunWedFri))
         evaluator.date = monday
@@ -108,7 +110,7 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         evaluator.date = wednesday
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekSunWedFri))
 
-        let dayOfWeekNotEqualMonWedThur = fromJSON(file: "DayOfWeekMultipleNotEqualTo")
+        let dayOfWeekNotEqualMonWedThur = JSONFrom(file: "DayOfWeekMultipleNotEqualTo")
         evaluator.date = sunday
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: dayOfWeekNotEqualMonWedThur))
         evaluator.date = monday
@@ -124,55 +126,54 @@ class VWOSegmentEvaluatorTests: XCTestCase {
     }
 
     func testHourOfTheDay(){
-        let format = DateFormatter(); format.dateFormat = "dd-MM-yyyy HH:mm"
         let evaluator = VWOSegmentEvaluator()
 
-        let hourOfTheDay6 = fromJSON(file: "HourOfTheDay")
-        evaluator.date = format.date(from: "01-01-2017 06:23")!
+        let hourOfTheDay6 = JSONFrom(file: "HourOfTheDay")
+        evaluator.date = dateHourformat.date(from: "01-01-2017 06:23")!
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDay6))
-        evaluator.date = format.date(from: "01-02-2017 16:13")!
+        evaluator.date = dateHourformat.date(from: "01-02-2017 16:13")!
         XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDay6))
 
-        let hourOfTheDayNotEqual16 = fromJSON(file: "HourOfTheDayNotEqual")
-        evaluator.date = format.date(from: "01-01-2017 16:23")!
+        let hourOfTheDayNotEqual16 = JSONFrom(file: "HourOfTheDayNotEqual")
+        evaluator.date = dateHourformat.date(from: "01-01-2017 16:23")!
         XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayNotEqual16))
-        evaluator.date = format.date(from: "01-01-2016 02:44")!
+        evaluator.date = dateHourformat.date(from: "01-01-2016 02:44")!
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayNotEqual16))
 
 
-        let hourOfTheDayMultiple4_6_20 = fromJSON(file: "HourOfTheDayMultiple")
-        evaluator.date = format.date(from: "01-01-2017 04:23")!
+        let hourOfTheDayMultiple4_6_20 = JSONFrom(file: "HourOfTheDayMultiple")
+        evaluator.date = dateHourformat.date(from: "01-01-2017 04:23")!
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultiple4_6_20))
-        evaluator.date = format.date(from: "01-01-2017 06:23")!
+        evaluator.date = dateHourformat.date(from: "01-01-2017 06:23")!
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultiple4_6_20))
-        evaluator.date = format.date(from: "01-01-2017 20:23")!
+        evaluator.date = dateHourformat.date(from: "01-01-2017 20:23")!
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultiple4_6_20))
-        evaluator.date = format.date(from: "01-01-2017 07:23")!
+        evaluator.date = dateHourformat.date(from: "01-01-2017 07:23")!
         XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultiple4_6_20))
-        evaluator.date = format.date(from: "01-01-2017 22:23")!
+        evaluator.date = dateHourformat.date(from: "01-01-2017 22:23")!
         XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultiple4_6_20))
 
-        let hourOfTheDayMultipleNotEqual2_14_16 = fromJSON(file: "HourOfTheDayMultipleNotEqual")
-        evaluator.date = format.date(from: "01-01-2017 04:23")!
+        let hourOfTheDayMultipleNotEqual2_14_16 = JSONFrom(file: "HourOfTheDayMultipleNotEqual")
+        evaluator.date = dateHourformat.date(from: "01-01-2017 04:23")!
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultipleNotEqual2_14_16))
-        evaluator.date = format.date(from: "01-01-2017 06:23")!
+        evaluator.date = dateHourformat.date(from: "01-01-2017 06:23")!
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultipleNotEqual2_14_16))
-        evaluator.date = format.date(from: "01-01-2017 20:23")!
+        evaluator.date = dateHourformat.date(from: "01-01-2017 20:23")!
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultipleNotEqual2_14_16))
-        evaluator.date = format.date(from: "01-01-2017 02:23")!
+        evaluator.date = dateHourformat.date(from: "01-01-2017 02:23")!
         XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultipleNotEqual2_14_16))
-        evaluator.date = format.date(from: "01-01-2017 14:23")!
+        evaluator.date = dateHourformat.date(from: "01-01-2017 14:23")!
         XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultipleNotEqual2_14_16))
-        evaluator.date = format.date(from: "01-01-2017 16:23")!
+        evaluator.date = dateHourformat.date(from: "01-01-2017 16:23")!
         XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: hourOfTheDayMultipleNotEqual2_14_16))
 
     }
 
     func testPredefined() {
-        let iPhoneJSON = fromJSON(file: "PredefinediPhone")
-        let iPadJSON = fromJSON(file: "PredefinediPad")
-        let returingJSON = fromJSON(file: "PredefinedReturningUser")
-        let newUserJSON = fromJSON(file: "PredefinedNewUser")
+        let iPhoneJSON = JSONFrom(file: "PredefinediPhone")
+        let iPadJSON = JSONFrom(file: "PredefinediPad")
+        let returingJSON = JSONFrom(file: "PredefinedReturningUser")
+        let newUserJSON = JSONFrom(file: "PredefinedNewUser")
 
         let evaluator = VWOSegmentEvaluator()
         evaluator.isReturning = false
@@ -195,9 +196,13 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         evaluator.customVariables = ["user" : "Paid"]
         evaluator.iOSVersion = "10.2"
 
-        let and1JSON = fromJSON(file: "And1")
+        let and1JSON = JSONFrom(file: "And1")
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: and1JSON))
 
+        let and2JSON = JSONFrom(file: "And2")
+        evaluator.appVersion = "1.2.1"
+        evaluator.date = dateHourformat.date(from: "01-01-2017 16:23")!
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: and2JSON))
     }
 }
 
