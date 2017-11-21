@@ -225,6 +225,7 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         evaluator.appVersion = "2.0"
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: or2JSON))
     }
+
     func testOr3() {
         let evaluator = VWOSegmentEvaluator()
         evaluator.appVersion = "1.2"
@@ -233,6 +234,31 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         let or3JSON = JSONFrom(file: "Or3")
         Swift.print(or3JSON.segmentDescription)
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: or3JSON))
+    }
+
+    func testComplex1() {
+        let evaluator = VWOSegmentEvaluator()
+        evaluator.appVersion = "2.2"
+        evaluator.iOSVersion = "8.2"
+        let complex1JSON3JSON = JSONFrom(file: "Complex1")
+        Swift.print(complex1JSON3JSON.segmentDescription)
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: complex1JSON3JSON))
+
+        evaluator.iOSVersion = "9.2"
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: complex1JSON3JSON))
+    }
+
+    func testComplex2() {
+        let evaluator = VWOSegmentEvaluator()
+        evaluator.appVersion = "2.2"
+        evaluator.iOSVersion = "8.2"
+        evaluator.date = dateFormat.date(from: "20-11-2017")!
+        let complex2JSON3JSON = JSONFrom(file: "Complex2")
+        Swift.print(complex2JSON3JSON.segmentDescription)
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: complex2JSON3JSON))
+
+        evaluator.appVersion = "1.2"
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: complex2JSON3JSON))
     }
 }
 

@@ -35,6 +35,9 @@ extension Dictionary where Key == String, Value == Any {
             if let previousLogialOperator = segment["prevLogicalOperator"] as? String {
                 str += "       \(previousLogialOperator)\n"
             }
+            if let leftBracket = segment["lBracket"] as? Bool, leftBracket {
+                str += "[  "
+            }
             let type = segment["type"] as! String
             if type == "7" {str += "CustomVariable"}
             if type == "6" {str += "AppVersion"}
@@ -56,21 +59,25 @@ extension Dictionary where Key == String, Value == Any {
             if `operator` == 8 {str += " DoesNotContain"}
             if `operator` == 9 {str += " IsBlank"}
             if `operator` == 10 {str += " IsNotBlank"}
-            if `operator` == 11 {str += " IsEqualTo"}
-            if `operator` == 12 {str += " IsNotEqualTo"}
+            if `operator` == 11 {str += " =="}
+            if `operator` == 12 {str += " !="}
             if `operator` == 13 {str += " StartsWith"}
             if `operator` == 14 {str += " EndsWith"}
-            if `operator` == 15 {str += " GreaterThan"}
-            if `operator` == 16 {str += " LessThan"}
+            if `operator` == 15 {str += " >"} //Greater than
+            if `operator` == 16 {str += " <"} // Less than
             if `operator` == 17 {str += " Converted"}
             if `operator` == 18 {str += " NotConverted"}
 
             if let rightOperand = segment["rOperandValue"] as? [Int] {
-                str += " [" + rightOperand.map(String.init).joined(separator:", ") + "]"
+                str += " (" + rightOperand.map(String.init).joined(separator:", ") + ")"
             }
             if let rightOperand = segment["rOperandValue"] as? String {
                 str += " \(rightOperand)"
             }
+            if let rightBracket = segment["rBracket"] as? Bool, rightBracket {
+                str += "  ]"
+            }
+
             return str
         }.joined(separator: "\n")
     }

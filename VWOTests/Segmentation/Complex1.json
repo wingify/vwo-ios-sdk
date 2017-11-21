@@ -1,0 +1,25 @@
+{
+    "type": "custom",
+    "partialSegments": [
+                        {
+                        "lOperandValue": "user",
+                        "rOperandValue": "Paid",
+                        "type": "7",
+                        "operator": 11,
+                        "lBracket": true
+                        },
+                        {
+                        "prevLogicalOperator": "OR",
+                        "type": "6",
+                        "operator": 12,
+                        "rOperandValue": "1.2",
+                        "rBracket": true
+                        },
+                        {
+                        "type": "1",
+                        "operator": 11,
+                        "rOperandValue": "8.2",
+                        "prevLogicalOperator": "AND"
+                        }
+                        ]
+}
