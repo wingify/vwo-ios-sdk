@@ -51,6 +51,14 @@ class VWOTestSwift: XCTestCase {
         XCTAssertEqual((format.date(from: "01-01-2017 21:23")! as NSDate).hourOfTheDay, 21)
         XCTAssertEqual((format.date(from: "01-01-2017 22:23")! as NSDate).hourOfTheDay, 22)
         XCTAssertEqual((format.date(from: "01-01-2017 23:23")! as NSDate).hourOfTheDay, 23)
+    }
 
+    func testKeysMissingFromDictionary() {
+        let dict = ["a" : 1, "b" : 2, "c" : 3] as NSDictionary
+        XCTAssertEqual(dict.keysMissing(from: ["a", "b", "c"]), [])
+        XCTAssertEqual(dict.keysMissing(from: ["a", "b", "c", "d"]), ["d"])
+        XCTAssertEqual(dict.keysMissing(from: ["a", "b", "c", "d", "e"]), ["d", "e"])
+        XCTAssertEqual(dict.keysMissing(from: ["a", "b"]), [])
+        XCTAssertEqual(dict.keysMissing(from: ["a1", "b1"]), ["a1", "b1"])
     }
 }

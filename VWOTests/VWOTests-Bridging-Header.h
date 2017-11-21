@@ -5,3 +5,4 @@
 #import "VWOSegmentEvaluator.h"
 #import "NSDate+VWO.h"
 #import "NSString+VWO.h"
+#import "NSDictionary+VWO.h"
