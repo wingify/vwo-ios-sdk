@@ -80,6 +80,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
 }
 
 - (BOOL)evaluatePredefinedSegmentation:(NSDictionary *)segmentObject {
+    NSAssert(self.appleDeviceType == VWOAppleDeviceTypeIPad || self.appleDeviceType == VWOAppleDeviceTypeIPhone, @"Invalid Apple device type");
     if ([segmentObject[kDevice] isEqualToString:@"iPad"] &&
         (self.appleDeviceType == VWOAppleDeviceTypeIPad)) {
         return YES;
@@ -165,6 +166,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
     switch (segmentType) {
         case SegmentationTypeiOSVersion: {
+            NSAssert(self.iOSVersion != nil, @"iOS Version not available");
             NSString *version = [self.iOSVersion toXDotY];
             NSString *targetVersion = operand.firstObject;
             NSComparisonResult result = [version compare:targetVersion options:NSNumericSearch];
@@ -181,18 +183,21 @@ static NSString * kReturningVisitor = @"returning_visitor";
         }
 
         case SegmentationTypeDayOfWeek: {
+            NSAssert(self.date != nil, @"Date not available");
             BOOL contains = [operand containsObject:[NSNumber numberWithInteger:self.date.dayOfWeek]];
             return ((contains && operator == OperatorTypeIsEqualTo) ||
                     (!contains && operator == OperatorTypeIsNotEqualTo));
         }
 
         case SegmentationTypeHourOfTheDay: {
+            NSAssert(self.date != nil, @"Date not available");
             BOOL contains = [operand containsObject:[NSNumber numberWithInteger:self.date.hourOfTheDay]];
             return ((contains && operator == OperatorTypeIsEqualTo) ||
                     (!contains && operator == OperatorTypeIsNotEqualTo));
         }
 
         case SegmentationTypeAppVersion: {
+            NSAssert(_appVersion != nil, @"App Version available");
             NSString *targetVersion = operand.firstObject;
             switch (operator) {
                 case OperatorTypeMatchesRegexCaseInsensitive:
@@ -219,7 +224,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
         case SegmentationTypeCustomVariable: {
             NSString *currentValue = _customVariables[lOperand];
-            if (!currentValue) return NO;
+            if (currentValue == nil) return NO;
 
             NSString *targetValue = operand.firstObject;
             switch (operator) {
