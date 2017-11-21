@@ -61,4 +61,11 @@ class VWOTestSwift: XCTestCase {
         XCTAssertEqual(dict.keysMissing(from: ["a", "b"]), [])
         XCTAssertEqual(dict.keysMissing(from: ["a1", "b1"]), ["a1", "b1"])
     }
+
+    func testToXDotY() {
+        XCTAssertEqual(("1.2" as NSString).toXDotY, "1.2")
+        XCTAssertEqual(("1.2.1" as NSString).toXDotY, "1.2")
+        XCTAssertEqual(("1" as NSString).toXDotY, "1.0")
+        XCTAssertEqual(("1.0" as NSString).toXDotY, "1.0")
+    }
 }
