@@ -197,7 +197,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
         }
 
         case SegmentationTypeAppVersion: {
-            NSAssert(_appVersion != nil, @"App Version available");
+            NSAssert(_appVersion != nil, @"App Version not available");
             NSString *targetVersion = operand.firstObject;
             switch (operator) {
                 case OperatorTypeMatchesRegexCaseInsensitive:
