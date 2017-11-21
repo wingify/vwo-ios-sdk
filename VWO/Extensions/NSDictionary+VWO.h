@@ -25,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSArray<NSString *> *) keysMissingFrom:(NSArray<NSString *> *)mustHaveKeys;
 
+- (nullable NSString *)toString;
+
+- (NSArray<NSURLQueryItem *> *)toQueryItems;
+
 @end
 
 NS_ASSUME_NONNULL_END

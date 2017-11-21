@@ -12,27 +12,7 @@
 #import "VWODevice.h"
 #import "VWOConfig.h"
 #import "VWO.h"
-
-@implementation NSDictionary (NSURLQueryItem)
-- (nullable NSString *)toString {
-    NSError *error;
-    NSData *currentData = [NSJSONSerialization dataWithJSONObject:self options:kNilOptions error:&error];
-    if (!error) {
-        return [[NSString alloc] initWithData:currentData encoding:NSUTF8StringEncoding];
-    }
-    return nil;
-}
-
-- (NSArray<NSURLQueryItem *> *)toQueryItems {
-    NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray new];
-    for (NSString *key in self) {
-        NSAssert([self[key] isKindOfClass:[NSString class]], @"Query item can only have string");
-        NSURLQueryItem *item = [NSURLQueryItem queryItemWithName:key value:self[key]];
-        [queryItems addObject:item];
-    }
-    return queryItems;
-}
-@end
+#import "NSDictionary+VWO.h"
 
 @implementation NSURLComponents (VWO)
     /// Creates URL component with scheme host and path. Eg: https://dacdn.visual.com/path
