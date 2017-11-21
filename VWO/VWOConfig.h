@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSString *UUID;
 
 
-+ (instancetype)configWithAPIKey:(NSString *)apiKey;
++ (instancetype)configWithAPIKey:(NSString *)apiKey userDefaultsKey:(NSString *)userDefaultsKey;
 
 - (BOOL)isTrackingUserForCampaign:(VWOCampaign *)campaign;
 - (void)trackUserForCampaign:(VWOCampaign *)campaign;

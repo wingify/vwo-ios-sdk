@@ -72,7 +72,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
         VWOLogInfo(@"Initializing VWO");
     #endif
 
-    _config = [VWOConfig configWithAPIKey:apiKey];
+    _config = [VWOConfig configWithAPIKey:apiKey userDefaultsKey:@"vwo.09cde70ba7a94aff9d843b1b846a79a7"];
     _config.sessionCount += 1;
     [self setupSentry];
 

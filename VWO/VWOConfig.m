@@ -15,20 +15,22 @@ static NSString * kGoalsMarked     = @"goalsMarked";
 static NSString * kSessionCount    = @"sessionCount";
 static NSString * kReturningUser   = @"returningUser";
 static NSString * kUUID            = @"UUID";
-static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 
-@implementation VWOConfig
-
-+ (instancetype)configWithAPIKey:(NSString *)apiKey {
-    return [[self alloc] initWithAPIKey:apiKey];
+@implementation VWOConfig {
+    NSString * _userDefaultsKey;
 }
 
-- (instancetype)initWithAPIKey:(NSString *)apiKey {
++ (instancetype)configWithAPIKey:(NSString *)apiKey userDefaultsKey:(NSString *)userDefaultsKey {
+    return [[self alloc] initWithAPIKey:apiKey userDefaultsKey:userDefaultsKey];
+}
+
+- (instancetype)initWithAPIKey:(NSString *)apiKey userDefaultsKey:(NSString *)userDefaultsKey {
     NSAssert([apiKey componentsSeparatedByString:@"-"].count == 2, @"Invalid key");
     NSAssert([apiKey componentsSeparatedByString:@"-"].firstObject.length == 32, @"Invalid key");
 
     if (self = [super init]) {
-        [self setDefaultValues];
+        _userDefaultsKey = userDefaultsKey;
+        [self setDefaultValuesKey:_userDefaultsKey];
         NSArray<NSString *> *splitKey = [apiKey componentsSeparatedByString:@"-"];
         _appKey     = splitKey[0];
         _accountID  = splitKey[1];
@@ -37,18 +39,18 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 }
 
 - (nullable id)objectForKey:(NSString *)key {
-    NSDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey];
+    NSDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:_userDefaultsKey];
     return activityDict[key];
 }
 
 - (void)setObject:(nullable id)value forKey:(NSString *)key {
-    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey] mutableCopy];
+    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:_userDefaultsKey] mutableCopy];
     activityDict[key] = value;
-    [NSUserDefaults.standardUserDefaults setObject:activityDict forKey:kUserDefaultsKey];
+    [NSUserDefaults.standardUserDefaults setObject:activityDict forKey:_userDefaultsKey];
 }
 
-- (void)setDefaultValues {
-    if ([NSUserDefaults.standardUserDefaults objectForKey:kUserDefaultsKey] != nil) {
+- (void)setDefaultValuesKey:(NSString *)key {
+    if ([NSUserDefaults.standardUserDefaults objectForKey:key] != nil) {
         return;
     }
     VWOLogDebug(@"Setting default values for first launch");
@@ -60,7 +62,7 @@ static NSString * kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
                                kReturningUser: @(NO),
                                kUUID         : UUID
                                };
-    [NSUserDefaults.standardUserDefaults registerDefaults:@{kUserDefaultsKey : defaults}];
+    [NSUserDefaults.standardUserDefaults registerDefaults:@{key : defaults}];
     VWOLogDebug(@"UUID %@", UUID);
 }
 
