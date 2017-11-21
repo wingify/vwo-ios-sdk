@@ -232,7 +232,6 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         evaluator.iOSVersion = "8.2"
         evaluator.date = dateHourformat.date(from: "01-01-2017 16:23")!
         let or3JSON = JSONFrom(file: "Or3")
-        Swift.print(or3JSON.segmentDescription)
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: or3JSON))
     }
 
@@ -241,7 +240,6 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         evaluator.appVersion = "2.2"
         evaluator.iOSVersion = "8.2"
         let complex1JSON3JSON = JSONFrom(file: "Complex1")
-        Swift.print(complex1JSON3JSON.segmentDescription)
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: complex1JSON3JSON))
 
         evaluator.iOSVersion = "9.2"
@@ -254,7 +252,6 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         evaluator.iOSVersion = "8.2"
         evaluator.date = dateFormat.date(from: "20-11-2017")!
         let complex2JSON3JSON = JSONFrom(file: "Complex2")
-        Swift.print(complex2JSON3JSON.segmentDescription)
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: complex2JSON3JSON))
 
         evaluator.appVersion = "1.2"

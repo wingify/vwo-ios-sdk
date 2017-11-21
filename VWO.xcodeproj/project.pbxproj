@@ -24,6 +24,7 @@
 		E3924B461FC408AD006A9EB2 /* Complex1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3924B451FC408AD006A9EB2 /* Complex1.json */; };
 		E3924B481FC40B2F006A9EB2 /* Complex2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3924B471FC40B2F006A9EB2 /* Complex2.json */; };
 		E3924B4A1FC42C06006A9EB2 /* VWODictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3924B491FC42C06006A9EB2 /* VWODictionaryTests.swift */; };
+		E3924B4C1FC4520D006A9EB2 /* VWOQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3924B4B1FC4520D006A9EB2 /* VWOQueueTests.swift */; };
 		E39814E01F6288C80035D519 /* VWO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39814D61F6288C80035D519 /* VWO.framework */; };
 		E39814E51F6288C80035D519 /* VWOTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E39814E41F6288C80035D519 /* VWOTests.m */; };
 		E39814E71F6288C80035D519 /* VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E39814D91F6288C80035D519 /* VWO.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -120,6 +121,7 @@
 		E3924B451FC408AD006A9EB2 /* Complex1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Complex1.json; sourceTree = "<group>"; };
 		E3924B471FC40B2F006A9EB2 /* Complex2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Complex2.json; sourceTree = "<group>"; };
 		E3924B491FC42C06006A9EB2 /* VWODictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWODictionaryTests.swift; sourceTree = "<group>"; };
+		E3924B4B1FC4520D006A9EB2 /* VWOQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOQueueTests.swift; sourceTree = "<group>"; };
 		E39814D61F6288C80035D519 /* VWO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VWO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39814D91F6288C80035D519 /* VWO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWO.h; sourceTree = "<group>"; };
 		E39814DA1F6288C80035D519 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				E39814E41F6288C80035D519 /* VWOTests.m */,
 				E31714C61F838C2F0036CF07 /* VWOTests.swift */,
 				E3924B491FC42C06006A9EB2 /* VWODictionaryTests.swift */,
+				E3924B4B1FC4520D006A9EB2 /* VWOQueueTests.swift */,
 				E3D29FA11FBDA85100A11C61 /* Segmentation */,
 				E3D29F951FBD91B700A11C61 /* Extra.swift */,
 				E39814E61F6288C80035D519 /* Info.plist */,
@@ -565,6 +568,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3924B4A1FC42C06006A9EB2 /* VWODictionaryTests.swift in Sources */,
+				E3924B4C1FC4520D006A9EB2 /* VWOQueueTests.swift in Sources */,
 				E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */,
 				E31714C41F838BB10036CF07 /* VWODevice.m in Sources */,
 				E39814E51F6288C80035D519 /* VWOTests.m in Sources */,
