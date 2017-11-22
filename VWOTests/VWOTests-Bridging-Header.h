@@ -8,3 +8,4 @@
 #import "NSDictionary+VWO.h"
 #import "VWOQueue.h"
 #import "VWOGoal.h"
+#import "VWOVariation.h"
