@@ -7,14 +7,7 @@
 //
 
 #import "VWO.h"
-
 #import "VWOController.h"
-#import "VWOSocketClient.h"
-#import <sys/types.h>
-#import <sys/sysctl.h>
-#import "VWODevice.h"
-#import "VWOSegmentEvaluator.h"
-#import "VWOConfig.h"
 
 static VWOLogLevel kLogLevel = VWOLogLevelError;
 NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStartedTrackingInCampaignNotification";
