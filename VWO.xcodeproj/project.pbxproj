@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E31714C41F838BB10036CF07 /* VWODevice.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815761F6291970035D519 /* VWODevice.m */; };
 		E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31714C61F838C2F0036CF07 /* VWOTests.swift */; };
+		E32C7A161FC58603009ABF2F /* VWOGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */; };
 		E344B2F01F87906900A4EEE6 /* VWOConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = E344B2EE1F87906900A4EEE6 /* VWOConfig.h */; };
 		E344B2F11F87906900A4EEE6 /* VWOConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E344B2EF1F87906900A4EEE6 /* VWOConfig.m */; };
 		E35484F51F713C2E00E14D2E /* NSURLSession+Synchronous.h in Headers */ = {isa = PBXBuildFile; fileRef = E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */; };
@@ -106,6 +107,7 @@
 		E31714C61F838C2F0036CF07 /* VWOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOTests.swift; sourceTree = "<group>"; };
 		E319151E1F67F1B900FC1695 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E31915231F6802D500FC1695 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOGoalTests.swift; sourceTree = "<group>"; };
 		E344B2EE1F87906900A4EEE6 /* VWOConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOConfig.h; sourceTree = "<group>"; };
 		E344B2EF1F87906900A4EEE6 /* VWOConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOConfig.m; sourceTree = "<group>"; };
 		E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSession+Synchronous.h"; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				E31714C61F838C2F0036CF07 /* VWOTests.swift */,
 				E3924B491FC42C06006A9EB2 /* VWODictionaryTests.swift */,
 				E3924B4B1FC4520D006A9EB2 /* VWOQueueTests.swift */,
+				E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */,
 				E3D29FA11FBDA85100A11C61 /* Segmentation */,
 				E3D29F951FBD91B700A11C61 /* Extra.swift */,
 				E39814E61F6288C80035D519 /* Info.plist */,
@@ -574,6 +577,7 @@
 				E39814E51F6288C80035D519 /* VWOTests.m in Sources */,
 				E3D29F941FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift in Sources */,
 				E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */,
+				E32C7A161FC58603009ABF2F /* VWOGoalTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
