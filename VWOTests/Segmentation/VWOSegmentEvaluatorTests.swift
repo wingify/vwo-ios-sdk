@@ -14,19 +14,9 @@ class VWOSegmentEvaluatorTests: XCTestCase {
     let dateHourformat = DateFormatter(format: "dd-MM-yyyy HH:mm");
     let dateFormat = DateFormatter(format: "dd-MM-yyyy");
 
-    func JSONFrom(file: String) -> [String: Any] {
-        let bundle = Bundle(for: type(of: self))
-        let path = bundle.path(forResource: file, ofType: "json")!
-        let url = URL(fileURLWithPath: path)
-        let str = try! String(contentsOf: url, encoding: .utf8)
-        return str.jsonToDictionary
-    }
-
     override func setUp() { super.setUp()
         continueAfterFailure = false
     }
-
-    override func tearDown() { super.tearDown() }
 
     func testCustomVariable() {
         let evaluator = VWOSegmentEvaluator()

@@ -82,3 +82,12 @@ extension Dictionary where Key == String, Value == Any {
         }.joined(separator: "\n")
     }
 }
+
+func JSONFrom(file: String) -> [String: Any] {
+    let bundle = Bundle(identifier: "com.Wingify.VWOTests")!
+    let path = bundle.path(forResource: file, ofType: "json")!
+    let url = URL(fileURLWithPath: path)
+    let str = try! String(contentsOf: url, encoding: .utf8)
+    return str.jsonToDictionary
+}
+
