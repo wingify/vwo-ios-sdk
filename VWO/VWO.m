@@ -22,7 +22,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     kLogLevel = level;
 }
 
-+ (void)launchForAPIKey:(NSString *) apiKey {
++ (void)launchForAPIKey:(NSString *)apiKey {
     NSParameterAssert(apiKey);
     dispatch_barrier_async(VWOController.taskQueue, ^{
         [VWOController.shared launchWithAPIKey:apiKey withTimeout:nil withCallback:nil failure:nil];
@@ -36,7 +36,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     });
 }
 
-+ (void)launchSynchronouslyForAPIKey:(NSString *) apiKey timeout:(NSTimeInterval)timeout {
++ (void)launchSynchronouslyForAPIKey:(NSString *)apiKey timeout:(NSTimeInterval)timeout {
     NSParameterAssert(apiKey);
     dispatch_barrier_sync(VWOController.taskQueue, ^{
         [VWOController.shared launchWithAPIKey:apiKey withTimeout:@(timeout) withCallback:nil failure:nil];
@@ -59,8 +59,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     dispatch_barrier_sync(VWOController.taskQueue, ^{
         object = [VWOController.shared variationForKey:key];;
     });
-    if (!object) object = defaultValue;
-    return object;
+    return object != nil ? object : defaultValue;
 }
 
 + (void)markConversionForGoal:(NSString *)goal {
