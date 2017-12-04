@@ -70,17 +70,17 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     return object;
 }
 
-+ (void)markConversionForGoal:(NSString *)goal {
++ (void)trackConversion:(NSString *)goal {
     NSParameterAssert(goal);
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        [VWOController.shared markConversionForGoal:goal withValue:nil];
+        [VWOController.shared trackConversion:goal withValue:nil];
     });
 }
 
-+ (void)markConversionForGoal:(NSString *)goal withValue:(double)value {
++ (void)trackConversion:(NSString *)goal withValue:(double)value {
     NSParameterAssert(goal);
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        [VWOController.shared markConversionForGoal:goal withValue:[NSNumber numberWithDouble:value]];
+        [VWOController.shared trackConversion:goal withValue:[NSNumber numberWithDouble:value]];
     });
 }
 

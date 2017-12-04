@@ -29,7 +29,7 @@ static NSString *kSDKversion = @"2.0.0-rc.1";
                  withCallback:(nullable void(^)(void))completionBlock
                       failure:(nullable void(^)(NSString *))failureBlock;
 
-- (void)markConversionForGoal:(NSString *)goal withValue:(nullable NSNumber *)value;
+- (void)trackConversion:(NSString *)goal withValue:(nullable NSNumber *)value;
 - (nullable id)variationForKey:(NSString *)key;
 
 @end

@@ -168,7 +168,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     return  evaluatedCampaigns;
 }
 
-- (void)markConversionForGoal:(NSString *)goalIdentifier withValue:(NSNumber *)value {
+- (void)trackConversion:(NSString *)goalIdentifier withValue:(NSNumber *)value {
     if (!_initialised) {
         VWOLogError(@"VWO must be launched first!");
         return;
