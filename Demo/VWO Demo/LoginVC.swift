@@ -44,21 +44,21 @@ class LoginVC: UIViewController {
     }
 
     @IBAction func actionSkip(_ sender: Any) {
-        VWO.markConversionFor(goal: "landingPage")
+        VWO.trackConversion("landingPage")
         loginDetailVC.view.isHidden = false
         loginDetailVC.imageField.image = #imageLiteral(resourceName: "Skip")
         loginDetailVC.labelField.text = "Login Skipped"
     }
 
     @IBAction func actionLoginEmail(_ sender: Any) {
-        VWO.markConversionFor(goal: "landingPage")
+        VWO.trackConversion("landingPage")
         loginDetailVC.view.isHidden = false
         loginDetailVC.imageField.image = #imageLiteral(resourceName: "Check")
         loginDetailVC.labelField.text = "Login successful"
     }
 
     @IBAction func actionLoginFacebook(_ sender: Any) {
-        VWO.markConversionFor(goal: "landingPage")
+        VWO.trackConversion("landingPage")
         loginDetailVC.view.isHidden = false
         loginDetailVC.imageField.image = #imageLiteral(resourceName: "Check")
         loginDetailVC.labelField.text = "Facebook Login successful"

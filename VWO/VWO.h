@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @note Every goal is marked once
  */
-+ (void)markConversionForGoal:(NSString *)goal NS_SWIFT_NAME(markConversionFor(goal:));
++ (void)trackConversion:(NSString *)goal NS_SWIFT_NAME(trackConversion(_:));
 
 /**
  Triggers goal with a Value for given identifier
@@ -130,7 +130,7 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @note Every goal is marked once
  */
-+ (void)markConversionForGoal:(NSString *)goal withValue:(double)value NS_SWIFT_NAME(markConversionFor(goal:value:));
++ (void)trackConversion:(NSString *)goal withValue:(double)value NS_SWIFT_NAME(trackConversion(_:value:));
 
 /**
  Sets key value pair.
