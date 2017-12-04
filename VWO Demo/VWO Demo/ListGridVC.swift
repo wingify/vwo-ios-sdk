@@ -95,7 +95,7 @@ extension ListGridVC : UICollectionViewDelegateFlowLayout, UICollectionViewDeleg
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        VWO.markConversionFor(goal: "productView")
+        VWO.trackConversion("productView")
         detailVC.setViewFor(phone: phoneList[indexPath.row])
         detailVC.view.isHidden = false
     }
