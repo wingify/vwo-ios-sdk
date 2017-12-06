@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             VWO.logLevel = .debug
             UserDefaults.standard.set(true, forKey: "vwo.enableSocket")
             Swift.print("Launching VWO-\(VWO.version())")
+//            VWO.optOut = true;
             VWO.launch(apiKey: apiKey, completion: {
                 DispatchQueue.main.async {
                     container.activityIndicator.stopAnimating()

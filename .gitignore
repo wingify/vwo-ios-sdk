@@ -17,4 +17,4 @@ DerivedData
 .idea/
 *.ipa
 *.xcuserstate
-
+Pods/
