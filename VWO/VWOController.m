@@ -64,6 +64,11 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     if (optOut) {
         VWOLogWarning(@"Cannot launch. VWO opted out");
         [self clearVWOData];
+        if (completionBlock) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                completionBlock();
+            });
+        }
         return;
     }
     if (_initialised) {
