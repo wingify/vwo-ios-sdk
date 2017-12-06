@@ -38,7 +38,6 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     VWOURLQueue *failedURLQueue;
     NSTimer *messageQueueFlushtimer;
     dispatch_queue_t _vwoQueue;
-    BOOL _initialised;
 }
 
 #pragma mark - Public methods
@@ -57,10 +56,16 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 }
 
 - (void)launchWithAPIKey:(NSString *)apiKey
+                  optOut:(BOOL)optOut
              withTimeout:(NSNumber *)timeout
             withCallback:(void(^)(void))completionBlock
                  failure:(void(^)(NSString *error))failureBlock {
 
+    if (optOut) {
+        VWOLogWarning(@"Cannot launch. VWO opted out");
+        [self clearVWOData];
+        return;
+    }
     if (_initialised) {
         VWOLogWarning(@"VWO must not be initialised more than once");
         return;
@@ -362,8 +367,16 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     [self sendNotificationUserStartedTracking:campaign];
 }
 
-- (void)dealloc{
+- (void)dealloc {
     [NSNotificationCenter.defaultCenter removeObserver:self];
+}
+
+- (void)clearVWOData {
+    [NSUserDefaults.standardUserDefaults removeObjectForKey:@"vwo.09cde70ba7a94aff9d843b1b846a79a7"];
+    
+    [NSFileManager.defaultManager removeItemAtURL:VWOFile.campaignCache error:nil];
+    [NSFileManager.defaultManager removeItemAtURL:VWOFile.messageQueue error:nil];
+    [NSFileManager.defaultManager removeItemAtURL:VWOFile.failedMessageQueue error:nil];
 }
 
 @end

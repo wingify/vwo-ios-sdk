@@ -31,6 +31,11 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 @property (class, nonatomic) VWOLogLevel logLevel;
 
 /**
+ Users that are not to be made part of VWO A/B testing can be opted out.
+ */
+@property (class, nonatomic) BOOL optOut;
+
+/**
  VWO SDK version
  */
 @property (class, nonatomic, readonly) NSString *version;
