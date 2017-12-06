@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString *kSDKversion = @"2.0.0-RC2";
+static NSString *kSDKversion = @"2.0.0-rc.3";
 
 @interface VWOController : NSObject
 
