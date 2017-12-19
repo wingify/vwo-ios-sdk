@@ -10,6 +10,8 @@
 #import "VWOController.h"
 
 static VWOLogLevel kLogLevel = VWOLogLevelError;
+static BOOL kOptOut = NO;
+
 NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStartedTrackingInCampaignNotification";
 
 @implementation VWO
@@ -22,24 +24,36 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     kLogLevel = level;
 }
 
-+ (void)launchForAPIKey:(NSString *)apiKey {
++ (BOOL)optOut {
+    return kOptOut;
+}
+
++ (void)setOptOut:(BOOL)optOut {
+    if (VWOController.shared.isInitialised) {
+        VWOLogWarning(@"Cannot optout/optin after VWO has been launched");
+        return;
+    }
+    kOptOut =  optOut;
+}
+
++ (void)launchForAPIKey:(NSString *) apiKey {
     NSParameterAssert(apiKey);
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        [VWOController.shared launchWithAPIKey:apiKey withTimeout:nil withCallback:nil failure:nil];
+        [VWOController.shared launchWithAPIKey:apiKey optOut:kOptOut withTimeout:nil withCallback:nil failure:nil];
     });
 }
 
 + (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion failure:(void (^)(NSString *error))failureBlock {
     NSParameterAssert(apiKey);
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        [VWOController.shared launchWithAPIKey:apiKey withTimeout:nil withCallback:completion failure:failureBlock];
+        [VWOController.shared launchWithAPIKey:apiKey optOut:kOptOut withTimeout:nil withCallback:completion failure:failureBlock];
     });
 }
 
 + (void)launchSynchronouslyForAPIKey:(NSString *)apiKey timeout:(NSTimeInterval)timeout {
     NSParameterAssert(apiKey);
     dispatch_barrier_sync(VWOController.taskQueue, ^{
-        [VWOController.shared launchWithAPIKey:apiKey withTimeout:@(timeout) withCallback:nil failure:nil];
+        [VWOController.shared launchWithAPIKey:apiKey optOut:kOptOut withTimeout:@(timeout) withCallback:nil failure:nil];
     });
 }
 

@@ -8,14 +8,11 @@
 
 import UIKit
 import VWO
+import FLEX
 
 class MenuVC : UIViewController {
 
-    #if VWO_DEBUG
     var optionList = ["Layout Campaign", "Onboarding Campaign", "Clear Data", "Enter API Key", "About", "Debug"];
-    #else
-    var optionList = ["Layout Campaign", "Onboarding Campaign", "Clear Data", "Enter API Key", "About"];
-    #endif
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -27,7 +24,7 @@ class MenuVC : UIViewController {
         case 2: campaignsClearShowAlert()
         case 3: changeAppKey()
         case 4: showAbout()
-        case 5: break
+        case 5: FLEXManager.shared().showExplorer()
         default: fatalError()
         }
     }

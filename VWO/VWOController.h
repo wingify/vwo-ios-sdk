@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString *kSDKversion = @"2.0.0-rc.1";
+static NSString *kSDKversion = @"2.0.0";
 
 @interface VWOController : NSObject
 
@@ -21,13 +21,15 @@ static NSString *kSDKversion = @"2.0.0-rc.1";
 @property NSMutableDictionary<NSString *, NSString *> *customVariables;
 @property NSDictionary *previewInfo;
 @property VWOConfig *config;
+@property (getter=isInitialised) BOOL initialised;
 
 + (instancetype)shared;
 
 - (void)launchWithAPIKey:(NSString *)apiKey
+                  optOut:(BOOL)optOut
              withTimeout:(nullable NSNumber *)timeout
-                 withCallback:(nullable void(^)(void))completionBlock
-                      failure:(nullable void(^)(NSString *))failureBlock;
+            withCallback:(nullable void(^)(void))completionBlock
+                 failure:(nullable void(^)(NSString *))failureBlock;
 
 - (void)trackConversion:(NSString *)goal withValue:(nullable NSNumber *)value;
 - (nullable id)variationForKey:(NSString *)key;
