@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)push:(id)object;
 - (nullable id)pop;
 - (BOOL)isEmpty;
+- (void)clear;
 @end
 
 NS_ASSUME_NONNULL_END

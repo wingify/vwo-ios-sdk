@@ -46,8 +46,12 @@
     }
     return nil;
 }
+
 - (BOOL)isEmpty {
     return _contents.count == 0;
 }
 
+- (void)clear {
+    [_contents removeAllObjects];
+}
 @end

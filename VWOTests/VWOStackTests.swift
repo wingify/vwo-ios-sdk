@@ -51,4 +51,16 @@ class VWOStackTests: XCTestCase {
         stack.push("B")
         XCTAssertEqual(stack.count, 2)
     }
+    func testClear() {
+        let stack = VWOStack()
+        stack.push("A")
+        stack.push("B")
+        XCTAssertEqual(stack.count, 2)
+        stack.clear()
+        XCTAssertEqual(stack.count, 0)
+        stack.push("A")
+        stack.push("B")
+        XCTAssertEqual(stack.count, 2)
+    }
+
 }
