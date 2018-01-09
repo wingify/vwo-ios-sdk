@@ -247,5 +247,50 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         evaluator.appVersion = "1.2"
         XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: complex2JSON3JSON))
     }
+    func testBracket1() {
+        //Only one segment which has left and right bracket
+        let evaluator = VWOSegmentEvaluator()
+        evaluator.appVersion = "1.2"
+        evaluator.iOSVersion = "8.2"
+        evaluator.date = dateFormat.date(from: "20-11-2017")!
+        let bracket1JSON = JSONFrom(file: "Bracket1")
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: bracket1JSON))
+    }
+    func testBracket2() {
+        //Only one segment which has left and right bracket
+        let evaluator = VWOSegmentEvaluator()
+        evaluator.appVersion = "1.2"
+        evaluator.iOSVersion = "9.3"
+        evaluator.date = dateFormat.date(from: "20-11-2017")!
+        let bracketJSON = JSONFrom(file: "Bracket2")
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: bracketJSON))
+    }
+    func testBracket3() {
+        //First segment has previous logical operator
+        let evaluator = VWOSegmentEvaluator()
+        evaluator.appVersion = "1.2"
+        evaluator.iOSVersion = "9.3"
+        evaluator.date = dateFormat.date(from: "20-11-2017")!
+        let bracketJSON = JSONFrom(file: "Bracket3")
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: bracketJSON))
+    }
+    func testBracket4() {
+        //First segment has previous logical operator
+        let evaluator = VWOSegmentEvaluator()
+        evaluator.appVersion = "1.2"
+        evaluator.iOSVersion = "9.3"
+        evaluator.date = dateFormat.date(from: "20-11-2017")!
+        let bracketJSON = JSONFrom(file: "Bracket4")
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: bracketJSON))
+    }
+    func testNestedBracket2() {
+        //First segment has previous logical operator
+        let evaluator = VWOSegmentEvaluator()
+        evaluator.appVersion = "1.2"
+        evaluator.iOSVersion = "9.3"
+        evaluator.date = dateFormat.date(from: "20-11-2017")!
+        let bracketJSON = JSONFrom(file: "NestedBracket2")
+        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: bracketJSON))
+    }
 }
 

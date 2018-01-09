@@ -8,11 +8,7 @@
 
 #import "VWOSegment.h"
 
-@implementation VWOSegment {
-    BOOL leftBracket;
-    BOOL rightBracket;
-    NSString *previousLogicalOperator;
-}
+@implementation VWOSegment
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *) segmentDict {
     self = [super init];
@@ -28,14 +24,14 @@
         }
         _type = [segmentDict[@"type"] intValue];
 
-        previousLogicalOperator = segmentDict[@"prevLogicalOperator"];
-        if ([previousLogicalOperator  isEqual: @"AND"]) {
-            previousLogicalOperator = @"&";
-        } else if ([previousLogicalOperator  isEqual: @"OR"]) {
-            previousLogicalOperator = @"|";
+        _previousLogicalOperator = segmentDict[@"prevLogicalOperator"];
+        if ([_previousLogicalOperator  isEqual: @"AND"]) {
+            _previousLogicalOperator = @"&";
+        } else if ([_previousLogicalOperator  isEqual: @"OR"]) {
+            _previousLogicalOperator = @"|";
         }
-        leftBracket = [segmentDict[@"lBracket"] boolValue];
-        rightBracket = [segmentDict[@"rBracket"] boolValue];
+        _leftBracket = [segmentDict[@"lBracket"] boolValue];
+        _rightBracket = [segmentDict[@"rBracket"] boolValue];
     }
     return self;
 
@@ -43,14 +39,14 @@
 
 - (NSArray *)toInfixForOperand:(BOOL)evaluatedOperand {
     NSMutableArray *arr = [NSMutableArray new];
-    if (previousLogicalOperator != nil) {
-        [arr addObject:previousLogicalOperator];
+    if (_previousLogicalOperator != nil) {
+        [arr addObject:_previousLogicalOperator];
     }
-    if (leftBracket) {
+    if (_leftBracket) {
         [arr addObject:@"("];
     }
     [arr addObject:evaluatedOperand ? @"1" : @"0"];
-    if(rightBracket) {
+    if(_rightBracket) {
         [arr addObject:@")"];
     }
     return arr;

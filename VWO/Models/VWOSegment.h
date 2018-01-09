@@ -24,6 +24,9 @@ typedef NS_ENUM(NSInteger, VWOSegmentType) {
 @property NSString *lOperand;
 @property NSArray *rOperand;
 @property (nonatomic, assign) VWOSegmentType type;
+@property (nonatomic, assign) BOOL leftBracket;
+@property (nonatomic, assign) BOOL rightBracket;
+@property (nullable) NSString *previousLogicalOperator;
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *) segmentDict;
 

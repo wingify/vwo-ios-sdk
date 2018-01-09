@@ -89,11 +89,17 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
 - (BOOL)evaluateCustomSegmentation:(NSArray *)partialSegments {
     NSMutableArray *infix = [NSMutableArray new];
+    NSUInteger count = 0;
     for (NSDictionary *partialSegment in partialSegments) {
         VWOSegment *segment = [[VWOSegment alloc] initWithDictionary:partialSegment];
+
+        //If first segment has previousLogicalOperator remove it.
+        if (count == 0) { segment.previousLogicalOperator = nil;}
+
         BOOL evaluated = [self evaluate:segment];
         NSArray *infixPart = [segment toInfixForOperand:evaluated];
         [infix addObjectsFromArray:infixPart];
+        count++;
     }
     return [[[VWOInfixEvaluator alloc] init] evaluate:infix];
 }

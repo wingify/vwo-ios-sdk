@@ -1,0 +1,13 @@
+{
+    "type": "custom",
+    "partialSegments": [
+                        {
+                        "lBracket": true,
+                        "prevLogicalOperator": "AND",
+                        "type": "1",
+                        "operator": 11,
+                        "rOperandValue": "9.3",
+                        "rBracket": true
+                        }
+                        ]
+}

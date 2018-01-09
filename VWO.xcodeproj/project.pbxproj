@@ -98,6 +98,11 @@
 		E3F7CBB12004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBB02004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift */; };
 		E3F7CBB42004C91400CC8C03 /* VWOSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F7CBB22004C91400CC8C03 /* VWOSegment.h */; };
 		E3F7CBB52004C91400CC8C03 /* VWOSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBB32004C91400CC8C03 /* VWOSegment.m */; };
+		E3F7CBB72004D6E600CC8C03 /* Bracket1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3F7CBB62004D6E600CC8C03 /* Bracket1.json */; };
+		E3F7CBB92004D85E00CC8C03 /* Bracket2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3F7CBB82004D85E00CC8C03 /* Bracket2.json */; };
+		E3F7CBBB2004D93D00CC8C03 /* Bracket3.json in Resources */ = {isa = PBXBuildFile; fileRef = E3F7CBBA2004D93D00CC8C03 /* Bracket3.json */; };
+		E3F7CBBD2004DFEE00CC8C03 /* Bracket4.json in Resources */ = {isa = PBXBuildFile; fileRef = E3F7CBBC2004DFEE00CC8C03 /* Bracket4.json */; };
+		E3F7CBBF2004E0AB00CC8C03 /* NestedBracket2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3F7CBBE2004E0AB00CC8C03 /* NestedBracket2.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +212,11 @@
 		E3F7CBB02004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOInfixEvaluatorTests.swift; sourceTree = "<group>"; };
 		E3F7CBB22004C91400CC8C03 /* VWOSegment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOSegment.h; sourceTree = "<group>"; };
 		E3F7CBB32004C91400CC8C03 /* VWOSegment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOSegment.m; sourceTree = "<group>"; };
+		E3F7CBB62004D6E600CC8C03 /* Bracket1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bracket1.json; sourceTree = "<group>"; };
+		E3F7CBB82004D85E00CC8C03 /* Bracket2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bracket2.json; sourceTree = "<group>"; };
+		E3F7CBBA2004D93D00CC8C03 /* Bracket3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bracket3.json; sourceTree = "<group>"; };
+		E3F7CBBC2004DFEE00CC8C03 /* Bracket4.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bracket4.json; sourceTree = "<group>"; };
+		E3F7CBBE2004E0AB00CC8C03 /* NestedBracket2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NestedBracket2.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -398,6 +408,11 @@
 				E3924B431FC2E65E006A9EB2 /* Or3.json */,
 				E3924B451FC408AD006A9EB2 /* Complex1.json */,
 				E3924B471FC40B2F006A9EB2 /* Complex2.json */,
+				E3F7CBB62004D6E600CC8C03 /* Bracket1.json */,
+				E3F7CBB82004D85E00CC8C03 /* Bracket2.json */,
+				E3F7CBBA2004D93D00CC8C03 /* Bracket3.json */,
+				E3F7CBBC2004DFEE00CC8C03 /* Bracket4.json */,
+				E3F7CBBE2004E0AB00CC8C03 /* NestedBracket2.json */,
 			);
 			path = Segmentation;
 			sourceTree = "<group>";
@@ -534,6 +549,7 @@
 				E3D29FAF1FBDAF1700A11C61 /* AppVersionEqualTo.json in Resources */,
 				E3D29FD51FBEEC8100A11C61 /* HourOfTheDayMultiple.json in Resources */,
 				E3D29FC11FBED57000A11C61 /* DayOfWeekSingle.json in Resources */,
+				E3F7CBBB2004D93D00CC8C03 /* Bracket3.json in Resources */,
 				E3D29FCD1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json in Resources */,
 				E3D29FBD1FBECA9E00A11C61 /* iOSVersionGreaterThan.json in Resources */,
 				E3924B461FC408AD006A9EB2 /* Complex1.json in Resources */,
@@ -543,6 +559,7 @@
 				E3D29FB71FBDAF8C00A11C61 /* AppVersionStartsWith.json in Resources */,
 				E3D29FA71FBDAE8A00A11C61 /* AppVersionRegex.json in Resources */,
 				E3924B481FC40B2F006A9EB2 /* Complex2.json in Resources */,
+				E3F7CBB92004D85E00CC8C03 /* Bracket2.json in Resources */,
 				E3D29FB51FBDAF7400A11C61 /* AppVersionNotEqualTo.json in Resources */,
 				E3D29FCF1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json in Resources */,
 				E3D29F9E1FBDA49B00A11C61 /* PredefinedNewUser.json in Resources */,
@@ -550,6 +567,7 @@
 				E3D29F981FBD928700A11C61 /* PredefinediPhone.json in Resources */,
 				E3D29FD71FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json in Resources */,
 				E3D29FC31FBED59B00A11C61 /* DayOfWeekMultiple.json in Resources */,
+				E3F7CBBD2004DFEE00CC8C03 /* Bracket4.json in Resources */,
 				E3924B441FC2E65E006A9EB2 /* Or3.json in Resources */,
 				E3924B3C1FC2C2D8006A9EB2 /* And1.json in Resources */,
 				E3D29FAB1FBDAED400A11C61 /* AppVersionContains.json in Resources */,
@@ -557,7 +575,9 @@
 				E3924B421FC2DD15006A9EB2 /* Or2.json in Resources */,
 				E3D29FA31FBDAC3E00A11C61 /* CustomVariable.json in Resources */,
 				E3D29FB91FBECA6700A11C61 /* iOSVersionEqualTo.json in Resources */,
+				E3F7CBBF2004E0AB00CC8C03 /* NestedBracket2.json in Resources */,
 				E3D29FBB1FBECA8800A11C61 /* iOSVersionNotEqualTo.json in Resources */,
+				E3F7CBB72004D6E600CC8C03 /* Bracket1.json in Resources */,
 				E3D29FA01FBDA4C100A11C61 /* PredefinedReturningUser.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
