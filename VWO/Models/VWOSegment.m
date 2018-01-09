@@ -15,8 +15,8 @@
     if (self) {
         _operator = [segmentDict[@"operator"] intValue];
 
+        // L-operand R- operand
         _lOperand = segmentDict[@"lOperandValue"];
-
         if ([segmentDict[@"rOperandValue"] isKindOfClass:[NSArray class]]) {
             _rOperand = segmentDict[@"rOperandValue"];
         } else {
@@ -24,12 +24,17 @@
         }
         _type = [segmentDict[@"type"] intValue];
 
-        _previousLogicalOperator = segmentDict[@"prevLogicalOperator"];
-        if ([_previousLogicalOperator  isEqual: @"AND"]) {
-            _previousLogicalOperator = @"&";
-        } else if ([_previousLogicalOperator  isEqual: @"OR"]) {
-            _previousLogicalOperator = @"|";
+        //Previous logical operator
+        NSString *operator = segmentDict[@"prevLogicalOperator"];
+        if ([operator  isEqual: @"AND"]) {
+            _previousLogicalOperator = VWOPreviousLogicalOperatorAnd;
+        } else if ([operator  isEqual: @"OR"]) {
+            _previousLogicalOperator = VWOPreviousLogicalOperatorOr;
+        } else {
+            _previousLogicalOperator = VWOPreviousLogicalOperatorNone;
         }
+
+        //Brackets
         _leftBracket = [segmentDict[@"lBracket"] boolValue];
         _rightBracket = [segmentDict[@"rBracket"] boolValue];
     }
@@ -38,9 +43,11 @@
 }
 
 - (NSArray *)toInfixForOperand:(BOOL)evaluatedOperand {
-    NSMutableArray *arr = [NSMutableArray new];
-    if (_previousLogicalOperator != nil) {
-        [arr addObject:_previousLogicalOperator];
+    NSMutableArray <NSString *>*arr = [NSMutableArray new];
+    if (_previousLogicalOperator == VWOPreviousLogicalOperatorAnd) {
+        [arr addObject:@"&"];
+    } else if (_previousLogicalOperator == VWOPreviousLogicalOperatorOr) {
+        [arr addObject:@"|"];
     }
     if (_leftBracket) {
         [arr addObject:@"("];

@@ -18,6 +18,12 @@ typedef NS_ENUM(NSInteger, VWOSegmentType) {
     VWOSegmentTypeHourOfTheDay   = 4,
 };
 
+typedef NS_ENUM(NSInteger, VWOPreviousLogicalOperator) {
+    VWOPreviousLogicalOperatorNone = 0,
+    VWOPreviousLogicalOperatorAnd = 1,
+    VWOPreviousLogicalOperatorOr = 2
+};
+
 @interface VWOSegment : NSObject
 
 @property (nonatomic, assign) int operator;
@@ -26,11 +32,11 @@ typedef NS_ENUM(NSInteger, VWOSegmentType) {
 @property (nonatomic, assign) VWOSegmentType type;
 @property (nonatomic, assign) BOOL leftBracket;
 @property (nonatomic, assign) BOOL rightBracket;
-@property (nullable) NSString *previousLogicalOperator;
+@property (nonatomic, assign) VWOPreviousLogicalOperator previousLogicalOperator;
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *) segmentDict;
 
-- (NSArray *)toInfixForOperand:(BOOL)evaluatedOperand;
+- (NSArray <NSString *>*)toInfixForOperand:(BOOL)evaluatedOperand;
 @end
 
 NS_ASSUME_NONNULL_END

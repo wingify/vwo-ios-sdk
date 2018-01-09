@@ -94,7 +94,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
         VWOSegment *segment = [[VWOSegment alloc] initWithDictionary:partialSegment];
 
         //If first segment has previousLogicalOperator remove it.
-        if (count == 0) { segment.previousLogicalOperator = nil;}
+        if (count == 0) { segment.previousLogicalOperator = VWOPreviousLogicalOperatorNone;}
 
         BOOL evaluated = [self evaluate:segment];
         NSArray *infixPart = [segment toInfixForOperand:evaluated];

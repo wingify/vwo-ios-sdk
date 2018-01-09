@@ -103,6 +103,7 @@
 		E3F7CBBB2004D93D00CC8C03 /* Bracket3.json in Resources */ = {isa = PBXBuildFile; fileRef = E3F7CBBA2004D93D00CC8C03 /* Bracket3.json */; };
 		E3F7CBBD2004DFEE00CC8C03 /* Bracket4.json in Resources */ = {isa = PBXBuildFile; fileRef = E3F7CBBC2004DFEE00CC8C03 /* Bracket4.json */; };
 		E3F7CBBF2004E0AB00CC8C03 /* NestedBracket2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3F7CBBE2004E0AB00CC8C03 /* NestedBracket2.json */; };
+		E3F7CBC12004E57900CC8C03 /* VWOSegmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBC02004E57900CC8C03 /* VWOSegmentTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,6 +218,7 @@
 		E3F7CBBA2004D93D00CC8C03 /* Bracket3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bracket3.json; sourceTree = "<group>"; };
 		E3F7CBBC2004DFEE00CC8C03 /* Bracket4.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bracket4.json; sourceTree = "<group>"; };
 		E3F7CBBE2004E0AB00CC8C03 /* NestedBracket2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NestedBracket2.json; sourceTree = "<group>"; };
+		E3F7CBC02004E57900CC8C03 /* VWOSegmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOSegmentTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,6 +298,7 @@
 				E3F7CBB02004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift */,
 				E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */,
 				E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */,
+				E3F7CBC02004E57900CC8C03 /* VWOSegmentTests.swift */,
 				E3D29FA11FBDA85100A11C61 /* Segmentation */,
 				E3D29F951FBD91B700A11C61 /* Extra.swift */,
 				E39814E61F6288C80035D519 /* Info.plist */,
@@ -627,6 +630,7 @@
 				E3F7CBAF2004B72E00CC8C03 /* VWOStackTests.swift in Sources */,
 				E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */,
 				E31714C41F838BB10036CF07 /* VWODevice.m in Sources */,
+				E3F7CBC12004E57900CC8C03 /* VWOSegmentTests.swift in Sources */,
 				E3D29F941FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift in Sources */,
 				E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */,
 				E32C7A161FC58603009ABF2F /* VWOGoalTests.swift in Sources */,

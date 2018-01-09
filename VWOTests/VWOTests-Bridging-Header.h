@@ -11,3 +11,4 @@
 #import "VWOVariation.h"
 #import "VWOStack.h"
 #import "VWOInfixEvaluator.h"
+#import "VWOSegment.h"
