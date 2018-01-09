@@ -9,34 +9,15 @@
 #import "VWOInfixEvaluator.h"
 #import "VWOStack.h"
 
-@implementation VWOInfixEvaluator {
-    VWOStack *_operandStack;//Bool array
-    VWOStack *_operatorStack;//NSString array
-    NSArray *_expression;
-}
+@implementation VWOInfixEvaluator
 
 static NSString *or = @"|";
 static NSString *and = @"&";
 static NSString *openBracket = @"(";
 static NSString *closeBracket = @")";
 
-- (instancetype)init {
-    if (self = [super init]) {
-        _operandStack = [VWOStack new];
-        _operatorStack = [VWOStack new];
-    }
-    return self;
-}
 
-- (void) pushOperator:(NSString *)operator {
-    [_operatorStack push:operator];
-}
-
-- (void)pushOperand:(BOOL) operand {
-    [_operandStack push:@(operand)];
-}
-
-- (BOOL)evaluteOperator:(NSString *)operator forLHS:(BOOL)lhs RHS:(BOOL)rhs {
++ (BOOL)evaluteOperator:(NSString *)operator forLHS:(BOOL)lhs RHS:(BOOL)rhs {
     if ([operator  isEqual: and]) {
         return lhs && rhs;
     } else if([operator  isEqual: or]) {
@@ -45,45 +26,45 @@ static NSString *closeBracket = @")";
     return NO;
 }
 
-- (void)evaluateStack {
-    if (_operatorStack.isEmpty) {
++ (void)evaluateSubExpressionForOperandStack:(VWOStack *)operandStack operatorStack:(VWOStack *)operatorStack {
+    if (operatorStack.isEmpty) {
         return;
     }
 
-    if ([_operatorStack.peek isEqualToString:@"("]) {
-        [_operatorStack pop];
+    if ([operatorStack.peek isEqualToString:@"("]) {
+        [operatorStack pop];
         return;
     }
     NSString *a;
-    while ( ![a isEqualToString:@"("] && !_operatorStack.isEmpty) {
-        NSString *operator = _operatorStack.pop;
-        BOOL rhs = [_operandStack.pop boolValue];
-        BOOL lhs = [_operandStack.pop boolValue];
+    while ( ![a isEqualToString:@"("] && !operatorStack.isEmpty) {
+        NSString *operator = operatorStack.pop;
+        BOOL rhs = [operandStack.pop boolValue];
+        BOOL lhs = [operandStack.pop boolValue];
         BOOL answer = [self evaluteOperator:operator forLHS:lhs RHS:rhs];
-        [_operandStack push:@(answer)];
-        a = _operatorStack.peek;
+        [operandStack push:@(answer)];
+        a = operatorStack.peek;
     }
 }
 
-- (BOOL) isOperator:(NSString *)string {
++ (BOOL) isOperator:(NSString *)string {
     NSArray *allOperators =  @[or, and, openBracket, closeBracket];
     return [allOperators containsObject:string];
 }
 
-- (BOOL) evaluate:(NSArray <NSString *>*) expression {
-    [_operandStack clear];
-    [_operatorStack clear];
++ (BOOL) evaluate:(NSArray <NSString *>*) expression {
+    VWOStack *_operandStack = [VWOStack new];
+    VWOStack * _operatorStack = [VWOStack new];
     for (NSString *exp in expression) {
         if ([exp isEqualToString:@")"]) {
-            [self evaluateStack];
+            [self evaluateSubExpressionForOperandStack:_operandStack operatorStack:_operatorStack];
         } else if ([self isOperator:exp]) {
-            [self pushOperator:exp];
+            [_operatorStack push:exp];
         } else {
-            [self pushOperand:[exp boolValue]];
+            [_operandStack push:@([exp boolValue])];
         }
     }
     while (_operatorStack.count > 0) {
-        [self evaluateStack];
+        [self evaluateSubExpressionForOperandStack:_operandStack operatorStack:_operatorStack];
     }
     return [_operandStack.pop boolValue];
 }

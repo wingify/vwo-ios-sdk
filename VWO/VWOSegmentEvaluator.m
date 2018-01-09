@@ -101,7 +101,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
         [infix addObjectsFromArray:infixPart];
         count++;
     }
-    return [[[VWOInfixEvaluator alloc] init] evaluate:infix];
+    return [VWOInfixEvaluator evaluate:infix];
 }
 
 - (BOOL)evaluate:(VWOSegment *) segment {
