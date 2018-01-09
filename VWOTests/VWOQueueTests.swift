@@ -18,6 +18,7 @@ class VWOQueueTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
+        try? FileManager.default.removeItem(at: path!)
         XCTAssertNotNil(path)
         XCTAssertFalse(FileManager.default.fileExists(atPath: path!.path), "File must be deleted before every test case")
         vwoQueue = VWOQueue(fileURL: path!)
