@@ -96,6 +96,8 @@
 		E3F7CBAD2004A9B100CC8C03 /* VWOStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBAB2004A9B100CC8C03 /* VWOStack.m */; };
 		E3F7CBAF2004B72E00CC8C03 /* VWOStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBAE2004B72E00CC8C03 /* VWOStackTests.swift */; };
 		E3F7CBB12004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBB02004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift */; };
+		E3F7CBB42004C91400CC8C03 /* VWOSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F7CBB22004C91400CC8C03 /* VWOSegment.h */; };
+		E3F7CBB52004C91400CC8C03 /* VWOSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBB32004C91400CC8C03 /* VWOSegment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +205,8 @@
 		E3F7CBAB2004A9B100CC8C03 /* VWOStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOStack.m; sourceTree = "<group>"; };
 		E3F7CBAE2004B72E00CC8C03 /* VWOStackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOStackTests.swift; sourceTree = "<group>"; };
 		E3F7CBB02004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOInfixEvaluatorTests.swift; sourceTree = "<group>"; };
+		E3F7CBB22004C91400CC8C03 /* VWOSegment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOSegment.h; sourceTree = "<group>"; };
+		E3F7CBB32004C91400CC8C03 /* VWOSegment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOSegment.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +307,8 @@
 				E3F7CBAB2004A9B100CC8C03 /* VWOStack.m */,
 				E398154B1F6291680035D519 /* VWOVariation.h */,
 				E398154C1F6291680035D519 /* VWOVariation.m */,
+				E3F7CBB22004C91400CC8C03 /* VWOSegment.h */,
+				E3F7CBB32004C91400CC8C03 /* VWOSegment.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -424,6 +430,7 @@
 				E398158F1F6291B50035D519 /* VWOSocketClient.h in Headers */,
 				E39815931F6291C10035D519 /* VWOSegmentEvaluator.h in Headers */,
 				E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */,
+				E3F7CBB42004C91400CC8C03 /* VWOSegment.h in Headers */,
 				E398159C1F6293BC0035D519 /* NSDictionary+VWO.h in Headers */,
 				E39815661F6291680035D519 /* socket.io.js.h in Headers */,
 				E3F7CBA82004A07800CC8C03 /* VWOInfixEvaluator.h in Headers */,
@@ -584,6 +591,7 @@
 				E3D29FCB1FBEDE2A00A11C61 /* NSString+VWO.m in Sources */,
 				E39815681F6291680035D519 /* VWOSIOSocket.m in Sources */,
 				E39815581F6291680035D519 /* VWOCampaign.m in Sources */,
+				E3F7CBB52004C91400CC8C03 /* VWOSegment.m in Sources */,
 				E39815841F6291970035D519 /* VWOFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

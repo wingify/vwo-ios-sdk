@@ -11,14 +11,8 @@
 #import "VWOLogger.h"
 #import "NSDate+VWO.h"
 #import "NSString+VWO.h"
-
-typedef NS_ENUM(NSInteger, SegmentationType) {
-    SegmentationTypeCustomVariable = 7,
-    SegmentationTypeAppVersion     = 6,
-    SegmentationTypeiOSVersion     = 1,
-    SegmentationTypeDayOfWeek      = 3,
-    SegmentationTypeHourOfTheDay   = 4,
-};
+#import "VWOSegment.h"
+#import "VWOInfixEvaluator.h"
 
 typedef NS_ENUM(NSInteger, OperatorType) {
     OperatorTypeIsEqualToCaseInsensitive    = 1,
@@ -94,112 +88,58 @@ static NSString * kReturningVisitor = @"returning_visitor";
 }
 
 - (BOOL)evaluateCustomSegmentation:(NSArray *)partialSegments {
-
-    NSMutableArray *stack = [NSMutableArray array];
+    NSMutableArray *infix = [NSMutableArray new];
     for (NSDictionary *partialSegment in partialSegments) {
-        BOOL leftParenthesis = [partialSegment[@"lBracket"] boolValue];
-        BOOL rightParenthesis = [partialSegment[@"rBracket"] boolValue];
-        int operator = [partialSegment[@"operator"] intValue];
-        NSString *logicalOperator = partialSegment[@"prevLogicalOperator"];
-
-        NSArray *operandValue;
-        if ([partialSegment[@"rOperandValue"] isKindOfClass:[NSArray class]]) {
-            operandValue = partialSegment[@"rOperandValue"];
-        } else {
-            operandValue = [NSArray arrayWithObject:partialSegment[@"rOperandValue"]];
-        }
-
-        NSString *lOperandValue = partialSegment[@"lOperandValue"];
-        SegmentationType segmentType = [partialSegment[@"type"] intValue];
-
-        BOOL currentValue = [self evaluateSegmentForOperand:operandValue lOperand:lOperandValue operator:operator type:segmentType];
-
-        if (logicalOperator && leftParenthesis) {
-            [stack addObject:logicalOperator];
-        } else if (logicalOperator) {
-            BOOL leftVariable = [stack.lastObject boolValue];
-            [stack removeLastObject];
-
-            // apply operator to these two
-            if ([logicalOperator isEqualToString:@"AND"]) {
-                currentValue = (leftVariable && currentValue);
-            } else {
-                currentValue = (leftVariable || currentValue);
-            }
-        }
-
-        if (leftParenthesis) {
-            [stack addObject:@"("];
-        }
-
-        if (rightParenthesis) {
-            [stack removeLastObject];
-
-            while ((stack.count > 0) && ![stack.lastObject isEqualToString:@")"]) {
-                NSString *stackLogicalOperator = stack.lastObject;
-                [stack removeLastObject];
-
-                BOOL leftVariable = [stack.lastObject boolValue];
-                [stack removeLastObject];
-
-                // apply operator to these two
-                if ([stackLogicalOperator isEqualToString:@"AND"]) {
-                    currentValue = (leftVariable && currentValue);
-                } else {
-                    currentValue = (leftVariable || currentValue);
-                }
-            }
-        }
-        [stack addObject:[NSNumber numberWithBool:currentValue]];
+        VWOSegment *segment = [[VWOSegment alloc] initWithDictionary:partialSegment];
+        BOOL evaluated = [self evaluate:segment];
+        NSArray *infixPart = [segment toInfixForOperand:evaluated];
+        [infix addObjectsFromArray:infixPart];
     }
-    return [stack.lastObject boolValue];
+    return [[[VWOInfixEvaluator alloc] init] evaluate:infix];
 }
 
-- (BOOL)evaluateSegmentForOperand:(NSArray *)operand
-                        lOperand:(NSString *)lOperand
-                        operator:(int)operator
-                            type:(SegmentationType)segmentType {
+- (BOOL)evaluate:(VWOSegment *) segment {
 
-    if (operand.count == 0) {
+    if (segment.rOperand.count == 0) {
         return YES;
     }
 
-    switch (segmentType) {
-        case SegmentationTypeiOSVersion: {
+    switch (segment.type) {
+        case VWOSegmentTypeiOSVersion: {
             NSAssert(self.iOSVersion != nil, @"iOS Version not available");
             NSString *version = [self.iOSVersion toXDotY];
-            NSString *targetVersion = operand.firstObject;
+            NSString *targetVersion = segment.rOperand.firstObject;
             NSComparisonResult result = [version compare:targetVersion options:NSNumericSearch];
-            switch (operator) {
+            switch (segment.operator) {
                 case OperatorTypeIsEqualTo: return result == NSOrderedSame;
                 case OperatorTypeIsNotEqualTo: return result != NSOrderedSame;
                 case OperatorTypeGreaterThan: return result == NSOrderedDescending;
                 case OperatorTypeLessThan: return result == NSOrderedAscending;
                 default:
-                    VWOLogException(@"Invalid operator received for iOSVersion %d", operator);
+                    VWOLogException(@"Invalid operator received for iOSVersion %d", segment.operator);
                     return NO;
             }
             break;
         }
 
-        case SegmentationTypeDayOfWeek: {
+        case VWOSegmentTypeDayOfWeek: {
             NSAssert(self.date != nil, @"Date not available");
-            BOOL contains = [operand containsObject:[NSNumber numberWithInteger:self.date.dayOfWeek]];
-            return ((contains && operator == OperatorTypeIsEqualTo) ||
-                    (!contains && operator == OperatorTypeIsNotEqualTo));
+            BOOL contains = [segment.rOperand containsObject:[NSNumber numberWithInteger:self.date.dayOfWeek]];
+            return ((contains && segment.operator == OperatorTypeIsEqualTo) ||
+                    (!contains && segment.operator == OperatorTypeIsNotEqualTo));
         }
 
-        case SegmentationTypeHourOfTheDay: {
+        case VWOSegmentTypeHourOfTheDay: {
             NSAssert(self.date != nil, @"Date not available");
-            BOOL contains = [operand containsObject:[NSNumber numberWithInteger:self.date.hourOfTheDay]];
-            return ((contains && operator == OperatorTypeIsEqualTo) ||
-                    (!contains && operator == OperatorTypeIsNotEqualTo));
+            BOOL contains = [segment.rOperand containsObject:[NSNumber numberWithInteger:self.date.hourOfTheDay]];
+            return ((contains && segment.operator == OperatorTypeIsEqualTo) ||
+                    (!contains && segment.operator == OperatorTypeIsNotEqualTo));
         }
 
-        case SegmentationTypeAppVersion: {
+        case VWOSegmentTypeAppVersion: {
             NSAssert(_appVersion != nil, @"App Version not available");
-            NSString *targetVersion = operand.firstObject;
-            switch (operator) {
+            NSString *targetVersion = segment.rOperand.firstObject;
+            switch (segment.operator) {
                 case OperatorTypeMatchesRegexCaseInsensitive:
                     return ([_appVersion rangeOfString:targetVersion options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound);
 
@@ -216,18 +156,18 @@ static NSString * kReturningVisitor = @"returning_visitor";
                     return [_appVersion hasPrefix:targetVersion];
 
                 default:
-                    VWOLogException(@"Invalid operator received for AppVersion %d", operator);
+                    VWOLogException(@"Invalid operator received for AppVersion %d", segment.operator);
                     return NO;
             }
             break;
         }
 
-        case SegmentationTypeCustomVariable: {
-            NSString *currentValue = _customVariables[lOperand];
+        case VWOSegmentTypeCustomVariable: {
+            NSString *currentValue = _customVariables[segment.lOperand];
             if (currentValue == nil) return NO;
 
-            NSString *targetValue = operand.firstObject;
-            switch (operator) {
+            NSString *targetValue = segment.rOperand.firstObject;
+            switch (segment.operator) {
                 case OperatorTypeMatchesRegexCaseInsensitive:
                     return ([currentValue rangeOfString:targetValue options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound);
 
@@ -244,13 +184,13 @@ static NSString * kReturningVisitor = @"returning_visitor";
                     return [currentValue hasPrefix:targetValue];
 
                 default:
-                    VWOLogException(@"Invalid operator received for Custom Variable %d", operator);
+                    VWOLogException(@"Invalid operator received for Custom Variable %d", segment.operator);
                     return NO;
             }
             break;
         }
         default:
-            VWOLogException(@"Invalid segment received %ld", (long)segmentType);
+            VWOLogException(@"Invalid segment received %ld", (long)segment.type);
             return NO;
     }
 }
