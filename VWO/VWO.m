@@ -8,6 +8,7 @@
 
 #import "VWO.h"
 #import "VWOController.h"
+#import "VWOLogger.h"
 
 static VWOLogLevel kLogLevel = VWOLogLevelError;
 static BOOL kOptOut = NO;
