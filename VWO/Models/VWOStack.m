@@ -54,4 +54,8 @@
 - (void)clear {
     [_contents removeAllObjects];
 }
+
+- (NSString *)description {
+    return [_contents componentsJoinedByString:@","];
+}
 @end

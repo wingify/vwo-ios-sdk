@@ -15,16 +15,15 @@
     NSArray *_expression;
 }
 
-static NSString *or = @"OR";
-static NSString *and = @"AND";
+static NSString *or = @"|";
+static NSString *and = @"&";
 static NSString *openBracket = @"(";
 static NSString *closeBracket = @")";
 
-- (instancetype)initWithExpression:(NSArray *) expression {
+- (instancetype)init {
     if (self = [super init]) {
         _operandStack = [VWOStack new];
         _operatorStack = [VWOStack new];
-        _expression = expression;
     }
     return self;
 }
@@ -38,9 +37,9 @@ static NSString *closeBracket = @")";
 }
 
 - (BOOL)evaluteOperator:(NSString *)operator forLHS:(BOOL)lhs RHS:(BOOL)rhs {
-    if ([operator  isEqual: @"&"]) {
+    if ([operator  isEqual: and]) {
         return lhs && rhs;
-    } else if([operator  isEqual: @"|"]) {
+    } else if([operator  isEqual: or]) {
         return lhs || rhs;
     }
     return NO;
@@ -56,10 +55,10 @@ static NSString *closeBracket = @")";
         return;
     }
     NSString *a;
-    while ( ![a isEqualToString:@"("] && !_operandStack.isEmpty) {
+    while ( ![a isEqualToString:@"("] && !_operatorStack.isEmpty) {
         NSString *operator = _operatorStack.pop;
-        BOOL rhs = _operandStack.pop;
-        BOOL lhs = _operandStack.pop;
+        BOOL rhs = [_operandStack.pop boolValue];
+        BOOL lhs = [_operandStack.pop boolValue];
         BOOL answer = [self evaluteOperator:operator forLHS:lhs RHS:rhs];
         [_operandStack push:@(answer)];
         a = _operatorStack.peek;
@@ -71,8 +70,10 @@ static NSString *closeBracket = @")";
     return [allOperators containsObject:string];
 }
 
-- (BOOL) evaluate {
-    for (NSString *exp in _expression) {
+- (BOOL) evaluate:(NSArray <NSString *>*) expression {
+    [_operandStack clear];
+    [_operatorStack clear];
+    for (NSString *exp in expression) {
         if ([exp isEqualToString:@")"]) {
             [self evaluateStack];
         } else if ([self isOperator:exp]) {
@@ -84,7 +85,7 @@ static NSString *closeBracket = @")";
     while (_operatorStack.count > 0) {
         [self evaluateStack];
     }
-    return _operandStack.pop;
+    return [_operandStack.pop boolValue];
 }
 
 @end

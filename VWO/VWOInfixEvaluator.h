@@ -12,9 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VWOInfixEvaluator : NSObject
 
-- (instancetype)initWithExpression:(NSArray *) expression;
-
-- (BOOL) evaluate;
+- (BOOL) evaluate:(NSArray <NSString *>*) expression;
 
 @end
 
