@@ -90,6 +90,11 @@
 		E3D29FD71FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FD61FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json */; };
 		E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */; };
 		E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */; };
+		E3F7CBA82004A07800CC8C03 /* VWOInfixEvaluator.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F7CBA62004A07800CC8C03 /* VWOInfixEvaluator.h */; };
+		E3F7CBA92004A07800CC8C03 /* VWOInfixEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBA72004A07800CC8C03 /* VWOInfixEvaluator.m */; };
+		E3F7CBAC2004A9B100CC8C03 /* VWOStack.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F7CBAA2004A9B100CC8C03 /* VWOStack.h */; };
+		E3F7CBAD2004A9B100CC8C03 /* VWOStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBAB2004A9B100CC8C03 /* VWOStack.m */; };
+		E3F7CBAF2004B72E00CC8C03 /* VWOStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBAE2004B72E00CC8C03 /* VWOStackTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,6 +196,11 @@
 		E3D29FD61FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HourOfTheDayMultipleNotEqual.json; sourceTree = "<group>"; };
 		E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOURL.h; sourceTree = "<group>"; };
 		E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOURL.m; sourceTree = "<group>"; };
+		E3F7CBA62004A07800CC8C03 /* VWOInfixEvaluator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOInfixEvaluator.h; sourceTree = "<group>"; };
+		E3F7CBA72004A07800CC8C03 /* VWOInfixEvaluator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOInfixEvaluator.m; sourceTree = "<group>"; };
+		E3F7CBAA2004A9B100CC8C03 /* VWOStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOStack.h; sourceTree = "<group>"; };
+		E3F7CBAB2004A9B100CC8C03 /* VWOStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOStack.m; sourceTree = "<group>"; };
+		E3F7CBAE2004B72E00CC8C03 /* VWOStackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOStackTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +255,8 @@
 				E388B6CD1F8F7D350023E11E /* VWOURLQueue.m */,
 				E39815911F6291C10035D519 /* VWOSegmentEvaluator.h */,
 				E39815921F6291C10035D519 /* VWOSegmentEvaluator.m */,
+				E3F7CBA62004A07800CC8C03 /* VWOInfixEvaluator.h */,
+				E3F7CBA72004A07800CC8C03 /* VWOInfixEvaluator.m */,
 				E39815F71F62A13A0035D519 /* Helpers */,
 				E39815951F6293BC0035D519 /* Extensions */,
 				E39815421F6291680035D519 /* Models */,
@@ -264,6 +276,7 @@
 				E31714C61F838C2F0036CF07 /* VWOTests.swift */,
 				E3924B491FC42C06006A9EB2 /* VWODictionaryTests.swift */,
 				E3924B4B1FC4520D006A9EB2 /* VWOQueueTests.swift */,
+				E3F7CBAE2004B72E00CC8C03 /* VWOStackTests.swift */,
 				E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */,
 				E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */,
 				E3D29FA11FBDA85100A11C61 /* Segmentation */,
@@ -283,6 +296,8 @@
 				E39815461F6291680035D519 /* VWOGoal.m */,
 				E39815471F6291680035D519 /* VWOQueue.h */,
 				E39815481F6291680035D519 /* VWOQueue.m */,
+				E3F7CBAA2004A9B100CC8C03 /* VWOStack.h */,
+				E3F7CBAB2004A9B100CC8C03 /* VWOStack.m */,
 				E398154B1F6291680035D519 /* VWOVariation.h */,
 				E398154C1F6291680035D519 /* VWOVariation.m */,
 			);
@@ -393,6 +408,7 @@
 				E3D29FC61FBEDAB300A11C61 /* NSDate+VWO.h in Headers */,
 				E39815811F6291970035D519 /* VWODevice.h in Headers */,
 				E398155B1F6291680035D519 /* VWOQueue.h in Headers */,
+				E3F7CBAC2004A9B100CC8C03 /* VWOStack.h in Headers */,
 				E388B6CE1F8F7D350023E11E /* VWOURLQueue.h in Headers */,
 				E344B2F01F87906900A4EEE6 /* VWOConfig.h in Headers */,
 				E39815571F6291680035D519 /* VWOCampaign.h in Headers */,
@@ -407,6 +423,7 @@
 				E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */,
 				E398159C1F6293BC0035D519 /* NSDictionary+VWO.h in Headers */,
 				E39815661F6291680035D519 /* socket.io.js.h in Headers */,
+				E3F7CBA82004A07800CC8C03 /* VWOInfixEvaluator.h in Headers */,
 				E39814E71F6288C80035D519 /* VWO.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -545,6 +562,7 @@
 				E344B2F11F87906900A4EEE6 /* VWOConfig.m in Sources */,
 				E3D29FC71FBEDAB300A11C61 /* NSDate+VWO.m in Sources */,
 				E36AC7191F75614E0041ACDF /* VWO.m in Sources */,
+				E3F7CBAD2004A9B100CC8C03 /* VWOStack.m in Sources */,
 				E39815651F6291680035D519 /* VWORavenConfig.m in Sources */,
 				E39815941F6291C10035D519 /* VWOSegmentEvaluator.m in Sources */,
 				E35484F61F713C2E00E14D2E /* NSURLSession+Synchronous.m in Sources */,
@@ -557,6 +575,7 @@
 				E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */,
 				E39815801F6291970035D519 /* VWOController.m in Sources */,
 				E398155C1F6291680035D519 /* VWOQueue.m in Sources */,
+				E3F7CBA92004A07800CC8C03 /* VWOInfixEvaluator.m in Sources */,
 				E39815601F6291680035D519 /* VWOVariation.m in Sources */,
 				E388B6CF1F8F7D350023E11E /* VWOURLQueue.m in Sources */,
 				E3D29FCB1FBEDE2A00A11C61 /* NSString+VWO.m in Sources */,
@@ -573,6 +592,7 @@
 				E32C7A181FC5886A009ABF2F /* VWOVariationTests.swift in Sources */,
 				E3924B4A1FC42C06006A9EB2 /* VWODictionaryTests.swift in Sources */,
 				E3924B4C1FC4520D006A9EB2 /* VWOQueueTests.swift in Sources */,
+				E3F7CBAF2004B72E00CC8C03 /* VWOStackTests.swift in Sources */,
 				E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */,
 				E31714C41F838BB10036CF07 /* VWODevice.m in Sources */,
 				E3D29F941FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift in Sources */,

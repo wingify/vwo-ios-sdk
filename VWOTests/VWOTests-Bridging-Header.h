@@ -9,3 +9,5 @@
 #import "VWOQueue.h"
 #import "VWOGoal.h"
 #import "VWOVariation.h"
+#import "VWOStack.h"
+#import "VWOInfixEvaluator.h"
