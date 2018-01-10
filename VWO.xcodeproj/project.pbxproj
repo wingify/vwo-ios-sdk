@@ -246,6 +246,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E35902BE2006241900ACDEBC /* CampaignTests */ = {
+			isa = PBXGroup;
+			children = (
+				E3689A3E20061F1A00764398 /* VWOCampaignTests.swift */,
+				E3689A4020061F6F00764398 /* Campaign1.json */,
+				E3689A422006205D00764398 /* CampaignPaused.json */,
+			);
+			path = CampaignTests;
+			sourceTree = "<group>";
+		};
 		E39814CC1F6288C80035D519 = {
 			isa = PBXGroup;
 			children = (
@@ -304,9 +314,7 @@
 				E3F7CBB02004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift */,
 				E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */,
 				E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */,
-				E3689A3E20061F1A00764398 /* VWOCampaignTests.swift */,
-				E3689A4020061F6F00764398 /* Campaign1.json */,
-				E3689A422006205D00764398 /* CampaignPaused.json */,
+				E35902BE2006241900ACDEBC /* CampaignTests */,
 				E3F7CBC02004E57900CC8C03 /* VWOSegmentTests.swift */,
 				E3D29FA11FBDA85100A11C61 /* Segmentation */,
 				E3D29F951FBD91B700A11C61 /* Extra.swift */,
