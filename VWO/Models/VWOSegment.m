@@ -10,7 +10,7 @@
 
 @implementation VWOSegment
 
-- (nullable instancetype)initWithDictionary:(NSDictionary *) segmentDict {
+- (nullable instancetype)initWithDictionary:(NSDictionary *)segmentDict {
     self = [super init];
     if (self) {
         _operator = [segmentDict[@"operator"] intValue];

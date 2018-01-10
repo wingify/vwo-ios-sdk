@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, VWOPreviousLogicalOperator) {
 @property (nonatomic, assign) BOOL rightBracket;
 @property (nonatomic, assign) VWOPreviousLogicalOperator previousLogicalOperator;
 
-- (nullable instancetype)initWithDictionary:(NSDictionary *) segmentDict;
+- (nullable instancetype)initWithDictionary:(NSDictionary *)segmentDict;
 
 - (NSArray <NSString *>*)toInfixForOperand:(BOOL)evaluatedOperand;
 @end
