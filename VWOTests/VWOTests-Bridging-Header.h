@@ -7,6 +7,7 @@
 #import "NSString+VWO.h"
 #import "NSDictionary+VWO.h"
 #import "VWOQueue.h"
+#import "VWOCampaign.h"
 #import "VWOGoal.h"
 #import "VWOVariation.h"
 #import "VWOStack.h"
