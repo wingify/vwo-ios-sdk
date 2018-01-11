@@ -37,9 +37,9 @@ static NSString * kChanges = @"changes";
     NSString *name        = variationDict[kName];
     NSDictionary *changes = variationDict[kChanges];
 
-    /*
+    /* ** IMP **
      In case of variation type control, Union of keys of all other variation are sent with nil values
-     changes dictionary stores the value as [NSNull null], as setting nil would remove the key value pair
+     changes dictionary stores the value as [NSNull null], beacuse setting it to 'nil' would remove the key value pair
      */
     return [self initWith:iD name:name changes:changes];
 }
