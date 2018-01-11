@@ -40,8 +40,7 @@ static NSString * kIdentifier = @"identifier";
     NSString *identifier = goalDict[kIdentifier];
 
     GoalType type = GoalTypeCustom;
-    if ([goalDict[kType] isEqualToString:@"@CUSTOM_GOAL"]) type = GoalTypeCustom;
-    else if([goalDict[kType] isEqualToString:@"REVENUE_TRACKING"]) type = GoalTypeRevenue;
+    if([goalDict[kType] isEqualToString:@"REVENUE_TRACKING"]) { type = GoalTypeRevenue; }
 
     return [self initWithId:id identifier:identifier type:type];
 }
