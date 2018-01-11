@@ -33,25 +33,20 @@ static NSString * kVariation            = @"variations";
 
     if (self = [super init]) {
         self.iD = [campaignDict[kId] intValue];
-    }
+        NSString *statusString = campaignDict[kStatus];
 
-    NSString *statusString = campaignDict[kStatus];
+        if ([statusString isEqualToString:@"EXCLUDED"]) {
+            self.status = CampaignStatusExcluded;
+            self.name   = campaignDict[kName];
+            return self;
+        }
 
-    if ([statusString isEqualToString:@"EXCLUDED"]) {
-        self.status = CampaignStatusExcluded;
-        self.name   = campaignDict[kName];
-        return self;
-    }
+        if([statusString isEqualToString:@"PAUSED"]) {
+            self.status = CampaignStatusPaused;
+            return self;
+        }
 
-    if([statusString isEqualToString:@"PAUSED"]) {
-        self.status = CampaignStatusPaused;
-        return self;
-    }
-
-    // Status
-    if ([statusString isEqualToString:@"RUNNING"]) {
-
-        //Check key validity only if the campaigns are running
+        //Here Campaign can only running
         NSArray *mustHaveKeys = @[kName, kTrackUserOnLaunch, kGoals, kVariation];
         NSArray *missingKeys  = [campaignDict keysMissingFrom:mustHaveKeys];
         if (missingKeys.count > 0) {
@@ -74,18 +69,16 @@ static NSString * kVariation            = @"variations";
         self.goals = goals;
 
         //Variation
-        VWOVariation *variation = [[VWOVariation alloc] initWithDictionary:campaignDict[kVariation]];
-        if (variation) self.variation = variation;
-        return self;
+        self.variation = [[VWOVariation alloc] initWithDictionary:campaignDict[kVariation]];
+
     }
-    return nil;
+    return self;
 }
 
 - (nullable id)variationForKey:(NSString *)key {
     NSParameterAssert(key);
-    NSDictionary *changes = self.variation.changes;
-    if (changes == nil) return nil;
-    return changes[key];//If key does not exist NSDictionary returns nil
+    //If key does not exist then NSDictionary returns nil
+    return self.variation.changes[key];
 }
 
 - (nullable VWOGoal *)goalForIdentifier:(NSString *)identifier {

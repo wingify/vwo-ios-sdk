@@ -61,6 +61,7 @@ class VWOVariationTests: XCTestCase {
         let variation = VWOVariation(dictionary: json)
         XCTAssertNotNil(variation)
         XCTAssertTrue(variation!.isControl())
+        XCTAssertNotNil(variation!.changes)
     }
 
     func testMissingKeys() {

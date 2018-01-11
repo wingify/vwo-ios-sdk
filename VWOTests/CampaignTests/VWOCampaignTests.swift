@@ -26,6 +26,7 @@ class VWOCampaignTests : XCTestCase {
         let campaign = VWOCampaign(dictionary: campaignJSON)
         XCTAssertEqual(campaign!.variation(forKey: "socialMedia") as! Bool, true)
         XCTAssertEqual(campaign!.variation(forKey: "layout") as! String, "grid")
+        XCTAssertNil(campaign!.variation(forKey: "invalidKey"))
     }
 
     func testGoalForIdentifier() {
@@ -58,7 +59,7 @@ class VWOCampaignTests : XCTestCase {
         let campaignExcluding = VWOCampaign(dictionary: JSONFrom(file: "CampaignExcluded"))
         XCTAssertNotNil(campaignExcluding)
         XCTAssertEqual(campaignExcluding!.status, .excluded)
-
+        XCTAssertEqual(campaignExcluding!.name, "Excl")
     }
 
     func testMissingKeys() {
