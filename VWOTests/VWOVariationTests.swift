@@ -62,5 +62,20 @@ class VWOVariationTests: XCTestCase {
         XCTAssertNotNil(variation)
         XCTAssertTrue(variation!.isControl())
     }
+
+    func testMissingKeys() {
+        let json = """
+        {
+            "changes": {
+                "skip": true,
+                "layout": "grid"
+            },
+            "weight": 100,
+            "id": "2"
+        }
+        """.jsonToDictionary
+        let variation = VWOVariation(dictionary: json)
+        XCTAssertNil(variation)
+    }
 }
 

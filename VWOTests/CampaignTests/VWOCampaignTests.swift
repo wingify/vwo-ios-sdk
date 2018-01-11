@@ -9,7 +9,7 @@
 import XCTest
 
 class VWOCampaignTests : XCTestCase {
-    func testCampaign() {
+    func testCampaignCreation() {
         let campaignJSON = JSONFrom(file: "Campaign1")
         let campaign = VWOCampaign(dictionary: campaignJSON)
         XCTAssertNotNil(campaign)
@@ -19,17 +19,31 @@ class VWOCampaignTests : XCTestCase {
         XCTAssertEqual(campaign!.status, .running)
         XCTAssertEqual(campaign!.variation.name, "Variation-2")
         XCTAssertEqual(campaign!.goals.count, 2)
+    }
+
+    func testVariationForKey() {
+        let campaignJSON = JSONFrom(file: "Campaign1")
+        let campaign = VWOCampaign(dictionary: campaignJSON)
         XCTAssertEqual(campaign!.variation(forKey: "socialMedia") as! Bool, true)
         XCTAssertEqual(campaign!.variation(forKey: "layout") as! String, "grid")
+    }
+
+    func testGoalForIdentifier() {
+        let campaignJSON = JSONFrom(file: "Campaign1")
+        let campaign = VWOCampaign(dictionary: campaignJSON)
 
         let landingGoal = campaign!.goal(forIdentifier: "landingPage")
         XCTAssertNotNil(landingGoal!)
         XCTAssertEqual(landingGoal!.iD, 1)
         XCTAssertEqual(landingGoal!.type, .revenue)
+
         let productViewGoal = campaign!.goal(forIdentifier: "productView")
         XCTAssertNotNil(productViewGoal!)
         XCTAssertEqual(productViewGoal!.iD, 201)
         XCTAssertEqual(productViewGoal!.type, .custom)
+
+        let nilGoal = campaign!.goal(forIdentifier: "someInvalidID")
+        XCTAssertNil(nilGoal)
     }
 
     func testPausedCampaign() {
@@ -38,6 +52,24 @@ class VWOCampaignTests : XCTestCase {
         XCTAssertNotNil(campaign)
         XCTAssertEqual(campaign!.iD, 11)
         XCTAssertEqual(campaign!.status, .paused)
+    }
 
+    func testExcludedCampaign() {
+        let campaignExcluding = VWOCampaign(dictionary: JSONFrom(file: "CampaignExcluded"))
+        XCTAssertNotNil(campaignExcluding)
+        XCTAssertEqual(campaignExcluding!.status, .excluded)
+
+    }
+
+    func testMissingKeys() {
+        let campaignIDMissing = VWOCampaign(dictionary: JSONFrom(file: "CampaignIDMissing"))
+        XCTAssertNil(campaignIDMissing)
+        let campaignStatusMissing = VWOCampaign(dictionary: JSONFrom(file: "CampaignStatusMissing"))
+        XCTAssertNil(campaignStatusMissing)
+    }
+
+    func testMissingKeysInRunningCampaign() {
+        let campaign = VWOCampaign(dictionary: JSONFrom(file: "CampaignRunningKeysMissing"))
+        XCTAssertNil(campaign)
     }
 }

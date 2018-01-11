@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		E31714C41F838BB10036CF07 /* VWODevice.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815761F6291970035D519 /* VWODevice.m */; };
 		E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31714C61F838C2F0036CF07 /* VWOTests.swift */; };
+		E32079C120075516005CB5CD /* CampaignIDMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C020075516005CB5CD /* CampaignIDMissing.json */; };
+		E32079C320075541005CB5CD /* CampaignStatusMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C220075541005CB5CD /* CampaignStatusMissing.json */; };
+		E32079C520076797005CB5CD /* CampaignExcluded.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C420076797005CB5CD /* CampaignExcluded.json */; };
+		E32079C720076C3D005CB5CD /* CampaignRunningKeysMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C620076C3D005CB5CD /* CampaignRunningKeysMissing.json */; };
 		E32C7A161FC58603009ABF2F /* VWOGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */; };
 		E32C7A181FC5886A009ABF2F /* VWOVariationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */; };
 		E344B2F01F87906900A4EEE6 /* VWOConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = E344B2EE1F87906900A4EEE6 /* VWOConfig.h */; };
@@ -124,6 +128,10 @@
 		E31714C61F838C2F0036CF07 /* VWOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOTests.swift; sourceTree = "<group>"; };
 		E319151E1F67F1B900FC1695 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E31915231F6802D500FC1695 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		E32079C020075516005CB5CD /* CampaignIDMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignIDMissing.json; sourceTree = "<group>"; };
+		E32079C220075541005CB5CD /* CampaignStatusMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignStatusMissing.json; sourceTree = "<group>"; };
+		E32079C420076797005CB5CD /* CampaignExcluded.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignExcluded.json; sourceTree = "<group>"; };
+		E32079C620076C3D005CB5CD /* CampaignRunningKeysMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignRunningKeysMissing.json; sourceTree = "<group>"; };
 		E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOGoalTests.swift; sourceTree = "<group>"; };
 		E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOVariationTests.swift; sourceTree = "<group>"; };
 		E344B2EE1F87906900A4EEE6 /* VWOConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOConfig.h; sourceTree = "<group>"; };
@@ -252,6 +260,10 @@
 				E3689A3E20061F1A00764398 /* VWOCampaignTests.swift */,
 				E3689A4020061F6F00764398 /* Campaign1.json */,
 				E3689A422006205D00764398 /* CampaignPaused.json */,
+				E32079C020075516005CB5CD /* CampaignIDMissing.json */,
+				E32079C220075541005CB5CD /* CampaignStatusMissing.json */,
+				E32079C420076797005CB5CD /* CampaignExcluded.json */,
+				E32079C620076C3D005CB5CD /* CampaignRunningKeysMissing.json */,
 			);
 			path = CampaignTests;
 			sourceTree = "<group>";
@@ -567,6 +579,7 @@
 			files = (
 				E3D29FD31FBEEC7900A11C61 /* HourOfTheDayNotEqual.json in Resources */,
 				E3D29FAF1FBDAF1700A11C61 /* AppVersionEqualTo.json in Resources */,
+				E32079C120075516005CB5CD /* CampaignIDMissing.json in Resources */,
 				E3D29FD51FBEEC8100A11C61 /* HourOfTheDayMultiple.json in Resources */,
 				E3D29FC11FBED57000A11C61 /* DayOfWeekSingle.json in Resources */,
 				E3F7CBBB2004D93D00CC8C03 /* Bracket3.json in Resources */,
@@ -576,6 +589,7 @@
 				E3924B3E1FC2D8B7006A9EB2 /* And2.json in Resources */,
 				E3D29FD11FBEEC6A00A11C61 /* HourOfTheDay.json in Resources */,
 				E3D29FBF1FBECAAB00A11C61 /* iOSVersionLessThan.json in Resources */,
+				E32079C320075541005CB5CD /* CampaignStatusMissing.json in Resources */,
 				E3D29FB71FBDAF8C00A11C61 /* AppVersionStartsWith.json in Resources */,
 				E3D29FA71FBDAE8A00A11C61 /* AppVersionRegex.json in Resources */,
 				E3689A432006205D00764398 /* CampaignPaused.json in Resources */,
@@ -589,9 +603,11 @@
 				E3D29FD71FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json in Resources */,
 				E3D29FC31FBED59B00A11C61 /* DayOfWeekMultiple.json in Resources */,
 				E3F7CBBD2004DFEE00CC8C03 /* Bracket4.json in Resources */,
+				E32079C520076797005CB5CD /* CampaignExcluded.json in Resources */,
 				E3924B441FC2E65E006A9EB2 /* Or3.json in Resources */,
 				E3924B3C1FC2C2D8006A9EB2 /* And1.json in Resources */,
 				E3D29FAB1FBDAED400A11C61 /* AppVersionContains.json in Resources */,
+				E32079C720076C3D005CB5CD /* CampaignRunningKeysMissing.json in Resources */,
 				E3D29F9A1FBDA29100A11C61 /* PredefinediPad.json in Resources */,
 				E3924B421FC2DD15006A9EB2 /* Or2.json in Resources */,
 				E3D29FA31FBDAC3E00A11C61 /* CustomVariable.json in Resources */,

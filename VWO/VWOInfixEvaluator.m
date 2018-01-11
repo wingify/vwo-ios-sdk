@@ -20,16 +20,12 @@ static NSString *closeBracket = @")";
 + (BOOL)evaluteOperator:(NSString *)operator forLHS:(BOOL)lhs RHS:(BOOL)rhs {
     if ([operator  isEqual: and]) {
         return lhs && rhs;
-    } else if([operator  isEqual: or]) {
+    } else {
         return lhs || rhs;
     }
-    return NO;
 }
 
 + (void)evaluateSubExpressionForOperandStack:(VWOStack *)operandStack operatorStack:(VWOStack *)operatorStack {
-    if (operatorStack.isEmpty) {
-        return;
-    }
 
     if ([operatorStack.peek isEqualToString:@"("]) {
         [operatorStack pop];
