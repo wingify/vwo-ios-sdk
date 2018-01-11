@@ -18,6 +18,10 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         continueAfterFailure = false
     }
 
+    func testInitializer() {
+        let segment = VWOSegmentEvaluator(iOSVersion: "9.2", appVersion: "1.2", date: Date(), isReturning: false, appDeviceType: .iPhone, customVariables: nil)
+        XCTAssertNotNil(segment)
+    }
     func testCustomVariable() {
         let evaluator = VWOSegmentEvaluator()
         evaluator.customVariables = ["user" : "Paid"]
