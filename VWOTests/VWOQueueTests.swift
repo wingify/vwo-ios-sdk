@@ -31,22 +31,33 @@ class VWOQueueTests: XCTestCase {
 
     func testAllBasic() {
 
-        //Initially empty
-        XCTAssertEqual(vwoQueue.count, 0)
+    }
+    func insert100ElementsinQueue() {
         for i in 0..<100 {
             vwoQueue.enqueue(["a" : i])
         }
-        //Enqueue
+
+    }
+    func testEnqueue() {
+        XCTAssertEqual(vwoQueue.count, 0)
+        insert100ElementsinQueue()
         XCTAssertEqual(vwoQueue.count, 100)
+    }
 
-        //Peek
-        XCTAssertEqual(vwoQueue.peek as! [String : Int], ["a" : 0])
-
+    func testDeQueue() {
+        insert100ElementsinQueue()
         //Dequeue
         for _ in 0..<vwoQueue.count {
             vwoQueue.dequeue()
         }
         XCTAssertEqual(vwoQueue.count, 0)
+        XCTAssertNil(vwoQueue.dequeue())
+
+    }
+    func testPeek() {
+        XCTAssertNil(vwoQueue.peek)
+        vwoQueue.enqueue(["a" : "b"])
+        XCTAssertEqual(vwoQueue.peek as! [String : String], ["a" : "b"])
     }
 
     func testInsertionLargeDictionary() {

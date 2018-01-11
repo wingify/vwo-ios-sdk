@@ -53,7 +53,7 @@
     dispatch_barrier_sync(_queue, ^{
         NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:_fileURL];
         if (array.count == 0) {
-            VWOLogException(@"Trying to remove from empty queue. NOP");
+            //First object which initially is null would be returned
             return;
         }
 
