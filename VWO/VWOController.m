@@ -110,7 +110,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     for (VWOCampaign *campaign in _campaignList) {
         VWOLogInfo(@"Got Campaigns %@ with variation %@", campaign, campaign.variation);
     }
-    if (_campaignList == nil) return;
+    if (_campaignList == nil) { return; }
     _initialised = true;
     [self trackUserForAllCampaignsOnLaunch:_campaignList];
 }
@@ -119,6 +119,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     [pendingURLQueue flush];
 }
 
+// VWOURLQueueDelegate
 - (void)retryCountExhaustedPath:(NSURL *)path url:(NSURL *)url {
     if ([pendingURLQueue.path isEqual:path]) {
         VWOLogWarning(@"Adding %@ to FAILURE QUEUE", url);
