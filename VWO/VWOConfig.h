@@ -19,7 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly) NSDictionary *campaignVariationPairs;
 @property (assign) NSUInteger sessionCount;
-@property (assign, getter=isReturningUser) BOOL returningUser;
+
+// Returning user will be set  when session count is updated
+@property (assign, getter=isReturningUser, readonly) BOOL returningUser;
 @property (readonly) NSString *UUID;
 
 

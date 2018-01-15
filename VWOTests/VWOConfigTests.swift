@@ -34,14 +34,11 @@ class VWOConfigTests: XCTestCase {
         XCTAssertEqual(config.sessionCount, 0)
     }
 
-    func testReturningUser() {
-        XCTAssertFalse(config.isReturningUser)
-        config.isReturningUser = true
-        XCTAssertTrue(config.isReturningUser)
-    }
-
     func testUpdateReturningUser() {
-
+        XCTAssertFalse(config.isReturningUser)
+        config.trackUser(for: campaign1)
+        config.sessionCount = 2
+        XCTAssertTrue(config.isReturningUser)
     }
 
     func testTwiceInitialization() {
