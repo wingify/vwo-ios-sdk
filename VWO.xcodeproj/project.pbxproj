@@ -344,7 +344,7 @@
 				E3F7CBAE2004B72E00CC8C03 /* VWOStackTests.swift */,
 				E3F7CBB02004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift */,
 				E3C06641200C931200FF9EF5 /* GoalTests */,
-				E3C0664A200C949800FF9EF5 /* New Group */,
+				E3C0664A200C949800FF9EF5 /* VariationTests */,
 				E3470B782008C6170035BEEF /* VWOConfigTests.swift */,
 				E35902BE2006241900ACDEBC /* CampaignTests */,
 				E3F7CBC02004E57900CC8C03 /* VWOSegmentTests.swift */,
@@ -439,7 +439,7 @@
 			path = GoalTests;
 			sourceTree = "<group>";
 		};
-		E3C0664A200C949800FF9EF5 /* New Group */ = {
+		E3C0664A200C949800FF9EF5 /* VariationTests */ = {
 			isa = PBXGroup;
 			children = (
 				E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */,
@@ -447,7 +447,7 @@
 				E3C0664D200C94C500FF9EF5 /* VarationControl.json */,
 				E3C0664F200C94DD00FF9EF5 /* VariationMissingKeys.json */,
 			);
-			path = "New Group";
+			path = VariationTests;
 			sourceTree = "<group>";
 		};
 		E3D29FA11FBDA85100A11C61 /* Segmentation */ = {
