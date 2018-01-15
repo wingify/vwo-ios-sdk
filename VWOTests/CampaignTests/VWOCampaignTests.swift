@@ -21,6 +21,15 @@ class VWOCampaignTests : XCTestCase {
         XCTAssertEqual(campaign!.goals.count, 2)
     }
 
+    func testCampaignCreation2() {
+        //Here track user on launch is false
+        let campaignJSON = JSONFrom(file: "Campaign2")
+        let campaign = VWOCampaign(dictionary: campaignJSON)
+        XCTAssertNotNil(campaign)
+        XCTAssertEqual(campaign!.name, "My Campaign")
+        XCTAssertFalse(campaign!.trackUserOnLaunch)
+    }
+
     func testVariationForKey() {
         let campaignJSON = JSONFrom(file: "Campaign1")
         let campaign = VWOCampaign(dictionary: campaignJSON)

@@ -18,13 +18,13 @@
               ],
     "variations": {
         "changes": {
-            "name": "Kaunteya,
+            "name": "Kaunteya",
             "os": "iOS",
             "isComing": false
         },
         "weight": 100,
         "name": "Variation-2",
-        "id": "3"
+        "id": "7"
     },
     "type": "VISUAL_AB",
     "clickmap": 1,
