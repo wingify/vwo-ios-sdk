@@ -17,6 +17,7 @@
 		E32C7A181FC5886A009ABF2F /* VWOVariationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */; };
 		E344B2F01F87906900A4EEE6 /* VWOConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = E344B2EE1F87906900A4EEE6 /* VWOConfig.h */; };
 		E344B2F11F87906900A4EEE6 /* VWOConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E344B2EF1F87906900A4EEE6 /* VWOConfig.m */; };
+		E3470B792008C6180035BEEF /* VWOConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3470B782008C6170035BEEF /* VWOConfigTests.swift */; };
 		E35484F51F713C2E00E14D2E /* NSURLSession+Synchronous.h in Headers */ = {isa = PBXBuildFile; fileRef = E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */; };
 		E35484F61F713C2E00E14D2E /* NSURLSession+Synchronous.m in Sources */ = {isa = PBXBuildFile; fileRef = E35484F41F713C2E00E14D2E /* NSURLSession+Synchronous.m */; };
 		E3689A3F20061F1A00764398 /* VWOCampaignTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3689A3E20061F1A00764398 /* VWOCampaignTests.swift */; };
@@ -136,6 +137,7 @@
 		E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOVariationTests.swift; sourceTree = "<group>"; };
 		E344B2EE1F87906900A4EEE6 /* VWOConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOConfig.h; sourceTree = "<group>"; };
 		E344B2EF1F87906900A4EEE6 /* VWOConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOConfig.m; sourceTree = "<group>"; };
+		E3470B782008C6170035BEEF /* VWOConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOConfigTests.swift; sourceTree = "<group>"; };
 		E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSession+Synchronous.h"; sourceTree = "<group>"; };
 		E35484F41F713C2E00E14D2E /* NSURLSession+Synchronous.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSession+Synchronous.m"; sourceTree = "<group>"; };
 		E3689A3E20061F1A00764398 /* VWOCampaignTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOCampaignTests.swift; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				E3F7CBB02004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift */,
 				E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */,
 				E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */,
+				E3470B782008C6170035BEEF /* VWOConfigTests.swift */,
 				E35902BE2006241900ACDEBC /* CampaignTests */,
 				E3F7CBC02004E57900CC8C03 /* VWOSegmentTests.swift */,
 				E3D29FA11FBDA85100A11C61 /* Segmentation */,
@@ -666,6 +669,7 @@
 				E3F7CBAF2004B72E00CC8C03 /* VWOStackTests.swift in Sources */,
 				E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */,
 				E31714C41F838BB10036CF07 /* VWODevice.m in Sources */,
+				E3470B792008C6180035BEEF /* VWOConfigTests.swift in Sources */,
 				E3F7CBC12004E57900CC8C03 /* VWOSegmentTests.swift in Sources */,
 				E3D29F941FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift in Sources */,
 				E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */,

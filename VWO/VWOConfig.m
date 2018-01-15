@@ -62,7 +62,7 @@ static NSString * kUUID            = @"UUID";
                                kReturningUser: @(NO),
                                kUUID         : UUID
                                };
-    [NSUserDefaults.standardUserDefaults registerDefaults:@{key : defaults}];
+    [NSUserDefaults.standardUserDefaults setObject:defaults forKey:key];
     VWOLogDebug(@"UUID %@", UUID);
 }
 
@@ -70,7 +70,7 @@ static NSString * kUUID            = @"UUID";
     NSDictionary *trackingDict = [self objectForKey:kTracking];
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
 
-    if (trackingDict[campaignID] == nil) return NO;
+    if (trackingDict[campaignID] == nil) { return NO; }
     return [trackingDict[campaignID] intValue] == campaign.variation.iD;
 }
 
