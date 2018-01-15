@@ -1,0 +1,33 @@
+{
+    "track_user_on_launch": false,
+    "version": 2,
+    "id": 16,
+    "status": "RUNNING",
+    "pc_traffic": 100,
+    "goals": [
+              {
+              "type": "REVENUE_TRACKING",
+              "identifier": "g1",
+              "id": 1
+              },
+              {
+              "type": "CUSTOM_GOAL",
+              "identifier": "g2",
+              "id": 201
+              }
+              ],
+    "variations": {
+        "changes": {
+            "name": "Kaunteya,
+            "os": "iOS",
+            "isComing": false
+        },
+        "weight": 100,
+        "name": "Variation-2",
+        "id": "3"
+    },
+    "type": "VISUAL_AB",
+    "clickmap": 1,
+    "name": "My Campaign",
+    "count_goal_once": 1
+}

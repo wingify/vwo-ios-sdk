@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id <VWOURLQueueDelegate> delegate;
 
 + (instancetype)queueWithFileURL:(NSURL *)fileURL;
-- (void)enqueue:(NSURL *)url maxRetry:(int)retryCount description:(NSString *)description;
+- (void)enqueue:(NSURL *)url maxRetry:(int)retryCount description:(nullable NSString *)description;
 - (void)flush;
 
 @end

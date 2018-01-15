@@ -10,14 +10,7 @@ import XCTest
 class VWOGOalTests: XCTestCase {
 
     func testCustomGoalInitialiser() {
-        let revenueGoalJSON = """
-        {
-            "type": "CUSTOM_GOAL",
-            "identifier": "newGoal",
-            "id": 12
-        }
-        """.jsonToDictionary
-        let goal = VWOGoal(dictionary: revenueGoalJSON)
+        let goal = VWOGoal(dictionary: JSONFrom(file: "Goal1"))
         XCTAssertNotNil(goal)
         XCTAssertEqual(goal!.type, .custom)
         XCTAssertNotNil(goal!.identifier)
@@ -26,14 +19,7 @@ class VWOGOalTests: XCTestCase {
     }
 
     func testRevenueInitialiser() {
-        let revenueGoalJSON = """
-        {
-            "type": "REVENUE_TRACKING",
-            "identifier": "goal45",
-            "id": 1
-        }
-        """.jsonToDictionary
-        let goal = VWOGoal(dictionary: revenueGoalJSON)
+        let goal = VWOGoal(dictionary: JSONFrom(file: "Goal2"))
         XCTAssertNotNil(goal)
         XCTAssertEqual(goal!.type, .revenue)
         XCTAssertNotNil(goal!.identifier)
@@ -42,24 +28,12 @@ class VWOGOalTests: XCTestCase {
     }
 
     func testMissingKeyId() {
-        let idMissingGoalJSON = """
-        {
-            "type": "REVENUE_TRACKING",
-            "identifier": "goal45"
-        }
-        """.jsonToDictionary
-        let goal = VWOGoal(dictionary: idMissingGoalJSON)
+        let goal = VWOGoal(dictionary: JSONFrom(file: "GoalIdMissing"))
         XCTAssertNil(goal, "Goal must be nil when id is not present in JSON")
     }
 
     func testMissingKeyIdentifier() {
-        let identifierMissingGoalJSON = """
-        {
-            "type": "REVENUE_TRACKING",
-            "id": 1
-        }
-        """.jsonToDictionary
-        let goal = VWOGoal(dictionary: identifierMissingGoalJSON)
+        let goal = VWOGoal(dictionary: JSONFrom(file: "GoalIdentifierMissing"))
         XCTAssertNil(goal, "Goal must be nil when identifier is not present in JSON")
     }
 }

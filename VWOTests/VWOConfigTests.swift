@@ -10,14 +10,12 @@ import XCTest
 
 class VWOConfigTests: XCTestCase {
 
-        let userDefaultskey = "someKey111"
+    let userDefaultskey = "someKey"
     let apiKey = "f9066ca73d6564484560a83b63658605-295084"
 
-    override func setUp() {
-    }
+    override func setUp() { }
 
-    override func tearDown() {
-    }
+    override func tearDown() { }
 
     func testInitialConfig() {
         UserDefaults.standard.removeObject(forKey: userDefaultskey)
@@ -107,7 +105,43 @@ class VWOConfigTests: XCTestCase {
 
         let dict = config.campaignVariationPairs as! [String : Int]
         XCTAssertEqual(dict, ["1": 123, "2": 7654])
+    }
 
+    func testTrackUser() {
+        UserDefaults.standard.removeObject(forKey: userDefaultskey)
+        XCTAssertNil(UserDefaults.standard.value(forKey: userDefaultskey))
+        let config = VWOConfig(apiKey: apiKey, userDefaultsKey: userDefaultskey)
 
+        let campaign1 = VWOCampaign(dictionary: JSONFrom(file: "Campaign1"))
+        let campaign2 = VWOCampaign(dictionary: JSONFrom(file: "Campaign2"))
+
+    }
+    func testMarkGoalConversion() {
+        UserDefaults.standard.removeObject(forKey: userDefaultskey)
+        XCTAssertNil(UserDefaults.standard.value(forKey: userDefaultskey))
+        let config = VWOConfig(apiKey: apiKey, userDefaultsKey: userDefaultskey)
+
+        let campaign1 = VWOCampaign()
+        campaign1.iD = 1
+
+        let campaign2 = VWOCampaign()
+        campaign2.iD = 2
+
+        let goal1 = VWOGoal()
+        goal1.iD = 211
+
+        let goal2 = VWOGoal()
+        goal2.iD = 311
+
+        config.markGoalConversion(goal1, in: campaign1)
+        XCTAssert(config.isGoalMarked(goal1, in: campaign1))
+        XCTAssertFalse(config.isGoalMarked(goal1, in: campaign2))
+
+        XCTAssertFalse(config.isGoalMarked(goal2, in: campaign1))
+        XCTAssertFalse(config.isGoalMarked(goal2, in: campaign2))
+
+        config.markGoalConversion(goal2, in: campaign1)
+        XCTAssert(config.isGoalMarked(goal2, in: campaign1))
+        XCTAssertFalse(config.isGoalMarked(goal2, in: campaign2))
     }
 }

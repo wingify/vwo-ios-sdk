@@ -68,6 +68,11 @@
 		E39815941F6291C10035D519 /* VWOSegmentEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815921F6291C10035D519 /* VWOSegmentEvaluator.m */; };
 		E398159C1F6293BC0035D519 /* NSDictionary+VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815981F6293BC0035D519 /* NSDictionary+VWO.h */; };
 		E398159D1F6293BC0035D519 /* NSDictionary+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815991F6293BC0035D519 /* NSDictionary+VWO.m */; };
+		E3C06640200C925000FF9EF5 /* Campaign2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C0663F200C925000FF9EF5 /* Campaign2.json */; };
+		E3C06643200C932F00FF9EF5 /* Goal1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C06642200C932F00FF9EF5 /* Goal1.json */; };
+		E3C06645200C933F00FF9EF5 /* Goal2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C06644200C933F00FF9EF5 /* Goal2.json */; };
+		E3C06647200C935B00FF9EF5 /* GoalIdMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C06646200C935B00FF9EF5 /* GoalIdMissing.json */; };
+		E3C06649200C937B00FF9EF5 /* GoalIdentifierMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C06648200C937B00FF9EF5 /* GoalIdentifierMissing.json */; };
 		E3D29F941FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */; };
 		E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D29F951FBD91B700A11C61 /* Extra.swift */; };
 		E3D29F981FBD928700A11C61 /* PredefinediPhone.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29F971FBD928700A11C61 /* PredefinediPhone.json */; };
@@ -191,6 +196,11 @@
 		E39815921F6291C10035D519 /* VWOSegmentEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOSegmentEvaluator.m; sourceTree = "<group>"; };
 		E39815981F6293BC0035D519 /* NSDictionary+VWO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+VWO.h"; sourceTree = "<group>"; };
 		E39815991F6293BC0035D519 /* NSDictionary+VWO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VWO.m"; sourceTree = "<group>"; };
+		E3C0663F200C925000FF9EF5 /* Campaign2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Campaign2.json; sourceTree = "<group>"; };
+		E3C06642200C932F00FF9EF5 /* Goal1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Goal1.json; sourceTree = "<group>"; };
+		E3C06644200C933F00FF9EF5 /* Goal2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Goal2.json; sourceTree = "<group>"; };
+		E3C06646200C935B00FF9EF5 /* GoalIdMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GoalIdMissing.json; sourceTree = "<group>"; };
+		E3C06648200C937B00FF9EF5 /* GoalIdentifierMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GoalIdentifierMissing.json; sourceTree = "<group>"; };
 		E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOSegmentEvaluatorTests.swift; sourceTree = "<group>"; };
 		E3D29F951FBD91B700A11C61 /* Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extra.swift; sourceTree = "<group>"; };
 		E3D29F971FBD928700A11C61 /* PredefinediPhone.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PredefinediPhone.json; sourceTree = "<group>"; };
@@ -261,6 +271,7 @@
 			children = (
 				E3689A3E20061F1A00764398 /* VWOCampaignTests.swift */,
 				E3689A4020061F6F00764398 /* Campaign1.json */,
+				E3C0663F200C925000FF9EF5 /* Campaign2.json */,
 				E3689A422006205D00764398 /* CampaignPaused.json */,
 				E32079C020075516005CB5CD /* CampaignIDMissing.json */,
 				E32079C220075541005CB5CD /* CampaignStatusMissing.json */,
@@ -326,7 +337,7 @@
 				E3924B4B1FC4520D006A9EB2 /* VWOQueueTests.swift */,
 				E3F7CBAE2004B72E00CC8C03 /* VWOStackTests.swift */,
 				E3F7CBB02004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift */,
-				E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */,
+				E3C06641200C931200FF9EF5 /* GoalTests */,
 				E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */,
 				E3470B782008C6170035BEEF /* VWOConfigTests.swift */,
 				E35902BE2006241900ACDEBC /* CampaignTests */,
@@ -408,6 +419,18 @@
 				E398157A1F6291970035D519 /* VWOLogger.m */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		E3C06641200C931200FF9EF5 /* GoalTests */ = {
+			isa = PBXGroup;
+			children = (
+				E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */,
+				E3C06642200C932F00FF9EF5 /* Goal1.json */,
+				E3C06644200C933F00FF9EF5 /* Goal2.json */,
+				E3C06646200C935B00FF9EF5 /* GoalIdMissing.json */,
+				E3C06648200C937B00FF9EF5 /* GoalIdentifierMissing.json */,
+			);
+			path = GoalTests;
 			sourceTree = "<group>";
 		};
 		E3D29FA11FBDA85100A11C61 /* Segmentation */ = {
@@ -586,13 +609,16 @@
 				E3D29FD51FBEEC8100A11C61 /* HourOfTheDayMultiple.json in Resources */,
 				E3D29FC11FBED57000A11C61 /* DayOfWeekSingle.json in Resources */,
 				E3F7CBBB2004D93D00CC8C03 /* Bracket3.json in Resources */,
+				E3C06640200C925000FF9EF5 /* Campaign2.json in Resources */,
 				E3D29FCD1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json in Resources */,
+				E3C06647200C935B00FF9EF5 /* GoalIdMissing.json in Resources */,
 				E3D29FBD1FBECA9E00A11C61 /* iOSVersionGreaterThan.json in Resources */,
 				E3924B461FC408AD006A9EB2 /* Complex1.json in Resources */,
 				E3924B3E1FC2D8B7006A9EB2 /* And2.json in Resources */,
 				E3D29FD11FBEEC6A00A11C61 /* HourOfTheDay.json in Resources */,
 				E3D29FBF1FBECAAB00A11C61 /* iOSVersionLessThan.json in Resources */,
 				E32079C320075541005CB5CD /* CampaignStatusMissing.json in Resources */,
+				E3C06643200C932F00FF9EF5 /* Goal1.json in Resources */,
 				E3D29FB71FBDAF8C00A11C61 /* AppVersionStartsWith.json in Resources */,
 				E3D29FA71FBDAE8A00A11C61 /* AppVersionRegex.json in Resources */,
 				E3689A432006205D00764398 /* CampaignPaused.json in Resources */,
@@ -603,11 +629,13 @@
 				E3D29F9E1FBDA49B00A11C61 /* PredefinedNewUser.json in Resources */,
 				E3924B401FC2DC24006A9EB2 /* Or1.json in Resources */,
 				E3D29F981FBD928700A11C61 /* PredefinediPhone.json in Resources */,
+				E3C06649200C937B00FF9EF5 /* GoalIdentifierMissing.json in Resources */,
 				E3D29FD71FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json in Resources */,
 				E3D29FC31FBED59B00A11C61 /* DayOfWeekMultiple.json in Resources */,
 				E3F7CBBD2004DFEE00CC8C03 /* Bracket4.json in Resources */,
 				E32079C520076797005CB5CD /* CampaignExcluded.json in Resources */,
 				E3924B441FC2E65E006A9EB2 /* Or3.json in Resources */,
+				E3C06645200C933F00FF9EF5 /* Goal2.json in Resources */,
 				E3924B3C1FC2C2D8006A9EB2 /* And1.json in Resources */,
 				E3D29FAB1FBDAED400A11C61 /* AppVersionContains.json in Resources */,
 				E32079C720076C3D005CB5CD /* CampaignRunningKeysMissing.json in Resources */,
