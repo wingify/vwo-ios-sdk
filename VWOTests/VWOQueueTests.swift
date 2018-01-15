@@ -73,12 +73,12 @@ class VWOQueueTests: XCTestCase {
 
     func testMultiThreadedInsertion() {
         var largeDict = [String : Any]()
-        for i in 0..<100 {
+        for i in 0..<10 {
             largeDict["lksjdflkjasdlkfjaslkdfjlsdkjfklsdjfklsjflkasjdfksdjflksjdfasdfasdf\(i)"] = "ASDFADFSFDGHSAGDDGHGSDlsjflkasjdfksdjflksjdfasdfasdf\(i)"
         }
 
         let dispatchQueue = DispatchQueue(label: "test.Insertion")
-        let count:UInt = 100;
+        let count:UInt = 10;
         let expe = expectation(description: "All insertions are complete")
         for _ in 0..<count {
             dispatchQueue.async {
