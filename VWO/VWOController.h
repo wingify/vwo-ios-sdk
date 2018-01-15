@@ -16,7 +16,7 @@ static NSString *kSDKversion = @"2.0.0";
 
 @interface VWOController : NSObject
 
-/// All the operations in controller are expected to happen on this queue
+/// All the operations in controller are expected to happen on taskQueue queue
 @property (class, readonly) dispatch_queue_t taskQueue;
 @property NSMutableDictionary<NSString *, NSString *> *customVariables;
 @property NSDictionary *previewInfo;

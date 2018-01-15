@@ -24,7 +24,9 @@ static NSTimeInterval kMessageQueueFlushInterval         = 5;
 #else
 static NSTimeInterval kMessageQueueFlushInterval         = 20;
 #endif
+
 static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
+static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 
 @interface VWOController() <VWOURLQueueDelegate>
 @property (atomic) NSArray<VWOCampaign *> *campaignList;
@@ -82,7 +84,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
         VWOLogInfo(@"Initializing VWO");
     #endif
 
-    _config = [VWOConfig configWithAPIKey:apiKey userDefaultsKey:@"vwo.09cde70ba7a94aff9d843b1b846a79a7"];
+    _config = [VWOConfig configWithAPIKey:apiKey userDefaultsKey:kUserDefaultsKey];
     _config.sessionCount += 1;
     [self setupSentry];
 
@@ -381,7 +383,7 @@ _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
 }
 
 - (void)clearVWOData {
-    [NSUserDefaults.standardUserDefaults removeObjectForKey:@"vwo.09cde70ba7a94aff9d843b1b846a79a7"];
+    [NSUserDefaults.standardUserDefaults removeObjectForKey:kUserDefaultsKey];
     
     [NSFileManager.defaultManager removeItemAtURL:VWOFile.campaignCache error:nil];
     [NSFileManager.defaultManager removeItemAtURL:VWOFile.messageQueue error:nil];
