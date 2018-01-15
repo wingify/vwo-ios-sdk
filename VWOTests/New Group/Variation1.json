@@ -1,0 +1,19 @@
+{
+    "changes": {
+        "skip": true,
+        "layout": "grid",
+        "details": {
+            "gender": "male",
+            "age": 28
+        },
+        "name": [
+                 "A",
+                 "B",
+                 "C"
+                 ],
+        "test": true
+    },
+    "weight": 100,
+    "name": "Variation-1",
+    "id": "2"
+}

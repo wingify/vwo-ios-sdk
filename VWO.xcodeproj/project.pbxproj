@@ -73,6 +73,9 @@
 		E3C06645200C933F00FF9EF5 /* Goal2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C06644200C933F00FF9EF5 /* Goal2.json */; };
 		E3C06647200C935B00FF9EF5 /* GoalIdMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C06646200C935B00FF9EF5 /* GoalIdMissing.json */; };
 		E3C06649200C937B00FF9EF5 /* GoalIdentifierMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C06648200C937B00FF9EF5 /* GoalIdentifierMissing.json */; };
+		E3C0664C200C94AD00FF9EF5 /* Variation1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C0664B200C94AD00FF9EF5 /* Variation1.json */; };
+		E3C0664E200C94C500FF9EF5 /* VarationControl.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C0664D200C94C500FF9EF5 /* VarationControl.json */; };
+		E3C06650200C94DD00FF9EF5 /* VariationMissingKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C0664F200C94DD00FF9EF5 /* VariationMissingKeys.json */; };
 		E3D29F941FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */; };
 		E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D29F951FBD91B700A11C61 /* Extra.swift */; };
 		E3D29F981FBD928700A11C61 /* PredefinediPhone.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29F971FBD928700A11C61 /* PredefinediPhone.json */; };
@@ -201,6 +204,9 @@
 		E3C06644200C933F00FF9EF5 /* Goal2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Goal2.json; sourceTree = "<group>"; };
 		E3C06646200C935B00FF9EF5 /* GoalIdMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GoalIdMissing.json; sourceTree = "<group>"; };
 		E3C06648200C937B00FF9EF5 /* GoalIdentifierMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GoalIdentifierMissing.json; sourceTree = "<group>"; };
+		E3C0664B200C94AD00FF9EF5 /* Variation1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Variation1.json; sourceTree = "<group>"; };
+		E3C0664D200C94C500FF9EF5 /* VarationControl.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VarationControl.json; sourceTree = "<group>"; };
+		E3C0664F200C94DD00FF9EF5 /* VariationMissingKeys.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VariationMissingKeys.json; sourceTree = "<group>"; };
 		E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOSegmentEvaluatorTests.swift; sourceTree = "<group>"; };
 		E3D29F951FBD91B700A11C61 /* Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extra.swift; sourceTree = "<group>"; };
 		E3D29F971FBD928700A11C61 /* PredefinediPhone.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PredefinediPhone.json; sourceTree = "<group>"; };
@@ -338,7 +344,7 @@
 				E3F7CBAE2004B72E00CC8C03 /* VWOStackTests.swift */,
 				E3F7CBB02004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift */,
 				E3C06641200C931200FF9EF5 /* GoalTests */,
-				E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */,
+				E3C0664A200C949800FF9EF5 /* New Group */,
 				E3470B782008C6170035BEEF /* VWOConfigTests.swift */,
 				E35902BE2006241900ACDEBC /* CampaignTests */,
 				E3F7CBC02004E57900CC8C03 /* VWOSegmentTests.swift */,
@@ -431,6 +437,17 @@
 				E3C06648200C937B00FF9EF5 /* GoalIdentifierMissing.json */,
 			);
 			path = GoalTests;
+			sourceTree = "<group>";
+		};
+		E3C0664A200C949800FF9EF5 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */,
+				E3C0664B200C94AD00FF9EF5 /* Variation1.json */,
+				E3C0664D200C94C500FF9EF5 /* VarationControl.json */,
+				E3C0664F200C94DD00FF9EF5 /* VariationMissingKeys.json */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		E3D29FA11FBDA85100A11C61 /* Segmentation */ = {
@@ -607,6 +624,7 @@
 				E3D29FAF1FBDAF1700A11C61 /* AppVersionEqualTo.json in Resources */,
 				E32079C120075516005CB5CD /* CampaignIDMissing.json in Resources */,
 				E3D29FD51FBEEC8100A11C61 /* HourOfTheDayMultiple.json in Resources */,
+				E3C06650200C94DD00FF9EF5 /* VariationMissingKeys.json in Resources */,
 				E3D29FC11FBED57000A11C61 /* DayOfWeekSingle.json in Resources */,
 				E3F7CBBB2004D93D00CC8C03 /* Bracket3.json in Resources */,
 				E3C06640200C925000FF9EF5 /* Campaign2.json in Resources */,
@@ -626,6 +644,7 @@
 				E3F7CBB92004D85E00CC8C03 /* Bracket2.json in Resources */,
 				E3D29FB51FBDAF7400A11C61 /* AppVersionNotEqualTo.json in Resources */,
 				E3D29FCF1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json in Resources */,
+				E3C0664E200C94C500FF9EF5 /* VarationControl.json in Resources */,
 				E3D29F9E1FBDA49B00A11C61 /* PredefinedNewUser.json in Resources */,
 				E3924B401FC2DC24006A9EB2 /* Or1.json in Resources */,
 				E3D29F981FBD928700A11C61 /* PredefinediPhone.json in Resources */,
@@ -648,6 +667,7 @@
 				E3689A4120061F6F00764398 /* Campaign1.json in Resources */,
 				E3F7CBB72004D6E600CC8C03 /* Bracket1.json in Resources */,
 				E3D29FA01FBDA4C100A11C61 /* PredefinedReturningUser.json in Resources */,
+				E3C0664C200C94AD00FF9EF5 /* Variation1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
