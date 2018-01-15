@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VWOInfixEvaluator : NSObject
 
-+ (BOOL) evaluate:(NSArray <NSString *>*) expression;
++ (BOOL)evaluate:(NSArray <NSString *>*) expression;
 
 @end
 

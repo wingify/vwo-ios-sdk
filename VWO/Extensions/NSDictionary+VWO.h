@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param mustHaveKeys List of the keys that dictionary must have
  * @return Missing keys
  */
-- (NSArray<NSString *> *) keysMissingFrom:(NSArray<NSString *> *)mustHaveKeys;
+- (NSArray<NSString *> *)keysMissingFrom:(NSArray<NSString *> *)mustHaveKeys;
 
 - (nullable NSString *)toString;
 

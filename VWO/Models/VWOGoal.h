@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, GoalType) {
 @property NSString *identifier;
 @property (nonatomic, assign) GoalType type;
 
-- (nullable instancetype)initWithDictionary:(NSDictionary *) goalDict;
+- (nullable instancetype)initWithDictionary:(NSDictionary *)goalDict;
 
 @end
 

@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(atomic) NSString *name;
 @property(atomic, nullable) NSDictionary *changes;
 
-- (nullable instancetype)initWithDictionary:(NSDictionary *) variationDict;
+- (nullable instancetype)initWithDictionary:(NSDictionary *)variationDict;
 
 - (BOOL)isControl;
 

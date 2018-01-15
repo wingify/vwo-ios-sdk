@@ -53,7 +53,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     return instance;
 }
 
-+ (dispatch_queue_t) taskQueue {
++ (dispatch_queue_t)taskQueue {
     return VWOController.shared->_vwoQueue;
 }
 
@@ -103,10 +103,15 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 
     // Start timer. (Timer can be scheduled only on Main Thread)
     dispatch_async(dispatch_get_main_queue(), ^{
-        messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:kMessageQueueFlushInterval target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
+        messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:kMessageQueueFlushInterval
+                                                                  target:self
+                                                                selector:@selector(timerAction)
+                                                                userInfo:nil repeats:YES];
     });
 
-    _campaignList = [self getCampaignListWithTimeout:timeout withCallback:completionBlock failure:failureBlock];
+    _campaignList = [self getCampaignListWithTimeout:timeout
+                                        withCallback:completionBlock
+                                             failure:failureBlock];
     for (VWOCampaign *campaign in _campaignList) {
         VWOLogInfo(@"Got Campaigns %@ with variation %@", campaign, campaign.variation);
     }
@@ -115,7 +120,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     [self trackUserForAllCampaignsOnLaunch:_campaignList];
 }
 
-- (void) timerAction {
+- (void)timerAction {
     [pendingURLQueue flush];
 }
 
@@ -212,7 +217,11 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
         if (matchedGoal) {
             if ([_config isTrackingUserForCampaign:campaign]) {
                 [_config markGoalConversion:matchedGoal inCampaign:campaign];
-                NSURL *url = [VWOURL forMarkingGoal:matchedGoal withValue:value campaign:campaign dateTime:NSDate.date config:_config];
+                NSURL *url = [VWOURL forMarkingGoal:matchedGoal
+                                          withValue:value
+                                           campaign:campaign
+                                           dateTime:NSDate.date
+                                             config:_config];
                 NSString *description = [NSString stringWithFormat:@"Goal %@", matchedGoal];
                 [pendingURLQueue enqueue:url maxRetry:10 description:description];
             } else {
@@ -289,10 +298,12 @@ _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
                                    @"vwo_variation_name" : campaign.variation.name.copy,
                                    @"vwo_variation_id"   : [NSString stringWithFormat:@"%d", campaign.variation.iD],
                                    };
-    [NSNotificationCenter.defaultCenter postNotificationName:VWOUserStartedTrackingInCampaignNotification object:nil userInfo:campaignInfo];
+    [NSNotificationCenter.defaultCenter postNotificationName:VWOUserStartedTrackingInCampaignNotification
+                                                      object:nil
+                                                    userInfo:campaignInfo];
 }
 
-- (NSArray <VWOCampaign *> *) campaignsFromJSON:(NSArray<NSDictionary *> *)jsonArray {
+- (NSArray <VWOCampaign *> *)campaignsFromJSON:(NSArray<NSDictionary *> *)jsonArray {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (NSDictionary *campaignDict in jsonArray) {
         VWOCampaign *aCampaign = [[VWOCampaign alloc] initWithDictionary:campaignDict];
@@ -306,7 +317,14 @@ _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
 
     NSString *appVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
 
-    VWOSegmentEvaluator *evaluator = [[VWOSegmentEvaluator alloc] initWithiOSVersion:VWODevice.iOSVersion appVersion:appVersion date:NSDate.date isReturning:_config.isReturningUser appDeviceType:VWODevice.appleDeviceType customVariables:_customVariables];
+    VWOSegmentEvaluator *evaluator = [[VWOSegmentEvaluator alloc]
+                                      initWithiOSVersion:VWODevice.iOSVersion
+                                      appVersion:appVersion
+                                      date:NSDate.date
+                                      isReturning:_config.isReturningUser
+                                      appDeviceType:VWODevice.appleDeviceType
+                                      customVariables:_customVariables];
+
     for (VWOCampaign *aCampaign in allCampaigns) {
         if ([evaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
             [newCampaignList addObject:aCampaign];
@@ -317,7 +335,7 @@ _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
     return newCampaignList;
 }
 
-- (void)trackUserForAllCampaignsOnLaunch:(NSArray<VWOCampaign *> *) allCampaigns {
+- (void)trackUserForAllCampaignsOnLaunch:(NSArray<VWOCampaign *> *)allCampaigns {
     VWOLogInfo(@"trackUserForAllCampaignsOnLaunch");
     for (VWOCampaign *aCampaign in allCampaigns) {
         if (aCampaign.status == CampaignStatusExcluded) {
@@ -329,17 +347,22 @@ _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
     }
 }
 
-- (nullable NSData *)getCampaignsFromNetworkWithTimeout:(NSNumber *)timeout onFailure:(NSString **)errorString {
+- (nullable NSData *)getCampaignsFromNetworkWithTimeout:(NSNumber *)timeout
+                                              onFailure:(NSString **)errorString {
     NSURL *url = [VWOURL forFetchingCampaignsConfig:_config];
     VWOLogDebug(@"fetchCampaigns URL(%@)", url.absoluteString);
     NSTimeInterval timeOutInterval = (timeout == nil) ? defaultFetchCampaignsTimeout : timeout.doubleValue;
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeOutInterval];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url
+                                             cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                         timeoutInterval:timeOutInterval];
 
     NSError *error = nil;
     NSURLResponse *response = nil;
-    NSData *data = [NSURLSession.sharedSession sendSynchronousDataTaskWithRequest:request returningResponse:&response error:&error];
+    NSData *data = [NSURLSession.sharedSession sendSynchronousDataTaskWithRequest:request
+                                                                returningResponse:&response
+                                                                            error:&error];
 
-    if (data == nil) return nil;
+    if (data == nil) { return nil; }
 
     NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
     if(statusCode >= 400 && statusCode <= 499) {
@@ -348,7 +371,7 @@ _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
         *errorString = json[@"message"];
         return nil;
     }
-    if (statusCode >= 500 && statusCode <=599) return nil;
+    if (statusCode >= 500 && statusCode <=599) { return nil; }
     return data;
 }
 

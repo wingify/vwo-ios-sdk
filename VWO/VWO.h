@@ -74,7 +74,10 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @param failureBlock A block object to be executed when there was error while fetching campaign settings
  */
-+ (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion failure:(nullable void (^)(NSString *error))failureBlock NS_SWIFT_NAME(launch(apiKey:completion:failure:));
++ (void)launchForAPIKey:(NSString *)apiKey
+             completion:(void(^)(void))completion
+                failure:(nullable void (^)(NSString *error))failureBlock
+NS_SWIFT_NAME(launch(apiKey:completion:failure:));
 
 /**
  `Synchronously` fetch campaign settings
@@ -89,7 +92,9 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @see launchForAPIKey:
  */
-+ (void)launchSynchronouslyForAPIKey:(NSString *) apiKey timeout:(NSTimeInterval)timeout NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:));
++ (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
+                             timeout:(NSTimeInterval)timeout
+NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:));
 
 /**
  Fetches variation for given key
@@ -115,7 +120,8 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @return variation if available else `defaultValue`
  */
-+ (id)variationForKey:(NSString *)key defaultValue:(id)defaultValue NS_SWIFT_NAME(variationFor(key:defaultValue:));
++ (id)variationForKey:(NSString *)key
+         defaultValue:(id)defaultValue NS_SWIFT_NAME(variationFor(key:defaultValue:));
 
 /**
  Triggers goal for given identifier
@@ -135,7 +141,8 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @note Every goal is marked once
  */
-+ (void)trackConversion:(NSString *)goal withValue:(double)value NS_SWIFT_NAME(trackConversion(_:value:));
++ (void)trackConversion:(NSString *)goal
+              withValue:(double)value NS_SWIFT_NAME(trackConversion(_:value:));
 
 /**
  Sets key value pair.
@@ -147,7 +154,8 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
  @param value Value for the key
 
  */
-+ (void)setCustomVariable:(NSString *)key withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:));
++ (void)setCustomVariable:(NSString *)key
+                withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:));
 
 @end
 NS_ASSUME_NONNULL_END

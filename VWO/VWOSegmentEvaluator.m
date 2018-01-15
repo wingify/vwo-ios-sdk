@@ -74,7 +74,10 @@ static NSString * kReturningVisitor = @"returning_visitor";
 }
 
 - (BOOL)evaluatePredefinedSegmentation:(NSDictionary *)segmentObject {
-    NSAssert(self.appleDeviceType == VWOAppleDeviceTypeIPad || self.appleDeviceType == VWOAppleDeviceTypeIPhone, @"Invalid Apple device type");
+    NSAssert(self.appleDeviceType == VWOAppleDeviceTypeIPad ||
+             self.appleDeviceType == VWOAppleDeviceTypeIPhone,
+             @"Invalid Apple device type");
+
     if ([segmentObject[kDevice] isEqualToString:@"iPad"] &&
         (self.appleDeviceType == VWOAppleDeviceTypeIPad)) {
         return YES;
@@ -147,7 +150,8 @@ static NSString * kReturningVisitor = @"returning_visitor";
             NSString *targetVersion = segment.rOperand.firstObject;
             switch (segment.operator) {
                 case OperatorTypeMatchesRegexCaseInsensitive:
-                    return ([_appVersion rangeOfString:targetVersion options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound);
+                    return ([_appVersion rangeOfString:targetVersion
+                                               options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound);
 
                 case OperatorTypeContains:
                     return [_appVersion rangeOfString:targetVersion].location != NSNotFound;
@@ -175,7 +179,8 @@ static NSString * kReturningVisitor = @"returning_visitor";
             NSString *targetValue = segment.rOperand.firstObject;
             switch (segment.operator) {
                 case OperatorTypeMatchesRegexCaseInsensitive:
-                    return ([currentValue rangeOfString:targetValue options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound);
+                    return ([currentValue rangeOfString:targetValue
+                                                options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound);
 
                 case OperatorTypeContains:
                     return [currentValue rangeOfString:targetValue].location != NSNotFound;

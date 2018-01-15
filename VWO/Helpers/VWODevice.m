@@ -47,8 +47,6 @@
         return VWOAppleDeviceTypeIPhone;
     }
     return VWOAppleDeviceTypeIPad;
-//    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-//    }
 }
 
 + (NSString *)deviceName {

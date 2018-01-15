@@ -37,24 +37,27 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     kOptOut =  optOut;
 }
 
-+ (void)launchForAPIKey:(NSString *) apiKey {
++ (void)launchForAPIKey:(NSString *)apiKey {
     NSParameterAssert(apiKey);
     dispatch_barrier_async(VWOController.taskQueue, ^{
         [VWOController.shared launchWithAPIKey:apiKey optOut:kOptOut withTimeout:nil withCallback:nil failure:nil];
     });
 }
 
-+ (void)launchForAPIKey:(NSString *)apiKey completion:(void(^)(void))completion failure:(void (^)(NSString *error))failureBlock {
++ (void)launchForAPIKey:(NSString *)apiKey
+             completion:(void(^)(void))completion
+                failure:(void (^)(NSString *error))failureBlock {
     NSParameterAssert(apiKey);
     dispatch_barrier_async(VWOController.taskQueue, ^{
         [VWOController.shared launchWithAPIKey:apiKey optOut:kOptOut withTimeout:nil withCallback:completion failure:failureBlock];
     });
 }
 
-+ (void)launchSynchronouslyForAPIKey:(NSString *)apiKey timeout:(NSTimeInterval)timeout {
++ (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
+                             timeout:(NSTimeInterval)timeout {
     NSParameterAssert(apiKey);
     dispatch_barrier_sync(VWOController.taskQueue, ^{
-        [VWOController.shared launchWithAPIKey:apiKey optOut:kOptOut withTimeout:@(timeout) withCallback:nil failure:nil];
+        [VWOController.shared launchWithAPIKey:apiKey optOut:kOptOut withTimeout:@(timeout)withCallback:nil failure:nil];
     });
 }
 

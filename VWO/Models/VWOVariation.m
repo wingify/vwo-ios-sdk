@@ -29,7 +29,9 @@ static NSString * kChanges = @"changes";
 - (instancetype)initWithDictionary:(NSDictionary *) variationDict {
     NSArray *missingKeys = [variationDict keysMissingFrom:@[kId, kName]];
     if (missingKeys.count > 0) {
-        VWOLogException(@"Keys missing [%@] for Variation JSON %@", [missingKeys componentsJoinedByString:@", "], variationDict);
+        VWOLogException(@"Keys missing [%@] for Variation JSON %@",
+                        [missingKeys componentsJoinedByString:@", "],
+                        variationDict);
         return nil;
     }
 

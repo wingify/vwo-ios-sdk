@@ -27,7 +27,9 @@ static NSString * kVariation            = @"variations";
     NSArray *mustHaveKeys = @[kId, kStatus];
     NSArray *missingKeys  = [campaignDict keysMissingFrom:mustHaveKeys];
     if (missingKeys.count > 0) {
-        VWOLogException(@"Keys missing [%@] for Campaign JSON {%@}", [missingKeys componentsJoinedByString:@", "], campaignDict);
+        VWOLogException(@"Keys missing [%@] for Campaign JSON {%@}",
+                        [missingKeys componentsJoinedByString:@", "],
+                        campaignDict);
         return nil;
     }
 
@@ -50,7 +52,9 @@ static NSString * kVariation            = @"variations";
         NSArray *mustHaveKeys = @[kName, kTrackUserOnLaunch, kGoals, kVariation];
         NSArray *missingKeys  = [campaignDict keysMissingFrom:mustHaveKeys];
         if (missingKeys.count > 0) {
-            VWOLogException(@"Keys missing [%@] for Running Campaign JSON {%@}", [missingKeys componentsJoinedByString:@", "], campaignDict);
+            VWOLogException(@"Keys missing [%@] for Running Campaign JSON {%@}",
+                            [missingKeys componentsJoinedByString:@", "],
+                            campaignDict);
             return nil;
         }
 

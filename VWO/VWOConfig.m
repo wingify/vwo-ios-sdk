@@ -44,7 +44,8 @@ static NSString * kUUID            = @"UUID";
 }
 
 - (void)setObject:(nullable id)value forKey:(NSString *)key {
-    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:_userDefaultsKey] mutableCopy];
+    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:_userDefaultsKey]
+                                         mutableCopy];
     activityDict[key] = value;
     [NSUserDefaults.standardUserDefaults setObject:activityDict forKey:_userDefaultsKey];
 }

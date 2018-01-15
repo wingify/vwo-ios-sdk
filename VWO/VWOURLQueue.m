@@ -60,7 +60,9 @@ static NSString *const kDescription = @"desc";
             NSError *error = nil;
             NSURLResponse *response = nil;
             VWOLogDebug(@"Sending request %@", url);
-            [NSURLSession.sharedSession sendSynchronousDataTaskWithURL:url returningResponse:&response error:&error];
+            [NSURLSession.sharedSession sendSynchronousDataTaskWithURL:url
+                                                     returningResponse:&response
+                                                                 error:&error];
 
                 //If No internet connection break; No need to process other messages in queue
             if (error.code == NSURLErrorNotConnectedToInternet) {

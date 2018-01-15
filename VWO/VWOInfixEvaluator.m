@@ -25,29 +25,30 @@ static NSString *closeBracket = @")";
     }
 }
 
-+ (void)evaluateSubExpressionForOperandStack:(VWOStack *)operandStack operatorStack:(VWOStack *)operatorStack {
++ (void)evaluateSubExpressionForOperandStack:(VWOStack *)operandStack
+                               operatorStack:(VWOStack *)operatorStack {
 
     if ([operatorStack.peek isEqualToString:@"("]) {
         [operatorStack pop];
         return;
     }
-    NSString *a;
-    while ( ![a isEqualToString:@"("] && !operatorStack.isEmpty) {
+    NSString *peek;
+    while ( ![peek isEqualToString:@"("] && !operatorStack.isEmpty) {
         NSString *operator = operatorStack.pop;
         BOOL rhs = [operandStack.pop boolValue];
         BOOL lhs = [operandStack.pop boolValue];
         BOOL answer = [self evaluteOperator:operator forLHS:lhs RHS:rhs];
         [operandStack push:@(answer)];
-        a = operatorStack.peek;
+        peek = operatorStack.peek;
     }
 }
 
-+ (BOOL) isOperator:(NSString *)string {
++ (BOOL)isOperator:(NSString *)string {
     NSArray *allOperators =  @[or, and, openBracket, closeBracket];
     return [allOperators containsObject:string];
 }
 
-+ (BOOL) evaluate:(NSArray <NSString *>*) expression {
++ (BOOL)evaluate:(NSArray <NSString *>*)expression {
     VWOStack *_operandStack = [VWOStack new];
     VWOStack * _operatorStack = [VWOStack new];
     for (NSString *exp in expression) {

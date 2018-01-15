@@ -16,7 +16,7 @@ static NSString * kIdentifier = @"identifier";
 
 @implementation VWOGoal
 
-- (instancetype)initWithId:(int) iD identifier:(NSString *)identifier type:(GoalType) type {
+- (instancetype)initWithId:(int)iD identifier:(NSString *)identifier type:(GoalType)type {
     NSParameterAssert(identifier);
     self = [super init];
     if (self) {
@@ -27,7 +27,7 @@ static NSString * kIdentifier = @"identifier";
     return self;
 }
 
-- (instancetype)initWithDictionary:(NSDictionary *) goalDict {
+- (instancetype)initWithDictionary:(NSDictionary *)goalDict {
     NSParameterAssert(goalDict);
 
     NSArray *missingKeys = [goalDict keysMissingFrom:@[kId, kIdentifier]];

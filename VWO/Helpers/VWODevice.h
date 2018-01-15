@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, readonly, nonatomic) BOOL isAttachedToDebugger;
 @property (class, readonly, nonatomic) VWOAppleDeviceType appleDeviceType;
 
-/// 11.0.2
+/// Eg: 11.0.2
 @property (class, readonly, nonatomic) NSString *iOSVersion;
 
 /// iPhone 6,2
