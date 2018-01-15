@@ -34,10 +34,12 @@ static NSString *kSDKversionNumber = @"3";
 }
 
 + (NSDictionary *)extraParametersWithDate:(NSDate *)date config:(VWOConfig *)config {
+    NSString *appVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
+    if (appVersion == nil) { appVersion = @"NA"; }
     return @{@"lt" : [NSString stringWithFormat:@"%f", date.timeIntervalSince1970],
              @"v"  : kSDKversionNumber,
              @"i"  : config.appKey,
-             @"av" : NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"],//App version //TODO: Handle for nil case
+             @"av" : appVersion,
              @"dt" : VWODevice.deviceName,//Device Type
              @"os" : VWODevice.iOSVersion
              };

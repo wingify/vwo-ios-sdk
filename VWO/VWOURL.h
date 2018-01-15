@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
                               dateTime:(NSDate *)date;
 
 + (NSURL *)forMarkingGoal:(VWOGoal *)goal
-                withValue:(NSNumber *)goalValue
+                withValue:(nullable NSNumber *)goalValue
                  campaign:(VWOCampaign *)campaign
                  dateTime:(NSDate *)date
                    config:(VWOConfig *)config;

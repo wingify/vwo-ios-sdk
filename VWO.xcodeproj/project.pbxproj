@@ -76,6 +76,7 @@
 		E3C0664C200C94AD00FF9EF5 /* Variation1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C0664B200C94AD00FF9EF5 /* Variation1.json */; };
 		E3C0664E200C94C500FF9EF5 /* VarationControl.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C0664D200C94C500FF9EF5 /* VarationControl.json */; };
 		E3C06650200C94DD00FF9EF5 /* VariationMissingKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C0664F200C94DD00FF9EF5 /* VariationMissingKeys.json */; };
+		E3C06652200CA4CB00FF9EF5 /* VWOURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C06651200CA4CB00FF9EF5 /* VWOURLTests.swift */; };
 		E3D29F941FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */; };
 		E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D29F951FBD91B700A11C61 /* Extra.swift */; };
 		E3D29F981FBD928700A11C61 /* PredefinediPhone.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29F971FBD928700A11C61 /* PredefinediPhone.json */; };
@@ -207,6 +208,7 @@
 		E3C0664B200C94AD00FF9EF5 /* Variation1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Variation1.json; sourceTree = "<group>"; };
 		E3C0664D200C94C500FF9EF5 /* VarationControl.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VarationControl.json; sourceTree = "<group>"; };
 		E3C0664F200C94DD00FF9EF5 /* VariationMissingKeys.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VariationMissingKeys.json; sourceTree = "<group>"; };
+		E3C06651200CA4CB00FF9EF5 /* VWOURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOURLTests.swift; sourceTree = "<group>"; };
 		E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOSegmentEvaluatorTests.swift; sourceTree = "<group>"; };
 		E3D29F951FBD91B700A11C61 /* Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extra.swift; sourceTree = "<group>"; };
 		E3D29F971FBD928700A11C61 /* PredefinediPhone.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PredefinediPhone.json; sourceTree = "<group>"; };
@@ -343,11 +345,12 @@
 				E3924B4B1FC4520D006A9EB2 /* VWOQueueTests.swift */,
 				E3F7CBAE2004B72E00CC8C03 /* VWOStackTests.swift */,
 				E3F7CBB02004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift */,
+				E3470B782008C6170035BEEF /* VWOConfigTests.swift */,
+				E3F7CBC02004E57900CC8C03 /* VWOSegmentTests.swift */,
+				E3C06651200CA4CB00FF9EF5 /* VWOURLTests.swift */,
 				E3C06641200C931200FF9EF5 /* GoalTests */,
 				E3C0664A200C949800FF9EF5 /* VariationTests */,
-				E3470B782008C6170035BEEF /* VWOConfigTests.swift */,
 				E35902BE2006241900ACDEBC /* CampaignTests */,
-				E3F7CBC02004E57900CC8C03 /* VWOSegmentTests.swift */,
 				E3D29FA11FBDA85100A11C61 /* Segmentation */,
 				E3D29F951FBD91B700A11C61 /* Extra.swift */,
 				E39814E61F6288C80035D519 /* Info.plist */,
@@ -717,6 +720,7 @@
 				E3F7CBAF2004B72E00CC8C03 /* VWOStackTests.swift in Sources */,
 				E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */,
 				E31714C41F838BB10036CF07 /* VWODevice.m in Sources */,
+				E3C06652200CA4CB00FF9EF5 /* VWOURLTests.swift in Sources */,
 				E3470B792008C6180035BEEF /* VWOConfigTests.swift in Sources */,
 				E3F7CBC12004E57900CC8C03 /* VWOSegmentTests.swift in Sources */,
 				E3D29F941FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift in Sources */,

@@ -14,3 +14,4 @@
 #import "VWOInfixEvaluator.h"
 #import "VWOSegment.h"
 #import "VWOConfig.h"
+#import "VWOURL.h"
