@@ -123,7 +123,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 - (void)retryCountExhaustedPath:(NSURL *)path url:(NSURL *)url {
     if ([pendingURLQueue.path isEqual:path]) {
         VWOLogWarning(@"Adding %@ to FAILURE QUEUE", url);
-        [failedURLQueue enqueue:url retryCount:5 description:@""];
+        [failedURLQueue enqueue:url maxRetry:5 description:nil];
     }
 }
 
@@ -214,7 +214,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
                 [_config markGoalConversion:matchedGoal inCampaign:campaign];
                 NSURL *url = [VWOURL forMarkingGoal:matchedGoal withValue:value campaign:campaign dateTime:NSDate.date config:_config];
                 NSString *description = [NSString stringWithFormat:@"Goal %@", matchedGoal];
-                [pendingURLQueue enqueue:url retryCount:10 description:description];
+                [pendingURLQueue enqueue:url maxRetry:10 description:description];
             } else {
                 VWOLogWarning(@"Goal %@ not tracked for %@ as user is not tracked", matchedGoal, campaign);
             }
@@ -374,7 +374,7 @@ _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
     //Send network request and notification only if the campaign is running
     NSURL *url = [VWOURL forMakingUserPartOfCampaign:campaign config:_config dateTime:NSDate.date];
     NSString *description = [NSString stringWithFormat:@"Track user %@ %@", campaign, campaign.variation];
-    [pendingURLQueue enqueue:url retryCount:10 description:description];
+    [pendingURLQueue enqueue:url maxRetry:10 description:description];
 
     [self sendNotificationUserStartedTracking:campaign];
 }

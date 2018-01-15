@@ -12,7 +12,7 @@
 #import "VWOLogger.h"
 
 static NSString *const kURL         = @"url";
-static NSString *const kRetryCount  = @"retry";
+static NSString *const kMaxRetry    = @"retry";
 static NSString *const kDescription = @"desc";
 
 @interface VWOURLQueue ()
@@ -35,8 +35,10 @@ static NSString *const kDescription = @"desc";
     return self;
 }
 
-- (void)enqueue:(NSURL *)url retryCount:(int)retryCount description:(NSString *)description {
-    [_queue enqueue:@{kURL : url.absoluteString, kRetryCount : @(retryCount), kDescription : description}];
+- (void)enqueue:(NSURL *)url maxRetry:(int)retryCount description:(NSString *)description {
+    NSMutableDictionary *dict = [@{kURL : url.absoluteString, kMaxRetry : @(retryCount)} mutableCopy];
+    if (description != nil) { dict[kDescription] = description; }
+    [_queue enqueue:dict];
 }
 
 /**
@@ -68,7 +70,7 @@ static NSString *const kDescription = @"desc";
             }
                 // Failure is confirmed only when status is not 200
             NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
-            int retryCount = [peekObject[kRetryCount] intValue];
+            int retryCount = [peekObject[kMaxRetry] intValue];
             if (statusCode == 200){
                 VWOLogInfo(@"Successfully sent message %d", statusCode);
                 [_queue dequeue];
@@ -77,8 +79,8 @@ static NSString *const kDescription = @"desc";
                 [self.delegate retryCountExhaustedPath:_path url:url];
                 [_queue dequeue];
             } else {
-                peekObject[kRetryCount] = @(retryCount - 1);
-                VWOLogDebug(@"Re inserting %@ with retry count %@",url, peekObject[kRetryCount]);
+                peekObject[kMaxRetry] = @(retryCount - 1);
+                VWOLogDebug(@"Re inserting %@ with retry count %@",url, peekObject[kMaxRetry]);
                 [_queue dequeue];
                 [_queue enqueue:peekObject];
             }
