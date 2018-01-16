@@ -19,12 +19,7 @@
 #import "VWODevice.h"
 #import "VWOConfig.h"
 
-#ifdef VWO_DEBUG
-static NSTimeInterval kMessageQueueFlushInterval         = 5;
-#else
-static NSTimeInterval kMessageQueueFlushInterval         = 20;
-#endif
-
+static NSTimeInterval kMessageQueueFlushInterval         = 10;
 static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 
