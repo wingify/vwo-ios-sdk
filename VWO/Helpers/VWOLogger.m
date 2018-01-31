@@ -37,7 +37,7 @@ void VWOLogException(NSString *format, ...) {
     NSString *bundleIdentifier = NSBundle.mainBundle.bundleIdentifier;
     if (bundleIdentifier == nil) { bundleIdentifier = @"-"; }
 
-    NSURL *url = [NSURL URLWithString:@"https://postman-echo.com/post"];
+    NSURL *url = [NSURL URLWithString:@"http://dacdn.visualwebsiteoptimizer.com/log-error"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 
         //Header -> "App-Key", "Account-ID", "Device-Type"
@@ -47,10 +47,13 @@ void VWOLogException(NSString *format, ...) {
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPMethod:@"POST"];
 
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"dd-MM-YYYY HH:mm:ss"];
+
     NSDictionary *dict = @{
-                           @"Date" : NSDate.date,
+                           @"Date" : [dateFormatter stringFromDate:NSDate.date],
                            @"Message" : message,
-                           @"iOS-Model" : @"",
+                           @"iOS-Model" : VWODevice.deviceName,
                            @"SDK Version" : kSDKversion,
                            @"UUID" : config.UUID,
                            @"iOS Version" : VWODevice.iOSVersion,
