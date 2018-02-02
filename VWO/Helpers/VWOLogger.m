@@ -7,7 +7,6 @@
 //
 
 #import "VWOLogger.h"
-#import "VWORavenClient.h"
 #import "VWOController.h"
 #import "VWOConfig.h"
 #import "VWODevice.h"
@@ -37,7 +36,7 @@ void VWOLogException(NSString *format, ...) {
     NSString *bundleIdentifier = NSBundle.mainBundle.bundleIdentifier;
     if (bundleIdentifier == nil) { bundleIdentifier = @"-"; }
 
-    NSURL *url = [NSURL URLWithString:@"http://dacdn.visualwebsiteoptimizer.com/log-error"];
+    NSURL *url = [NSURL URLWithString:@"https://dacdn.visualwebsiteoptimizer.com/log-error"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 
         //Header -> "App-Key", "Account-ID", "Device-Type"
