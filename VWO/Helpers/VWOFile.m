@@ -20,7 +20,7 @@
                    create:YES
                    error:&error];
     if (error != nil) {
-        VWOLogException(@"Unable to create file VWOMessages.plist");
+        VWOLogException(@"Unable to create file VWOMessages.plist %@", error.description);
     }
     return [path URLByAppendingPathComponent:@"VWOMessages.plist"];
 }
@@ -34,7 +34,7 @@
                    create:YES
                    error:&error];
     if (error != nil) {
-        VWOLogException(@"Unable to create file VWOMessagesfailed.plist");
+        VWOLogException(@"Unable to create file VWOMessagesfailed.plist %@", error.description);
     }
     return [path URLByAppendingPathComponent:@"VWOMessagesfailed.plist"];
 }
@@ -48,7 +48,7 @@
                    create:YES
                    error:&error];
     if (error != nil) {
-        VWOLogException(@"Unable to create file VWOCampaigns.plist");
+        VWOLogException(@"Unable to create file VWOCampaigns.plist %@", error.description);
     }
     return [path URLByAppendingPathComponent:@"VWOCampaigns.plist"];
 }
