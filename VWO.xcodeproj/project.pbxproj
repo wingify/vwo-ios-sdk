@@ -46,11 +46,6 @@
 		E398155C1F6291680035D519 /* VWOQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815481F6291680035D519 /* VWOQueue.m */; };
 		E398155F1F6291680035D519 /* VWOVariation.h in Headers */ = {isa = PBXBuildFile; fileRef = E398154B1F6291680035D519 /* VWOVariation.h */; };
 		E39815601F6291680035D519 /* VWOVariation.m in Sources */ = {isa = PBXBuildFile; fileRef = E398154C1F6291680035D519 /* VWOVariation.m */; };
-		E39815611F6291680035D519 /* VWORavenClient.h in Headers */ = {isa = PBXBuildFile; fileRef = E398154E1F6291680035D519 /* VWORavenClient.h */; };
-		E39815621F6291680035D519 /* VWORavenClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E398154F1F6291680035D519 /* VWORavenClient.m */; };
-		E39815631F6291680035D519 /* VWORavenClient_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815501F6291680035D519 /* VWORavenClient_Private.h */; };
-		E39815641F6291680035D519 /* VWORavenConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815511F6291680035D519 /* VWORavenConfig.h */; };
-		E39815651F6291680035D519 /* VWORavenConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815521F6291680035D519 /* VWORavenConfig.m */; };
 		E39815661F6291680035D519 /* socket.io.js.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815541F6291680035D519 /* socket.io.js.h */; };
 		E39815671F6291680035D519 /* VWOSIOSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815551F6291680035D519 /* VWOSIOSocket.h */; };
 		E39815681F6291680035D519 /* VWOSIOSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815561F6291680035D519 /* VWOSIOSocket.m */; };
@@ -178,11 +173,6 @@
 		E39815481F6291680035D519 /* VWOQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VWOQueue.m; sourceTree = "<group>"; };
 		E398154B1F6291680035D519 /* VWOVariation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VWOVariation.h; sourceTree = "<group>"; };
 		E398154C1F6291680035D519 /* VWOVariation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOVariation.m; sourceTree = "<group>"; };
-		E398154E1F6291680035D519 /* VWORavenClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWORavenClient.h; sourceTree = "<group>"; };
-		E398154F1F6291680035D519 /* VWORavenClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWORavenClient.m; sourceTree = "<group>"; };
-		E39815501F6291680035D519 /* VWORavenClient_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWORavenClient_Private.h; sourceTree = "<group>"; };
-		E39815511F6291680035D519 /* VWORavenConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWORavenConfig.h; sourceTree = "<group>"; };
-		E39815521F6291680035D519 /* VWORavenConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWORavenConfig.m; sourceTree = "<group>"; };
 		E39815541F6291680035D519 /* socket.io.js.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = socket.io.js.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		E39815551F6291680035D519 /* VWOSIOSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOSIOSocket.h; sourceTree = "<group>"; };
 		E39815561F6291680035D519 /* VWOSIOSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOSIOSocket.m; sourceTree = "<group>"; };
@@ -327,7 +317,6 @@
 				E39815F71F62A13A0035D519 /* Helpers */,
 				E39815951F6293BC0035D519 /* Extensions */,
 				E39815421F6291680035D519 /* Models */,
-				E398154D1F6291680035D519 /* Raven */,
 				E39815531F6291680035D519 /* Socket */,
 				E39814DA1F6288C80035D519 /* Info.plist */,
 				E39814F41F628CAA0035D519 /* VWO.podspec */,
@@ -376,18 +365,6 @@
 				E3F7CBB32004C91400CC8C03 /* VWOSegment.m */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		E398154D1F6291680035D519 /* Raven */ = {
-			isa = PBXGroup;
-			children = (
-				E398154E1F6291680035D519 /* VWORavenClient.h */,
-				E398154F1F6291680035D519 /* VWORavenClient.m */,
-				E39815501F6291680035D519 /* VWORavenClient_Private.h */,
-				E39815511F6291680035D519 /* VWORavenConfig.h */,
-				E39815521F6291680035D519 /* VWORavenConfig.m */,
-			);
-			path = Raven;
 			sourceTree = "<group>";
 		};
 		E39815531F6291680035D519 /* Socket */ = {
@@ -505,7 +482,6 @@
 				E39815671F6291680035D519 /* VWOSIOSocket.h in Headers */,
 				E39815851F6291970035D519 /* VWOLogger.h in Headers */,
 				E39815591F6291680035D519 /* VWOGoal.h in Headers */,
-				E39815611F6291680035D519 /* VWORavenClient.h in Headers */,
 				E3D29FCA1FBEDE2A00A11C61 /* NSString+VWO.h in Headers */,
 				E3D29FC61FBEDAB300A11C61 /* NSDate+VWO.h in Headers */,
 				E39815811F6291970035D519 /* VWODevice.h in Headers */,
@@ -515,9 +491,7 @@
 				E344B2F01F87906900A4EEE6 /* VWOConfig.h in Headers */,
 				E39815571F6291680035D519 /* VWOCampaign.h in Headers */,
 				E39815831F6291970035D519 /* VWOFile.h in Headers */,
-				E39815641F6291680035D519 /* VWORavenConfig.h in Headers */,
 				E35484F51F713C2E00E14D2E /* NSURLSession+Synchronous.h in Headers */,
-				E39815631F6291680035D519 /* VWORavenClient_Private.h in Headers */,
 				E398155F1F6291680035D519 /* VWOVariation.h in Headers */,
 				E398157F1F6291970035D519 /* VWOController.h in Headers */,
 				E398158F1F6291B50035D519 /* VWOSocketClient.h in Headers */,
@@ -685,13 +659,11 @@
 				E3D29FC71FBEDAB300A11C61 /* NSDate+VWO.m in Sources */,
 				E36AC7191F75614E0041ACDF /* VWO.m in Sources */,
 				E3F7CBAD2004A9B100CC8C03 /* VWOStack.m in Sources */,
-				E39815651F6291680035D519 /* VWORavenConfig.m in Sources */,
 				E39815941F6291C10035D519 /* VWOSegmentEvaluator.m in Sources */,
 				E35484F61F713C2E00E14D2E /* NSURLSession+Synchronous.m in Sources */,
 				E398159D1F6293BC0035D519 /* NSDictionary+VWO.m in Sources */,
 				E39815861F6291970035D519 /* VWOLogger.m in Sources */,
 				E39815821F6291970035D519 /* VWODevice.m in Sources */,
-				E39815621F6291680035D519 /* VWORavenClient.m in Sources */,
 				E39815901F6291B50035D519 /* VWOSocketClient.m in Sources */,
 				E398155A1F6291680035D519 /* VWOGoal.m in Sources */,
 				E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */,

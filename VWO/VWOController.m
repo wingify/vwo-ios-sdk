@@ -15,7 +15,6 @@
 #import "VWOFile.h"
 #import "NSURLSession+Synchronous.h"
 #import "VWOURL.h"
-#import "VWORavenClient.h"
 #import "VWODevice.h"
 #import "VWOConfig.h"
 
@@ -81,7 +80,6 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 
     _config = [VWOConfig configWithAPIKey:apiKey userDefaultsKey:kUserDefaultsKey];
     _config.sessionCount += 1;
-    [self setupSentry];
 
     if (VWODevice.isAttachedToDebugger || [NSUserDefaults.standardUserDefaults objectForKey:@"vwo.enableSocket"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -267,22 +265,6 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
-}
-
-- (void)setupSentry {
-    VWOLogDebug(@"Sentry setup");
-    NSDictionary *tags = @{@"VWO Account id" : _config.accountID,
-                           @"SDK Version"    : kSDKversion};
-
-    //CFBundleDisplayName & CFBundleIdentifier can be nil
-    NSMutableDictionary *extras = [NSMutableDictionary new];
-    extras[@"App Name"] = NSBundle.mainBundle.infoDictionary[@"CFBundleDisplayName"];
-    extras[@"BundleID"] = NSBundle.mainBundle.infoDictionary[@"CFBundleIdentifier"];
-
-    NSString *DSN = @"https://c3f6ba4cf03548f3bd90066dd182a649:6d6d9593d15944849cc9f8d88ccf1fb0@sentry.io/41858";
-    VWORavenClient *client = [VWORavenClient clientWithDSN:DSN extra:extras tags:tags];
-
-    [VWORavenClient setSharedClient:client];
 }
 
 - (void)sendNotificationUserStartedTracking:(VWOCampaign *)campaign {

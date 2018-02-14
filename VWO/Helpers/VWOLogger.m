@@ -7,7 +7,13 @@
 //
 
 #import "VWOLogger.h"
-#import "VWORavenClient.h"
+#import "VWOController.h"
+#import "VWOConfig.h"
+#import "VWODevice.h"
+
+@interface GrayLog: NSObject
++ (void)sendMessage:(NSString *)message;
+@end
 
 void VWOLogException(NSString *format, ...) {
     va_list argList;
@@ -18,6 +24,44 @@ void VWOLogException(NSString *format, ...) {
     // NSAssert will only work for objective c files. Hence NSCAssert
     NSCAssert(false, @"VWO EXCEPTION: %s\n", [formattedMessage UTF8String]);//Stops execution
 #else
-    [VWORavenClient.sharedClient captureMessage:formattedMessage];
+    [GrayLog sendMessage:formattedMessage];
 #endif
 }
+
+@implementation GrayLog: NSObject
++ (void)sendMessage:(NSString *)message {
+    VWOConfig *config = VWOController.shared.config;
+    if (config == nil) { return;}
+
+    NSString *bundleIdentifier = NSBundle.mainBundle.bundleIdentifier;
+    if (bundleIdentifier == nil) { bundleIdentifier = @"-"; }
+
+    NSURL *url = [NSURL URLWithString:@"https://dacdn.visualwebsiteoptimizer.com/log-error"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+
+        //Header -> "App-Key", "Account-ID", "Device-Type"
+    [request setValue:config.appKey forHTTPHeaderField:@"App-Key"]; // Left part of API Key
+    [request setValue:config.accountID forHTTPHeaderField:@"Account-ID"]; //Right part of API Key
+    [request setValue:@"iOS" forHTTPHeaderField:@"Device-Type"]; //
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPMethod:@"POST"];
+
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"dd-MM-YYYY HH:mm:ss"];
+
+    NSDictionary *dict = @{
+                           @"Date" : [dateFormatter stringFromDate:NSDate.date],
+                           @"Message" : message,
+                           @"iOS-Model" : VWODevice.deviceName,
+                           @"SDK Version" : kSDKversion,
+                           @"UUID" : config.UUID,
+                           @"iOS Version" : VWODevice.iOSVersion,
+                           @"App Bundle" : bundleIdentifier
+                           };
+    NSError *error;
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
+    if (error != nil) { return;}
+    [request setHTTPBody:postData];
+    [[NSURLSession.sharedSession dataTaskWithRequest:request] resume];
+}
+@end
