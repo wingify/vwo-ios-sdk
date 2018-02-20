@@ -174,28 +174,6 @@ class VWOSegmentEvaluatorTests: XCTestCase {
 
     }
 
-    func testPredefined() {
-        let iPhoneJSON = JSONFrom(file: "PredefinediPhone")
-        let iPadJSON = JSONFrom(file: "PredefinediPad")
-        let returingJSON = JSONFrom(file: "PredefinedReturningUser")
-        let newUserJSON = JSONFrom(file: "PredefinedNewUser")
-
-        let evaluator = VWOSegmentEvaluator()
-        evaluator.isReturning = false
-        evaluator.appleDeviceType = .iPhone
-        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: iPhoneJSON), iPhoneJSON.segmentDescription)
-        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: iPadJSON), iPadJSON.segmentDescription)
-        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: returingJSON), returingJSON.segmentDescription)
-        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: newUserJSON), newUserJSON.segmentDescription)
-
-        evaluator.isReturning = true
-        evaluator.appleDeviceType = .iPad
-        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: iPhoneJSON), iPhoneJSON.segmentDescription)
-        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: iPadJSON), iPadJSON.segmentDescription)
-        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: returingJSON), returingJSON.segmentDescription)
-        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: newUserJSON), newUserJSON.segmentDescription)
-    }
-
     func testbasicAnd1() {
         let evaluator = VWOSegmentEvaluator()
         evaluator.customVariables = ["user" : "Paid"]
