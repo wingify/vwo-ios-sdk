@@ -21,6 +21,11 @@
 		E341CC70203C3FB7008D182B /* DeviceTypeIPhoneNotEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E341CC6F203C3FB7008D182B /* DeviceTypeIPhoneNotEqual.json */; };
 		E341CC72203C4034008D182B /* DeviceTypeIPadEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E341CC71203C4034008D182B /* DeviceTypeIPadEqual.json */; };
 		E341CC74203C403E008D182B /* DeviceTypeIPadNotEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E341CC73203C403E008D182B /* DeviceTypeIPadNotEqual.json */; };
+		E341CC77203C41D4008D182B /* VisitorTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E341CC76203C41D4008D182B /* VisitorTypeTests.swift */; };
+		E341CC79203C41F5008D182B /* VisitorTypeEqualNew.json in Resources */ = {isa = PBXBuildFile; fileRef = E341CC78203C41F5008D182B /* VisitorTypeEqualNew.json */; };
+		E341CC7B203C4204008D182B /* VisitorTypeNotEqualNew.json in Resources */ = {isa = PBXBuildFile; fileRef = E341CC7A203C4204008D182B /* VisitorTypeNotEqualNew.json */; };
+		E341CC7D203C4217008D182B /* VisitorTypeEqualReturning.json in Resources */ = {isa = PBXBuildFile; fileRef = E341CC7C203C4217008D182B /* VisitorTypeEqualReturning.json */; };
+		E341CC7F203C4221008D182B /* VisitorTypeNotEqualReturning.json in Resources */ = {isa = PBXBuildFile; fileRef = E341CC7E203C4221008D182B /* VisitorTypeNotEqualReturning.json */; };
 		E344B2F01F87906900A4EEE6 /* VWOConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = E344B2EE1F87906900A4EEE6 /* VWOConfig.h */; };
 		E344B2F11F87906900A4EEE6 /* VWOConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E344B2EF1F87906900A4EEE6 /* VWOConfig.m */; };
 		E3470B792008C6180035BEEF /* VWOConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3470B782008C6170035BEEF /* VWOConfigTests.swift */; };
@@ -151,6 +156,11 @@
 		E341CC6F203C3FB7008D182B /* DeviceTypeIPhoneNotEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DeviceTypeIPhoneNotEqual.json; sourceTree = "<group>"; };
 		E341CC71203C4034008D182B /* DeviceTypeIPadEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DeviceTypeIPadEqual.json; sourceTree = "<group>"; };
 		E341CC73203C403E008D182B /* DeviceTypeIPadNotEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DeviceTypeIPadNotEqual.json; sourceTree = "<group>"; };
+		E341CC76203C41D4008D182B /* VisitorTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorTypeTests.swift; sourceTree = "<group>"; };
+		E341CC78203C41F5008D182B /* VisitorTypeEqualNew.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VisitorTypeEqualNew.json; sourceTree = "<group>"; };
+		E341CC7A203C4204008D182B /* VisitorTypeNotEqualNew.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VisitorTypeNotEqualNew.json; sourceTree = "<group>"; };
+		E341CC7C203C4217008D182B /* VisitorTypeEqualReturning.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VisitorTypeEqualReturning.json; sourceTree = "<group>"; };
+		E341CC7E203C4221008D182B /* VisitorTypeNotEqualReturning.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VisitorTypeNotEqualReturning.json; sourceTree = "<group>"; };
 		E344B2EE1F87906900A4EEE6 /* VWOConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOConfig.h; sourceTree = "<group>"; };
 		E344B2EF1F87906900A4EEE6 /* VWOConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOConfig.m; sourceTree = "<group>"; };
 		E3470B782008C6170035BEEF /* VWOConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOConfigTests.swift; sourceTree = "<group>"; };
@@ -286,6 +296,18 @@
 				E341CC73203C403E008D182B /* DeviceTypeIPadNotEqual.json */,
 			);
 			path = DeviceType;
+			sourceTree = "<group>";
+		};
+		E341CC75203C41B4008D182B /* VisitorType */ = {
+			isa = PBXGroup;
+			children = (
+				E341CC76203C41D4008D182B /* VisitorTypeTests.swift */,
+				E341CC78203C41F5008D182B /* VisitorTypeEqualNew.json */,
+				E341CC7A203C4204008D182B /* VisitorTypeNotEqualNew.json */,
+				E341CC7C203C4217008D182B /* VisitorTypeEqualReturning.json */,
+				E341CC7E203C4221008D182B /* VisitorTypeNotEqualReturning.json */,
+			);
+			path = VisitorType;
 			sourceTree = "<group>";
 		};
 		E35902BE2006241900ACDEBC /* CampaignTests */ = {
@@ -459,6 +481,7 @@
 			children = (
 				E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */,
 				E341CC6C203C3D03008D182B /* DeviceType */,
+				E341CC75203C41B4008D182B /* VisitorType */,
 				E3018959203C0184002FA411 /* InvalidSegmentType.json */,
 				E3D29F971FBD928700A11C61 /* PredefinediPhone.json */,
 				E3D29F991FBDA29100A11C61 /* PredefinediPad.json */,
@@ -626,6 +649,7 @@
 				E3D29FD31FBEEC7900A11C61 /* HourOfTheDayNotEqual.json in Resources */,
 				E3D29FAF1FBDAF1700A11C61 /* AppVersionEqualTo.json in Resources */,
 				E32079C120075516005CB5CD /* CampaignIDMissing.json in Resources */,
+				E341CC7B203C4204008D182B /* VisitorTypeNotEqualNew.json in Resources */,
 				E3D29FD51FBEEC8100A11C61 /* HourOfTheDayMultiple.json in Resources */,
 				E3C06650200C94DD00FF9EF5 /* VariationMissingKeys.json in Resources */,
 				E3D29FC11FBED57000A11C61 /* DayOfWeekSingle.json in Resources */,
@@ -661,12 +685,15 @@
 				E3924B441FC2E65E006A9EB2 /* Or3.json in Resources */,
 				E3C06645200C933F00FF9EF5 /* Goal2.json in Resources */,
 				E3924B3C1FC2C2D8006A9EB2 /* And1.json in Resources */,
+				E341CC79203C41F5008D182B /* VisitorTypeEqualNew.json in Resources */,
 				E341CC70203C3FB7008D182B /* DeviceTypeIPhoneNotEqual.json in Resources */,
 				E3D29FAB1FBDAED400A11C61 /* AppVersionContains.json in Resources */,
+				E341CC7F203C4221008D182B /* VisitorTypeNotEqualReturning.json in Resources */,
 				E32079C720076C3D005CB5CD /* CampaignRunningKeysMissing.json in Resources */,
 				E3D29F9A1FBDA29100A11C61 /* PredefinediPad.json in Resources */,
 				E3924B421FC2DD15006A9EB2 /* Or2.json in Resources */,
 				E3D29FA31FBDAC3E00A11C61 /* CustomVariable.json in Resources */,
+				E341CC7D203C4217008D182B /* VisitorTypeEqualReturning.json in Resources */,
 				E3D29FB91FBECA6700A11C61 /* iOSVersionEqualTo.json in Resources */,
 				E341CC72203C4034008D182B /* DeviceTypeIPadEqual.json in Resources */,
 				E3F7CBBF2004E0AB00CC8C03 /* NestedBracket2.json in Resources */,
@@ -721,6 +748,7 @@
 				E3924B4C1FC4520D006A9EB2 /* VWOQueueTests.swift in Sources */,
 				E3F7CBB12004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift in Sources */,
 				E3F7CBAF2004B72E00CC8C03 /* VWOStackTests.swift in Sources */,
+				E341CC77203C41D4008D182B /* VisitorTypeTests.swift in Sources */,
 				E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */,
 				E31714C41F838BB10036CF07 /* VWODevice.m in Sources */,
 				E341CC6B203C3CFB008D182B /* DeviceTypeTests.swift in Sources */,

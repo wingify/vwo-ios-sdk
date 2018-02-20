@@ -202,7 +202,8 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
         case VWOSegmentTypeVisitorType: {
             NSString *givenType = segment.rOperand.firstObject;
-            BOOL valid = (self.isReturning && [givenType isEqualToString:@"ret"]) || (self.isReturning && [givenType isEqualToString:@"new"]);
+            BOOL valid = (self.isReturning && [givenType isEqualToString:@"ret"]) ||
+            (!self.isReturning && [givenType isEqualToString:@"new"]);
             return ((valid && segment.operator == OperatorTypeIsEqualTo) ||
                     (!valid && segment.operator == OperatorTypeIsNotEqualTo));
         }
