@@ -195,14 +195,27 @@ static NSString * kReturningVisitor = @"returning_visitor";
                     return [currentValue hasPrefix:targetValue];
 
                 default:
-                    VWOLogException(@"Invalid operator received for Custom Variable %d", segment.operator);
                     return NO;
             }
             break;
         }
-        default:
-            VWOLogException(@"Invalid segment received %ld", (long)segment.type);
-            return NO;
+
+        case VWOSegmentTypeVisitorType: {
+            NSString *givenType = segment.rOperand.firstObject;
+            BOOL valid = (self.isReturning && [givenType isEqualToString:@"ret"]) || (self.isReturning && [givenType isEqualToString:@"new"]);
+            return ((valid && segment.operator == OperatorTypeIsEqualTo) ||
+                    (!valid && segment.operator == OperatorTypeIsNotEqualTo));
+        }
+
+        case VWOSegmentTypeDeviceType: {
+            NSString *givenDeviceType = segment.rOperand.firstObject;
+            BOOL valid = (self.appleDeviceType == VWOAppleDeviceTypeIPhone && [givenDeviceType isEqualToString:@"iPhone"]) ||
+            (self.appleDeviceType == VWOAppleDeviceTypeIPad && [givenDeviceType isEqualToString:@"iPad"]);
+            return ((valid && segment.operator == OperatorTypeIsEqualTo) ||
+                    (!valid && segment.operator == OperatorTypeIsNotEqualTo));
+        }
+
+        default: return NO;
     }
 }
 
