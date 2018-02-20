@@ -1,0 +1,10 @@
+{
+    "type": "custom",
+    "partialSegments": [
+                        {
+                        "type": "912",
+                        "operator": 11,
+                        "rOperandValue": "ipad"
+                        }
+                        ]
+}

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E301895A203C0184002FA411 /* InvalidSegmentType.json in Resources */ = {isa = PBXBuildFile; fileRef = E3018959203C0184002FA411 /* InvalidSegmentType.json */; };
 		E31714C41F838BB10036CF07 /* VWODevice.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815761F6291970035D519 /* VWODevice.m */; };
 		E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31714C61F838C2F0036CF07 /* VWOTests.swift */; };
 		E32079C120075516005CB5CD /* CampaignIDMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C020075516005CB5CD /* CampaignIDMissing.json */; };
@@ -129,6 +130,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E3018959203C0184002FA411 /* InvalidSegmentType.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InvalidSegmentType.json; sourceTree = "<group>"; };
 		E31714C51F838C2F0036CF07 /* VWOTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VWOTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		E31714C61F838C2F0036CF07 /* VWOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOTests.swift; sourceTree = "<group>"; };
 		E319151E1F67F1B900FC1695 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -434,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */,
+				E3018959203C0184002FA411 /* InvalidSegmentType.json */,
 				E3D29F971FBD928700A11C61 /* PredefinediPhone.json */,
 				E3D29F991FBDA29100A11C61 /* PredefinediPad.json */,
 				E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */,
@@ -643,6 +646,7 @@
 				E3D29FBB1FBECA8800A11C61 /* iOSVersionNotEqualTo.json in Resources */,
 				E3689A4120061F6F00764398 /* Campaign1.json in Resources */,
 				E3F7CBB72004D6E600CC8C03 /* Bracket1.json in Resources */,
+				E301895A203C0184002FA411 /* InvalidSegmentType.json in Resources */,
 				E3D29FA01FBDA4C100A11C61 /* PredefinedReturningUser.json in Resources */,
 				E3C0664C200C94AD00FF9EF5 /* Variation1.json in Resources */,
 			);

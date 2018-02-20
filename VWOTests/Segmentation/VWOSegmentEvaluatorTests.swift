@@ -22,6 +22,15 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         let segment = VWOSegmentEvaluator(iOSVersion: "9.2", appVersion: "1.2", date: Date(), isReturning: false, appDeviceType: .iPhone, customVariables: nil)
         XCTAssertNotNil(segment)
     }
+
+    func testInvalidSegmentType() {
+        // segment "type" is set to invalid number
+
+        let evaluator = VWOSegmentEvaluator()
+        let json = JSONFrom(file: "InvalidSegmentType")
+        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: json))
+    }
+
     func testCustomVariable() {
         let evaluator = VWOSegmentEvaluator()
         evaluator.customVariables = ["user" : "Paid"]
