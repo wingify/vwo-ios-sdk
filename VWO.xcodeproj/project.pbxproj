@@ -16,6 +16,11 @@
 		E32079C720076C3D005CB5CD /* CampaignRunningKeysMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C620076C3D005CB5CD /* CampaignRunningKeysMissing.json */; };
 		E32C7A161FC58603009ABF2F /* VWOGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */; };
 		E32C7A181FC5886A009ABF2F /* VWOVariationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */; };
+		E341CC6B203C3CFB008D182B /* DeviceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E341CC6A203C3CFA008D182B /* DeviceTypeTests.swift */; };
+		E341CC6E203C3EDE008D182B /* DeviceTypeIPhoneEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E341CC6D203C3EDE008D182B /* DeviceTypeIPhoneEqual.json */; };
+		E341CC70203C3FB7008D182B /* DeviceTypeIPhoneNotEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E341CC6F203C3FB7008D182B /* DeviceTypeIPhoneNotEqual.json */; };
+		E341CC72203C4034008D182B /* DeviceTypeIPadEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E341CC71203C4034008D182B /* DeviceTypeIPadEqual.json */; };
+		E341CC74203C403E008D182B /* DeviceTypeIPadNotEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E341CC73203C403E008D182B /* DeviceTypeIPadNotEqual.json */; };
 		E344B2F01F87906900A4EEE6 /* VWOConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = E344B2EE1F87906900A4EEE6 /* VWOConfig.h */; };
 		E344B2F11F87906900A4EEE6 /* VWOConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E344B2EF1F87906900A4EEE6 /* VWOConfig.m */; };
 		E3470B792008C6180035BEEF /* VWOConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3470B782008C6170035BEEF /* VWOConfigTests.swift */; };
@@ -141,6 +146,11 @@
 		E32079C620076C3D005CB5CD /* CampaignRunningKeysMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignRunningKeysMissing.json; sourceTree = "<group>"; };
 		E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOGoalTests.swift; sourceTree = "<group>"; };
 		E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOVariationTests.swift; sourceTree = "<group>"; };
+		E341CC6A203C3CFA008D182B /* DeviceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypeTests.swift; sourceTree = "<group>"; };
+		E341CC6D203C3EDE008D182B /* DeviceTypeIPhoneEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DeviceTypeIPhoneEqual.json; sourceTree = "<group>"; };
+		E341CC6F203C3FB7008D182B /* DeviceTypeIPhoneNotEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DeviceTypeIPhoneNotEqual.json; sourceTree = "<group>"; };
+		E341CC71203C4034008D182B /* DeviceTypeIPadEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DeviceTypeIPadEqual.json; sourceTree = "<group>"; };
+		E341CC73203C403E008D182B /* DeviceTypeIPadNotEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DeviceTypeIPadNotEqual.json; sourceTree = "<group>"; };
 		E344B2EE1F87906900A4EEE6 /* VWOConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOConfig.h; sourceTree = "<group>"; };
 		E344B2EF1F87906900A4EEE6 /* VWOConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOConfig.m; sourceTree = "<group>"; };
 		E3470B782008C6170035BEEF /* VWOConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOConfigTests.swift; sourceTree = "<group>"; };
@@ -266,6 +276,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E341CC6C203C3D03008D182B /* DeviceType */ = {
+			isa = PBXGroup;
+			children = (
+				E341CC6A203C3CFA008D182B /* DeviceTypeTests.swift */,
+				E341CC6D203C3EDE008D182B /* DeviceTypeIPhoneEqual.json */,
+				E341CC6F203C3FB7008D182B /* DeviceTypeIPhoneNotEqual.json */,
+				E341CC71203C4034008D182B /* DeviceTypeIPadEqual.json */,
+				E341CC73203C403E008D182B /* DeviceTypeIPadNotEqual.json */,
+			);
+			path = DeviceType;
+			sourceTree = "<group>";
+		};
 		E35902BE2006241900ACDEBC /* CampaignTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,6 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */,
+				E341CC6C203C3D03008D182B /* DeviceType */,
 				E3018959203C0184002FA411 /* InvalidSegmentType.json */,
 				E3D29F971FBD928700A11C61 /* PredefinediPhone.json */,
 				E3D29F991FBDA29100A11C61 /* PredefinediPad.json */,
@@ -621,6 +644,8 @@
 				E3D29FA71FBDAE8A00A11C61 /* AppVersionRegex.json in Resources */,
 				E3689A432006205D00764398 /* CampaignPaused.json in Resources */,
 				E3924B481FC40B2F006A9EB2 /* Complex2.json in Resources */,
+				E341CC74203C403E008D182B /* DeviceTypeIPadNotEqual.json in Resources */,
+				E341CC6E203C3EDE008D182B /* DeviceTypeIPhoneEqual.json in Resources */,
 				E3F7CBB92004D85E00CC8C03 /* Bracket2.json in Resources */,
 				E3D29FB51FBDAF7400A11C61 /* AppVersionNotEqualTo.json in Resources */,
 				E3D29FCF1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json in Resources */,
@@ -636,12 +661,14 @@
 				E3924B441FC2E65E006A9EB2 /* Or3.json in Resources */,
 				E3C06645200C933F00FF9EF5 /* Goal2.json in Resources */,
 				E3924B3C1FC2C2D8006A9EB2 /* And1.json in Resources */,
+				E341CC70203C3FB7008D182B /* DeviceTypeIPhoneNotEqual.json in Resources */,
 				E3D29FAB1FBDAED400A11C61 /* AppVersionContains.json in Resources */,
 				E32079C720076C3D005CB5CD /* CampaignRunningKeysMissing.json in Resources */,
 				E3D29F9A1FBDA29100A11C61 /* PredefinediPad.json in Resources */,
 				E3924B421FC2DD15006A9EB2 /* Or2.json in Resources */,
 				E3D29FA31FBDAC3E00A11C61 /* CustomVariable.json in Resources */,
 				E3D29FB91FBECA6700A11C61 /* iOSVersionEqualTo.json in Resources */,
+				E341CC72203C4034008D182B /* DeviceTypeIPadEqual.json in Resources */,
 				E3F7CBBF2004E0AB00CC8C03 /* NestedBracket2.json in Resources */,
 				E3D29FBB1FBECA8800A11C61 /* iOSVersionNotEqualTo.json in Resources */,
 				E3689A4120061F6F00764398 /* Campaign1.json in Resources */,
@@ -696,6 +723,7 @@
 				E3F7CBAF2004B72E00CC8C03 /* VWOStackTests.swift in Sources */,
 				E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */,
 				E31714C41F838BB10036CF07 /* VWODevice.m in Sources */,
+				E341CC6B203C3CFB008D182B /* DeviceTypeTests.swift in Sources */,
 				E3C06652200CA4CB00FF9EF5 /* VWOURLTests.swift in Sources */,
 				E3470B792008C6180035BEEF /* VWOConfigTests.swift in Sources */,
 				E3F7CBC12004E57900CC8C03 /* VWOSegmentTests.swift in Sources */,
