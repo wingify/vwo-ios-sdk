@@ -14,6 +14,7 @@
 		E32079C320075541005CB5CD /* CampaignStatusMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C220075541005CB5CD /* CampaignStatusMissing.json */; };
 		E32079C520076797005CB5CD /* CampaignExcluded.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C420076797005CB5CD /* CampaignExcluded.json */; };
 		E32079C720076C3D005CB5CD /* CampaignRunningKeysMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C620076C3D005CB5CD /* CampaignRunningKeysMissing.json */; };
+		E327C124203EC95100161CC2 /* iOSVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E327C123203EC95100161CC2 /* iOSVersionTests.swift */; };
 		E32C7A161FC58603009ABF2F /* VWOGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */; };
 		E32C7A181FC5886A009ABF2F /* VWOVariationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */; };
 		E341CC6B203C3CFB008D182B /* DeviceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E341CC6A203C3CFA008D182B /* DeviceTypeTests.swift */; };
@@ -151,6 +152,7 @@
 		E32079C220075541005CB5CD /* CampaignStatusMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignStatusMissing.json; sourceTree = "<group>"; };
 		E32079C420076797005CB5CD /* CampaignExcluded.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignExcluded.json; sourceTree = "<group>"; };
 		E32079C620076C3D005CB5CD /* CampaignRunningKeysMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignRunningKeysMissing.json; sourceTree = "<group>"; };
+		E327C123203EC95100161CC2 /* iOSVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSVersionTests.swift; sourceTree = "<group>"; };
 		E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOGoalTests.swift; sourceTree = "<group>"; };
 		E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOVariationTests.swift; sourceTree = "<group>"; };
 		E341CC6A203C3CFA008D182B /* DeviceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypeTests.swift; sourceTree = "<group>"; };
@@ -290,6 +292,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E327C122203EC93E00161CC2 /* iOS Version */ = {
+			isa = PBXGroup;
+			children = (
+				E327C123203EC95100161CC2 /* iOSVersionTests.swift */,
+				E3D29FB81FBECA6700A11C61 /* iOSVersionEqualTo.json */,
+				E3D29FBA1FBECA8800A11C61 /* iOSVersionNotEqualTo.json */,
+				E3D29FBC1FBECA9E00A11C61 /* iOSVersionGreaterThan.json */,
+				E3D29FBE1FBECAAB00A11C61 /* iOSVersionLessThan.json */,
+			);
+			path = "iOS Version";
+			sourceTree = "<group>";
+		};
 		E341CC6C203C3D03008D182B /* DeviceType */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,10 +529,7 @@
 				E341CC80203C4495008D182B /* Predefined */,
 				E3D29FA21FBDAC3E00A11C61 /* CustomVariable.json */,
 				E341CC83203C4644008D182B /* App Version */,
-				E3D29FB81FBECA6700A11C61 /* iOSVersionEqualTo.json */,
-				E3D29FBA1FBECA8800A11C61 /* iOSVersionNotEqualTo.json */,
-				E3D29FBC1FBECA9E00A11C61 /* iOSVersionGreaterThan.json */,
-				E3D29FBE1FBECAAB00A11C61 /* iOSVersionLessThan.json */,
+				E327C122203EC93E00161CC2 /* iOS Version */,
 				E3D29FC01FBED57000A11C61 /* DayOfWeekSingle.json */,
 				E3D29FCE1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json */,
 				E3D29FC21FBED59B00A11C61 /* DayOfWeekMultiple.json */,
@@ -774,6 +785,7 @@
 				E341CC82203C44AD008D182B /* PredefinedSegmentTests.swift in Sources */,
 				E341CC77203C41D4008D182B /* VisitorTypeTests.swift in Sources */,
 				E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */,
+				E327C124203EC95100161CC2 /* iOSVersionTests.swift in Sources */,
 				E31714C41F838BB10036CF07 /* VWODevice.m in Sources */,
 				E341CC6B203C3CFB008D182B /* DeviceTypeTests.swift in Sources */,
 				E3C06652200CA4CB00FF9EF5 /* VWOURLTests.swift in Sources */,

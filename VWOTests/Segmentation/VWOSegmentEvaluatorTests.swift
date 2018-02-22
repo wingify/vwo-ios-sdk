@@ -19,7 +19,7 @@ class VWOSegmentEvaluatorTests: XCTestCase {
     }
 
     func testInitializer() {
-        let segment = VWOSegmentEvaluator(iOSVersion: "9.2", appVersion: "1.2", date: Date(), isReturning: false, appDeviceType: .iPhone, customVariables: nil)
+        let segment = VWOSegmentEvaluator(iOSVersion: "9.2", appVersion: "1.2", date: Date(), locale: NSLocale.current, isReturning: false, appDeviceType: .iPhone, customVariables: nil)
         XCTAssertNotNil(segment)
     }
 
