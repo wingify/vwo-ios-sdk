@@ -27,6 +27,7 @@
 		E341CC7D203C4217008D182B /* VisitorTypeEqualReturning.json in Resources */ = {isa = PBXBuildFile; fileRef = E341CC7C203C4217008D182B /* VisitorTypeEqualReturning.json */; };
 		E341CC7F203C4221008D182B /* VisitorTypeNotEqualReturning.json in Resources */ = {isa = PBXBuildFile; fileRef = E341CC7E203C4221008D182B /* VisitorTypeNotEqualReturning.json */; };
 		E341CC82203C44AD008D182B /* PredefinedSegmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E341CC81203C44AD008D182B /* PredefinedSegmentTests.swift */; };
+		E341CC85203C4658008D182B /* AppVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E341CC84203C4658008D182B /* AppVersionTests.swift */; };
 		E344B2F01F87906900A4EEE6 /* VWOConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = E344B2EE1F87906900A4EEE6 /* VWOConfig.h */; };
 		E344B2F11F87906900A4EEE6 /* VWOConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E344B2EF1F87906900A4EEE6 /* VWOConfig.m */; };
 		E3470B792008C6180035BEEF /* VWOConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3470B782008C6170035BEEF /* VWOConfigTests.swift */; };
@@ -163,6 +164,7 @@
 		E341CC7C203C4217008D182B /* VisitorTypeEqualReturning.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VisitorTypeEqualReturning.json; sourceTree = "<group>"; };
 		E341CC7E203C4221008D182B /* VisitorTypeNotEqualReturning.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VisitorTypeNotEqualReturning.json; sourceTree = "<group>"; };
 		E341CC81203C44AD008D182B /* PredefinedSegmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedSegmentTests.swift; sourceTree = "<group>"; };
+		E341CC84203C4658008D182B /* AppVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionTests.swift; sourceTree = "<group>"; };
 		E344B2EE1F87906900A4EEE6 /* VWOConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOConfig.h; sourceTree = "<group>"; };
 		E344B2EF1F87906900A4EEE6 /* VWOConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOConfig.m; sourceTree = "<group>"; };
 		E3470B782008C6170035BEEF /* VWOConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOConfigTests.swift; sourceTree = "<group>"; };
@@ -315,13 +317,26 @@
 		E341CC80203C4495008D182B /* Predefined */ = {
 			isa = PBXGroup;
 			children = (
-				E3D29F971FBD928700A11C61 /* PredefinediPhone.json */,
 				E341CC81203C44AD008D182B /* PredefinedSegmentTests.swift */,
+				E3D29F971FBD928700A11C61 /* PredefinediPhone.json */,
 				E3D29F991FBDA29100A11C61 /* PredefinediPad.json */,
 				E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */,
 				E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */,
 			);
 			path = Predefined;
+			sourceTree = "<group>";
+		};
+		E341CC83203C4644008D182B /* App Version */ = {
+			isa = PBXGroup;
+			children = (
+				E341CC84203C4658008D182B /* AppVersionTests.swift */,
+				E3D29FA61FBDAE8A00A11C61 /* AppVersionRegex.json */,
+				E3D29FAA1FBDAED400A11C61 /* AppVersionContains.json */,
+				E3D29FAE1FBDAF1700A11C61 /* AppVersionEqualTo.json */,
+				E3D29FB41FBDAF7400A11C61 /* AppVersionNotEqualTo.json */,
+				E3D29FB61FBDAF8C00A11C61 /* AppVersionStartsWith.json */,
+			);
+			path = "App Version";
 			sourceTree = "<group>";
 		};
 		E35902BE2006241900ACDEBC /* CampaignTests */ = {
@@ -499,11 +514,7 @@
 				E3018959203C0184002FA411 /* InvalidSegmentType.json */,
 				E341CC80203C4495008D182B /* Predefined */,
 				E3D29FA21FBDAC3E00A11C61 /* CustomVariable.json */,
-				E3D29FA61FBDAE8A00A11C61 /* AppVersionRegex.json */,
-				E3D29FAA1FBDAED400A11C61 /* AppVersionContains.json */,
-				E3D29FAE1FBDAF1700A11C61 /* AppVersionEqualTo.json */,
-				E3D29FB41FBDAF7400A11C61 /* AppVersionNotEqualTo.json */,
-				E3D29FB61FBDAF8C00A11C61 /* AppVersionStartsWith.json */,
+				E341CC83203C4644008D182B /* App Version */,
 				E3D29FB81FBECA6700A11C61 /* iOSVersionEqualTo.json */,
 				E3D29FBA1FBECA8800A11C61 /* iOSVersionNotEqualTo.json */,
 				E3D29FBC1FBECA9E00A11C61 /* iOSVersionGreaterThan.json */,
@@ -757,6 +768,7 @@
 				E32C7A181FC5886A009ABF2F /* VWOVariationTests.swift in Sources */,
 				E3924B4A1FC42C06006A9EB2 /* VWODictionaryTests.swift in Sources */,
 				E3924B4C1FC4520D006A9EB2 /* VWOQueueTests.swift in Sources */,
+				E341CC85203C4658008D182B /* AppVersionTests.swift in Sources */,
 				E3F7CBB12004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift in Sources */,
 				E3F7CBAF2004B72E00CC8C03 /* VWOStackTests.swift in Sources */,
 				E341CC82203C44AD008D182B /* PredefinedSegmentTests.swift in Sources */,

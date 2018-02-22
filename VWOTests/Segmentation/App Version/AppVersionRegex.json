@@ -4,7 +4,7 @@
                         {
                         "type": "6",
                         "operator": 5,
-                        "rOperandValue": "1.*"
+                        "rOperandValue": "[123]"
                         }
                         ]
 }

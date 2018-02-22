@@ -41,26 +41,6 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: json))
     }
 
-    func testAppVersion() {
-        let containsJSON = JSONFrom(file: "AppVersionContains")
-        let equalToJSON = JSONFrom(file: "AppVersionEqualTo")
-        let notEqualToJSON = JSONFrom(file: "AppVersionNotEqualTo")
-        let regexJSON = JSONFrom(file: "AppVersionRegex")
-        let startsWithJSON = JSONFrom(file: "AppVersionStartsWith")
-
-        let evaluator = VWOSegmentEvaluator()
-        evaluator.appVersion = "1.2"
-        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: containsJSON), containsJSON.segmentDescription)
-        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: equalToJSON), equalToJSON.segmentDescription)
-        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: notEqualToJSON), notEqualToJSON.segmentDescription)
-        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: regexJSON), regexJSON.segmentDescription)
-        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: startsWithJSON), startsWithJSON.segmentDescription)
-
-        evaluator.appVersion = "1.0"
-        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: equalToJSON), equalToJSON.segmentDescription)
-        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: notEqualToJSON), notEqualToJSON.segmentDescription)
-    }
-
     func testiOSVersion() {
         let iOSVersionEqualTo10_3 = JSONFrom(file: "iOSVersionEqualTo")
         let iOSVersionNotEqualTo10_3 = JSONFrom(file: "iOSVersionNotEqualTo")

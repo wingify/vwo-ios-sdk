@@ -3,8 +3,8 @@
     "partialSegments": [
                         {
                         "type": "6",
-                        "operator": 11,
-                        "rOperandValue": "1.2"
+                        "operator": 7,
+                        "rOperandValue": "1"
                         }
                         ]
 }
