@@ -19,10 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSDate *date;//for hour of the day and day of Week
 @property NSString *appVersion;
 @property NSString *iOSVersion;
+@property NSLocale *locale;
 
 - (instancetype)initWithiOSVersion:(NSString *)iOSVersion
                         appVersion:(NSString *)appVersion
                               date:(NSDate *)date
+                            locale:(NSLocale *)locale
                        isReturning:(BOOL)isReturning
                      appDeviceType:(VWOAppleDeviceType)deviceType
                    customVariables:(nullable NSDictionary *)customVariables;

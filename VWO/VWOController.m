@@ -298,6 +298,7 @@ _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
                                       initWithiOSVersion:VWODevice.iOSVersion
                                       appVersion:appVersion
                                       date:NSDate.date
+                                      locale:NSLocale.currentLocale
                                       isReturning:_config.isReturningUser
                                       appDeviceType:VWODevice.appleDeviceType
                                       customVariables:_customVariables];

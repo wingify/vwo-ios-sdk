@@ -17,7 +17,8 @@ typedef NS_ENUM(NSInteger, VWOSegmentType) {
     VWOSegmentTypeDayOfWeek      = 3,
     VWOSegmentTypeHourOfTheDay   = 4,
     VWOSegmentTypeVisitorType    = 8,
-    VWOSegmentTypeDeviceType     = 9
+    VWOSegmentTypeDeviceType     = 9,
+    VWOSegmentTypeLocation       = 5
 };
 
 typedef NS_ENUM(NSInteger, VWOPreviousLogicalOperator) {

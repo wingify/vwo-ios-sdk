@@ -46,6 +46,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
 - (instancetype)initWithiOSVersion:(NSString *)iOSVersion
                         appVersion:(NSString *)appVersion
                               date:(NSDate *)date
+                            locale:(NSLocale *)locale
                        isReturning:(BOOL)isReturning
                      appDeviceType:(VWOAppleDeviceType)deviceType
                    customVariables:(NSDictionary *)customVariables {
@@ -55,6 +56,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
         self.iOSVersion = iOSVersion;
         self.appVersion = appVersion;
         self.date = date;
+        self.locale = locale;
         self.isReturning = isReturning;
         self.appleDeviceType = deviceType;
         self.customVariables = customVariables;
@@ -216,6 +218,14 @@ static NSString * kReturningVisitor = @"returning_visitor";
                     (!valid && segment.operator == OperatorTypeIsNotEqualTo));
         }
 
+        case VWOSegmentTypeLocation: {
+            NSString *countryCode = self.locale.countryCode;
+            if (countryCode == nil) { return NO;}
+            BOOL contains = [segment.rOperand containsObject: countryCode];
+            return ((contains && segment.operator == OperatorTypeIsEqualTo) ||
+                    (!contains && segment.operator == OperatorTypeIsNotEqualTo));
+
+        }
         default: return NO;
     }
 }
