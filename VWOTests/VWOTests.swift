@@ -59,4 +59,42 @@ class VWOTestSwift: XCTestCase {
         XCTAssertEqual(("1" as NSString).toXDotY, "1.0")
         XCTAssertEqual(("1.0" as NSString).toXDotY, "1.0")
     }
+
+    func testAN() {
+//        XCTAssertEqual(("abc" as NSString).compareVersion("1.2"), VWOComparisonResult.invalid)
+
+
+    }
+
+    func testCompareInvalid() {
+        XCTAssertEqual(("" as NSString).compareVersion("1"), .invalid)
+        XCTAssertEqual(("1.2" as NSString).compareVersion(""), .invalid)
+    }
+
+    func testCompareStringVersionEqual() {
+        XCTAssertEqual(("1.0" as NSString).compareVersion("1"), .equal)
+        XCTAssertEqual(("1.0.0" as NSString).compareVersion("1"), .equal)
+        XCTAssertEqual(("1.0.0" as NSString).compareVersion("1.0"), .equal)
+        XCTAssertEqual(("1.0.0" as NSString).compareVersion("1.0.0"), .equal)
+        XCTAssertEqual(("1.0" as NSString).compareVersion("1.0.0"), .equal)
+        XCTAssertEqual(("1" as NSString).compareVersion("1.0.0"), .equal)
+    }
+
+    func testCompareVersionLessThan() {
+        XCTAssertEqual(("1" as NSString).compareVersion("2"), .lesser)
+        XCTAssertEqual(("1.0" as NSString).compareVersion("2"), .lesser)
+        XCTAssertEqual(("1.1" as NSString).compareVersion("2"), .lesser)
+        XCTAssertEqual(("1.0.1" as NSString).compareVersion("2"), .lesser)
+        XCTAssertEqual(("9.0.1" as NSString).compareVersion("12"), .lesser)
+        XCTAssertEqual(("9" as NSString).compareVersion("12.1"), .lesser)
+    }
+
+    func testCompareVersionGreater() {
+        XCTAssertEqual(("14" as NSString).compareVersion("2"), .greater)
+        XCTAssertEqual(("14.0" as NSString).compareVersion("2"), .greater)
+        XCTAssertEqual(("14" as NSString).compareVersion("2.1"), .greater)
+        XCTAssertEqual(("14.0.1" as NSString).compareVersion("2.1"), .greater)
+        XCTAssertEqual(("14.0.1" as NSString).compareVersion("2.1.0"), .greater)
+        XCTAssertEqual(("14" as NSString).compareVersion("2.1.0"), .greater)
+    }
 }

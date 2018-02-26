@@ -8,11 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, VWOComparisonResult) {
+    VWOComparisonResultInvalid = 1,
+    VWOComparisonResultLesser = 2,
+    VWOComparisonResultGreater = 3,
+    VWOComparisonResultEqual = 4,
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString(VWO)
 
 @property (readonly) NSString *toXDotY;
+- (VWOComparisonResult)compareVersion:(NSString *)targetVersion;
 
 @end
 

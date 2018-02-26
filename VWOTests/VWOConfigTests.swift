@@ -23,7 +23,9 @@ class VWOConfigTests: XCTestCase {
         XCTAssertNotNil(config)
     }
 
-    override func tearDown() { }
+    override func tearDown() {
+        UserDefaults.standard.removeObject(forKey: userDefaultskey)
+    }
 
     func testInitialConfig() {
         XCTAssertEqual(config.accountID, "295084")

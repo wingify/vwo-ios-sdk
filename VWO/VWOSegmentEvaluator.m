@@ -150,12 +150,12 @@ static NSString * kReturningVisitor = @"returning_visitor";
         case VWOSegmentTypeAppVersion: {
             NSAssert(_appVersion != nil, @"App Version not available");
             NSString *targetVersion = segment.rOperand.firstObject;
-            NSComparisonResult result = [_appVersion compare:targetVersion options:NSNumericSearch];
+            VWOComparisonResult result = [_appVersion compareVersion:targetVersion];
             switch (segment.operator) {
-                case OperatorTypeIsEqualTo: return result == NSOrderedSame;
-                case OperatorTypeIsNotEqualTo: return result != NSOrderedSame;
-                case OperatorTypeGreaterThan: return result == NSOrderedDescending;
-                case OperatorTypeLessThan: return result == NSOrderedAscending;
+                case OperatorTypeIsEqualTo: return result == VWOComparisonResultEqual;
+                case OperatorTypeIsNotEqualTo: return result != VWOComparisonResultEqual;
+                case OperatorTypeGreaterThan: return result == VWOComparisonResultGreater;
+                case OperatorTypeLessThan: return result == VWOComparisonResultLesser;
                 default: return NO;
             }
             break;

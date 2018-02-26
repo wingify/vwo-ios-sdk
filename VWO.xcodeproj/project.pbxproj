@@ -15,6 +15,8 @@
 		E32079C520076797005CB5CD /* CampaignExcluded.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C420076797005CB5CD /* CampaignExcluded.json */; };
 		E32079C720076C3D005CB5CD /* CampaignRunningKeysMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C620076C3D005CB5CD /* CampaignRunningKeysMissing.json */; };
 		E327C124203EC95100161CC2 /* iOSVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E327C123203EC95100161CC2 /* iOSVersionTests.swift */; };
+		E327C126203ECFEB00161CC2 /* DayOfWeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E327C125203ECFEB00161CC2 /* DayOfWeekTests.swift */; };
+		E327C128203ED2A800161CC2 /* HourOftheDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E327C127203ED2A800161CC2 /* HourOftheDayTests.swift */; };
 		E32C7A161FC58603009ABF2F /* VWOGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */; };
 		E32C7A181FC5886A009ABF2F /* VWOVariationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */; };
 		E341CC6B203C3CFB008D182B /* DeviceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E341CC6A203C3CFA008D182B /* DeviceTypeTests.swift */; };
@@ -93,27 +95,10 @@
 		E3D29F9E1FBDA49B00A11C61 /* PredefinedNewUser.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */; };
 		E3D29FA01FBDA4C100A11C61 /* PredefinedReturningUser.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */; };
 		E3D29FA31FBDAC3E00A11C61 /* CustomVariable.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FA21FBDAC3E00A11C61 /* CustomVariable.json */; };
-		E3D29FA71FBDAE8A00A11C61 /* AppVersionRegex.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FA61FBDAE8A00A11C61 /* AppVersionRegex.json */; };
-		E3D29FAB1FBDAED400A11C61 /* AppVersionContains.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FAA1FBDAED400A11C61 /* AppVersionContains.json */; };
-		E3D29FAF1FBDAF1700A11C61 /* AppVersionEqualTo.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FAE1FBDAF1700A11C61 /* AppVersionEqualTo.json */; };
-		E3D29FB51FBDAF7400A11C61 /* AppVersionNotEqualTo.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FB41FBDAF7400A11C61 /* AppVersionNotEqualTo.json */; };
-		E3D29FB71FBDAF8C00A11C61 /* AppVersionStartsWith.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FB61FBDAF8C00A11C61 /* AppVersionStartsWith.json */; };
-		E3D29FB91FBECA6700A11C61 /* iOSVersionEqualTo.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FB81FBECA6700A11C61 /* iOSVersionEqualTo.json */; };
-		E3D29FBB1FBECA8800A11C61 /* iOSVersionNotEqualTo.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FBA1FBECA8800A11C61 /* iOSVersionNotEqualTo.json */; };
-		E3D29FBD1FBECA9E00A11C61 /* iOSVersionGreaterThan.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FBC1FBECA9E00A11C61 /* iOSVersionGreaterThan.json */; };
-		E3D29FBF1FBECAAB00A11C61 /* iOSVersionLessThan.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FBE1FBECAAB00A11C61 /* iOSVersionLessThan.json */; };
-		E3D29FC11FBED57000A11C61 /* DayOfWeekSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FC01FBED57000A11C61 /* DayOfWeekSingle.json */; };
-		E3D29FC31FBED59B00A11C61 /* DayOfWeekMultiple.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FC21FBED59B00A11C61 /* DayOfWeekMultiple.json */; };
 		E3D29FC61FBEDAB300A11C61 /* NSDate+VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D29FC41FBEDAB300A11C61 /* NSDate+VWO.h */; };
 		E3D29FC71FBEDAB300A11C61 /* NSDate+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D29FC51FBEDAB300A11C61 /* NSDate+VWO.m */; };
 		E3D29FCA1FBEDE2A00A11C61 /* NSString+VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D29FC81FBEDE2A00A11C61 /* NSString+VWO.h */; };
 		E3D29FCB1FBEDE2A00A11C61 /* NSString+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D29FC91FBEDE2A00A11C61 /* NSString+VWO.m */; };
-		E3D29FCD1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FCC1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json */; };
-		E3D29FCF1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FCE1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json */; };
-		E3D29FD11FBEEC6A00A11C61 /* HourOfTheDay.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FD01FBEEC6A00A11C61 /* HourOfTheDay.json */; };
-		E3D29FD31FBEEC7900A11C61 /* HourOfTheDayNotEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FD21FBEEC7900A11C61 /* HourOfTheDayNotEqual.json */; };
-		E3D29FD51FBEEC8100A11C61 /* HourOfTheDayMultiple.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FD41FBEEC8100A11C61 /* HourOfTheDayMultiple.json */; };
-		E3D29FD71FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json in Resources */ = {isa = PBXBuildFile; fileRef = E3D29FD61FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json */; };
 		E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */; };
 		E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */; };
 		E3F7CBA82004A07800CC8C03 /* VWOInfixEvaluator.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F7CBA62004A07800CC8C03 /* VWOInfixEvaluator.h */; };
@@ -153,6 +138,8 @@
 		E32079C420076797005CB5CD /* CampaignExcluded.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignExcluded.json; sourceTree = "<group>"; };
 		E32079C620076C3D005CB5CD /* CampaignRunningKeysMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignRunningKeysMissing.json; sourceTree = "<group>"; };
 		E327C123203EC95100161CC2 /* iOSVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSVersionTests.swift; sourceTree = "<group>"; };
+		E327C125203ECFEB00161CC2 /* DayOfWeekTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekTests.swift; sourceTree = "<group>"; };
+		E327C127203ED2A800161CC2 /* HourOftheDayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourOftheDayTests.swift; sourceTree = "<group>"; };
 		E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOGoalTests.swift; sourceTree = "<group>"; };
 		E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOVariationTests.swift; sourceTree = "<group>"; };
 		E341CC6A203C3CFA008D182B /* DeviceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypeTests.swift; sourceTree = "<group>"; };
@@ -234,27 +221,10 @@
 		E3D29F9D1FBDA49B00A11C61 /* PredefinedNewUser.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PredefinedNewUser.json; sourceTree = "<group>"; };
 		E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PredefinedReturningUser.json; sourceTree = "<group>"; };
 		E3D29FA21FBDAC3E00A11C61 /* CustomVariable.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CustomVariable.json; sourceTree = "<group>"; };
-		E3D29FA61FBDAE8A00A11C61 /* AppVersionRegex.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppVersionRegex.json; sourceTree = "<group>"; };
-		E3D29FAA1FBDAED400A11C61 /* AppVersionContains.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppVersionContains.json; sourceTree = "<group>"; };
-		E3D29FAE1FBDAF1700A11C61 /* AppVersionEqualTo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppVersionEqualTo.json; sourceTree = "<group>"; };
-		E3D29FB41FBDAF7400A11C61 /* AppVersionNotEqualTo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppVersionNotEqualTo.json; sourceTree = "<group>"; };
-		E3D29FB61FBDAF8C00A11C61 /* AppVersionStartsWith.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AppVersionStartsWith.json; sourceTree = "<group>"; };
-		E3D29FB81FBECA6700A11C61 /* iOSVersionEqualTo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = iOSVersionEqualTo.json; sourceTree = "<group>"; };
-		E3D29FBA1FBECA8800A11C61 /* iOSVersionNotEqualTo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = iOSVersionNotEqualTo.json; sourceTree = "<group>"; };
-		E3D29FBC1FBECA9E00A11C61 /* iOSVersionGreaterThan.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = iOSVersionGreaterThan.json; sourceTree = "<group>"; };
-		E3D29FBE1FBECAAB00A11C61 /* iOSVersionLessThan.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = iOSVersionLessThan.json; sourceTree = "<group>"; };
-		E3D29FC01FBED57000A11C61 /* DayOfWeekSingle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DayOfWeekSingle.json; sourceTree = "<group>"; };
-		E3D29FC21FBED59B00A11C61 /* DayOfWeekMultiple.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DayOfWeekMultiple.json; sourceTree = "<group>"; };
 		E3D29FC41FBEDAB300A11C61 /* NSDate+VWO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+VWO.h"; sourceTree = "<group>"; };
 		E3D29FC51FBEDAB300A11C61 /* NSDate+VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+VWO.m"; sourceTree = "<group>"; };
 		E3D29FC81FBEDE2A00A11C61 /* NSString+VWO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+VWO.h"; sourceTree = "<group>"; };
 		E3D29FC91FBEDE2A00A11C61 /* NSString+VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+VWO.m"; sourceTree = "<group>"; };
-		E3D29FCC1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DayOfWeekMultipleNotEqualTo.json; sourceTree = "<group>"; };
-		E3D29FCE1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DayOfWeekSingleNotEqual.json; sourceTree = "<group>"; };
-		E3D29FD01FBEEC6A00A11C61 /* HourOfTheDay.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HourOfTheDay.json; sourceTree = "<group>"; };
-		E3D29FD21FBEEC7900A11C61 /* HourOfTheDayNotEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HourOfTheDayNotEqual.json; sourceTree = "<group>"; };
-		E3D29FD41FBEEC8100A11C61 /* HourOfTheDayMultiple.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HourOfTheDayMultiple.json; sourceTree = "<group>"; };
-		E3D29FD61FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HourOfTheDayMultipleNotEqual.json; sourceTree = "<group>"; };
 		E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOURL.h; sourceTree = "<group>"; };
 		E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOURL.m; sourceTree = "<group>"; };
 		E3F7CBA62004A07800CC8C03 /* VWOInfixEvaluator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOInfixEvaluator.h; sourceTree = "<group>"; };
@@ -292,18 +262,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E327C122203EC93E00161CC2 /* iOS Version */ = {
-			isa = PBXGroup;
-			children = (
-				E327C123203EC95100161CC2 /* iOSVersionTests.swift */,
-				E3D29FB81FBECA6700A11C61 /* iOSVersionEqualTo.json */,
-				E3D29FBA1FBECA8800A11C61 /* iOSVersionNotEqualTo.json */,
-				E3D29FBC1FBECA9E00A11C61 /* iOSVersionGreaterThan.json */,
-				E3D29FBE1FBECAAB00A11C61 /* iOSVersionLessThan.json */,
-			);
-			path = "iOS Version";
-			sourceTree = "<group>";
-		};
 		E341CC6C203C3D03008D182B /* DeviceType */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,19 +296,6 @@
 				E3D29F9F1FBDA4C100A11C61 /* PredefinedReturningUser.json */,
 			);
 			path = Predefined;
-			sourceTree = "<group>";
-		};
-		E341CC83203C4644008D182B /* App Version */ = {
-			isa = PBXGroup;
-			children = (
-				E341CC84203C4658008D182B /* AppVersionTests.swift */,
-				E3D29FA61FBDAE8A00A11C61 /* AppVersionRegex.json */,
-				E3D29FAA1FBDAED400A11C61 /* AppVersionContains.json */,
-				E3D29FAE1FBDAF1700A11C61 /* AppVersionEqualTo.json */,
-				E3D29FB41FBDAF7400A11C61 /* AppVersionNotEqualTo.json */,
-				E3D29FB61FBDAF8C00A11C61 /* AppVersionStartsWith.json */,
-			);
-			path = "App Version";
 			sourceTree = "<group>";
 		};
 		E35902BE2006241900ACDEBC /* CampaignTests */ = {
@@ -528,16 +473,10 @@
 				E3018959203C0184002FA411 /* InvalidSegmentType.json */,
 				E341CC80203C4495008D182B /* Predefined */,
 				E3D29FA21FBDAC3E00A11C61 /* CustomVariable.json */,
-				E341CC83203C4644008D182B /* App Version */,
-				E327C122203EC93E00161CC2 /* iOS Version */,
-				E3D29FC01FBED57000A11C61 /* DayOfWeekSingle.json */,
-				E3D29FCE1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json */,
-				E3D29FC21FBED59B00A11C61 /* DayOfWeekMultiple.json */,
-				E3D29FCC1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json */,
-				E3D29FD01FBEEC6A00A11C61 /* HourOfTheDay.json */,
-				E3D29FD21FBEEC7900A11C61 /* HourOfTheDayNotEqual.json */,
-				E3D29FD41FBEEC8100A11C61 /* HourOfTheDayMultiple.json */,
-				E3D29FD61FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json */,
+				E341CC84203C4658008D182B /* AppVersionTests.swift */,
+				E327C123203EC95100161CC2 /* iOSVersionTests.swift */,
+				E327C125203ECFEB00161CC2 /* DayOfWeekTests.swift */,
+				E327C127203ED2A800161CC2 /* HourOftheDayTests.swift */,
 				E3924B3B1FC2C2D8006A9EB2 /* And1.json */,
 				E3924B3D1FC2D8B7006A9EB2 /* And2.json */,
 				E3924B3F1FC2DC24006A9EB2 /* Or1.json */,
@@ -679,40 +618,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3D29FD31FBEEC7900A11C61 /* HourOfTheDayNotEqual.json in Resources */,
-				E3D29FAF1FBDAF1700A11C61 /* AppVersionEqualTo.json in Resources */,
 				E32079C120075516005CB5CD /* CampaignIDMissing.json in Resources */,
 				E341CC7B203C4204008D182B /* VisitorTypeNotEqualNew.json in Resources */,
-				E3D29FD51FBEEC8100A11C61 /* HourOfTheDayMultiple.json in Resources */,
 				E3C06650200C94DD00FF9EF5 /* VariationMissingKeys.json in Resources */,
-				E3D29FC11FBED57000A11C61 /* DayOfWeekSingle.json in Resources */,
 				E3F7CBBB2004D93D00CC8C03 /* Bracket3.json in Resources */,
 				E3C06640200C925000FF9EF5 /* Campaign2.json in Resources */,
-				E3D29FCD1FBEE69400A11C61 /* DayOfWeekMultipleNotEqualTo.json in Resources */,
 				E3C06647200C935B00FF9EF5 /* GoalIdMissing.json in Resources */,
-				E3D29FBD1FBECA9E00A11C61 /* iOSVersionGreaterThan.json in Resources */,
 				E3924B461FC408AD006A9EB2 /* Complex1.json in Resources */,
 				E3924B3E1FC2D8B7006A9EB2 /* And2.json in Resources */,
-				E3D29FD11FBEEC6A00A11C61 /* HourOfTheDay.json in Resources */,
-				E3D29FBF1FBECAAB00A11C61 /* iOSVersionLessThan.json in Resources */,
 				E32079C320075541005CB5CD /* CampaignStatusMissing.json in Resources */,
 				E3C06643200C932F00FF9EF5 /* Goal1.json in Resources */,
-				E3D29FB71FBDAF8C00A11C61 /* AppVersionStartsWith.json in Resources */,
-				E3D29FA71FBDAE8A00A11C61 /* AppVersionRegex.json in Resources */,
 				E3689A432006205D00764398 /* CampaignPaused.json in Resources */,
 				E3924B481FC40B2F006A9EB2 /* Complex2.json in Resources */,
 				E341CC74203C403E008D182B /* DeviceTypeIPadNotEqual.json in Resources */,
 				E341CC6E203C3EDE008D182B /* DeviceTypeIPhoneEqual.json in Resources */,
 				E3F7CBB92004D85E00CC8C03 /* Bracket2.json in Resources */,
-				E3D29FB51FBDAF7400A11C61 /* AppVersionNotEqualTo.json in Resources */,
-				E3D29FCF1FBEE6BD00A11C61 /* DayOfWeekSingleNotEqual.json in Resources */,
 				E3C0664E200C94C500FF9EF5 /* VarationControl.json in Resources */,
 				E3D29F9E1FBDA49B00A11C61 /* PredefinedNewUser.json in Resources */,
 				E3924B401FC2DC24006A9EB2 /* Or1.json in Resources */,
 				E3D29F981FBD928700A11C61 /* PredefinediPhone.json in Resources */,
 				E3C06649200C937B00FF9EF5 /* GoalIdentifierMissing.json in Resources */,
-				E3D29FD71FBEEC8B00A11C61 /* HourOfTheDayMultipleNotEqual.json in Resources */,
-				E3D29FC31FBED59B00A11C61 /* DayOfWeekMultiple.json in Resources */,
 				E3F7CBBD2004DFEE00CC8C03 /* Bracket4.json in Resources */,
 				E32079C520076797005CB5CD /* CampaignExcluded.json in Resources */,
 				E3924B441FC2E65E006A9EB2 /* Or3.json in Resources */,
@@ -720,17 +645,14 @@
 				E3924B3C1FC2C2D8006A9EB2 /* And1.json in Resources */,
 				E341CC79203C41F5008D182B /* VisitorTypeEqualNew.json in Resources */,
 				E341CC70203C3FB7008D182B /* DeviceTypeIPhoneNotEqual.json in Resources */,
-				E3D29FAB1FBDAED400A11C61 /* AppVersionContains.json in Resources */,
 				E341CC7F203C4221008D182B /* VisitorTypeNotEqualReturning.json in Resources */,
 				E32079C720076C3D005CB5CD /* CampaignRunningKeysMissing.json in Resources */,
 				E3D29F9A1FBDA29100A11C61 /* PredefinediPad.json in Resources */,
 				E3924B421FC2DD15006A9EB2 /* Or2.json in Resources */,
 				E3D29FA31FBDAC3E00A11C61 /* CustomVariable.json in Resources */,
 				E341CC7D203C4217008D182B /* VisitorTypeEqualReturning.json in Resources */,
-				E3D29FB91FBECA6700A11C61 /* iOSVersionEqualTo.json in Resources */,
 				E341CC72203C4034008D182B /* DeviceTypeIPadEqual.json in Resources */,
 				E3F7CBBF2004E0AB00CC8C03 /* NestedBracket2.json in Resources */,
-				E3D29FBB1FBECA8800A11C61 /* iOSVersionNotEqualTo.json in Resources */,
 				E3689A4120061F6F00764398 /* Campaign1.json in Resources */,
 				E3F7CBB72004D6E600CC8C03 /* Bracket1.json in Resources */,
 				E301895A203C0184002FA411 /* InvalidSegmentType.json in Resources */,
@@ -784,10 +706,12 @@
 				E3F7CBAF2004B72E00CC8C03 /* VWOStackTests.swift in Sources */,
 				E341CC82203C44AD008D182B /* PredefinedSegmentTests.swift in Sources */,
 				E341CC77203C41D4008D182B /* VisitorTypeTests.swift in Sources */,
+				E327C128203ED2A800161CC2 /* HourOftheDayTests.swift in Sources */,
 				E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */,
 				E327C124203EC95100161CC2 /* iOSVersionTests.swift in Sources */,
 				E31714C41F838BB10036CF07 /* VWODevice.m in Sources */,
 				E341CC6B203C3CFB008D182B /* DeviceTypeTests.swift in Sources */,
+				E327C126203ECFEB00161CC2 /* DayOfWeekTests.swift in Sources */,
 				E3C06652200CA4CB00FF9EF5 /* VWOURLTests.swift in Sources */,
 				E3470B792008C6180035BEEF /* VWOConfigTests.swift in Sources */,
 				E3F7CBC12004E57900CC8C03 /* VWOSegmentTests.swift in Sources */,
@@ -934,7 +858,7 @@
 				);
 				INFOPLIST_FILE = VWO/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -954,7 +878,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = VWO/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
