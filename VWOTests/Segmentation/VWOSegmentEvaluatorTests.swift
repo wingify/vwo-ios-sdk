@@ -31,16 +31,6 @@ class VWOSegmentEvaluatorTests: XCTestCase {
         XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: json))
     }
 
-    func testCustomVariable() {
-        let evaluator = VWOSegmentEvaluator()
-        evaluator.customVariables = ["user" : "Paid"]
-        let json = JSONFrom(file: "CustomVariable")
-        XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: json))
-
-        evaluator.customVariables = ["user" : "free"]
-        XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: json))
-    }
-
     func testbasicAnd1() {
         let evaluator = VWOSegmentEvaluator()
         evaluator.customVariables = ["user" : "Paid"]

@@ -10,14 +10,20 @@ import XCTest
 
 class VisitorTypeTests: XCTestCase {
     func testNewEqual() {
-        let json = JSONFrom(file: "VisitorTypeEqualNew")
+        let json: [String : Any] = [
+            "type": "custom",
+            "partialSegments": [[ "type": "8", "operator": 11, "rOperandValue": "new" ]]
+        ]
         let evaluator = VWOSegmentEvaluator()
         evaluator.isReturning = false
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: json), json.segmentDescription)
     }
 
     func testNewNotEqual() {
-        let json = JSONFrom(file: "VisitorTypeNotEqualNew")
+        let json: [String : Any] = [
+            "type": "custom",
+            "partialSegments": [[ "type": "8", "operator": 12, "rOperandValue": "new" ]]
+        ]
         let evaluator = VWOSegmentEvaluator()
         evaluator.isReturning = false
         XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: json), json.segmentDescription)
@@ -27,7 +33,10 @@ class VisitorTypeTests: XCTestCase {
     }
 
     func testNewReturning() {
-        let json = JSONFrom(file: "VisitorTypeEqualReturning")
+        let json: [String : Any] = [
+            "type": "custom",
+            "partialSegments": [[ "type": "8", "operator": 11, "rOperandValue": "ret" ]]
+        ]
         let evaluator = VWOSegmentEvaluator()
         evaluator.isReturning = true
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: json), json.segmentDescription)
@@ -37,7 +46,10 @@ class VisitorTypeTests: XCTestCase {
     }
 
     func testNewNotReturning() {
-        let json = JSONFrom(file: "VisitorTypeNotEqualReturning")
+        let json: [String : Any] = [
+            "type": "custom",
+            "partialSegments": [[ "type": "8", "operator": 12, "rOperandValue": "ret" ]]
+        ]
         let evaluator = VWOSegmentEvaluator()
         evaluator.isReturning = false
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: json), json.segmentDescription)
