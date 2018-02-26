@@ -89,6 +89,7 @@
 		E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */; };
 		E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */; };
 		E3F2D512204437B200862EE3 /* CustomVariableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2D511204437B200862EE3 /* CustomVariableTests.swift */; };
+		E3F2D5152044389C00862EE3 /* ComplexSegmentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2D5142044389C00862EE3 /* ComplexSegmentationTests.swift */; };
 		E3F7CBA82004A07800CC8C03 /* VWOInfixEvaluator.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F7CBA62004A07800CC8C03 /* VWOInfixEvaluator.h */; };
 		E3F7CBA92004A07800CC8C03 /* VWOInfixEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBA72004A07800CC8C03 /* VWOInfixEvaluator.m */; };
 		E3F7CBAC2004A9B100CC8C03 /* VWOStack.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F7CBAA2004A9B100CC8C03 /* VWOStack.h */; };
@@ -203,6 +204,7 @@
 		E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOURL.h; sourceTree = "<group>"; };
 		E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOURL.m; sourceTree = "<group>"; };
 		E3F2D511204437B200862EE3 /* CustomVariableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVariableTests.swift; sourceTree = "<group>"; };
+		E3F2D5142044389C00862EE3 /* ComplexSegmentationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexSegmentationTests.swift; sourceTree = "<group>"; };
 		E3F7CBA62004A07800CC8C03 /* VWOInfixEvaluator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOInfixEvaluator.h; sourceTree = "<group>"; };
 		E3F7CBA72004A07800CC8C03 /* VWOInfixEvaluator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOInfixEvaluator.m; sourceTree = "<group>"; };
 		E3F7CBAA2004A9B100CC8C03 /* VWOStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOStack.h; sourceTree = "<group>"; };
@@ -417,6 +419,15 @@
 				E327C123203EC95100161CC2 /* iOSVersionTests.swift */,
 				E327C125203ECFEB00161CC2 /* DayOfWeekTests.swift */,
 				E327C127203ED2A800161CC2 /* HourOftheDayTests.swift */,
+				E3F2D5132044387F00862EE3 /* ComplexTests */,
+			);
+			path = Segmentation;
+			sourceTree = "<group>";
+		};
+		E3F2D5132044387F00862EE3 /* ComplexTests */ = {
+			isa = PBXGroup;
+			children = (
+				E3F2D5142044389C00862EE3 /* ComplexSegmentationTests.swift */,
 				E3924B3B1FC2C2D8006A9EB2 /* And1.json */,
 				E3924B3D1FC2D8B7006A9EB2 /* And2.json */,
 				E3924B3F1FC2DC24006A9EB2 /* Or1.json */,
@@ -430,7 +441,7 @@
 				E3F7CBBC2004DFEE00CC8C03 /* Bracket4.json */,
 				E3F7CBBE2004E0AB00CC8C03 /* NestedBracket2.json */,
 			);
-			path = Segmentation;
+			path = ComplexTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -646,6 +657,7 @@
 				E3D29F941FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift in Sources */,
 				E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */,
 				E32C7A161FC58603009ABF2F /* VWOGoalTests.swift in Sources */,
+				E3F2D5152044389C00862EE3 /* ComplexSegmentationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
