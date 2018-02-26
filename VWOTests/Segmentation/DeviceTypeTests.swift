@@ -11,32 +11,44 @@ import XCTest
 class DeviceTypeTests: XCTestCase {
 
     func testiPhoneEqual() {
-        let json = JSONFrom(file: "DeviceTypeIPhoneEqual")
+        let json: [String : Any] = [
+            "type": "custom",
+            "partialSegments": [[ "type": "9", "operator": 11, "rOperandValue": "iPhone" ]]
+        ]
+
         let evaluator = VWOSegmentEvaluator()
         evaluator.appleDeviceType = .iPhone
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: json), json.segmentDescription)
     }
 
     func testiPhoneNotEqual() {
-        let json = JSONFrom(file: "DeviceTypeIPhoneNotEqual")
+        let json: [String : Any] = [
+            "type": "custom",
+            "partialSegments": [[ "type": "9", "operator": 12, "rOperandValue": "iPhone" ]]
+        ]
         let evaluator = VWOSegmentEvaluator()
         evaluator.appleDeviceType = .iPhone
         XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: json), json.segmentDescription)
 
         evaluator.appleDeviceType = .iPad
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: json), json.segmentDescription)
-
     }
 
     func testiPadEqual() {
-        let json = JSONFrom(file: "DeviceTypeIPadEqual")
+        let json: [String : Any] = [
+            "type": "custom",
+            "partialSegments": [[ "type": "9", "operator": 11, "rOperandValue": "iPad" ]]
+        ]
         let evaluator = VWOSegmentEvaluator()
         evaluator.appleDeviceType = .iPad
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: json), json.segmentDescription)
     }
 
     func testiPadNotEqual() {
-        let json = JSONFrom(file: "DeviceTypeIPadNotEqual")
+        let json: [String : Any] = [
+            "type": "custom",
+            "partialSegments": [[ "type": "9", "operator": 12, "rOperandValue": "iPad" ]]
+        ]
         let evaluator = VWOSegmentEvaluator()
         evaluator.appleDeviceType = .iPad
         XCTAssertFalse(evaluator.canUserBePartOfCampaign(forSegment: json), json.segmentDescription)
