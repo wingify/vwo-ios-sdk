@@ -80,7 +80,6 @@
 		E3C0664E200C94C500FF9EF5 /* VarationControl.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C0664D200C94C500FF9EF5 /* VarationControl.json */; };
 		E3C06650200C94DD00FF9EF5 /* VariationMissingKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C0664F200C94DD00FF9EF5 /* VariationMissingKeys.json */; };
 		E3C06652200CA4CB00FF9EF5 /* VWOURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C06651200CA4CB00FF9EF5 /* VWOURLTests.swift */; };
-		E3D29F941FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */; };
 		E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D29F951FBD91B700A11C61 /* Extra.swift */; };
 		E3D29FC61FBEDAB300A11C61 /* NSDate+VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D29FC41FBEDAB300A11C61 /* NSDate+VWO.h */; };
 		E3D29FC71FBEDAB300A11C61 /* NSDate+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D29FC51FBEDAB300A11C61 /* NSDate+VWO.m */; };
@@ -195,7 +194,6 @@
 		E3C0664D200C94C500FF9EF5 /* VarationControl.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VarationControl.json; sourceTree = "<group>"; };
 		E3C0664F200C94DD00FF9EF5 /* VariationMissingKeys.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VariationMissingKeys.json; sourceTree = "<group>"; };
 		E3C06651200CA4CB00FF9EF5 /* VWOURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOURLTests.swift; sourceTree = "<group>"; };
-		E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOSegmentEvaluatorTests.swift; sourceTree = "<group>"; };
 		E3D29F951FBD91B700A11C61 /* Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extra.swift; sourceTree = "<group>"; };
 		E3D29FC41FBEDAB300A11C61 /* NSDate+VWO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+VWO.h"; sourceTree = "<group>"; };
 		E3D29FC51FBEDAB300A11C61 /* NSDate+VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+VWO.m"; sourceTree = "<group>"; };
@@ -409,7 +407,6 @@
 		E3D29FA11FBDA85100A11C61 /* Segmentation */ = {
 			isa = PBXGroup;
 			children = (
-				E3D29F931FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift */,
 				E341CC6A203C3CFA008D182B /* DeviceTypeTests.swift */,
 				E341CC76203C41D4008D182B /* VisitorTypeTests.swift */,
 				E3018959203C0184002FA411 /* InvalidSegmentType.json */,
@@ -654,7 +651,6 @@
 				E3C06652200CA4CB00FF9EF5 /* VWOURLTests.swift in Sources */,
 				E3470B792008C6180035BEEF /* VWOConfigTests.swift in Sources */,
 				E3F7CBC12004E57900CC8C03 /* VWOSegmentTests.swift in Sources */,
-				E3D29F941FBD8B1300A11C61 /* VWOSegmentEvaluatorTests.swift in Sources */,
 				E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */,
 				E32C7A161FC58603009ABF2F /* VWOGoalTests.swift in Sources */,
 				E3F2D5152044389C00862EE3 /* ComplexSegmentationTests.swift in Sources */,

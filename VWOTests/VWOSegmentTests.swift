@@ -8,6 +8,31 @@
 
 import XCTest
 class VWOSegmentTests: XCTestCase {
+
+    func testInitializationFailure() {
+        let json: [String : Any] = [ "type": "3", "operator": 11, "rOperandValue": [0]]
+        XCTAssertNotNil(VWOSegment(dictionary: json))
+
+        let json1: [String : Any] = [String : Any]()
+        XCTAssertNil(VWOSegment(dictionary: json1), "Should not initialize when dictionary is missing")
+
+        let json2: [String : Any] = ["operator": 11, "rOperandValue": [0]]
+        XCTAssertNil(VWOSegment(dictionary: json2), "Should not initialize when type is missing")
+
+        let json3: [String : Any] = [ "type": "3", "rOperandValue": [0]]
+        XCTAssertNil(VWOSegment(dictionary: json3), "Should not initialize when operator is missing")
+
+        let json4: [String : Any] = [ "type": "3", "operator": 11]
+        XCTAssertNil(VWOSegment(dictionary: json4), "Should not initialize when rOperandValue is missing")
+
+        let json5: [String : Any] = [ "type": 123, "operator": 11, "rOperandValue": [0]]
+        XCTAssertNil(VWOSegment(dictionary: json5), "Should not initialize when type is not string")
+
+        let json6: [String : Any] = [ "type": 123, "operator": 11, "rOperandValue": [0], "prevLogicalOperator": "INVALID"]
+        XCTAssertNil(VWOSegment(dictionary: json6), "Should not initialize when previouslogical operaor is invalid")
+    }
+
+    //MARK: - Infix Tests
     func test1() {
         let segment = VWOSegment()
         XCTAssertEqual(segment.toInfix(forOperand: true), ["1"])

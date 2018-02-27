@@ -64,15 +64,15 @@ static NSString * kReturningVisitor = @"returning_visitor";
     return self;
 }
 
-- (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *) segment {
-    if (segment == nil) return YES;
+- (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *)segment {
+    if (segment == nil) return NO;
     if ([segment[kType] isEqualToString:@"custom"]) {
         NSArray *partialSegments = (NSArray *)segment[kPartialSegments];
         return [self evaluateCustomSegmentation:partialSegments];
     } else if ([segment[kType] isEqualToString:@"predefined"]) {
         return [self evaluatePredefinedSegmentation:segment[kSegmentCode]];
     }
-    return YES;
+    return NO;
 }
 
 - (BOOL)evaluatePredefinedSegmentation:(NSDictionary *)segmentObject {
@@ -97,14 +97,15 @@ static NSString * kReturningVisitor = @"returning_visitor";
     NSUInteger count = 0;
     for (NSDictionary *partialSegment in partialSegments) {
         VWOSegment *segment = [[VWOSegment alloc] initWithDictionary:partialSegment];
+        if (segment) {
+                //If first segment has previousLogicalOperator remove it.
+            if (count == 0) { segment.previousLogicalOperator = VWOPreviousLogicalOperatorNone;}
 
-        //If first segment has previousLogicalOperator remove it.
-        if (count == 0) { segment.previousLogicalOperator = VWOPreviousLogicalOperatorNone;}
-
-        BOOL evaluated = [self evaluate:segment];
-        NSArray *infixPart = [segment toInfixForOperand:evaluated];
-        [infix addObjectsFromArray:infixPart];
-        count++;
+            BOOL evaluated = [self evaluate:segment];
+            NSArray *infixPart = [segment toInfixForOperand:evaluated];
+            [infix addObjectsFromArray:infixPart];
+            count++;
+        }
     }
     return [VWOInfixEvaluator evaluate:infix];
 }

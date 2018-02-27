@@ -7,12 +7,29 @@
 //
 
 #import "VWOSegment.h"
+#import "NSDictionary+VWO.h"
 
 @implementation VWOSegment
+
+- (BOOL)isJSONValid:(NSDictionary *)segmentDict {
+    if (segmentDict[@"operator"] == nil) { return NO; }
+    NSArray *missing = [segmentDict keysMissingFrom:@[@"type", @"operator", @"rOperandValue"]];
+    if (missing.count > 0) { return NO; }
+    if (![segmentDict[@"type"] isKindOfClass:NSString.class]) { return NO; }
+    if (segmentDict[@"prevLogicalOperator"] != nil) {
+        if (![segmentDict[@"prevLogicalOperator"] isEqualToString:@"AND"] &&
+            ![segmentDict[@"prevLogicalOperator"] isEqualToString:@"OR"]) {
+            return NO;
+        }
+    }
+    return YES;
+}
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *)segmentDict {
     self = [super init];
     if (self) {
+        if (![self isJSONValid:segmentDict]) { return nil;}
+        
         _operator = [segmentDict[@"operator"] intValue];
 
         // L-operand R- operand
@@ -26,12 +43,12 @@
 
         //Previous logical operator
         NSString *operator = segmentDict[@"prevLogicalOperator"];
-        if ([operator  isEqual: @"AND"]) {
-            _previousLogicalOperator = VWOPreviousLogicalOperatorAnd;
-        } else if ([operator  isEqual: @"OR"]) {
-            _previousLogicalOperator = VWOPreviousLogicalOperatorOr;
-        } else {
-            _previousLogicalOperator = VWOPreviousLogicalOperatorNone;
+        if (operator) {
+            if ([operator  isEqual: @"AND"]) {
+                _previousLogicalOperator = VWOPreviousLogicalOperatorAnd;
+            } else {
+                _previousLogicalOperator = VWOPreviousLogicalOperatorOr;
+            }
         }
 
         //Brackets
@@ -39,7 +56,6 @@
         _rightBracket = [segmentDict[@"rBracket"] boolValue];
     }
     return self;
-
 }
 
 - (NSArray *)toInfixForOperand:(BOOL)evaluatedOperand {
