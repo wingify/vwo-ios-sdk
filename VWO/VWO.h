@@ -45,9 +45,11 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  This method is typically invoked in your application:didFinishLaunchingWithOptions: method.
 
+ @note Use launchForAPIKey:completion:failure method instead
+
  @param apiKey Unique developer ApiKey provided by VWO.
  */
-+ (void)launchForAPIKey:(NSString *)apiKey NS_SWIFT_NAME(launch(apiKey:));
++ (void)launchForAPIKey:(NSString *)apiKey NS_SWIFT_NAME(launch(apiKey:)) __deprecated;
 
 /**
  Asynchronously fetch campaign settings
@@ -99,7 +101,7 @@ NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:));
 /**
  Fetches variation for given key
 
- @note If same key is present in multiple campaigns, then value is fetched from the first campaign that has the key.
+ @note Use variationForKey:defaultValue instead
 
  @param key key whose value is to be fetched
 
@@ -107,7 +109,7 @@ NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:));
 
  @see variationForKey:defaultValue:
  */
-+ (nullable id)variationForKey:(NSString *)key NS_SWIFT_NAME(variationFor(key:));
++ (nullable id)variationForKey:(NSString *)key NS_SWIFT_NAME(variationFor(key:))__deprecated;
 
 /**
  Fetch variation for given key
