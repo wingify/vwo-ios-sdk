@@ -34,6 +34,7 @@
 		E36AC7191F75614E0041ACDF /* VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E36AC7181F75614E0041ACDF /* VWO.m */; };
 		E3806D30205269D800FFE897 /* DeviceWidthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3806D2F205269D800FFE897 /* DeviceWidthTests.swift */; };
 		E3806D3220526C6900FFE897 /* DeviceHeightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3806D3120526C6900FFE897 /* DeviceHeightTests.swift */; };
+		E3806D342052717100FFE897 /* LocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3806D332052717100FFE897 /* LocationTests.swift */; };
 		E388B6CE1F8F7D350023E11E /* VWOURLQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = E388B6CC1F8F7D350023E11E /* VWOURLQueue.h */; };
 		E388B6CF1F8F7D350023E11E /* VWOURLQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E388B6CD1F8F7D350023E11E /* VWOURLQueue.m */; };
 		E3924B3C1FC2C2D8006A9EB2 /* And1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3924B3B1FC2C2D8006A9EB2 /* And1.json */; };
@@ -147,6 +148,7 @@
 		E36AC7181F75614E0041ACDF /* VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWO.m; sourceTree = "<group>"; };
 		E3806D2F205269D800FFE897 /* DeviceWidthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceWidthTests.swift; sourceTree = "<group>"; };
 		E3806D3120526C6900FFE897 /* DeviceHeightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHeightTests.swift; sourceTree = "<group>"; };
+		E3806D332052717100FFE897 /* LocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
 		E388B6CC1F8F7D350023E11E /* VWOURLQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOURLQueue.h; sourceTree = "<group>"; };
 		E388B6CD1F8F7D350023E11E /* VWOURLQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOURLQueue.m; sourceTree = "<group>"; };
 		E3924B3B1FC2C2D8006A9EB2 /* And1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = And1.json; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				E327C123203EC95100161CC2 /* iOSVersionTests.swift */,
 				E327C125203ECFEB00161CC2 /* DayOfWeekTests.swift */,
 				E327C127203ED2A800161CC2 /* HourOftheDayTests.swift */,
+				E3806D332052717100FFE897 /* LocationTests.swift */,
 				E3806D2F205269D800FFE897 /* DeviceWidthTests.swift */,
 				E3806D3120526C6900FFE897 /* DeviceHeightTests.swift */,
 				E3F2D5132044387F00862EE3 /* ComplexTests */,
@@ -658,6 +661,7 @@
 				E327C126203ECFEB00161CC2 /* DayOfWeekTests.swift in Sources */,
 				E3C06652200CA4CB00FF9EF5 /* VWOURLTests.swift in Sources */,
 				E3470B792008C6180035BEEF /* VWOConfigTests.swift in Sources */,
+				E3806D342052717100FFE897 /* LocationTests.swift in Sources */,
 				E3F7CBC12004E57900CC8C03 /* VWOSegmentTests.swift in Sources */,
 				E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */,
 				E32C7A161FC58603009ABF2F /* VWOGoalTests.swift in Sources */,
