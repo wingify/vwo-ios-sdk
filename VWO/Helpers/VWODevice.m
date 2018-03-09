@@ -61,4 +61,12 @@
     return UIDevice.currentDevice.systemVersion;
 }
 
++ (int)screenWidth {
+    return UIScreen.mainScreen.bounds.size.width;
+}
+
++(int)screenHeight {
+    return UIScreen.mainScreen.bounds.size.height;
+}
+
 @end

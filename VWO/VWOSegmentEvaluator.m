@@ -43,27 +43,6 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
 @implementation VWOSegmentEvaluator
 
-- (instancetype)initWithiOSVersion:(NSString *)iOSVersion
-                        appVersion:(NSString *)appVersion
-                              date:(NSDate *)date
-                            locale:(NSLocale *)locale
-                       isReturning:(BOOL)isReturning
-                     appDeviceType:(VWOAppleDeviceType)deviceType
-                   customVariables:(NSDictionary *)customVariables {
-
-    self = [super init];
-    if (self) {
-        self.iOSVersion = iOSVersion;
-        self.appVersion = appVersion;
-        self.date = date;
-        self.locale = locale;
-        self.isReturning = isReturning;
-        self.appleDeviceType = deviceType;
-        self.customVariables = customVariables;
-    }
-    return self;
-}
-
 - (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *)segment {
     if (segment == nil) return NO;
     if ([segment[kType] isEqualToString:@"custom"]) {
@@ -117,103 +96,124 @@ static NSString * kReturningVisitor = @"returning_visitor";
     }
 
     switch (segment.type) {
-        case VWOSegmentTypeiOSVersion: {
-            NSAssert(self.iOSVersion != nil, @"iOS Version not available");
-            NSString *version = [self.iOSVersion toXDotY];
-            NSString *targetVersion = segment.rOperand.firstObject;
-            NSComparisonResult result = [version compare:targetVersion options:NSNumericSearch];
-            switch (segment.operator) {
-                case OperatorTypeIsEqualTo: return result == NSOrderedSame;
-                case OperatorTypeIsNotEqualTo: return result != NSOrderedSame;
-                case OperatorTypeGreaterThan: return result == NSOrderedDescending;
-                case OperatorTypeLessThan: return result == NSOrderedAscending;
-                default:
-                    VWOLogException(@"Invalid operator received for iOSVersion %d", segment.operator);
-                    return NO;
+            case VWOSegmentTypeiOSVersion: {
+                NSAssert(self.iOSVersion != nil, @"iOS Version not available");
+                NSString *version = [self.iOSVersion toXDotY];
+                NSString *targetVersion = segment.rOperand.firstObject;
+                NSComparisonResult result = [version compare:targetVersion options:NSNumericSearch];
+                switch (segment.operator) {
+                        case OperatorTypeIsEqualTo: return result == NSOrderedSame;
+                        case OperatorTypeIsNotEqualTo: return result != NSOrderedSame;
+                        case OperatorTypeGreaterThan: return result == NSOrderedDescending;
+                        case OperatorTypeLessThan: return result == NSOrderedAscending;
+                    default:
+                        VWOLogException(@"Invalid operator received for iOSVersion %d", segment.operator);
+                        return NO;
+                }
+                break;
             }
-            break;
-        }
 
-        case VWOSegmentTypeDayOfWeek: {
-            NSAssert(self.date != nil, @"Date not available");
-            BOOL contains = [segment.rOperand containsObject:[NSNumber numberWithInteger:self.date.dayOfWeek]];
-            return ((contains && segment.operator == OperatorTypeIsEqualTo) ||
-                    (!contains && segment.operator == OperatorTypeIsNotEqualTo));
-        }
-
-        case VWOSegmentTypeHourOfTheDay: {
-            NSAssert(self.date != nil, @"Date not available");
-            BOOL contains = [segment.rOperand containsObject:[NSNumber numberWithInteger:self.date.hourOfTheDay]];
-            return ((contains && segment.operator == OperatorTypeIsEqualTo) ||
-                    (!contains && segment.operator == OperatorTypeIsNotEqualTo));
-        }
-
-        case VWOSegmentTypeAppVersion: {
-            NSAssert(_appVersion != nil, @"App Version not available");
-            NSString *targetVersion = segment.rOperand.firstObject;
-            VWOComparisonResult result = [_appVersion compareVersion:targetVersion];
-            switch (segment.operator) {
-                case OperatorTypeIsEqualTo: return result == VWOComparisonResultEqual;
-                case OperatorTypeIsNotEqualTo: return result != VWOComparisonResultEqual;
-                case OperatorTypeGreaterThan: return result == VWOComparisonResultGreater;
-                case OperatorTypeLessThan: return result == VWOComparisonResultLesser;
-                default: return NO;
+            case VWOSegmentTypeDayOfWeek: {
+                NSAssert(self.date != nil, @"Date not available");
+                BOOL contains = [segment.rOperand containsObject:[NSNumber numberWithInteger:self.date.dayOfWeek]];
+                return ((contains && segment.operator == OperatorTypeIsEqualTo) ||
+                        (!contains && segment.operator == OperatorTypeIsNotEqualTo));
             }
-            break;
-        }
 
-        case VWOSegmentTypeCustomVariable: {
-            NSString *currentValue = _customVariables[segment.lOperand];
-            if (currentValue == nil) return NO;
-
-            NSString *targetValue = segment.rOperand.firstObject;
-            switch (segment.operator) {
-                case OperatorTypeMatchesRegexCaseInsensitive:
-                    return ([currentValue rangeOfString:targetValue
-                                                options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound);
-
-                case OperatorTypeContains:
-                    return [currentValue rangeOfString:targetValue].location != NSNotFound;
-
-                case OperatorTypeIsEqualTo:
-                    return [currentValue isEqualToString:targetValue];
-
-                case OperatorTypeIsNotEqualTo:
-                    return ![currentValue isEqualToString:targetValue];
-
-                case OperatorTypeStartsWith:
-                    return [currentValue hasPrefix:targetValue];
-
-                default:
-                    return NO;
+            case VWOSegmentTypeHourOfTheDay: {
+                NSAssert(self.date != nil, @"Date not available");
+                BOOL contains = [segment.rOperand containsObject:[NSNumber numberWithInteger:self.date.hourOfTheDay]];
+                return ((contains && segment.operator == OperatorTypeIsEqualTo) ||
+                        (!contains && segment.operator == OperatorTypeIsNotEqualTo));
             }
-            break;
-        }
 
-        case VWOSegmentTypeVisitorType: {
-            NSString *givenType = segment.rOperand.firstObject;
-            BOOL valid = (self.isReturning && [givenType isEqualToString:@"ret"]) ||
-            (!self.isReturning && [givenType isEqualToString:@"new"]);
-            return ((valid && segment.operator == OperatorTypeIsEqualTo) ||
-                    (!valid && segment.operator == OperatorTypeIsNotEqualTo));
-        }
+            case VWOSegmentTypeAppVersion: {
+                NSAssert(_appVersion != nil, @"App Version not available");
+                NSString *targetVersion = segment.rOperand.firstObject;
+                VWOComparisonResult result = [_appVersion compareVersion:targetVersion];
+                switch (segment.operator) {
+                        case OperatorTypeIsEqualTo: return result == VWOComparisonResultEqual;
+                        case OperatorTypeIsNotEqualTo: return result != VWOComparisonResultEqual;
+                        case OperatorTypeGreaterThan: return result == VWOComparisonResultGreater;
+                        case OperatorTypeLessThan: return result == VWOComparisonResultLesser;
+                    default: return NO;
+                }
+                break;
+            }
 
-        case VWOSegmentTypeDeviceType: {
-            NSString *givenDeviceType = segment.rOperand.firstObject;
-            BOOL valid = (self.appleDeviceType == VWOAppleDeviceTypeIPhone && [givenDeviceType isEqualToString:@"iPhone"]) ||
-            (self.appleDeviceType == VWOAppleDeviceTypeIPad && [givenDeviceType isEqualToString:@"iPad"]);
-            return ((valid && segment.operator == OperatorTypeIsEqualTo) ||
-                    (!valid && segment.operator == OperatorTypeIsNotEqualTo));
-        }
+            case VWOSegmentTypeCustomVariable: {
+                NSString *currentValue = _customVariables[segment.lOperand];
+                if (currentValue == nil) return NO;
 
-        case VWOSegmentTypeLocation: {
-            NSString *countryCode = self.locale.countryCode;
-            if (countryCode == nil) { return NO;}
-            BOOL contains = [segment.rOperand containsObject: countryCode];
-            return ((contains && segment.operator == OperatorTypeIsEqualTo) ||
-                    (!contains && segment.operator == OperatorTypeIsNotEqualTo));
+                NSString *targetValue = segment.rOperand.firstObject;
+                switch (segment.operator) {
+                        case OperatorTypeMatchesRegexCaseInsensitive:
+                        return ([currentValue rangeOfString:targetValue
+                                                    options:NSRegularExpressionSearch|NSCaseInsensitiveSearch].location != NSNotFound);
 
-        }
+                        case OperatorTypeContains:
+                        return [currentValue rangeOfString:targetValue].location != NSNotFound;
+
+                        case OperatorTypeIsEqualTo:
+                        return [currentValue isEqualToString:targetValue];
+
+                        case OperatorTypeIsNotEqualTo:
+                        return ![currentValue isEqualToString:targetValue];
+
+                        case OperatorTypeStartsWith:
+                        return [currentValue hasPrefix:targetValue];
+
+                    default:
+                        return NO;
+                }
+                break;
+            }
+
+            case VWOSegmentTypeVisitorType: {
+                NSString *givenType = segment.rOperand.firstObject;
+                BOOL valid = (self.isReturning && [givenType isEqualToString:@"ret"]) ||
+                (!self.isReturning && [givenType isEqualToString:@"new"]);
+                return ((valid && segment.operator == OperatorTypeIsEqualTo) ||
+                        (!valid && segment.operator == OperatorTypeIsNotEqualTo));
+            }
+
+            case VWOSegmentTypeDeviceType: {
+                NSString *givenDeviceType = segment.rOperand.firstObject;
+                BOOL valid = (self.appleDeviceType == VWOAppleDeviceTypeIPhone && [givenDeviceType isEqualToString:@"iPhone"]) ||
+                (self.appleDeviceType == VWOAppleDeviceTypeIPad && [givenDeviceType isEqualToString:@"iPad"]);
+                return ((valid && segment.operator == OperatorTypeIsEqualTo) ||
+                        (!valid && segment.operator == OperatorTypeIsNotEqualTo));
+            }
+
+            case VWOSegmentTypeLocation: {
+                NSString *countryCode = self.locale.countryCode;
+                if (countryCode == nil) { return NO;}
+                BOOL contains = [segment.rOperand containsObject: countryCode];
+                return ((contains && segment.operator == OperatorTypeIsEqualTo) ||
+                        (!contains && segment.operator == OperatorTypeIsNotEqualTo));
+
+            }
+            case VWOSegmentTypeScreenWidth: {
+                int targetWidth = [segment.rOperand.firstObject intValue];
+                switch (segment.operator) {
+                        case OperatorTypeIsEqualTo: return self.screenWidth == targetWidth;
+                        case OperatorTypeIsNotEqualTo: return self.screenWidth != targetWidth;
+                        case OperatorTypeGreaterThan: return self.screenWidth > targetWidth;
+                        case OperatorTypeLessThan: return self.screenWidth < targetWidth;
+                    default: return NO;
+                }
+            }
+            case VWOSegmentTypeScreenHeight: {
+                int targetHeight = [segment.rOperand.firstObject intValue];
+                switch (segment.operator) {
+                        case OperatorTypeIsEqualTo: return self.screenHeight == targetHeight;
+                        case OperatorTypeIsNotEqualTo: return self.screenHeight != targetHeight;
+                        case OperatorTypeGreaterThan: return self.screenHeight > targetHeight;
+                        case OperatorTypeLessThan: return self.screenHeight < targetHeight;
+                    default: return NO;
+                }
+            }
+
         default: return NO;
     }
 }

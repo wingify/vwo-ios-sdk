@@ -9,7 +9,7 @@
 import XCTest
 
 class AppVersionTests: XCTestCase {
-    func    VersionEqualTo() {
+    func testVersionEqualTo() {
         let json: [String : Any] = [
             "type": "custom",
             "partialSegments": [[ "type": "6", "operator": 11, "rOperandValue": "1.0" ]]

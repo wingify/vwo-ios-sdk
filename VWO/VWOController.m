@@ -294,14 +294,16 @@ _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
 
     NSString *appVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
 
-    VWOSegmentEvaluator *evaluator = [[VWOSegmentEvaluator alloc]
-                                      initWithiOSVersion:VWODevice.iOSVersion
-                                      appVersion:appVersion
-                                      date:NSDate.date
-                                      locale:NSLocale.currentLocale
-                                      isReturning:_config.isReturningUser
-                                      appDeviceType:VWODevice.appleDeviceType
-                                      customVariables:_customVariables];
+    VWOSegmentEvaluator *evaluator = [[VWOSegmentEvaluator alloc] init];
+    evaluator.iOSVersion = VWODevice.iOSVersion;
+    evaluator.appVersion = appVersion;
+    evaluator.date = NSDate.date;
+    evaluator.locale = NSLocale.currentLocale;
+    evaluator.isReturning = _config.isReturningUser;
+    evaluator.appleDeviceType = VWODevice.appleDeviceType;
+    evaluator.customVariables = _customVariables;
+    evaluator.screenWidth = VWODevice.screenWidth;
+    evaluator.screenHeight = VWODevice.screenHeight;
 
     for (VWOCampaign *aCampaign in allCampaigns) {
         if ([evaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {

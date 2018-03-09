@@ -20,14 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString *appVersion;
 @property NSString *iOSVersion;
 @property NSLocale *locale;
-
-- (instancetype)initWithiOSVersion:(NSString *)iOSVersion
-                        appVersion:(NSString *)appVersion
-                              date:(NSDate *)date
-                            locale:(NSLocale *)locale
-                       isReturning:(BOOL)isReturning
-                     appDeviceType:(VWOAppleDeviceType)deviceType
-                   customVariables:(nullable NSDictionary *)customVariables;
+@property uint screenWidth;
+@property uint screenHeight;
 
 - (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *)segment;
 
