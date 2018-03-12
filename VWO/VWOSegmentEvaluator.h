@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property uint screenWidth;
 @property uint screenHeight;
 
-- (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *)segment;
+- (BOOL)canUserBePartOfCampaignForSegment:(nullable NSDictionary *)segment;
 
 @end
 
