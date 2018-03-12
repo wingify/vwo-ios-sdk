@@ -44,7 +44,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
 @implementation VWOSegmentEvaluator
 
 - (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *)segment {
-    if (segment == nil) return NO;
+    if (segment == nil) return YES;
     if ([segment[kType] isEqualToString:@"custom"]) {
         NSArray *partialSegments = (NSArray *)segment[kPartialSegments];
         return [self evaluateCustomSegmentation:partialSegments];
