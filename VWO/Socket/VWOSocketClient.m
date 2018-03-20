@@ -34,7 +34,7 @@
 
 - (void)launchAppKey:(NSString *)appKey {
     [VWOSIOSocket socketWithHost:kSocketIP response: ^(VWOSIOSocket *remoteSocket) {
-        _socket = remoteSocket;
+        self.socket = remoteSocket;
         [self startListenersAppKey:appKey];
     }];
 }
@@ -51,7 +51,7 @@
     
     _socket.onDisconnect = ^{
         VWOLogDebug(@"Socket disconnected");
-        _enabled = NO;
+        self->_enabled = NO;
     };
     
     _socket.onConnectError = ^(NSDictionary *error) {
@@ -64,7 +64,7 @@
     
     [_socket on:@"browser_connect" callback:^(SIOParameterArray *arguments) {
         VWOLogInfo(@"Socket browser connected");
-        _enabled = YES;
+        self.enabled = YES;
         id object = [arguments firstObject];
         if (object && object[@"name"]) {
             VWOLogInfo(@"Preview mode: Connected with: '%@'", object[@"name"]);
@@ -73,7 +73,7 @@
 
     [_socket on:@"browser_disconnect" callback:^(SIOParameterArray *arguments) {
         VWOLogInfo(@"Preview mode Disconnected");
-        _enabled = NO;
+        self.enabled = NO;
     }];
     
     [_socket on:@"receive_variation" callback:^(SIOParameterArray *arguments) {
@@ -85,7 +85,7 @@
             VWOLogError(@"Received variation error");
         }
         
-        [_socket emit:@"receive_variation_success" args:[NSArray arrayWithObject:@{@"variationId":expObject[@"variationId"]}]];
+        [self.socket emit:@"receive_variation_success" args:[NSArray arrayWithObject:@{@"variationId":expObject[@"variationId"]}]];
         
         if (arguments.count > 0) {
             NSDictionary *changes = ((NSDictionary *)arguments.firstObject)[@"json"];

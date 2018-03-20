@@ -49,12 +49,12 @@ static NSString *const kDescription = @"desc";
     if (_isFlushing) return;
     _isFlushing = true;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        NSUInteger count = _queue.count;
+        NSUInteger count = self.queue.count;
         VWOLogDebug(@"Flush Queue. Count %d", count);
         for (; count > 0; count -= 1) {
-            NSAssert(_queue.peek != nil, @"queue.peek is giving invalid results");
+            NSAssert(self.queue.peek != nil, @"queue.peek is giving invalid results");
 
-            NSMutableDictionary *peekObject = [_queue.peek mutableCopy];
+            NSMutableDictionary *peekObject = [self.queue.peek mutableCopy];
 
             NSURL *url =  [NSURL URLWithString:peekObject[kURL]];
             NSError *error = nil;
@@ -67,7 +67,7 @@ static NSString *const kDescription = @"desc";
                 //If No internet connection break; No need to process other messages in queue
             if (error.code == NSURLErrorNotConnectedToInternet) {
                 VWOLogWarning(@"No internet connection. Flush aborted");
-                _isFlushing = false;
+                self.isFlushing = false;
                 break;
             }
                 // Failure is confirmed only when status is not 200
@@ -75,19 +75,19 @@ static NSString *const kDescription = @"desc";
             int retryCount = [peekObject[kMaxRetry] intValue];
             if (statusCode == 200){
                 VWOLogInfo(@"Successfully sent message %d", statusCode);
-                [_queue dequeue];
+                [self.queue dequeue];
             } else if (retryCount <= 0) {
                 VWOLogInfo(@"Retry count exhausted %@", url);
-                [self.delegate retryCountExhaustedPath:_path url:url];
-                [_queue dequeue];
+                [self.delegate retryCountExhaustedPath:self.path url:url];
+                [self.queue dequeue];
             } else {
                 peekObject[kMaxRetry] = @(retryCount - 1);
                 VWOLogDebug(@"Re inserting %@ with retry count %@",url, peekObject[kMaxRetry]);
-                [_queue dequeue];
-                [_queue enqueue:peekObject];
+                [self.queue dequeue];
+                [self.queue enqueue:peekObject];
             }
         }//for
-        _isFlushing = false;
+        self.isFlushing = false;
     });
 }
 
