@@ -186,7 +186,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
             }
 
             case VWOSegmentTypeLocation: {
-                NSString *countryCode = self.locale.countryCode;
+                NSString *countryCode = [self.locale objectForKey:NSLocaleCountryCode];
                 if (countryCode == nil) { return NO;}
                 BOOL contains = [segment.rOperand containsObject: countryCode];
                 return ((contains && segment.operator == OperatorTypeIsEqualTo) ||
