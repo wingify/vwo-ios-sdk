@@ -41,17 +41,17 @@
 - (void)enqueue:(NSDictionary *)object {
     VWOLogDebug(@"QUEUE Enqueue : %@", object);
     dispatch_barrier_async(_queue, ^{
-        NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:_fileURL];
+        NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:self->_fileURL];
         assert(array != nil);
         [array addObject:object];
-        [array writeToURL:_fileURL atomically:YES];
+        [array writeToURL:self->_fileURL atomically:YES];
     });
 }
 
 - (NSDictionary *)dequeue {
     __block NSDictionary *firstObject = nil;
     dispatch_barrier_sync(_queue, ^{
-        NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:_fileURL];
+        NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:self->_fileURL];
         if (array.count == 0) {
             //First object which initially is null would be returned
             return;
@@ -59,7 +59,7 @@
 
         firstObject = array.firstObject;
         [array removeObjectAtIndex:0];
-        [array writeToURL:_fileURL atomically:YES];
+        [array writeToURL:self->_fileURL atomically:YES];
     });
     return firstObject;
 }
@@ -67,7 +67,7 @@
 - (NSDictionary *)peek {
     __block NSDictionary *firstObject;
     dispatch_sync(_queue, ^{
-        NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:_fileURL];
+        NSMutableArray *array = [NSMutableArray arrayWithContentsOfURL:self->_fileURL];
         firstObject = array.firstObject;
     });
     return firstObject;
@@ -76,7 +76,7 @@
 - (NSUInteger) count {
     __block NSUInteger count;
     dispatch_sync(_queue, ^{
-        count = [NSArray arrayWithContentsOfURL:_fileURL].count;
+        count = [NSArray arrayWithContentsOfURL:self->_fileURL].count;
     });
     return count;
 }

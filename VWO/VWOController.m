@@ -84,7 +84,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     if (VWODevice.isAttachedToDebugger || [NSUserDefaults.standardUserDefaults objectForKey:@"vwo.enableSocket"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
                 //UIWebKit is used. Hence dispatched on main Queue
-            [VWOSocketClient.shared launchAppKey:_config.appKey];
+            [VWOSocketClient.shared launchAppKey:self->_config.appKey];
         });
     }
 
@@ -96,7 +96,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 
     // Start timer. (Timer can be scheduled only on Main Thread)
     dispatch_async(dispatch_get_main_queue(), ^{
-        messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:kMessageQueueFlushInterval
+        self->messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:kMessageQueueFlushInterval
                                                                   target:self
                                                                 selector:@selector(timerAction)
                                                                 userInfo:nil repeats:YES];
