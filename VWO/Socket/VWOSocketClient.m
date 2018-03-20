@@ -33,6 +33,7 @@
 }
 
 - (void)launchAppKey:(NSString *)appKey {
+    if (self.socket != nil) { return; }
     [VWOSIOSocket socketWithHost:kSocketIP response: ^(VWOSIOSocket *remoteSocket) {
         self.socket = remoteSocket;
         [self startListenersAppKey:appKey];

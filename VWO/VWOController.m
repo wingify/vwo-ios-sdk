@@ -17,6 +17,7 @@
 #import "VWOURL.h"
 #import "VWODevice.h"
 #import "VWOConfig.h"
+#import <UIKit/UIKit.h>
 
 static NSTimeInterval kMessageQueueFlushInterval         = 10;
 static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
@@ -81,12 +82,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     _config = [VWOConfig configWithAPIKey:apiKey userDefaultsKey:kUserDefaultsKey];
     _config.sessionCount += 1;
 
-    if (VWODevice.isAttachedToDebugger || [NSUserDefaults.standardUserDefaults objectForKey:@"vwo.enableSocket"]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-                //UIWebKit is used. Hence dispatched on main Queue
-            [VWOSocketClient.shared launchAppKey:self.config.appKey];
-        });
-    }
+    [self addGestureRecognizer];
 
     // Initialise the queue and flush the persistance URLs
     pendingURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.messageQueue];
@@ -111,6 +107,28 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     if (_campaignList == nil) { return; }
     _initialised = true;
     [self trackUserForAllCampaignsOnLaunch:_campaignList];
+}
+
+- (void)addGestureRecognizer {
+    UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognised:)];
+    gesture.minimumPressDuration = 1;
+    gesture.cancelsTouchesInView = NO;
+    gesture.numberOfTouchesRequired = 5;
+
+        // Start timer. (Timer can be scheduled only on Main Thread)
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIApplication.sharedApplication.keyWindow addGestureRecognizer:gesture];
+    });
+}
+
+- (void)longGestureRecognised:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"UIGestureRecognizerStateBegan.");
+        dispatch_async(dispatch_get_main_queue(), ^{
+                //UIWebKit is used. Hence dispatched on main Queue
+            [VWOSocketClient.shared launchAppKey:self.config.appKey];
+        });
+    }
 }
 
 - (void)timerAction {
