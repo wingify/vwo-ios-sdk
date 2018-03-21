@@ -82,7 +82,7 @@ class ContainerVC: UIViewController {
         addVC(side: .left, vc: ListGridVC.makeViewFor(type: .list))
 
         // Right
-        let variation = (VWO.variationFor(key: "layout") as? String) ?? "list"
+        let variation = VWO.variationFor(key: "layout", defaultValue: "list") as! String
         let variationListType = ListType(rawValue: variation) ?? .list
         navController.variationLabel.text = "(\(variationListType.navDecription))"
         addVC(side: .right, vc: ListGridVC.makeViewFor(type: variationListType))
