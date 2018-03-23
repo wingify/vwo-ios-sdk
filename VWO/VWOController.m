@@ -82,6 +82,13 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     _config = [VWOConfig configWithAPIKey:apiKey userDefaultsKey:kUserDefaultsKey];
     _config.sessionCount += 1;
 
+    if (VWODevice.isAttachedToDebugger) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+                //UIWebKit is used. Hence dispatched on main Queue
+            [VWOSocketClient.shared launchAppKey:self.config.appKey];
+        });
+    }
+
     [self addGestureRecognizer];
 
     // Initialise the queue and flush the persistance URLs
@@ -111,11 +118,10 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 
 - (void)addGestureRecognizer {
     UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGestureRecognised:)];
-    gesture.minimumPressDuration = 1;
+    gesture.minimumPressDuration = 2;
     gesture.cancelsTouchesInView = NO;
     gesture.numberOfTouchesRequired = 5;
 
-        // Start timer. (Timer can be scheduled only on Main Thread)
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication.sharedApplication.keyWindow addGestureRecognizer:gesture];
     });
