@@ -74,9 +74,9 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     }
 
     #ifdef VWO_DEBUG
-        VWOLogInfo(@"Initializing VWO with ******  VWO_DEBUG *******");
+        VWOLogInfo(@"Initializing VWO(DEBUG) with key %@", apiKey);
     #else
-        VWOLogInfo(@"Initializing VWO");
+        VWOLogInfo(@"Initializing VWO with key %@", apiKey);
     #endif
 
     _config = [VWOConfig configWithAPIKey:apiKey userDefaultsKey:kUserDefaultsKey];
