@@ -54,16 +54,10 @@ class VWOTestSwift: XCTestCase {
     }
 
     func testToXDotY() {
-        XCTAssertEqual(("1.2" as NSString).toXDotY, "1.2")
-        XCTAssertEqual(("1.2.1" as NSString).toXDotY, "1.2")
-        XCTAssertEqual(("1" as NSString).toXDotY, "1.0")
-        XCTAssertEqual(("1.0" as NSString).toXDotY, "1.0")
-    }
-
-    func testAN() {
-//        XCTAssertEqual(("abc" as NSString).compareVersion("1.2"), VWOComparisonResult.invalid)
-
-
+        XCTAssertEqual(("1.2.1" as NSString).version2Places, "1.2")
+        XCTAssertEqual(("1.2" as NSString).version2Places, "1.2")
+        XCTAssertEqual(("1.0" as NSString).version2Places, "1.0")
+        XCTAssertEqual(("1" as NSString).version2Places, "1.0")
     }
 
     func testCompareInvalid() {
@@ -90,6 +84,7 @@ class VWOTestSwift: XCTestCase {
     }
 
     func testCompareVersionGreater() {
+        XCTAssertEqual(("14.1" as NSString).compareVersion("14"), .greater)
         XCTAssertEqual(("14" as NSString).compareVersion("2"), .greater)
         XCTAssertEqual(("14.0" as NSString).compareVersion("2"), .greater)
         XCTAssertEqual(("14" as NSString).compareVersion("2.1"), .greater)

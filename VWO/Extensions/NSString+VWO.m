@@ -9,8 +9,8 @@
 #import "NSString+VWO.h"
 
 @implementation NSString(Version)
-    //Converts version in X.y format
-- (NSString *)toXDotY {
+
+- (NSString *)version2Places {
     NSArray *currentArray = [self componentsSeparatedByString:@"."];
     NSMutableString *formattedVersion = [NSMutableString new];
     if (currentArray.firstObject) {

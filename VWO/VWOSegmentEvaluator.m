@@ -98,7 +98,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
     switch (segment.type) {
             case VWOSegmentTypeiOSVersion: {
                 NSAssert(self.iOSVersion != nil, @"iOS Version not available");
-                NSString *version = [self.iOSVersion toXDotY];
+                NSString *version = [self.iOSVersion version2Places];
                 NSString *targetVersion = segment.rOperand.firstObject;
                 NSComparisonResult result = [version compare:targetVersion options:NSNumericSearch];
                 switch (segment.operator) {
