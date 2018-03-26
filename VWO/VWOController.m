@@ -129,7 +129,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 
 - (void)longGestureRecognised:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"UIGestureRecognizerStateBegan.");
+        VWOLogInfo(@"Gesture recognized");
         dispatch_async(dispatch_get_main_queue(), ^{
                 //UIWebKit is used. Hence dispatched on main Queue
             [VWOSocketClient.shared launchAppKey:self.config.appKey];
