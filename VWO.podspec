@@ -11,5 +11,5 @@ s.social_media_url = "http://twitter.com/wingify"
 s.platform     	   = :ios, '8.0'
 s.requires_arc 	   = true
 s.source_files     = 'VWO/**/*.{m,h}'
-s.dependency 'Socket.IO-Client-Swift'#, '~> 13.1.0'
+s.dependency 'Socket.IO-Client-Swift', '~> 13.1'
 end
