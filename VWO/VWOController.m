@@ -7,7 +7,7 @@
 //
 
 #import "VWOController.h"
-#import "VWOSocketClient.h"
+#import "VWOSocket.h"
 #import "VWOLogger.h"
 #import "VWOSegmentEvaluator.h"
 #import "VWOCampaign.h"
@@ -83,13 +83,11 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     _config.sessionCount += 1;
 
     if (VWODevice.isAttachedToDebugger) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-                //UIWebKit is used. Hence dispatched on main Queue
-            [VWOSocketClient.shared launchAppKey:self.config.appKey];
-        });
+        [VWOSocket.shared launchWithAppKey:_config.appKey];
+    } else {
+        [self addGestureRecognizer];
     }
 
-    [self addGestureRecognizer];
 
     // Initialise the queue and flush the persistance URLs
     pendingURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.messageQueue];
@@ -130,10 +128,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 - (void)longGestureRecognised:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
         VWOLogInfo(@"Gesture recognized");
-        dispatch_async(dispatch_get_main_queue(), ^{
-                //UIWebKit is used. Hence dispatched on main Queue
-            [VWOSocketClient.shared launchAppKey:self.config.appKey];
-        });
+        [VWOSocket.shared launchWithAppKey:_config.appKey];
     }
 }
 
@@ -209,9 +204,9 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
         return;
     }
 
-    if (VWOSocketClient.shared.isEnabled) {
+    if (VWOSocket.shared.connectedToBrowser) {
         VWOLogDebug(@"Marking goal on socket");
-        [VWOSocketClient.shared goalTriggered:goalIdentifier withValue:value];
+        [VWOSocket.shared goalTriggered:goalIdentifier withValue:value];
         return;
     }
 
@@ -253,7 +248,8 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
         VWOLogWarning(@"variationForKey(%@) called before launching VWO", key);
         return nil;
     }
-    if (VWOSocketClient.shared.isEnabled) {
+
+    if (VWOSocket.shared.connectedToBrowser) {
         if(key && _previewInfo != nil) {
             VWOLogInfo(@"Socket: got variation %@ for key %@", _previewInfo[key], key);
             return _previewInfo[key];

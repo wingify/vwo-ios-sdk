@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E31714C41F838BB10036CF07 /* VWODevice.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815761F6291970035D519 /* VWODevice.m */; };
 		E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31714C61F838C2F0036CF07 /* VWOTests.swift */; };
 		E32079C120075516005CB5CD /* CampaignIDMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C020075516005CB5CD /* CampaignIDMissing.json */; };
 		E32079C320075541005CB5CD /* CampaignStatusMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C220075541005CB5CD /* CampaignStatusMissing.json */; };
@@ -57,9 +56,6 @@
 		E398155C1F6291680035D519 /* VWOQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815481F6291680035D519 /* VWOQueue.m */; };
 		E398155F1F6291680035D519 /* VWOVariation.h in Headers */ = {isa = PBXBuildFile; fileRef = E398154B1F6291680035D519 /* VWOVariation.h */; };
 		E39815601F6291680035D519 /* VWOVariation.m in Sources */ = {isa = PBXBuildFile; fileRef = E398154C1F6291680035D519 /* VWOVariation.m */; };
-		E39815661F6291680035D519 /* socket.io.js.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815541F6291680035D519 /* socket.io.js.h */; };
-		E39815671F6291680035D519 /* VWOSIOSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815551F6291680035D519 /* VWOSIOSocket.h */; };
-		E39815681F6291680035D519 /* VWOSIOSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815561F6291680035D519 /* VWOSIOSocket.m */; };
 		E398157F1F6291970035D519 /* VWOController.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815731F6291960035D519 /* VWOController.h */; };
 		E39815801F6291970035D519 /* VWOController.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815741F6291960035D519 /* VWOController.m */; };
 		E39815811F6291970035D519 /* VWODevice.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815751F6291970035D519 /* VWODevice.h */; };
@@ -68,12 +64,12 @@
 		E39815841F6291970035D519 /* VWOFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815781F6291970035D519 /* VWOFile.m */; };
 		E39815851F6291970035D519 /* VWOLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815791F6291970035D519 /* VWOLogger.h */; };
 		E39815861F6291970035D519 /* VWOLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E398157A1F6291970035D519 /* VWOLogger.m */; };
-		E398158F1F6291B50035D519 /* VWOSocketClient.h in Headers */ = {isa = PBXBuildFile; fileRef = E398158B1F6291B50035D519 /* VWOSocketClient.h */; };
-		E39815901F6291B50035D519 /* VWOSocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E398158C1F6291B50035D519 /* VWOSocketClient.m */; };
 		E39815931F6291C10035D519 /* VWOSegmentEvaluator.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815911F6291C10035D519 /* VWOSegmentEvaluator.h */; };
 		E39815941F6291C10035D519 /* VWOSegmentEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815921F6291C10035D519 /* VWOSegmentEvaluator.m */; };
 		E398159C1F6293BC0035D519 /* NSDictionary+VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815981F6293BC0035D519 /* NSDictionary+VWO.h */; };
 		E398159D1F6293BC0035D519 /* NSDictionary+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815991F6293BC0035D519 /* NSDictionary+VWO.m */; };
+		E3BBA3602068FA630046B2F2 /* VWOSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = E3BBA35E2068FA630046B2F2 /* VWOSocket.h */; };
+		E3BBA3612068FA630046B2F2 /* VWOSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BBA35F2068FA630046B2F2 /* VWOSocket.m */; };
 		E3C06640200C925000FF9EF5 /* Campaign2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C0663F200C925000FF9EF5 /* Campaign2.json */; };
 		E3C06643200C932F00FF9EF5 /* Goal1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C06642200C932F00FF9EF5 /* Goal1.json */; };
 		E3C06645200C933F00FF9EF5 /* Goal2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C06644200C933F00FF9EF5 /* Goal2.json */; };
@@ -92,6 +88,12 @@
 		E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */; };
 		E3F2D512204437B200862EE3 /* CustomVariableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2D511204437B200862EE3 /* CustomVariableTests.swift */; };
 		E3F2D5152044389C00862EE3 /* ComplexSegmentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2D5142044389C00862EE3 /* ComplexSegmentationTests.swift */; };
+		E3F52EE5206A30550026F0F4 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BBA33C2068F2510046B2F2 /* SocketIO.framework */; };
+		E3F52EE6206A315F0026F0F4 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BBA33E2068F2570046B2F2 /* Starscream.framework */; };
+		E3F52EE7206A31610026F0F4 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BBA33C2068F2510046B2F2 /* SocketIO.framework */; };
+		E3F52EE8206A31940026F0F4 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BBA33E2068F2570046B2F2 /* Starscream.framework */; };
+		E3F52EEA206A33B90026F0F4 /* SocketIO.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E3BBA33C2068F2510046B2F2 /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E3F52EEB206A33BB0026F0F4 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E3BBA33E2068F2570046B2F2 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E3F7CBA82004A07800CC8C03 /* VWOInfixEvaluator.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F7CBA62004A07800CC8C03 /* VWOInfixEvaluator.h */; };
 		E3F7CBA92004A07800CC8C03 /* VWOInfixEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBA72004A07800CC8C03 /* VWOInfixEvaluator.m */; };
 		E3F7CBAC2004A9B100CC8C03 /* VWOStack.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F7CBAA2004A9B100CC8C03 /* VWOStack.h */; };
@@ -117,6 +119,20 @@
 			remoteInfo = VWO;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E3F52EE9206A33AD0026F0F4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E3F52EEA206A33B90026F0F4 /* SocketIO.framework in CopyFiles */,
+				E3F52EEB206A33BB0026F0F4 /* Starscream.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E31714C51F838C2F0036CF07 /* VWOTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VWOTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -165,7 +181,7 @@
 		E39814DA1F6288C80035D519 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E39814DF1F6288C80035D519 /* VWOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VWOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39814E61F6288C80035D519 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E39814F41F628CAA0035D519 /* VWO.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VWO.podspec; sourceTree = SOURCE_ROOT; };
+		E39814F41F628CAA0035D519 /* VWO.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VWO.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E39815431F6291680035D519 /* VWOCampaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOCampaign.h; sourceTree = "<group>"; };
 		E39815441F6291680035D519 /* VWOCampaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOCampaign.m; sourceTree = "<group>"; };
 		E39815451F6291680035D519 /* VWOGoal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VWOGoal.h; sourceTree = "<group>"; };
@@ -174,9 +190,6 @@
 		E39815481F6291680035D519 /* VWOQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VWOQueue.m; sourceTree = "<group>"; };
 		E398154B1F6291680035D519 /* VWOVariation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VWOVariation.h; sourceTree = "<group>"; };
 		E398154C1F6291680035D519 /* VWOVariation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOVariation.m; sourceTree = "<group>"; };
-		E39815541F6291680035D519 /* socket.io.js.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = socket.io.js.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		E39815551F6291680035D519 /* VWOSIOSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOSIOSocket.h; sourceTree = "<group>"; };
-		E39815561F6291680035D519 /* VWOSIOSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOSIOSocket.m; sourceTree = "<group>"; };
 		E39815731F6291960035D519 /* VWOController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOController.h; sourceTree = "<group>"; };
 		E39815741F6291960035D519 /* VWOController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOController.m; sourceTree = "<group>"; };
 		E39815751F6291970035D519 /* VWODevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWODevice.h; path = Helpers/VWODevice.h; sourceTree = "<group>"; };
@@ -185,12 +198,14 @@
 		E39815781F6291970035D519 /* VWOFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = VWOFile.m; path = Helpers/VWOFile.m; sourceTree = "<group>"; };
 		E39815791F6291970035D519 /* VWOLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWOLogger.h; path = Helpers/VWOLogger.h; sourceTree = "<group>"; };
 		E398157A1F6291970035D519 /* VWOLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = VWOLogger.m; path = Helpers/VWOLogger.m; sourceTree = "<group>"; };
-		E398158B1F6291B50035D519 /* VWOSocketClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOSocketClient.h; sourceTree = "<group>"; };
-		E398158C1F6291B50035D519 /* VWOSocketClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOSocketClient.m; sourceTree = "<group>"; };
 		E39815911F6291C10035D519 /* VWOSegmentEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOSegmentEvaluator.h; sourceTree = "<group>"; };
 		E39815921F6291C10035D519 /* VWOSegmentEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOSegmentEvaluator.m; sourceTree = "<group>"; };
 		E39815981F6293BC0035D519 /* NSDictionary+VWO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+VWO.h"; sourceTree = "<group>"; };
 		E39815991F6293BC0035D519 /* NSDictionary+VWO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VWO.m"; sourceTree = "<group>"; };
+		E3BBA33C2068F2510046B2F2 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = Carthage/Build/iOS/SocketIO.framework; sourceTree = "<group>"; };
+		E3BBA33E2068F2570046B2F2 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
+		E3BBA35E2068FA630046B2F2 /* VWOSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOSocket.h; sourceTree = "<group>"; };
+		E3BBA35F2068FA630046B2F2 /* VWOSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOSocket.m; sourceTree = "<group>"; };
 		E3C0663F200C925000FF9EF5 /* Campaign2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Campaign2.json; sourceTree = "<group>"; };
 		E3C06642200C932F00FF9EF5 /* Goal1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Goal1.json; sourceTree = "<group>"; };
 		E3C06644200C933F00FF9EF5 /* Goal2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Goal2.json; sourceTree = "<group>"; };
@@ -230,6 +245,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3F52EE6206A315F0026F0F4 /* Starscream.framework in Frameworks */,
+				E3F52EE7206A31610026F0F4 /* SocketIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +255,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E39814E01F6288C80035D519 /* VWO.framework in Frameworks */,
+				E3F52EE8206A31940026F0F4 /* Starscream.framework in Frameworks */,
+				E3F52EE5206A30550026F0F4 /* SocketIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +284,7 @@
 				E39814D81F6288C80035D519 /* VWO */,
 				E39814E31F6288C80035D519 /* VWOTests */,
 				E39814D71F6288C80035D519 /* Products */,
+				E3BBA33B2068F2500046B2F2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -294,10 +314,11 @@
 				E39815921F6291C10035D519 /* VWOSegmentEvaluator.m */,
 				E3F7CBA62004A07800CC8C03 /* VWOInfixEvaluator.h */,
 				E3F7CBA72004A07800CC8C03 /* VWOInfixEvaluator.m */,
+				E3BBA35E2068FA630046B2F2 /* VWOSocket.h */,
+				E3BBA35F2068FA630046B2F2 /* VWOSocket.m */,
 				E39815F71F62A13A0035D519 /* Helpers */,
 				E39815951F6293BC0035D519 /* Extensions */,
 				E39815421F6291680035D519 /* Models */,
-				E39815531F6291680035D519 /* Socket */,
 				E39814DA1F6288C80035D519 /* Info.plist */,
 				E39814F41F628CAA0035D519 /* VWO.podspec */,
 				E319151E1F67F1B900FC1695 /* README.md */,
@@ -347,18 +368,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		E39815531F6291680035D519 /* Socket */ = {
-			isa = PBXGroup;
-			children = (
-				E39815541F6291680035D519 /* socket.io.js.h */,
-				E398158B1F6291B50035D519 /* VWOSocketClient.h */,
-				E398158C1F6291B50035D519 /* VWOSocketClient.m */,
-				E39815551F6291680035D519 /* VWOSIOSocket.h */,
-				E39815561F6291680035D519 /* VWOSIOSocket.m */,
-			);
-			path = Socket;
-			sourceTree = "<group>";
-		};
 		E39815951F6293BC0035D519 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,6 +394,15 @@
 				E398157A1F6291970035D519 /* VWOLogger.m */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		E3BBA33B2068F2500046B2F2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E3BBA33E2068F2570046B2F2 /* Starscream.framework */,
+				E3BBA33C2068F2510046B2F2 /* SocketIO.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E3C06641200C931200FF9EF5 /* GoalTests */ = {
@@ -457,7 +475,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E39815671F6291680035D519 /* VWOSIOSocket.h in Headers */,
 				E39815851F6291970035D519 /* VWOLogger.h in Headers */,
 				E39815591F6291680035D519 /* VWOGoal.h in Headers */,
 				E3D29FCA1FBEDE2A00A11C61 /* NSString+VWO.h in Headers */,
@@ -471,13 +488,12 @@
 				E39815831F6291970035D519 /* VWOFile.h in Headers */,
 				E35484F51F713C2E00E14D2E /* NSURLSession+Synchronous.h in Headers */,
 				E398155F1F6291680035D519 /* VWOVariation.h in Headers */,
+				E3BBA3602068FA630046B2F2 /* VWOSocket.h in Headers */,
 				E398157F1F6291970035D519 /* VWOController.h in Headers */,
-				E398158F1F6291B50035D519 /* VWOSocketClient.h in Headers */,
 				E39815931F6291C10035D519 /* VWOSegmentEvaluator.h in Headers */,
 				E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */,
 				E3F7CBB42004C91400CC8C03 /* VWOSegment.h in Headers */,
 				E398159C1F6293BC0035D519 /* NSDictionary+VWO.h in Headers */,
-				E39815661F6291680035D519 /* socket.io.js.h in Headers */,
 				E3F7CBA82004A07800CC8C03 /* VWOInfixEvaluator.h in Headers */,
 				E39814E71F6288C80035D519 /* VWO.h in Headers */,
 			);
@@ -511,6 +527,7 @@
 				E39814DB1F6288C80035D519 /* Sources */,
 				E39814DC1F6288C80035D519 /* Frameworks */,
 				E39814DD1F6288C80035D519 /* Resources */,
+				E3F52EE9206A33AD0026F0F4 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -615,12 +632,12 @@
 				E3D29FC71FBEDAB300A11C61 /* NSDate+VWO.m in Sources */,
 				E36AC7191F75614E0041ACDF /* VWO.m in Sources */,
 				E3F7CBAD2004A9B100CC8C03 /* VWOStack.m in Sources */,
+				E3BBA3612068FA630046B2F2 /* VWOSocket.m in Sources */,
 				E39815941F6291C10035D519 /* VWOSegmentEvaluator.m in Sources */,
 				E35484F61F713C2E00E14D2E /* NSURLSession+Synchronous.m in Sources */,
 				E398159D1F6293BC0035D519 /* NSDictionary+VWO.m in Sources */,
 				E39815861F6291970035D519 /* VWOLogger.m in Sources */,
 				E39815821F6291970035D519 /* VWODevice.m in Sources */,
-				E39815901F6291B50035D519 /* VWOSocketClient.m in Sources */,
 				E398155A1F6291680035D519 /* VWOGoal.m in Sources */,
 				E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */,
 				E39815801F6291970035D519 /* VWOController.m in Sources */,
@@ -629,7 +646,6 @@
 				E39815601F6291680035D519 /* VWOVariation.m in Sources */,
 				E388B6CF1F8F7D350023E11E /* VWOURLQueue.m in Sources */,
 				E3D29FCB1FBEDE2A00A11C61 /* NSString+VWO.m in Sources */,
-				E39815681F6291680035D519 /* VWOSIOSocket.m in Sources */,
 				E39815581F6291680035D519 /* VWOCampaign.m in Sources */,
 				E3F7CBB52004C91400CC8C03 /* VWOSegment.m in Sources */,
 				E39815841F6291970035D519 /* VWOFile.m in Sources */,
@@ -655,7 +671,6 @@
 				E327C128203ED2A800161CC2 /* HourOftheDayTests.swift in Sources */,
 				E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */,
 				E327C124203EC95100161CC2 /* iOSVersionTests.swift in Sources */,
-				E31714C41F838BB10036CF07 /* VWODevice.m in Sources */,
 				E341CC6B203C3CFB008D182B /* DeviceTypeTests.swift in Sources */,
 				E327C126203ECFEB00161CC2 /* DayOfWeekTests.swift in Sources */,
 				E3C06652200CA4CB00FF9EF5 /* VWOURLTests.swift in Sources */,
@@ -801,6 +816,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -826,6 +845,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = VWO/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -842,7 +865,12 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = DBN26NC8KE;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = VWOTests/Info.plist;
+				INSTALL_PATH = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWOTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -857,7 +885,12 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = DBN26NC8KE;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = VWOTests/Info.plist;
+				INSTALL_PATH = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWOTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
