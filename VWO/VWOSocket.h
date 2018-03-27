@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign) BOOL connectedToBrowser;
 
 + (instancetype)shared;
-- (void)launchWithAppKey:(NSString *)appKey;
+- (void)launchWithAppKey:(NSString *)appKey deviceName:(NSString *)deviceName;
 - (void)goalTriggered:(NSString *)identifier withValue:(NSNumber *)value;
 
 @end

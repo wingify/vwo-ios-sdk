@@ -7,8 +7,9 @@
 //
 
 #import "VWOSocket.h"
-#import <UIKit/UIKit.h>
 #import "VWOController.h"
+#import "VWOLogger.h"
+
 @import SocketIO;
 
 @implementation VWOSocket {
@@ -25,7 +26,7 @@
     return instance;
 }
 
-- (void)launchWithAppKey:(NSString *)appKey {
+- (void)launchWithAppKey:(NSString *)appKey deviceName:(NSString *)deviceName {
     if (manager.defaultSocket.status == SocketIOStatusConnected ||
         manager.defaultSocket.status == SocketIOStatusConnecting) {
         NSLog(@"Already connected or connecting");
@@ -34,7 +35,7 @@
     NSURL* url = [[NSURL alloc] initWithString:@"https://mobilepreview.vwo.com:443"];
     manager = [[SocketManager alloc] initWithSocketURL:url config:nil];
     SocketIOClient *socket = manager.defaultSocket;
-    NSDictionary *dict = @{@"name" : [[UIDevice currentDevice] name],
+    NSDictionary *dict = @{@"name" : deviceName,//[[UIDevice currentDevice] name],
                            @"type" : @"iOS",
                            @"appKey" : appKey};
 

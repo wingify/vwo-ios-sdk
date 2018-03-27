@@ -83,7 +83,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     _config.sessionCount += 1;
 
     if (VWODevice.isAttachedToDebugger) {
-        [VWOSocket.shared launchWithAppKey:_config.appKey];
+        [VWOSocket.shared launchWithAppKey:_config.appKey deviceName:UIDevice.currentDevice.name];
     } else {
         [self addGestureRecognizer];
     }
@@ -128,7 +128,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 - (void)longGestureRecognised:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
         VWOLogInfo(@"Gesture recognized");
-        [VWOSocket.shared launchWithAppKey:_config.appKey];
+        [VWOSocket.shared launchWithAppKey:_config.appKey deviceName:UIDevice.currentDevice.name];
     }
 }
 
