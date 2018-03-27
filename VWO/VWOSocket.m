@@ -29,9 +29,10 @@
 - (void)launchWithAppKey:(NSString *)appKey deviceName:(NSString *)deviceName {
     if (manager.defaultSocket.status == SocketIOStatusConnected ||
         manager.defaultSocket.status == SocketIOStatusConnecting) {
-        NSLog(@"Already connected or connecting");
+        VWOLogWarning(@"Already connected or connecting");
         return;
     }
+    
     NSURL* url = [[NSURL alloc] initWithString:@"https://mobilepreview.vwo.com:443"];
     manager = [[SocketManager alloc] initWithSocketURL:url config:nil];
     SocketIOClient *socket = manager.defaultSocket;
@@ -41,36 +42,36 @@
 
     [socket on:@"connect" callback:^(NSArray *data, SocketAckEmitter *ack) {
         [socket emit:@"register_mobile" with:@[dict]];
-        NSLog(@"socket connected");
+        VWOLogDebug(@"socket connected");
     }];
 
     [socket on:@"browser_connect" callback:^(NSArray *data, SocketAckEmitter *ack) {
         self.connectedToBrowser = YES;
-        NSLog(@"socket connected to browser %@", data.firstObject);
+        VWOLogInfo(@"socket connected to browser %@", data.firstObject);
     }];
 
     [socket on:@"browser_disconnect" callback:^(NSArray *data, SocketAckEmitter *ack) {
         self.connectedToBrowser = NO;
-        NSLog(@"Browser disconnected ");
+        VWOLogInfo(@"Browser disconnected ");
     }];
 
     [socket on:@"receive_variation" callback:^(NSArray *data, SocketAckEmitter *ack) {
-        NSLog(@"Variation received: {%@}", data);
+        VWOLogInfo(@"Variation received: {%@}", data);
         id variationData = data.firstObject;
 
         NSDictionary *changes = ((NSDictionary *)data.firstObject)[@"json"];
         if (changes) {
             VWOController.shared.previewInfo = changes;
-            NSLog(@"VWO: In preview mode. Variation Received: %@", changes);
         }
 
         [socket emit:@"receive_variation_success" with:@[@{@"variationId":variationData[@"variationId"]}]];
     }];
+
     [socket connect];
 }
 
 - (void)goalTriggered:(NSString *)identifier withValue:(NSNumber *)value {
-    NSLog(@"Goal '%@' triggered for Socket with value %@", identifier, value);
+    VWOLogDebug(@"Goal '%@' triggered for socket connection with value %@", identifier, value);
     NSMutableDictionary *dict = [@{ @"goal" : identifier } mutableCopy];
     dict[@"value"] = value;//Does not set if value is nil
     [manager.defaultSocket emit:@"goal_triggered" with:@[dict]];
