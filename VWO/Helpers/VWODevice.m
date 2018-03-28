@@ -57,6 +57,10 @@
     return deviceModel;
 }
 
++ (NSString *)userName {
+    return UIDevice.currentDevice.name;
+}
+
 + (NSString *)iOSVersion {
     return UIDevice.currentDevice.systemVersion;
 }

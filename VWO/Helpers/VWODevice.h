@@ -26,6 +26,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// iPhone 6,2
 @property (class, readonly, nonatomic) NSString *deviceName;
 
+/**
+ UIDevice.currentDevice.name
+ Eg: Kaunteya's iPhone
+ */
+@property (class, readonly, nonatomic) NSString *userName;
+
 @property (class, readonly, nonatomic) int screenWidth;
 @property (class, readonly, nonatomic) int screenHeight;
 

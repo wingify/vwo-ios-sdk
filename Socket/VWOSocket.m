@@ -26,7 +26,7 @@
     return instance;
 }
 
-- (void)launchWithAppKey:(NSString *)appKey deviceName:(NSString *)deviceName {
+- (void)launchWithAppKey:(NSString *)appKey userName:(NSString *)deviceName {
     if (manager.defaultSocket.status == SocketIOStatusConnected ||
         manager.defaultSocket.status == SocketIOStatusConnecting) {
         VWOLogWarning(@"Already connected or connecting");

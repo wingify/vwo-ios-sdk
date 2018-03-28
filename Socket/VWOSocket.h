@@ -12,10 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VWOSocket : NSObject
 
+//This class must be used only as a singleton
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 @property (assign) BOOL connectedToBrowser;
 
 + (instancetype)shared;
-- (void)launchWithAppKey:(NSString *)appKey deviceName:(NSString *)deviceName;
+- (void)launchWithAppKey:(NSString *)appKey userName:(NSString *)deviceName;
 - (void)goalTriggered:(NSString *)identifier withValue:(NSNumber *)value;
 
 @end
