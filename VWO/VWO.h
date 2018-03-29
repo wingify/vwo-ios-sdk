@@ -159,6 +159,15 @@ NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:));
 + (void)setCustomVariable:(NSString *)key
                 withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:));
 
+/**
+ Disabling preview would stop VWO from initializing the Socket connection that is done on VWO.launch,
+ Preview is used for previewing variations and goals.
+ This option can be used to selectively disable the previews
+
+ @Note: Preview must be disabled before launching VWO
+ */
++ (void) disablePreview;
+
 @end
 NS_ASSUME_NONNULL_END
 

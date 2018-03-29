@@ -82,7 +82,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     _config = [VWOConfig configWithAPIKey:apiKey userDefaultsKey:kUserDefaultsKey];
     _config.sessionCount += 1;
 
-    if (VWOSocketConnector.isSocketLibraryAvailable) {
+    if (VWOSocketConnector.isSocketLibraryAvailable && kPreviewEnabled) {
         if (VWODevice.isAttachedToDebugger) {
             VWOLogDebug(@"Phone attached to Mac. Initializing socket connection");
             [VWOSocketConnector launchWithAppKey:_config.appKey];

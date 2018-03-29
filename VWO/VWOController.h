@@ -13,6 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 static NSString *kSDKversion = @"2.2.1";
+static BOOL kPreviewEnabled = YES;
 
 @interface VWOController : NSObject
 

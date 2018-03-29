@@ -37,6 +37,10 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     kOptOut =  optOut;
 }
 
++ (void)disablePreview {
+    kPreviewEnabled = false;
+}
+
 + (void)launchForAPIKey:(NSString *)apiKey {
     NSParameterAssert(apiKey);
     dispatch_barrier_async(VWOController.taskQueue, ^{
