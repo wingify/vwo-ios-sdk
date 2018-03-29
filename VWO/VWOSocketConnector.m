@@ -35,7 +35,7 @@
 + (void)goalTriggered:(NSString *)identifier withValue:(NSNumber *)value {
     #if SOCKET_AVAILABLE
     [VWOSocket.shared goalTriggered:identifier withValue:value];
-    @endif
+    #endif
 }
 
 @end
