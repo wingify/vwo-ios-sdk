@@ -25,6 +25,14 @@
     return NO;
 }
 
++ (BOOL)isSocketLibraryAvailable {
+    #if SOCKET_AVAILABLE
+    return YES;
+    #else
+    return NO;
+    #endif
+}
+
 + (void)launchWithAppKey:(NSString *)appKey {
     #if SOCKET_AVAILABLE
     [VWOSocket.shared launchWithAppKey:appKey

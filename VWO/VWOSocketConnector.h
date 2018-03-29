@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface VWOSocketConnector : NSObject
 
-@property (class, readonly, nonatomic) BOOL isConnectedToBrowser;
+@property (class, readonly) BOOL isConnectedToBrowser;
+@property (class, readonly) BOOL isSocketLibraryAvailable;
 
 + (void)launchWithAppKey:(NSString *)appKey;
 + (void)goalTriggered:(NSString *)identifier withValue:(NSNumber *)value;

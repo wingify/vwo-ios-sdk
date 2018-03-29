@@ -82,12 +82,17 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     _config = [VWOConfig configWithAPIKey:apiKey userDefaultsKey:kUserDefaultsKey];
     _config.sessionCount += 1;
 
-    if (VWODevice.isAttachedToDebugger) {
-        [VWOSocketConnector launchWithAppKey:_config.appKey];
+    if (VWOSocketConnector.isSocketLibraryAvailable) {
+        if (VWODevice.isAttachedToDebugger) {
+            VWOLogDebug(@"Phone attached to Mac. Initializing socket connection");
+            [VWOSocketConnector launchWithAppKey:_config.appKey];
+        } else {
+            VWOLogDebug(@"Gesture recognizer added.");
+            [self addGestureRecognizer];
+        }
     } else {
-        [self addGestureRecognizer];
+        VWOLogDebug(@"Initializing without socket library");
     }
-
 
     // Initialise the queue and flush the persistance URLs
     pendingURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.messageQueue];
