@@ -37,14 +37,10 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     kOptOut =  optOut;
 }
 
-+ (void)disablePreview {
-    kPreviewEnabled = false;
-}
-
 + (void)launchForAPIKey:(NSString *)apiKey {
     NSParameterAssert(apiKey);
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        [VWOController.shared launchWithAPIKey:apiKey optOut:kOptOut withTimeout:nil withCallback:nil failure:nil];
+        [VWOController.shared launchWithAPIKey:apiKey userConfig:nil withTimeout:nil withCallback:nil failure:nil];
     });
 }
 
@@ -53,7 +49,22 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
                 failure:(void (^)(NSString *error))failureBlock {
     NSParameterAssert(apiKey);
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        [VWOController.shared launchWithAPIKey:apiKey optOut:kOptOut withTimeout:nil withCallback:completion failure:failureBlock];
+        [VWOController.shared launchWithAPIKey:apiKey userConfig:nil withTimeout:nil withCallback:completion failure:nil];
+    });
+}
+
++ (void)launchForAPIKey:(NSString *)apiKey
+             userConfig:(VWOUserConfig *)userConfig
+             completion:(void(^)(void))completion
+                failure:(nullable void (^)(NSString *error))failureBlock {
+    NSParameterAssert(apiKey);
+    dispatch_barrier_async(VWOController.taskQueue, ^{
+        [VWOController.shared launchWithAPIKey:apiKey
+                                    userConfig:userConfig
+                                   withTimeout:nil
+                                  withCallback:completion
+                                       failure:failureBlock];
+
     });
 }
 
@@ -61,7 +72,26 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
                              timeout:(NSTimeInterval)timeout {
     NSParameterAssert(apiKey);
     dispatch_barrier_sync(VWOController.taskQueue, ^{
-        [VWOController.shared launchWithAPIKey:apiKey optOut:kOptOut withTimeout:@(timeout)withCallback:nil failure:nil];
+        [VWOController.shared launchWithAPIKey:apiKey
+                                    userConfig:nil
+                                   withTimeout:@(timeout)
+                                  withCallback:nil
+                                       failure:nil];
+
+    });
+}
+
++ (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
+                          userConfig:(VWOUserConfig *)userConfig
+                             timeout:(NSTimeInterval)timeout {
+    NSParameterAssert(apiKey);
+    dispatch_barrier_sync(VWOController.taskQueue, ^{
+        [VWOController.shared launchWithAPIKey:apiKey
+                                    userConfig:userConfig
+                                   withTimeout:@(timeout)
+                                  withCallback:nil
+                                       failure:nil];
+
     });
 }
 

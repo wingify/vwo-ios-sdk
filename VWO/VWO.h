@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VWOUserConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,9 +32,9 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 @property (class, nonatomic) VWOLogLevel logLevel;
 
 /**
- Users that are not to be made part of VWO A/B testing can be opted out.
+  Use optOt from VWOUserConfig instead
  */
-@property (class, nonatomic) BOOL optOut;
+@property (class, nonatomic) BOOL optOut __deprecated;
 
 /**
  VWO SDK version
@@ -76,10 +77,17 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @param failureBlock A block object to be executed when there was error while fetching campaign settings
  */
+
 + (void)launchForAPIKey:(NSString *)apiKey
              completion:(void(^)(void))completion
                 failure:(nullable void (^)(NSString *error))failureBlock
-NS_SWIFT_NAME(launch(apiKey:completion:failure:));
+NS_SWIFT_NAME(launch(apiKey:completion:failure:)) __deprecated;
+
++ (void)launchForAPIKey:(NSString *)apiKey
+             userConfig:(nullable VWOUserConfig *)userConfig
+             completion:(void(^)(void))completion
+                failure:(nullable void (^)(NSString *error))failureBlock
+NS_SWIFT_NAME(launch(apiKey:userConfig:completion:failure:));
 
 /**
  `Synchronously` fetch campaign settings
@@ -96,7 +104,12 @@ NS_SWIFT_NAME(launch(apiKey:completion:failure:));
  */
 + (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
                              timeout:(NSTimeInterval)timeout
-NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:));
+NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:)) __deprecated;
+
++ (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
+                          userConfig:(VWOUserConfig *)userConfig
+                             timeout:(NSTimeInterval)timeout
+NS_SWIFT_NAME(launchSynchronously(apiKey:userConfig:timeout:));
 
 /**
  Fetches variation for given key
@@ -147,26 +160,10 @@ NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:));
               withValue:(double)value NS_SWIFT_NAME(trackConversion(_:value:));
 
 /**
- Sets key value pair.
-
- Custom Variable is used in the cases where developer intends to programatically create segmentation.
-
- @param key Unique key
-
- @param value Value for the key
-
+  Set custom variables from VWOUserConfig.customVariables instead
  */
 + (void)setCustomVariable:(NSString *)key
-                withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:));
-
-/**
- Disabling preview would stop VWO from initializing the Socket connection that is done on VWO.launch,
- Preview is used for previewing variations and goals.
- This option can be used to selectively disable the previews
-
- @Note: Preview must be disabled before launching VWO
- */
-+ (void) disablePreview;
+                withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:)) __deprecated;
 
 @end
 NS_ASSUME_NONNULL_END

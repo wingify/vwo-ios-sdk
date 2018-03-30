@@ -18,6 +18,7 @@
 #import "VWODevice.h"
 #import "VWOConfig.h"
 #import <UIKit/UIKit.h>
+#import "VWOUserConfig.h"
 
 static NSTimeInterval kMessageQueueFlushInterval         = 10;
 static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
@@ -53,12 +54,15 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 }
 
 - (void)launchWithAPIKey:(NSString *)apiKey
-                  optOut:(BOOL)optOut
+              userConfig:(VWOUserConfig *)userConfig
              withTimeout:(NSNumber *)timeout
             withCallback:(void(^)(void))completionBlock
                  failure:(void(^)(NSString *error))failureBlock {
 
-    if (optOut) {
+    VWOUserConfig *userConfig1 = userConfig != nil ? userConfig : [VWOUserConfig new];
+    self.customVariables = [userConfig1.customVariables mutableCopy];
+
+    if (userConfig1.optOut) {
         VWOLogWarning(@"Cannot launch. VWO opted out");
         [self clearVWOData];
         if (completionBlock) {
@@ -82,7 +86,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     _config = [VWOConfig configWithAPIKey:apiKey userDefaultsKey:kUserDefaultsKey];
     _config.sessionCount += 1;
 
-    if (VWOSocketConnector.isSocketLibraryAvailable && kPreviewEnabled) {
+    if (VWOSocketConnector.isSocketLibraryAvailable && userConfig1.disablePreview == NO) {
         if (VWODevice.isAttachedToDebugger) {
             VWOLogDebug(@"Phone attached to Mac. Initializing socket connection");
             [VWOSocketConnector launchWithAppKey:_config.appKey];

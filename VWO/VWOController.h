@@ -13,7 +13,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 static NSString *kSDKversion = @"2.2.1";
-static BOOL kPreviewEnabled = YES;
+
+@class VWOUserConfig;
 
 @interface VWOController : NSObject
 
@@ -27,7 +28,7 @@ static BOOL kPreviewEnabled = YES;
 + (instancetype)shared;
 
 - (void)launchWithAPIKey:(NSString *)apiKey
-                  optOut:(BOOL)optOut
+              userConfig:(nullable VWOUserConfig *)userConfig
              withTimeout:(nullable NSNumber *)timeout
             withCallback:(nullable void(^)(void))completionBlock
                  failure:(nullable void(^)(NSString *))failureBlock;
