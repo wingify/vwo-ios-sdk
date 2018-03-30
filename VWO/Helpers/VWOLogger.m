@@ -30,8 +30,6 @@ void VWOLogException(NSString *format, ...) {
 
 @implementation GrayLog: NSObject
 + (void)sendMessage:(NSString *)message {
-    VWOUserDefaults *config = VWOController.shared.userDefaults;
-    if (config == nil) { return;}
 
     NSString *bundleIdentifier = NSBundle.mainBundle.bundleIdentifier;
     if (bundleIdentifier == nil) { bundleIdentifier = @"-"; }
@@ -40,8 +38,8 @@ void VWOLogException(NSString *format, ...) {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 
         //Header -> "App-Key", "Account-ID", "Device-Type"
-    [request setValue:config.appKey forHTTPHeaderField:@"App-Key"]; // Left part of API Key
-    [request setValue:config.accountID forHTTPHeaderField:@"Account-ID"]; //Right part of API Key
+    [request setValue:VWOController.shared.appKey forHTTPHeaderField:@"App-Key"]; // Left part of API Key
+    [request setValue:VWOController.shared.accountID forHTTPHeaderField:@"Account-ID"]; //Right part of API Key
     [request setValue:@"iOS" forHTTPHeaderField:@"Device-Type"]; //
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPMethod:@"POST"];
@@ -54,7 +52,7 @@ void VWOLogException(NSString *format, ...) {
                            @"Message" : message,
                            @"iOS-Model" : VWODevice.deviceName,
                            @"SDK Version" : kSDKversion,
-                           @"UUID" : config.UUID,
+                           @"UUID" : VWOUserDefaults.UUID,
                            @"iOS Version" : VWODevice.iOSVersion,
                            @"App Bundle" : bundleIdentifier
                            };

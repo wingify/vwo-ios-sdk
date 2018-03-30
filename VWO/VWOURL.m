@@ -33,12 +33,12 @@ static NSString *kSDKversionNumber = @"7";
     return [NSString stringWithFormat:@"%f", ((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1)];
 }
 
-+ (NSDictionary *)extraParametersWithDate:(NSDate *)date config:(VWOUserDefaults *)config {
++ (NSDictionary *)extraParametersWithDate:(NSDate *)date appKey:(NSString *)appKey {
     NSString *appVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
     if (appVersion == nil) { appVersion = @"NA"; }
     return @{@"lt" : [NSString stringWithFormat:@"%f", date.timeIntervalSince1970],
              @"v"  : kSDKversionNumber,
-             @"i"  : config.appKey,
+             @"i"  : appKey,
              @"av" : appVersion,
              @"dt" : VWODevice.deviceName,//Device Type
              @"os" : VWODevice.iOSVersion
@@ -47,17 +47,18 @@ static NSString *kSDKversionNumber = @"7";
 
 #pragma mark - Public Methods
 
-+ (NSURL *)forFetchingCampaignsConfig:(VWOUserDefaults *)config {
++ (NSURL *)forFetchingCampaignsAppKey:(NSString *)appKey
+                            accountID:(NSString *)accountID {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile"];
     NSDictionary *paramDict =
     @{@"api-version": @"2",
-      @"a"          : config.accountID,
+      @"a"          : accountID,
       @"dt"         : VWODevice.deviceName,
-      @"i"          : config.appKey,
-      @"k"          : config.campaignVariationPairs.toString,
+      @"i"          : appKey,
+      @"k"          : VWOUserDefaults.campaignVariationPairs.toString,
       @"os"         : VWODevice.iOSVersion,
       @"r"          : [self randomNumber],
-      @"u"          : config.UUID,
+      @"u"          : VWOUserDefaults.UUID,
       @"v"          : kSDKversionNumber
       };
     components.queryItems = [paramDict toQueryItems];
@@ -65,17 +66,18 @@ static NSString *kSDKversionNumber = @"7";
 }
 
 + (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign
-                                config:(VWOUserDefaults *)config
+                                appKey:(NSString *)appKey
+                             accountID:(NSString *)accountID
                               dateTime:(NSDate *)date {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-user"];
     NSDictionary *paramDict =
     @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
-      @"account_id"   : config.accountID,
+      @"account_id"   : accountID,
       @"combination"  : [NSString stringWithFormat:@"%d", campaign.variation.iD],
-      @"u"            : config.UUID,
-      @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)config.sessionCount],
+      @"u"            : VWOUserDefaults.UUID,
+      @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount],
       @"random"       : [self randomNumber],
-      @"ed"           : [self extraParametersWithDate:date config:config].toString
+      @"ed"           : [self extraParametersWithDate:date appKey:appKey].toString
       };
     components.queryItems = [paramDict toQueryItems];
     return components.URL;
@@ -85,16 +87,17 @@ static NSString *kSDKversionNumber = @"7";
                 withValue:(NSNumber *)goalValue
                  campaign:(VWOCampaign *)campaign
                  dateTime:(NSDate *)date
-                   config:(VWOUserDefaults *)config {
+                   appKey:(NSString *)appKey
+                accountID:(NSString *)accountID {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-goal"];
     NSMutableDictionary <NSString *, NSString *> *paramDict = [NSMutableDictionary new];
     paramDict[@"experiment_id"] = [NSString stringWithFormat:@"%d", campaign.iD];
-    paramDict[@"account_id"]    = config.accountID;
+    paramDict[@"account_id"]    = accountID;
     paramDict[@"combination"]   = [NSString stringWithFormat:@"%d", campaign.variation.iD];
-    paramDict[@"u"]             = config.UUID;
-    paramDict[@"s"]             = [NSString stringWithFormat:@"%lu", (unsigned long)config.sessionCount];
+    paramDict[@"u"]             = VWOUserDefaults.UUID;
+    paramDict[@"s"]             = [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount];
     paramDict[@"random"]        = [self randomNumber];
-    paramDict[@"ed"]            = [self extraParametersWithDate:date config:config].toString;
+    paramDict[@"ed"]            = [self extraParametersWithDate:date appKey:appKey].toString;
     paramDict[@"goal_id"]       = [NSString stringWithFormat:@"%d", goal.iD];
 
     if (goalValue != nil) {

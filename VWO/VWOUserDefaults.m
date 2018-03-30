@@ -16,45 +16,29 @@ static NSString * kSessionCount    = @"sessionCount";
 static NSString * kReturningUser   = @"returningUser";
 static NSString * kUUID            = @"UUID";
 
-@implementation VWOUserDefaults {
-    NSString * _userDefaultsKey;
-}
+static NSString * _userDefaultsKey;
 
-+ (instancetype)configWithAPIKey:(NSString *)apiKey userDefaultsKey:(NSString *)userDefaultsKey {
-    return [[self alloc] initWithAPIKey:apiKey userDefaultsKey:userDefaultsKey];
-}
+@implementation VWOUserDefaults
 
-- (instancetype)initWithAPIKey:(NSString *)apiKey userDefaultsKey:(NSString *)userDefaultsKey {
-    NSAssert([apiKey componentsSeparatedByString:@"-"].count == 2, @"Invalid key");
-    NSAssert([apiKey componentsSeparatedByString:@"-"].firstObject.length == 32, @"Invalid key");
-
-    if (self = [super init]) {
-        _userDefaultsKey = userDefaultsKey;
-        [self setDefaultValuesKey:_userDefaultsKey];
-        NSArray<NSString *> *splitKey = [apiKey componentsSeparatedByString:@"-"];
-        _appKey     = splitKey[0];
-        _accountID  = splitKey[1];
-    }
-    return self;
-}
-
-- (nullable id)objectForKey:(NSString *)key {
++ (nullable id)objectForKey:(NSString *)key {
     NSDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:_userDefaultsKey];
     return activityDict[key];
 }
 
-- (void)setObject:(nullable id)value forKey:(NSString *)key {
-    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults objectForKey:_userDefaultsKey]
-                                         mutableCopy];
++ (void)setObject:(nullable id)value forKey:(NSString *)key {
+    NSParameterAssert(_userDefaultsKey != nil);
+    NSMutableDictionary *activityDict = [[NSUserDefaults.standardUserDefaults
+                                          objectForKey:_userDefaultsKey] mutableCopy];
     activityDict[key] = value;
     [NSUserDefaults.standardUserDefaults setObject:activityDict forKey:_userDefaultsKey];
 }
 
-- (void)setDefaultValuesKey:(NSString *)key {
++ (void)setDefaultsKey:(NSString *)key {
     if ([NSUserDefaults.standardUserDefaults objectForKey:key] != nil) {
         return;
     }
     VWOLogDebug(@"Setting default values for first launch");
+    _userDefaultsKey = key;
     NSString *UUID = [NSUUID.UUID.UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@""];
     NSDictionary *defaults = @{
                                kTracking     : @{},
@@ -67,7 +51,7 @@ static NSString * kUUID            = @"UUID";
     VWOLogDebug(@"UUID %@", UUID);
 }
 
-- (BOOL)isTrackingUserForCampaign:(VWOCampaign *)campaign {
++ (BOOL)isTrackingUserForCampaign:(VWOCampaign *)campaign {
     NSDictionary *trackingDict = [self objectForKey:kTracking];
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
 
@@ -76,7 +60,7 @@ static NSString * kUUID            = @"UUID";
 }
 
     /// Stores "campaignId : "variationID" in User Activity["tracking"]
-- (void)trackUserForCampaign:(VWOCampaign *)campaign {
++ (void)trackUserForCampaign:(VWOCampaign *)campaign {
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
     int variationID = campaign.status == CampaignStatusExcluded ? 0 : campaign.variation.iD;
 
@@ -85,31 +69,31 @@ static NSString * kUUID            = @"UUID";
     [self setObject:trackingDict forKey:kTracking];
 }
 
-- (void)markGoalConversion:(VWOGoal *)goal inCampaign:(VWOCampaign *)campaign {
++ (void)markGoalConversion:(VWOGoal *)goal inCampaign:(VWOCampaign *)campaign {
     NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)[self objectForKey:kGoalsMarked]];
     [set addObject:[NSString stringWithFormat:@"%d:%d", campaign.iD, goal.iD]];
     [self setObject:set.allObjects forKey:kGoalsMarked];
 }
 
-- (BOOL)isGoalMarked:(VWOGoal *)goal inCampaign:(VWOCampaign *)campaign {
++ (BOOL)isGoalMarked:(VWOGoal *)goal inCampaign:(VWOCampaign *)campaign {
     NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)[self objectForKey:kGoalsMarked]];
     return [set containsObject:[NSString stringWithFormat:@"%d:%d", campaign.iD, goal.iD]];
 }
 
-- (NSDictionary *)campaignVariationPairs {
++ (NSDictionary *)campaignVariationPairs {
     return [self objectForKey:kTracking];
 }
 
-- (NSString *)UUID {
++ (NSString *)UUID {
     return [self objectForKey:kUUID];
 }
 
-- (void)setSessionCount:(NSUInteger)count {
++ (void)setSessionCount:(NSUInteger)count {
     [self setObject:@(count) forKey:kSessionCount];
     [self updateIsReturningUser];
 }
 
-- (void)updateIsReturningUser {
++ (void)updateIsReturningUser {
     NSDictionary *trackingDict = [self objectForKey:kTracking];
     if (trackingDict.count > 0 && self.sessionCount > 1 && self.isReturningUser == NO) {
         VWOLogDebug(@"Setting returningUser=YES");
@@ -117,15 +101,15 @@ static NSString * kUUID            = @"UUID";
     }
 }
 
-- (NSUInteger)sessionCount {
++ (NSUInteger)sessionCount {
     return [[self objectForKey:kSessionCount] integerValue];
 }
 
-- (void)setReturningUser:(BOOL)isReturning {
++ (void)setReturningUser:(BOOL)isReturning {
     [self setObject:@(isReturning) forKey:kReturningUser];
 }
 
-- (BOOL)isReturningUser {
++ (BOOL)isReturningUser {
     return [[self objectForKey:kReturningUser] boolValue];
 }
 

@@ -18,11 +18,13 @@ static NSString *kSDKversion = @"2.2.1";
 
 @interface VWOController : NSObject
 
+@property NSString *accountID;
+@property NSString *appKey;
+
 /// All the operations in controller are expected to happen on taskQueue queue
 @property (class, readonly) dispatch_queue_t taskQueue;
 @property NSMutableDictionary<NSString *, NSString *> *customVariables;
 @property NSDictionary *previewInfo;
-@property VWOUserDefaults *userDefaults;
 @property (getter=isInitialised) BOOL initialised;
 
 + (instancetype)shared;

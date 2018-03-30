@@ -14,25 +14,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VWOUserDefaults : NSObject
 
-@property (readonly) NSString *accountID;
-@property (readonly) NSString *appKey;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
-@property (readonly) NSDictionary *campaignVariationPairs;
-@property (assign) NSUInteger sessionCount;
+@property (class, readonly) NSDictionary *campaignVariationPairs;
+@property (class) NSUInteger sessionCount;
 
 // Returning user will be set  when session count is updated
-@property (assign, getter=isReturningUser, readonly) BOOL returningUser;
-@property (readonly) NSString *UUID;
+@property (class, getter=isReturningUser, readonly) BOOL returningUser;
+@property (class, readonly) NSString *UUID;
 
++ (BOOL)isTrackingUserForCampaign:(VWOCampaign *)campaign;
++ (void)trackUserForCampaign:(VWOCampaign *)campaign;
 
-+ (instancetype)configWithAPIKey:(NSString *)apiKey userDefaultsKey:(NSString *)userDefaultsKey;
++ (void)markGoalConversion:(VWOGoal *)goal inCampaign:(VWOCampaign *)campaign;
++ (BOOL)isGoalMarked:(VWOGoal *)goal inCampaign:(VWOCampaign *)campaign;
 
-- (BOOL)isTrackingUserForCampaign:(VWOCampaign *)campaign;
-- (void)trackUserForCampaign:(VWOCampaign *)campaign;
-
-- (void)markGoalConversion:(VWOGoal *)goal inCampaign:(VWOCampaign *)campaign;
-- (BOOL)isGoalMarked:(VWOGoal *)goal inCampaign:(VWOCampaign *)campaign;
-
++ (void)setDefaultsKey:(NSString *)key;
 @end
 
 NS_ASSUME_NONNULL_END
