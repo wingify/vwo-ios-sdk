@@ -22,7 +22,7 @@ static NSString *kSDKversion = @"2.2.1";
 @property (class, readonly) dispatch_queue_t taskQueue;
 @property NSMutableDictionary<NSString *, NSString *> *customVariables;
 @property NSDictionary *previewInfo;
-@property VWOUserDefaults *config;
+@property VWOUserDefaults *userDefaults;
 @property (getter=isInitialised) BOOL initialised;
 
 + (instancetype)shared;

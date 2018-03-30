@@ -30,7 +30,7 @@ void VWOLogException(NSString *format, ...) {
 
 @implementation GrayLog: NSObject
 + (void)sendMessage:(NSString *)message {
-    VWOUserDefaults *config = VWOController.shared.config;
+    VWOUserDefaults *config = VWOController.shared.userDefaults;
     if (config == nil) { return;}
 
     NSString *bundleIdentifier = NSBundle.mainBundle.bundleIdentifier;

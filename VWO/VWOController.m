@@ -83,13 +83,13 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
         VWOLogInfo(@"Initializing VWO with key %@", apiKey);
     #endif
 
-    _config = [VWOUserDefaults configWithAPIKey:apiKey userDefaultsKey:kUserDefaultsKey];
-    _config.sessionCount += 1;
+    _userDefaults = [VWOUserDefaults configWithAPIKey:apiKey userDefaultsKey:kUserDefaultsKey];
+    _userDefaults.sessionCount += 1;
 
     if (VWOSocketConnector.isSocketLibraryAvailable && userConfig1.disablePreview == NO) {
         if (VWODevice.isAttachedToDebugger) {
             VWOLogDebug(@"Phone attached to Mac. Initializing socket connection");
-            [VWOSocketConnector launchWithAppKey:_config.appKey];
+            [VWOSocketConnector launchWithAppKey:_userDefaults.appKey];
         } else {
             VWOLogDebug(@"Gesture recognizer added.");
             [self addGestureRecognizer];
@@ -137,7 +137,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 - (void)longGestureRecognised:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
         VWOLogInfo(@"Gesture recognized");
-        [VWOSocketConnector launchWithAppKey:_config.appKey];
+        [VWOSocketConnector launchWithAppKey:_userDefaults.appKey];
     }
 }
 
@@ -225,7 +225,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     for (VWOCampaign *campaign in _campaignList) {
         VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
         if (matchedGoal) {
-            if ([_config isGoalMarked:matchedGoal inCampaign:campaign]) {
+            if ([_userDefaults isGoalMarked:matchedGoal inCampaign:campaign]) {
                 VWOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
                 return;
             }
@@ -236,13 +236,13 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     for (VWOCampaign *campaign in _campaignList) {
         VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
         if (matchedGoal) {
-            if ([_config isTrackingUserForCampaign:campaign]) {
-                [_config markGoalConversion:matchedGoal inCampaign:campaign];
+            if ([_userDefaults isTrackingUserForCampaign:campaign]) {
+                [_userDefaults markGoalConversion:matchedGoal inCampaign:campaign];
                 NSURL *url = [VWOURL forMarkingGoal:matchedGoal
                                           withValue:value
                                            campaign:campaign
                                            dateTime:NSDate.date
-                                             config:_config];
+                                             config:_userDefaults];
                 NSString *description = [NSString stringWithFormat:@"Goal %@", matchedGoal];
                 [pendingURLQueue enqueue:url maxRetry:10 description:description];
             } else {
@@ -328,7 +328,7 @@ _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
     evaluator.appVersion = appVersion;
     evaluator.date = NSDate.date;
     evaluator.locale = NSLocale.currentLocale;
-    evaluator.isReturning = _config.isReturningUser;
+    evaluator.isReturning = _userDefaults.isReturningUser;
     evaluator.appleDeviceType = VWODevice.appleDeviceType;
     evaluator.customVariables = _customVariables;
     evaluator.screenWidth = VWODevice.screenWidth;
@@ -348,7 +348,7 @@ _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
     VWOLogInfo(@"trackUserForAllCampaignsOnLaunch");
     for (VWOCampaign *aCampaign in allCampaigns) {
         if (aCampaign.status == CampaignStatusExcluded) {
-            [_config trackUserForCampaign:aCampaign];
+            [_userDefaults trackUserForCampaign:aCampaign];
             continue;
         } else if (aCampaign.status == CampaignStatusRunning && aCampaign.trackUserOnLaunch) {
             [self trackUserForCampaign:aCampaign];
@@ -358,7 +358,7 @@ _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
 
 - (nullable NSData *)getCampaignsFromNetworkWithTimeout:(NSNumber *)timeout
                                               onFailure:(NSString **)errorString {
-    NSURL *url = [VWOURL forFetchingCampaignsConfig:_config];
+    NSURL *url = [VWOURL forFetchingCampaignsConfig:_userDefaults];
     VWOLogDebug(@"fetchCampaigns URL(%@)", url.absoluteString);
     NSTimeInterval timeOutInterval = (timeout == nil) ? defaultFetchCampaignsTimeout : timeout.doubleValue;
     NSURLRequest *request = [NSURLRequest requestWithURL:url
@@ -395,16 +395,16 @@ _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
     NSParameterAssert(campaign);
     NSAssert(campaign.status == CampaignStatusRunning, @"Non running campaigns must not be tracked");
 
-    if ([_config isTrackingUserForCampaign:campaign]) {
+    if ([_userDefaults isTrackingUserForCampaign:campaign]) {
         VWOLogDebug(@"Controller: Returning. Already tracking %@", campaign);
         return;
     }
     VWOLogDebug(@"Controller: trackUserForCampaign %@", campaign);
 
-    [_config trackUserForCampaign:campaign];
+    [_userDefaults trackUserForCampaign:campaign];
 
     //Send network request and notification only if the campaign is running
-    NSURL *url = [VWOURL forMakingUserPartOfCampaign:campaign config:_config dateTime:NSDate.date];
+    NSURL *url = [VWOURL forMakingUserPartOfCampaign:campaign config:_userDefaults dateTime:NSDate.date];
     NSString *description = [NSString stringWithFormat:@"Track user %@ %@", campaign, campaign.variation];
     [pendingURLQueue enqueue:url maxRetry:10 description:description];
 
