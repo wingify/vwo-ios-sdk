@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Swift.print("Launching VWO-\(VWO.version())")
 
 
-            VWO.launch(apiKey: apiKey, userConfig: nil, completion: {
+            VWO.launch(apiKey: apiKey, config: nil, completion: {
                 DispatchQueue.main.async {
                     container.activityIndicator.stopAnimating()
                 }
