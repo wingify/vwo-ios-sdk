@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class VWOSegmentEvaluator, VWOConfig;
+@class VWOSegmentEvaluator, VWOUserDefaults;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,7 +22,7 @@ static NSString *kSDKversion = @"2.2.1";
 @property (class, readonly) dispatch_queue_t taskQueue;
 @property NSMutableDictionary<NSString *, NSString *> *customVariables;
 @property NSDictionary *previewInfo;
-@property VWOConfig *config;
+@property VWOUserDefaults *config;
 @property (getter=isInitialised) BOOL initialised;
 
 + (instancetype)shared;

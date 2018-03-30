@@ -1,5 +1,5 @@
 //
-//  VWOConfig.h
+//  VWOUserDefaults.h
 //  VWO
 //
 //  Created by Kaunteya Suryawanshi on 06/10/17.
@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class  VWOCampaign, VWOGoal;
 
-@interface VWOConfig : NSObject
+@interface VWOUserDefaults : NSObject
 
 @property (readonly) NSString *accountID;
 @property (readonly) NSString *appKey;

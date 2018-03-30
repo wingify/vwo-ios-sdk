@@ -10,7 +10,7 @@
 #import "VWOCampaign.h"
 #import "VWOGoal.h"
 #import "VWODevice.h"
-#import "VWOConfig.h"
+#import "VWOUserDefaults.h"
 #import "VWO.h"
 #import "NSDictionary+VWO.h"
 
@@ -33,7 +33,7 @@ static NSString *kSDKversionNumber = @"7";
     return [NSString stringWithFormat:@"%f", ((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1)];
 }
 
-+ (NSDictionary *)extraParametersWithDate:(NSDate *)date config:(VWOConfig *)config {
++ (NSDictionary *)extraParametersWithDate:(NSDate *)date config:(VWOUserDefaults *)config {
     NSString *appVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
     if (appVersion == nil) { appVersion = @"NA"; }
     return @{@"lt" : [NSString stringWithFormat:@"%f", date.timeIntervalSince1970],
@@ -47,7 +47,7 @@ static NSString *kSDKversionNumber = @"7";
 
 #pragma mark - Public Methods
 
-+ (NSURL *)forFetchingCampaignsConfig:(VWOConfig *)config {
++ (NSURL *)forFetchingCampaignsConfig:(VWOUserDefaults *)config {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile"];
     NSDictionary *paramDict =
     @{@"api-version": @"2",
@@ -65,7 +65,7 @@ static NSString *kSDKversionNumber = @"7";
 }
 
 + (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign
-                                config:(VWOConfig *)config
+                                config:(VWOUserDefaults *)config
                               dateTime:(NSDate *)date {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-user"];
     NSDictionary *paramDict =
@@ -85,7 +85,7 @@ static NSString *kSDKversionNumber = @"7";
                 withValue:(NSNumber *)goalValue
                  campaign:(VWOCampaign *)campaign
                  dateTime:(NSDate *)date
-                   config:(VWOConfig *)config {
+                   config:(VWOUserDefaults *)config {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-goal"];
     NSMutableDictionary <NSString *, NSString *> *paramDict = [NSMutableDictionary new];
     paramDict[@"experiment_id"] = [NSString stringWithFormat:@"%d", campaign.iD];

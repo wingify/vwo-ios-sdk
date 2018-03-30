@@ -8,7 +8,7 @@
 
 #import "VWOLogger.h"
 #import "VWOController.h"
-#import "VWOConfig.h"
+#import "VWOUserDefaults.h"
 #import "VWODevice.h"
 
 @interface GrayLog: NSObject
@@ -30,7 +30,7 @@ void VWOLogException(NSString *format, ...) {
 
 @implementation GrayLog: NSObject
 + (void)sendMessage:(NSString *)message {
-    VWOConfig *config = VWOController.shared.config;
+    VWOUserDefaults *config = VWOController.shared.config;
     if (config == nil) { return;}
 
     NSString *bundleIdentifier = NSBundle.mainBundle.bundleIdentifier;

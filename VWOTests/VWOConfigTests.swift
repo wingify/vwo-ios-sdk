@@ -10,7 +10,7 @@ import XCTest
 
 class VWOConfigTests: XCTestCase {
 
-    var config: VWOConfig!
+    var config: VWOUserDefaults!
     let userDefaultskey = "someKey"
     let apiKey = "f9066ca73d6564484560a83b63658605-295084"
     let campaign1 = VWOCampaign(dictionary: JSONFrom(file: "Campaign1"))!
@@ -19,7 +19,7 @@ class VWOConfigTests: XCTestCase {
     override func setUp() {
         UserDefaults.standard.removeObject(forKey: userDefaultskey)
         XCTAssertNil(UserDefaults.standard.value(forKey: userDefaultskey))
-        config = VWOConfig(apiKey: apiKey, userDefaultsKey: userDefaultskey)
+        config = VWOUserDefaults(apiKey: apiKey, userDefaultsKey: userDefaultskey)
         XCTAssertNotNil(config)
     }
 
@@ -45,7 +45,7 @@ class VWOConfigTests: XCTestCase {
 
     func testTwiceInitialization() {
         config.sessionCount = 100
-        config = VWOConfig(apiKey: apiKey, userDefaultsKey: userDefaultskey)
+        config = VWOUserDefaults(apiKey: apiKey, userDefaultsKey: userDefaultskey)
         XCTAssertEqual(config.sessionCount, 100)
     }
 

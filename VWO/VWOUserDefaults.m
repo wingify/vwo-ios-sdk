@@ -1,12 +1,12 @@
 //
-//  VWOConfig.m
+//  VWOUserDefaults.m
 //  VWO
 //
 //  Created by Kaunteya Suryawanshi on 06/10/17.
 //  Copyright © 2017 vwo. All rights reserved.
 //
 
-#import "VWOConfig.h"
+#import "VWOUserDefaults.h"
 #import "VWOCampaign.h"
 #import "VWOLogger.h"
 
@@ -16,7 +16,7 @@ static NSString * kSessionCount    = @"sessionCount";
 static NSString * kReturningUser   = @"returningUser";
 static NSString * kUUID            = @"UUID";
 
-@implementation VWOConfig {
+@implementation VWOUserDefaults {
     NSString * _userDefaultsKey;
 }
 

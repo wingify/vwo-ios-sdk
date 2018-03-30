@@ -10,21 +10,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class VWOCampaign, VWOGoal, VWOConfig;
+@class VWOCampaign, VWOGoal, VWOUserDefaults;
 
 @interface VWOURL : NSObject
 
-+ (NSURL *)forFetchingCampaignsConfig:(VWOConfig *)config;
++ (NSURL *)forFetchingCampaignsConfig:(VWOUserDefaults *)config;
 
 + (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign
-                                config:(VWOConfig *)config
+                                config:(VWOUserDefaults *)config
                               dateTime:(NSDate *)date;
 
 + (NSURL *)forMarkingGoal:(VWOGoal *)goal
                 withValue:(nullable NSNumber *)goalValue
                  campaign:(VWOCampaign *)campaign
                  dateTime:(NSDate *)date
-                   config:(VWOConfig *)config;
+                   config:(VWOUserDefaults *)config;
 
 @end
 

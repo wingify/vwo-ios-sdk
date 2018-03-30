@@ -13,5 +13,5 @@
 #import "VWOStack.h"
 #import "VWOInfixEvaluator.h"
 #import "VWOSegment.h"
-#import "VWOConfig.h"
+#import "VWOUserDefaults.h"
 #import "VWOURL.h"

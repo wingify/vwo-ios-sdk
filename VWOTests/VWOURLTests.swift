@@ -13,7 +13,7 @@ class VWOURLTests: XCTestCase {
     let userDefaultskey = "someKeyURL"
 
     func testForFetchingCampaigns() {
-        let config = VWOConfig(apiKey: apiKey, userDefaultsKey: userDefaultskey)
+        let config = VWOUserDefaults(apiKey: apiKey, userDefaultsKey: userDefaultskey)
         let url = VWOURL.forFetchingCampaignsConfig(config)
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
         XCTAssertEqual(components.host, "dacdn.visualwebsiteoptimizer.com")
@@ -30,7 +30,7 @@ class VWOURLTests: XCTestCase {
     }
 
     func testsForMakingUserPartOfCampaign() {
-        let config = VWOConfig(apiKey: apiKey, userDefaultsKey: userDefaultskey)
+        let config = VWOUserDefaults(apiKey: apiKey, userDefaultsKey: userDefaultskey)
         let campaign1 = VWOCampaign(dictionary: JSONFrom(file: "Campaign1"))!
 
         let url = VWOURL.forMakingUserPart(of: campaign1, config: config, dateTime: Date.distantFuture)
@@ -43,7 +43,7 @@ class VWOURLTests: XCTestCase {
     }
 
     func testForMarkingGoal1() {
-        let config = VWOConfig(apiKey: apiKey, userDefaultsKey: userDefaultskey)
+        let config = VWOUserDefaults(apiKey: apiKey, userDefaultsKey: userDefaultskey)
         let campaign1 = VWOCampaign(dictionary: JSONFrom(file: "Campaign1"))!
         let goal = VWOGoal(dictionary: JSONFrom(file: "Goal1"))!
 
@@ -55,7 +55,7 @@ class VWOURLTests: XCTestCase {
     }
 
     func testForMarkingGoal2() {
-        let config = VWOConfig(apiKey: apiKey, userDefaultsKey: userDefaultskey)
+        let config = VWOUserDefaults(apiKey: apiKey, userDefaultsKey: userDefaultskey)
         let campaign1 = VWOCampaign(dictionary: JSONFrom(file: "Campaign1"))!
         let goal = VWOGoal(dictionary: JSONFrom(file: "Goal1"))!
 

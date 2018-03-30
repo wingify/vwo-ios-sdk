@@ -16,7 +16,7 @@
 #import "NSURLSession+Synchronous.h"
 #import "VWOURL.h"
 #import "VWODevice.h"
-#import "VWOConfig.h"
+#import "VWOUserDefaults.h"
 #import <UIKit/UIKit.h>
 #import "VWOUserConfig.h"
 
@@ -83,7 +83,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
         VWOLogInfo(@"Initializing VWO with key %@", apiKey);
     #endif
 
-    _config = [VWOConfig configWithAPIKey:apiKey userDefaultsKey:kUserDefaultsKey];
+    _config = [VWOUserDefaults configWithAPIKey:apiKey userDefaultsKey:kUserDefaultsKey];
     _config.sessionCount += 1;
 
     if (VWOSocketConnector.isSocketLibraryAvailable && userConfig1.disablePreview == NO) {
