@@ -47,6 +47,8 @@
 		E3924B481FC40B2F006A9EB2 /* Complex2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3924B471FC40B2F006A9EB2 /* Complex2.json */; };
 		E3924B4A1FC42C06006A9EB2 /* VWODictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3924B491FC42C06006A9EB2 /* VWODictionaryTests.swift */; };
 		E3924B4C1FC4520D006A9EB2 /* VWOQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3924B4B1FC4520D006A9EB2 /* VWOQueueTests.swift */; };
+		E39567A3206E5DA80030B30B /* VWOCampaignFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = E39567A1206E5DA80030B30B /* VWOCampaignFetcher.h */; };
+		E39567A4206E5DA80030B30B /* VWOCampaignFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = E39567A2206E5DA80030B30B /* VWOCampaignFetcher.m */; };
 		E39814E01F6288C80035D519 /* VWO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39814D61F6288C80035D519 /* VWO.framework */; };
 		E39814E71F6288C80035D519 /* VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E39814D91F6288C80035D519 /* VWO.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E39814F51F628CAA0035D519 /* VWO.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E39814F41F628CAA0035D519 /* VWO.podspec */; };
@@ -182,6 +184,8 @@
 		E3924B471FC40B2F006A9EB2 /* Complex2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Complex2.json; sourceTree = "<group>"; };
 		E3924B491FC42C06006A9EB2 /* VWODictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWODictionaryTests.swift; sourceTree = "<group>"; };
 		E3924B4B1FC4520D006A9EB2 /* VWOQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOQueueTests.swift; sourceTree = "<group>"; };
+		E39567A1206E5DA80030B30B /* VWOCampaignFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOCampaignFetcher.h; sourceTree = "<group>"; };
+		E39567A2206E5DA80030B30B /* VWOCampaignFetcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOCampaignFetcher.m; sourceTree = "<group>"; };
 		E39814D61F6288C80035D519 /* VWO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VWO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39814D91F6288C80035D519 /* VWO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWO.h; sourceTree = "<group>"; };
 		E39814DA1F6288C80035D519 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -322,6 +326,8 @@
 				E36AC7181F75614E0041ACDF /* VWO.m */,
 				E39815731F6291960035D519 /* VWOController.h */,
 				E39815741F6291960035D519 /* VWOController.m */,
+				E39567A1206E5DA80030B30B /* VWOCampaignFetcher.h */,
+				E39567A2206E5DA80030B30B /* VWOCampaignFetcher.m */,
 				E3E95E8B206D0B13006DCE6C /* VWOConfig.h */,
 				E3E95E8C206D0B13006DCE6C /* VWOConfig.m */,
 				E344B2EE1F87906900A4EEE6 /* VWOUserDefaults.h */,
@@ -510,6 +516,7 @@
 				E3529574206B720A00C90716 /* VWOSocketConnector.h in Headers */,
 				E3E95E8D206D0B13006DCE6C /* VWOConfig.h in Headers */,
 				E398155F1F6291680035D519 /* VWOVariation.h in Headers */,
+				E39567A3206E5DA80030B30B /* VWOCampaignFetcher.h in Headers */,
 				E3BBA3602068FA630046B2F2 /* VWOSocket.h in Headers */,
 				E398157F1F6291970035D519 /* VWOController.h in Headers */,
 				E39815931F6291C10035D519 /* VWOSegmentEvaluator.h in Headers */,
@@ -654,6 +661,7 @@
 				E3D29FC71FBEDAB300A11C61 /* NSDate+VWO.m in Sources */,
 				E36AC7191F75614E0041ACDF /* VWO.m in Sources */,
 				E3F7CBAD2004A9B100CC8C03 /* VWOStack.m in Sources */,
+				E39567A4206E5DA80030B30B /* VWOCampaignFetcher.m in Sources */,
 				E3BBA3612068FA630046B2F2 /* VWOSocket.m in Sources */,
 				E39815941F6291C10035D519 /* VWOSegmentEvaluator.m in Sources */,
 				E3E95E8E206D0B13006DCE6C /* VWOConfig.m in Sources */,

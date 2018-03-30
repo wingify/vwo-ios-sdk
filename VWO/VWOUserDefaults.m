@@ -34,11 +34,11 @@ static NSString * _userDefaultsKey;
 }
 
 + (void)setDefaultsKey:(NSString *)key {
+    _userDefaultsKey = key;
     if ([NSUserDefaults.standardUserDefaults objectForKey:key] != nil) {
         return;
     }
     VWOLogDebug(@"Setting default values for first launch");
-    _userDefaultsKey = key;
     NSString *UUID = [NSUUID.UUID.UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@""];
     NSDictionary *defaults = @{
                                kTracking     : @{},
