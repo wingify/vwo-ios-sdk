@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface VWOUserConfig : NSObject
+@interface VWOConfig : NSObject
 
 /**
  Users that are not to be made part of VWO A/B testing can be opted out.
@@ -22,6 +22,7 @@
 
 /**
  Disabling preview would stop VWO from initializing the Socket connection that is done on VWO.launch
+ Preview is enabled by default
  */
 @property BOOL disablePreview;
 

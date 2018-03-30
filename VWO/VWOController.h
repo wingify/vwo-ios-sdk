@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 static NSString *kSDKversion = @"2.2.1";
 
-@class VWOUserConfig;
+@class VWOConfig;
 
 @interface VWOController : NSObject
 
@@ -30,7 +30,7 @@ static NSString *kSDKversion = @"2.2.1";
 + (instancetype)shared;
 
 - (void)launchWithAPIKey:(NSString *)apiKey
-              userConfig:(nullable VWOUserConfig *)userConfig
+              config:(nullable VWOConfig *)config
              withTimeout:(nullable NSNumber *)timeout
             withCallback:(nullable void(^)(void))completionBlock
                  failure:(nullable void(^)(NSString *))failureBlock;

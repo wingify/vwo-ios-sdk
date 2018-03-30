@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "VWOUserConfig.h"
+#import "VWOConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -84,10 +84,10 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 NS_SWIFT_NAME(launch(apiKey:completion:failure:)) __deprecated;
 
 + (void)launchForAPIKey:(NSString *)apiKey
-             userConfig:(nullable VWOUserConfig *)userConfig
+                 config:(nullable VWOConfig *)config
              completion:(void(^)(void))completion
                 failure:(nullable void (^)(NSString *error))failureBlock
-NS_SWIFT_NAME(launch(apiKey:userConfig:completion:failure:));
+NS_SWIFT_NAME(launch(apiKey:config:completion:failure:));
 
 /**
  `Synchronously` fetch campaign settings
@@ -107,9 +107,9 @@ NS_SWIFT_NAME(launch(apiKey:userConfig:completion:failure:));
 NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:)) __deprecated;
 
 + (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
-                          userConfig:(VWOUserConfig *)userConfig
+                          config:(VWOConfig *)config
                              timeout:(NSTimeInterval)timeout
-NS_SWIFT_NAME(launchSynchronously(apiKey:userConfig:timeout:));
+NS_SWIFT_NAME(launchSynchronously(apiKey:config:timeout:));
 
 /**
  Fetches variation for given key

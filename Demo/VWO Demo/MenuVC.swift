@@ -57,7 +57,7 @@ class MenuVC : UIViewController {
             self.clearVWOFiles()
             let container = self.slideMenuController()?.mainViewController as! ContainerVC
             container.activityIndicator.startAnimating()
-            VWO.launch(apiKey: apiKey, completion: {
+            VWO.launch(apiKey: apiKey, userConfig: nil, completion: {
                 DispatchQueue.main.async {
                     container.activityIndicator.stopAnimating()
                     self.showAlert("Success", message: "API Key changed successfully.\n Old campaigns cleared", button: "OK")

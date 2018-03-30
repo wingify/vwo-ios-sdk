@@ -6,8 +6,8 @@
 //  Copyright © 2018 vwo. All rights reserved.
 //
 
-#import "VWOUserConfig.h"
+#import "VWOConfig.h"
 
-@implementation VWOUserConfig
+@implementation VWOConfig
 
 @end
