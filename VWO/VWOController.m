@@ -102,15 +102,11 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
                                                                 userInfo:nil repeats:YES];
     });
 
-    NSURL *campaignFetchURL = [_vwoURL forFetchingCampaigns];
     _campaignList = [VWOCampaignFetcher getCampaignsWithTimeout:timeout
-                                                            url:campaignFetchURL
+                                                            url:[_vwoURL forFetchingCampaigns]
                                                       customVariables:_customVariables
                                                    withCallback:completionBlock
                                                         failure:failureBlock];
-    for (VWOCampaign *campaign in _campaignList) {
-        VWOLogInfo(@"Got Campaigns %@ with variation %@", campaign, campaign.variation);
-    }
     if (_campaignList == nil) { return; }
     _initialised = true;
     [self trackUserForAllCampaignsOnLaunch:_campaignList];
@@ -149,8 +145,8 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     }
 }
 
+    // Initialise the queue and flush the persistance URLs
 - (void)updateQueues {
-        // Initialise the queue and flush the persistance URLs
     pendingURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.messageQueue];
     pendingURLQueue.delegate = self;
     failedURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.failedMessageQueue];
