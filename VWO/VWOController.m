@@ -53,15 +53,15 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 }
 
 - (void)launchWithAPIKey:(NSString *)apiKey
-              config:(VWOConfig *)config
+              config:(VWOConfig *)configNullable
              withTimeout:(NSNumber *)timeout
             withCallback:(void(^)(void))completionBlock
                  failure:(void(^)(NSString *error))failureBlock {
 
-    VWOConfig *config1 = config != nil ? config : [VWOConfig new];
-    self.customVariables = [config1.customVariables mutableCopy];
+    VWOConfig *config = configNullable != nil ? configNullable : [VWOConfig new];
+    self.customVariables = [config.customVariables mutableCopy];
     [self updateAPIKey:apiKey];
-    if (config1.optOut) {
+    if (config.optOut) {
         VWOLogWarning(@"Cannot launch. VWO opted out");
         [self clearVWOData];
         if (completionBlock) {
@@ -85,7 +85,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     [VWOUserDefaults setDefaultsKey:kUserDefaultsKey];
     VWOUserDefaults.sessionCount += 1;
 
-    if (VWOSocketConnector.isSocketLibraryAvailable && config1.disablePreview == NO) {
+    if (VWOSocketConnector.isSocketLibraryAvailable && config.disablePreview == NO) {
         if (VWODevice.isAttachedToDebugger) {
             VWOLogDebug(@"Phone attached to Mac. Initializing socket connection");
             [VWOSocketConnector launchWithAppKey:_appKey];
