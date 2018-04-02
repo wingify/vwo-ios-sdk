@@ -23,7 +23,7 @@ static NSTimeInterval kMessageQueueFlushInterval         = 10;
 static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 
 @interface VWOController() <VWOURLQueueDelegate>
-@property (atomic) NSArray<VWOCampaign *> *campaignList;
+@property (atomic) VWOCampaignArray *campaignList;
 @end
 
 @implementation VWOController {
@@ -269,7 +269,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
                                                     userInfo:campaignInfo];
 }
 
-- (void)trackUserForAllCampaignsOnLaunch:(NSArray<VWOCampaign *> *)allCampaigns {
+- (void)trackUserForAllCampaignsOnLaunch:(VWOCampaignArray *)allCampaigns {
     VWOLogInfo(@"trackUserForAllCampaignsOnLaunch");
     for (VWOCampaign *aCampaign in allCampaigns) {
         if (aCampaign.status == CampaignStatusExcluded) {

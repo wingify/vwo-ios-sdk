@@ -41,7 +41,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
  @note completionblock and failureblocks are invoked only in this method
  @return Array of campaigns. nil if network returns 400. nil if campaign list not available on network and cache
  */
-+ (nullable NSArray<VWOCampaign *> *)getCampaignsWithTimeout:(NSNumber *)timeout
++ (nullable VWOCampaignArray *)getCampaignsWithTimeout:(NSNumber *)timeout
                                                          url:(NSURL *)url
                                              customVariables:(NSDictionary<NSString *, NSString *> *)customVariables
                                                 withCallback:(void(^)(void))completionBlock
@@ -82,10 +82,10 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     NSArray<NSDictionary *> *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror];
     VWOLogDebug(@"%@", jsonArray);
 
-    NSArray<VWOCampaign *> *allCampaigns = [self campaignsFromJSON:jsonArray];
+    VWOCampaignArray *allCampaigns = [self campaignsFromJSON:jsonArray];
 
     VWOSegmentEvaluator *evaluator = [self getEvaluatorWithCustomVariables:customVariables];
-    NSArray<VWOCampaign *> *evaluatedCampaigns = [self segmentEvaluated:allCampaigns
+    VWOCampaignArray *evaluatedCampaigns = [self segmentEvaluated:allCampaigns
                                                               evaluator:evaluator];
     if (completionBlock) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -123,7 +123,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     return data;
 }
 
-+ (NSArray <VWOCampaign *> *)campaignsFromJSON:(NSArray<NSDictionary *> *)jsonArray {
++ (VWOCampaignArray *)campaignsFromJSON:(NSArray<NSDictionary *> *)jsonArray {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (NSDictionary *campaignDict in jsonArray) {
         VWOCampaign *aCampaign = [[VWOCampaign alloc] initWithDictionary:campaignDict];
@@ -132,7 +132,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     return newCampaignList;
 }
 
-+ (NSArray <VWOCampaign *> *)segmentEvaluated:(NSArray <VWOCampaign *> *)allCampaigns
++ (VWOCampaignArray *)segmentEvaluated:(VWOCampaignArray *)allCampaigns
                                     evaluator:(VWOSegmentEvaluator *)evaluator {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (VWOCampaign *aCampaign in allCampaigns) {
