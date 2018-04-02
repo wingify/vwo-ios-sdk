@@ -24,6 +24,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 
 @interface VWOController() <VWOURLQueueDelegate>
 @property (atomic) VWOCampaignArray *campaignList;
+@property (nonatomic) VWOURL *vwoURL;
 @end
 
 @implementation VWOController {
@@ -37,6 +38,15 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 }
 
 #pragma mark - Public methods
+
+- (id)init {
+    if (self = [super init]) {
+        _campaignList    = [NSMutableArray new];
+        _customVariables = [NSMutableDictionary new];
+        _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
+    }
+    return self;
+}
 
 + (instancetype)shared {
     static VWOController *instance = nil;
@@ -60,6 +70,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     VWOConfig *config = configNullable != nil ? configNullable : [VWOConfig new];
     self.customVariables = [config.customVariables mutableCopy];
     [self updateAPIKey:apiKey];
+    _vwoURL = [VWOURL urlWithAppKey:_appKey accountID:_accountID];
     if (config.optOut) {
         VWOLogWarning(@"Cannot launch. VWO opted out");
         [self clearVWOData];
@@ -110,7 +121,8 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
                                                                 userInfo:nil repeats:YES];
     });
 
-    NSURL *campaignFetchURL = [VWOURL forFetchingCampaignsAppKey:_appKey accountID:_accountID];
+    NSURL *campaignFetchURL = [_vwoURL forFetchingCampaigns];
+
 
     _campaignList = [VWOCampaignFetcher getCampaignsWithTimeout:timeout
                                                             url:campaignFetchURL
@@ -188,12 +200,10 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
         if (matchedGoal) {
             if ([VWOUserDefaults isTrackingUserForCampaign:campaign]) {
                 [VWOUserDefaults markGoalConversion:matchedGoal inCampaign:campaign];
-                NSURL *url = [VWOURL forMarkingGoal:matchedGoal
+                NSURL *url = [_vwoURL forMarkingGoal:matchedGoal
                                           withValue:value
                                            campaign:campaign
-                                           dateTime:NSDate.date
-                                             appKey:_appKey
-                                          accountID:_accountID];
+                                            dateTime:NSDate.date];
                 NSString *description = [NSString stringWithFormat:@"Goal %@", matchedGoal];
                 [pendingURLQueue enqueue:url maxRetry:10 description:description];
             } else {
@@ -236,17 +246,6 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     return finalVariation;
 }
 
-#pragma mark - Private methods
-
-- (id)init {
-    if (self = [super init]) {
-        _campaignList    = [NSMutableArray new];
-        _customVariables = [NSMutableDictionary new];
-        _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
-    }
-    return self;
-}
-
 - (void)sendNotificationUserStartedTracking:(VWOCampaign *)campaign {
     VWOLogInfo(@"Controller: Sending notfication user started tracking %@", campaign);
     //Note: All values in campaignInfo dictionary must be in string format
@@ -285,7 +284,8 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     [VWOUserDefaults trackUserForCampaign:campaign];
 
     //Send network request and notification only if the campaign is running
-    NSURL *url = [VWOURL forMakingUserPartOfCampaign:campaign appKey:_appKey accountID:_accountID dateTime:NSDate.date];
+
+    NSURL *url = [_vwoURL forMakingUserPartOfCampaign:campaign dateTime:NSDate.date];
     NSString *description = [NSString stringWithFormat:@"Track user %@ %@", campaign, campaign.variation];
     [pendingURLQueue enqueue:url maxRetry:10 description:description];
 
