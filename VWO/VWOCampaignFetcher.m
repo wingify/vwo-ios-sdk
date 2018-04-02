@@ -10,7 +10,6 @@
 #import "VWOLogger.h"
 #import "VWOFile.h"
 #import "NSURLSession+Synchronous.h"
-#import "VWOURL.h"
 #import "VWOSegmentEvaluator.h"
 #import "VWOCampaign.h"
 #import "VWOUserDefaults.h"
