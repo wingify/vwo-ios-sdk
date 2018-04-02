@@ -29,10 +29,13 @@ static NSString *const kDescription = @"desc";
 - (instancetype)initWithFileURL:(NSURL *)fileURL {
     self = [self init];
     if (self) {
-        self.path = fileURL;
         self.queue = [VWOQueue queueWithFileURL:fileURL];
     }
     return self;
+}
+
+- (NSURL *)fileURL {
+    return self.queue.fileURL;
 }
 
 - (void)enqueue:(NSURL *)url maxRetry:(int)retryCount description:(NSString *)description {
@@ -78,7 +81,7 @@ static NSString *const kDescription = @"desc";
                 [self.queue dequeue];
             } else if (retryCount <= 0) {
                 VWOLogInfo(@"Retry count exhausted %@", url);
-                [self.delegate retryCountExhaustedPath:self.path url:url];
+                [self.delegate retryCountExhaustedForURL:url atFileURLPath:self.fileURL];
                 [self.queue dequeue];
             } else {
                 peekObject[kMaxRetry] = @(retryCount - 1);

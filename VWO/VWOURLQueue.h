@@ -13,12 +13,23 @@ NS_ASSUME_NONNULL_BEGIN
 @class VWOURLQueue;
 
 @protocol VWOURLQueueDelegate <NSObject>
-- (void) retryCountExhaustedPath:(NSURL *)path url:(NSURL *)url;
+/**
+ Invoked when retryCount of an URL becomes zero.
+ */
+- (void) retryCountExhaustedForURL:(NSURL *)url atFileURLPath:(NSURL *)fileURL;
 @end
 
+/**
+ VWOURLQueue is a wrapper to VWOQueue.
+ It stores a dictionary with keys: "url", "retryCount" & "description"
+ Eg:
+ {"url": "http://vwo.com/trackuser",
+ "retryCount":10,
+ "description":"URL to track user"
+ */
 @interface VWOURLQueue : NSObject
 
-@property (nonatomic) NSURL *path;
+@property (nonatomic, readonly) NSURL *fileURL;
 @property (nonatomic, weak) id <VWOURLQueueDelegate> delegate;
 
 + (instancetype)queueWithFileURL:(NSURL *)fileURL;

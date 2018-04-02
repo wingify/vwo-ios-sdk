@@ -11,7 +11,6 @@
 
 @interface VWOQueue ()
 
-@property NSURL *fileURL;
 @property (nonatomic) dispatch_queue_t queue;
 
 @end

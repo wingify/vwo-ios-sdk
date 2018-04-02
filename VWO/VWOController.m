@@ -156,15 +156,6 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     [pendingURLQueue flush];
 }
 
-// VWOURLQueueDelegate
-- (void)retryCountExhaustedPath:(NSURL *)path url:(NSURL *)url {
-    if ([pendingURLQueue.path isEqual:path]) {
-        VWOLogWarning(@"Adding %@ to FAILURE QUEUE", url);
-        [failedURLQueue enqueue:url maxRetry:5 description:nil];
-    }
-}
-
-
 - (void)trackConversion:(NSString *)goalIdentifier withValue:(NSNumber *)value {
     if (!_initialised) {
         VWOLogError(@"VWO must be launched first!");
@@ -312,6 +303,14 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     [NSFileManager.defaultManager removeItemAtURL:VWOFile.campaignCache error:nil];
     [NSFileManager.defaultManager removeItemAtURL:VWOFile.messageQueue error:nil];
     [NSFileManager.defaultManager removeItemAtURL:VWOFile.failedMessageQueue error:nil];
+}
+
+#pragma mark - VWOURLQueueDelegate
+- (void)retryCountExhaustedForURL:(NSURL *)url atFileURLPath:(NSURL *)fileURL {
+    if ([pendingURLQueue.fileURL isEqual:fileURL]) {
+        VWOLogWarning(@"Adding %@ to FAILURE QUEUE", url);
+        [failedURLQueue enqueue:url maxRetry:5 description:nil];
+    }
 }
 
 @end
