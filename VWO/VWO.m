@@ -137,7 +137,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 }
 
 + (NSString *)version {
-    return kSDKversion;
+    return kVWOSDKversion;
 }
 
 @end

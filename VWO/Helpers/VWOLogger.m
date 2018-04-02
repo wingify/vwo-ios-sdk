@@ -51,7 +51,7 @@ void VWOLogException(NSString *format, ...) {
                            @"Date" : [dateFormatter stringFromDate:NSDate.date],
                            @"Message" : message,
                            @"iOS-Model" : VWODevice.deviceName,
-                           @"SDK Version" : kSDKversion,
+                           @"SDK Version" : kVWOSDKversion,
                            @"UUID" : VWOUserDefaults.UUID,
                            @"iOS Version" : VWODevice.iOSVersion,
                            @"App Bundle" : bundleIdentifier
