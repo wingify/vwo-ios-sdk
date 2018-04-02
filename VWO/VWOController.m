@@ -71,16 +71,11 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     self.customVariables = [config.customVariables mutableCopy];
     [self updateAPIKey:apiKey];
     _vwoURL = [VWOURL urlWithAppKey:_appKey accountID:_accountID];
+
     if (config.optOut) {
-        VWOLogWarning(@"Cannot launch. VWO opted out");
-        [self clearVWOData];
-        if (completionBlock) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                completionBlock();
-            });
-        }
-        return;
+        [self handleOptOutwithCompletion:completionBlock]; return;
     }
+
     if (_initialised) {
         VWOLogWarning(@"VWO must not be initialised more than once");
         return;
@@ -95,23 +90,9 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     [VWOUserDefaults setDefaultsKey:kUserDefaultsKey];
     VWOUserDefaults.sessionCount += 1;
 
-    if (VWOSocketConnector.isSocketLibraryAvailable && config.disablePreview == NO) {
-        if (VWODevice.isAttachedToDebugger) {
-            VWOLogDebug(@"Phone attached to Mac. Initializing socket connection");
-            [VWOSocketConnector launchWithAppKey:_appKey];
-        } else {
-            VWOLogDebug(@"Gesture recognizer added.");
-            [self addGestureRecognizer];
-        }
-    } else {
-        VWOLogDebug(@"Initializing without socket library");
-    }
+    if (config.disablePreview == NO) { [self handleSocket]; }
 
-    // Initialise the queue and flush the persistance URLs
-    pendingURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.messageQueue];
-    pendingURLQueue.delegate = self;
-    failedURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.failedMessageQueue];
-    [failedURLQueue flush];
+    [self updateQueues];
 
     // Start timer. (Timer can be scheduled only on Main Thread)
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -122,8 +103,6 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     });
 
     NSURL *campaignFetchURL = [_vwoURL forFetchingCampaigns];
-
-
     _campaignList = [VWOCampaignFetcher getCampaignsWithTimeout:timeout
                                                             url:campaignFetchURL
                                                       customVariables:_customVariables
@@ -144,6 +123,38 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     NSArray<NSString *> *splitKey = [apiKey componentsSeparatedByString:@"-"];
     _appKey     = splitKey[0];
     _accountID  = splitKey[1];
+}
+
+- (void)handleOptOutwithCompletion:(void(^)(void))completionBlock {
+    VWOLogWarning(@"Cannot launch. VWO opted out");
+    [self clearVWOData];
+    if (completionBlock) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            completionBlock();
+        });
+    }
+}
+
+- (void)handleSocket {
+    if (VWOSocketConnector.isSocketLibraryAvailable) {
+        if (VWODevice.isAttachedToDebugger) {
+            VWOLogDebug(@"Phone attached to Mac. Initializing socket connection");
+            [VWOSocketConnector launchWithAppKey:_appKey];
+        } else {
+            VWOLogDebug(@"Gesture recognizer added.");
+            [self addGestureRecognizer];
+        }
+    } else {
+        VWOLogDebug(@"Initializing without socket library");
+    }
+}
+
+- (void)updateQueues {
+        // Initialise the queue and flush the persistance URLs
+    pendingURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.messageQueue];
+    pendingURLQueue.delegate = self;
+    failedURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.failedMessageQueue];
+    [failedURLQueue flush];
 }
 
 - (void)addGestureRecognizer {

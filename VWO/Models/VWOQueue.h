@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, readonly) NSDictionary *peek;
 
 /**
- Creates an empty file backed queue.
+ Creates an file backed queue. Restores the contents if present in file
 
  @param fileURL Location where queue is to be stored
  @return VWOQueue object
