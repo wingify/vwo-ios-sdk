@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface VWOCampaignFetcher : NSObject
 + (nullable NSArray<VWOCampaign *> *)getCampaignsWithTimeout:(NSNumber *)timeout
                                                          url:(NSURL *)url
-                                                   evaluator:(VWOSegmentEvaluator *)evaluator
+                                             customVariables:(NSDictionary<NSString *, NSString *> *)customVariables
                                                 withCallback:(void(^)(void))completionBlock
                                                      failure:(void(^)(NSString *error))failureBlock;
 @end

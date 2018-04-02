@@ -9,7 +9,6 @@
 #import "VWOController.h"
 #import "VWOSocketConnector.h"
 #import "VWOLogger.h"
-#import "VWOSegmentEvaluator.h"
 #import "VWOCampaign.h"
 #import "VWOURLQueue.h"
 #import "VWOFile.h"
@@ -112,9 +111,10 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     });
 
     NSURL *campaignFetchURL = [VWOURL forFetchingCampaignsAppKey:_appKey accountID:_accountID];
+
     _campaignList = [VWOCampaignFetcher getCampaignsWithTimeout:timeout
                                                             url:campaignFetchURL
-                                                      evaluator:[self getEvaluator]
+                                                      customVariables:_customVariables
                                                    withCallback:completionBlock
                                                         failure:failureBlock];
     for (VWOCampaign *campaign in _campaignList) {
@@ -123,22 +123,6 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     if (_campaignList == nil) { return; }
     _initialised = true;
     [self trackUserForAllCampaignsOnLaunch:_campaignList];
-}
-
-- (VWOSegmentEvaluator *)getEvaluator {
-    NSString *appVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
-
-    VWOSegmentEvaluator *evaluator = [[VWOSegmentEvaluator alloc] init];
-    evaluator.iOSVersion = VWODevice.iOSVersion;
-    evaluator.appVersion = appVersion;
-    evaluator.date = NSDate.date;
-    evaluator.locale = NSLocale.currentLocale;
-    evaluator.isReturning = VWOUserDefaults.isReturningUser;
-    evaluator.appleDeviceType = VWODevice.appleDeviceType;
-    evaluator.customVariables = _customVariables;
-    evaluator.screenWidth = VWODevice.screenWidth;
-    evaluator.screenHeight = VWODevice.screenHeight;
-    return evaluator;
 }
 
 - (void)updateAPIKey:(NSString *)apiKey {
