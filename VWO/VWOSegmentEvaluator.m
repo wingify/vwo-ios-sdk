@@ -142,7 +142,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
             }
 
             case VWOSegmentTypeCustomVariable: {
-                NSString *currentValue = _customVariables[segment.lOperand];
+                NSString *currentValue = [NSString stringWithFormat:@"%@", _customVariables[segment.lOperand]];
                 if (currentValue == nil) return NO;
 
                 NSString *targetValue = segment.rOperand.firstObject;
