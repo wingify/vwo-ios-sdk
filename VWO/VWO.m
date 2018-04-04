@@ -82,8 +82,8 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 }
 
 + (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
-                          config:(VWOConfig *)config
-                             timeout:(NSTimeInterval)timeout {
+                             timeout:(NSTimeInterval)timeout
+                          config:(VWOConfig *)config {
     NSParameterAssert(apiKey);
     dispatch_barrier_sync(VWOController.taskQueue, ^{
         [VWOController.shared launchWithAPIKey:apiKey

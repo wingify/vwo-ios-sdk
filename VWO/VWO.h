@@ -107,9 +107,9 @@ NS_SWIFT_NAME(launch(apiKey:config:completion:failure:));
 NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:)) __deprecated;
 
 + (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
-                          config:(VWOConfig *)config
                              timeout:(NSTimeInterval)timeout
-NS_SWIFT_NAME(launchSynchronously(apiKey:config:timeout:));
+                          config:(VWOConfig *)config
+NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:config:));
 
 /**
  Fetches variation for given key
