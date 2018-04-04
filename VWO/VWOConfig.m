@@ -10,4 +10,10 @@
 
 @implementation VWOConfig
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"Optout: %@\nPreviewDisabled: %@\n%@",
+            self.optOut ? @"YES" : @"NO",
+            self.disablePreview ? @"YES" : @"NO",
+            self.customVariables];
+}
 @end
