@@ -12,13 +12,15 @@ Pod::Spec.new do |s|
                             :tag => s.version.to_s }
 	s.social_media_url  = "http://twitter.com/wingify"
 	s.platform     	    = :ios, '8.0'
-	
-	s.subspec 'Core' do |ss|
+    s.swift_version = '4.0'
+    s.default_subspec = 'All'
+
+    s.subspec 'Core' do |ss|
 	    ss.source_files = 'VWO/**/*.{m,h}'
 	end
 	
-	s.subspec 'Socket' do |ss|
-	    ss.source_files = 'Socket/**/*.{m,h}'
+    s.subspec 'All' do |ss|
+	    ss.source_files = 'Socket/**/*.{m,h}', 'VWO/**/*.{m,h}'
 	    ss.dependency 'Socket.IO-Client-Swift', '~> 13.1'
-	end
+    end
 end
