@@ -10,7 +10,6 @@ Pod::Spec.new do |s|
 	s.author            = { 'VWO' => 'info@wingify.com' }
 	s.source            = { :git => "https://github.com/wingify/vwo-ios-sdk.git",
                             :tag => s.version.to_s }
-	s.social_media_url  = "http://twitter.com/wingify"
 	s.platform     	    = :ios, '8.0'
     s.swift_version = '4.0'
     s.default_subspec = 'All'
