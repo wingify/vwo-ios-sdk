@@ -1,13 +1,11 @@
 PODS:
   - FLEX (2.4.0)
-  - Socket.IO-Client-Swift (13.1.2):
+  - Socket.IO-Client-Swift (13.1.3):
     - Starscream (~> 3.0.2)
-  - Starscream (3.0.4)
-  - VWO (2.2.1):
-    - VWO/Core (= 2.2.1)
-    - VWO/Socket (= 2.2.1)
-  - VWO/Core (2.2.1)
-  - VWO/Socket (2.2.1):
+  - Starscream (3.0.5)
+  - VWO (2.3.0):
+    - VWO/All (= 2.3.0)
+  - VWO/All (2.3.0):
     - Socket.IO-Client-Swift (~> 13.1)
 
 DEPENDENCIES:
@@ -20,9 +18,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
-  Socket.IO-Client-Swift: 010d2f464bdd1849b859c0cd0500d68194401ac8
-  Starscream: f5da93fe6984c77b694366bf7299b7dc63a76f26
-  VWO: aa57b26ad64cf563804deee9fbca75fcec29ce94
+  Socket.IO-Client-Swift: d30d6fd08a38ad2a182b090936a043bf512ab2de
+  Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
+  VWO: bee34559884940ce229c10f1ef93a2cbf5a707e4
 
 PODFILE CHECKSUM: 6b40b6399c4167b97e8aaf1a10ac0c32296d1d71
 
