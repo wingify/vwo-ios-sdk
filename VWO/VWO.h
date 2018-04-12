@@ -136,7 +136,7 @@ NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:config:));
  @return variation if available else `defaultValue`
  */
 + (id)variationForKey:(NSString *)key
-         defaultValue:(id)defaultValue NS_SWIFT_NAME(variationFor(key:defaultValue:));
+         defaultValue:(nullable id)defaultValue NS_SWIFT_NAME(variationFor(key:defaultValue:));
 
 /**
  Triggers goal for given identifier
