@@ -9,7 +9,7 @@
 import XCTest
 extension Locale {
     static func from(countryCode: String) -> Locale {
-        let id = Locale.identifier(fromComponents: [NSLocale.Key.countryCode._rawValue as String : countryCode])
+        let id = Locale.identifier(fromComponents: [NSLocale.Key.countryCode.rawValue as String : countryCode])
         return Locale(identifier: id)
     }
 }
