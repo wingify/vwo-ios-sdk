@@ -16,11 +16,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NSArray <VWOCampaign *> VWOCampaignArray;
 
-+ (nullable VWOCampaignArray *)getCampaignsWithTimeout:(NSNumber *)timeout
-                                                         url:(NSURL *)url
-                                             customVariables:(NSDictionary<NSString *, NSString *> *)customVariables
-                                                withCallback:(void(^)(void))completionBlock
-                                                     failure:(void(^)(NSString *error))failureBlock;
+@property VWOSegmentEvaluator *evaluator;
+
+
+- (instancetype)initWithURL:(NSURL *)url
+                    timeout:(NSNumber *)timeout
+            customVariables:(nullable NSDictionary *)customVariables;
+
+- (void)updateCacheFromSettingsFileOnce:(NSString *)fileName;
+
+- (nullable VWOCampaignArray *)fetchWithCallback:(nullable void(^)(void))completion
+                                         failure:(nullable void(^)(NSString *error))failure;
+
 @end
 
 NS_ASSUME_NONNULL_END

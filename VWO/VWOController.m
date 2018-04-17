@@ -23,8 +23,9 @@ static NSTimeInterval kMessageQueueFlushInterval         = 10;
 static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 
 @interface VWOController() <VWOURLQueueDelegate>
-@property (atomic) VWOCampaignArray *campaignList;
-@property (nonatomic) VWOURL *vwoURL;
+@property VWOCampaignArray *campaignList;
+@property VWOURL *vwoURL;
+@property VWOCampaignFetcher *campaignFetcher;
 @end
 
 @implementation VWOController {
@@ -42,7 +43,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 - (id)init {
     if (self = [super init]) {
         _campaignList    = [NSMutableArray new];
-        _customVariables = [NSMutableDictionary new];
+//        _customVariables = [NSMutableDictionary new];
         _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
@@ -67,32 +68,43 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
             withCallback:(void(^)(void))completionBlock
                  failure:(void(^)(NSString *error))failureBlock {
 
-    VWOConfig *config = configNullable != nil ? configNullable : [VWOConfig new];
-    self.customVariables = [config.customVariables mutableCopy];
-    [self updateAPIKey:apiKey];
-    _vwoURL = [VWOURL urlWithAppKey:_appKey accountID:_accountID];
-
-    if (config.optOut) {
-        [self handleOptOutwithCompletion:completionBlock]; return;
-    }
-
     if (_initialised) {
         VWOLogWarning(@"VWO must not be initialised more than once");
         return;
     }
 
-    #ifdef VWO_DEBUG
-        VWOLogInfo(@"Initializing VWO(DEBUG) with key %@", apiKey);
-    #else
-        VWOLogInfo(@"Initializing VWO with key %@", apiKey);
-    #endif
+    VWOLogInfo(@"Initializing VWO with API Key %@", apiKey);
+
+    NSAssert([apiKey componentsSeparatedByString:@"-"].count == 2, @"Invalid key");
+    NSAssert([apiKey componentsSeparatedByString:@"-"].firstObject.length == 32, @"Invalid key");
+
+    NSArray<NSString *> *splitKey = [apiKey componentsSeparatedByString:@"-"];
+    _appKey     = splitKey[0];
+    _accountID  = splitKey[1];
 
     [VWOUserDefaults setDefaultsKey:kUserDefaultsKey];
     VWOUserDefaults.sessionCount += 1;
 
+    VWOConfig *config = configNullable != nil ? configNullable : [VWOConfig new];
+
+    if (config.optOut) {
+        [self handleOptOutwithCompletion:completionBlock]; return;
+    }
+
+    _vwoURL = [VWOURL urlWithAppKey:_appKey accountID:_accountID];
+
+    _campaignFetcher = [[VWOCampaignFetcher alloc] initWithURL:[_vwoURL forFetchingCampaigns]
+                                                       timeout:timeout
+                                               customVariables:config.customVariables];
+    [_campaignFetcher updateCacheFromSettingsFileOnce:@"VWO"];
+
+
     if (config.disablePreview == NO) { [self handleSocket]; }
 
-    [self updateQueues];
+    pendingURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.messageQueue];
+    pendingURLQueue.delegate = self;
+    failedURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.failedMessageQueue];
+    [failedURLQueue flush];
 
     // Start timer. (Timer can be scheduled only on Main Thread)
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -102,23 +114,11 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
                                                                 userInfo:nil repeats:YES];
     });
 
-    _campaignList = [VWOCampaignFetcher getCampaignsWithTimeout:timeout
-                                                            url:[_vwoURL forFetchingCampaigns]
-                                                      customVariables:_customVariables
-                                                   withCallback:completionBlock
-                                                        failure:failureBlock];
+    _campaignList =[_campaignFetcher fetchWithCallback:completionBlock failure:failureBlock];
+
     if (_campaignList == nil) { return; }
     _initialised = true;
     [self trackUserForAllCampaignsOnLaunch:_campaignList];
-}
-
-- (void)updateAPIKey:(NSString *)apiKey {
-    NSAssert([apiKey componentsSeparatedByString:@"-"].count == 2, @"Invalid key");
-    NSAssert([apiKey componentsSeparatedByString:@"-"].firstObject.length == 32, @"Invalid key");
-
-    NSArray<NSString *> *splitKey = [apiKey componentsSeparatedByString:@"-"];
-    _appKey     = splitKey[0];
-    _accountID  = splitKey[1];
 }
 
 - (void)handleOptOutwithCompletion:(void(^)(void))completionBlock {
@@ -143,14 +143,6 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     } else {
         VWOLogDebug(@"Initializing without socket library");
     }
-}
-
-    // Initialise the queue and flush the persistance URLs
-- (void)updateQueues {
-    pendingURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.messageQueue];
-    pendingURLQueue.delegate = self;
-    failedURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.failedMessageQueue];
-    [failedURLQueue flush];
 }
 
 - (void)addGestureRecognizer {

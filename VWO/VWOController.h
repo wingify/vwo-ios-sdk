@@ -23,7 +23,6 @@ static NSString *kVWOSDKversion = @"2.3.1";
 
 /// All the operations in controller are expected to happen on taskQueue queue
 @property (class, readonly) dispatch_queue_t taskQueue;
-@property NSMutableDictionary<NSString *, NSString *> *customVariables;
 @property NSDictionary *previewInfo;
 @property (getter=isInitialised) BOOL initialised;
 

@@ -13,6 +13,7 @@
 #import "NSString+VWO.h"
 #import "VWOSegment.h"
 #import "VWOInfixEvaluator.h"
+#import "VWOUserDefaults.h"
 
 typedef NS_ENUM(NSInteger, OperatorType) {
     OperatorTypeIsEqualToCaseInsensitive    = 1,
@@ -42,6 +43,23 @@ static NSString * kDevice           = @"device";
 static NSString * kReturningVisitor = @"returning_visitor";
 
 @implementation VWOSegmentEvaluator
+
+- (instancetype)initWithCustomVariables:(NSDictionary *)customVariables {
+    self = [super init];
+    if (self) {
+        NSString *appVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
+        _iOSVersion = VWODevice.iOSVersion;
+        _appVersion = appVersion;
+        _date = NSDate.date;
+        _locale = NSLocale.currentLocale;
+        _isReturning = VWOUserDefaults.isReturningUser;
+        _appleDeviceType = VWODevice.appleDeviceType;
+        _customVariables = customVariables;
+        _screenWidth = VWODevice.screenWidth;
+        _screenHeight = VWODevice.screenHeight;
+    }
+    return self;
+}
 
 - (BOOL)canUserBePartOfCampaignForSegment:(NSDictionary *)segment {
     if (segment == nil) return YES;

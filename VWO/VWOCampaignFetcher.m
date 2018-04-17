@@ -16,96 +16,89 @@
 
 static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
+@interface VWOCampaignFetcher()
+@property BOOL settingsFilePresent;
+@property NSURLRequest *urlRequest;
+@end
+
 @implementation VWOCampaignFetcher
 
-+ (VWOSegmentEvaluator *)getEvaluatorWithCustomVariables:(NSDictionary<NSString *, NSString *> *)customVariables {
-    NSString *appVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
+- (instancetype)initWithURL:(NSURL *)url
+                    timeout:(NSNumber *)timeout
+            customVariables:(NSDictionary *)customVariables {
+    self = [super init];
+    if (self) {
+        NSTimeInterval requestTimeout = timeout ? timeout.doubleValue : defaultFetchCampaignsTimeout;
+        _urlRequest = [NSURLRequest requestWithURL:url
+                                      cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                  timeoutInterval:requestTimeout];
 
-    VWOSegmentEvaluator *evaluator = [[VWOSegmentEvaluator alloc] init];
-    evaluator.iOSVersion = VWODevice.iOSVersion;
-    evaluator.appVersion = appVersion;
-    evaluator.date = NSDate.date;
-    evaluator.locale = NSLocale.currentLocale;
-    evaluator.isReturning = VWOUserDefaults.isReturningUser;
-    evaluator.appleDeviceType = VWODevice.appleDeviceType;
-    evaluator.customVariables = customVariables;
-    evaluator.screenWidth = VWODevice.screenWidth;
-    evaluator.screenHeight = VWODevice.screenHeight;
-    return evaluator;
+        _evaluator = [[VWOSegmentEvaluator alloc] initWithCustomVariables:customVariables];
+    }
+    return self;
+}
+
+- (void)updateCacheFromSettingsFileOnce:(NSString *)fileName {
+    if ([NSFileManager.defaultManager fileExistsAtPath:VWOFile.campaignCache.path]) {
+        return;
+    }
+    NSURL *settingsFileURL = [NSBundle.mainBundle URLForResource:fileName withExtension:@"json"];
+    _settingsFilePresent = settingsFileURL != nil;
+    NSData *data = [NSData dataWithContentsOfURL:settingsFileURL];
+    BOOL isIt = [data writeToURL:VWOFile.campaignCache atomically:YES];
+    VWOLogDebug(@"Settings copied to cache: %@", isIt ? @"success" : @"failed");
 }
 
 /**
- Fetch campaigns from network
  If campaigns not available the returns campaigns from cache
  @note completionblock and failureblocks are invoked only in this method
  @return Array of campaigns. nil if network returns 400. nil if campaign list not available on network and cache
  */
-+ (nullable VWOCampaignArray *)getCampaignsWithTimeout:(NSNumber *)timeout
-                                                         url:(NSURL *)url
-                                             customVariables:(NSDictionary<NSString *, NSString *> *)customVariables
-                                                withCallback:(void(^)(void))completionBlock
-                                                     failure:(void(^)(NSString *error))failureBlock {
-    VWOLogDebug(@"Fetching campaigns");
-    NSString *errorString;
+- (nullable VWOCampaignArray *)fetchWithCallback:(void(^)(void))completion
+                                         failure:(void(^)(NSString *error))failure {
 
-    NSData *data = [self getCampaignsFromNetworkWithTimeout:timeout url:url onFailure:&errorString];
-
-    if (errorString != nil) {
-        VWOLogError(errorString);
-        if (failureBlock) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                failureBlock(errorString);
-            });
-        }
-        return nil;
-    }
-
-    if (data == nil) {
-        data = [NSData dataWithContentsOfURL:VWOFile.campaignCache];
-        if (data == nil) {
-            VWOLogWarning(@"No campaigns available. No cache available");
-            if (failureBlock) {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    failureBlock(errorString);
-                });
-            }
+    NSData *settingsData;
+    if (_settingsFilePresent) {
+        settingsData = [NSData dataWithContentsOfURL:VWOFile.campaignCache];
+    } else {
+        NSString *errorString;
+        settingsData = [self getCampaignsFromNetwork:&errorString];
+        if (errorString) {
+            VWOLogError(errorString);
+            [self invokeFailure:failure error:errorString];
             return nil;
         }
-        VWOLogInfo(@"Loading from Cache");
-    } else {
-        BOOL isIt = [data writeToURL:VWOFile.campaignCache atomically:YES];
-        VWOLogDebug(@"Cache updated: %@", isIt ? @"success" : @"failed");
+        if (settingsData == nil) {
+            settingsData = [NSData dataWithContentsOfURL:VWOFile.campaignCache];
+            if (settingsData == nil) {
+                VWOLogWarning(@"No campaigns available. No cache available");
+                [self invokeFailure:failure error:@"Campaigns not available"];
+                return nil;
+            }
+            VWOLogInfo(@"Loading campaigns from Cache");
+        } else {
+            BOOL isIt = [settingsData writeToURL:VWOFile.campaignCache atomically:YES];
+            VWOLogDebug(@"Cache updated: %@", isIt ? @"success" : @"failed");
+        }
     }
 
     NSError *jsonerror;
-    NSArray<NSDictionary *> *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror];
+    NSArray<NSDictionary *> *jsonArray = [NSJSONSerialization JSONObjectWithData:settingsData options:0 error:&jsonerror];
     VWOLogDebug(@"%@", jsonArray);
 
-    VWOCampaignArray *allCampaigns = [self campaignsFromJSON:jsonArray];
 
-    VWOSegmentEvaluator *evaluator = [self getEvaluatorWithCustomVariables:customVariables];
-    VWOCampaignArray *evaluatedCampaigns = [self segmentEvaluated:allCampaigns
-                                                              evaluator:evaluator];
-    if (completionBlock) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            completionBlock();
-        });
-    }
+    VWOCampaignArray *allCampaigns = [self campaignsFromJSON:jsonArray];
+    VWOCampaignArray *evaluatedCampaigns = [self segmentEvaluated:allCampaigns evaluator:_evaluator];
+    [self invokeCompletion:completion];
     return  evaluatedCampaigns;
 }
 
-+ (nullable NSData *)getCampaignsFromNetworkWithTimeout:(NSNumber *)timeout
-                                                    url:(NSURL *)url
-                                              onFailure:(NSString **)errorString {
-
-    NSTimeInterval timeOutInterval = (timeout == nil) ? defaultFetchCampaignsTimeout : timeout.doubleValue;
-    NSURLRequest *request = [NSURLRequest requestWithURL:url
-                                             cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                         timeoutInterval:timeOutInterval];
+- (nullable NSData *)getCampaignsFromNetwork:(NSString **)errorString {
+    VWOLogDebug(@"Fetching settings from network");
 
     NSError *error = nil;
     NSURLResponse *response = nil;
-    NSData *data = [NSURLSession.sharedSession sendSynchronousDataTaskWithRequest:request
+    NSData *data = [NSURLSession.sharedSession sendSynchronousDataTaskWithRequest:_urlRequest
                                                                 returningResponse:&response
                                                                             error:&error];
 
@@ -122,7 +115,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     return data;
 }
 
-+ (VWOCampaignArray *)campaignsFromJSON:(NSArray<NSDictionary *> *)jsonArray {
+- (VWOCampaignArray *)campaignsFromJSON:(NSArray<NSDictionary *> *)jsonArray {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (NSDictionary *campaignDict in jsonArray) {
         VWOCampaign *aCampaign = [[VWOCampaign alloc] initWithDictionary:campaignDict];
@@ -131,7 +124,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     return newCampaignList;
 }
 
-+ (VWOCampaignArray *)segmentEvaluated:(VWOCampaignArray *)allCampaigns
+- (VWOCampaignArray *)segmentEvaluated:(VWOCampaignArray *)allCampaigns
                                     evaluator:(VWOSegmentEvaluator *)evaluator {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (VWOCampaign *aCampaign in allCampaigns) {
@@ -144,5 +137,20 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     return newCampaignList;
 }
 
+- (void)invokeFailure:(nullable void(^)(NSString *error))failure error:(NSString *)error {
+    if (failure) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            failure(error);
+        });
+    }
+}
+
+- (void)invokeCompletion:(void(^)(void))completionBlock {
+    if (completionBlock) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            completionBlock();
+        });
+    }
+}
 
 @end

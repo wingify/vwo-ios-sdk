@@ -25,33 +25,33 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     kLogLevel = level;
 }
 
-+ (BOOL)optOut {
-    return kOptOut;
-}
+//+ (BOOL)optOut {
+//    return kOptOut;
+//}
+//
+//+ (void)setOptOut:(BOOL)optOut {
+//    if (VWOController.shared.isInitialised) {
+//        VWOLogWarning(@"Cannot optout/optin after VWO has been launched");
+//        return;
+//    }
+//    kOptOut =  optOut;
+//}
 
-+ (void)setOptOut:(BOOL)optOut {
-    if (VWOController.shared.isInitialised) {
-        VWOLogWarning(@"Cannot optout/optin after VWO has been launched");
-        return;
-    }
-    kOptOut =  optOut;
-}
-
-+ (void)launchForAPIKey:(NSString *)apiKey {
-    NSParameterAssert(apiKey);
-    dispatch_barrier_async(VWOController.taskQueue, ^{
-        [VWOController.shared launchWithAPIKey:apiKey config:nil withTimeout:nil withCallback:nil failure:nil];
-    });
-}
-
-+ (void)launchForAPIKey:(NSString *)apiKey
-             completion:(void(^)(void))completion
-                failure:(void (^)(NSString *error))failureBlock {
-    NSParameterAssert(apiKey);
-    dispatch_barrier_async(VWOController.taskQueue, ^{
-        [VWOController.shared launchWithAPIKey:apiKey config:nil withTimeout:nil withCallback:completion failure:nil];
-    });
-}
+//+ (void)launchForAPIKey:(NSString *)apiKey {
+//    NSParameterAssert(apiKey);
+//    dispatch_barrier_async(VWOController.taskQueue, ^{
+//        [VWOController.shared launchWithAPIKey:apiKey config:nil withTimeout:nil withCallback:nil failure:nil];
+//    });
+//}
+//
+//+ (void)launchForAPIKey:(NSString *)apiKey
+//             completion:(void(^)(void))completion
+//                failure:(void (^)(NSString *error))failureBlock {
+//    NSParameterAssert(apiKey);
+//    dispatch_barrier_async(VWOController.taskQueue, ^{
+//        [VWOController.shared launchWithAPIKey:apiKey config:nil withTimeout:nil withCallback:completion failure:nil];
+//    });
+//}
 
 + (void)launchForAPIKey:(NSString *)apiKey
              config:(VWOConfig *)config
@@ -127,13 +127,13 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     });
 }
 
-+ (void)setCustomVariable:(NSString *)key withValue:(NSString *)value {
-    NSParameterAssert(key);
-    NSParameterAssert(value);
-    dispatch_barrier_async(VWOController.taskQueue, ^{
-        VWOController.shared.customVariables[key] = value;
-    });
-}
+//+ (void)setCustomVariable:(NSString *)key withValue:(NSString *)value {
+//    NSParameterAssert(key);
+//    NSParameterAssert(value);
+//    dispatch_barrier_async(VWOController.taskQueue, ^{
+//        VWOController.shared.customVariables[key] = value;
+//    });
+//}
 
 + (NSString *)version {
     return kVWOSDKversion;

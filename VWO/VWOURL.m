@@ -41,8 +41,8 @@ static NSString *kSDKversionNumber = @"9";
 }
 
 - (instancetype)initWithAppKey:(NSString *)appKey accountID:(NSString *)accountID {
-    NSParameterAssert(appKey != nil);
-    NSParameterAssert(accountID != nil);
+    NSParameterAssert(appKey);
+    NSParameterAssert(accountID);
     self = [self init];
     if (self) {
         _appKey = appKey;

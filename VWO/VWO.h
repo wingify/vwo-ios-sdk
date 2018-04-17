@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 /**
   Use optOt from VWOUserConfig instead
  */
-@property (class, nonatomic) BOOL optOut __deprecated;
+//@property (class, nonatomic) BOOL optOut __deprecated;
 
 /**
  VWO SDK version
@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @param apiKey Unique developer ApiKey provided by VWO.
  */
-+ (void)launchForAPIKey:(NSString *)apiKey NS_SWIFT_NAME(launch(apiKey:)) __deprecated;
+//+ (void)launchForAPIKey:(NSString *)apiKey NS_SWIFT_NAME(launch(apiKey:)) __deprecated;
 
 /**
  Asynchronously fetch campaign settings
@@ -78,10 +78,10 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
  @param failureBlock A block object to be executed when there was error while fetching campaign settings
  */
 
-+ (void)launchForAPIKey:(NSString *)apiKey
-             completion:(void(^)(void))completion
-                failure:(nullable void (^)(NSString *error))failureBlock
-NS_SWIFT_NAME(launch(apiKey:completion:failure:)) __deprecated;
+//+ (void)launchForAPIKey:(NSString *)apiKey
+//             completion:(void(^)(void))completion
+//                failure:(nullable void (^)(NSString *error))failureBlock
+//NS_SWIFT_NAME(launch(apiKey:completion:failure:)) __deprecated;
 
 + (void)launchForAPIKey:(NSString *)apiKey
                  config:(nullable VWOConfig *)config
@@ -102,9 +102,9 @@ NS_SWIFT_NAME(launch(apiKey:config:completion:failure:));
 
  @see launchForAPIKey:
  */
-+ (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
-                             timeout:(NSTimeInterval)timeout
-NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:)) __deprecated;
+//+ (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
+//                             timeout:(NSTimeInterval)timeout
+//NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:)) __deprecated;
 
 + (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
                              timeout:(NSTimeInterval)timeout
@@ -162,8 +162,8 @@ NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:config:));
 /**
   Set custom variables from VWOUserConfig.customVariables instead
  */
-+ (void)setCustomVariable:(NSString *)key
-                withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:)) __deprecated;
+//+ (void)setCustomVariable:(NSString *)key
+//                withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:)) __deprecated;
 
 @end
 NS_ASSUME_NONNULL_END
