@@ -48,9 +48,9 @@
                    create:YES
                    error:&error];
     if (error != nil) {
-        VWOLogException(@"Unable to create file VWOCampaigns.plist %@", error.description);
+        VWOLogException(@"Unable to create file VWOCampaigns.json %@", error.description);
     }
-    return [path URLByAppendingPathComponent:@"VWOCampaigns.plist"];
+    return [path URLByAppendingPathComponent:@"VWOCampaigns.json"];
 }
 
 @end
