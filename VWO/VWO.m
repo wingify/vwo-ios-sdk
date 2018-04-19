@@ -11,7 +11,7 @@
 #import "VWOLogger.h"
 
 static VWOLogLevel kLogLevel = VWOLogLevelError;
-static BOOL kOptOut = NO;
+//static BOOL kOptOut = NO;
 
 NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStartedTrackingInCampaignNotification";
 
