@@ -23,7 +23,7 @@ typedef NSArray <VWOCampaign *> VWOCampaignArray;
                     timeout:(NSNumber *)timeout
             customVariables:(nullable NSDictionary *)customVariables;
 
-- (void)updateCacheFromSettingsFileOnce:(NSString *)fileName;
+- (void)updateCacheOnceFromSettingsFileNamed:(NSString *)fileName;
 
 - (nullable VWOCampaignArray *)fetchWithCallback:(nullable void(^)(void))completion
                                          failure:(nullable void(^)(NSString *error))failure;

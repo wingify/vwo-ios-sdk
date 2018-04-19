@@ -19,12 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSURL *)forFetchingCampaigns;
 
 - (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign
-                              dateTime:(NSDate *)date;
+                              date:(NSDate *)date;
 
 - (NSURL *)forMarkingGoal:(VWOGoal *)goal
                 withValue:(nullable NSNumber *)goalValue
                  campaign:(VWOCampaign *)campaign
-                 dateTime:(NSDate *)date;
+                 date:(NSDate *)date;
 
 @end
 

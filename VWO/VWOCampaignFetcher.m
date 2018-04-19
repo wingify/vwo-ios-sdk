@@ -1,10 +1,10 @@
-//
-//  VWOCampaignFetcher.m
-//  VWO
-//
-//  Created by Kaunteya Suryawanshi on 30/03/18.
-//  Copyright © 2018 vwo. All rights reserved.
-//
+    //
+    //  VWOCampaignFetcher.m
+    //  VWO
+    //
+    //  Created by Kaunteya Suryawanshi on 30/03/18.
+    //  Copyright © 2018 vwo. All rights reserved.
+    //
 
 #import "VWOCampaignFetcher.h"
 #import "VWOLogger.h"
@@ -25,20 +25,20 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
 - (instancetype)initWithURL:(NSURL *)url
                     timeout:(NSNumber *)timeout
-            customVariables:(NSDictionary *)customVariables {
+            customVariables:(nullable NSDictionary *)customVariables {
     self = [super init];
     if (self) {
         NSTimeInterval requestTimeout = timeout ? timeout.doubleValue : defaultFetchCampaignsTimeout;
         _urlRequest = [NSURLRequest requestWithURL:url
-                                      cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                  timeoutInterval:requestTimeout];
+                                       cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                   timeoutInterval:requestTimeout];
 
         _evaluator = [[VWOSegmentEvaluator alloc] initWithCustomVariables:customVariables];
     }
     return self;
 }
 
-- (void)updateCacheFromSettingsFileOnce:(NSString *)fileName {
+- (void)updateCacheOnceFromSettingsFileNamed:(NSString *)fileName {
     if ([NSFileManager.defaultManager fileExistsAtPath:VWOFile.campaignCache.path]) {
         return;
     }
@@ -86,7 +86,6 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     NSArray<NSDictionary *> *jsonArray = [NSJSONSerialization JSONObjectWithData:settingsData options:0 error:&jsonerror];
     VWOLogDebug(@"%@", jsonArray);
 
-
     VWOCampaignArray *allCampaigns = [self campaignsFromJSON:jsonArray];
     VWOCampaignArray *evaluatedCampaigns = [self segmentEvaluated:allCampaigns evaluator:_evaluator];
     [self invokeCompletion:completion];
@@ -117,15 +116,20 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
 - (VWOCampaignArray *)campaignsFromJSON:(NSArray<NSDictionary *> *)jsonArray {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
+
     for (NSDictionary *campaignDict in jsonArray) {
-        VWOCampaign *aCampaign = [[VWOCampaign alloc] initWithDictionary:campaignDict];
-        if (aCampaign) [newCampaignList addObject:aCampaign];
+        NSNumber *variationID = nil;
+        if (campaignDict[@"id"] != nil) {
+            variationID = [VWOUserDefaults selectedVariationForCampaignID:[campaignDict[@"id"] intValue]];
+        }
+        VWOCampaign *aCampaign = [[VWOCampaign alloc] initWithDictionary:campaignDict selectVariation:variationID];
+        if (aCampaign) { [newCampaignList addObject:aCampaign]; }
     }
     return newCampaignList;
 }
 
 - (VWOCampaignArray *)segmentEvaluated:(VWOCampaignArray *)allCampaigns
-                                    evaluator:(VWOSegmentEvaluator *)evaluator {
+                             evaluator:(VWOSegmentEvaluator *)evaluator {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (VWOCampaign *aCampaign in allCampaigns) {
         if ([evaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {

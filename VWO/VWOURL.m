@@ -70,24 +70,25 @@ static NSString *kSDKversionNumber = @"9";
 #pragma mark - Public Methods
 
 - (NSURL *)forFetchingCampaigns {
-    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile"];
-    NSDictionary *paramDict =
-    @{@"api-version": @"2",
-      @"a"          : _accountID,
-      @"dt"         : VWODevice.deviceName,
-      @"i"          : _appKey,
-      @"k"          : VWOUserDefaults.campaignVariationPairs.toString,
-      @"os"         : VWODevice.iOSVersion,
-      @"r"          : [self randomNumber],
-      @"u"          : VWOUserDefaults.UUID,
-      @"v"          : kSDKversionNumber
-      };
-    components.queryItems = [paramDict toQueryItems];
-    return components.URL;
+    return [NSURL URLWithString:@"http://10.0.17.251:9111/Settings.json"];
+//    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile"];
+//    NSDictionary *paramDict =
+//    @{@"api-version": @"2",
+//      @"a"          : _accountID,
+//      @"dt"         : VWODevice.deviceName,
+//      @"i"          : _appKey,
+////      @"k"          : VWOUserDefaults.campaignVariationPairs.toString,
+//      @"os"         : VWODevice.iOSVersion,
+//      @"r"          : [self randomNumber],
+//      @"u"          : VWOUserDefaults.UUID,
+//      @"v"          : kSDKversionNumber
+//      };
+//    components.queryItems = [paramDict toQueryItems];
+//    return components.URL;
 }
 
 - (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign
-                              dateTime:(NSDate *)date {
+                              date:(NSDate *)date {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-user"];
     NSDictionary *paramDict =
     @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
@@ -105,7 +106,7 @@ static NSString *kSDKversionNumber = @"9";
 - (NSURL *)forMarkingGoal:(VWOGoal *)goal
                 withValue:(NSNumber *)goalValue
                  campaign:(VWOCampaign *)campaign
-                 dateTime:(NSDate *)date {
+                 date:(NSDate *)date {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-goal"];
     NSMutableDictionary <NSString *, NSString *> *paramDict = [NSMutableDictionary new];
     paramDict[@"experiment_id"] = [NSString stringWithFormat:@"%d", campaign.iD];

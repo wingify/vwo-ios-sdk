@@ -20,7 +20,8 @@
 #import "VWOCampaignFetcher.h"
 
 static NSTimeInterval kMessageQueueFlushInterval         = 10;
-static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
+//static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
+static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a8";
 
 @interface VWOController() <VWOURLQueueDelegate>
 @property VWOCampaignArray *campaignList;
@@ -90,35 +91,27 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     if (config.optOut) {
         [self handleOptOutwithCompletion:completionBlock]; return;
     }
-
-    _vwoURL = [VWOURL urlWithAppKey:_appKey accountID:_accountID];
-
-    _campaignFetcher = [[VWOCampaignFetcher alloc] initWithURL:[_vwoURL forFetchingCampaigns]
-                                                       timeout:timeout
-                                               customVariables:config.customVariables];
-    [_campaignFetcher updateCacheFromSettingsFileOnce:@"VWO"];
-
-
-    if (config.disablePreview == NO) { [self handleSocket]; }
+    if (config.disablePreview == NO) { [self launchSocketOrAddGesture]; }
 
     pendingURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.messageQueue];
     pendingURLQueue.delegate = self;
     failedURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.failedMessageQueue];
-    [failedURLQueue flush];
+    [failedURLQueue flush];//Flushed only on launch
 
-    // Start timer. (Timer can be scheduled only on Main Thread)
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self->messageQueueFlushtimer = [NSTimer scheduledTimerWithTimeInterval:kMessageQueueFlushInterval
-                                                                  target:self
-                                                                selector:@selector(timerAction)
-                                                                userInfo:nil repeats:YES];
-    });
+    _vwoURL = [VWOURL urlWithAppKey:_appKey accountID:_accountID];
+
+    _campaignFetcher = [[VWOCampaignFetcher alloc] initWithURL: [_vwoURL forFetchingCampaigns]
+                                                       timeout:timeout
+                                               customVariables:config.customVariables];
+
+    [_campaignFetcher updateCacheOnceFromSettingsFileNamed:@"VWO"];
 
     _campaignList =[_campaignFetcher fetchWithCallback:completionBlock failure:failureBlock];
 
-    if (_campaignList == nil) { return; }
+    [self updateVWOUserDefaults:_campaignList];
+
+    [self startTimer];
     _initialised = true;
-    [self trackUserForAllCampaignsOnLaunch:_campaignList];
 }
 
 - (void)handleOptOutwithCompletion:(void(^)(void))completionBlock {
@@ -131,7 +124,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     }
 }
 
-- (void)handleSocket {
+- (void)launchSocketOrAddGesture {
     if (VWOSocketConnector.isSocketLibraryAvailable) {
         if (VWODevice.isAttachedToDebugger) {
             VWOLogDebug(@"Phone attached to Mac. Initializing socket connection");
@@ -163,6 +156,66 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     }
 }
 
+- (void)updateVWOUserDefaults:(VWOCampaignArray *)campaignList {
+    for (VWOCampaign *aCampaign in campaignList) {
+        switch (aCampaign.status) {
+            case CampaignStatusRunning:
+                [VWOUserDefaults setSelectedVariationFor:aCampaign];
+                if (![VWOUserDefaults isUserTrackedForCampaign:aCampaign] &&
+                    aCampaign.trackUserOnLaunch) {
+                    [self trackUserForCampaign:aCampaign];
+                }
+                break;
+            case CampaignStatusExcluded:
+                [VWOUserDefaults setCampaignExcluded:aCampaign];
+                break;
+            case CampaignStatusPaused: break;
+        }
+    }
+}
+
+    /// set in VWOUserDefaults, add in pending queue & send notification
+- (void)trackUserForCampaign:(VWOCampaign *)campaign {
+    NSParameterAssert(campaign);
+    NSAssert(campaign.status == CampaignStatusRunning, @"Non running campaigns must not be tracked");
+
+    if (![VWOUserDefaults isUserTrackedForCampaign:campaign]) {
+        VWOLogDebug(@"Track User For Campaign %@", campaign);
+
+        [VWOUserDefaults trackUserForCampaign:campaign];
+
+        NSURL *url = [_vwoURL forMakingUserPartOfCampaign:campaign date:NSDate.date];
+        NSString *description = [NSString stringWithFormat:@"Track user %@ %@", campaign, campaign.variation];
+        [pendingURLQueue enqueue:url maxRetry:10 description:description];
+
+        [self sendNotificationUserStartedTracking:campaign];
+    }
+}
+
+- (void)sendNotificationUserStartedTracking:(VWOCampaign *)campaign {
+    VWOLogInfo(@"Controller: Sending notfication user started tracking %@", campaign);
+        //Note: All values in campaignInfo dictionary must be in string format
+    NSDictionary *campaignInfo = @{@"vwo_campaign_name"  : campaign.name.copy,
+                                   @"vwo_campaign_id"    : [NSString stringWithFormat:@"%d", campaign.iD],
+                                   @"vwo_variation_name" : campaign.variation.name.copy,
+                                   @"vwo_variation_id"   : [NSString stringWithFormat:@"%d", campaign.variation.iD],
+                                   };
+    [NSNotificationCenter.defaultCenter postNotificationName:VWOUserStartedTrackingInCampaignNotification
+                                                      object:nil
+                                                    userInfo:campaignInfo];
+}
+
+- (void)startTimer {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self->messageQueueFlushtimer =
+        [NSTimer scheduledTimerWithTimeInterval:kMessageQueueFlushInterval
+                                         target:self
+                                       selector:@selector(timerAction)
+                                       userInfo:nil repeats:YES];
+    });
+
+}
+
 - (void)timerAction {
     [pendingURLQueue flush];
 }
@@ -183,30 +236,32 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 
         //Check if the goal is already marked.
     for (VWOCampaign *campaign in _campaignList) {
-        VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
-        if (matchedGoal) {
-
-            if ([VWOUserDefaults isGoalMarked:matchedGoal inCampaign:campaign]) {
-                VWOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
-                return;
+        if (campaign.status == CampaignStatusRunning) {
+            VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
+            if (matchedGoal) {
+                if ([VWOUserDefaults isGoalMarked:matchedGoal inCampaign:campaign]) {
+                    VWOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
+                    return;
+                }
             }
         }
     }
-
         // Mark goal(Goal can be present in multiple campaigns
     for (VWOCampaign *campaign in _campaignList) {
-        VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
-        if (matchedGoal) {
-            if ([VWOUserDefaults isTrackingUserForCampaign:campaign]) {
-                [VWOUserDefaults markGoalConversion:matchedGoal inCampaign:campaign];
-                NSURL *url = [_vwoURL forMarkingGoal:matchedGoal
-                                          withValue:value
-                                           campaign:campaign
-                                            dateTime:NSDate.date];
-                NSString *description = [NSString stringWithFormat:@"Goal %@", matchedGoal];
-                [pendingURLQueue enqueue:url maxRetry:10 description:description];
-            } else {
-                VWOLogWarning(@"Goal %@ not tracked for %@ as user is not tracked", matchedGoal, campaign);
+        if (campaign.status == CampaignStatusRunning) {
+            VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
+            if (matchedGoal) {
+                if ([VWOUserDefaults isUserTrackedForCampaign:campaign]) {
+                    [VWOUserDefaults markGoalConversion:matchedGoal inCampaign:campaign];
+                    NSURL *url = [_vwoURL forMarkingGoal:matchedGoal
+                                               withValue:value
+                                                campaign:campaign
+                                                    date:NSDate.date];
+                    NSString *description = [NSString stringWithFormat:@"Goal %@", matchedGoal];
+                    [pendingURLQueue enqueue:url maxRetry:10 description:description];
+                } else {
+                    VWOLogWarning(@"Goal %@ not tracked for %@ as user is not tracked", matchedGoal, campaign);
+                }
             }
         }
     }
@@ -229,12 +284,14 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 
     id finalVariation = nil;
     for (VWOCampaign *campaign in _campaignList) {
-        id variation = [campaign variationForKey:key];
+        if (campaign.status == CampaignStatusRunning) {
+            id variation = [campaign variationForKey:key];
 
-            //If variation Key is present in Campaign
-        if (variation) {
-            finalVariation = variation;
-            if (campaign.trackUserOnLaunch == false) [self trackUserForCampaign:campaign];
+                //If variation Key is present in Campaign
+            if (variation) {
+                finalVariation = variation;
+                if (campaign.trackUserOnLaunch == false) [self trackUserForCampaign:campaign];
+            }
         }
     }
     if (finalVariation == [NSNull null]) {
@@ -243,52 +300,6 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     }
     VWOLogDebug(@"Got variation %@ for key %@", finalVariation, key);
     return finalVariation;
-}
-
-- (void)sendNotificationUserStartedTracking:(VWOCampaign *)campaign {
-    VWOLogInfo(@"Controller: Sending notfication user started tracking %@", campaign);
-    //Note: All values in campaignInfo dictionary must be in string format
-    NSDictionary *campaignInfo = @{@"vwo_campaign_name"  : campaign.name.copy,
-                                   @"vwo_campaign_id"    : [NSString stringWithFormat:@"%d", campaign.iD],
-                                   @"vwo_variation_name" : campaign.variation.name.copy,
-                                   @"vwo_variation_id"   : [NSString stringWithFormat:@"%d", campaign.variation.iD],
-                                   };
-    [NSNotificationCenter.defaultCenter postNotificationName:VWOUserStartedTrackingInCampaignNotification
-                                                      object:nil
-                                                    userInfo:campaignInfo];
-}
-
-- (void)trackUserForAllCampaignsOnLaunch:(VWOCampaignArray *)allCampaigns {
-    VWOLogInfo(@"trackUserForAllCampaignsOnLaunch");
-    for (VWOCampaign *aCampaign in allCampaigns) {
-        if (aCampaign.status == CampaignStatusExcluded) {
-            [VWOUserDefaults trackUserForCampaign:aCampaign];
-            continue;
-        } else if (aCampaign.status == CampaignStatusRunning && aCampaign.trackUserOnLaunch) {
-            [self trackUserForCampaign:aCampaign];
-        }
-    }
-}
-
-- (void)trackUserForCampaign:(VWOCampaign *)campaign {
-    NSParameterAssert(campaign);
-    NSAssert(campaign.status == CampaignStatusRunning, @"Non running campaigns must not be tracked");
-
-    if ([VWOUserDefaults isTrackingUserForCampaign:campaign]) {
-        VWOLogDebug(@"Controller: Returning. Already tracking %@", campaign);
-        return;
-    }
-    VWOLogDebug(@"Controller: trackUserForCampaign %@", campaign);
-
-    [VWOUserDefaults trackUserForCampaign:campaign];
-
-    //Send network request and notification only if the campaign is running
-
-    NSURL *url = [_vwoURL forMakingUserPartOfCampaign:campaign dateTime:NSDate.date];
-    NSString *description = [NSString stringWithFormat:@"Track user %@ %@", campaign, campaign.variation];
-    [pendingURLQueue enqueue:url maxRetry:10 description:description];
-
-    [self sendNotificationUserStartedTracking:campaign];
 }
 
 - (void)dealloc {

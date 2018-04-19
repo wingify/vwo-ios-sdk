@@ -28,7 +28,10 @@ typedef NS_ENUM(NSInteger, CampaignStatus) {
 @property NSArray<VWOGoal *> *goals;
 @property (nullable) NSDictionary *segmentObject;
 
-- (nullable instancetype)initWithDictionary:(NSDictionary *)campaignDict;
+/// variationID is sent if variation has already been selected
+/// If variationID is nil then campaign randomly selects a variation depending on weights
+- (nullable instancetype)initWithDictionary:(NSDictionary *)campaignDict
+                                  selectVariation:(nullable NSNumber *)variationID;
 - (nullable id)variationForKey:(NSString *)key;
 - (nullable VWOGoal *)goalForIdentifier:(NSString *)identifier;
 

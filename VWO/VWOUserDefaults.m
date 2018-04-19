@@ -10,13 +10,16 @@
 #import "VWOCampaign.h"
 #import "VWOLogger.h"
 
-static NSString * kTracking        = @"tracking";
-static NSString * kGoalsMarked     = @"goalsMarked";
-static NSString * kSessionCount    = @"sessionCount";
-static NSString * kReturningUser   = @"returningUser";
-static NSString * kUUID            = @"UUID";
+static NSString * kVariationSelected = @"variationSelected";
+static NSString * kCampaignsTracked  = @"campaignsTracked";
+static NSString * kCampaingsExcluded = @"campaingsExcluded";
+static NSString * kGoalsMarked       = @"goalsMarked";
+static NSString * kSessionCount      = @"sessionCount";
+static NSString * kReturningUser     = @"returningUser";
+static NSString * kUUID              = @"UUID";
 
 static NSString * _userDefaultsKey;
+NSString *const kOLDUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 
 @implementation VWOUserDefaults
 
@@ -38,35 +41,102 @@ static NSString * _userDefaultsKey;
     if ([NSUserDefaults.standardUserDefaults objectForKey:key] != nil) {
         return;
     }
-    VWOLogDebug(@"Setting default values for first launch");
+    // If old key is present then run the migration.
+    if ([NSUserDefaults.standardUserDefaults objectForKey:kOLDUserDefaultsKey] != nil) {
+        [self runMigration:key];
+        return;
+    }
+    VWOLogDebug(@"Setting default values");
     NSString *UUID = [NSUUID.UUID.UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@""];
     NSDictionary *defaults = @{
-                               kTracking     : @{},
-                               kGoalsMarked  : @[],
-                               kSessionCount : @(0),
-                               kReturningUser: @(NO),
-                               kUUID         : UUID
+                               kVariationSelected: @[],//Array<NSString> of "CampaignId:VariationID"
+                               kCampaignsTracked : @[],//Array<NSNumber> of Campaing Id
+                               kCampaingsExcluded: @[],
+                               kGoalsMarked      : @[],//Array<NSString> of "CampaignId:GoalID"
+                               kSessionCount     : @(0),
+                               kReturningUser    : @(NO),
+                               kUUID             : UUID
                                };
+
     [NSUserDefaults.standardUserDefaults setObject:defaults forKey:key];
     VWOLogDebug(@"UUID %@", UUID);
 }
 
-+ (BOOL)isTrackingUserForCampaign:(VWOCampaign *)campaign {
-    NSDictionary *trackingDict = [self objectForKey:kTracking];
-    NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
-
-    if (trackingDict[campaignID] == nil) { return NO; }
-    return [trackingDict[campaignID] intValue] == campaign.variation.iD;
+/// Runs migration from old format to new format
++ (void)runMigration:(NSString *)newKey {
+    VWOLogDebug(@"Running migration from old values to new");
+    NSDictionary *oldValues = [NSUserDefaults.standardUserDefaults objectForKey:kOLDUserDefaultsKey];
+    NSMutableArray <NSNumber *> *campaignsTracked  = [NSMutableArray new];
+    NSMutableArray <NSNumber *> *campaignsExcluded = [NSMutableArray new];
+    NSMutableArray <NSString *> *variationSelected = [NSMutableArray new];
+    NSDictionary *oldTrackingInfo = oldValues[@"tracking"];
+    for (NSString *campaignID in oldTrackingInfo) {
+        NSNumber *variationID = oldTrackingInfo[campaignID];
+        if (variationID.intValue == 0) {
+            [campaignsExcluded addObject:@([campaignID intValue])];
+        } else {
+            [campaignsTracked addObject:@([campaignID intValue])];
+        }
+        NSString *campVar = [NSString stringWithFormat:@"%@:%@", campaignID, variationID];
+        [variationSelected addObject:campVar];
+    }
+    NSDictionary *defaults = @{
+                               kVariationSelected: variationSelected,
+                               kCampaignsTracked : campaignsTracked,
+                               kCampaignsTracked : campaignsExcluded,
+                               kGoalsMarked      : oldValues[@"goalsMarked"],
+                               kSessionCount     : @([oldValues[@"sessionCount"] integerValue]),
+                               kReturningUser    : @([oldValues[@"returningUser"] boolValue]),
+                               kUUID             : oldValues[@"UUID"]
+                               };
+    [NSUserDefaults.standardUserDefaults setObject:defaults forKey:newKey];
+    [NSUserDefaults.standardUserDefaults removeObjectForKey:kOLDUserDefaultsKey];
 }
 
-    /// Stores "campaignId : "variationID" in User Activity["tracking"]
-+ (void)trackUserForCampaign:(VWOCampaign *)campaign {
-    NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
-    int variationID = campaign.status == CampaignStatusExcluded ? 0 : campaign.variation.iD;
+//+ (void)setSelectedVariationID:(int)variationID forCampaignID:(int)campaignID {
+//    NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)[self objectForKey:kVariationSelected]];
+//    [set addObject:[NSString stringWithFormat:@"%d:%d", campaignID, variationID]];
+//    [self setObject:set.allObjects forKey:kVariationSelected];
+//}
 
-    NSMutableDictionary *trackingDict = [[self objectForKey:kTracking] mutableCopy];
-    trackingDict[campaignID] = [NSNumber numberWithInt:variationID];
-    [self setObject:trackingDict forKey:kTracking];
++ (void)setSelectedVariationFor:(VWOCampaign *)campaign {
+    NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)[self objectForKey:kVariationSelected]];
+    [set addObject:[NSString stringWithFormat:@"%d:%d", campaign.iD, campaign.variation.iD]];
+    [self setObject:set.allObjects forKey:kVariationSelected];
+}
+
++ (nullable NSNumber *)selectedVariationForCampaignID:(int)campaignID {
+    NSArray *variationSelectedList = [self objectForKey:kVariationSelected];
+    for (NSString *pair in variationSelectedList) {
+        NSString *a = [pair componentsSeparatedByString:@":"][0];
+        NSString *b = [pair componentsSeparatedByString:@":"][1];
+        if (campaignID == [a intValue]) {
+            return @([b intValue]);
+        }
+    }
+    return nil;
+}
+
++ (void)trackUserForCampaign:(VWOCampaign *)campaign {
+    NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)[self objectForKey:kCampaignsTracked]];
+    [set addObject:@(campaign.iD)];
+    [self setObject:set.allObjects forKey:kCampaignsTracked];
+}
+
++ (BOOL)isUserTrackedForCampaign:(VWOCampaign *)campaign {
+    NSSet *set = [NSSet setWithArray:(NSArray *)[self objectForKey:kCampaignsTracked]];
+    return [set containsObject:@(campaign.iD)];
+}
+
++ (void)setCampaignExcluded:(VWOCampaign *)campaign {
+    NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)[self objectForKey:kCampaingsExcluded]];
+    [set addObject:@(campaign.iD)];
+    [self setObject:set.allObjects forKey:kCampaingsExcluded];
+}
+
++ (BOOL)isCampaignExcluded:(VWOCampaign *)campaign {
+    NSSet *set = [NSSet setWithArray:(NSArray *)[self objectForKey:kCampaingsExcluded]];
+    return [set containsObject:@(campaign.iD)];
 }
 
 + (void)markGoalConversion:(VWOGoal *)goal inCampaign:(VWOCampaign *)campaign {
@@ -80,10 +150,6 @@ static NSString * _userDefaultsKey;
     return [set containsObject:[NSString stringWithFormat:@"%d:%d", campaign.iD, goal.iD]];
 }
 
-+ (NSDictionary *)campaignVariationPairs {
-    return [self objectForKey:kTracking];
-}
-
 + (NSString *)UUID {
     return [self objectForKey:kUUID];
 }
@@ -94,8 +160,8 @@ static NSString * _userDefaultsKey;
 }
 
 + (void)updateIsReturningUser {
-    NSDictionary *trackingDict = [self objectForKey:kTracking];
-    if (trackingDict.count > 0 && self.sessionCount > 1 && self.isReturningUser == NO) {
+    NSArray *trackedCampaigns = [self objectForKey:kCampaignsTracked];
+    if (trackedCampaigns.count > 0 && self.sessionCount > 1 && self.isReturningUser == NO) {
         VWOLogDebug(@"Setting returningUser=YES");
         self.returningUser = YES;
     }

@@ -20,7 +20,9 @@ static NSString * kVariation            = @"variations";
 
 @implementation VWOCampaign
 
-- (nullable instancetype)initWithDictionary:(NSDictionary *) campaignDict {
+- (nullable instancetype)initWithDictionary:(NSDictionary *)campaignDict
+                                  selectVariation:(NSNumber *)variationID {
+
     NSParameterAssert(campaignDict);
 
     // Campaign ID and status are the must have keys for any type of campaign
@@ -72,11 +74,28 @@ static NSString * kVariation            = @"variations";
         }
         self.goals = goals;
 
-        //Variation
-        self.variation = [[VWOVariation alloc] initWithDictionary:campaignDict[kVariation]];
-
+        //Get variation for a campaign from variationID. If variation is not found then randomly select
+        NSDictionary *allVariations = campaignDict[kVariation];
+        NSDictionary *selectedVariation = [self variationJSONForID:variationID from:allVariations];
+        if (selectedVariation == nil) {
+            selectedVariation = [VWOCampaign selectRandomVariation:campaignDict[kVariation]];
+        }
+        self.variation = [[VWOVariation alloc] initWithDictionary:selectedVariation];
     }
     return self;
+}
+
+/// Selects the variation from allVariations based on given variationID
+/// Returns nil if not found
+- (nullable NSDictionary *)variationJSONForID:(nullable NSNumber *)variationID
+                                     from:(NSDictionary *)allVariations {
+    if (variationID == nil) { return nil; }
+    for (NSDictionary *variation in allVariations) {
+        if ([variation[@"id"] intValue] == variationID.intValue) {
+            return variation;
+        }
+    }
+    return nil;
 }
 
 - (nullable id)variationForKey:(NSString *)key {
@@ -93,6 +112,33 @@ static NSString * kVariation            = @"variations";
         }
     }
     return nil;
+}
+
++ (NSDictionary *)selectRandomVariation:(NSArray *)allVariations {
+    NSMutableArray <NSNumber *> *weights = [NSMutableArray new];
+    for (NSDictionary *variation in allVariations) {
+        NSNumber *weight = variation[@"weight"];
+        [weights addObject:weight];
+    }
+    int index = [self getRandomIndexforWeights:weights];
+    return allVariations[index];
+}
+
++ (int)getRandomIndexforWeights:(NSArray <NSNumber *>*)weights {
+    if (weights.count <= 1) { return 0;}
+    NSMutableArray <NSNumber *> *incrementalWeights = [NSMutableArray new];
+    for (NSNumber *weight in weights) {
+        NSNumber *newWeight = [NSNumber numberWithInt:(weight.intValue + incrementalWeights.lastObject.intValue)];
+        [incrementalWeights addObject:newWeight];
+    }
+
+    NSNumber *random = [NSNumber numberWithUnsignedInteger:arc4random() % 100];
+    int i = 0;
+    for (NSNumber * a in incrementalWeights) {
+        if (random <= a) { return i; }
+        i += 1;
+    }
+    return 0;
 }
 
 - (NSString *)description {

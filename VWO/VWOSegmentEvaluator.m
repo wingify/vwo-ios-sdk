@@ -44,7 +44,7 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
 @implementation VWOSegmentEvaluator
 
-- (instancetype)initWithCustomVariables:(NSDictionary *)customVariables {
+- (instancetype)initWithCustomVariables:(nullable NSDictionary *)customVariables {
     self = [super init];
     if (self) {
         NSString *appVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
