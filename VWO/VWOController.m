@@ -295,8 +295,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a8
         }
     }
     if (finalVariation == [NSNull null]) {
-        // finalVariation can be NSNull if Control is assigned to campaign
-        return nil;
+        return nil; // finalVariation can be NSNull if Control is assigned to campaign
     }
     VWOLogDebug(@"Got variation %@ for key %@", finalVariation, key);
     return finalVariation;
