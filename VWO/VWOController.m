@@ -106,12 +106,23 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a8
 
     [_campaignFetcher updateCacheOnceFromSettingsFileNamed:@"VWO"];
 
-    _campaignList =[_campaignFetcher fetchWithCallback:completionBlock failure:failureBlock];
+    NSString *errorString;
+    _campaignList = [_campaignFetcher fetch:&errorString];
 
-    [self updateVWOUserDefaults:_campaignList];
+    if (errorString) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            failure(errorString);
+        });
+        return;
+    } else {
+        [self updateVWOUserDefaults:_campaignList];
 
-    [self startTimer];
-    _initialised = true;
+        [self startTimer];
+        _initialised = true;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            completionBlock();
+        });
+    }
 }
 
 - (void)handleOptOutwithCompletion:(void(^)(void))completionBlock {
@@ -286,8 +297,6 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a8
     for (VWOCampaign *campaign in _campaignList) {
         if (campaign.status == CampaignStatusRunning) {
             id variation = [campaign variationForKey:key];
-
-                //If variation Key is present in Campaign
             if (variation) {
                 finalVariation = variation;
                 if (campaign.trackUserOnLaunch == false) [self trackUserForCampaign:campaign];

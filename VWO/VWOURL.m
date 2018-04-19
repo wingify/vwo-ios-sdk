@@ -70,7 +70,7 @@ static NSString *kSDKversionNumber = @"9";
 #pragma mark - Public Methods
 
 - (NSURL *)forFetchingCampaigns {
-    return [NSURL URLWithString:@"http://10.0.17.251:9111/Settings.json"];
+    return [NSURL URLWithString:@"http://10.0.17.251:9111/Settings/Settings.json"];
 //    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile"];
 //    NSDictionary *paramDict =
 //    @{@"api-version": @"2",

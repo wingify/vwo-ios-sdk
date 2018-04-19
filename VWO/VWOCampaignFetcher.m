@@ -44,9 +44,11 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     }
     NSURL *settingsFileURL = [NSBundle.mainBundle URLForResource:fileName withExtension:@"json"];
     _settingsFilePresent = settingsFileURL != nil;
-    NSData *data = [NSData dataWithContentsOfURL:settingsFileURL];
-    BOOL isIt = [data writeToURL:VWOFile.campaignCache atomically:YES];
-    VWOLogDebug(@"Settings copied to cache: %@", isIt ? @"success" : @"failed");
+    if (_settingsFilePresent) {
+        NSData *data = [NSData dataWithContentsOfURL:settingsFileURL];
+        BOOL isIt = [data writeToURL:VWOFile.campaignCache atomically:YES];
+        VWOLogDebug(@"Settings copied to cache: %@", isIt ? @"success" : @"failed");
+    }
 }
 
 /**
@@ -54,25 +56,19 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
  @note completionblock and failureblocks are invoked only in this method
  @return Array of campaigns. nil if network returns 400. nil if campaign list not available on network and cache
  */
-- (nullable VWOCampaignArray *)fetchWithCallback:(void(^)(void))completion
-                                         failure:(void(^)(NSString *error))failure {
+- (nullable VWOCampaignArray *)fetch:(NSString **)errorString {
 
     NSData *settingsData;
     if (_settingsFilePresent) {
         settingsData = [NSData dataWithContentsOfURL:VWOFile.campaignCache];
     } else {
-        NSString *errorString;
-        settingsData = [self getCampaignsFromNetwork:&errorString];
-        if (errorString) {
-            VWOLogError(errorString);
-            [self invokeFailure:failure error:errorString];
-            return nil;
-        }
+        settingsData = [self getCampaignsFromNetwork:errorString];
+        if (errorString) { return nil; }
+
         if (settingsData == nil) {
             settingsData = [NSData dataWithContentsOfURL:VWOFile.campaignCache];
             if (settingsData == nil) {
-                VWOLogWarning(@"No campaigns available. No cache available");
-                [self invokeFailure:failure error:@"Campaigns not available"];
+                *errorString = @"Campaigns not available";
                 return nil;
             }
             VWOLogInfo(@"Loading campaigns from Cache");
@@ -88,7 +84,6 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
     VWOCampaignArray *allCampaigns = [self campaignsFromJSON:jsonArray];
     VWOCampaignArray *evaluatedCampaigns = [self segmentEvaluated:allCampaigns evaluator:_evaluator];
-    [self invokeCompletion:completion];
     return  evaluatedCampaigns;
 }
 
@@ -139,22 +134,6 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
         }
     }
     return newCampaignList;
-}
-
-- (void)invokeFailure:(nullable void(^)(NSString *error))failure error:(NSString *)error {
-    if (failure) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            failure(error);
-        });
-    }
-}
-
-- (void)invokeCompletion:(void(^)(void))completionBlock {
-    if (completionBlock) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            completionBlock();
-        });
-    }
 }
 
 @end

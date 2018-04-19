@@ -25,8 +25,13 @@ typedef NSArray <VWOCampaign *> VWOCampaignArray;
 
 - (void)updateCacheOnceFromSettingsFileNamed:(NSString *)fileName;
 
-- (nullable VWOCampaignArray *)fetchWithCallback:(nullable void(^)(void))completion
-                                         failure:(nullable void(^)(NSString *error))failure;
+/**
+ Fetch campaigns from network or settings file
+
+ @param errorString Error message incase of failure
+ @return nil if some error occurred while fetching. Returns empty array @[] if no campaigns are received
+ */
+- (nullable VWOCampaignArray *)fetch:(NSString **)errorString;
 
 @end
 
