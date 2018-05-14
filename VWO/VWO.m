@@ -104,7 +104,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     return object;
 }
 
-+ (nullable id)objectForKey:(NSString *)key defaultValue:(nullable id)defaultValue {
++ (id)objectForKey:(NSString *)key defaultValue:(nullable id)defaultValue {
     id object = [self objectForKey:key];
     return object != nil ? object : defaultValue;
 }
@@ -129,7 +129,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     return object != nil ? [object doubleValue] : defaultValue;
 }
 
-+ (nullable NSString *)stringForKey:(NSString *)key defaultValue:(nullable NSString *)defaultValue {
++ (NSString *)stringForKey:(NSString *)key defaultValue:(NSString *)defaultValue {
     NSParameterAssert(key);
     id object = [self objectForKey:key];
     return object != nil ? [object stringValue] : defaultValue;
