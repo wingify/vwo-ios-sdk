@@ -95,7 +95,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     });
 }
 
-+ (id)variationForKey:(NSString *)key {
++ (id)objectForKey:(NSString *)key {
     NSParameterAssert(key);
     __block id object;
     dispatch_barrier_sync(VWOController.taskQueue, ^{
@@ -104,13 +104,35 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     return object;
 }
 
-+ (id)variationForKey:(NSString *)key defaultValue:(id)defaultValue {
-    NSParameterAssert(key);
-    __block id object;
-    dispatch_barrier_sync(VWOController.taskQueue, ^{
-        object = [VWOController.shared variationForKey:key];;
-    });
++ (nullable id)objectForKey:(NSString *)key defaultValue:(nullable id)defaultValue {
+    id object = [self objectForKey:key];
     return object != nil ? object : defaultValue;
+}
+
++ (id)variationForKey:(NSString *)key defaultValue:(id)defaultValue {
+        // Deprecated
+    return [self objectForKey:key defaultValue:defaultValue];
+}
+
++ (BOOL)boolForKey:(NSString *)key defaultValue:(BOOL)defaultValue {
+    id object = [self objectForKey:key];
+    return object != nil ? [object boolValue] : defaultValue;
+}
+
++ (int)intForKey:(NSString *)key defaultValue:(int)defaultValue {
+    id object = [self objectForKey:key];
+    return object != nil ? [object intValue] : defaultValue;
+}
+
++ (double)doubleForKey:(NSString *)key defaultValue:(double)defaultValue {
+    id object = [self objectForKey:key];
+    return object != nil ? [object doubleValue] : defaultValue;
+}
+
++ (nullable NSString *)stringForKey:(NSString *)key defaultValue:(nullable NSString *)defaultValue {
+    NSParameterAssert(key);
+    id object = [self objectForKey:key];
+    return object != nil ? [object stringValue] : defaultValue;
 }
 
 + (void)trackConversion:(NSString *)goal {

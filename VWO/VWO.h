@@ -112,19 +112,6 @@ NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:)) __deprecated;
 NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:config:));
 
 /**
- Fetches variation for given key
-
- @note Use variationForKey:defaultValue instead
-
- @param key key whose value is to be fetched
-
- @return variation if available else `null`
-
- @see variationForKey:defaultValue:
- */
-+ (nullable id)variationForKey:(NSString *)key NS_SWIFT_NAME(variationFor(key:))__deprecated;
-
-/**
  Fetch variation for given key
 
  @note If same key is present in multiple campaigns, then value is fetched from the first campaign that has the key.
@@ -135,8 +122,14 @@ NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:config:));
 
  @return variation if available else `defaultValue`
  */
-+ (id)variationForKey:(NSString *)key
-         defaultValue:(nullable id)defaultValue NS_SWIFT_NAME(variationFor(key:defaultValue:));
++ (nullable id)variationForKey:(NSString *)key
+         defaultValue:(nullable id)defaultValue NS_SWIFT_NAME(variationFor(key:defaultValue:))__deprecated;
++ (nullable id)objectForKey:(NSString *)key defaultValue:(nullable id)defaultValue NS_SWIFT_NAME(objectForKey(key:defaultValue:));
+
++ (BOOL)boolForKey:(NSString *)key defaultValue:(BOOL)defaultValue NS_SWIFT_NAME(boolFor(key:defaultValue:));
++ (int)intForKey:(NSString *)key defaultValue:(int)defaultValue NS_SWIFT_NAME(intFor(key:defaultValue:));
++ (double)doubleForKey:(NSString *)key defaultValue:(double)defaultValue NS_SWIFT_NAME(doubleFor(key:defaultValue:));
++ (nullable NSString *)stringForKey:(NSString *)key defaultValue:(nullable NSString *)defaultValue NS_SWIFT_NAME(stringForKey(key:defaultValue:));
 
 /**
  Triggers goal for given identifier
