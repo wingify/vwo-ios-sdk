@@ -1,32 +1,32 @@
-//
-//  VWOController.m
-//  VWO
-//
-//  Created by Wingify on 25/11/13.
-//  Copyright (c) 2013 Wingify Software Pvt. Ltd. All rights reserved.
-//
 
 #import "VWOController.h"
 #import "VWOSocketConnector.h"
 #import "VWOLogger.h"
 #import "VWOCampaign.h"
 #import "VWOURLQueue.h"
-#import "VWOFile.h"
+#import "VWOFilePath.h"
 #import "VWOURL.h"
 #import "VWODevice.h"
 #import "VWOUserDefaults.h"
 #import <UIKit/UIKit.h>
 #import "VWOConfig.h"
-#import "VWOCampaignFetcher.h"
+#import "VWOCampaignCache.h"
+#import "NSURLSession+Synchronous.h"
+#import "VWOSegmentEvaluator.h"
 
-static NSTimeInterval kMessageQueueFlushInterval         = 10;
+static NSTimeInterval kMessageQueueFlushInterval  = 10;
 //static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a8";
 
 @interface VWOController() <VWOURLQueueDelegate>
-@property VWOCampaignArray *campaignList;
+@property NSArray<VWOCampaign *> *campaignList;
 @property VWOURL *vwoURL;
-@property VWOCampaignFetcher *campaignFetcher;
+@property VWOCampaignCache *campaignFetcher;
+@property VWOSegmentEvaluator *evaluator;
+
+
+/// This flag is set when first request to variationForKey or trackConversion is sent
+@property BOOL vwoUsageStarted;
 @end
 
 @implementation VWOController {
@@ -39,12 +39,8 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a8
     dispatch_queue_t _vwoQueue;
 }
 
-#pragma mark - Public methods
-
 - (id)init {
     if (self = [super init]) {
-        _campaignList    = [NSMutableArray new];
-//        _customVariables = [NSMutableDictionary new];
         _vwoQueue = dispatch_queue_create("com.vwo.tasks", DISPATCH_QUEUE_CONCURRENT);
     }
     return self;
@@ -64,10 +60,9 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a8
 }
 
 - (void)launchWithAPIKey:(NSString *)apiKey
-              config:(VWOConfig *)configNullable
-             withTimeout:(NSNumber *)timeout
+                  config:(VWOConfig *)configNullable
             withCallback:(void(^)(void))completionBlock
-                 failure:(void(^)(NSString *error))failureBlock {
+                 failure:(void(^)(NSString *error))failure {
 
     if (_initialised) {
         VWOLogWarning(@"VWO must not be initialised more than once");
@@ -76,58 +71,122 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a8
 
     VWOLogInfo(@"Initializing VWO with API Key %@", apiKey);
 
-    NSAssert([apiKey componentsSeparatedByString:@"-"].count == 2, @"Invalid key");
-    NSAssert([apiKey componentsSeparatedByString:@"-"].firstObject.length == 32, @"Invalid key");
+    NSAssert([apiKey componentsSeparatedByString:@"-"].count == 2, @"Invalid API key");
+    NSAssert([apiKey componentsSeparatedByString:@"-"].firstObject.length == 32, @"Invalid API key");
 
     NSArray<NSString *> *splitKey = [apiKey componentsSeparatedByString:@"-"];
-    _appKey     = splitKey[0];
-    _accountID  = splitKey[1];
+    _appKey    = splitKey[0];
+    _accountID = splitKey[1];
 
     [VWOUserDefaults setDefaultsKey:kUserDefaultsKey];
     VWOUserDefaults.sessionCount += 1;
 
-    VWOConfig *config = configNullable != nil ? configNullable : [VWOConfig new];
+    VWOConfig *config = configNullable != nil ? configNullable : VWOConfig.defaultConfig;
 
     if (config.optOut) {
         [self handleOptOutwithCompletion:completionBlock]; return;
     }
     if (config.disablePreview == NO) { [self launchSocketOrAddGesture]; }
 
-    pendingURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.messageQueue];
+    pendingURLQueue = [VWOURLQueue queueWithFileURL:VWOFilePath.messageQueue];
     pendingURLQueue.delegate = self;
-    failedURLQueue = [VWOURLQueue queueWithFileURL:VWOFile.failedMessageQueue];
+    failedURLQueue = [VWOURLQueue queueWithFileURL:VWOFilePath.failedMessageQueue];
     [failedURLQueue flush];//Flushed only on launch
 
     _vwoURL = [VWOURL urlWithAppKey:_appKey accountID:_accountID];
+    _evaluator = [[VWOSegmentEvaluator alloc] initWithCustomVariables:config.customVariables];
 
-    _campaignFetcher = [[VWOCampaignFetcher alloc] initWithURL: [_vwoURL forFetchingCampaigns]
-                                                       timeout:timeout
-                                               customVariables:config.customVariables];
+    [VWOCampaignCache writeFromSettingsFile:@"vwo_settings" to:VWOFilePath.campaignCache];
 
-    [_campaignFetcher updateCacheOnceFromSettingsFileNamed:@"VWO"];
+    if (config.forceReloadCampaingsOnLaunch) {
+        NSString *errorString;
+        [VWOCampaignCache writeFromNetworkResponse:[_vwoURL forFetchingCampaigns]
+                                           timeout:config.timeout
+                                                to:VWOFilePath.campaignCache
+                                             error:&errorString];
+        if (errorString) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                failure(errorString);
+            });
+            return;
+        }
+        [self synchronizeCampaignsInfo:_campaignList];
+    } else { [self loadCampaignListInBackground]; }
 
-    NSString *errorString;
-    _campaignList = [_campaignFetcher fetch:&errorString];
 
-    if (errorString) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            failure(errorString);
-        });
-        return;
-    } else {
-        [self updateVWOUserDefaults:_campaignList];
+    [self startTimer];
+    _initialised = true;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        completionBlock();
+    });
 
-        [self startTimer];
-        _initialised = true;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            completionBlock();
-        });
+}
+
+/// Reads all campaigns from cache, evalutes them and returns the campaigns that pass evaluation
+/// Error is generated when campaign cache is empty
+- (nullable NSArray<VWOCampaign *>*)getEvaluatedCampaignsFromCache:(NSString **)errorString {
+    NSArray<VWOCampaign *>* campaignList = [VWOCampaignCache getCampaingsFromCache:VWOFilePath.campaignCache error:&errorString];
+    if (errorString || campaignList == nil) return nil;
+
+    NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
+    for (VWOCampaign *aCampaign in campaignList) {
+        if ([evaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
+            [newCampaignList addObject:aCampaign];
+        } else {
+            VWOLogDebug(@"Campaign %@ did not pass segmentation", aCampaign);
+        }
+    }
+    return newCampaignList;
+}
+
+/**
+ Loads campaings from network and writes to cache.
+
+ Loads campaigns from cache and updates the _campaignList
+
+ Store campaign info VWOUserDefaults
+
+ @note When forceReloadCampaingsOnLaunch is false campaings would be loaded in background
+ */
+- (void)loadCampaignListInBackground {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [VWOCampaignCache writeFromNetworkResponse:[_vwoURL forFetchingCampaigns]
+                                           timeout:60
+                                                to:VWOFilePath.campaignCache
+                                             error:nil];
+        NSError *error;
+        NSArray<VWOCampaign *> *newCampaignList = [self getEvaluatedCampaignsFromCache:&error];
+        if (!_vwoUsageStarted && newCampaignList != nil && error == nil) {
+            _campaignList = newCampaignList;
+            [self synchronizeCampaignsInfo:_campaignList];
+        }
+    });
+}
+
+/// Store all the campaign realted info  like isUserTracked, isUserExcluded in VWOUserDefaults
+- (void)synchronizeCampaignsInfo:(VWOCampaignArray *)campaignList {
+    NSParameterAssert(campaignList);
+    for (VWOCampaign *aCampaign in campaignList) {
+        if (![VWOUserDefaults isCampaignExcluded:aCampaign] &&
+            ![VWOUserDefaults isUserTrackedForCampaign:aCampaign]) {
+            int random = arc4random_uniform(101);
+            if (random <= percent) {
+                [self trackUserForCampaign:aCampaign];
+            } else {
+                [VWOUserDefaults setCampaignExcluded:aCampaign];
+            }
+        }
     }
 }
 
 - (void)handleOptOutwithCompletion:(void(^)(void))completionBlock {
     VWOLogWarning(@"Cannot launch. VWO opted out");
-    [self clearVWOData];
+    [NSUserDefaults.standardUserDefaults removeObjectForKey:kUserDefaultsKey];
+
+    [NSFileManager.defaultManager removeItemAtURL:VWOFilePath.campaignCache error:nil];
+    [NSFileManager.defaultManager removeItemAtURL:VWOFilePath.messageQueue error:nil];
+    [NSFileManager.defaultManager removeItemAtURL:VWOFilePath.failedMessageQueue error:nil];
+
     if (completionBlock) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             completionBlock();
@@ -135,6 +194,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a8
     }
 }
 
+/// If phone is connected to machine launch socket else add Gesture Recognizer
 - (void)launchSocketOrAddGesture {
     if (VWOSocketConnector.isSocketLibraryAvailable) {
         if (VWODevice.isAttachedToDebugger) {
@@ -167,28 +227,9 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a8
     }
 }
 
-- (void)updateVWOUserDefaults:(VWOCampaignArray *)campaignList {
-    for (VWOCampaign *aCampaign in campaignList) {
-        switch (aCampaign.status) {
-            case CampaignStatusRunning:
-                [VWOUserDefaults setSelectedVariationFor:aCampaign];
-                if (![VWOUserDefaults isUserTrackedForCampaign:aCampaign] &&
-                    aCampaign.trackUserOnLaunch) {
-                    [self trackUserForCampaign:aCampaign];
-                }
-                break;
-            case CampaignStatusExcluded:
-                [VWOUserDefaults setCampaignExcluded:aCampaign];
-                break;
-            case CampaignStatusPaused: break;
-        }
-    }
-}
-
     /// set in VWOUserDefaults, add in pending queue & send notification
 - (void)trackUserForCampaign:(VWOCampaign *)campaign {
     NSParameterAssert(campaign);
-    NSAssert(campaign.status == CampaignStatusRunning, @"Non running campaigns must not be tracked");
 
     if (![VWOUserDefaults isUserTrackedForCampaign:campaign]) {
         VWOLogDebug(@"Track User For Campaign %@", campaign);
@@ -224,7 +265,6 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a8
                                        selector:@selector(timerAction)
                                        userInfo:nil repeats:YES];
     });
-
 }
 
 - (void)timerAction {
@@ -245,34 +285,32 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a8
 
     VWOLogDebug(@"Controller markConversionForGoal %@", goalIdentifier);
 
+    _vwoUsageStarted = YES;
+
         //Check if the goal is already marked.
     for (VWOCampaign *campaign in _campaignList) {
-        if (campaign.status == CampaignStatusRunning) {
-            VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
-            if (matchedGoal) {
-                if ([VWOUserDefaults isGoalMarked:matchedGoal inCampaign:campaign]) {
-                    VWOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
-                    return;
-                }
+        VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
+        if (matchedGoal) {
+            if ([VWOUserDefaults isGoalMarked:matchedGoal inCampaign:campaign]) {
+                VWOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
+                return;
             }
         }
     }
         // Mark goal(Goal can be present in multiple campaigns
     for (VWOCampaign *campaign in _campaignList) {
-        if (campaign.status == CampaignStatusRunning) {
-            VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
-            if (matchedGoal) {
-                if ([VWOUserDefaults isUserTrackedForCampaign:campaign]) {
-                    [VWOUserDefaults markGoalConversion:matchedGoal inCampaign:campaign];
-                    NSURL *url = [_vwoURL forMarkingGoal:matchedGoal
-                                               withValue:value
-                                                campaign:campaign
-                                                    date:NSDate.date];
-                    NSString *description = [NSString stringWithFormat:@"Goal %@", matchedGoal];
-                    [pendingURLQueue enqueue:url maxRetry:10 description:description];
-                } else {
-                    VWOLogWarning(@"Goal %@ not tracked for %@ as user is not tracked", matchedGoal, campaign);
-                }
+        VWOGoal *matchedGoal = [campaign goalForIdentifier:goalIdentifier];
+        if (matchedGoal) {
+            if ([VWOUserDefaults isUserTrackedForCampaign:campaign]) {
+                [VWOUserDefaults markGoalConversion:matchedGoal inCampaign:campaign];
+                NSURL *url = [_vwoURL forMarkingGoal:matchedGoal
+                                           withValue:value
+                                            campaign:campaign
+                                                date:NSDate.date];
+                NSString *description = [NSString stringWithFormat:@"Goal %@", matchedGoal];
+                [pendingURLQueue enqueue:url maxRetry:10 description:description];
+            } else {
+                VWOLogWarning(@"Goal %@ not tracked for %@ as user is not tracked", matchedGoal, campaign);
             }
         }
     }
@@ -293,33 +331,26 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a8
         return nil;
     }
 
-    id finalVariation = nil;
+    _vwoUsageStarted = YES;
+    id finalValue = nil;
     for (VWOCampaign *campaign in _campaignList) {
-        if (campaign.status == CampaignStatusRunning) {
-            id variation = [campaign variationForKey:key];
-            if (variation) {
-                finalVariation = variation;
-                if (campaign.trackUserOnLaunch == false) [self trackUserForCampaign:campaign];
-            }
+        NSNumber *variationID = [VWOUserDefaults selectedVariationForCampaign:campaign];
+        VWOVariation *variation = [campaign variationForID:variationID];
+        id value = [variation valueOfKey:key];
+        if (value != nil) {
+            finalValue = value;
+            if (campaign.trackUserOnLaunch == false) [self trackUserForCampaign:campaign];
         }
     }
-    if (finalVariation == [NSNull null]) {
+    if (finalValue == [NSNull null]) {
         return nil; // finalVariation can be NSNull if Control is assigned to campaign
     }
-    VWOLogDebug(@"Got variation %@ for key %@", finalVariation, key);
-    return finalVariation;
+    VWOLogDebug(@"Got variation %@ for key %@", finalValue, key);
+    return finalValue;
 }
 
 - (void)dealloc {
     [NSNotificationCenter.defaultCenter removeObserver:self];
-}
-
-- (void)clearVWOData {
-    [NSUserDefaults.standardUserDefaults removeObjectForKey:kUserDefaultsKey];
-    
-    [NSFileManager.defaultManager removeItemAtURL:VWOFile.campaignCache error:nil];
-    [NSFileManager.defaultManager removeItemAtURL:VWOFile.messageQueue error:nil];
-    [NSFileManager.defaultManager removeItemAtURL:VWOFile.failedMessageQueue error:nil];
 }
 
 #pragma mark - VWOURLQueueDelegate

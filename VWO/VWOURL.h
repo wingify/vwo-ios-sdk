@@ -12,6 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class VWOCampaign, VWOGoal, VWOUserDefaults;
 
+/**
+ VWOURL creates URLs required for DACDN communication
+ It stores API key and account id.
+
+ @note: Do store NSURL in variables, that are created from VWOURL methods.
+ These methods always generate different URL since there is a random component to it
+ */
 @interface VWOURL : NSObject
 
 + (instancetype)urlWithAppKey:(NSString *)appKey accountID:(NSString *)accountID;

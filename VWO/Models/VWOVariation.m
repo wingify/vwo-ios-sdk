@@ -14,6 +14,10 @@ static NSString * kId      = @"id";
 static NSString * kName    = @"name";
 static NSString * kChanges = @"changes";
 
+@interface VWOVariation()
+    @property(atomic, nullable) NSDictionary *changes;
+@end
+
 @implementation VWOVariation
 
 - (instancetype)initWith:(int)iD name:(NSString *)name changes:(NSDictionary * _Nullable)changes {
@@ -21,7 +25,7 @@ static NSString * kChanges = @"changes";
     if (self = [self init]) {
         self.iD      = iD;
         self.name    = name;
-        self.changes = changes;
+//        self.changes = changes;
     }
     return self;
 }
@@ -48,6 +52,10 @@ static NSString * kChanges = @"changes";
 
 - (BOOL)isControl {
     return (self.iD == 1);
+}
+
+- (id)valueOfKey:(NSString *)key {
+    return self.changes[key];
 }
 
 - (NSString *)description {

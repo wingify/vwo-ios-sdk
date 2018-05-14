@@ -12,21 +12,24 @@
 
 static NSString * kId                   = @"id";
 static NSString * kName                 = @"name";
+static NSString * kTrafficPercent       = @"pc_traffic";
 static NSString * kTrackUserOnLaunch    = @"track_user_on_launch";
 static NSString * kStatus               = @"status";
 static NSString * kSegmentObject        = @"segment_object";
 static NSString * kGoals                = @"goals";
 static NSString * kVariation            = @"variations";
 
+@interface VWOCampaign()
+@property NSDictionary<NSNumber *, VWOVariation *> *variationDict;
+@end
+
 @implementation VWOCampaign
 
-- (nullable instancetype)initWithDictionary:(NSDictionary *)campaignDict
-                                  selectVariation:(NSNumber *)variationID {
-
+- (nullable instancetype)initWithDictionary:(NSDictionary *)campaignDict {
     NSParameterAssert(campaignDict);
 
     // Campaign ID and status are the must have keys for any type of campaign
-    NSArray *mustHaveKeys = @[kId, kStatus];
+    NSArray *mustHaveKeys = @[kId, kTrafficPercent, kName, kTrackUserOnLaunch, kGoals, kVariation];
     NSArray *missingKeys  = [campaignDict keysMissingFrom:mustHaveKeys];
     if (missingKeys.count > 0) {
         VWOLogException(@"Keys missing [%@] for Campaign JSON {%@}",
@@ -37,31 +40,9 @@ static NSString * kVariation            = @"variations";
 
     if (self = [super init]) {
         self.iD = [campaignDict[kId] intValue];
-        NSString *statusString = campaignDict[kStatus];
 
-        if ([statusString isEqualToString:@"EXCLUDED"]) {
-            self.status = CampaignStatusExcluded;
-            self.name   = campaignDict[kName];
-            return self;
-        }
-
-        if([statusString isEqualToString:@"PAUSED"]) {
-            self.status = CampaignStatusPaused;
-            return self;
-        }
-
-        //Here Campaign can only running
-        NSArray *mustHaveKeys = @[kName, kTrackUserOnLaunch, kGoals, kVariation];
-        NSArray *missingKeys  = [campaignDict keysMissingFrom:mustHaveKeys];
-        if (missingKeys.count > 0) {
-            VWOLogException(@"Keys missing [%@] for Running Campaign JSON {%@}",
-                            [missingKeys componentsJoinedByString:@", "],
-                            campaignDict);
-            return nil;
-        }
-
-        self.status            = CampaignStatusRunning;
         self.name              = campaignDict[kName];
+        self.trafficPercent = [campaignDict[kTrafficPercent] intValue];
         self.trackUserOnLaunch = [campaignDict[kTrackUserOnLaunch] boolValue];
         self.segmentObject     = campaignDict[kSegmentObject];
 
@@ -75,12 +56,13 @@ static NSString * kVariation            = @"variations";
         self.goals = goals;
 
         //Get variation for a campaign from variationID. If variation is not found then randomly select
-        NSDictionary *allVariations = campaignDict[kVariation];
-        NSDictionary *selectedVariation = [self variationJSONForID:variationID from:allVariations];
-        if (selectedVariation == nil) {
-            selectedVariation = [VWOCampaign selectRandomVariation:campaignDict[kVariation]];
+        NSArray *allVariations = campaignDict[kVariation];
+        NSMutableDictionary <NSNumber *, VWOVariation *> *variations = [NSMutableDictionary new];
+        for (NSDictionary *iVariation in allVariations) {
+            VWOVariation *aVariation = [[VWOVariation alloc] initWithDictionary:iVariation];
+            if (aVariation) { variations[@(aVariation.iD)] = aVariation; }
         }
-        self.variation = [[VWOVariation alloc] initWithDictionary:selectedVariation];
+        self.variationDict = variations;
     }
     return self;
 }
@@ -98,11 +80,16 @@ static NSString * kVariation            = @"variations";
     return nil;
 }
 
-- (nullable id)variationForKey:(NSString *)key {
-    NSParameterAssert(key);
-    //If key does not exist then NSDictionary returns nil
-    return self.variation.changes[key];
+- (nullable VWOVariation *)variationForID:(NSNumber *)variationID {
+    if (variationID == nil) { return nil; }
+    return _variationDict[variationID];
 }
+
+//- (nullable id)variationForKey:(NSString *)key {
+//    NSParameterAssert(key);
+//    //If key does not exist then NSDictionary returns nil
+//    return nil;//self.variation.changes[key];
+//}
 
 - (nullable VWOGoal *)goalForIdentifier:(NSString *)identifier {
     NSParameterAssert(identifier);

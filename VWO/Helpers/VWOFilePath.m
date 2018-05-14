@@ -6,10 +6,10 @@
 //
 //
 
-#import "VWOFile.h"
+#import "VWOFilePath.h"
 #import "VWOLogger.h"
 
-@implementation VWOFile
+@implementation VWOFilePath
 
 + (NSURL *)messageQueue {
     NSError *error;

@@ -10,10 +10,19 @@
 
 @implementation VWOConfig
 
++ (VWOConfig *)defaultConfig {
+    VWOConfig *config = [VWOConfig new];
+    config.timeout = 60;
+    return config;
+}
+
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Optout: %@\nPreviewDisabled: %@\n%@",
+    return [NSString
+            stringWithFormat:@"ForceReload: %@\nOptout: %@\nPreviewDisabled: %@\n%@",
+            self.forceReloadCampaingsOnLaunch ? @"YES" : @"NO",
             self.optOut ? @"YES" : @"NO",
             self.disablePreview ? @"YES" : @"NO",
             self.customVariables];
 }
+
 @end

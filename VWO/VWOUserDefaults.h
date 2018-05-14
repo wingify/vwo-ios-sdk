@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class  VWOCampaign, VWOGoal;
+@class VWOCampaign, VWOGoal, VWOVariation;
 
 @interface VWOUserDefaults : NSObject
 
@@ -26,9 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, readonly) NSString *UUID;
 
 // To determine which variation is selected for given campaign
-//+ (void)setSelectedVariationID:(int)variationID forCampaignID:(int)campaignID;
-+ (void)setSelectedVariationFor:(VWOCampaign *)campaign;
-+ (nullable NSNumber *)selectedVariationForCampaignID:(int)campaignID;
++ (void)setSelectedVariation:(VWOVariation *)variation for:(VWOCampaign *)campaign;
++ (nullable NSNumber *)selectedVariationForCampaign:(VWOCampaign *)campaign;
 
 // /track-user has been sent for this campaign-variation
 + (void)trackUserForCampaign:(VWOCampaign *)campaign;

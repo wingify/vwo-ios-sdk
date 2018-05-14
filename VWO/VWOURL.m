@@ -28,10 +28,8 @@
 static NSString *kSDKversionNumber = @"9";
 
 @interface VWOURL()
-
 @property NSString *appKey;
 @property NSString *accountID;
-
 @end
 
 @implementation VWOURL

@@ -10,6 +10,8 @@
 
 @interface VWOConfig : NSObject
 
+@property (class, readonly) VWOConfig *defaultConfig;
+
 /**
  Users that are not to be made part of VWO A/B testing can be opted out.
  */
@@ -25,5 +27,19 @@
  Preview is enabled by default
  */
 @property BOOL disablePreview;
+
+/**
+ If TRUE, will load latest campaigns from Server and then complete the launch
+
+ If FALSE, will fetch campaigns from cached response
+
+ Default Value: FALSE
+ */
+@property BOOL forceReloadCampaingsOnLaunch;
+
+/**
+ Timeout the URL requests
+ */
+@property int timeout;
 
 @end

@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property uint screenHeight;
 
 - (instancetype)initWithCustomVariables:(nullable NSDictionary *)customVariables;
+
 - (BOOL)canUserBePartOfCampaignForSegment:(nullable NSDictionary *)segment;
 
 @end

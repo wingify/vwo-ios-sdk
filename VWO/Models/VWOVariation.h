@@ -14,11 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, assign) int iD;
 @property(atomic) NSString *name;
-@property(atomic, nullable) NSDictionary *changes;
+@property(readonly) BOOL isControl;
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *)variationDict;
 
-- (BOOL)isControl;
+    /// Fetches the value of key in changes. returns nil if not found
+- (nullable id)valueOfKey:(NSString *)key;
 
 @end
 

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VWOFile : NSObject
+@interface VWOFilePath : NSObject
 
 @property (class, readonly, copy) NSURL *campaignCache;
 @property (class, readonly, copy) NSURL *messageQueue;

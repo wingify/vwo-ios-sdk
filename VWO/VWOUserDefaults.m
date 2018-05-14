@@ -25,6 +25,7 @@ NSString *const kOLDUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 
 + (nullable id)objectForKey:(NSString *)key {
     NSDictionary *activityDict = [NSUserDefaults.standardUserDefaults objectForKey:_userDefaultsKey];
+    
     return activityDict[key];
 }
 
@@ -93,24 +94,18 @@ NSString *const kOLDUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
     [NSUserDefaults.standardUserDefaults removeObjectForKey:kOLDUserDefaultsKey];
 }
 
-//+ (void)setSelectedVariationID:(int)variationID forCampaignID:(int)campaignID {
-//    NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)[self objectForKey:kVariationSelected]];
-//    [set addObject:[NSString stringWithFormat:@"%d:%d", campaignID, variationID]];
-//    [self setObject:set.allObjects forKey:kVariationSelected];
-//}
-
-+ (void)setSelectedVariationFor:(VWOCampaign *)campaign {
++ (void)setSelectedVariation:(VWOVariation *)variation for:(VWOCampaign *)campaign {
     NSMutableSet *set = [NSMutableSet setWithArray:(NSArray *)[self objectForKey:kVariationSelected]];
-    [set addObject:[NSString stringWithFormat:@"%d:%d", campaign.iD, campaign.variation.iD]];
+    [set addObject:[NSString stringWithFormat:@"%d:%d", campaign.iD, variation.iD]];
     [self setObject:set.allObjects forKey:kVariationSelected];
 }
 
-+ (nullable NSNumber *)selectedVariationForCampaignID:(int)campaignID {
++ (nullable NSNumber *)selectedVariationForCampaign:(VWOCampaign *)campaign {
     NSArray *variationSelectedList = [self objectForKey:kVariationSelected];
     for (NSString *pair in variationSelectedList) {
         NSString *a = [pair componentsSeparatedByString:@":"][0];
         NSString *b = [pair componentsSeparatedByString:@":"][1];
-        if (campaignID == [a intValue]) {
+        if (campaign.iD == [a intValue]) {
             return @([b intValue]);
         }
     }
@@ -178,5 +173,6 @@ NSString *const kOLDUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
 + (BOOL)isReturningUser {
     return [[self objectForKey:kReturningUser] boolValue];
 }
+
 
 @end
