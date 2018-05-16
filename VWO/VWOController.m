@@ -257,7 +257,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     for (VWOCampaign *campaign in _campaignList) {
         if ([campaign.testKey isEqualToString:campaignTestKey]) {
             [self trackUserForCampaign:campaign];
-            return campaign.variation.name
+            return campaign.variation.name;
         }
     }
     return nil;
