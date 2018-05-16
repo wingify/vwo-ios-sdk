@@ -17,6 +17,7 @@ static NSString * kStatus               = @"status";
 static NSString * kSegmentObject        = @"segment_object";
 static NSString * kGoals                = @"goals";
 static NSString * kVariation            = @"variations";
+static NSString * kTestKey              = @"test_key";
 
 @implementation VWOCampaign
 
@@ -49,7 +50,7 @@ static NSString * kVariation            = @"variations";
         }
 
         //Here Campaign can only running
-        NSArray *mustHaveKeys = @[kName, kTrackUserOnLaunch, kGoals, kVariation];
+        NSArray *mustHaveKeys = @[kName, kTestKey, kTrackUserOnLaunch, kGoals, kVariation];
         NSArray *missingKeys  = [campaignDict keysMissingFrom:mustHaveKeys];
         if (missingKeys.count > 0) {
             VWOLogException(@"Keys missing [%@] for Running Campaign JSON {%@}",
@@ -60,6 +61,7 @@ static NSString * kVariation            = @"variations";
 
         self.status            = CampaignStatusRunning;
         self.name              = campaignDict[kName];
+        self.testKey           = campaignDict[kTestKey];
         self.trackUserOnLaunch = [campaignDict[kTrackUserOnLaunch] boolValue];
         self.segmentObject     = campaignDict[kSegmentObject];
 

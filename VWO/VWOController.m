@@ -253,6 +253,16 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     return finalVariation;
 }
 
+- (nullable NSString *)variationNameForCampaignTestKey:(NSString *)campaignTestKey {
+    for (VWOCampaign *campaign in _campaignList) {
+        if ([campaign.testKey isEqualToString:campaignTestKey]) {
+            [self trackUserForCampaign:campaign];
+            return campaign.variation.name
+        }
+    }
+    return nil;
+}
+
 - (void)sendNotificationUserStartedTracking:(VWOCampaign *)campaign {
     VWOLogInfo(@"Controller: Sending notfication user started tracking %@", campaign);
     //Note: All values in campaignInfo dictionary must be in string format

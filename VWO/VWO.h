@@ -131,6 +131,9 @@ NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:config:));
 + (double)doubleForKey:(NSString *)key defaultValue:(double)defaultValue NS_SWIFT_NAME(doubleFor(key:defaultValue:));
 + (nullable NSString *)stringForKey:(NSString *)key defaultValue:(nullable NSString *)defaultValue NS_SWIFT_NAME(stringFor(key:defaultValue:));
 
+
++ (nullable NSString *)variationNameForTestKey:(NSString *)campaignTestKey;
+
 /**
  Triggers goal for given identifier
 

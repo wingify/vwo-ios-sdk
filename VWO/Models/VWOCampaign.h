@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, CampaignStatus) {
 
 @property (nonatomic, assign) int iD;
 @property (atomic) NSString *name;
+@property (atomic) NSString *testKey;
 @property (nonatomic, assign) BOOL trackUserOnLaunch;
 @property (nonatomic, assign) CampaignStatus status;
 @property VWOVariation *variation;
