@@ -31,10 +31,7 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
  */
 @property (class, nonatomic) VWOLogLevel logLevel;
 
-/**
-  Use optOt from VWOUserConfig instead
- */
-@property (class, nonatomic) BOOL optOut __deprecated;
+@property (class, nonatomic) BOOL optOut __deprecated_msg("Use optOt from VWOUserConfig instead");
 
 /**
  VWO SDK version
@@ -50,7 +47,13 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @param apiKey Unique developer ApiKey provided by VWO.
  */
-+ (void)launchForAPIKey:(NSString *)apiKey NS_SWIFT_NAME(launch(apiKey:)) __deprecated;
++ (void)launchForAPIKey:(NSString *)apiKey NS_SWIFT_NAME(launch(apiKey:)) __deprecated_msg("Use launchForAPIKey:config:completion:failure instead");
+
++ (void)launchForAPIKey:(NSString *)apiKey
+             completion:(void(^)(void))completion
+                failure:(nullable void (^)(NSString *error))failureBlock
+NS_SWIFT_NAME(launch(apiKey:completion:failure:))
+__deprecated_msg("Use launchForAPIKey:config:completion:failure instead");
 
 /**
  Asynchronously fetch campaign settings
@@ -59,29 +62,26 @@ typedef NS_ENUM(NSInteger, VWOLogLevel) {
 
  @param apiKey Unique developer ApiKey provided by VWO.
 
+ @param config A VWOConfig object can be passed for configuring the launch
+
  @param completion A block object to be executed when campaign settings are fetched successfully.
 
  @warning Completion & Failure blocks are not invoked on the main queue. It is developers responsibility to dispatch the code in the appropriate queue.
  For any UI update the completion must be explicitly dispatched on the main queue.
 
  @code
- [VWO launchForAPIKey:apiKey completion:^{
-     dispatch_async(dispatch_get_main_queue(), ^{
-         [activityIndicator stopAnimating];
-         uiLabel.text = "New Value";
-     });
- } failure:^(NSString * _Nonnull error) {
-     NSLog(@"Error %@", error);
+ [VWO launchForAPIKey:apiKey config:nil completion:^{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [activityIndicator stopAnimating];
+        uiLabel.text = "New Value";
+    });
+    } failure:^(NSString * _Nonnull error) {
+        NSLog(@"Error %@", error);
  }];
  @endcode
 
  @param failureBlock A block object to be executed when there was error while fetching campaign settings
  */
-
-+ (void)launchForAPIKey:(NSString *)apiKey
-             completion:(void(^)(void))completion
-                failure:(nullable void (^)(NSString *error))failureBlock
-NS_SWIFT_NAME(launch(apiKey:completion:failure:)) __deprecated;
 
 + (void)launchForAPIKey:(NSString *)apiKey
                  config:(nullable VWOConfig *)config
@@ -104,17 +104,16 @@ NS_SWIFT_NAME(launch(apiKey:config:completion:failure:));
  */
 + (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
                              timeout:(NSTimeInterval)timeout
-NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:)) __deprecated;
+NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:))
+__deprecated_msg("Use launchForAPIKey:config:completion:failure instead");
 
-+ (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
-                             timeout:(NSTimeInterval)timeout
-                          config:(VWOConfig *)config
-NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:config:));
+
++ (nullable id)variationForKey:(NSString *)key
+         defaultValue:(nullable id)defaultValue NS_SWIFT_NAME(variationFor(key:defaultValue:))
+__deprecated_msg("Use objectForKey:defaultValue instead");
 
 /**
  Fetch variation for given key
-
- @note If same key is present in multiple campaigns, then value is fetched from the first campaign that has the key.
 
  @param key key whose value is to be fetched
 
@@ -122,16 +121,61 @@ NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:config:));
 
  @return variation if available else `defaultValue`
  */
-+ (nullable id)variationForKey:(NSString *)key
-         defaultValue:(nullable id)defaultValue NS_SWIFT_NAME(variationFor(key:defaultValue:))__deprecated;
 + (nullable id)objectForKey:(NSString *)key defaultValue:(nullable id)defaultValue NS_SWIFT_NAME(objectFor(key:defaultValue:));
 
+/**
+ Fetch variation for given key
+
+ @param key key whose value is to be fetched
+
+ @param defaultValue Value that is to be returned if key is not found
+
+ @return variation if available else `defaultValue`
+ */
 + (BOOL)boolForKey:(NSString *)key defaultValue:(BOOL)defaultValue NS_SWIFT_NAME(boolFor(key:defaultValue:));
+
+/**
+ Fetch variation for given key
+
+ @param key key whose value is to be fetched
+
+ @param defaultValue Value that is to be returned if key is not found
+
+ @return variation if available else `defaultValue`
+ */
 + (int)intForKey:(NSString *)key defaultValue:(int)defaultValue NS_SWIFT_NAME(intFor(key:defaultValue:));
+
+/**
+ Fetch variation for given key
+
+ @param key key whose value is to be fetched
+
+ @param defaultValue Value that is to be returned if key is not found
+
+ @return variation if available else `defaultValue`
+ */
 + (double)doubleForKey:(NSString *)key defaultValue:(double)defaultValue NS_SWIFT_NAME(doubleFor(key:defaultValue:));
+
+/**
+ Fetch variation for given key
+
+ @param key key whose value is to be fetched
+
+ @param defaultValue Value that is to be returned if key is not found
+
+ @return variation if available else `defaultValue`
+ */
 + (nullable NSString *)stringForKey:(NSString *)key defaultValue:(nullable NSString *)defaultValue NS_SWIFT_NAME(stringFor(key:defaultValue:));
 
 
+/**
+ Fetch variation name for given campaign.
+
+ @note It is recommend to copy the code snippet from dashboard to avoid errors.
+
+ @param campaignTestKey Unique campaign test key
+ @return Variation name
+ */
 + (nullable NSString *)variationNameForTestKey:(NSString *)campaignTestKey;
 
 /**
@@ -155,11 +199,9 @@ NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:config:));
 + (void)trackConversion:(NSString *)goal
               withValue:(double)value NS_SWIFT_NAME(trackConversion(_:value:));
 
-/**
-  Set custom variables from VWOUserConfig.customVariables instead
- */
 + (void)setCustomVariable:(NSString *)key
-                withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:)) __deprecated;
+                withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:))
+__deprecated_msg("Set custom variables from VWOUserConfig.customVariables instead");
 
 @end
 NS_ASSUME_NONNULL_END
