@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             VWO.launch(apiKey: apiKey, config: nil, completion: {
                 DispatchQueue.main.async {
                     container.activityIndicator.stopAnimating()
+                    container.navigationActionReloadClicked()
                 }
                 Swift.print("VWO launched in demo app")
             }, failure: { (errorString) in
