@@ -177,7 +177,6 @@
 				E34D6BA81F7E4BE40094A905 /* Resources */,
 				E3FFD9261F7E56220025F6FD /* Embed Frameworks */,
 				1A30E5DF0F574AA24035A142 /* [CP] Embed Pods Frameworks */,
-				69F3F9E50BBFAF7A51B963CD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -289,21 +288,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VWO Demo/Pods-VWO Demo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		69F3F9E50BBFAF7A51B963CD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VWO Demo/Pods-VWO Demo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		878FD425F301D14D2EB57176 /* [CP] Check Pods Manifest.lock */ = {

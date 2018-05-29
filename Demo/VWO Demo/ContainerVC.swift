@@ -67,8 +67,8 @@ class ContainerVC: UIViewController {
         addVC(side: .left, vc: leftLoginVC)
 
         // Right
-        let hasSkip: Bool = VWO.variationFor(key: "skip", defaultValue: false) as! Bool
-        let hasSocialMedia: Bool = VWO.variationFor(key: "socialMedia", defaultValue: false) as! Bool
+        let hasSkip = VWO.boolFor(key: "skip", defaultValue: false)
+        let hasSocialMedia = VWO.boolFor(key: "socialMedia", defaultValue: false)
         navController.variationLabel.text = " (Email \(hasSkip ? ", Skip" : "")\(hasSocialMedia ? ", Social Media" : ""))"
         let rightLoginVC = LoginVC.makeView(hasSkip: hasSkip, hasSocialMedia: hasSocialMedia)
         addVC(side: .right, vc: rightLoginVC)
@@ -82,7 +82,7 @@ class ContainerVC: UIViewController {
         addVC(side: .left, vc: ListGridVC.makeViewFor(type: .list))
 
         // Right
-        let variation = VWO.variationFor(key: "layout", defaultValue: "list") as! String
+        let variation = VWO.stringFor(key: "layout", defaultValue: "list")!
         let variationListType = ListType(rawValue: variation) ?? .list
         navController.variationLabel.text = "(\(variationListType.navDecription))"
         addVC(side: .right, vc: ListGridVC.makeViewFor(type: variationListType))
