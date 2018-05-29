@@ -8,7 +8,7 @@
 
 import UIKit
 import VWO
-import FLEX
+//import FLEX
 
 class MenuVC : UIViewController {
 
@@ -24,7 +24,7 @@ class MenuVC : UIViewController {
         case 2: campaignsClearShowAlert()
         case 3: changeAppKey()
         case 4: showAbout()
-        case 5: FLEXManager.shared().showExplorer()
+//        case 5: FLEXManager.shared().showExplorer()
         default: fatalError()
         }
     }

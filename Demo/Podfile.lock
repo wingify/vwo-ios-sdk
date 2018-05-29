@@ -1,5 +1,4 @@
 PODS:
-  - FLEX (2.4.0)
   - Socket.IO-Client-Swift (13.1.3):
     - Starscream (~> 3.0.2)
   - Starscream (3.0.5)
@@ -9,12 +8,10 @@ PODS:
     - Socket.IO-Client-Swift (~> 13.1)
 
 DEPENDENCIES:
-  - FLEX (~> 2.0)
   - VWO (from `../`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - FLEX
     - Socket.IO-Client-Swift
     - Starscream
 
@@ -23,11 +20,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   Socket.IO-Client-Swift: d30d6fd08a38ad2a182b090936a043bf512ab2de
   Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
   VWO: 8ca52f1c68cb5b7feba5ae9b00a90c207ba44dc4
 
-PODFILE CHECKSUM: 6b40b6399c4167b97e8aaf1a10ac0c32296d1d71
+PODFILE CHECKSUM: abb8ee649e7e44ef2f00dcf03bd1cddb7a582c27
 
 COCOAPODS: 1.5.0
