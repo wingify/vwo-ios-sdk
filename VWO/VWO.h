@@ -176,7 +176,7 @@ __deprecated_msg("Use objectForKey:defaultValue instead");
  @param campaignTestKey Unique campaign test key
  @return Variation name
  */
-+ (nullable NSString *)variationNameForTestKey:(NSString *)campaignTestKey;
++ (nullable NSString *)variationNameForTestKey:(NSString *)campaignTestKey NS_SWIFT_NAME(variationNameFor(testKey:));
 
 /**
  Triggers goal for given identifier
