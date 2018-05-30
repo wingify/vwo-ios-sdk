@@ -132,7 +132,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 + (NSString *)stringForKey:(NSString *)key defaultValue:(NSString *)defaultValue {
     NSParameterAssert(key);
     id object = [self objectForKey:key];
-    return object != nil ? object : defaultValue;
+    return [NSString stringWithFormat:@"%@", object != nil ? object : defaultValue];
 }
 
 + (nullable NSString *)variationNameForTestKey:(NSString *)campaignTestKey {
