@@ -89,6 +89,12 @@ __deprecated_msg("Use launchForAPIKey:config:completion:failure instead");
                 failure:(nullable void (^)(NSString *error))failureBlock
 NS_SWIFT_NAME(launch(apiKey:config:completion:failure:));
 
++ (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
+                             timeout:(NSTimeInterval)timeout
+NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:))
+__deprecated_msg("Use launchSynchronouslyForAPIKey:config:timeout");
+
+
 /**
  `Synchronously` fetch campaign settings
 
@@ -96,16 +102,19 @@ NS_SWIFT_NAME(launch(apiKey:config:completion:failure:));
 
  @param apiKey Unique developer ApiKey provided by VWO.
 
+ @param config Launch configuration
+
  @param timeout Request timeout
 
  @warning  Use of this method should be avoided as it blocks the main thread, which would freeze your UI.
 
  @see launchForAPIKey:
  */
+
 + (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
+                              config:(nullable VWOConfig *)config
                              timeout:(NSTimeInterval)timeout
-NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:))
-__deprecated_msg("Use launchForAPIKey:config:completion:failure instead");
+NS_SWIFT_NAME(launchSynchronously(apiKey:config:timeout:));
 
 
 + (nullable id)variationForKey:(NSString *)key
