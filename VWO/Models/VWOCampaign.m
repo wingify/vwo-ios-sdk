@@ -50,7 +50,7 @@ static NSString * kTestKey              = @"test_key";
         }
 
         //Here Campaign can only running
-        NSArray *mustHaveKeys = @[kName, kTestKey, kTrackUserOnLaunch, kGoals, kVariation];
+        NSArray *mustHaveKeys = @[kName, kTrackUserOnLaunch, kGoals, kVariation];
         NSArray *missingKeys  = [campaignDict keysMissingFrom:mustHaveKeys];
         if (missingKeys.count > 0) {
             VWOLogException(@"Keys missing [%@] for Running Campaign JSON {%@}",
