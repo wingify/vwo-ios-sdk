@@ -112,9 +112,9 @@ __deprecated_msg("Use launchSynchronouslyForAPIKey:config:timeout");
  */
 
 + (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
-                              config:(nullable VWOConfig *)config
                              timeout:(NSTimeInterval)timeout
-NS_SWIFT_NAME(launchSynchronously(apiKey:config:timeout:));
+                              config:(VWOConfig *)config
+NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:config:));
 
 
 + (nullable id)variationForKey:(NSString *)key
