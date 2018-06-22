@@ -16,14 +16,12 @@
 @end
 
 void VWOLogException(NSString *format, ...) {
+#ifndef DEBUG
     va_list argList;
     va_start(argList, format);
     NSString* formattedMessage = [[NSString alloc] initWithFormat: format arguments: argList];
     va_end(argList);
-#ifdef VWO_DEBUG
-    // NSAssert will only work for objective c files. Hence NSCAssert
-    NSCAssert(false, @"VWO EXCEPTION: %s\n", [formattedMessage UTF8String]);//Stops execution
-#else
+
     [GrayLog sendMessage:formattedMessage];
 #endif
 }
