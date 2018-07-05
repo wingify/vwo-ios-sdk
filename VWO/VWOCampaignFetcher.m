@@ -12,27 +12,10 @@
 #import "NSURLSession+Synchronous.h"
 #import "VWOSegmentEvaluator.h"
 #import "VWOCampaign.h"
-#import "VWOUserDefaults.h"
 
 static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
 @implementation VWOCampaignFetcher
-
-+ (VWOSegmentEvaluator *)getEvaluatorWithCustomVariables:(NSDictionary<NSString *, NSString *> *)customVariables {
-    NSString *appVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
-
-    VWOSegmentEvaluator *evaluator = [[VWOSegmentEvaluator alloc] init];
-    evaluator.iOSVersion = VWODevice.iOSVersion;
-    evaluator.appVersion = appVersion;
-    evaluator.date = NSDate.date;
-    evaluator.locale = NSLocale.currentLocale;
-    evaluator.isReturning = VWOUserDefaults.isReturningUser;
-    evaluator.appleDeviceType = VWODevice.appleDeviceType;
-    evaluator.customVariables = customVariables;
-    evaluator.screenWidth = VWODevice.screenWidth;
-    evaluator.screenHeight = VWODevice.screenHeight;
-    return evaluator;
-}
 
 /**
  Fetch campaigns from network
@@ -42,7 +25,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
  */
 + (nullable VWOCampaignArray *)getCampaignsWithTimeout:(NSNumber *)timeout
                                                          url:(NSURL *)url
-                                             customVariables:(NSDictionary<NSString *, NSString *> *)customVariables
+                                             evaluator:(VWOSegmentEvaluator *)evaluator
                                                 withCallback:(void(^)(void))completionBlock
                                                      failure:(void(^)(NSString *error))failureBlock {
     VWOLogDebug(@"Fetching campaigns");
@@ -83,7 +66,6 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
     VWOCampaignArray *allCampaigns = [self campaignsFromJSON:jsonArray];
 
-    VWOSegmentEvaluator *evaluator = [self getEvaluatorWithCustomVariables:customVariables];
     VWOCampaignArray *evaluatedCampaigns = [self segmentEvaluated:allCampaigns
                                                               evaluator:evaluator];
     if (completionBlock) {
@@ -135,7 +117,8 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
                                     evaluator:(VWOSegmentEvaluator *)evaluator {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (VWOCampaign *aCampaign in allCampaigns) {
-        if ([evaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
+        if (aCampaign.trackUserOnLaunch &&
+            [evaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
             [newCampaignList addObject:aCampaign];
         } else {
             VWOLogDebug(@"Campaign %@ did not pass segmentation", aCampaign);

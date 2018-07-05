@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)canUserBePartOfCampaignForSegment:(nullable NSDictionary *)segment;
 
++ (VWOSegmentEvaluator *)makeEvaluator:(NSDictionary<NSString *, NSString *> *)customVariables;
 @end
 
 NS_ASSUME_NONNULL_END

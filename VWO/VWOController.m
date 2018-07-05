@@ -18,6 +18,7 @@
 #import <UIKit/UIKit.h>
 #import "VWOConfig.h"
 #import "VWOCampaignFetcher.h"
+#import "VWOSegmentEvaluator.h"
 
 static NSTimeInterval kMessageQueueFlushInterval         = 10;
 static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
@@ -98,11 +99,13 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
                                                                 userInfo:nil repeats:YES];
     });
 
+    VWOSegmentEvaluator *evaluator = [VWOSegmentEvaluator makeEvaluator:_customVariables];
     _campaignList = [VWOCampaignFetcher getCampaignsWithTimeout:timeout
-                                                            url:[_vwoURL forFetchingCampaigns]
-                                                      customVariables:_customVariables
-                                                   withCallback:completionBlock
-                                                        failure:failureBlock];
+                                            url:[_vwoURL forFetchingCampaigns]
+                                      evaluator:evaluator
+                                   withCallback:completionBlock
+                                        failure:failureBlock];
+
     if (_campaignList == nil) { return; }
     _initialised = true;
     [self trackUserForAllCampaignsOnLaunch:_campaignList];
