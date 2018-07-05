@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, getter=isReturningUser, readonly) BOOL returningUser;
 @property (class, readonly) NSString *UUID;
 
++ (void)setExcludedCampaign:(VWOCampaign *)campaign;
+
 + (BOOL)isTrackingUserForCampaign:(VWOCampaign *)campaign;
 + (void)trackUserForCampaign:(VWOCampaign *)campaign;
 

@@ -59,13 +59,18 @@ static NSString * _userDefaultsKey;
     return [trackingDict[campaignID] intValue] == campaign.variation.iD;
 }
 
-    /// Stores "campaignId : "variationID" in User Activity["tracking"]
+    /// Stores campaignId : 0
++ (void)setExcludedCampaign:(VWOCampaign *)campaign {
+    NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
+    NSMutableDictionary *trackingDict = [[self objectForKey:kTracking] mutableCopy];
+    trackingDict[campaignID] = @0;
+    [self setObject:trackingDict forKey:kTracking];
+}
+
 + (void)trackUserForCampaign:(VWOCampaign *)campaign {
     NSString *campaignID = [NSString stringWithFormat:@"%d", campaign.iD];
-    int variationID = campaign.status == CampaignStatusExcluded ? 0 : campaign.variation.iD;
-
     NSMutableDictionary *trackingDict = [[self objectForKey:kTracking] mutableCopy];
-    trackingDict[campaignID] = [NSNumber numberWithInt:variationID];
+    trackingDict[campaignID] = @(campaign.variation.iD);
     [self setObject:trackingDict forKey:kTracking];
 }
 
