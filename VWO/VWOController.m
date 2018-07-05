@@ -237,11 +237,20 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     id finalVariation = nil;
     for (VWOCampaign *campaign in _campaignList) {
         id variation = [campaign variationForKey:key];
+        BOOL isCampaignTracked = [VWOUserDefaults isTrackingUserForCampaign:campaign];
 
-            //If variation Key is present in Campaign
+        //If variation Key is present in Campaign
         if (variation) {
-            finalVariation = variation;
-            if (campaign.trackUserOnLaunch == false) [self trackUserForCampaign:campaign];
+            if (isCampaignTracked) {
+                finalVariation = variation;
+            } else {
+                VWOSegmentEvaluator *evaluator = [VWOSegmentEvaluator makeEvaluator:_customVariables];
+                BOOL canBePart = [evaluator canUserBePartOfCampaignForSegment:campaign.segmentObject];
+                if (canBePart) {
+                    finalVariation = variation;
+                    [self trackUserForCampaign:campaign];
+                }
+            }
         }
     }
     if (finalVariation == [NSNull null]) {

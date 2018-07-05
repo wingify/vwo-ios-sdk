@@ -209,8 +209,7 @@ __deprecated_msg("Use objectForKey:defaultValue instead");
               withValue:(double)value NS_SWIFT_NAME(trackConversion(_:value:));
 
 + (void)setCustomVariable:(NSString *)key
-                withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:))
-__deprecated_msg("Set custom variables from VWOUserConfig.customVariables instead");
+                withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:));
 
 @end
 NS_ASSUME_NONNULL_END
