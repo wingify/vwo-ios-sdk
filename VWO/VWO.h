@@ -208,6 +208,9 @@ __deprecated_msg("Use objectForKey:defaultValue instead");
 + (void)trackConversion:(NSString *)goal
               withValue:(double)value NS_SWIFT_NAME(trackConversion(_:value:));
 
+/**
+ Set Custom Variable
+*/
 + (void)setCustomVariable:(NSString *)key
                 withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:));
 
