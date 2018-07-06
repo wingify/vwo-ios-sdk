@@ -117,8 +117,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
                                     evaluator:(VWOSegmentEvaluator *)evaluator {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (VWOCampaign *aCampaign in allCampaigns) {
-        if (aCampaign.trackUserOnLaunch &&
-            [evaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
+        if ([evaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
             [newCampaignList addObject:aCampaign];
         } else {
             VWOLogDebug(@"Campaign %@ did not pass segmentation", aCampaign);
