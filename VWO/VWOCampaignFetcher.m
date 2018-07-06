@@ -25,7 +25,6 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
  */
 + (nullable VWOCampaignArray *)getCampaignsWithTimeout:(NSNumber *)timeout
                                                          url:(NSURL *)url
-                                             evaluator:(VWOSegmentEvaluator *)evaluator
                                                 withCallback:(void(^)(void))completionBlock
                                                      failure:(void(^)(NSString *error))failureBlock {
     VWOLogDebug(@"Fetching campaigns");
@@ -66,14 +65,12 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
     VWOCampaignArray *allCampaigns = [self campaignsFromJSON:jsonArray];
 
-    VWOCampaignArray *evaluatedCampaigns = [self segmentEvaluated:allCampaigns
-                                                              evaluator:evaluator];
     if (completionBlock) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             completionBlock();
         });
     }
-    return  evaluatedCampaigns;
+    return  allCampaigns;
 }
 
 + (nullable NSData *)getCampaignsFromNetworkWithTimeout:(NSNumber *)timeout
@@ -112,19 +109,5 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     }
     return newCampaignList;
 }
-
-+ (VWOCampaignArray *)segmentEvaluated:(VWOCampaignArray *)allCampaigns
-                                    evaluator:(VWOSegmentEvaluator *)evaluator {
-    NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
-    for (VWOCampaign *aCampaign in allCampaigns) {
-        if ([evaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
-            [newCampaignList addObject:aCampaign];
-        } else {
-            VWOLogDebug(@"Campaign %@ did not pass segmentation", aCampaign);
-        }
-    }
-    return newCampaignList;
-}
-
 
 @end

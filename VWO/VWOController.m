@@ -99,10 +99,8 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
                                                                 userInfo:nil repeats:YES];
     });
 
-    VWOSegmentEvaluator *evaluator = [VWOSegmentEvaluator makeEvaluator:_customVariables];
     _campaignList = [VWOCampaignFetcher getCampaignsWithTimeout:timeout
                                             url:[_vwoURL forFetchingCampaigns]
-                                      evaluator:evaluator
                                    withCallback:completionBlock
                                         failure:failureBlock];
 
@@ -286,12 +284,17 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 
 - (void)trackUserForAllCampaignsOnLaunch:(VWOCampaignArray *)allCampaigns {
     VWOLogInfo(@"trackUserForAllCampaignsOnLaunch");
+    VWOSegmentEvaluator *evaluator = [VWOSegmentEvaluator makeEvaluator:_customVariables];
     for (VWOCampaign *aCampaign in allCampaigns) {
         if (aCampaign.status == CampaignStatusExcluded) {
             [VWOUserDefaults setExcludedCampaign:aCampaign];
             continue;
         } else if (aCampaign.status == CampaignStatusRunning && aCampaign.trackUserOnLaunch) {
-            [self trackUserForCampaign:aCampaign];
+            if ([evaluator canUserBePartOfCampaignForSegment:aCampaign.segmentObject]) {
+                [self trackUserForCampaign:aCampaign];
+            } else {
+                VWOLogDebug(@"Campaign %@ did not pass segmentation", aCampaign);
+            }
         }
     }
 }

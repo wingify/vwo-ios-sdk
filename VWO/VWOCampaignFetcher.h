@@ -18,7 +18,6 @@ typedef NSArray <VWOCampaign *> VWOCampaignArray;
 
 + (nullable VWOCampaignArray *)getCampaignsWithTimeout:(NSNumber *)timeout
                                                          url:(NSURL *)url
-                                             evaluator:(VWOSegmentEvaluator *)evaluator
                                                 withCallback:(void(^)(void))completionBlock
                                                      failure:(void(^)(NSString *error))failureBlock;
 @end
