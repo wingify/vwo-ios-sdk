@@ -104,6 +104,9 @@
                         <viewLayoutGuide key="safeArea" id="ZP4-O7-voV"/>
                     </view>
                     <navigationItem key="navigationItem" title="Test" id="AGW-YJ-ZD8"/>
+                    <connections>
+                        <outlet property="tableView" destination="nKg-Uw-cus" id="hej-eq-SOj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4d-7C-15J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -201,10 +204,10 @@
             </objects>
             <point key="canvasLocation" x="2311" y="2400"/>
         </scene>
-        <!--DetailsVC-->
+        <!--Phone DetailVC-->
         <scene sceneID="E5b-uH-KVK">
             <objects>
-                <viewController storyboardIdentifier="scroll" automaticallyAdjustsScrollViewInsets="NO" id="u9z-uA-ioH" customClass="DetailsVC" customModule="VWO_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="scroll" automaticallyAdjustsScrollViewInsets="NO" id="u9z-uA-ioH" customClass="PhoneDetailVC" customModule="VWO_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yfO-hl-x7U"/>
                         <viewControllerLayoutGuide type="bottom" id="xWI-Sm-lth"/>
