@@ -21,11 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         createSlideViewController()
-        VWO.logLevel = .debug
-        if let apiKey = UserDefaults.standard.string(forKey: keyVWOApiKey) {
-            UserDefaults.standard.set(apiKey, forKey: keyVWOApiKey)
-            launchVWO(apiKey)
-        }
+//        VWO.logLevel = .debug
+//        if let apiKey = UserDefaults.standard.string(forKey: keyVWOApiKey) {
+//            UserDefaults.standard.set(apiKey, forKey: keyVWOApiKey)
+//            launchVWO(apiKey)
+//        }
 
         return true
     }

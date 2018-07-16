@@ -23,6 +23,7 @@
 		E34D6BDF1F7E4D5E0094A905 /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD61F7E4D5E0094A905 /* ContainerVC.swift */; };
 		E34D6BE01F7E4D5E0094A905 /* ListGridVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD71F7E4D5E0094A905 /* ListGridVC.swift */; };
 		E3FC3A2020FC85140097DB02 /* PhoneListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC3A1F20FC85140097DB02 /* PhoneListVC.swift */; };
+		E3FC3A2220FCA07B0097DB02 /* HouseCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC3A2120FCA07B0097DB02 /* HouseCollectionVC.swift */; };
 		E3FFD9221F7E547B0025F6FD /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FFD9211F7E547B0025F6FD /* SlideMenuController.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		E34D6BE21F7E512F0094A905 /* SlideMenuControllerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SlideMenuControllerSwift.framework; path = Carthage/Build/iOS/SlideMenuControllerSwift.framework; sourceTree = "<group>"; };
 		E3BA017920BFD64600F23100 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E3FC3A1F20FC85140097DB02 /* PhoneListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneListVC.swift; sourceTree = "<group>"; };
+		E3FC3A2120FCA07B0097DB02 /* HouseCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCollectionVC.swift; sourceTree = "<group>"; };
 		E3FFD9211F7E547B0025F6FD /* SlideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,8 +132,9 @@
 			isa = PBXGroup;
 			children = (
 				E34D6BAD1F7E4BE40094A905 /* AppDelegate.swift */,
-				E34D6BD61F7E4D5E0094A905 /* ContainerVC.swift */,
 				E3FC3A1F20FC85140097DB02 /* PhoneListVC.swift */,
+				E3FC3A2120FCA07B0097DB02 /* HouseCollectionVC.swift */,
+				E34D6BD61F7E4D5E0094A905 /* ContainerVC.swift */,
 				E34D6BD11F7E4D5D0094A905 /* DetailsVC.swift */,
 				E34D6BCF1F7E4D5C0094A905 /* Extras.swift */,
 				E34D6BD01F7E4D5C0094A905 /* GridCellView.swift */,
@@ -324,6 +327,7 @@
 				E34D6BDD1F7E4D5E0094A905 /* LoginDetailVC.swift in Sources */,
 				E34D6BDC1F7E4D5E0094A905 /* LoginVC.swift in Sources */,
 				E34D6BDB1F7E4D5E0094A905 /* MenuVC.swift in Sources */,
+				E3FC3A2220FCA07B0097DB02 /* HouseCollectionVC.swift in Sources */,
 				E34D6BD81F7E4D5E0094A905 /* Extras.swift in Sources */,
 				E34D6BDE1F7E4D5E0094A905 /* NavigationController.swift in Sources */,
 				E34D6BD91F7E4D5E0094A905 /* GridCellView.swift in Sources */,
