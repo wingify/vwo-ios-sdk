@@ -8,6 +8,13 @@
 
 import UIKit
 
+struct Phone {
+    let name: String
+    let manufacturer: String
+    let price: Int
+    let image: UIImage
+}
+
 class PhoneListVC: UIViewController {
     let phoneList = [
         Phone(name: "iPhone 6 (16GB, Black)", manufacturer: "Apple", price: 399, image: #imageLiteral(resourceName: "iPhone")),

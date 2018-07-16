@@ -56,12 +56,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    let menuVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "menuVC") as! MenuVC
     private func createSlideViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let menuVC = storyboard.instantiateViewController(withIdentifier: "menuVC") as! MenuVC
+        menuVC.delegate = self
 //        let containerVC = storyboard.instantiateViewController(withIdentifier: "container") as! ContainerVC
-        let nav = storyboard.instantiateViewController(withIdentifier: "navController") as! UINavigationController
-//        let phoneListVC = storyboard.instantiateViewController(withIdentifier: "phoneListVC") as! PhoneListVC
+//        let nav = storyboard.instantiateViewController(withIdentifier: "houseNav") as! UINavigationController
+        let nav = storyboard.instantiateViewController(withIdentifier: "phoneNav") as! UINavigationController
+
 
         let slideMenuController = SlideMenuController(mainViewController: nav, leftMenuViewController: menuVC)
         window?.rootViewController = slideMenuController
@@ -69,3 +71,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+extension AppDelegate: HamburgerMenuDelegate {
+    func selectedMenuItem(item: HamburgerMenuItem) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        switch item {
+        case .sortingCampaign:
+            let nav = storyboard.instantiateViewController(withIdentifier: "phoneNav") as! UINavigationController
+            let slideMenuController = SlideMenuController(mainViewController: nav, leftMenuViewController: menuVC)
+            window?.rootViewController = slideMenuController
+        case .variableCampaign:
+            let nav = storyboard.instantiateViewController(withIdentifier: "houseNav") as! UINavigationController
+            let slideMenuController = SlideMenuController(mainViewController: nav, leftMenuViewController: menuVC)
+            window?.rootViewController = slideMenuController
+        default: break
+        }
+    }
+}

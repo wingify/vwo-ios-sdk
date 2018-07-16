@@ -10,24 +10,25 @@ import UIKit
 import VWO
 //import FLEX
 
+enum HamburgerMenuItem: String {
+    case sortingCampaign = "Sorting Campaign"
+    case variableCampaign = "Variable Campaign"
+    case clearData = "Clear Data"
+    case apiKey = "Enter API Key"
+    case about = "About"
+    static var all: [HamburgerMenuItem] {
+        return [.sortingCampaign, .variableCampaign, .clearData, .apiKey, .about]
+    }
+}
+
+protocol HamburgerMenuDelegate: class {
+    func selectedMenuItem(item: HamburgerMenuItem)
+}
+
 class MenuVC : UIViewController {
 
-    var optionList = ["Layout Campaign", "Onboarding Campaign", "Clear Data", "Enter API Key", "About", "Debug"];
-
     @IBOutlet weak var tableView: UITableView!
-
-    func actionSelectionIndex(_ index: Int) {
-        let containerVC = self.slideMenuController()?.mainViewController as! ContainerVC
-        switch index {
-        case 0: containerVC.activeView = .listGrid
-        case 1: containerVC.activeView = .login
-        case 2: campaignsClearShowAlert()
-        case 3: changeAppKey()
-        case 4: showAbout()
-//        case 5: FLEXManager.shared().showExplorer()
-        default: fatalError()
-        }
-    }
+    weak var delegate: HamburgerMenuDelegate?
 
     @IBAction func actionCloseMenu(_ sender: Any) {
         self.slideMenuController()?.closeLeft()
@@ -55,12 +56,12 @@ class MenuVC : UIViewController {
             }
             UserDefaults.standard.set(apiKey, forKey: keyVWOApiKey)
             self.clearVWOFiles()
-            let container = self.slideMenuController()?.mainViewController as! ContainerVC
-            container.activityIndicator.startAnimating()
+//            let container = self.slideMenuController()?.mainViewController as! ContainerVC
+//            container.activityIndicator.startAnimating()
             VWO.launch(apiKey: apiKey, config: nil, completion: {
                 DispatchQueue.main.async {
-                    container.activityIndicator.stopAnimating()
-                    self.showAlert("Success", message: "API Key changed successfully.\n Old campaigns cleared", button: "OK")
+//                    container.activityIndicator.stopAnimating()
+//                    self.showAlert("Success", message: "API Key changed successfully.\n Old campaigns cleared", button: "OK")
                 }
             }, failure: nil)
         })
@@ -119,12 +120,12 @@ class MenuVC : UIViewController {
 //MARK: - UITableViewDataSource
 extension MenuVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return optionList.count
+        return HamburgerMenuItem.all.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "menuCell")!
-        cell.textLabel?.text = optionList[indexPath.row]
+        cell.textLabel?.text = HamburgerMenuItem.all[indexPath.row].rawValue
         return cell
     }
 }
@@ -133,7 +134,7 @@ extension MenuVC : UITableViewDataSource {
 extension MenuVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.slideMenuController()?.closeLeft()
-        actionSelectionIndex(indexPath.row)
+        delegate?.selectedMenuItem(item: HamburgerMenuItem.all[indexPath.row])
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 45

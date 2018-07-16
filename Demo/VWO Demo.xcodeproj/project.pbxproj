@@ -14,14 +14,9 @@
 		E34D6BB81F7E4BE40094A905 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E34D6BB61F7E4BE40094A905 /* LaunchScreen.storyboard */; };
 		E34D6BC31F7E4BE40094A905 /* VWO_DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BC21F7E4BE40094A905 /* VWO_DemoTests.swift */; };
 		E34D6BD81F7E4D5E0094A905 /* Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BCF1F7E4D5C0094A905 /* Extras.swift */; };
-		E34D6BD91F7E4D5E0094A905 /* GridCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD01F7E4D5C0094A905 /* GridCellView.swift */; };
+		E34D6BD91F7E4D5E0094A905 /* PhoneCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD01F7E4D5C0094A905 /* PhoneCellView.swift */; };
 		E34D6BDA1F7E4D5E0094A905 /* DetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD11F7E4D5D0094A905 /* DetailsVC.swift */; };
 		E34D6BDB1F7E4D5E0094A905 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD21F7E4D5D0094A905 /* MenuVC.swift */; };
-		E34D6BDC1F7E4D5E0094A905 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD31F7E4D5D0094A905 /* LoginVC.swift */; };
-		E34D6BDD1F7E4D5E0094A905 /* LoginDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD41F7E4D5D0094A905 /* LoginDetailVC.swift */; };
-		E34D6BDE1F7E4D5E0094A905 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD51F7E4D5D0094A905 /* NavigationController.swift */; };
-		E34D6BDF1F7E4D5E0094A905 /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD61F7E4D5E0094A905 /* ContainerVC.swift */; };
-		E34D6BE01F7E4D5E0094A905 /* ListGridVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD71F7E4D5E0094A905 /* ListGridVC.swift */; };
 		E3FC3A2020FC85140097DB02 /* PhoneListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC3A1F20FC85140097DB02 /* PhoneListVC.swift */; };
 		E3FC3A2220FCA07B0097DB02 /* HouseCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC3A2120FCA07B0097DB02 /* HouseCollectionVC.swift */; };
 		E3FFD9221F7E547B0025F6FD /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FFD9211F7E547B0025F6FD /* SlideMenuController.swift */; };
@@ -65,14 +60,9 @@
 		E34D6BC21F7E4BE40094A905 /* VWO_DemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWO_DemoTests.swift; sourceTree = "<group>"; };
 		E34D6BC41F7E4BE40094A905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E34D6BCF1F7E4D5C0094A905 /* Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extras.swift; sourceTree = "<group>"; };
-		E34D6BD01F7E4D5C0094A905 /* GridCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellView.swift; sourceTree = "<group>"; };
+		E34D6BD01F7E4D5C0094A905 /* PhoneCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneCellView.swift; sourceTree = "<group>"; };
 		E34D6BD11F7E4D5D0094A905 /* DetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsVC.swift; sourceTree = "<group>"; };
 		E34D6BD21F7E4D5D0094A905 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
-		E34D6BD31F7E4D5D0094A905 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		E34D6BD41F7E4D5D0094A905 /* LoginDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDetailVC.swift; sourceTree = "<group>"; };
-		E34D6BD51F7E4D5D0094A905 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
-		E34D6BD61F7E4D5E0094A905 /* ContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
-		E34D6BD71F7E4D5E0094A905 /* ListGridVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGridVC.swift; sourceTree = "<group>"; };
 		E34D6BE21F7E512F0094A905 /* SlideMenuControllerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SlideMenuControllerSwift.framework; path = Carthage/Build/iOS/SlideMenuControllerSwift.framework; sourceTree = "<group>"; };
 		E3BA017920BFD64600F23100 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E3FC3A1F20FC85140097DB02 /* PhoneListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneListVC.swift; sourceTree = "<group>"; };
@@ -134,16 +124,11 @@
 				E34D6BAD1F7E4BE40094A905 /* AppDelegate.swift */,
 				E3FC3A1F20FC85140097DB02 /* PhoneListVC.swift */,
 				E3FC3A2120FCA07B0097DB02 /* HouseCollectionVC.swift */,
-				E34D6BD61F7E4D5E0094A905 /* ContainerVC.swift */,
 				E34D6BD11F7E4D5D0094A905 /* DetailsVC.swift */,
 				E34D6BCF1F7E4D5C0094A905 /* Extras.swift */,
-				E34D6BD01F7E4D5C0094A905 /* GridCellView.swift */,
-				E34D6BD71F7E4D5E0094A905 /* ListGridVC.swift */,
-				E34D6BD41F7E4D5D0094A905 /* LoginDetailVC.swift */,
-				E34D6BD31F7E4D5D0094A905 /* LoginVC.swift */,
+				E34D6BD01F7E4D5C0094A905 /* PhoneCellView.swift */,
 				E34D6BD21F7E4D5D0094A905 /* MenuVC.swift */,
 				E3FFD9211F7E547B0025F6FD /* SlideMenuController.swift */,
-				E34D6BD51F7E4D5D0094A905 /* NavigationController.swift */,
 				E34D6BB11F7E4BE40094A905 /* Main.storyboard */,
 				E34D6BB41F7E4BE40094A905 /* Assets.xcassets */,
 				E34D6BB61F7E4BE40094A905 /* LaunchScreen.storyboard */,
@@ -323,17 +308,12 @@
 			files = (
 				E34D6BDA1F7E4D5E0094A905 /* DetailsVC.swift in Sources */,
 				E3FC3A2020FC85140097DB02 /* PhoneListVC.swift in Sources */,
-				E34D6BE01F7E4D5E0094A905 /* ListGridVC.swift in Sources */,
-				E34D6BDD1F7E4D5E0094A905 /* LoginDetailVC.swift in Sources */,
-				E34D6BDC1F7E4D5E0094A905 /* LoginVC.swift in Sources */,
 				E34D6BDB1F7E4D5E0094A905 /* MenuVC.swift in Sources */,
 				E3FC3A2220FCA07B0097DB02 /* HouseCollectionVC.swift in Sources */,
 				E34D6BD81F7E4D5E0094A905 /* Extras.swift in Sources */,
-				E34D6BDE1F7E4D5E0094A905 /* NavigationController.swift in Sources */,
-				E34D6BD91F7E4D5E0094A905 /* GridCellView.swift in Sources */,
+				E34D6BD91F7E4D5E0094A905 /* PhoneCellView.swift in Sources */,
 				E34D6BAE1F7E4BE40094A905 /* AppDelegate.swift in Sources */,
 				E3FFD9221F7E547B0025F6FD /* SlideMenuController.swift in Sources */,
-				E34D6BDF1F7E4D5E0094A905 /* ContainerVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

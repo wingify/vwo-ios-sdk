@@ -8,13 +8,6 @@
 
 import UIKit
 
-class GridCellView: UICollectionViewCell {
-    @IBOutlet weak var phoneImageField: UIImageView!
-    @IBOutlet weak var subTitleLabelField: UILabel!
-    @IBOutlet weak var priceLabelField: UILabel!
-    @IBOutlet weak var titleLabelField: UILabel!
-}
-
 class PhoneCellView: UITableViewCell {
     @IBOutlet weak var phoneImageField: UIImageView!
     @IBOutlet weak var subTitleLabelField: UILabel!
