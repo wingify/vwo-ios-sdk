@@ -16,16 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var viewControllers = [UIInputViewController]()
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    lazy var menuVC = storyboard.instantiateViewController(withIdentifier: "menuVC") as! MenuVC
+    lazy var phoneNav = storyboard.instantiateViewController(withIdentifier: "phoneNav") as! UINavigationController
+    lazy var houseNav = storyboard.instantiateViewController(withIdentifier: "houseNav") as! UINavigationController
+    lazy var slideMenuController = SlideMenuController(mainViewController: phoneNav, leftMenuViewController: menuVC)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        createSlideViewController()
-//        VWO.logLevel = .debug
-//        if let apiKey = UserDefaults.standard.string(forKey: keyVWOApiKey) {
-//            UserDefaults.standard.set(apiKey, forKey: keyVWOApiKey)
-//            launchVWO(apiKey)
-//        }
+        menuVC.delegate = self
+        window?.rootViewController = slideMenuController
+        window?.makeKeyAndVisible()
 
         return true
     }
@@ -55,34 +56,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         }
     }
-
-    let menuVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "menuVC") as! MenuVC
-    private func createSlideViewController() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        menuVC.delegate = self
-//        let containerVC = storyboard.instantiateViewController(withIdentifier: "container") as! ContainerVC
-//        let nav = storyboard.instantiateViewController(withIdentifier: "houseNav") as! UINavigationController
-        let nav = storyboard.instantiateViewController(withIdentifier: "phoneNav") as! UINavigationController
-
-
-        let slideMenuController = SlideMenuController(mainViewController: nav, leftMenuViewController: menuVC)
-        window?.rootViewController = slideMenuController
-        window?.makeKeyAndVisible()
-    }
 }
 
 extension AppDelegate: HamburgerMenuDelegate {
     func selectedMenuItem(item: HamburgerMenuItem) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         switch item {
         case .sortingCampaign:
-            let nav = storyboard.instantiateViewController(withIdentifier: "phoneNav") as! UINavigationController
-            let slideMenuController = SlideMenuController(mainViewController: nav, leftMenuViewController: menuVC)
-            window?.rootViewController = slideMenuController
+            slideMenuController.mainViewController = phoneNav
         case .variableCampaign:
-            let nav = storyboard.instantiateViewController(withIdentifier: "houseNav") as! UINavigationController
-            let slideMenuController = SlideMenuController(mainViewController: nav, leftMenuViewController: menuVC)
-            window?.rootViewController = slideMenuController
+            slideMenuController.mainViewController = houseNav
         default: break
         }
     }
