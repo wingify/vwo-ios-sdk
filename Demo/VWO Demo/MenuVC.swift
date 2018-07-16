@@ -136,6 +136,7 @@ extension MenuVC : UITableViewDelegate {
         self.slideMenuController()?.closeLeft()
         delegate?.selectedMenuItem(item: HamburgerMenuItem.all[indexPath.row])
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 45
     }

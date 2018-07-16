@@ -30,6 +30,10 @@ class PhoneListVC: UIViewController {
         let t = tableView.indexPathForSelectedRow!.row
         destination.phone = phoneList[t]
     }
+
+    @IBAction func hamburgerTapped(_ sender: Any) {
+        self.slideMenuController()?.openLeft()
+    }
 }
 
 extension PhoneListVC: UITabBarDelegate, UITableViewDataSource {

@@ -12,7 +12,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Test-->
+        <!--Sorting Campaign-->
         <scene sceneID="JAA-IM-yHb">
             <objects>
                 <viewController storyboardIdentifier="phoneListVC" id="tKQ-2c-lOK" customClass="PhoneListVC" customModule="VWO_Demo" customModuleProvider="target" sceneMemberID="viewController">
@@ -103,7 +103,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZP4-O7-voV"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Test" id="AGW-YJ-ZD8"/>
+                    <navigationItem key="navigationItem" title="Sorting Campaign" id="AGW-YJ-ZD8">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="Menu" id="nnv-wH-Xxg">
+                            <connections>
+                                <action selector="hamburgerTapped:" destination="tKQ-2c-lOK" id="kXx-eb-oZp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="nKg-Uw-cus" id="hej-eq-SOj"/>
                     </connections>
@@ -198,7 +204,13 @@
                             <outlet property="delegate" destination="fp5-jo-PfQ" id="ySV-zT-8xM"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="Ukc-FG-KOT"/>
+                    <navigationItem key="navigationItem" id="Ukc-FG-KOT">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="Menu" id="qUP-J7-HVK">
+                            <connections>
+                                <action selector="hamburgerTapped:" destination="fp5-jo-PfQ" id="P7A-sv-cUl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U08-Yx-95j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -424,7 +436,7 @@
                                 <rect key="frame" x="0.0" y="40" width="250" height="335"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="menuCell" textLabel="Rmb-Fh-hrd" rowHeight="52" style="IBUITableViewCellStyleDefault" id="Mm2-fB-pXi">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="menuCell" textLabel="Rmb-Fh-hrd" rowHeight="52" style="IBUITableViewCellStyleDefault" id="Mm2-fB-pXi">
                                         <rect key="frame" x="0.0" y="28" width="250" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mm2-fB-pXi" id="Sr8-fx-lho">
@@ -509,6 +521,7 @@
     </scenes>
     <resources>
         <image name="Close" width="26" height="26"/>
+        <image name="Menu" width="26" height="19"/>
         <image name="Star-empty" width="17" height="17"/>
         <image name="Star-filled" width="17" height="17"/>
         <image name="ZTE Max" width="160" height="304"/>

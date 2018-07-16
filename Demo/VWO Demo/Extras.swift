@@ -25,3 +25,9 @@ extension UIView {
         self.leftAnchor.constraint(equalTo: subView.leftAnchor).isActive = true
     }
 }
+
+extension UIStoryboard {
+    static var main: UIStoryboard {
+        return  UIStoryboard(name: "Main", bundle: nil)
+    }
+}

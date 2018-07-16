@@ -16,21 +16,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    lazy var menuVC = storyboard.instantiateViewController(withIdentifier: "menuVC") as! MenuVC
-    lazy var phoneNav = storyboard.instantiateViewController(withIdentifier: "phoneNav") as! UINavigationController
-    lazy var houseNav = storyboard.instantiateViewController(withIdentifier: "houseNav") as! UINavigationController
-    lazy var slideMenuController = SlideMenuController(mainViewController: phoneNav, leftMenuViewController: menuVC)
+    let menuVC = UIStoryboard.main.instantiateViewController(withIdentifier: "menuVC") as! MenuVC
+    let phoneNav = UIStoryboard.main.instantiateViewController(withIdentifier: "phoneNav") as! UINavigationController
+    let houseNav = UIStoryboard.main.instantiateViewController(withIdentifier: "houseNav") as! UINavigationController
+
+//    lazy var slideMenuController = SlideMenuController(mainViewController: phoneNav, leftMenuViewController: menuVC)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
-        menuVC.delegate = self
-        window?.rootViewController = slideMenuController
-        window?.makeKeyAndVisible()
-
+        set(vc: houseNav)
         return true
     }
 
+    func set(vc: UIViewController) {
+        let slideMenuController = SlideMenuController(mainViewController: vc, leftMenuViewController: menuVC)
+        menuVC.delegate = self
+        window?.rootViewController = slideMenuController
+        window?.makeKeyAndVisible()
+    }
     private func launchVWO(_ apiKey : String) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
             let slideVC = self.window!.rootViewController as! SlideMenuController
@@ -52,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                    container.activityIndicator.stopAnimating()
                 }
                 Swift.print("Failed \(errorString)")
-
             })
         }
     }
@@ -60,11 +61,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: HamburgerMenuDelegate {
     func selectedMenuItem(item: HamburgerMenuItem) {
+        print("Item \(item)")
         switch item {
         case .sortingCampaign:
-            slideMenuController.mainViewController = phoneNav
+            set(vc: phoneNav)
         case .variableCampaign:
-            slideMenuController.mainViewController = houseNav
+            set(vc: houseNav)
         default: break
         }
     }
