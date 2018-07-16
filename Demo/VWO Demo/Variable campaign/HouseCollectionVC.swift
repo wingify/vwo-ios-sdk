@@ -30,8 +30,18 @@ class HouseCollectionVC: UICollectionViewController {
         cell.textLabel.text = "\(indexPath.section) BHK Flats Apartments near you"
         return cell
     }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "houseCell", for: indexPath)
+//        cell.backgroundColor = .red
+
         return cell
+    }
+}
+
+extension HouseCollectionVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let a = collectionView.bounds.width / 2
+        return CGSize(width: a, height: a)
     }
 }

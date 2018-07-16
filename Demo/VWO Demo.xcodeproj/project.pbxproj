@@ -19,6 +19,7 @@
 		E34D6BDB1F7E4D5E0094A905 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD21F7E4D5D0094A905 /* MenuVC.swift */; };
 		E3FC3A2020FC85140097DB02 /* PhoneListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC3A1F20FC85140097DB02 /* PhoneListVC.swift */; };
 		E3FC3A2220FCA07B0097DB02 /* HouseCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC3A2120FCA07B0097DB02 /* HouseCollectionVC.swift */; };
+		E3FC3A2620FCD8CC0097DB02 /* HouseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC3A2520FCD8CC0097DB02 /* HouseCollectionCell.swift */; };
 		E3FFD9221F7E547B0025F6FD /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FFD9211F7E547B0025F6FD /* SlideMenuController.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		E3BA017920BFD64600F23100 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E3FC3A1F20FC85140097DB02 /* PhoneListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneListVC.swift; sourceTree = "<group>"; };
 		E3FC3A2120FCA07B0097DB02 /* HouseCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCollectionVC.swift; sourceTree = "<group>"; };
+		E3FC3A2520FCD8CC0097DB02 /* HouseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCollectionCell.swift; sourceTree = "<group>"; };
 		E3FFD9211F7E547B0025F6FD /* SlideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,10 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				E34D6BAD1F7E4BE40094A905 /* AppDelegate.swift */,
-				E34D6BD01F7E4D5C0094A905 /* PhoneCellView.swift */,
-				E3FC3A1F20FC85140097DB02 /* PhoneListVC.swift */,
-				E3FC3A2120FCA07B0097DB02 /* HouseCollectionVC.swift */,
-				E34D6BD11F7E4D5D0094A905 /* PhoneDetailVC.swift */,
+				E3FC3A2320FCD8AD0097DB02 /* Sorting campaign */,
+				E3FC3A2420FCD8B90097DB02 /* Variable campaign */,
 				E34D6BCF1F7E4D5C0094A905 /* Extras.swift */,
 				E34D6BD21F7E4D5D0094A905 /* MenuVC.swift */,
 				E3FFD9211F7E547B0025F6FD /* SlideMenuController.swift */,
@@ -155,6 +155,25 @@
 				24545B21162BFC471F57493A /* Pods_VWO_DemoTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E3FC3A2320FCD8AD0097DB02 /* Sorting campaign */ = {
+			isa = PBXGroup;
+			children = (
+				E34D6BD11F7E4D5D0094A905 /* PhoneDetailVC.swift */,
+				E34D6BD01F7E4D5C0094A905 /* PhoneCellView.swift */,
+				E3FC3A1F20FC85140097DB02 /* PhoneListVC.swift */,
+			);
+			path = "Sorting campaign";
+			sourceTree = "<group>";
+		};
+		E3FC3A2420FCD8B90097DB02 /* Variable campaign */ = {
+			isa = PBXGroup;
+			children = (
+				E3FC3A2120FCA07B0097DB02 /* HouseCollectionVC.swift */,
+				E3FC3A2520FCD8CC0097DB02 /* HouseCollectionCell.swift */,
+			);
+			path = "Variable campaign";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +331,7 @@
 				E3FC3A2220FCA07B0097DB02 /* HouseCollectionVC.swift in Sources */,
 				E34D6BD81F7E4D5E0094A905 /* Extras.swift in Sources */,
 				E34D6BD91F7E4D5E0094A905 /* PhoneCellView.swift in Sources */,
+				E3FC3A2620FCD8CC0097DB02 /* HouseCollectionCell.swift in Sources */,
 				E34D6BAE1F7E4BE40094A905 /* AppDelegate.swift in Sources */,
 				E3FFD9221F7E547B0025F6FD /* SlideMenuController.swift in Sources */,
 			);
