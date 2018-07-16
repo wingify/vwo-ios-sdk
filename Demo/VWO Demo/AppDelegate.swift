@@ -33,8 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func launchVWO(_ apiKey : String) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
             let slideVC = self.window!.rootViewController as! SlideMenuController
-            let container = slideVC.mainViewController as! ContainerVC
-            container.activityIndicator.startAnimating()
+//            let container = slideVC.mainViewController as! ContainerVC
+//            container.activityIndicator.startAnimating()
             VWO.logLevel = .debug
             UserDefaults.standard.set(true, forKey: "vwo.enableSocket")
             Swift.print("Launching VWO-\(VWO.version())")
@@ -42,13 +42,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             VWO.launch(apiKey: apiKey, config: nil, completion: {
                 DispatchQueue.main.async {
-                    container.activityIndicator.stopAnimating()
-                    container.navigationActionReloadClicked()
+//                    container.activityIndicator.stopAnimating()
+//                    container.navigationActionReloadClicked()
                 }
                 Swift.print("VWO launched in demo app")
             }, failure: { (errorString) in
                 DispatchQueue.main.async {
-                    container.activityIndicator.stopAnimating()
+//                    container.activityIndicator.stopAnimating()
                 }
                 Swift.print("Failed \(errorString)")
 
@@ -59,9 +59,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func createSlideViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let menuVC = storyboard.instantiateViewController(withIdentifier: "menuVC") as! MenuVC
-        let containerVC = storyboard.instantiateViewController(withIdentifier: "container") as! ContainerVC
+//        let containerVC = storyboard.instantiateViewController(withIdentifier: "container") as! ContainerVC
+        let nav = storyboard.instantiateViewController(withIdentifier: "navController") as! UINavigationController
+//        let phoneListVC = storyboard.instantiateViewController(withIdentifier: "phoneListVC") as! PhoneListVC
 
-        let slideMenuController = SlideMenuController(mainViewController: containerVC, leftMenuViewController: menuVC)
+        let slideMenuController = SlideMenuController(mainViewController: nav, leftMenuViewController: menuVC)
         window?.rootViewController = slideMenuController
         window?.makeKeyAndVisible()
     }
