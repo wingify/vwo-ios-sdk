@@ -17,6 +17,8 @@
 		E34D6BD91F7E4D5E0094A905 /* PhoneCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD01F7E4D5C0094A905 /* PhoneCellView.swift */; };
 		E34D6BDA1F7E4D5E0094A905 /* PhoneDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD11F7E4D5D0094A905 /* PhoneDetailVC.swift */; };
 		E34D6BDB1F7E4D5E0094A905 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD21F7E4D5D0094A905 /* MenuVC.swift */; };
+		E3F4292F20FDCA8C00CA281F /* Phones.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3F4292E20FDCA8C00CA281F /* Phones.xcassets */; };
+		E3F4293120FDEACB00CA281F /* House.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3F4293020FDEACB00CA281F /* House.xcassets */; };
 		E3FC3A2020FC85140097DB02 /* PhoneListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC3A1F20FC85140097DB02 /* PhoneListVC.swift */; };
 		E3FC3A2220FCA07B0097DB02 /* HouseCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC3A2120FCA07B0097DB02 /* HouseCollectionVC.swift */; };
 		E3FC3A2620FCD8CC0097DB02 /* HouseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC3A2520FCD8CC0097DB02 /* HouseCollectionCell.swift */; };
@@ -66,6 +68,8 @@
 		E34D6BD21F7E4D5D0094A905 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		E34D6BE21F7E512F0094A905 /* SlideMenuControllerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SlideMenuControllerSwift.framework; path = Carthage/Build/iOS/SlideMenuControllerSwift.framework; sourceTree = "<group>"; };
 		E3BA017920BFD64600F23100 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		E3F4292E20FDCA8C00CA281F /* Phones.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Phones.xcassets; sourceTree = "<group>"; };
+		E3F4293020FDEACB00CA281F /* House.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = House.xcassets; sourceTree = "<group>"; };
 		E3FC3A1F20FC85140097DB02 /* PhoneListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneListVC.swift; sourceTree = "<group>"; };
 		E3FC3A2120FCA07B0097DB02 /* HouseCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCollectionVC.swift; sourceTree = "<group>"; };
 		E3FC3A2520FCD8CC0097DB02 /* HouseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseCollectionCell.swift; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 				E3FFD9211F7E547B0025F6FD /* SlideMenuController.swift */,
 				E34D6BB11F7E4BE40094A905 /* Main.storyboard */,
 				E34D6BB41F7E4BE40094A905 /* Assets.xcassets */,
+				E3F4292E20FDCA8C00CA281F /* Phones.xcassets */,
+				E3F4293020FDEACB00CA281F /* House.xcassets */,
 				E34D6BB61F7E4BE40094A905 /* LaunchScreen.storyboard */,
 				E34D6BB91F7E4BE40094A905 /* Info.plist */,
 				E3BA017920BFD64600F23100 /* README.md */,
@@ -262,6 +268,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3F4292F20FDCA8C00CA281F /* Phones.xcassets in Resources */,
+				E3F4293120FDEACB00CA281F /* House.xcassets in Resources */,
 				E34D6BB81F7E4BE40094A905 /* LaunchScreen.storyboard in Resources */,
 				E34D6BB51F7E4BE40094A905 /* Assets.xcassets in Resources */,
 				E34D6BB31F7E4BE40094A905 /* Main.storyboard in Resources */,

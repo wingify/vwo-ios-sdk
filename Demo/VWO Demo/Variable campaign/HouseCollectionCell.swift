@@ -10,8 +10,8 @@ import UIKit
 
 class HouseCollectionCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
-    @IBOutlet weak var bhkLabel: UILabel!
 
     @IBOutlet weak var houseImagefield: UIImageView!
     override func awakeFromNib() {

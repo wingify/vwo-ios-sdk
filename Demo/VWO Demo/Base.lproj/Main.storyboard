@@ -15,7 +15,7 @@
         <!--Sorting Campaign-->
         <scene sceneID="JAA-IM-yHb">
             <objects>
-                <viewController storyboardIdentifier="phoneListVC" id="tKQ-2c-lOK" customClass="PhoneListVC" customModule="VWO_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="phoneListVC" automaticallyAdjustsScrollViewInsets="NO" id="tKQ-2c-lOK" customClass="PhoneListVC" customModule="VWO_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bYt-r8-XeV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -194,10 +194,10 @@
                                     <constraint firstAttribute="trailing" secondItem="y1x-Gz-zjq" secondAttribute="trailing" constant="5" id="ypE-If-4P6"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="bhkLabel" destination="d6a-Uu-m5q" id="gP9-5g-nqn"/>
-                                    <outlet property="houseImagefield" destination="nmF-c0-nui" id="yzY-1Y-MMK"/>
-                                    <outlet property="priceLabel" destination="Kk7-2y-hps" id="NFd-fb-e8u"/>
-                                    <outlet property="typeLabel" destination="cf3-sW-eal" id="E0Y-p8-qeX"/>
+                                    <outlet property="houseImagefield" destination="nmF-c0-nui" id="gPr-5n-yUK"/>
+                                    <outlet property="nameLabel" destination="d6a-Uu-m5q" id="EI5-O6-13s"/>
+                                    <outlet property="priceLabel" destination="Kk7-2y-hps" id="Cjy-eB-ZdJ"/>
+                                    <outlet property="typeLabel" destination="cf3-sW-eal" id="1t1-EM-8cH"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
