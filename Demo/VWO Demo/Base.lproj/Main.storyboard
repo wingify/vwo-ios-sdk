@@ -371,25 +371,12 @@
                                                     <constraint firstItem="oXt-Qk-bhv" firstAttribute="width" secondItem="rsp-Ru-8yh" secondAttribute="width" multiplier="0.6" id="Jha-gO-Uce"/>
                                                 </constraints>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fR2-HI-ISS">
-                                                <rect key="frame" x="2" y="2" width="50" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="PQF-BH-yid"/>
-                                                    <constraint firstAttribute="width" constant="50" id="jXm-6f-taz"/>
-                                                </constraints>
-                                                <state key="normal" image="Close"/>
-                                                <connections>
-                                                    <action selector="actionClose:" destination="u9z-uA-ioH" eventType="touchUpInside" id="GFB-rc-abY"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="fR2-HI-ISS" firstAttribute="leading" secondItem="zBP-dU-Z9B" secondAttribute="leading" constant="2" id="3V1-z3-Ruv"/>
                                             <constraint firstAttribute="trailing" secondItem="rsp-Ru-8yh" secondAttribute="trailing" id="IcL-QW-aUW"/>
                                             <constraint firstItem="rsp-Ru-8yh" firstAttribute="leading" secondItem="zBP-dU-Z9B" secondAttribute="leading" id="JcO-5k-R7I"/>
                                             <constraint firstAttribute="bottom" secondItem="rsp-Ru-8yh" secondAttribute="bottom" constant="20" id="KvN-Wm-Yi8"/>
-                                            <constraint firstItem="fR2-HI-ISS" firstAttribute="top" secondItem="zBP-dU-Z9B" secondAttribute="top" constant="2" id="dRT-bA-WYV"/>
                                             <constraint firstAttribute="height" constant="400" id="eEW-J0-TV2"/>
                                             <constraint firstItem="rsp-Ru-8yh" firstAttribute="top" secondItem="zBP-dU-Z9B" secondAttribute="top" constant="20" id="eNK-Yj-faR"/>
                                         </constraints>

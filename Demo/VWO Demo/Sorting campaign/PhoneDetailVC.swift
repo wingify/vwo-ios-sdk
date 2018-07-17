@@ -15,10 +15,6 @@ class PhoneDetailVC: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     var phone: Phone!
     
-    @IBAction func actionClose(_ sender: Any) {
-        self.view.isHidden = true
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         updateViewForPhone()
     }
