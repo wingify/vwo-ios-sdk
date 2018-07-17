@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SCLAlertView
+
 class SectionHeader: UICollectionReusableView {
     @IBOutlet weak var textLabel: UILabel!
 }
@@ -51,6 +53,19 @@ class HouseCollectionVC: UICollectionViewController {
         return houseList.count
     }
 
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            showCircularIcon: false,
+            hideWhenBackgroundViewIsTapped : true
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        alertView.addButton("Upgrade with $6") {
+            print("Show upgrade window")
+        }
+        alertView.showInfo("Find a house in minutes", subTitle: "You can use our in house agents who can help you find suitable house!")
+    }
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return houseList[section + 1]!.count
     }
@@ -67,6 +82,7 @@ class HouseCollectionVC: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        //////////////////////// HEADER ///////////////////////////////////////
         let headerCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "asd", for: indexPath) as! SectionHeader
         headerCell.textLabel.text = "\(indexPath.section + 1) BHK Flats Apartments near you"
 
