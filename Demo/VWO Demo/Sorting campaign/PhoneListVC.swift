@@ -8,13 +8,6 @@
 
 import UIKit
 
-struct Phone {
-    let name: String
-    let manufacturer: String
-    let price: Int
-    let image: UIImage
-}
-
 class PhoneListVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let phoneList = [
