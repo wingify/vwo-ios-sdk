@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     private func launchVWO(_ apiKey : String) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
-            let slideVC = self.window!.rootViewController as! SlideMenuController
+//            let slideVC = self.window!.rootViewController as! SlideMenuController
 //            let container = slideVC.mainViewController as! ContainerVC
 //            container.activityIndicator.startAnimating()
             VWO.logLevel = .debug

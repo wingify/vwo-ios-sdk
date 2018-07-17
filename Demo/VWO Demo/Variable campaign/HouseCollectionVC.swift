@@ -13,7 +13,7 @@ class SectionHeader: UICollectionReusableView {
 
 struct House {
     typealias BHK = Int
-    enum Type_: String { case residential, commercial}
+    enum Type_: String { case residential = "Residential", commercial = "Commercial"}
     let name: String
     let price: Int
     let bhk: BHK
@@ -61,18 +61,16 @@ class HouseCollectionVC: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "houseCell", for: indexPath) as! HouseCollectionCell
         cell.nameLabel.text = house.name
         cell.priceLabel.text = "$ \(house.price)"
-        cell.typeLabel.text = house.type.rawValue.uppercased()
+        cell.typeLabel.text = house.type.rawValue
         cell.houseImagefield.image = house.image
         return cell
     }
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "asd", for: indexPath) as! SectionHeader
-        cell.textLabel.text = "\(indexPath.section) BHK Flats Apartments near you"
+        let headerCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "asd", for: indexPath) as! SectionHeader
+        headerCell.textLabel.text = "\(indexPath.section + 1) BHK Flats Apartments near you"
 
-        return cell
-
-
+        return headerCell
     }
 }
 
