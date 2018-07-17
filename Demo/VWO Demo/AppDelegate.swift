@@ -16,18 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    let menuVC = UIStoryboard.main.instantiateViewController(withIdentifier: "menuVC") as! MenuVC
-    let phoneNav = UIStoryboard.main.instantiateViewController(withIdentifier: "phoneNav") as! UINavigationController
-    let houseNav = UIStoryboard.main.instantiateViewController(withIdentifier: "houseNav") as! UINavigationController
-
-//    lazy var slideMenuController = SlideMenuController(mainViewController: phoneNav, leftMenuViewController: menuVC)
+    let menuVC = UIStoryboard.main.instantiate(identifier: "menuVC") as MenuVC
+    let phoneNav = UIStoryboard.main.instantiate(identifier: "phoneNav") as UINavigationController
+    let houseNav = UIStoryboard.main.instantiate(identifier: "houseNav") as UINavigationController
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        set(vc: houseNav)
+        setCurrentViewController(vc: houseNav)
         return true
     }
 
-    func set(vc: UIViewController) {
+    func setCurrentViewController(vc: UIViewController) {
         let slideMenuController = SlideMenuController(mainViewController: vc, leftMenuViewController: menuVC)
         menuVC.delegate = self
         window?.rootViewController = slideMenuController
@@ -64,9 +62,9 @@ extension AppDelegate: HamburgerMenuDelegate {
         print("Item \(item)")
         switch item {
         case .sortingCampaign:
-            set(vc: phoneNav)
+            setCurrentViewController(vc: phoneNav)
         case .variableCampaign:
-            set(vc: houseNav)
+            setCurrentViewController(vc: houseNav)
         default: break
         }
     }
