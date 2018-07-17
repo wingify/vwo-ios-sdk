@@ -10,7 +10,8 @@ import UIKit
 
 class PhoneListVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    let phoneList = [
+
+    var phoneList = [
         Phone(name: "iPhone 6 (16GB, Black)", manufacturer: "Apple", price: 399, image: #imageLiteral(resourceName: "iPhone")),
         Phone(name: "Samsung Galaxy S8 (64GB, Black)", manufacturer: "Samsung", price: 799, image: #imageLiteral(resourceName: "S8")),
         Phone(name: "Google Pixel (32GB, Very Silver)", manufacturer: "Google", price: 699, image: #imageLiteral(resourceName: "Pixel")),
@@ -31,6 +32,25 @@ class PhoneListVC: UIViewController {
 
     @IBAction func hamburgerTapped(_ sender: Any) {
         self.slideMenuController()?.openLeft()
+    }
+
+    @IBAction func reloadTapped(_ sender: Any) {
+        let variation =
+//        "Control"
+//        "Variation-1"
+        "Variation-2"
+
+        switch variation {
+        case "Control":
+            phoneList.sort { $0.name >  $1.name }
+        case "Variation-1":
+            phoneList.sort { $0.price >  $1.price }
+        case "Variation-2":
+            phoneList.sort { $0.price <  $1.price }
+        default: break
+
+        }
+        tableView.reloadData()
     }
 }
 

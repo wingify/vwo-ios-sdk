@@ -109,6 +109,11 @@
                                 <action selector="hamburgerTapped:" destination="tKQ-2c-lOK" id="kXx-eb-oZp"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="Reload" id="daH-7H-D4A">
+                            <connections>
+                                <action selector="reloadTapped:" destination="tKQ-2c-lOK" id="ABr-sS-8kf"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="nKg-Uw-cus" id="hej-eq-SOj"/>
@@ -540,6 +545,7 @@
     <resources>
         <image name="Close" width="26" height="26"/>
         <image name="Menu" width="26" height="19"/>
+        <image name="Reload" width="23" height="23"/>
         <image name="Star-empty" width="17" height="17"/>
         <image name="Star-filled" width="17" height="17"/>
         <image name="ZTE Max" width="160" height="304"/>
