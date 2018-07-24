@@ -13,11 +13,10 @@ import VWO
 enum HamburgerMenuItem: String {
     case sortingCampaign = "Sorting Campaign"
     case variableCampaign = "Variable Campaign"
-    case clearData = "Clear Data"
     case apiKey = "Enter API Key"
     case about = "About"
     static var all: [HamburgerMenuItem] {
-        return [.sortingCampaign, .variableCampaign, .clearData, .apiKey, .about]
+        return [.sortingCampaign, .variableCampaign, .apiKey, .about]
     }
 }
 
@@ -104,16 +103,6 @@ class MenuVC : UIViewController {
         if let path = Bundle.main.path(forResource: "VWOCampaigns", ofType: "plist") {
             try? FileManager.default.removeItem(atPath: path)
         }
-    }
-
-    private func showAbout() {
-        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-        let build = Bundle.main.infoDictionary?[kCFBundleVersionKey as String] as! String
-
-        let apiKey = UserDefaults.standard.string(forKey: keyVWOApiKey)
-        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")
-
-        self.showAlert("Version: \(version)(\(build))", message: apiKey, button: "OK")
     }
 }
 
