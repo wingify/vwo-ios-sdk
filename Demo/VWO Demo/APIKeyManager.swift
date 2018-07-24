@@ -35,7 +35,7 @@ struct APIKeyManager {
         }
 
         // Xcode launch parameters
-        if let value = UserDefaults.standard.string(forKey: keyVWOApiKey) {
+        if let value = UserDefaults.standard.string(forKey: "VWOApiKey") {
             return value
         }
         return nil

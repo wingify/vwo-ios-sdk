@@ -9,9 +9,6 @@
 import UIKit
 import VWO
 import SCLAlertView
-import MBProgressHUD
-
-let keyVWOApiKey = "VWOApiKey"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -38,16 +35,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: HamburgerMenuDelegate {
-
     func selectedMenuItem(item: HamburgerMenuItem) {
-        print("Item \(item)")
         switch item {
         case .sortingCampaign: setCurrentViewController(vc: phoneNav)
         case .variableCampaign: setCurrentViewController(vc: houseNav)
         case .about:
             let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
             let build = Bundle.main.infoDictionary?[kCFBundleVersionKey as String] as! String
-            SCLAlertView().showInfo("Version: \(version)(\(build))", subTitle: "")
+            SCLAlertView().showInfo("App Version: \(version)(\(build))", subTitle: "VWO version \(VWO.version())")
         case .apiKey:
             let _ = 1
             APIKeyManager.showAlert()
