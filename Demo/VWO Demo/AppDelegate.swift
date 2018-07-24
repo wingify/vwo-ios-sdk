@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let houseNav = UIStoryboard.main.instantiate(identifier: "houseNav") as UINavigationController
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//        setCurrentViewController(vc: houseNav)
-        setCurrentViewController(vc: phoneNav)
+        setCurrentViewController(vc: houseNav)
+//        setCurrentViewController(vc: phoneNav)
         return true
     }
 
@@ -32,26 +32,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = slideMenuController
         window?.makeKeyAndVisible()
     }
+
     private func launchVWO(_ apiKey : String) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
-//            let slideVC = self.window!.rootViewController as! SlideMenuController
-//            let container = slideVC.mainViewController as! ContainerVC
-//            container.activityIndicator.startAnimating()
             VWO.logLevel = .debug
             UserDefaults.standard.set(true, forKey: "vwo.enableSocket")
             Swift.print("Launching VWO-\(VWO.version())")
 
 
             VWO.launch(apiKey: apiKey, config: nil, completion: {
-                DispatchQueue.main.async {
-//                    container.activityIndicator.stopAnimating()
-//                    container.navigationActionReloadClicked()
-                }
                 Swift.print("VWO launched in demo app")
             }, failure: { (errorString) in
-                DispatchQueue.main.async {
-//                    container.activityIndicator.stopAnimating()
-                }
                 Swift.print("Failed \(errorString)")
             })
         }
