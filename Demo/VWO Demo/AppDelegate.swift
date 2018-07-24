@@ -35,53 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
     }
 
-    private func launchVWO(_ apiKey : String) {
-        let hud = MBProgressHUD.showAdded(to: self.window!.rootViewController!.view, animated: true)
-        hud.label.text = "Launching VWO"
-
-        VWO.logLevel = .debug
-        Swift.print("Launching VWO-\(VWO.version())")
-
-        VWO.launch(apiKey: apiKey, config: nil, completion: {
-            DispatchQueue.main.async {
-                hud.hide(animated: false)
-                SCLAlertView().showSuccess("Success", subTitle: "VWO launched successfully \(apiKey)")
-            }
-        }, failure: { (errorString) in
-            DispatchQueue.main.async {
-                hud.hide(animated: false)
-                SCLAlertView().showError("Error", subTitle: errorString)
-            }
-        })
-    }
 }
 
 extension AppDelegate: HamburgerMenuDelegate {
-    ///Key must be in format `[32Chars]-[NUMS]`
-    private func isValid(apiKey: String) -> Bool {
-        let keyAnduserId = apiKey.components(separatedBy: "-")
-        guard keyAnduserId.count == 2 else {
-            return false
-        }
-        guard keyAnduserId.first?.count == 32 else {
-            return false
-        }
-        guard Int(keyAnduserId[1]) != nil else {
-            return false
-        }
-        return true
-    }
-
-    func getAPIKeyForPlaceholder() -> String? {
-        if let clipboard = UIPasteboard.general.string,
-            isValid(apiKey: clipboard) {
-            return clipboard
-        }
-        if let value = UserDefaults.standard.string(forKey: keyVWOApiKey) {
-            return value
-        }
-        return nil
-    }
 
     func selectedMenuItem(item: HamburgerMenuItem) {
         print("Item \(item)")
@@ -94,14 +50,7 @@ extension AppDelegate: HamburgerMenuDelegate {
             SCLAlertView().showInfo("Version: \(version)(\(build))", subTitle: "")
         case .apiKey:
             let _ = 1
-            let alert = SCLAlertView()
-            let APIkey = alert.addTextField("Enter API key")
-            APIkey.text = getAPIKeyForPlaceholder()
-
-            alert.addButton("Launch VWO") { [unowned self] in
-                self.launchVWO(APIkey.text!)
-            }
-            alert.showNotice("Launch VWO", subTitle: "", closeButtonTitle: "Cancel")
+            APIKeyManager.showAlert()
         }
     }
 }

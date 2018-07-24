@@ -17,6 +17,8 @@
 		E34D6BD91F7E4D5E0094A905 /* PhoneCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD01F7E4D5C0094A905 /* PhoneCellView.swift */; };
 		E34D6BDA1F7E4D5E0094A905 /* PhoneDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD11F7E4D5D0094A905 /* PhoneDetailVC.swift */; };
 		E34D6BDB1F7E4D5E0094A905 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BD21F7E4D5D0094A905 /* MenuVC.swift */; };
+		E390A9572107464100F5777D /* VWOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390A9562107464100F5777D /* VWOManager.swift */; };
+		E390A959210747EB00F5777D /* APIKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390A958210747EB00F5777D /* APIKeyManager.swift */; };
 		E3F4292F20FDCA8C00CA281F /* Phones.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3F4292E20FDCA8C00CA281F /* Phones.xcassets */; };
 		E3F4293120FDEACB00CA281F /* House.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3F4293020FDEACB00CA281F /* House.xcassets */; };
 		E3F4293320FDFAC700CA281F /* Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F4293220FDFAC700CA281F /* Phone.swift */; };
@@ -68,6 +70,8 @@
 		E34D6BD11F7E4D5D0094A905 /* PhoneDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneDetailVC.swift; sourceTree = "<group>"; };
 		E34D6BD21F7E4D5D0094A905 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		E34D6BE21F7E512F0094A905 /* SlideMenuControllerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SlideMenuControllerSwift.framework; path = Carthage/Build/iOS/SlideMenuControllerSwift.framework; sourceTree = "<group>"; };
+		E390A9562107464100F5777D /* VWOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOManager.swift; sourceTree = "<group>"; };
+		E390A958210747EB00F5777D /* APIKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyManager.swift; sourceTree = "<group>"; };
 		E3BA017920BFD64600F23100 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		E3F4292E20FDCA8C00CA281F /* Phones.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Phones.xcassets; sourceTree = "<group>"; };
 		E3F4293020FDEACB00CA281F /* House.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = House.xcassets; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				E34D6BAD1F7E4BE40094A905 /* AppDelegate.swift */,
+				E390A9562107464100F5777D /* VWOManager.swift */,
+				E390A958210747EB00F5777D /* APIKeyManager.swift */,
 				E3FC3A2320FCD8AD0097DB02 /* Sorting campaign */,
 				E3FC3A2420FCD8B90097DB02 /* Variable campaign */,
 				E34D6BCF1F7E4D5C0094A905 /* Extras.swift */,
@@ -340,12 +346,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E390A959210747EB00F5777D /* APIKeyManager.swift in Sources */,
 				E3F4293320FDFAC700CA281F /* Phone.swift in Sources */,
 				E34D6BDA1F7E4D5E0094A905 /* PhoneDetailVC.swift in Sources */,
 				E3FC3A2020FC85140097DB02 /* PhoneListVC.swift in Sources */,
 				E34D6BDB1F7E4D5E0094A905 /* MenuVC.swift in Sources */,
 				E3FC3A2220FCA07B0097DB02 /* HouseCollectionVC.swift in Sources */,
 				E34D6BD81F7E4D5E0094A905 /* Extras.swift in Sources */,
+				E390A9572107464100F5777D /* VWOManager.swift in Sources */,
 				E34D6BD91F7E4D5E0094A905 /* PhoneCellView.swift in Sources */,
 				E3FC3A2620FCD8CC0097DB02 /* HouseCollectionCell.swift in Sources */,
 				E34D6BAE1F7E4BE40094A905 /* AppDelegate.swift in Sources */,
