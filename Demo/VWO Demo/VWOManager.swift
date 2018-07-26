@@ -11,13 +11,12 @@ import VWO
 import MBProgressHUD
 import SCLAlertView
 
-
 class VWOManager {
     class func launch(_ apiKey: String) {
-        guard let view = (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.view else {
+        guard let hudParentView = (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.view else {
             return
         }
-        let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        let hud = MBProgressHUD.showAdded(to: hudParentView, animated: true)
         hud.label.text = "Launching VWO-\(VWO.version())"
 
         VWO.logLevel = .debug

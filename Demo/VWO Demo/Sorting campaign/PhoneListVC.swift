@@ -12,13 +12,13 @@ import VWO
 class PhoneListVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
-    var sortPhoneAlphabetically: (Phone, Phone) -> Bool {
+    private var sortPhoneAlphabetically: (Phone, Phone) -> Bool {
         return { a, b in
             return a.name.lowercased() < b.name.lowercased()
         }
     }
 
-    var sortPhoneByPrice: (Phone, Phone) -> Bool {
+    private var sortPhoneByPrice: (Phone, Phone) -> Bool {
         return { a, b in
             return a.price < b.price
         }
@@ -49,14 +49,17 @@ class PhoneListVC: UIViewController {
 
 
     @IBAction func reloadTapped(_ sender: Any) {
-        if let variation = VWO.variationNameFor(testKey: "e-Commerce") {
-            switch variation {
-            case "Control": phoneList.sort(by: sortPhoneAlphabetically)
-            case "Variation-1": phoneList.sort(by: sortPhoneByPrice)
-            default: break
-            }
-            tableView.reloadData()
+        let variation = VWO.variationNameFor(testKey: "sorting")
+        switch variation {
+        case "Control":
+            phoneList.sort(by: sortPhoneAlphabetically)
+        case "Variation-1":
+            phoneList.sort(by: sortPhoneByPrice)
+        default:
+            print("Default")
+            break
         }
+        tableView.reloadData()
     }
 }
 

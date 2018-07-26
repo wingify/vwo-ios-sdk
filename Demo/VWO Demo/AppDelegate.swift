@@ -31,20 +31,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = slideMenuController
         window?.makeKeyAndVisible()
     }
-
 }
 
 extension AppDelegate: HamburgerMenuDelegate {
     func selectedMenuItem(item: HamburgerMenuItem) {
         switch item {
         case .sortingCampaign: setCurrentViewController(vc: phoneNav)
+
         case .variableCampaign: setCurrentViewController(vc: houseNav)
+
         case .about:
             let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
             let build = Bundle.main.infoDictionary?[kCFBundleVersionKey as String] as! String
             SCLAlertView().showInfo("App Version: \(version)(\(build))", subTitle: "VWO version \(VWO.version())")
+
         case .apiKey:
-            let _ = 1
             APIKeyManager.showAlert()
         }
     }

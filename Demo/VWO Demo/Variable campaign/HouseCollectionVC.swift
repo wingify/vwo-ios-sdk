@@ -62,7 +62,7 @@ class HouseCollectionVC: UICollectionViewController {
         let alertView = SCLAlertView(appearance: appearance)
         alertView.addButton("Upgrade with $6") {
             print("Goal mark upgrade purchased")
-            VWO.trackConversion("upgradePurchased")
+            VWO.trackConversion("upgrade-clicked")
         }
 
         let heading = VWO.stringFor(key: "heading", defaultValue: "Use our House Agent!")!
