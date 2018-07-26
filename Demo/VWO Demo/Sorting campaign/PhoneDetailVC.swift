@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import VWO
 
 class PhoneDetailVC: UIViewController {
 
@@ -23,5 +24,9 @@ class PhoneDetailVC: UIViewController {
         nameLabel.text = phone.name
         phoneImageHandle.image = phone.image
         priceLabel.text = "$\(phone.price)"
+    }
+    
+    @IBAction func actionBuy(_ sender: Any) {
+        VWO.trackConversion("productView")
     }
 }

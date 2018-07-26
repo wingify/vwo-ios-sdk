@@ -357,6 +357,9 @@
                                                                 <state key="normal" title="Buy Now">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="actionBuy:" destination="u9z-uA-ioH" eventType="touchUpInside" id="B3r-WI-N24"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kce-F2-ec5">
                                                                 <rect key="frame" x="0.0" y="36" width="225" height="27"/>

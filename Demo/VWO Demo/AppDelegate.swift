@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let houseNav = UIStoryboard.main.instantiate(identifier: "houseNav") as UINavigationController
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        setCurrentViewController(vc: houseNav)
-//        setCurrentViewController(vc: phoneNav)
+//        setCurrentViewController(vc: houseNav)
+        setCurrentViewController(vc: phoneNav)
         return true
     }
 

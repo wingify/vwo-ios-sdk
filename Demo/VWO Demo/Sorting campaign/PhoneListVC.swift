@@ -7,15 +7,28 @@
 //
 
 import UIKit
+import VWO
 
 class PhoneListVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
-    var phoneList = [
-        Phone(name: "iPhone 6 (16GB, Black)", manufacturer: "Apple", price: 399, image: #imageLiteral(resourceName: "iPhone")),
-        Phone(name: "Samsung Galaxy S8 (64GB, Black)", manufacturer: "Samsung", price: 799, image: #imageLiteral(resourceName: "S8")),
-        Phone(name: "Google Pixel (32GB, Very Silver)", manufacturer: "Google", price: 699, image: #imageLiteral(resourceName: "Pixel")),
-        Phone(name: "ZTE Max XL (16GB)", manufacturer: "ZTE", price: 129, image: #imageLiteral(resourceName: "ZTE Max")),
+    var sortPhoneAlphabetically: (Phone, Phone) -> Bool {
+        return { a, b in
+            return a.name.lowercased() < b.name.lowercased()
+        }
+    }
+
+    var sortPhoneByPrice: (Phone, Phone) -> Bool {
+        return { a, b in
+            return a.price < b.price
+        }
+    }
+
+    lazy var phoneList = [
+        Phone(name: "iPhone 6", manufacturer: "Apple", price: 399, image: #imageLiteral(resourceName: "iPhone")),
+        Phone(name: "Samsung Galaxy S8", manufacturer: "Samsung", price: 799, image: #imageLiteral(resourceName: "S8")),
+        Phone(name: "Google Pixel", manufacturer: "Google", price: 699, image: #imageLiteral(resourceName: "Pixel")),
+        Phone(name: "ZTE Max XL", manufacturer: "ZTE", price: 129, image: #imageLiteral(resourceName: "ZTE Max")),
         Phone(name: "Galaxy J250", manufacturer: "Samsung", price: 400, image: #imageLiteral(resourceName: "Galaxy J250")),
         Phone(name: "Honor 7X", manufacturer: "Honor", price: 299, image: #imageLiteral(resourceName: "Honor 7X")),
         Phone(name: "Mi Mix 2", manufacturer: "Mi", price: 350, image: #imageLiteral(resourceName: "Mi Mix 2")),
@@ -34,23 +47,16 @@ class PhoneListVC: UIViewController {
         self.slideMenuController()?.openLeft()
     }
 
+
     @IBAction func reloadTapped(_ sender: Any) {
-        let variation =
-//        "Control"
-//        "Variation-1"
-        "Variation-2"
-
-        switch variation {
-        case "Control":
-            phoneList.sort { $0.name >  $1.name }
-        case "Variation-1":
-            phoneList.sort { $0.price >  $1.price }
-        case "Variation-2":
-            phoneList.sort { $0.price <  $1.price }
-        default: break
-
+        if let variation = VWO.variationNameFor(testKey: "e-Commerce") {
+            switch variation {
+            case "Control": phoneList.sort(by: sortPhoneAlphabetically)
+            case "Variation-1": phoneList.sort(by: sortPhoneByPrice)
+            default: break
+            }
+            tableView.reloadData()
         }
-        tableView.reloadData()
     }
 }
 

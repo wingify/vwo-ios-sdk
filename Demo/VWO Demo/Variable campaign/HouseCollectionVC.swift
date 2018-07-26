@@ -56,15 +56,15 @@ class HouseCollectionVC: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let appearance = SCLAlertView.SCLAppearance(
-//            showCloseButton: false,
             showCircularIcon: false,
             hideWhenBackgroundViewIsTapped : true
         )
         let alertView = SCLAlertView(appearance: appearance)
         alertView.addButton("Upgrade with $6") {
-            print("Show upgrade window")
-            // Mark goal "upgradePurchased"
+            print("Goal mark upgrade purchased")
+            VWO.trackConversion("upgradePurchased")
         }
+
         let heading = VWO.stringFor(key: "heading", defaultValue: "Use our House Agent!")!
         let content = VWO.stringFor(key: "content", defaultValue: "You can use our in-house agents who can help you find a suitable house.")!
         alertView.showInfo(heading, subTitle: content, closeButtonTitle: "Cancel")
