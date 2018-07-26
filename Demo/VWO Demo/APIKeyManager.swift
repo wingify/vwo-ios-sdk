@@ -12,13 +12,18 @@ import SCLAlertView
 /// Handles stuff that is to be done when user clicks on "Enter API Key"
 struct APIKeyManager {
     static func showAlert() {
-        let alert = SCLAlertView()
-        let APIkey = alert.addTextField("Enter API key")
-        APIkey.text = getAPIKeyForPlaceholder()
+
+        let alert = SCLAlertView(
+            appearance: SCLAlertView.SCLAppearance(
+                kWindowWidth: UIScreen.main.bounds.width
+            )
+        )
+        let APIkeytextField: UITextField = alert.addTextField("Enter API key")
+        APIkeytextField.text = getAPIKeyForPlaceholder()
 
         alert.addButton("Launch VWO") {
-            if _isValid(apiKey: APIkey.text!) {
-                VWOManager.launch(APIkey.text!)
+            if _isValid(apiKey: APIkeytextField.text!) {
+                VWOManager.launch(APIkeytextField.text!)
             } else {
                 SCLAlertView().showError("API Key error", subTitle: "")
             }
