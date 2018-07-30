@@ -40,6 +40,7 @@ class PhoneListVC: UIViewController {
         print("\(segue.destination) \(segue.source)")
         let destination = segue.destination as! PhoneDetailVC
         let t = tableView.indexPathForSelectedRow!.row
+        VWO.trackConversion("productView")
         destination.phone = phoneList[t]
     }
 

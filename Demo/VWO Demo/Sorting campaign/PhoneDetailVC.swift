@@ -27,6 +27,5 @@ class PhoneDetailVC: UIViewController {
     }
     
     @IBAction func actionBuy(_ sender: Any) {
-        VWO.trackConversion("productView")
     }
 }
