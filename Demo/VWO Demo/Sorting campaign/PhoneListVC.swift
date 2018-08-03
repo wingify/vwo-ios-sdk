@@ -52,9 +52,9 @@ class PhoneListVC: UIViewController {
     @IBAction func reloadTapped(_ sender: Any) {
         let variation = VWO.variationNameFor(testKey: "sorting")
         switch variation {
-        case "Control":
+        case "Sort-Alphabetically":
             phoneList.sort(by: sortPhoneAlphabetically)
-        case "Variation-1":
+        case "Sort-By-Price":
             phoneList.sort(by: sortPhoneByPrice)
         default:
             print("Default")
