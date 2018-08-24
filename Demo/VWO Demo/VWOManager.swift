@@ -20,7 +20,9 @@ class VWOManager {
         hud.label.text = "Launching VWO-\(VWO.version())"
 
         VWO.logLevel = .debug
-        VWO.launch(apiKey: apiKey, config: nil, completion: {
+        let config = VWOConfig()
+//        config.userID = "info@vow.com"
+        VWO.launch(apiKey: apiKey, config: config, completion: {
             DispatchQueue.main.async {
                 hud.hide(animated: false)
                 SCLAlertView().showSuccess("Success", subTitle: "VWO launched successfully \(apiKey)")
