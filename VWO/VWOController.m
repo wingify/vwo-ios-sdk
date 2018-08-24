@@ -98,9 +98,9 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
                                                                 selector:@selector(timerAction)
                                                                 userInfo:nil repeats:YES];
     });
-
+    NSURL *url = [_vwoURL forFetchingCampaigns:config.userID];
     _campaignList = [VWOCampaignFetcher getCampaignsWithTimeout:timeout
-                                            url:[_vwoURL forFetchingCampaigns]
+                                                            url:url
                                    withCallback:completionBlock
                                         failure:failureBlock];
 

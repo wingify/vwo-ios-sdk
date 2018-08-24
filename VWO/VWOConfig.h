@@ -26,4 +26,6 @@
  */
 @property BOOL disablePreview;
 
+@property NSString *userID;
+
 @end

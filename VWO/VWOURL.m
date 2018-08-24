@@ -13,6 +13,7 @@
 #import "VWOUserDefaults.h"
 #import "VWO.h"
 #import "NSDictionary+VWO.h"
+#import "NSString+MD5.h"
 
 @implementation NSURLComponents (VWO)
     /// Creates URL component with scheme host and path. Eg: https://dacdn.visual.com/path
@@ -69,10 +70,10 @@ static NSString *kSDKversionNumber = @"12";
 
 #pragma mark - Public Methods
 
-- (NSURL *)forFetchingCampaigns {
+- (NSURL *)forFetchingCampaigns:(nullable NSString *)userID {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile"];
-    NSDictionary *paramDict =
-    @{@"api-version": @"2",
+    NSMutableDictionary *paramDict =
+    [@{@"api-version": @"2",
       @"a"          : _accountID,
       @"dt"         : VWODevice.deviceName,
       @"i"          : _appKey,
@@ -81,7 +82,8 @@ static NSString *kSDKversionNumber = @"12";
       @"r"          : [self randomNumber],
       @"u"          : VWOUserDefaults.UUID,
       @"v"          : kSDKversionNumber
-      };
+      } mutableCopy];
+    if (userID) { paramDict[@"uHash"] = userID.generateMD5; }
     components.queryItems = [paramDict toQueryItems];
     return components.URL;
 }

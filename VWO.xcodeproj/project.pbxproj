@@ -36,6 +36,8 @@
 		E3806D30205269D800FFE897 /* DeviceWidthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3806D2F205269D800FFE897 /* DeviceWidthTests.swift */; };
 		E3806D3220526C6900FFE897 /* DeviceHeightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3806D3120526C6900FFE897 /* DeviceHeightTests.swift */; };
 		E3806D342052717100FFE897 /* LocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3806D332052717100FFE897 /* LocationTests.swift */; };
+		E3871A1D212FE27C0033D86B /* NSString+MD5.h in Headers */ = {isa = PBXBuildFile; fileRef = E3871A1B212FE27C0033D86B /* NSString+MD5.h */; };
+		E3871A1E212FE27C0033D86B /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = E3871A1C212FE27C0033D86B /* NSString+MD5.m */; };
 		E388B6CE1F8F7D350023E11E /* VWOURLQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = E388B6CC1F8F7D350023E11E /* VWOURLQueue.h */; };
 		E388B6CF1F8F7D350023E11E /* VWOURLQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E388B6CD1F8F7D350023E11E /* VWOURLQueue.m */; };
 		E3924B3C1FC2C2D8006A9EB2 /* And1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3924B3B1FC2C2D8006A9EB2 /* And1.json */; };
@@ -173,6 +175,8 @@
 		E3806D2F205269D800FFE897 /* DeviceWidthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceWidthTests.swift; sourceTree = "<group>"; };
 		E3806D3120526C6900FFE897 /* DeviceHeightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHeightTests.swift; sourceTree = "<group>"; };
 		E3806D332052717100FFE897 /* LocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
+		E3871A1B212FE27C0033D86B /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		E3871A1C212FE27C0033D86B /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		E388B6CC1F8F7D350023E11E /* VWOURLQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOURLQueue.h; sourceTree = "<group>"; };
 		E388B6CD1F8F7D350023E11E /* VWOURLQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOURLQueue.m; sourceTree = "<group>"; };
 		E3924B3B1FC2C2D8006A9EB2 /* And1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = And1.json; sourceTree = "<group>"; };
@@ -397,6 +401,8 @@
 		E39815951F6293BC0035D519 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E3871A1B212FE27C0033D86B /* NSString+MD5.h */,
+				E3871A1C212FE27C0033D86B /* NSString+MD5.m */,
 				E39815981F6293BC0035D519 /* NSDictionary+VWO.h */,
 				E39815991F6293BC0035D519 /* NSDictionary+VWO.m */,
 				E3D29FC41FBEDAB300A11C61 /* NSDate+VWO.h */,
@@ -503,6 +509,7 @@
 			files = (
 				E39815851F6291970035D519 /* VWOLogger.h in Headers */,
 				E39815591F6291680035D519 /* VWOGoal.h in Headers */,
+				E3871A1D212FE27C0033D86B /* NSString+MD5.h in Headers */,
 				E3D29FCA1FBEDE2A00A11C61 /* NSString+VWO.h in Headers */,
 				E3D29FC61FBEDAB300A11C61 /* NSDate+VWO.h in Headers */,
 				E39815811F6291970035D519 /* VWODevice.h in Headers */,
@@ -659,6 +666,7 @@
 			files = (
 				E344B2F11F87906900A4EEE6 /* VWOUserDefaults.m in Sources */,
 				E3D29FC71FBEDAB300A11C61 /* NSDate+VWO.m in Sources */,
+				E3871A1E212FE27C0033D86B /* NSString+MD5.m in Sources */,
 				E36AC7191F75614E0041ACDF /* VWO.m in Sources */,
 				E3F7CBAD2004A9B100CC8C03 /* VWOStack.m in Sources */,
 				E39567A4206E5DA80030B30B /* VWOCampaignFetcher.m in Sources */,

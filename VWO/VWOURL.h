@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)urlWithAppKey:(NSString *)appKey accountID:(NSString *)accountID;
 
-- (NSURL *)forFetchingCampaigns;
+- (NSURL *)forFetchingCampaigns:(nullable NSString *)userID;
 
 - (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign
                               dateTime:(NSDate *)date;
