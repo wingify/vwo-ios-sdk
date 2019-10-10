@@ -79,6 +79,11 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 
     if (_initialised) {
         VWOLogWarning(@"VWO must not be initialised more than once");
+        if (failureBlock) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                failureBlock(@"VWO must not be initialised more than once");
+            });
+        }
         return;
     }
 
