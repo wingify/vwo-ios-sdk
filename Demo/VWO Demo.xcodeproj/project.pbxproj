@@ -301,7 +301,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VWO Demo/Pods-VWO Demo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-VWO Demo/Pods-VWO Demo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
@@ -318,7 +318,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VWO Demo/Pods-VWO Demo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VWO Demo/Pods-VWO Demo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		878FD425F301D14D2EB57176 /* [CP] Check Pods Manifest.lock */ = {

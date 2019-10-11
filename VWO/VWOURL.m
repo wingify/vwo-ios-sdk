@@ -26,7 +26,7 @@
 }
 @end
 
-static NSString *kSDKversionNumber = @"13";
+static NSString *kSDKversionNumber = @"14";
 
 @interface VWOURL()
 
