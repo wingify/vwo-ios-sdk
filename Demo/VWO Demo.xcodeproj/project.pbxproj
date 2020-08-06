@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		682FAD2401FE82C5C2A48A2B /* Pods_VWO_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FAF68EB5053737B941C0877 /* Pods_VWO_Demo.framework */; };
+		88AB31C924D45582000D4429 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AB31C824D45582000D4429 /* LoginVC.swift */; };
 		E34D6BAE1F7E4BE40094A905 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34D6BAD1F7E4BE40094A905 /* AppDelegate.swift */; };
 		E34D6BB31F7E4BE40094A905 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E34D6BB11F7E4BE40094A905 /* Main.storyboard */; };
 		E34D6BB51F7E4BE40094A905 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E34D6BB41F7E4BE40094A905 /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		24545B21162BFC471F57493A /* Pods_VWO_DemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VWO_DemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88AB31C824D45582000D4429 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		8FAF68EB5053737B941C0877 /* Pods_VWO_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VWO_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB5B8FB3D715DA6E51505A25 /* Pods-VWO Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VWO Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-VWO Demo/Pods-VWO Demo.release.xcconfig"; sourceTree = "<group>"; };
 		E29775C6CEE32F6DD028E06B /* Pods-VWO Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VWO Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VWO Demo/Pods-VWO Demo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				E34D6BB61F7E4BE40094A905 /* LaunchScreen.storyboard */,
 				E34D6BB91F7E4BE40094A905 /* Info.plist */,
 				E3BA017920BFD64600F23100 /* README.md */,
+				88AB31C824D45582000D4429 /* LoginVC.swift */,
 			);
 			path = "VWO Demo";
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				E34D6BD81F7E4D5E0094A905 /* Extras.swift in Sources */,
 				E390A9572107464100F5777D /* VWOManager.swift in Sources */,
 				E34D6BD91F7E4D5E0094A905 /* PhoneCellView.swift in Sources */,
+				88AB31C924D45582000D4429 /* LoginVC.swift in Sources */,
 				E3FC3A2620FCD8CC0097DB02 /* HouseCollectionCell.swift in Sources */,
 				E34D6BAE1F7E4BE40094A905 /* AppDelegate.swift in Sources */,
 				E3FFD9221F7E547B0025F6FD /* SlideMenuController.swift in Sources */,
@@ -519,7 +523,7 @@
 				DEVELOPMENT_TEAM = DBN26NC8KE;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "VWO Demo/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wingify.abtestapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -538,7 +542,7 @@
 				DEVELOPMENT_TEAM = DBN26NC8KE;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "VWO Demo/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wingify.abtestapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

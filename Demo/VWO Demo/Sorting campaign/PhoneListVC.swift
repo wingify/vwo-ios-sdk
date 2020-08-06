@@ -1,15 +1,13 @@
-//
-//  File.swift
-//  VWO Demo
-//
-//  Created by Kaunteya Suryawanshi on 16/07/18.
-//  Copyright © 2018 Wingify. All rights reserved.
-//
 
 import UIKit
 import VWO
 
 class PhoneListVC: UIViewController {
+    override func viewDidLoad() {
+        
+        print("view controller are  \(self.navigationController?.viewControllers)")
+
+    }
     @IBOutlet weak var tableView: UITableView!
 
     private var sortPhoneAlphabetically: (Phone, Phone) -> Bool {
@@ -50,7 +48,8 @@ class PhoneListVC: UIViewController {
 
 
     @IBAction func reloadTapped(_ sender: Any) {
-        let variation = VWO.variationNameFor(testKey: "sorting")
+        let variation = VWO.variationNameFor(testKey: "TestCampaign")
+        
         switch variation {
         case "Sort-Alphabetically":
             phoneList.sort(by: sortPhoneAlphabetically)

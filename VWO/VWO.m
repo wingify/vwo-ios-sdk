@@ -185,4 +185,8 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     return kVWOSDKversion;
 }
 
++ (void)clearInstance {
+    [VWOController.shared clearInstance];
+}
+
 @end

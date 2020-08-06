@@ -15,8 +15,9 @@ enum HamburgerMenuItem: String {
     case variableCampaign = "Variable Campaign"
     case apiKey = "Enter API Key"
     case about = "About"
+    case logout = "Logout"
     static var all: [HamburgerMenuItem] {
-        return [.sortingCampaign, .variableCampaign, .apiKey, .about]
+        return [.sortingCampaign, .variableCampaign, .apiKey, .about, .logout]
     }
 }
 

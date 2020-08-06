@@ -24,14 +24,14 @@ class VWOURLTests: XCTestCase {
 
     func testForFetchingCampaigns() {
         VWOUserDefaults.setDefaultsKey(userDefaultskey)
-        let url = vwoURL.forFetchingCampaigns()
+        let url = vwoURL.forFetchingCampaigns("userId")
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
         XCTAssertEqual(components.host, "dacdn.visualwebsiteoptimizer.com")
         XCTAssertEqual(components.scheme, "https")
         XCTAssertEqual(components.path, "/mobile")
 
         let queryItems = components.queryItems!
-        XCTAssertEqual(queryItems.count, 9)
+        XCTAssertEqual(queryItems.count, 10)
         for query in queryItems {
             if query.name == "a" {
                 XCTAssertEqual(query.value!, "295084")

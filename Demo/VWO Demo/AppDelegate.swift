@@ -47,6 +47,13 @@ extension AppDelegate: HamburgerMenuDelegate {
 
         case .apiKey:
             APIKeyManager.showAlert()
+        case .logout:
+            VWO.clearInstance()
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialViewControlleripad : UIViewController = storyBoard.instantiateViewController(withIdentifier: "loginVC") as! LoginVC
+            let navigationController = UINavigationController(rootViewController: initialViewControlleripad)
+            self.setCurrentViewController(vc: navigationController)
+            break
         }
     }
 }

@@ -214,6 +214,8 @@ __deprecated_msg("Use objectForKey:defaultValue instead");
 + (void)setCustomVariable:(NSString *)key
                 withValue:(NSString *)value NS_SWIFT_NAME(setCustomVariable(key:value:));
 
++ (void)clearInstance;
+
 @end
 NS_ASSUME_NONNULL_END
 

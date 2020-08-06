@@ -28,6 +28,7 @@ static NSString *kVWOSDKversion = @"2.5.1";
 @property (getter=isInitialised) BOOL initialised;
 
 + (instancetype)shared;
+- (void)clearInstance;
 
 - (void)launchWithAPIKey:(NSString *)apiKey
               config:(nullable VWOConfig *)config

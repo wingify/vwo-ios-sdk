@@ -1,10 +1,10 @@
-//
-//  VWOController.m
-//  VWO
-//
-//  Created by Wingify on 25/11/13.
-//  Copyright (c) 2013 Wingify Software Pvt. Ltd. All rights reserved.
-//
+    //
+    //  VWOController.m
+    //  VWO
+    //
+    //  Created by Wingify on 25/11/13.
+    //  Copyright (c) 2013 Wingify Software Pvt. Ltd. All rights reserved.
+    //
 
 #import "VWOController.h"
 #import "VWOSocketConnector.h"
@@ -22,6 +22,8 @@
 
 static NSTimeInterval kMessageQueueFlushInterval         = 10;
 static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7";
+static VWOController *instance = nil;
+static dispatch_once_t oncePredicate;
 
 @interface VWOController() <VWOURLQueueDelegate>
 @property (atomic) VWOCampaignArray *campaignList;
@@ -31,8 +33,8 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 @implementation VWOController {
     VWOURLQueue *pendingURLQueue;
     
-    //URLS that are not successfully sent. Are loaded in failureQueue
-    //Failure queue is flushed only on app launch
+        //URLS that are not successfully sent. Are loaded in failureQueue
+        //Failure queue is flushed only on app launch
     VWOURLQueue *failedURLQueue;
     NSTimer *messageQueueFlushtimer;
     dispatch_queue_t _vwoQueue;
@@ -50,8 +52,6 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 }
 
 + (instancetype)shared {
-    static VWOController *instance = nil;
-    static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         instance = [[self alloc] init];
     });
@@ -63,20 +63,20 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 }
 
 - (void)launchWithAPIKey:(NSString *)apiKey
-              config:(VWOConfig *)configNullable
+                  config:(VWOConfig *)configNullable
              withTimeout:(NSNumber *)timeout
             withCallback:(void(^)(void))completionBlock
                  failure:(void(^)(NSString *error))failureBlock {
-
+    
     VWOConfig *config = configNullable != nil ? configNullable : [VWOConfig new];
     self.customVariables = [config.customVariables mutableCopy];
     [self updateAPIKey:apiKey];
     _vwoURL = [VWOURL urlWithAppKey:_appKey accountID:_accountID];
-
+    
     if (config.optOut) {
         [self handleOptOutwithCompletion:completionBlock]; return;
     }
-
+    
     if (_initialised) {
         VWOLogWarning(@"VWO must not be initialised more than once");
         if (failureBlock) {
@@ -342,6 +342,17 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     if ([pendingURLQueue.fileURL isEqual:fileURL]) {
         VWOLogWarning(@"Adding %@ to FAILURE QUEUE", url);
         [failedURLQueue enqueue:url maxRetry:5 description:nil];
+    }
+}
+
+- (void) clearInstance{
+    [self->messageQueueFlushtimer invalidate];
+    self->messageQueueFlushtimer = nil;
+    
+    [self clearVWOData];
+    @synchronized(self) {
+        instance = nil;
+        oncePredicate = 0;
     }
 }
 

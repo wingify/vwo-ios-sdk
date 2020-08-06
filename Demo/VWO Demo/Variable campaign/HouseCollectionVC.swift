@@ -65,7 +65,12 @@ class HouseCollectionVC: UICollectionViewController {
             VWO.trackConversion("upgrade-clicked")
         }
 
+        let start = NSDate().timeIntervalSince1970 * 1000
         let heading = VWO.stringFor(key: "heading", defaultValue: "Use our House Agent!")!
+        print("heading is \(heading)")
+        let stop = NSDate().timeIntervalSince1970 * 1000
+        let diff = stop - start
+        print("difference is \(diff)")
         let content = VWO.stringFor(key: "content", defaultValue: "You can use our in-house agents who can help you find a suitable house.")!
         alertView.showInfo(heading, subTitle: content, closeButtonTitle: "Cancel")
     }
