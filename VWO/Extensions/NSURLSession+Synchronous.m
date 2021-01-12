@@ -22,17 +22,21 @@
                                                   error:(NSError *_Nullable __autoreleasing *_Nullable)error {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     __block NSData *data = nil;
+    __block NSError *_error = nil;
+    __block NSURLResponse *_response = nil;
     [[self dataTaskWithRequest:request completionHandler:^(NSData *taskData, NSURLResponse *taskResponse, NSError *taskError) {
         data = taskData;
-        if (response) {
-            *response = taskResponse;
+        if (taskResponse) {
+            _response = taskResponse;
         }
-        if (error) {
-            *error = taskError;
+        if (taskError) {
+            _error = taskError;
         }
         dispatch_semaphore_signal(semaphore);
     }] resume];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    if (error) *error = _error;
+    if (response) *response = _response;
     return data;
 }
 
