@@ -13,7 +13,7 @@ pod 'VWO'
 
 ## iOS Version Support
 
-This library supports iOS version 8.0 and above.
+This library supports iOS version 9.0 and above.
 
 ## Setting up VWO Account
 
