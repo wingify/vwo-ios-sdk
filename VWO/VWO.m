@@ -181,6 +181,15 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     });
 }
 
++ (void)pushCustomDimension:(NSString *)customDimensionKey withCustomDimensionValue:(nonnull NSString *)customDimensionValue {
+    NSParameterAssert(customDimensionKey);
+    NSParameterAssert(customDimensionValue);
+    dispatch_barrier_async(VWOController.taskQueue, ^{
+        [VWOController.shared pushCustomDimension:customDimensionKey withCustomDimensionValue:customDimensionValue];
+    });
+    
+}
+
 + (NSString *)version {
     return kVWOSDKversion;
 }

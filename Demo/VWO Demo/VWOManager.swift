@@ -21,9 +21,11 @@ class VWOManager {
 
         VWO.logLevel = .debug
         let config = VWOConfig()
-//        config.userID = "info@vow.com"
+//        config.setCustomDimension(customDimensionKey: "userId", customDimensionValue: "userName")
+        config.userID = "userId"
         VWO.launch(apiKey: apiKey, config: config, completion: {
             DispatchQueue.main.async {
+//                VWO.pushCustomDimension(customDimensionKey: "userId", customDimensionValue: "userName")
                 hud.hide(animated: false)
                 SCLAlertView().showSuccess("Success", subTitle: "VWO launched successfully \(apiKey)")
             }

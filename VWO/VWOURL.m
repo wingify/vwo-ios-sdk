@@ -26,7 +26,7 @@
 }
 @end
 
-static NSString *kSDKversionNumber = @"15";
+static NSString *kSDKversionNumber = @"16";
 
 @interface VWOURL()
 
@@ -83,23 +83,32 @@ static NSString *kSDKversionNumber = @"15";
       @"u"          : VWOUserDefaults.UUID,
       @"v"          : kSDKversionNumber
       } mutableCopy];
-    if (userID) { paramDict[@"uHash"] = userID.generateMD5; }
+    if (userID) {
+        NSString * uHash = userID.generateMD5;
+        paramDict[@"uHash"] = uHash;
+        [VWOUserDefaults updateUUID:uHash];
+    }
     components.queryItems = [paramDict toQueryItems];
     return components.URL;
 }
 
 - (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign
-                              dateTime:(NSDate *)date {
+                              dateTime:(NSDate *)date
+                              config:(VWOConfig *) config {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-user"];
-    NSDictionary *paramDict =
-    @{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
+    NSMutableDictionary *paramDict =
+    [@{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
       @"account_id"   : _accountID,
       @"combination"  : [NSString stringWithFormat:@"%d", campaign.variation.iD],
       @"u"            : VWOUserDefaults.UUID,
       @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount],
       @"random"       : [self randomNumber],
+      @"sId"          : [NSString stringWithFormat:@"%f", date.timeIntervalSince1970],
       @"ed"           : [self extraParametersWithDate:date].toString
-      };
+      } mutableCopy];
+    if (config.customDimension != nil) {
+        paramDict[@"tags"] = config.customDimension;
+    }
     components.queryItems = [paramDict toQueryItems];
     return components.URL;
 }
@@ -116,12 +125,27 @@ static NSString *kSDKversionNumber = @"15";
     paramDict[@"u"]             = VWOUserDefaults.UUID;
     paramDict[@"s"]             = [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount];
     paramDict[@"random"]        = [self randomNumber];
+    paramDict[@"sId"]           = [NSString stringWithFormat:@"%f", date.timeIntervalSince1970];
     paramDict[@"ed"]            = [self extraParametersWithDate:date].toString;
     paramDict[@"goal_id"]       = [NSString stringWithFormat:@"%d", goal.iD];
 
     if (goalValue != nil) {
         paramDict[@"r"] = [NSString stringWithFormat:@"%@", goalValue];
     }
+    components.queryItems = [paramDict toQueryItems];
+    return components.URL;
+}
+
+- (NSURL *)forPushingCustomDimension:(NSString *)customDimensionKey withCustomDimensionValue:(nonnull NSString *)customDimensionValue dateTime:(nonnull NSDate *)date {
+    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile-app/push"];
+    NSMutableDictionary <NSString *, NSString *> *paramDict = [NSMutableDictionary new];
+    paramDict[@"account_id"]    = _accountID;
+    paramDict[@"u"]             = VWOUserDefaults.UUID;
+    paramDict[@"s"]             = [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount];
+    paramDict[@"random"]        = [self randomNumber];
+    paramDict[@"sId"]           = [NSString stringWithFormat:@"%f", date.timeIntervalSince1970];
+    paramDict[@"tags"]          = [NSString stringWithFormat:@"{\"u\":{\"%@\":\"%@\"}}", customDimensionKey, customDimensionValue];
+    
     components.queryItems = [paramDict toQueryItems];
     return components.URL;
 }

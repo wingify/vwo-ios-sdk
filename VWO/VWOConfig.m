@@ -17,4 +17,10 @@
             self.userID,
             self.customVariables];
 }
+
+- (void) setCustomDimension:(nonnull NSString *)customDimensionKey withCustomDimensionValue:(nonnull NSString *)customDimensionValue {
+    NSAssert(customDimensionKey.length != 0, @"CustomDimensionKey cannot be empty");
+    NSAssert(customDimensionValue.length != 0, @"customDimensionValue cannot be empty");
+    _customDimension = [NSString stringWithFormat:@"{\"u\":{\"%@\":\"%@\"}}", customDimensionKey, customDimensionValue];
+}
 @end

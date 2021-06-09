@@ -106,6 +106,10 @@ static NSString * _userDefaultsKey;
     }
 }
 
++ (void)updateUUID:(NSString *)uuid {
+    [self setObject:uuid forKey:kUUID];
+}
+
 + (NSUInteger)sessionCount {
     return [[self objectForKey:kSessionCount] integerValue];
 }

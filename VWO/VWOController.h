@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString *kVWOSDKversion = @"2.6.0";
+static NSString *kVWOSDKversion = @"2.7.0";
 
 @class VWOConfig;
 
@@ -38,6 +38,7 @@ static NSString *kVWOSDKversion = @"2.6.0";
 - (void)trackConversion:(NSString *)goal withValue:(nullable NSNumber *)value;
 - (nullable id)variationForKey:(NSString *)key;
 - (nullable NSString *)variationNameForCampaignTestKey:(NSString *)campaignTestKey;
+- (void)pushCustomDimension:(NSString *) customDimensionKey withCustomDimensionValue:(NSString *) customDimensionValue;
 
 @end
 

@@ -26,6 +26,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 @interface VWOController() <VWOURLQueueDelegate>
 @property (atomic) VWOCampaignArray *campaignList;
 @property (nonatomic) VWOURL *vwoURL;
+@property (atomic) VWOConfig *vwoConfig;
 @end
 
 @implementation VWOController {
@@ -69,6 +70,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
                  failure:(void(^)(NSString *error))failureBlock {
 
     VWOConfig *config = configNullable != nil ? configNullable : [VWOConfig new];
+    _vwoConfig = config;
     self.customVariables = [config.customVariables mutableCopy];
     [self updateAPIKey:apiKey];
     _vwoURL = [VWOURL urlWithAppKey:_appKey accountID:_accountID];
@@ -318,11 +320,26 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 
     //Send network request and notification only if the campaign is running
 
-    NSURL *url = [_vwoURL forMakingUserPartOfCampaign:campaign dateTime:NSDate.date];
+    NSURL *url = [_vwoURL forMakingUserPartOfCampaign:campaign dateTime:NSDate.date config: _vwoConfig];
     NSString *description = [NSString stringWithFormat:@"Track user %@ %@", campaign, campaign.variation];
     [pendingURLQueue enqueue:url maxRetry:10 description:description];
 
     [self sendNotificationUserStartedTracking:campaign];
+}
+
+- (void)pushCustomDimension:(nonnull NSString *)customDimensionKey withCustomDimensionValue:(nonnull NSString *)customDimensionValue {
+    NSAssert(customDimensionKey.length != 0, @"customDimensionKey cannot be empty");
+    NSAssert(customDimensionValue.length != 0, @"customDimensionValue cannot be empty");
+    
+    if (!_initialised) {
+        VWOLogWarning(@"pushCustomDimension called before launching VWO");
+        return;
+    }
+    
+    NSURL *url = [_vwoURL forPushingCustomDimension:customDimensionKey withCustomDimensionValue:customDimensionValue dateTime:NSDate.date];
+    NSString *description = [NSString stringWithFormat:@"Custom Dimension %@ %@", customDimensionKey, customDimensionValue];
+    [pendingURLQueue enqueue:url maxRetry:10 description:description];
+    
 }
 
 - (void)dealloc {

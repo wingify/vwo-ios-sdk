@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class VWOCampaign, VWOGoal, VWOUserDefaults;
+@class VWOCampaign, VWOGoal, VWOUserDefaults, VWOConfig;
 
 @interface VWOURL : NSObject
 
@@ -19,12 +19,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSURL *)forFetchingCampaigns:(nullable NSString *)userID;
 
 - (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign
-                              dateTime:(NSDate *)date;
+                              dateTime:(NSDate *)date
+                              config:(VWOConfig *) config;
 
 - (NSURL *)forMarkingGoal:(VWOGoal *)goal
                 withValue:(nullable NSNumber *)goalValue
                  campaign:(VWOCampaign *)campaign
                  dateTime:(NSDate *)date;
+
+- (NSURL *)forPushingCustomDimension:(NSString *) customDimensionKey
+                        withCustomDimensionValue:(NSString *) customDimensionValue
+                        dateTime:(NSDate *)date;
 
 @end
 

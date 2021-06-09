@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isGoalMarked:(VWOGoal *)goal inCampaign:(VWOCampaign *)campaign;
 
 + (void)setDefaultsKey:(NSString *)key;
++ (void)updateUUID:(NSString*)uuid;
 @end
 
 NS_ASSUME_NONNULL_END

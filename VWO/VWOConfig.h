@@ -20,6 +20,8 @@
  */
 @property NSDictionary<NSString *, NSString*> *customVariables;
 
+@property NSString *customDimension;
+
 /**
  Disabling preview would stop VWO from initializing the Socket connection that is done on VWO.launch
  Preview is enabled by default
@@ -27,5 +29,8 @@
 @property BOOL disablePreview;
 
 @property NSString *userID;
+
+- (void)setCustomDimension:(NSString *)customDimensionKey withCustomDimensionValue:(NSString*) customDimensionValue
+                                        NS_SWIFT_NAME(setCustomDimension(customDimensionKey:customDimensionValue:));
 
 @end

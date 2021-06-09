@@ -24,7 +24,7 @@ class VWOURLTests: XCTestCase {
 
     func testForFetchingCampaigns() {
         VWOUserDefaults.setDefaultsKey(userDefaultskey)
-        let url = vwoURL.forFetchingCampaigns()
+        let url = vwoURL.forFetchingCampaigns(nil)
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
         XCTAssertEqual(components.host, "dacdn.visualwebsiteoptimizer.com")
         XCTAssertEqual(components.scheme, "https")
@@ -70,6 +70,55 @@ class VWOURLTests: XCTestCase {
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
         let queryNameList = components.queryItems!.map { $0.name}
         XCTAssert(queryNameList.contains("r"))
+    }
+    
+    func testCustomDimension() {
+        let url = vwoURL.forPushingCustomDimension("key", withCustomDimensionValue: "value", dateTime: Date())
+        let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        let queryNameList = components.queryItems!.map { $0.name}
+        XCTAssert(queryNameList.contains("tags"))
+    }
+    
+    func testUserId() {
+        var url = vwoURL.forFetchingCampaigns("userId")
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        var queryNameList = components.queryItems!.map { $0.name}
+        XCTAssert(queryNameList.contains("uHash"))
+        var userID = ""
+        for query in components.queryItems! {
+            if query.name == "uHash" {
+                userID = query.value!
+            }
+        }
+        
+        
+        url = vwoURL.forPushingCustomDimension("key", withCustomDimensionValue: "value", dateTime: Date())
+        components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        queryNameList = components.queryItems!.map { $0.name}
+        for query in components.queryItems! {
+            if query.name == "u" {
+                XCTAssertEqual(query.value!, userID)
+            }
+        }
+        XCTAssert(queryNameList.contains("tags"))
+    }
+    
+    func testWithoutUserId() {
+        var url = vwoURL.forFetchingCampaigns(nil)
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        var queryNameList = components.queryItems!.map { $0.name}
+        XCTAssertFalse(queryNameList.contains("uHash"))
+        let userID = ""
+        
+        
+        url = vwoURL.forPushingCustomDimension("key", withCustomDimensionValue: "value", dateTime: Date())
+        components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        queryNameList = components.queryItems!.map { $0.name}
+        for query in components.queryItems! {
+            if query.name == "u" {
+                XCTAssertNotEqual(query.value!, userID)
+            }
+        }
     }
 }
 
