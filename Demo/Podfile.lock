@@ -4,9 +4,9 @@ PODS:
   - Socket.IO-Client-Swift (13.4.0):
     - Starscream (~> 3.0.2)
   - Starscream (3.0.6)
-  - VWO (2.6.0):
-    - VWO/All (= 2.6.0)
-  - VWO/All (2.6.0):
+  - VWO (2.7.0):
+    - VWO/All (= 2.7.0)
+  - VWO/All (2.7.0):
     - Socket.IO-Client-Swift (~> 13.1)
 
 DEPENDENCIES:
@@ -30,8 +30,8 @@ SPEC CHECKSUMS:
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   Socket.IO-Client-Swift: 2b2720f14c92ff1237ced09bc2f2da2022624fee
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
-  VWO: 67b825b53b72ede9fe11796a2e137c7e893c36b6
+  VWO: f86cb4e2df45c2c04188800ebcede0da0ae10e4c
 
-PODFILE CHECKSUM: d4c98c91472994b426b3f22ad61ac4197ae00a0c
+PODFILE CHECKSUM: d09e5733ca3cd69659f82c8ebab0ed0ff0b9e3a7
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.1

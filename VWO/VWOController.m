@@ -267,13 +267,38 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 }
 
 - (nullable NSString *)variationNameForCampaignTestKey:(NSString *)campaignTestKey {
+    if (!_initialised) {
+        VWOLogWarning(@"variationNameForCampaignTestKey(%@) called before launching VWO", campaignTestKey);
+        return nil;
+    }
+    
+    id finalVariation = nil;
     for (VWOCampaign *campaign in _campaignList) {
         if ([campaign.testKey isEqualToString:campaignTestKey]) {
-            [self trackUserForCampaign:campaign];
-            return campaign.variation.name;
+            id variation = campaign.variation.name;
+            BOOL isCampaignTracked = [VWOUserDefaults isTrackingUserForCampaign:campaign];
+            
+                //If variation Key is present in Campaign
+            if (isCampaignTracked) {
+                finalVariation = variation;
+            } else {
+                VWOSegmentEvaluator *evaluator = [VWOSegmentEvaluator makeEvaluator:_customVariables];
+                BOOL canBePart = [evaluator canUserBePartOfCampaignForSegment:campaign.segmentObject];
+                if (canBePart) {
+                    finalVariation = variation;
+                    [self trackUserForCampaign:campaign];
+                }
+            }
         }
     }
-    return nil;
+    
+    if (finalVariation == [NSNull null]) {
+            // finalVariation can be NSNull if Control is assigned to campaign
+        return nil;
+    }
+    
+    VWOLogDebug(@"Got variation %@ for campaign %@", finalVariation, campaignTestKey);
+    return finalVariation;
 }
 
 - (void)sendNotificationUserStartedTracking:(VWOCampaign *)campaign {
