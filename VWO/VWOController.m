@@ -73,7 +73,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     _vwoConfig = config;
     self.customVariables = [config.customVariables mutableCopy];
     [self updateAPIKey:apiKey];
-    _vwoURL = [VWOURL urlWithAppKey:_appKey accountID:_accountID];
+    _vwoURL = [VWOURL urlWithAppKey:_appKey accountID:_accountID isChinaCDN:config.isChinaCDN];
 
     if (config.optOut) {
         [self handleOptOutwithCompletion:completionBlock]; return;

@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VWOURL : NSObject
 
-+ (instancetype)urlWithAppKey:(NSString *)appKey accountID:(NSString *)accountID;
++ (instancetype)urlWithAppKey:(NSString *)appKey accountID:(NSString *)accountID isChinaCDN:(BOOL)isChinaCDN;
 
 - (NSURL *)forFetchingCampaigns:(nullable NSString *)userID;
 

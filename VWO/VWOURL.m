@@ -17,37 +17,43 @@
 
 @implementation NSURLComponents (VWO)
     /// Creates URL component with scheme host and path. Eg: https://dacdn.visual.com/path
-+ (instancetype)vwoComponentForPath:(NSString *)path {
++ (instancetype)vwoComponentForPath:(NSString *)path isChinaCDN:(BOOL)isChinaCDN {
     NSURLComponents *components = [NSURLComponents new];
     [components setScheme:@"https"];
-    [components setHost:@"dacdn.visualwebsiteoptimizer.com"];
+    if (isChinaCDN) {
+        [components setHost:@"cdn-cn.vwo-analytics.com"];
+    } else {
+        [components setHost:@"dacdn.visualwebsiteoptimizer.com"];
+    }
     [components setPath:path];
     return components;
 }
 @end
 
-static NSString *kSDKversionNumber = @"17";
+static NSString *kSDKversionNumber = @"18";
 
 @interface VWOURL()
 
 @property NSString *appKey;
 @property NSString *accountID;
+@property BOOL isChinaCDN;
 
 @end
 
 @implementation VWOURL
 
-+ (instancetype)urlWithAppKey:(NSString *)appKey accountID:(NSString *)accountID {
-    return [[self alloc] initWithAppKey:appKey accountID:accountID];
++ (instancetype)urlWithAppKey:(NSString *)appKey accountID:(NSString *)accountID isChinaCDN:(BOOL)isChinaCDN {
+    return [[self alloc] initWithAppKey:appKey accountID:accountID isChinaCDN:isChinaCDN];
 }
 
-- (instancetype)initWithAppKey:(NSString *)appKey accountID:(NSString *)accountID {
+- (instancetype)initWithAppKey:(NSString *)appKey accountID:(NSString *)accountID isChinaCDN:(BOOL)isChinaCDN {
     NSParameterAssert(appKey != nil);
     NSParameterAssert(accountID != nil);
     self = [self init];
     if (self) {
         _appKey = appKey;
         _accountID = accountID;
+        _isChinaCDN = isChinaCDN;
     }
     return self;
 }
@@ -71,7 +77,7 @@ static NSString *kSDKversionNumber = @"17";
 #pragma mark - Public Methods
 
 - (NSURL *)forFetchingCampaigns:(nullable NSString *)userID {
-    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile"];
+    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile" isChinaCDN:_isChinaCDN];
     NSMutableDictionary *paramDict =
     [@{@"api-version": @"2",
       @"a"          : _accountID,
@@ -95,7 +101,7 @@ static NSString *kSDKversionNumber = @"17";
 - (NSURL *)forMakingUserPartOfCampaign:(VWOCampaign *)campaign
                               dateTime:(NSDate *)date
                               config:(VWOConfig *) config {
-    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-user"];
+    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-user" isChinaCDN:_isChinaCDN];
     NSMutableDictionary *paramDict =
     [@{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
       @"account_id"   : _accountID,
@@ -117,7 +123,7 @@ static NSString *kSDKversionNumber = @"17";
                 withValue:(NSNumber *)goalValue
                  campaign:(VWOCampaign *)campaign
                  dateTime:(NSDate *)date {
-    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-goal"];
+    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-goal" isChinaCDN:_isChinaCDN];
     NSMutableDictionary <NSString *, NSString *> *paramDict = [NSMutableDictionary new];
     paramDict[@"experiment_id"] = [NSString stringWithFormat:@"%d", campaign.iD];
     paramDict[@"account_id"]    = _accountID;
@@ -137,7 +143,7 @@ static NSString *kSDKversionNumber = @"17";
 }
 
 - (NSURL *)forPushingCustomDimension:(NSString *)customDimensionKey withCustomDimensionValue:(nonnull NSString *)customDimensionValue dateTime:(nonnull NSDate *)date {
-    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile-app/push"];
+    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile-app/push" isChinaCDN:_isChinaCDN];
     NSMutableDictionary <NSString *, NSString *> *paramDict = [NSMutableDictionary new];
     paramDict[@"account_id"]    = _accountID;
     paramDict[@"u"]             = VWOUserDefaults.UUID;

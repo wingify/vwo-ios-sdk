@@ -16,6 +16,11 @@
 @property BOOL optOut;
 
 /**
+ isChinaCDN can be used to  bypass China's firewall which blocks VWO tracking
+ */
+@property BOOL isChinaCDN;
+
+/**
  Custom Variable is used in the cases where developer intends to programatically create segmentation.
  */
 @property NSDictionary<NSString *, NSString*> *customVariables;

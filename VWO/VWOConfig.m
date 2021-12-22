@@ -13,6 +13,7 @@
 - (NSString *)description {
     return [NSString stringWithFormat:@"Optout: %@\nPreviewDisabled: %@\nUserID: %@\n%@",
             self.optOut ? @"YES" : @"NO",
+            self.isChinaCDN ? @"YES" : @"NO",
             self.disablePreview ? @"YES" : @"NO",
             self.userID,
             self.customVariables];
