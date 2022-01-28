@@ -87,7 +87,7 @@ class HouseCollectionVC: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         //////////////////////// HEADER ///////////////////////////////////////
-        let headerCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "asd", for: indexPath) as! SectionHeader
+        let headerCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "asd", for: indexPath) as! SectionHeader
         headerCell.textLabel.text = "\(indexPath.section + 1) BHK Flats Apartments near you"
 
         return headerCell

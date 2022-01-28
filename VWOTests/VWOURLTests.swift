@@ -10,7 +10,7 @@ import XCTest
 
 class VWOURLTests: XCTestCase {
     let userDefaultskey = "someKeyURL"
-    let vwoURL = VWOURL(appKey: "f9066ca73d6564484560a83b63658605", accountID: "295084")
+    let vwoURL = VWOURL(appKey: "f9066ca73d6564484560a83b63658605", accountID: "295084", isChinaCDN: false)
 
     override func setUp() {
         UserDefaults.standard.removeObject(forKey: userDefaultskey)
@@ -38,17 +38,17 @@ class VWOURLTests: XCTestCase {
             }
         }
     }
-
-    func testsForMakingUserPartOfCampaign() {
-        let campaign1 = VWOCampaign(dictionary: JSONFrom(file: "Campaign1"))!
-        let url = vwoURL.forMakingUserPart(of: campaign1, dateTime: Date.distantFuture)
-        let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
-
-        XCTAssertEqual(components.path, "/track-user")
-        let queryNameList = components.queryItems!.map { $0.name}
-        XCTAssert(queryNameList.contains("experiment_id"))
-        XCTAssert(queryNameList.contains("account_id"))
-    }
+//
+//    func testsForMakingUserPartOfCampaign() {
+//        let campaign1 = VWOCampaign(dictionary: JSONFrom(file: "Campaign1"))!
+//        let url = vwoURL.forMakingUserPart(of: campaign1, dateTime: Date.distantFuture)
+//        let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+//
+//        XCTAssertEqual(components.path, "/track-user")
+//        let queryNameList = components.queryItems!.map { $0.name}
+//        XCTAssert(queryNameList.contains("experiment_id"))
+//        XCTAssert(queryNameList.contains("account_id"))
+//    }
 
     func testForMarkingGoal1() {
         let campaign1 = VWOCampaign(dictionary: JSONFrom(file: "Campaign1"))!

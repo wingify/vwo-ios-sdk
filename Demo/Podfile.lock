@@ -1,17 +1,17 @@
 PODS:
   - MBProgressHUD (1.1.0)
   - SCLAlertView (0.8)
-  - Socket.IO-Client-Swift (13.4.0):
-    - Starscream (~> 3.0.2)
-  - Starscream (3.0.6)
-  - VWO (2.7.1):
-    - VWO/All (= 2.7.1)
-  - VWO/All (2.7.1):
-    - Socket.IO-Client-Swift (~> 13.1)
+  - Socket.IO-Client-Swift (15.2.0):
+    - Starscream (~> 3.1)
+  - Starscream (3.1.1)
+  - VWO (2.8.0):
+    - VWO/All (= 2.8.0)
+  - VWO/All (2.8.0):
+    - Socket.IO-Client-Swift (~> 15.2.0)
 
 DEPENDENCIES:
   - MBProgressHUD (~> 1.1.0)
-  - SCLAlertView
+  - SCLAlertView (~> 0.8)
   - VWO (from `../`)
 
 SPEC REPOS:
@@ -28,10 +28,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
-  Socket.IO-Client-Swift: 2b2720f14c92ff1237ced09bc2f2da2022624fee
-  Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
-  VWO: f7cfcc0df231c378eed8d8088d30babf456ccc9c
+  Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
+  VWO: c12710457497bc88cdca575bd3151e246ac5a57c
 
-PODFILE CHECKSUM: 2b2638e9e63d49ba40c6ab42dfe34e64a8745537
+PODFILE CHECKSUM: 71bfa555223ee2b1ddab35d14fef462b5e6267e6
 
 COCOAPODS: 1.10.2

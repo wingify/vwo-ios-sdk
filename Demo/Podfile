@@ -5,8 +5,7 @@ target 'VWO Demo' do
   use_frameworks!
    #pod 'VWO', '~> 2.7.1'
    pod 'VWO', :path => '../'
-#  pod 'FLEX', '~> 2.0', :configurations => ['Debug']
-pod 'SCLAlertView'
-pod 'MBProgressHUD', '~> 1.1.0'
+   pod 'SCLAlertView', '~> 0.8'
+   pod 'MBProgressHUD', '~> 1.1.0'
 
 end

@@ -23,7 +23,7 @@ class VWOManager {
         let config = VWOConfig()
 //        config.setCustomDimension(customDimensionKey: "userId", customDimensionValue: "userName")
         config.userID = "userId"
-        config.isChinaCDN = false
+//        config.isChinaCDN = false
         VWO.launch(apiKey: apiKey, config: config, completion: {
             DispatchQueue.main.async {
 //                VWO.pushCustomDimension(customDimensionKey: "userId", customDimensionValue: "userName")

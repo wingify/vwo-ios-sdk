@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32C4822427A421CE007128E3 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 32C4822327A421CE007128E3 /* SocketIO */; };
 		E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31714C61F838C2F0036CF07 /* VWOTests.swift */; };
 		E32079C120075516005CB5CD /* CampaignIDMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C020075516005CB5CD /* CampaignIDMissing.json */; };
 		E32079C320075541005CB5CD /* CampaignStatusMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C220075541005CB5CD /* CampaignStatusMissing.json */; };
@@ -96,12 +97,6 @@
 		E3E95E8E206D0B13006DCE6C /* VWOConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E95E8C206D0B13006DCE6C /* VWOConfig.m */; };
 		E3F2D512204437B200862EE3 /* CustomVariableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2D511204437B200862EE3 /* CustomVariableTests.swift */; };
 		E3F2D5152044389C00862EE3 /* ComplexSegmentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2D5142044389C00862EE3 /* ComplexSegmentationTests.swift */; };
-		E3F52EE5206A30550026F0F4 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BBA33C2068F2510046B2F2 /* SocketIO.framework */; };
-		E3F52EE6206A315F0026F0F4 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BBA33E2068F2570046B2F2 /* Starscream.framework */; };
-		E3F52EE7206A31610026F0F4 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BBA33C2068F2510046B2F2 /* SocketIO.framework */; };
-		E3F52EE8206A31940026F0F4 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BBA33E2068F2570046B2F2 /* Starscream.framework */; };
-		E3F52EEA206A33B90026F0F4 /* SocketIO.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E3BBA33C2068F2510046B2F2 /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3F52EEB206A33BB0026F0F4 /* Starscream.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E3BBA33E2068F2570046B2F2 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E3F7CBA82004A07800CC8C03 /* VWOInfixEvaluator.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F7CBA62004A07800CC8C03 /* VWOInfixEvaluator.h */; };
 		E3F7CBA92004A07800CC8C03 /* VWOInfixEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBA72004A07800CC8C03 /* VWOInfixEvaluator.m */; };
 		E3F7CBAC2004A9B100CC8C03 /* VWOStack.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F7CBAA2004A9B100CC8C03 /* VWOStack.h */; };
@@ -135,8 +130,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E3F52EEA206A33B90026F0F4 /* SocketIO.framework in CopyFiles */,
-				E3F52EEB206A33BB0026F0F4 /* Starscream.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,8 +209,6 @@
 		E39815921F6291C10035D519 /* VWOSegmentEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOSegmentEvaluator.m; sourceTree = "<group>"; };
 		E39815981F6293BC0035D519 /* NSDictionary+VWO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+VWO.h"; sourceTree = "<group>"; };
 		E39815991F6293BC0035D519 /* NSDictionary+VWO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VWO.m"; sourceTree = "<group>"; };
-		E3BBA33C2068F2510046B2F2 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = Carthage/Build/iOS/SocketIO.framework; sourceTree = "<group>"; };
-		E3BBA33E2068F2570046B2F2 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		E3BBA35E2068FA630046B2F2 /* VWOSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOSocket.h; sourceTree = "<group>"; };
 		E3BBA35F2068FA630046B2F2 /* VWOSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOSocket.m; sourceTree = "<group>"; };
 		E3C0663F200C925000FF9EF5 /* Campaign2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Campaign2.json; sourceTree = "<group>"; };
@@ -261,8 +252,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3F52EE6206A315F0026F0F4 /* Starscream.framework in Frameworks */,
-				E3F52EE7206A31610026F0F4 /* SocketIO.framework in Frameworks */,
+				32C4822427A421CE007128E3 /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,8 +261,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E39814E01F6288C80035D519 /* VWO.framework in Frameworks */,
-				E3F52EE8206A31940026F0F4 /* Starscream.framework in Frameworks */,
-				E3F52EE5206A30550026F0F4 /* SocketIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,8 +419,6 @@
 		E3BBA33B2068F2500046B2F2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E3BBA33E2068F2570046B2F2 /* Starscream.framework */,
-				E3BBA33C2068F2510046B2F2 /* SocketIO.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -552,6 +538,9 @@
 			dependencies = (
 			);
 			name = VWO;
+			packageProductDependencies = (
+				32C4822327A421CE007128E3 /* SocketIO */,
+			);
 			productName = VWO;
 			productReference = E39814D61F6288C80035D519 /* VWO.framework */;
 			productType = "com.apple.product-type.framework";
@@ -592,7 +581,7 @@
 					E39814DE1F6288C80035D519 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = DBN26NC8KE;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1320;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -607,6 +596,9 @@
 				Base,
 			);
 			mainGroup = E39814CC1F6288C80035D519;
+			packageReferences = (
+				32C4822227A421CE007128E3 /* XCRemoteSwiftPackageReference "socket" */,
+			);
 			productRefGroup = E39814D71F6288C80035D519 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -848,7 +840,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -870,6 +863,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -878,11 +872,15 @@
 				INFOPLIST_FILE = VWO/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
@@ -901,15 +899,20 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = VWO/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
@@ -926,12 +929,16 @@
 				INFOPLIST_FILE = VWOTests/Info.plist;
 				INSTALL_PATH = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWOTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "VWOTests/VWOTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
@@ -948,11 +955,15 @@
 				INFOPLIST_FILE = VWOTests/Info.plist;
 				INSTALL_PATH = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWOTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "VWOTests/VWOTests-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
@@ -988,6 +999,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		32C4822227A421CE007128E3 /* XCRemoteSwiftPackageReference "socket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 15.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		32C4822327A421CE007128E3 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 32C4822227A421CE007128E3 /* XCRemoteSwiftPackageReference "socket" */;
+			productName = SocketIO;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E39814CD1F6288C80035D519 /* Project object */;
 }
