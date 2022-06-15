@@ -3,7 +3,7 @@
 //  VWO Demo
 //
 //  Created by Kaunteya Suryawanshi on 29/09/17.
-//  Copyright © 2017 Wingify. All rights reserved.
+//  Copyright © 2017-2022 Wingify. All rights reserved.
 //
 
 import UIKit

@@ -3,7 +3,7 @@
 //  VWOTests
 //
 //  Created by Kaunteya Suryawanshi on 15/01/18.
-//  Copyright © 2018 vwo. All rights reserved.
+//  Copyright © 2018-2022 vwo. All rights reserved.
 //
 
 import XCTest
@@ -71,14 +71,14 @@ class VWOURLTests: XCTestCase {
         let queryNameList = components.queryItems!.map { $0.name}
         XCTAssert(queryNameList.contains("r"))
     }
-    
+
     func testCustomDimension() {
         let url = vwoURL.forPushingCustomDimension("key", withCustomDimensionValue: "value", dateTime: Date())
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
         let queryNameList = components.queryItems!.map { $0.name}
         XCTAssert(queryNameList.contains("tags"))
     }
-    
+
     func testUserId() {
         var url = vwoURL.forFetchingCampaigns("userId")
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
@@ -90,8 +90,8 @@ class VWOURLTests: XCTestCase {
                 userID = query.value!
             }
         }
-        
-        
+
+
         url = vwoURL.forPushingCustomDimension("key", withCustomDimensionValue: "value", dateTime: Date())
         components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
         queryNameList = components.queryItems!.map { $0.name}
@@ -102,15 +102,15 @@ class VWOURLTests: XCTestCase {
         }
         XCTAssert(queryNameList.contains("tags"))
     }
-    
+
     func testWithoutUserId() {
         var url = vwoURL.forFetchingCampaigns(nil)
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
         var queryNameList = components.queryItems!.map { $0.name}
         XCTAssertFalse(queryNameList.contains("uHash"))
         let userID = ""
-        
-        
+
+
         url = vwoURL.forPushingCustomDimension("key", withCustomDimensionValue: "value", dateTime: Date())
         components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
         queryNameList = components.queryItems!.map { $0.name}
@@ -121,4 +121,3 @@ class VWOURLTests: XCTestCase {
         }
     }
 }
-

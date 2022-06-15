@@ -3,7 +3,7 @@
 //  VWODemoApp
 //
 //  Created by Kaunteya Suryawanshi on 28/07/17.
-//  Copyright © 2017 Wingify. All rights reserved.
+//  Copyright © 2017-2022 Wingify. All rights reserved.
 //
 
 import UIKit
@@ -30,7 +30,7 @@ extension UIStoryboard {
     static var main: UIStoryboard {
         return  UIStoryboard(name: "Main", bundle: nil)
     }
-    
+
     func instantiate<T>(identifier: String) -> T {
         return UIStoryboard.main.instantiateViewController(withIdentifier: identifier) as! T
     }

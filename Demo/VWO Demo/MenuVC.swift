@@ -3,7 +3,7 @@
 //  VWODemoApp
 //
 //  Created by Kaunteya Suryawanshi on 25/07/17.
-//  Copyright © 2017 Wingify. All rights reserved.
+//  Copyright © 2017-2022 Wingify. All rights reserved.
 //
 
 import UIKit
@@ -53,7 +53,7 @@ extension MenuVC : UITableViewDelegate {
         self.slideMenuController()?.closeLeft()
         delegate?.selectedMenuItem(item: HamburgerMenuItem.all[indexPath.row])
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 45
     }

@@ -3,7 +3,7 @@
 //  VWO
 //
 //  Created by Kaunteya Suryawanshi on 09/01/18.
-//  Copyright © 2018 vwo. All rights reserved.
+//  Copyright © 2018-2022 vwo. All rights reserved.
 //
 
 #import "VWOSegment.h"
@@ -29,7 +29,7 @@
     self = [super init];
     if (self) {
         if (![self isJSONValid:segmentDict]) { return nil;}
-        
+
         _operator = [segmentDict[@"operator"] intValue];
 
         // L-operand R- operand

@@ -3,7 +3,7 @@
 //  VWO
 //
 //  Created by Kaunteya Suryawanshi on 26/03/18.
-//  Copyright © 2018 vwo. All rights reserved.
+//  Copyright © 2018-2022 vwo. All rights reserved.
 //
 
 #import "VWOSocket.h"
@@ -32,7 +32,7 @@
         VWOLogWarning(@"Already connected or connecting");
         return;
     }
-    
+
     NSURL* url = [[NSURL alloc] initWithString:@"https://mobilepreview.vwo.com:443"];
     manager = [[SocketManager alloc] initWithSocketURL:url config:nil];
     SocketIOClient *socket = manager.defaultSocket;

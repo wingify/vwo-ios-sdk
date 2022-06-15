@@ -3,7 +3,7 @@
 //  VWOTests
 //
 //  Created by Kaunteya Suryawanshi on 26/02/18.
-//  Copyright © 2018 vwo. All rights reserved.
+//  Copyright © 2018-2022 vwo. All rights reserved.
 //
 
 import XCTest
@@ -28,7 +28,7 @@ class ComplexSegmentationTests: XCTestCase {
         evaluator.date = dateHourformat.date(from: "01-01-2017 16:23")!
         XCTAssert(evaluator.canUserBePartOfCampaign(forSegment: json), json.segmentDescription)
     }
-    
+
     func testOr1() {
         let evaluator = VWOSegmentEvaluator()
         evaluator.customVariables = ["user" : "Paid"]

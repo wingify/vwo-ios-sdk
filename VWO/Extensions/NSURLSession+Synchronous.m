@@ -3,7 +3,7 @@
 //  VWO
 //
 //  Created by Kaunteya Suryawanshi on 19/09/17.
-//  Copyright © 2017 vwo. All rights reserved.
+//  Copyright © 2017-2022 vwo. All rights reserved.
 //
 
 #import "NSURLSession+Synchronous.h"

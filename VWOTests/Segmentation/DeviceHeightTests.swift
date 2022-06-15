@@ -3,13 +3,13 @@
 //  VWOTests
 //
 //  Created by Kaunteya Suryawanshi on 09/03/18.
-//  Copyright © 2018 vwo. All rights reserved.
+//  Copyright © 2018-2022 vwo. All rights reserved.
 //
 
 import XCTest
 
 class DeviceHeightTests: XCTestCase {
-    
+
     func testEqualTo() {
         let json: [String : Any] = [
             "type": "custom",

@@ -3,7 +3,7 @@
 //  VWO
 //
 //  Created by Kaunteya Suryawanshi on 15/09/17.
-//  Copyright © 2017 vwo. All rights reserved.
+//  Copyright © 2017-2022 vwo. All rights reserved.
 //
 
 #import "VWOURL.h"
@@ -151,7 +151,7 @@ static NSString *kSDKversionNumber = @"19";
     paramDict[@"random"]        = [self randomNumber];
     paramDict[@"sId"]           = [NSString stringWithFormat:@"%f", date.timeIntervalSince1970];
     paramDict[@"tags"]          = [NSString stringWithFormat:@"{\"u\":{\"%@\":\"%@\"}}", customDimensionKey, customDimensionValue];
-    
+
     components.queryItems = [paramDict toQueryItems];
     return components.URL;
 }

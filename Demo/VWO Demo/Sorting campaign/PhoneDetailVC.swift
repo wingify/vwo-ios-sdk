@@ -3,7 +3,7 @@
 //  VWODemoApp
 //
 //  Created by Kaunteya Suryawanshi on 28/07/17.
-//  Copyright © 2017 Wingify. All rights reserved.
+//  Copyright © 2017-2022 Wingify. All rights reserved.
 //
 
 import UIKit
@@ -15,7 +15,7 @@ class PhoneDetailVC: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     var phone: Phone!
-    
+
     override func viewWillAppear(_ animated: Bool) {
         updateViewForPhone()
     }
@@ -25,7 +25,7 @@ class PhoneDetailVC: UIViewController {
         phoneImageHandle.image = phone.image
         priceLabel.text = "$\(phone.price)"
     }
-    
+
     @IBAction func actionBuy(_ sender: Any) {
     }
 }

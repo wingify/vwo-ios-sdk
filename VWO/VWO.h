@@ -3,7 +3,7 @@
 //  VWO
 //
 //  Created by Kaunteya Suryawanshi on 08/09/17.
-//  Copyright © 2017 vwo. All rights reserved.
+//  Copyright © 2017-2022 vwo. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -217,9 +217,9 @@ __deprecated_msg("Use objectForKey:defaultValue instead");
 /**
  Push the custom dimensions to the VWO servers.
  * This will help to filter out the reports on VWO web-app.
- 
+
  @param customDimensionKey key for the custom dimension
- 
+
  @param customDimensionValue value corresponding to the given customDimensionKey
  */
 + (void) pushCustomDimension:(NSString *) customDimensionKey
@@ -227,4 +227,3 @@ __deprecated_msg("Use objectForKey:defaultValue instead");
 
 @end
 NS_ASSUME_NONNULL_END
-

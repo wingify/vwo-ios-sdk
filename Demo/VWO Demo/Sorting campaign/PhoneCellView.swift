@@ -3,7 +3,7 @@
 //  VWODemoApp
 //
 //  Created by Kaunteya Suryawanshi on 25/07/17.
-//  Copyright © 2017 Wingify. All rights reserved.
+//  Copyright © 2017-2022 Wingify. All rights reserved.
 //
 
 import UIKit
@@ -14,4 +14,3 @@ class PhoneCellView: UITableViewCell {
     @IBOutlet weak var priceLabelField: UILabel!
     @IBOutlet weak var titleLabelField: UILabel!
 }
-

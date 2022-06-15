@@ -3,7 +3,7 @@
 //  VWO
 //
 //  Created by Kaunteya Suryawanshi on 22/09/17.
-//  Copyright © 2017 vwo. All rights reserved.
+//  Copyright © 2017-2022 vwo. All rights reserved.
 //
 
 #import "VWO.h"
@@ -185,7 +185,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
         VWOController.shared.customVariables = customVariables;
     });
 }
-  
+
 
 + (void)pushCustomDimension:(NSString *)customDimensionKey withCustomDimensionValue:(nonnull NSString *)customDimensionValue {
     NSParameterAssert(customDimensionKey);
@@ -193,7 +193,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     dispatch_barrier_async(VWOController.taskQueue, ^{
         [VWOController.shared pushCustomDimension:customDimensionKey withCustomDimensionValue:customDimensionValue];
     });
-    
+
 }
 
 + (NSString *)version {

@@ -3,7 +3,7 @@
 //  VWOTests
 //
 //  Created by Kaunteya Suryawanshi on 16/11/17.
-//  Copyright © 2017 vwo. All rights reserved.
+//  Copyright © 2017-2022 vwo. All rights reserved.
 //
 
 import Foundation
@@ -90,4 +90,3 @@ func JSONFrom(file: String) -> [String: Any] {
     let str = try! String(contentsOf: url, encoding: .utf8)
     return str.jsonToDictionary
 }
-

@@ -3,7 +3,7 @@
 //  VWOTests
 //
 //  Created by Kaunteya Suryawanshi on 03/10/17.
-//  Copyright © 2017 vwo. All rights reserved.
+//  Copyright © 2017-2022 vwo. All rights reserved.
 //
 
 import XCTest
@@ -14,7 +14,7 @@ class VWOTestSwift: XCTestCase {
     override func setUp() { super.setUp() }
 
     override func tearDown() { super.tearDown() }
-    
+
     func testDayOfWeek() {
         let format = DateFormatter(); format.dateFormat = "dd-MM-yyyy"
         XCTAssertEqual((format.date(from: "01-01-2017")! as NSDate).dayOfWeek, 0) // Sunday
@@ -25,7 +25,7 @@ class VWOTestSwift: XCTestCase {
         XCTAssertEqual((format.date(from: "23-06-2017")! as NSDate).dayOfWeek, 5) // Friday
         XCTAssertEqual((format.date(from: "29-07-2017")! as NSDate).dayOfWeek, 6) // Saturday
     }
-    
+
     func testHourOfTheDay() {
         let format = DateFormatter(); format.dateFormat = "dd-MM-yyyy HH:mm"
         XCTAssertEqual((format.date(from: "01-01-2017 01:23")! as NSDate).hourOfTheDay, 1)
