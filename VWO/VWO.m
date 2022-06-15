@@ -12,6 +12,7 @@
 
 static VWOLogLevel kLogLevel = VWOLogLevelError;
 static BOOL kOptOut = NO;
+NSMutableDictionary<NSString *, NSString *> *customVariables;
 
 NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStartedTrackingInCampaignNotification";
 
@@ -176,10 +177,15 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 + (void)setCustomVariable:(NSString *)key withValue:(NSString *)value {
     NSParameterAssert(key);
     NSParameterAssert(value);
+    if (customVariables == nil) {
+        customVariables = [NSMutableDictionary new];
+    }
+    customVariables[key] = value;
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        VWOController.shared.customVariables[key] = value;
+        VWOController.shared.customVariables = customVariables;
     });
 }
+  
 
 + (void)pushCustomDimension:(NSString *)customDimensionKey withCustomDimensionValue:(nonnull NSString *)customDimensionValue {
     NSParameterAssert(customDimensionKey);
