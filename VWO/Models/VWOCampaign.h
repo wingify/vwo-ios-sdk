@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, CampaignStatus) {
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *)campaignDict;
 - (nullable id)variationForKey:(NSString *)key;
+- (nullable id)testKey:(NSString *)testKey;
 - (nullable VWOGoal *)goalForIdentifier:(NSString *)identifier;
 
 @end

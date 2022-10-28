@@ -37,6 +37,7 @@ static NSString *kVWOSDKversion = @"2.10.0";
 
 - (void)trackConversion:(NSString *)goal withValue:(nullable NSNumber *)value;
 - (nullable id)variationForKey:(NSString *)key;
+- (nullable id)variationForKey:(NSString *)key testKey:(NSString *)testKey;
 - (nullable NSString *)variationNameForCampaignTestKey:(NSString *)campaignTestKey;
 - (void)pushCustomDimension:(NSString *) customDimensionKey withCustomDimensionValue:(NSString *) customDimensionValue;
 

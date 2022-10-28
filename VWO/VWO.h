@@ -149,10 +149,37 @@ __deprecated_msg("Use objectForKey:defaultValue instead");
  @param key key whose value is to be fetched
 
  @param defaultValue Value that is to be returned if key is not found
+ 
+ @param testKey Value  is Test key which is used with the variation Key
+
+ @return variation if available else `defaultValue`
+ */
++ (BOOL)boolForKey:(NSString *)key defaultValue:(BOOL)defaultValue testKey:(NSString *)testKey NS_SWIFT_NAME(boolFor(key:defaultValue:testKey:));
+
+
+/**
+ Fetch variation for given key
+
+ @param key key whose value is to be fetched
+
+ @param defaultValue Value that is to be returned if key is not found
 
  @return variation if available else `defaultValue`
  */
 + (int)intForKey:(NSString *)key defaultValue:(int)defaultValue NS_SWIFT_NAME(intFor(key:defaultValue:));
+
+/**
+ Fetch variation for given key
+
+ @param key key whose value is to be fetched
+
+ @param defaultValue Value that is to be returned if key is not found
+ 
+ @param testKey Value  is Test key which is used with the variation Key
+
+ @return variation if available else `defaultValue`
+ */
++ (int)intForKey:(NSString *)key defaultValue:(int)defaultValue testKey:(NSString *)testKey NS_SWIFT_NAME(intFor(key:defaultValue:testKey:));
 
 /**
  Fetch variation for given key
@@ -171,10 +198,36 @@ __deprecated_msg("Use objectForKey:defaultValue instead");
  @param key key whose value is to be fetched
 
  @param defaultValue Value that is to be returned if key is not found
+ 
+ @param testKey Value  is Test key which is used with the variation Key
+
+ @return variation if available else `defaultValue`
+ */
++ (double)doubleForKey:(NSString *)key defaultValue:(double)defaultValue testKey:(NSString *)testKey NS_SWIFT_NAME(doubleFor(key:defaultValue:testKey:));
+
+/**
+ Fetch variation for given key
+
+ @param key key whose value is to be fetched
+
+ @param defaultValue Value that is to be returned if key is not found
 
  @return variation if available else `defaultValue`
  */
 + (nullable NSString *)stringForKey:(NSString *)key defaultValue:(nullable NSString *)defaultValue NS_SWIFT_NAME(stringFor(key:defaultValue:));
+
+/**
+ Fetch variation for given key
+
+ @param key key whose value is to be fetched
+
+ @param defaultValue Value that is to be returned if key is not found
+ 
+ @param testKey Value  is Test key which is used with the variation Key
+
+ @return variation if available else `defaultValue`
+ */
++ (nullable NSString *)stringForKey:(NSString *)key defaultValue:(nullable NSString *)defaultValue testKey:(NSString *)testKey NS_SWIFT_NAME(stringFor(key:defaultValue:testKey:));
 
 
 /**

@@ -266,6 +266,52 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     return finalVariation;
 }
 
+- (id)variationForKey:(NSString *)key testKey:(NSString *)testKey{
+    if (!_initialised) {
+        VWOLogWarning(@"variationForKey(%@) called before launching VWO", key);
+        return nil;
+    }
+
+    if (VWOSocketConnector.isConnectedToBrowser) {
+        if(key && _previewInfo != nil) {
+            VWOLogInfo(@"Socket: got variation %@ for key %@", _previewInfo[key], key);
+            return _previewInfo[key];
+        }
+        VWOLogInfo(@"Socket: got variation nil for key %@", key);
+        return nil;
+    }
+
+    id finalVariation = nil;
+    for (VWOCampaign *campaign in _campaignList) {
+        id variation = [campaign variationForKey:key];
+        
+        BOOL isCampaignTracked = [VWOUserDefaults isTrackingUserForCampaign:campaign];
+
+        id campaginTestKey = [campaign testKey:testKey];
+        if(campaginTestKey){
+            NSString * campTestKey = campaginTestKey;
+            //If variation Key is present in Campaign and testKey matches
+            if (variation && [campTestKey isEqualToString:testKey]) {
+                if (isCampaignTracked) {
+                    finalVariation = variation;
+                } else {
+                    VWOSegmentEvaluator *evaluator = [VWOSegmentEvaluator makeEvaluator:_customVariables];
+                    BOOL canBePart = [evaluator canUserBePartOfCampaignForSegment:campaign.segmentObject];
+                    if (canBePart) {
+                        finalVariation = variation;
+                        [self trackUserForCampaign:campaign];
+                    }
+                }
+            }
+        }
+    }
+    if (finalVariation == [NSNull null]) {
+        // finalVariation can be NSNull if Control is assigned to campaign
+        return nil;
+    }
+    VWOLogDebug(@"Got variation %@ for key %@", finalVariation, key);
+    return finalVariation;
+}
 - (nullable NSString *)variationNameForCampaignTestKey:(NSString *)campaignTestKey {
     if (!_initialised) {
         VWOLogWarning(@"variationNameForCampaignTestKey(%@) called before launching VWO", campaignTestKey);

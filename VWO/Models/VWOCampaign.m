@@ -81,6 +81,11 @@ static NSString * kTestKey              = @"test_key";
     return self;
 }
 
+- (nullable id)testKey:(NSString *)testKey {
+    NSParameterAssert(testKey);
+    //If key does not exist then NSDictionary returns nil
+    return self.testKey;
+}
 - (nullable id)variationForKey:(NSString *)key {
     NSParameterAssert(key);
     //If key does not exist then NSDictionary returns nil
