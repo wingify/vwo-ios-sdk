@@ -109,7 +109,7 @@ static NSString *kSDKversionNumber = @"19";
       @"u"            : VWOUserDefaults.UUID,
       @"s"            : [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount],
       @"random"       : [self randomNumber],
-      @"sId"          : [NSString stringWithFormat:@"%f", date.timeIntervalSince1970],
+       @"sId"          : [NSString stringWithFormat:@"%lu", (unsigned long)date.timeIntervalSince1970],
       @"ed"           : [self extraParametersWithDate:date].toString
       } mutableCopy];
     if (config.customDimension != nil) {
