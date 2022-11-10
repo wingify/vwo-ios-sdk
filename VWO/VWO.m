@@ -110,17 +110,30 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     });
 }
 
-+ (id)objectForKey:(NSString *)key {
++ (id)objectForKey:(NSString *)key{
     NSParameterAssert(key);
     __block id object;
     dispatch_barrier_sync(VWOController.taskQueue, ^{
-        object = [VWOController.shared variationForKey:key];;
+        object = [VWOController.shared variationForKey:key];
     });
     return object;
 }
 
-+ (id)objectForKey:(NSString *)key defaultValue:(nullable id)defaultValue {
++ (id)objectForKey:(NSString *)key testKey:(NSString *)testKey{
+    NSParameterAssert(key);
+    __block id object;
+    dispatch_barrier_sync(VWOController.taskQueue, ^{
+        object = [VWOController.shared variationForKey:key testKey:testKey];
+    });
+    return object;
+}
++ (id)objectForKey:(NSString *)key defaultValue:(nullable id)defaultValue{
     id object = [self objectForKey:key];
+    return object != nil ? object : defaultValue;
+}
+
++ (id)objectForKey:(NSString *)key defaultValue:(nullable id)defaultValue testKey:(NSString *)testKey{
+    id object = [self objectForKey:key testKey:testKey];
     return object != nil ? object : defaultValue;
 }
 
@@ -134,8 +147,18 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     return object != nil ? [object boolValue] : defaultValue;
 }
 
++ (BOOL)boolForKey:(NSString *)key defaultValue:(BOOL)defaultValue testKey:(NSString *)testKey{
+    id object = [self objectForKey:key testKey:testKey];
+    return object != nil ? [object boolValue] : defaultValue;
+}
+
 + (int)intForKey:(NSString *)key defaultValue:(int)defaultValue {
     id object = [self objectForKey:key];
+    return object != nil ? [object intValue] : defaultValue;
+}
+
++ (int)intForKey:(NSString *)key defaultValue:(int)defaultValue testKey:(NSString *)testKey{
+    id object = [self objectForKey:key testKey:testKey];
     return object != nil ? [object intValue] : defaultValue;
 }
 
@@ -144,9 +167,20 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     return object != nil ? [object doubleValue] : defaultValue;
 }
 
++ (double)doubleForKey:(NSString *)key defaultValue:(double)defaultValue testKey:(NSString *)testKey{
+    id object = [self objectForKey:key testKey:testKey];
+    return object != nil ? [object doubleValue] : defaultValue;
+}
+
 + (NSString *)stringForKey:(NSString *)key defaultValue:(NSString *)defaultValue {
     NSParameterAssert(key);
     id object = [self objectForKey:key];
+    return [NSString stringWithFormat:@"%@", object != nil ? object : defaultValue];
+}
+
++ (NSString *)stringForKey:(NSString *)key defaultValue:(NSString *)defaultValue testKey:(NSString *)testKey{
+    NSParameterAssert(key);
+    id object = [self objectForKey:key testKey:testKey];
     return [NSString stringWithFormat:@"%@", object != nil ? object : defaultValue];
 }
 
