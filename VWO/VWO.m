@@ -9,9 +9,14 @@
 #import "VWO.h"
 #import "VWOController.h"
 #import "VWOLogger.h"
+#import "CampaignGroupMapper.h"
+#import "MutuallyExclusiveGroups.h"
+#import "Group.h"
 
 static VWOLogLevel kLogLevel = VWOLogLevelError;
 static BOOL kOptOut = NO;
+static NSString * const CAMPAIGN_TYPE = @"type";
+static NSString * const CAMPAIGN_GROUPS = @"groups";
 NSMutableDictionary<NSString *, NSString *> *customVariables;
 
 NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStartedTrackingInCampaignNotification";
@@ -125,6 +130,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     dispatch_barrier_sync(VWOController.taskQueue, ^{
         object = [VWOController.shared variationForKey:key testKey:testKey];
     });
+    
     return object;
 }
 + (id)objectForKey:(NSString *)key defaultValue:(nullable id)defaultValue{
@@ -192,6 +198,39 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     });
     return variationName;
 
+}
+
++ (NSString *)getCampaign:(NSString *)userId args:(NSDictionary *)args {
+    
+    if (userId == nil || [userId length]==0) {
+        // use the (default | random) user id
+        userId = [VWOController.shared getUserId];
+    }
+    
+    VWOCampaignArray * campaignsData = [VWOController.shared getCampaignData];
+    
+//    VWOCampaign *megGroupsData = [[VWOCampaign alloc] initWithDictionary:];
+    
+    if (campaignsData != nil && campaignsData.count > 0) {
+        for (int i = 0; i < campaignsData.count; i++) {
+            @try {
+                VWOCampaign *groupDataItem = campaignsData[i];
+//                if (groupDataItem[CAMPAIGN_TYPE] == CAMPAIGN_GROUPS) {
+//                    megGroupsData = groupDataItem;
+//                   break;
+//                }
+            }
+            @catch (NSException *exception)  {
+             //   VWOLog.e(VWOLog.DATA_LOGS, exception, true, false);
+            }
+        }
+    }
+
+//    NSDictionary<NSString *, Group*> *mappedData = [CampaignGroupMapper createAndGetGroups: megGroupsData];
+
+    MutuallyExclusiveGroups *meg = [[MutuallyExclusiveGroups alloc] initMutuallyExclusiveGroups:userId];
+//    [meg addGroups:mappedData];
+    return [meg getCampaign:args jsonData:campaignsData];
 }
 
 + (void)trackConversion:(NSString *)goal {

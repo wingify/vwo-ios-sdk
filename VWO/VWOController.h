@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VWOCampaignFetcher.h"
 
 @class VWOSegmentEvaluator, VWOUserDefaults;
 
@@ -38,6 +39,8 @@ static NSString *kVWOSDKversion = @"2.11.0";
 - (void)trackConversion:(NSString *)goal withValue:(nullable NSNumber *)value;
 - (nullable id)variationForKey:(NSString *)key;
 - (nullable id)variationForKey:(NSString *)key testKey:(NSString *)testKey;
+- (VWOCampaignArray *)getCampaignData;
+-(NSString *) getUserId;
 - (nullable NSString *)variationNameForCampaignTestKey:(NSString *)campaignTestKey;
 - (void)pushCustomDimension:(NSString *) customDimensionKey withCustomDimensionValue:(NSString *) customDimensionValue;
 

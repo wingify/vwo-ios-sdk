@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "VWOGoal.h"
 #import "VWOVariation.h"
+#import "VWOGroup.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,6 +29,8 @@ typedef NS_ENUM(NSInteger, CampaignStatus) {
 @property VWOVariation *variation;
 @property NSArray<VWOGoal *> *goals;
 @property (nullable) NSDictionary *segmentObject;
+@property (atomic) NSString *type;
+@property VWOGroup * group;
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *)campaignDict;
 - (nullable id)variationForKey:(NSString *)key;
