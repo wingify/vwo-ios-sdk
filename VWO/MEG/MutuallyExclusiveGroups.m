@@ -8,7 +8,7 @@
 
 #import "MutuallyExclusiveGroups.h"
 #import "MurmurHash.h"
-
+#import "VWOCampaign.h"
 #include <math.h>
 #import "Group.h"
 
@@ -160,16 +160,23 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
         @try {
 
             NSDictionary *groupDataItem = campaignsData[i];
-
-                        if(groupDataItem[CAMPAIGN_TYPE] == TYPE_VISUAL_AB) {
-
-                            if(groupDataItem[CAMPAIGN_TEST_KEY] == testKey){
-
-                                return groupDataItem[CAMPAIGN_ID];
-
-                            }
-
-                        }
+            VWOCampaign *groupData = groupDataItem; //[groupDataItem objectForKey:CAMPAIGN_TYPE] ;
+            
+            if([[groupData type] isEqual:TYPE_VISUAL_AB]){
+                if([[groupData  testKey] isEqual: testKey]){
+                    return  [NSString stringWithFormat:@"%d",[groupData iD]];
+                }
+            }
+            
+//                        if( [[groupDataItem objectForKey:CAMPAIGN_TYPE] isEqual: TYPE_VISUAL_AB]) {
+//
+//                            if([[groupDataItem objectForKey:CAMPAIGN_TEST_KEY] isEqual: testKey]){
+//
+//                                return [groupDataItem objectForKey:CAMPAIGN_ID];
+//
+//                            }
+//
+//                        }
 
         }
 
@@ -202,18 +209,26 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
     for (int i = 0; i < campaignsData.count; i++) {
 
         @try {
-
             NSDictionary *groupDataItem = campaignsData[i];
-
-                        if(groupDataItem[CAMPAIGN_TYPE] == TYPE_VISUAL_AB) {
-
-                            if(groupDataItem[CAMPAIGN_ID] == campaignId){
-
-                                return groupDataItem[CAMPAIGN_TEST_KEY];
-
-                            }
-
-                        }
+            VWOCampaign *groupData = groupDataItem;
+            
+            if([[groupData type] isEqual:TYPE_VISUAL_AB]){
+                if([[NSString stringWithFormat:@"%d",[groupData iD]] isEqual: [NSString stringWithFormat:@"%@",campaignId]]){
+                    return  [groupData testKey];
+                }
+            }
+            
+//            NSDictionary *groupDataItem = campaignsData[i];
+//
+//                        if(groupDataItem[CAMPAIGN_TYPE] == TYPE_VISUAL_AB) {
+//
+//                            if(groupDataItem[CAMPAIGN_ID] == campaignId){
+//
+//                                return groupDataItem[CAMPAIGN_TEST_KEY];
+//
+//                            }
+//
+//                        }
 
         }
 

@@ -33,6 +33,7 @@ typedef NS_ENUM(NSInteger, CampaignStatus) {
 @property VWOGroup * group;
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *)campaignDict;
+-(nullable instancetype)setGroups:(NSDictionary *) campaignDict;
 - (nullable id)variationForKey:(NSString *)key;
 - (nullable id)testKey:(NSString *)testKey;
 - (nullable VWOGoal *)goalForIdentifier:(NSString *)identifier;

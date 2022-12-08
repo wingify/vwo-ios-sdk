@@ -229,7 +229,7 @@ NSNumber *weight;
 
     
 
-    NSNumber *weightBinValue = 0;
+    NSNumber *weightBinValue = [NSNumber numberWithInt:0];
 
     
 

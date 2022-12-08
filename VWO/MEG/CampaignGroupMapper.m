@@ -8,7 +8,7 @@
 
 #import "CampaignGroupMapper.h"
 #import "VWOLogger.h"
-
+#import "VWOCampaign.h"
 #import "Group.h"
 
 @implementation CampaignGroupMapper
@@ -76,9 +76,11 @@ float m = 1.0;
     NSDictionary *jsonGroups = nil;
     
     @try {
-        jsonGroups = jsonObject[KEY_GROUPS];
+        VWOCampaign *groupDict = [jsonObject objectForKey:KEY_GROUPS] ;
+        jsonGroups =  groupDict.group.groups;  
     }
     @catch (NSException *exception) {
+        NSLog(@"Group check exception %@",exception);
        // VWOLog.e(VWOLog.DATA_LOGS, exception, true, false);
     }
     return jsonGroups;

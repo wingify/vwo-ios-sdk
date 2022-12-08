@@ -41,6 +41,8 @@ class PhoneListVC: UIViewController {
         let destination = segue.destination as! PhoneDetailVC
         let t = tableView.indexPathForSelectedRow!.row
         VWO.trackConversion("productView")
+      let abcd =  VWO.getCampaign("userId", args: ["test_key":"37","groupId":"1"])
+        print("mutual exp ...... \(abcd)")
         destination.phone = phoneList[t]
     }
 

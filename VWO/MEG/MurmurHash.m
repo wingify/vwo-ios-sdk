@@ -74,7 +74,13 @@
  * @return 32 bit hash of the given string
  */
 +(int)hash32:(NSString *) text{
-    NSArray* arrayOfStrings = [text componentsSeparatedByString:@""];
+//    NSArray* arrayOfStrings = [text componentsSeparatedByString:@""];
+    
+    NSMutableArray *arrayOfStrings = [[NSMutableArray alloc] initWithCapacity:[text length]];
+    for (int i=0; i < [text length]; i++) {
+        NSString *ichar  = [NSString stringWithFormat:@"%C", [text characterAtIndex:i]];
+        [arrayOfStrings addObject:ichar];
+    }
     return [self hash32:arrayOfStrings length:(int)[text length]];
 }
 

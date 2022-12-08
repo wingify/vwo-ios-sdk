@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSDictionary<NSNumber *, NSNumber *>  * campaignGroups;
 @property NSDictionary<NSNumber *, id >  * groups;
 
-- (instancetype)initWithDictionary:(NSDictionary *)groupDict
+- (instancetype)initWithDictionary:(NSDictionary *)groupDict;
 
 @end
 

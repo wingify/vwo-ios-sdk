@@ -102,6 +102,13 @@ static NSString * CAMPAIGN_GROUPS = @"groups";
     return self;
 }
 
+-(nullable instancetype)setGroups:(NSDictionary *) campaignDict{
+    self.type = CAMPAIGN_GROUPS;
+    self.group = [[VWOGroup alloc] initWithDictionary:campaignDict];
+    
+    return  self;
+}
+
 - (nullable id)testKey:(NSString *)testKey {
     NSParameterAssert(testKey);
     //If key does not exist then NSDictionary returns nil
