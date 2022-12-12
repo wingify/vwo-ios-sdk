@@ -12,14 +12,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Group : NSObject
 
-- (NSString *) getCampaignForRespectiveWeight: (NSNumber *) weight;
-- (int) getId;
 
+@property(nonatomic,assign)int Id;
+@property(nonatomic,strong)NSString *name;
+@property(nonatomic,strong)NSMutableArray<NSString *> *campaignList;
+@property(nonatomic,strong)NSMutableDictionary<NSString *, id> *weightMap;
+@property(nonatomic,strong)NSNumber *weight;
+
+- (NSString *) getCampaignForRespectiveWeight: (NSNumber *) weight;
+- (NSMutableArray<NSString *> *) getCampaigns;
 - (NSString *) getNameOnlyIfPresent: (NSString *) toSearch;
 - (NSString *) getOnlyIfPresent: (NSString *) toSearch;
 - (void) addCampaign: (NSString *) campaign;
-- (void) setName: (NSString *) Name;
-- (void) setId: (int) Id;
 @end
 
 NS_ASSUME_NONNULL_END

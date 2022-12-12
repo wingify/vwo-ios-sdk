@@ -29,8 +29,8 @@ float m = 1.0;
         jsonCampaignGroups = jsonObject[KEY_CAMPAIGN_GROUPS];
     }
     @catch (NSException *exception) {
-        //VWOLogError(NSString *format, ...)
-        //VWOLog.e(VWOLog.DATA_LOGS, exception, true, false);
+        VWOLogDebug(@"MutuallyExclusive  %@", exception);
+        
     }
     return jsonCampaignGroups;
 }
@@ -54,20 +54,22 @@ float m = 1.0;
             NSString *groupName = objGroup[KEY_NAME];
             
             Group *group = [[Group alloc]init];
-            [group setName: groupName];
-            [group setId: key.intValue];
+            group.name = groupName;
+            group.Id = key.intValue;
             
             for (int i = 0; i < arrCampaigns.count; i++) {
                 [group addCampaign:arrCampaigns[i]];
             }
-            
+            VWOLogDebug(@"MutuallyExclusive  Added Group Id %d", group.Id);
+            VWOLogDebug(@"MutuallyExclusive  Added Group Campaign %@", group.getCampaigns);
+
             [groups setObject:group forKey:groupName];
             index++;
         }
     }
     
     @catch (NSException *exception) {
-       // VWOLog.e(VWOLog.DATA_LOGS, exception, true, false);
+        VWOLogDebug(@"MutuallyExclusive  error while adding groups %@", exception);
     }
     return groups;
 }
@@ -80,8 +82,7 @@ float m = 1.0;
         jsonGroups =  groupDict.group.groups;  
     }
     @catch (NSException *exception) {
-        NSLog(@"Group check exception %@",exception);
-       // VWOLog.e(VWOLog.DATA_LOGS, exception, true, false);
+        VWOLogDebug(@"MutuallyExclusive  %@", exception);
     }
     return jsonGroups;
 }

@@ -204,13 +204,11 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 + (NSString *)getCampaign:(NSString *)userId args:(NSDictionary *)args {
     
     if (userId == nil || [userId length]==0) {
-        // use the (default | random) user id
         userId = [VWOController.shared getUserId];
     }
     
     VWOCampaignArray * campaignsData = [VWOController.shared getCampaignData];
     
-//    VWOCampaign *megGroupsData = [[VWOCampaign alloc] initWithDictionary:args];
     NSMutableDictionary *megGroupsData = [[NSMutableDictionary alloc] init];
 
     if (campaignsData != nil && campaignsData.count > 0) {
@@ -219,12 +217,12 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
                 VWOCampaign *groupDataItem = campaignsData[i];
                 if ([groupDataItem type] == CAMPAIGN_GROUPS) {
                     [megGroupsData setObject:groupDataItem forKey:@"groups"];
-//                    megGroupsData[@"groups"] = groupDataItem;
                    break;
                 }
             }
             @catch (NSException *exception)  {
-             //   VWOLog.e(VWOLog.DATA_LOGS, exception, true, false);
+                VWOLogDebug(@"MutuallyExclusive  %@", exception);
+           
             }
         }
     }

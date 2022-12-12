@@ -11,6 +11,7 @@
 #import "VWOCampaign.h"
 #include <math.h>
 #import "Group.h"
+#import "VWOLogger.h"
 
 @implementation MutuallyExclusiveGroups
 
@@ -77,8 +78,7 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
         
         // there must be at least one type of id
         // either GROUP or CAMPAIGN
-
-          //VWOLog.w(VWOLog.MEG_LOGS, "The groupId and campaignId ; both are null.", false);
+        VWOLogDebug(@"MutuallyExclusive The groupId and campaignId both are null");
 
         return nil;
     }
@@ -92,26 +92,24 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
     BOOL groupIdIsNotPresentInArgs = (groupId == nil || groupId.length == 0);
 
     if(groupIdIsNotPresentInArgs) {
+        VWOLogDebug(@"MutuallyExclusive The groupId was not found in the mapping so just picking the specific campaign [ %@ ]",campaignId);
 
-                //VWOLog.i(VWOLog.MEG_LOGS, ID_GROUP + " was not found in the mapping so just picking the specific campaign [ " + campaignId + " ]", false);
 
        // if there is no sign of group we can simply use the campaign matching logic
 
               campaign = [self getCampaignFromCampaignId: userId campaign: campaignId];
+        
+        VWOLogDebug(@"MutuallyExclusive Campaign selected from the mutually exclusive group is [ %@ ]",campaign);
 
-                //VWOLog.i(VWOLog.MEG_LOGS, "Campaign selected from the mutually exclusive group is [ " + campaign + " ]", false);
 
         TestKey = [self getTestKeyFromCampaignId: campaign campaignsData:campaignsData];
-
-               // VWOLog.i(VWOLog.MEG_LOGS, "Test-key of the campaign selected from the mutually exclusive group is [ " + TestKey + " ]", false);
-
+        VWOLogDebug(@"MutuallyExclusive Test-key of the campaign selected from the mutually exclusive group is [ %@ ]",TestKey);
         
 
         return TestKey;
 
     }
-
-      //  VWOLog.d(VWOLog.MEG_LOGS, "Because there was groupId present, we are going to prioritize it and get a campaign from that group", false);
+    VWOLogDebug(@"MutuallyExclusive Because there was groupId present, we are going to prioritize it and get a campaign from that group");
 
     @try{
 
@@ -120,8 +118,7 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
     }
 
     @catch(NSException *exception) {
-
-      //  VWOLog.e(VWOLog.DATA_LOGS, exception, true, false);
+        VWOLogDebug(@"MutuallyExclusive %@",exception);
 
         return nil;
 
@@ -130,12 +127,10 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
     
 
     campaign = [self getCampaignFromSpecificGroup:groupName];
-
-     //  VWOLog.i(VWOLog.MEG_LOGS, "Selected campaign from [ " + groupName + " ] is [ " + campaign + " ]", false);
+    VWOLogDebug(@"MutuallyExclusive Selected campaign from [ %@ ] is [ %@ ]",groupName,campaign);
 
     TestKey = [self getTestKeyFromCampaignId:campaign campaignsData:campaignsData];
-
-      //  VWOLog.i(VWOLog.MEG_LOGS, "Test-key of the campaign selected from the mutually exclusive group is [ " + TestKey + " ]", false);
+    VWOLogDebug(@"MutuallyExclusive Test-key of the campaign selected from the mutually exclusive group is [ %@ ]",TestKey);
 
     return TestKey;
 
@@ -167,22 +162,12 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
                     return  [NSString stringWithFormat:@"%d",[groupData iD]];
                 }
             }
-            
-//                        if( [[groupDataItem objectForKey:CAMPAIGN_TYPE] isEqual: TYPE_VISUAL_AB]) {
-//
-//                            if([[groupDataItem objectForKey:CAMPAIGN_TEST_KEY] isEqual: testKey]){
-//
-//                                return [groupDataItem objectForKey:CAMPAIGN_ID];
-//
-//                            }
-//
-//                        }
+
 
         }
 
         @catch(NSException *exception) {
-
-           //    VWOLog.e(VWOLog.DATA_LOGS, exception, true, false);
+            VWOLogDebug(@"MutuallyExclusive  %@ ",exception);
 
         }
 
@@ -217,24 +202,13 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
                     return  [groupData testKey];
                 }
             }
-            
-//            NSDictionary *groupDataItem = campaignsData[i];
-//
-//                        if(groupDataItem[CAMPAIGN_TYPE] == TYPE_VISUAL_AB) {
-//
-//                            if(groupDataItem[CAMPAIGN_ID] == campaignId){
-//
-//                                return groupDataItem[CAMPAIGN_TEST_KEY];
-//
-//                            }
-//
-//                        }
+        
 
         }
 
         @catch(NSException *exception) {
-
-             //  VWOLog.e(VWOLog.DATA_LOGS, exception, true, false);
+            VWOLogDebug(@"MutuallyExclusive  %@ ",exception);
+            
 
         }
 
@@ -263,6 +237,8 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
     
 
     NSNumber *murmurHash = [self getMurMurHash:userId];
+    
+    NSLog(@"Murmur hash value %@",murmurHash);
 
     // If the campaign-user mapping is present in the App storage, get the decision from there. Otherwise, go to the next step
 
@@ -272,7 +248,7 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
 
     NSNumber *normalizedValue = [self getNormalizedValue:murmurHash];
 
-       // VWOLog.d(VWOLog.MEG_LOGS, "Normalized value for user with userID -> " + userId + " is [ " + normalizedValue + " ] ", false);
+    VWOLogDebug(@"MutuallyExclusive  Normalized value for user with userID -> %@ is  ",userId,normalizedValue);
 
      Group *interestedGroup = CAMPAIGN_GROUPS[groupName];
 
@@ -290,9 +266,7 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
         Group *group = CAMPAIGN_GROUPS[key];
         
         if(group == nil)return nil;
-        
-        if(groupId == [group getId]){
-            //we found the group we have been searching for
+        if(groupId == group.Id){
             return key;
         }
     }
@@ -304,16 +278,15 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
     NSString *campaignFoundInGroup = [self getCampaignIfPresent:campaign];
 
     if (campaignFoundInGroup == nil) {
-
-             //   VWOLog.i(VWOLog.MEG_LOGS, "The campaign key [ " + campaign + " ] is not present in any of the mutually exclusive groups.", false);
+        VWOLogDebug(@"MutuallyExclusive  The campaign key [ %@ ] is not present in any of the mutually exclusive groups ",campaign);
 
         return campaign;
 
     }
 
     else {
-
-              //  VWOLog.i(VWOLog.MEG_LOGS, "Found campaign [ " + campaign + " ] in mutually exclusive group [ " + campaignFoundInGroup + " ] ", false);
+        
+        VWOLogDebug(@"MutuallyExclusive  Found campaign [ %@ ] in mutually exclusive group [ %@ ] ",campaign,campaignFoundInGroup);
 
     }
 
@@ -322,23 +295,18 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
     NSNumber *murmurHash = [self getMurMurHash:userId];
 
     // If the campaign-user mapping is present in the App storage, get the decision from there. Otherwise, go to the next step
-
+    VWOLogDebug(@"MutuallyExclusive  Murmur hash for [%@] -> [%@]",userId,murmurHash);
     NSString *murmurHashString = [NSString stringWithFormat: @"%@", murmurHash];
 
     if ([USER_CAMPAIGN objectForKey: murmurHashString]) return USER_CAMPAIGN[murmurHashString];
 
     NSNumber *normalizedValue = [self getNormalizedValue:murmurHash];
-
-      //  VWOLog.d(VWOLog.MEG_LOGS, "Normalized value for user with userID -> " + userId + " is [ " + normalizedValue + " ] ", false);
-
     
-
-    // this group has our campaign
+    VWOLogDebug(@"MutuallyExclusive  Normalized value for user with userID [%@] -> [%@]",userId,normalizedValue);
 
     Group *interestedGroup = CAMPAIGN_GROUPS[campaignFoundInGroup];
 
     
-
     if (interestedGroup == nil)
 
         return nil; // basic null check because NSDictionary is being used
@@ -348,20 +316,17 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
     NSString *finalCampaign = [interestedGroup getCampaignForRespectiveWeight: normalizedValue];
 
     
-
-    if (campaign == finalCampaign) {
-
+    if([campaign isEqual:[NSString stringWithFormat:@"%@",finalCampaign]]){
+        VWOLogDebug(@"MutuallyExclusive  Campaign [%@] found for given weight [%@]",finalCampaign,normalizedValue);
         return finalCampaign;
 
     }
 
     else {
-
-      //  VWOLog.i(VWOLog.MEG_LOGS, "Passed campaign : " + campaign + " does not match calculated campaign " + finalCampaign, false);
+        VWOLogDebug(@"MutuallyExclusive  Passed campaign : [%@] does not match calculated campaign [%@]",campaign,finalCampaign);
 
     }
 
-    
 
     return nil;
 
@@ -403,7 +368,7 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
 
     int max = 100;
 
-    double ratio = murmurHash.intValue / (int) pow(2,31);
+    double ratio = murmurHash.intValue /  pow(2,31);
 
     double multipliedValue = (max * ratio) + 1;
 

@@ -11,87 +11,38 @@
 #import "MutuallyExclusiveGroups.h"
 
 @implementation Group
-static int ID = INT_MIN;
-/**
 
- * Name of the group
+- (NSUInteger) getCampaignSize {
 
- */
+    if(_campaignList == nil){
 
-NSString *name = nil;
-/**
-
- * The list of campaigns assigned for this group.
-
- */
-
-NSMutableArray<NSString *> *campaignList;
-/**
-
- * A simple key value based mechanism to check where our weight belongs to.
-
- */
-
-NSMutableDictionary<NSString *, id> *weightMap = nil;
-NSNumber *weight;
-
-- (int)getId {
-
-    return ID;
-
-}
-
-- (NSString *) getName {
-
-    return name;
-
-}
-
-- (void) setName: (NSString *) Name {
-
-    name = Name;
-
-}
-
-- (void) setId: (int) Id {
-
-    ID = Id;
-
-}
-
-+ (NSUInteger) getCampaignSize {
-
-    if(campaignList == nil){
-
-        campaignList = [NSMutableArray new];
+        self.campaignList = [NSMutableArray new];
 
     }
 
-    return campaignList.count;
+    return self.campaignList.count;
 
 }
 
-+ (NSMutableArray<NSString *> *) getCampaigns {
+- (NSMutableArray<NSString *> *) getCampaigns {
 
-    if(campaignList == nil){
+    if(self.campaignList == nil){
 
-        campaignList = [NSMutableArray new];
+        self.campaignList = [NSMutableArray new];
 
     }
 
-    return campaignList;
+    return self.campaignList;
 
 }
-
-
 
 - (void) calculateWeight {
 
     float total = 100; // because 100%
 
-    NSUInteger totalCampaigns = campaignList.count;
+    NSUInteger totalCampaigns = self.campaignList.count;
 
-    weight = @(total/totalCampaigns);
+    self.weight = @(total/totalCampaigns);
 
 }
 
@@ -100,21 +51,21 @@ NSNumber *weight;
 - (void) addCampaign: (NSString *) campaign {
     CampaignUniquenessTracker *campaignUniquenessTracker = [[CampaignUniquenessTracker alloc] init];
       if([campaignUniquenessTracker groupContainsCampaign:campaign]) {
-          [MutuallyExclusiveGroups log: [NSString stringWithFormat:@"%s/%@/%s/%@/%s/%@/%s", "addCampaign: could not add campaign [ ", campaign, " ] to group [ ", [self getName]," ] because it already belongs to group [ ", [campaignUniquenessTracker getNameOfGroupFor:campaign]," ]"]];
+          [MutuallyExclusiveGroups log: [NSString stringWithFormat:@"%s/%@/%s/%@/%s/%@/%s", "addCampaign: could not add campaign [ ", campaign, " ] to group [ ", self.name," ] because it already belongs to group [ ", [campaignUniquenessTracker getNameOfGroupFor:campaign]," ]"]];
 
         return;
 
     }
 
-    [campaignUniquenessTracker addCampaignAsRegistered:campaign  group:[self getName]];
+    [campaignUniquenessTracker addCampaignAsRegistered:campaign  group:self.name];
 
-    if(campaignList == nil){
+    if(_campaignList == nil){
 
-        campaignList = [NSMutableArray new];
+        _campaignList = [NSMutableArray new];
 
     }
 
-    [campaignList addObject:campaign];
+    [self.campaignList addObject:campaign];
 
     [self calculateWeight];
 
@@ -124,13 +75,13 @@ NSNumber *weight;
 
     NSMutableArray<NSString *> *campaigns = [NSMutableArray new];
 
-    if (campaignList == nil) return;
+    if (self.campaignList == nil) return;
 
-    if (campaignList.count== 0) return;
+    if (_campaignList.count== 0) return;
 
-    for (int i = 0; i < campaignList.count; i++) {
+    for (int i = 0; i < _campaignList.count; i++) {
 
-        NSString *value = campaignList[i];
+        NSString *value = _campaignList[i];
 
         if (value == campaign) continue;
 
@@ -138,26 +89,28 @@ NSNumber *weight;
 
     }
 
-    [campaignList removeAllObjects];
+    [_campaignList removeAllObjects];
 
-    [campaignList addObjectsFromArray:(campaigns)];
+    [_campaignList addObjectsFromArray:(campaigns)];
 
     [self calculateWeight];
 
 }
 
-+ (NSNumber *) getWeight {
-    return weight;
+- (NSNumber *) getWeight {
+    return _weight;
 }
 
 - (NSString *) getOnlyIfPresent: (NSString *) toSearch{
-    if (campaignList == nil) return nil;
+    if (_campaignList == nil) return nil;
 
-    if (campaignList.count== 0) return nil;
+    if (_campaignList.count== 0) return nil;
 
-    for (NSString *campaignId in campaignList) {
+    for (NSString *campaignId in _campaignList) {
 
-        if (toSearch == campaignId) return [NSString stringWithFormat:@"%d",ID];
+        if([toSearch isEqual:[NSString stringWithFormat:@"%@",campaignId]]){
+            return [NSString stringWithFormat:@"%d",_Id];
+        }
 
     }
 
@@ -169,15 +122,15 @@ NSNumber *weight;
 
 - (NSString *) getNameOnlyIfPresent: (NSString *) toSearch{
 
-    if (campaignList == nil) return nil;
+    if (_campaignList == nil) return nil;
 
     
 
-    if (campaignList.count== 0) return nil;
+    if (_campaignList.count== 0) return nil;
 
-    for (NSString *campaignId in campaignList) {
+    for (NSString *campaignId in _campaignList) {
 
-        if (toSearch == campaignId) return name;
+        if (toSearch == campaignId) return _name;
 
     }
 
@@ -191,17 +144,25 @@ NSNumber *weight;
 
     [self createWeightMap];
 
-    NSArray *allKeys = [weightMap allKeys];
+    NSArray *allKeys = [_weightMap allKeys];
 
     for(NSString *key in allKeys) {
 
-        NSMutableArray<NSNumber *> *weightMaxMin = weightMap[key];
+        NSMutableArray<NSNumber *> *weightMaxMin = _weightMap[key];
 
         if (weightMaxMin == nil) continue;
-
-        BOOL weightIsGreaterThanMin = (weight > weightMaxMin[0]);
-
-        BOOL weightIsLessThanMax = (weight <= weightMaxMin[1]);
+        
+        BOOL weightIsGreaterThanMin = false;
+        int maxWeight = [weightMaxMin[0] intValue];
+        if ([weight intValue] > maxWeight){
+            weightIsGreaterThanMin = true;
+        }
+        
+        BOOL weightIsLessThanMax = false;
+        
+        if ([weight intValue] <= [weightMaxMin[1] intValue]){
+            weightIsLessThanMax = true;
+        }
 
         if(weightIsGreaterThanMin && weightIsLessThanMax) {
 
@@ -221,9 +182,9 @@ NSNumber *weight;
 
 - (void) createWeightMap {
 
-    if (weightMap == nil) {
+    if (_weightMap == nil) {
 
-        weightMap = [NSMutableDictionary new];
+        _weightMap = [NSMutableDictionary new];
 
     }
 
@@ -235,17 +196,17 @@ NSNumber *weight;
 
     // A 0 - 33.33 , B 33.33 - 66.33 , C 66.333, 100.0
 
-    for (int i = 0; i < campaignList.count; i++) {
+    for (int i = 0; i < _campaignList.count; i++) {
 
         NSMutableArray<NSNumber *> *range = [NSMutableArray new];
 
         [range addObject:weightBinValue];
 
-        weightBinValue = @(weightBinValue.intValue + weight.intValue);
+        weightBinValue = @(weightBinValue.intValue + _weight.intValue);
 
         [range addObject:weightBinValue];
 
-        [weightMap setObject: range forKey: campaignList[i]];
+        [_weightMap setObject: range forKey: _campaignList[i]];
 
     }
 
