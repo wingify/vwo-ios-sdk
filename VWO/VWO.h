@@ -89,6 +89,7 @@ __deprecated_msg("Use launchForAPIKey:config:completion:failure instead");
                 failure:(nullable void (^)(NSString *error))failureBlock
 NS_SWIFT_NAME(launch(apiKey:config:completion:failure:));
 
++ (NSString *)getCampaign:(NSString *)userId args:(NSDictionary *)args;
 + (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
                              timeout:(NSTimeInterval)timeout
 NS_SWIFT_NAME(launchSynchronously(apiKey:timeout:))

@@ -104,8 +104,15 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 + (VWOCampaignArray *)campaignsFromJSON:(NSArray<NSDictionary *> *)jsonArray {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (NSDictionary *campaignDict in jsonArray) {
+        NSString *type = [campaignDict objectForKey:@"type"];
+        
         VWOCampaign *aCampaign = [[VWOCampaign alloc] initWithDictionary:campaignDict];
         if (aCampaign) [newCampaignList addObject:aCampaign];
+        
+        if ([type  isEqual: @"groups"]){
+            VWOCampaign *aCampaign = [[VWOCampaign alloc] setGroups:campaignDict];
+            if (aCampaign) [newCampaignList addObject:aCampaign];
+        }
     }
     return newCampaignList;
 }

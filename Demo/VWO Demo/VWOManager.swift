@@ -22,13 +22,15 @@ class VWOManager {
         VWO.logLevel = .debug
         let config = VWOConfig()
 //        config.setCustomDimension(customDimensionKey: "userId", customDimensionValue: "userName")
-        config.userID = "userId"
+        config.userID = "9c3832ad-15f9-420a-93cd-a7f2cde0f7bc"
 //        config.isChinaCDN = false
         VWO.launch(apiKey: apiKey, config: config, completion: {
             DispatchQueue.main.async {
 //                VWO.pushCustomDimension(customDimensionKey: "userId", customDimensionValue: "userName")
                 hud.hide(animated: false)
                 SCLAlertView().showSuccess("Success", subTitle: "VWO launched successfully \(apiKey)")
+                
+                
             }
         }, failure: { (errorString) in
             DispatchQueue.main.async {

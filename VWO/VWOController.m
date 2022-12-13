@@ -17,7 +17,6 @@
 #import "VWOUserDefaults.h"
 #import <UIKit/UIKit.h>
 #import "VWOConfig.h"
-#import "VWOCampaignFetcher.h"
 #import "VWOSegmentEvaluator.h"
 
 static NSTimeInterval kMessageQueueFlushInterval         = 10;
@@ -61,6 +60,15 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 
 + (dispatch_queue_t)taskQueue {
     return VWOController.shared->_vwoQueue;
+}
+
+- (VWOCampaignArray *)getCampaignData{
+    return _campaignList;
+}
+
+-(NSString *) getUserId{
+    NSString * userId = _vwoConfig.userID;
+    return userId;
 }
 
 - (void)launchWithAPIKey:(NSString *)apiKey
@@ -312,6 +320,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     VWOLogDebug(@"Got variation %@ for key %@", finalVariation, key);
     return finalVariation;
 }
+
 - (nullable NSString *)variationNameForCampaignTestKey:(NSString *)campaignTestKey {
     if (!_initialised) {
         VWOLogWarning(@"variationNameForCampaignTestKey(%@) called before launching VWO", campaignTestKey);
