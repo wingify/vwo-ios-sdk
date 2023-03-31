@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 // Returning user will be set  when session count is updated
 @property (class, getter=isReturningUser, readonly) BOOL returningUser;
 @property (class, readonly) NSString *UUID;
+@property (class, readonly) NSString *CollectionPrefix;
 
 + (void)setExcludedCampaign:(VWOCampaign *)campaign;
 
@@ -34,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)setDefaultsKey:(NSString *)key;
 + (void)updateUUID:(NSString*)uuid;
++ (void)updateCollectionPrefix:(NSString*)collectionPrefix;
 @end
 
 NS_ASSUME_NONNULL_END

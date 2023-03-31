@@ -79,7 +79,7 @@ static NSString *kSDKversionNumber = @"19";
 - (NSURL *)forFetchingCampaigns:(nullable NSString *)userID {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile" isChinaCDN:_isChinaCDN];
     NSMutableDictionary *paramDict =
-    [@{@"api-version": @"2",
+    [@{@"api-version": @"3",
       @"a"          : _accountID,
       @"dt"         : VWODevice.deviceName,
       @"i"          : _appKey,
@@ -102,6 +102,11 @@ static NSString *kSDKversionNumber = @"19";
                               dateTime:(NSDate *)date
                               config:(VWOConfig *) config {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-user" isChinaCDN:_isChinaCDN];
+    if(VWOUserDefaults.CollectionPrefix != NULL && VWOUserDefaults.CollectionPrefix.length != 0){
+        NSString *path = [NSString stringWithFormat: @"%@/track-user", VWOUserDefaults.CollectionPrefix];
+        components = [NSURLComponents vwoComponentForPath:path isChinaCDN:_isChinaCDN];
+    }
+    
     NSMutableDictionary *paramDict =
     [@{@"experiment_id": [NSString stringWithFormat:@"%d", campaign.iD],
       @"account_id"   : _accountID,
@@ -124,6 +129,11 @@ static NSString *kSDKversionNumber = @"19";
                  campaign:(VWOCampaign *)campaign
                  dateTime:(NSDate *)date {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/track-goal" isChinaCDN:_isChinaCDN];
+    if(VWOUserDefaults.CollectionPrefix != NULL && VWOUserDefaults.CollectionPrefix.length != 0){
+        NSString *path = [NSString stringWithFormat: @"%@/track-goal", VWOUserDefaults.CollectionPrefix];
+        components = [NSURLComponents vwoComponentForPath:path isChinaCDN:_isChinaCDN];
+    }
+    
     NSMutableDictionary <NSString *, NSString *> *paramDict = [NSMutableDictionary new];
     paramDict[@"experiment_id"] = [NSString stringWithFormat:@"%d", campaign.iD];
     paramDict[@"account_id"]    = _accountID;
@@ -144,6 +154,10 @@ static NSString *kSDKversionNumber = @"19";
 
 - (NSURL *)forPushingCustomDimension:(NSString *)customDimensionKey withCustomDimensionValue:(nonnull NSString *)customDimensionValue dateTime:(nonnull NSDate *)date {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile-app/push" isChinaCDN:_isChinaCDN];
+    if(VWOUserDefaults.CollectionPrefix != NULL && VWOUserDefaults.CollectionPrefix.length != 0){
+        NSString *path = [NSString stringWithFormat: @"%@/mobile-app/push", VWOUserDefaults.CollectionPrefix];
+        components = [NSURLComponents vwoComponentForPath:path isChinaCDN:_isChinaCDN];
+    }
     NSMutableDictionary <NSString *, NSString *> *paramDict = [NSMutableDictionary new];
     paramDict[@"account_id"]    = _accountID;
     paramDict[@"u"]             = VWOUserDefaults.UUID;
