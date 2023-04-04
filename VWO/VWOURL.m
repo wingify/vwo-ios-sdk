@@ -14,6 +14,7 @@
 #import "VWO.h"
 #import "NSDictionary+VWO.h"
 #import "NSString+MD5.h"
+#import "VWOConstants.h"
 
 @implementation NSURLComponents (VWO)
     /// Creates URL component with scheme host and path. Eg: https://dacdn.visual.com/path
@@ -79,7 +80,7 @@ static NSString *kSDKversionNumber = @"19";
 - (NSURL *)forFetchingCampaigns:(nullable NSString *)userID {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile" isChinaCDN:_isChinaCDN];
     NSMutableDictionary *paramDict =
-    [@{@"api-version": @"3",
+    [@{@"api-version": ConstAPIVersion,
       @"a"          : _accountID,
       @"dt"         : VWODevice.deviceName,
       @"i"          : _appKey,

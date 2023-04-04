@@ -13,6 +13,7 @@
 #import "VWOSegmentEvaluator.h"
 #import "VWOCampaign.h"
 #import "VWOUserDefaults.h"
+#import "VWOConstants.h"
 
 static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
@@ -114,23 +115,23 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
 + (VWOCampaignArray *)EUCheckAndDataFetching:(NSDictionary *) jsonDict{
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
-    NSLog(@"%@", [jsonDict objectForKey:@"campaigns"] );
-    NSArray<NSDictionary *> *campaignArray = [jsonDict objectForKey:@"campaigns"];
+    NSLog(@"%@", [jsonDict objectForKey: ConstCampaigns] );
+    NSArray<NSDictionary *> *campaignArray = [jsonDict objectForKey: ConstCampaigns];
     VWOLogDebug(@"%@", campaignArray);
     VWOCampaignArray *allCampaigns = [self campaignsFromJSON:campaignArray];
     [newCampaignList addObjectsFromArray:allCampaigns];
     
     //check for EU client or not
-    if([jsonDict objectForKey:@"collectionPrefix"] != NULL){
-        NSString *collectionPrefix = [NSString stringWithFormat: @"/%@", [jsonDict objectForKey:@"collectionPrefix"]];
+    if([jsonDict objectForKey: ConstCollectionPrefix] != NULL){
+        NSString *collectionPrefix = [NSString stringWithFormat: @"/%@", [jsonDict objectForKey: ConstCollectionPrefix]];
         [VWOUserDefaults updateCollectionPrefix: collectionPrefix];
     }else{
         [VWOUserDefaults updateCollectionPrefix: @""];
     }
     
     //checking for availablility of groups in response
-    if([jsonDict objectForKey:@"groups"] != NULL && [jsonDict objectForKey:@"campaignGroups"] != NULL){
-        NSDictionary *groupDict = @{@"groups":[jsonDict objectForKey:@"groups"], @"campaignGroups":[jsonDict objectForKey:@"campaignGroups"] ,@"type": @"groups"};
+    if([jsonDict objectForKey: ConstGroups] != NULL && [jsonDict objectForKey: ConstCampaignGroups] != NULL){
+        NSDictionary *groupDict = @{ConstGroups:[jsonDict objectForKey:ConstGroups], ConstCampaignGroups:[jsonDict objectForKey:ConstCampaignGroups] ,ConstType: ConstGroups};
         VWOCampaign *aCampaign = [[VWOCampaign alloc] setGroups:groupDict];
         if (aCampaign) [newCampaignList addObject:aCampaign];
     }
