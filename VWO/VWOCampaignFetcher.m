@@ -12,6 +12,8 @@
 #import "NSURLSession+Synchronous.h"
 #import "VWOSegmentEvaluator.h"
 #import "VWOCampaign.h"
+#import "VWOUserDefaults.h"
+#import "VWOConstants.h"
 
 static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
@@ -60,10 +62,11 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     }
 
     NSError *jsonerror;
-    NSArray<NSDictionary *> *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror];
-    VWOLogDebug(@"%@", jsonArray);
+    //handle NSDict nd NSArray comparison
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror];
+    VWOLogDebug(@"%@", jsonDict);
 
-    VWOCampaignArray *allCampaigns = [self campaignsFromJSON:jsonArray];
+    VWOCampaignArray *allCampaigns = [self EUCheckAndDataFetching:jsonDict];
 
     if (completionBlock) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -104,16 +107,35 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 + (VWOCampaignArray *)campaignsFromJSON:(NSArray<NSDictionary *> *)jsonArray {
     NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
     for (NSDictionary *campaignDict in jsonArray) {
-        NSString *type = [campaignDict objectForKey:@"type"];
-        
         VWOCampaign *aCampaign = [[VWOCampaign alloc] initWithDictionary:campaignDict];
         if (aCampaign) [newCampaignList addObject:aCampaign];
-        
-        if ([type  isEqual: @"groups"]){
-            VWOCampaign *aCampaign = [[VWOCampaign alloc] setGroups:campaignDict];
-            if (aCampaign) [newCampaignList addObject:aCampaign];
-        }
     }
+    return newCampaignList;
+}
+
++ (VWOCampaignArray *)EUCheckAndDataFetching:(NSDictionary *) jsonDict{
+    NSMutableArray<VWOCampaign *> *newCampaignList = [NSMutableArray new];
+    NSLog(@"%@", [jsonDict objectForKey: ConstCampaigns] );
+    NSArray<NSDictionary *> *campaignArray = [jsonDict objectForKey: ConstCampaigns];
+    VWOLogDebug(@"%@", campaignArray);
+    VWOCampaignArray *allCampaigns = [self campaignsFromJSON:campaignArray];
+    [newCampaignList addObjectsFromArray:allCampaigns];
+    
+    //check for EU client or not
+    if([jsonDict objectForKey: ConstCollectionPrefix] != NULL){
+        NSString *collectionPrefix = [NSString stringWithFormat: @"/%@", [jsonDict objectForKey: ConstCollectionPrefix]];
+        [VWOUserDefaults updateCollectionPrefix: collectionPrefix];
+    }else{
+        [VWOUserDefaults updateCollectionPrefix: @""];
+    }
+    
+    //checking for availablility of groups in response
+    if([jsonDict objectForKey: ConstGroups] != NULL && [jsonDict objectForKey: ConstCampaignGroups] != NULL){
+        NSDictionary *groupDict = @{ConstGroups:[jsonDict objectForKey:ConstGroups], ConstCampaignGroups:[jsonDict objectForKey:ConstCampaignGroups] ,ConstType: ConstGroups};
+        VWOCampaign *aCampaign = [[VWOCampaign alloc] setGroups:groupDict];
+        if (aCampaign) [newCampaignList addObject:aCampaign];
+    }
+    
     return newCampaignList;
 }
 

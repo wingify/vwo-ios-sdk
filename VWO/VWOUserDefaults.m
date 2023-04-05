@@ -15,6 +15,7 @@ static NSString * kGoalsMarked     = @"goalsMarked";
 static NSString * kSessionCount    = @"sessionCount";
 static NSString * kReturningUser   = @"returningUser";
 static NSString * kUUID            = @"UUID";
+static NSString * kCollectionPrefix= @"collectionPrefix";
 
 static NSString * _userDefaultsKey;
 
@@ -93,6 +94,10 @@ static NSString * _userDefaultsKey;
     return [self objectForKey:kUUID];
 }
 
++ (NSString *)CollectionPrefix {
+    return [self objectForKey:kCollectionPrefix];
+}
+
 + (void)setSessionCount:(NSUInteger)count {
     [self setObject:@(count) forKey:kSessionCount];
     [self updateIsReturningUser];
@@ -108,6 +113,10 @@ static NSString * _userDefaultsKey;
 
 + (void)updateUUID:(NSString *)uuid {
     [self setObject:uuid forKey:kUUID];
+}
+
++(void)updateCollectionPrefix:(NSString *)collectionPrefix {
+    [self setObject:collectionPrefix forKey:kCollectionPrefix];
 }
 
 + (NSUInteger)sessionCount {
