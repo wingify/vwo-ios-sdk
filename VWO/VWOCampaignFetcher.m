@@ -65,7 +65,8 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     //handle NSDict nd NSArray comparison
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror];
     VWOLogDebug(@"%@", jsonDict);
-
+    
+    [self checkForIsEventArchEnabledFlag:jsonDict];
     VWOCampaignArray *allCampaigns = [self EUCheckAndDataFetching:jsonDict];
 
     if (completionBlock) {
@@ -137,6 +138,17 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     }
     
     return newCampaignList;
+}
+
++(void)checkForIsEventArchEnabledFlag:(NSDictionary *)jsonDict{
+    BOOL isEventArchEnabledFlag = [[jsonDict objectForKey:ConstIsEventArchEnabled] boolValue];
+//    BOOL *isEventArchEnabledFlag = [jsonDict objectForKey: ConstIsEventArchEnabled];
+    if(isEventArchEnabledFlag != NULL && isEventArchEnabledFlag == YES){
+        [VWOUserDefaults updateIsEventArchEnabled: EventArchEnabled];
+    }
+    else{
+        [VWOUserDefaults updateIsEventArchEnabled: EventArchDisabled];
+    }
 }
 
 @end

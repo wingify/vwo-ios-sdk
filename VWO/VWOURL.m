@@ -125,6 +125,53 @@ static NSString *kSDKversionNumber = @"19";
     return components.URL;
 }
 
+- (NSURL *)forMakingUserPartOfCampaignEventArch:(VWOCampaign *)campaign
+                              dateTime:(NSDate *)date
+                              config:(VWOConfig *) config{
+    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/events/t" isChinaCDN:_isChinaCDN];
+    if(VWOUserDefaults.CollectionPrefix != NULL && VWOUserDefaults.CollectionPrefix.length != 0){
+        NSString *path = [NSString stringWithFormat: @"%@/events/t", VWOUserDefaults.CollectionPrefix];
+        components = [NSURLComponents vwoComponentForPath:path isChinaCDN:_isChinaCDN];
+    }
+    
+    NSString *currentTimeInSec = [NSString stringWithFormat:@"%lu", (unsigned long)date.timeIntervalSince1970];
+    NSString *currentTimeInMilli = [NSString stringWithFormat:@"%lu", (unsigned long)(date.timeIntervalSince1970 * 1000)];
+    
+    NSMutableDictionary *paramDict =
+    [@{APIEventName: TrackUserEventName,
+       AccountID: _accountID,
+       APIKey: [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
+       CurrentTimeInMillis: currentTimeInMilli,
+       Random: [self randomNumber]
+     } mutableCopy];
+    
+    components.queryItems = [paramDict toQueryItems];
+    
+    NSMutableDictionary *EventArchDict = @{
+        D: @{
+            MessageID: [NSString stringWithFormat:@"%@-%@", VWOUserDefaults.UUID, currentTimeInSec],
+            VisitorID: VWOUserDefaults.UUID,
+            SessionID: currentTimeInSec,
+            Event: @{
+                EventProps: @{
+                    SDKName: SDKNameValue,
+                    SDKVersion: kSDKversionNumber,
+                    CampaignID: [NSString stringWithFormat:@"%d", campaign.iD],
+                    VariationID: [NSString stringWithFormat:@"%d", campaign.variation.iD],
+                    IsFirst: @1 //always 1
+                },
+                Data360EventName: TrackUserEventName,
+                EventTime: currentTimeInMilli
+            }
+        }
+    };
+    
+    NSString *urlString = [components.URL absoluteString];
+    [VWOUserDefaults updateEventArchData:urlString valueDict:EventArchDict];
+    
+    return components.URL;
+}
+
 - (NSURL *)forMarkingGoal:(VWOGoal *)goal
                 withValue:(NSNumber *)goalValue
                  campaign:(VWOCampaign *)campaign
@@ -153,7 +200,71 @@ static NSString *kSDKversionNumber = @"19";
     return components.URL;
 }
 
-- (NSURL *)forPushingCustomDimension:(NSString *)customDimensionKey withCustomDimensionValue:(nonnull NSString *)customDimensionValue dateTime:(nonnull NSDate *)date {
+- (NSURL *)forMarkingGoalEventArch:(VWOGoal *)goal
+                          withValue:(NSNumber *)goalValue
+                          campaign:(VWOCampaign *)campaign
+                          dateTime:(NSDate *)date {
+    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/events/t" isChinaCDN:_isChinaCDN];
+    if(VWOUserDefaults.CollectionPrefix != NULL && VWOUserDefaults.CollectionPrefix.length != 0){
+        NSString *path = [NSString stringWithFormat: @"%@/events/t", VWOUserDefaults.CollectionPrefix];
+        components = [NSURLComponents vwoComponentForPath:path isChinaCDN:_isChinaCDN];
+    }
+    
+    NSString *currentTimeInSec = [NSString stringWithFormat:@"%lu", (unsigned long)date.timeIntervalSince1970];
+    NSString *currentTimeInMilli = [NSString stringWithFormat:@"%lu", (unsigned long)(date.timeIntervalSince1970 * 1000)];
+    
+    NSMutableDictionary *paramDict =
+    [@{APIEventName: TrackGoalEventName,
+       AccountID: _accountID,
+       APIKey: [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
+       CurrentTimeInMillis: currentTimeInMilli,
+       Random: [self randomNumber]
+     } mutableCopy];
+    
+    components.queryItems = [paramDict toQueryItems];
+    
+    NSDictionary *VWOMetaDict = @{
+        Metric: @{
+            [NSString stringWithFormat:@"id_%d", campaign.iD]: [NSString stringWithFormat:@"g_%d", goal.iD]
+        }
+    };
+    
+    if (goalValue != nil) {
+        VWOMetaDict = @{
+            Metric: @{
+                [NSString stringWithFormat:@"id_%d", campaign.iD]: [NSString stringWithFormat:@"g_%d", goal.iD]
+            },
+            goal.revenueProp : goalValue
+        };
+    }
+    
+    NSMutableDictionary *EventArchDict = @{
+        D: @{
+            MessageID: [NSString stringWithFormat:@"%@-%@", VWOUserDefaults.UUID, currentTimeInSec],
+            VisitorID: VWOUserDefaults.UUID,
+            SessionID: currentTimeInSec,
+            Event: @{
+                EventProps: @{
+                    SDKName: SDKNameValue,
+                    SDKVersion: kSDKversionNumber,
+                    IsCustomEvent: @true,
+                    VWOMeta: VWOMetaDict
+                },
+                Data360EventName: TrackGoalEventName,
+                EventTime: currentTimeInMilli
+            }
+        }
+    };
+    
+    NSString *urlString = [components.URL absoluteString];
+    [VWOUserDefaults updateEventArchData:urlString valueDict:EventArchDict];
+    
+    return components.URL;
+}
+
+- (NSURL *)forPushingCustomDimension:(NSString *)customDimensionKey
+                            withCustomDimensionValue:(nonnull NSString *)customDimensionValue
+                            dateTime:(nonnull NSDate *)date {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile-app/push" isChinaCDN:_isChinaCDN];
     if(VWOUserDefaults.CollectionPrefix != NULL && VWOUserDefaults.CollectionPrefix.length != 0){
         NSString *path = [NSString stringWithFormat: @"%@/mobile-app/push", VWOUserDefaults.CollectionPrefix];
@@ -168,6 +279,61 @@ static NSString *kSDKversionNumber = @"19";
     paramDict[@"tags"]          = [NSString stringWithFormat:@"{\"u\":{\"%@\":\"%@\"}}", customDimensionKey, customDimensionValue];
 
     components.queryItems = [paramDict toQueryItems];
+    return components.URL;
+}
+
+- (NSURL *)forPushingCustomDimensionEventArch:(NSString *)customDimensionKey
+                                withCustomDimensionValue:(nonnull NSString *)customDimensionValue
+                                dateTime:(nonnull NSDate *)date {
+    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/events/t" isChinaCDN:_isChinaCDN];
+    if(VWOUserDefaults.CollectionPrefix != NULL && VWOUserDefaults.CollectionPrefix.length != 0){
+        NSString *path = [NSString stringWithFormat: @"%@/events/t", VWOUserDefaults.CollectionPrefix];
+        components = [NSURLComponents vwoComponentForPath:path isChinaCDN:_isChinaCDN];
+    }
+    
+    NSString *currentTimeInSec = [NSString stringWithFormat:@"%lu", (unsigned long)date.timeIntervalSince1970];
+    NSString *currentTimeInMilli = [NSString stringWithFormat:@"%lu", (unsigned long)(date.timeIntervalSince1970 * 1000)];
+    
+    NSMutableDictionary *paramDict =
+    [@{APIEventName: PushEventName,
+       AccountID: _accountID,
+       APIKey: [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
+       CurrentTimeInMillis: currentTimeInMilli,
+       Random: [self randomNumber]
+     } mutableCopy];
+    
+    components.queryItems = [paramDict toQueryItems];
+    
+    NSMutableDictionary *EventArchDict = @{
+        D: @{
+            MessageID: [NSString stringWithFormat:@"%@-%@", VWOUserDefaults.UUID, currentTimeInSec],
+            VisitorID: VWOUserDefaults.UUID,
+            SessionID: currentTimeInSec,
+            Event: @{
+                EventProps: @{
+                    SDKName: SDKNameValue,
+                    SDKVersion: kSDKversionNumber,
+                    IsCustomEvent: @true,
+                    Visitor: @{
+                        VisitorProps: @{
+                            customDimensionKey: customDimensionValue    ///[tagkey]: [tagValue]
+                        }
+                    }
+                },
+                Data360EventName: PushEventName,
+                EventTime: currentTimeInMilli
+            },
+            Visitor: @{
+                VisitorProps: @{
+                    customDimensionKey: customDimensionValue    ///[tagkey]: [tagValue]
+                }
+            }
+        }
+    };
+    
+    NSString *urlString = [components.URL absoluteString];
+    [VWOUserDefaults updateEventArchData:urlString valueDict:EventArchDict];
+    
     return components.URL;
 }
 

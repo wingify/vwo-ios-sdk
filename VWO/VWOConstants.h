@@ -14,6 +14,47 @@ extern NSString const *ConstCampaignGroups;
 extern NSString const *ConstType;
 extern NSString const *ConstCampaigns;
 extern NSString const *ConstCollectionPrefix;
+extern NSString const *ConstIsEventArchEnabled;
 extern NSString const *ConstAPIVersion;
 
+@end
+
+@interface VWOData360Constants : NSObject
+
+extern NSString const *ConstGroups;
+
+extern NSString const *UserAgentValue;
+extern NSString const *EventArchEnabled;
+extern NSString const *EventArchDisabled;
+
+// MARK: - QueryParamsEventArchEnabled
+extern NSString const *APIEventName;
+extern NSString const *TrackUserEventName;
+extern NSString const *TrackGoalEventName;
+extern NSString const *PushEventName;
+extern NSString const *AccountID;
+extern NSString const *APIKey;
+extern NSString const *CurrentTimeInMillis;
+extern NSString const *Random;
+
+// MARK: - Data360PayloadParams
+extern NSString const *D;
+extern NSString const *MessageID;// uuid-currentTimeStamp in seconds
+extern NSString const *VisitorID;//uuid
+extern NSString const *SessionID;//current timestamp in seconds
+extern NSString const *Event;
+extern NSString const *EventProps;
+extern NSString const *SDKName;//name of the sdk
+extern NSString const *SDKNameValue;
+extern NSString const *SDKVersion;//version of the sdk
+extern NSString const *CampaignID;//id of the campaign
+extern NSString const *VariationID;//id of the variation
+extern NSString const *IsFirst;//this will be sent as 1 always
+extern NSString const *IsCustomEvent;//this will always be sent as true
+extern NSString const *VWOMeta;
+extern NSString const *Metric;
+extern NSString const *Visitor;
+extern NSString const *VisitorProps;
+extern NSString const *Data360EventName;//event name
+extern NSString const *EventTime;//current timestamp in milliseconds
 @end

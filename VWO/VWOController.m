@@ -10,6 +10,7 @@
 #import "VWOSocketConnector.h"
 #import "VWOLogger.h"
 #import "VWOCampaign.h"
+#import "VWOConstants.h"
 #import "VWOURLQueue.h"
 #import "VWOFile.h"
 #import "VWOURL.h"
@@ -219,10 +220,23 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
         if (matchedGoal) {
             if ([VWOUserDefaults isTrackingUserForCampaign:campaign]) {
                 [VWOUserDefaults markGoalConversion:matchedGoal inCampaign:campaign];
-                NSURL *url = [_vwoURL forMarkingGoal:matchedGoal
-                                          withValue:value
-                                           campaign:campaign
-                                            dateTime:NSDate.date];
+                
+                NSURL *url = NULL;
+                if((VWOUserDefaults.IsEventArchEnabled != NULL) &&
+                    ([VWOUserDefaults.IsEventArchEnabled isEqualToString:EventArchEnabled])){
+                    //for Event based API calls
+                    url = [_vwoURL forMarkingGoalEventArch:matchedGoal
+                                        withValue:value
+                                         campaign:campaign
+                                          dateTime:NSDate.date];
+                }else{
+                    //for previous version support
+                    url = [_vwoURL forMarkingGoal:matchedGoal
+                                        withValue:value
+                                         campaign:campaign
+                                          dateTime:NSDate.date];
+                }
+                
                 NSString *description = [NSString stringWithFormat:@"Goal %@", matchedGoal];
                 [pendingURLQueue enqueue:url maxRetry:10 description:description];
             } else {
@@ -400,7 +414,17 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
 
     //Send network request and notification only if the campaign is running
 
-    NSURL *url = [_vwoURL forMakingUserPartOfCampaign:campaign dateTime:NSDate.date config: _vwoConfig];
+    NSURL *url = NULL;
+    
+    if((VWOUserDefaults.IsEventArchEnabled != NULL) &&
+       ([VWOUserDefaults.IsEventArchEnabled isEqualToString:EventArchEnabled])){
+        //for Event based API calls
+        url = [_vwoURL forMakingUserPartOfCampaignEventArch:campaign dateTime:NSDate.date config: _vwoConfig];
+    }else{
+        //for previous version support
+        url = [_vwoURL forMakingUserPartOfCampaign:campaign dateTime:NSDate.date config: _vwoConfig];
+    }
+    
     NSString *description = [NSString stringWithFormat:@"Track user %@ %@", campaign, campaign.variation];
     [pendingURLQueue enqueue:url maxRetry:10 description:description];
 
@@ -416,7 +440,18 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
         return;
     }
     
-    NSURL *url = [_vwoURL forPushingCustomDimension:customDimensionKey withCustomDimensionValue:customDimensionValue dateTime:NSDate.date];
+    
+    NSURL *url = NULL;
+    
+    if((VWOUserDefaults.IsEventArchEnabled != NULL) &&
+       ([VWOUserDefaults.IsEventArchEnabled isEqualToString:EventArchEnabled])){
+        //for Event based API calls
+        url = [_vwoURL forPushingCustomDimensionEventArch:customDimensionKey withCustomDimensionValue:customDimensionValue dateTime:NSDate.date];
+    }else{
+        //for previous version support
+        url = [_vwoURL forPushingCustomDimension:customDimensionKey withCustomDimensionValue:customDimensionValue dateTime:NSDate.date];
+    }
+    
     NSString *description = [NSString stringWithFormat:@"Custom Dimension %@ %@", customDimensionKey, customDimensionValue];
     [pendingURLQueue enqueue:url maxRetry:10 description:description];
     
