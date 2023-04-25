@@ -30,10 +30,6 @@ class VWOManager {
                 hud.hide(animated: false)
                 SCLAlertView().showSuccess("Success", subTitle: "VWO launched successfully \(apiKey)")
                 
-                VWO.pushCustomDimension(customDimensionKey: "event4metricProperty", customDimensionValue: "DimensionValue02")
-
-                let variation = VWO.variationNameFor(testKey: "Campaign11")
-                VWO.trackConversion("harshevent", value: 10.0)
                 
             }
         }, failure: { (errorString) in

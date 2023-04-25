@@ -8,7 +8,6 @@
 
 #import "VWOUserDefaults.h"
 #import "VWOCampaign.h"
-#import "VWOConstants.h"
 #import "VWOLogger.h"
 
 static NSString * kTracking           = @"tracking";
