@@ -30,7 +30,6 @@ extern NSString const *EventArchDisabled;
 // MARK: - QueryParamsEventArchEnabled
 extern NSString const *APIEventName;
 extern NSString const *TrackUserEventName;
-extern NSString const *TrackGoalEventName;
 extern NSString const *PushEventName;
 extern NSString const *AccountID;
 extern NSString const *APIKey;
@@ -53,7 +52,8 @@ extern NSString const *IsFirst;//this will be sent as 1 always
 extern NSString const *IsCustomEvent;//this will always be sent as true
 extern NSString const *VWOMeta;
 extern NSString const *Metric;
-extern NSString const *Visitor;
+extern NSString const *InternalVisitor;
+extern NSString const *ExternalVisitor;
 extern NSString const *VisitorProps;
 extern NSString const *Data360EventName;//event name
 extern NSString const *EventTime;//current timestamp in milliseconds

@@ -40,7 +40,6 @@ NSString const *UserAgentValue = @"iOSVwoAb";
 //query params
 NSString const *APIEventName = @"en";// value changes based on the current API call
 NSString const *TrackUserEventName = @"vwo_variationShown";
-NSString const *TrackGoalEventName = @"goalIdenitifier";
 NSString const *PushEventName = @"vwo_syncVisitorProp";
 NSString const *AccountID = @"a";
 NSString const *APIKey = @"env";
@@ -63,7 +62,8 @@ NSString const *IsFirst = @"isFirst";//this will be sent as 1 always
 NSString const *IsCustomEvent = @"isCustomEvent";//this will always be sent as true
 NSString const *VWOMeta = @"vwoMeta";
 NSString const *Metric = @"metric";
-NSString const *Visitor = @"visitor";
+NSString const *InternalVisitor = @"$visitor";
+NSString const *ExternalVisitor = @"visitor";
 NSString const *VisitorProps = @"props";
 NSString const *Data360EventName = @"name";//event name
 NSString const *EventTime = @"time";//current timestamp in milliseconds

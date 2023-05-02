@@ -134,14 +134,14 @@ static NSString *kSDKversionNumber = @"19";
         components = [NSURLComponents vwoComponentForPath:path isChinaCDN:_isChinaCDN];
     }
     
-    NSString *currentTimeInSec = [NSString stringWithFormat:@"%lu", (unsigned long)date.timeIntervalSince1970];
-    NSString *currentTimeInMilli = [NSString stringWithFormat:@"%lu", (unsigned long)(date.timeIntervalSince1970 * 1000)];
+    unsigned long currentTimeInSec = (unsigned long)date.timeIntervalSince1970;
+    unsigned long currentTimeInMilli = (unsigned long)(date.timeIntervalSince1970 * 1000);
     
     NSMutableDictionary *paramDict =
     [@{APIEventName: TrackUserEventName,
        AccountID: _accountID,
        APIKey: [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
-       CurrentTimeInMillis: currentTimeInMilli,
+       CurrentTimeInMillis: [NSString stringWithFormat:@"%lu", currentTimeInMilli],
        Random: [self randomNumber]
      } mutableCopy];
     
@@ -149,19 +149,19 @@ static NSString *kSDKversionNumber = @"19";
     
     NSMutableDictionary *EventArchDict = @{
         D: @{
-            MessageID: [NSString stringWithFormat:@"%@-%@", VWOUserDefaults.UUID, currentTimeInSec],
+            MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,
-            SessionID: currentTimeInSec,
+            SessionID: [NSNumber numberWithUnsignedLong : currentTimeInSec],
             Event: @{
                 EventProps: @{
                     SDKName: SDKNameValue,
                     SDKVersion: kSDKversionNumber,
-                    CampaignID: [NSString stringWithFormat:@"%d", campaign.iD],
-                    VariationID: [NSString stringWithFormat:@"%d", campaign.variation.iD],
+                    CampaignID: [NSNumber numberWithInt : campaign.iD],
+                    VariationID: [NSNumber numberWithInt : campaign.variation.iD],
                     IsFirst: @1 //always 1
                 },
                 Data360EventName: TrackUserEventName,
-                EventTime: currentTimeInMilli
+                EventTime: [NSNumber numberWithUnsignedLong : currentTimeInMilli]
             }
         }
     };
@@ -210,29 +210,31 @@ static NSString *kSDKversionNumber = @"19";
         components = [NSURLComponents vwoComponentForPath:path isChinaCDN:_isChinaCDN];
     }
     
-    NSString *currentTimeInSec = [NSString stringWithFormat:@"%lu", (unsigned long)date.timeIntervalSince1970];
-    NSString *currentTimeInMilli = [NSString stringWithFormat:@"%lu", (unsigned long)(date.timeIntervalSince1970 * 1000)];
+    unsigned long currentTimeInSec = (unsigned long)date.timeIntervalSince1970;
+    unsigned long currentTimeInMilli = (unsigned long)(date.timeIntervalSince1970 * 1000);
     
     NSMutableDictionary *paramDict =
-    [@{APIEventName: TrackGoalEventName,
+    [@{APIEventName: goal.identifier,
        AccountID: _accountID,
        APIKey: [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
-       CurrentTimeInMillis: currentTimeInMilli,
+       CurrentTimeInMillis: [NSString stringWithFormat:@"%lu", currentTimeInMilli],
        Random: [self randomNumber]
      } mutableCopy];
     
     components.queryItems = [paramDict toQueryItems];
     
+    NSString *goalID = [NSString stringWithFormat:@"g_%d", goal.iD];
+    NSArray *goalIDArray = @[goalID];
     NSDictionary *VWOMetaDict = @{
         Metric: @{
-            [NSString stringWithFormat:@"id_%d", campaign.iD]: [NSString stringWithFormat:@"g_%d", goal.iD]
+            [NSString stringWithFormat:@"id_%d", campaign.iD]: goalIDArray
         }
     };
     
     if (goalValue != nil) {
         VWOMetaDict = @{
             Metric: @{
-                [NSString stringWithFormat:@"id_%d", campaign.iD]: [NSString stringWithFormat:@"g_%d", goal.iD]
+                [NSString stringWithFormat:@"id_%d", campaign.iD]: goalIDArray
             },
             goal.revenueProp : goalValue
         };
@@ -240,18 +242,18 @@ static NSString *kSDKversionNumber = @"19";
     
     NSMutableDictionary *EventArchDict = @{
         D: @{
-            MessageID: [NSString stringWithFormat:@"%@-%@", VWOUserDefaults.UUID, currentTimeInSec],
+            MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,
-            SessionID: currentTimeInSec,
+            SessionID: [NSNumber numberWithUnsignedLong : currentTimeInSec],
             Event: @{
                 EventProps: @{
                     SDKName: SDKNameValue,
                     SDKVersion: kSDKversionNumber,
-                    IsCustomEvent: @true,
+                    IsCustomEvent: @((BOOL)true),
                     VWOMeta: VWOMetaDict
                 },
-                Data360EventName: TrackGoalEventName,
-                EventTime: currentTimeInMilli
+                Data360EventName: goal.identifier,
+                EventTime: [NSNumber numberWithUnsignedLong : currentTimeInMilli]
             }
         }
     };
@@ -291,14 +293,14 @@ static NSString *kSDKversionNumber = @"19";
         components = [NSURLComponents vwoComponentForPath:path isChinaCDN:_isChinaCDN];
     }
     
-    NSString *currentTimeInSec = [NSString stringWithFormat:@"%lu", (unsigned long)date.timeIntervalSince1970];
-    NSString *currentTimeInMilli = [NSString stringWithFormat:@"%lu", (unsigned long)(date.timeIntervalSince1970 * 1000)];
+    unsigned long currentTimeInSec = (unsigned long)date.timeIntervalSince1970;
+    unsigned long currentTimeInMilli = (unsigned long)(date.timeIntervalSince1970 * 1000);
     
     NSMutableDictionary *paramDict =
     [@{APIEventName: PushEventName,
        AccountID: _accountID,
        APIKey: [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
-       CurrentTimeInMillis: currentTimeInMilli,
+       CurrentTimeInMillis: [NSString stringWithFormat:@"%lu", currentTimeInMilli],
        Random: [self randomNumber]
      } mutableCopy];
     
@@ -306,24 +308,24 @@ static NSString *kSDKversionNumber = @"19";
     
     NSMutableDictionary *EventArchDict = @{
         D: @{
-            MessageID: [NSString stringWithFormat:@"%@-%@", VWOUserDefaults.UUID, currentTimeInSec],
+            MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,
-            SessionID: currentTimeInSec,
+            SessionID: [NSNumber numberWithUnsignedLong : currentTimeInSec],
             Event: @{
                 EventProps: @{
                     SDKName: SDKNameValue,
                     SDKVersion: kSDKversionNumber,
-                    IsCustomEvent: @true,
-                    Visitor: @{
+                    IsCustomEvent: @((BOOL)true),
+                    InternalVisitor: @{
                         VisitorProps: @{
                             customDimensionKey: customDimensionValue    ///[tagkey]: [tagValue]
                         }
                     }
                 },
                 Data360EventName: PushEventName,
-                EventTime: currentTimeInMilli
+                EventTime: [NSNumber numberWithUnsignedLong : currentTimeInMilli]
             },
-            Visitor: @{
+            ExternalVisitor: @{
                 VisitorProps: @{
                     customDimensionKey: customDimensionValue    ///[tagkey]: [tagValue]
                 }
