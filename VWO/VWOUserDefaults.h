@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, readonly) NSString *UUID;
 @property (class, readonly) NSString *CollectionPrefix;
 
++ (nullable id)objectForKey:(NSString *)key;
++ (void)setObject:(nullable id)value forKey:(NSString *)key;
+
 + (void)setExcludedCampaign:(VWOCampaign *)campaign;
 
 + (BOOL)isTrackingUserForCampaign:(VWOCampaign *)campaign;

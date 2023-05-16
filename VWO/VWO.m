@@ -13,6 +13,7 @@
 #import "MutuallyExclusiveGroups.h"
 #import "Group.h"
 #import "VWOCampaign.h"
+#import "MEGManager.h"
 
 static VWOLogLevel kLogLevel = VWOLogLevelError;
 static BOOL kOptOut = NO;
@@ -202,36 +203,8 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 }
 
 + (NSString *)getCampaign:(NSString *)userId args:(NSDictionary *)args {
-    
-    if (userId == nil || [userId length]==0) {
-        userId = [VWOController.shared getUserId];
-    }
-    
-    VWOCampaignArray * campaignsData = [VWOController.shared getCampaignData];
-    
-    NSMutableDictionary *megGroupsData = [[NSMutableDictionary alloc] init];
-
-    if (campaignsData != nil && campaignsData.count > 0) {
-        for (int i = 0; i < campaignsData.count; i++) {
-            @try {
-                VWOCampaign *groupDataItem = campaignsData[i];
-                if ([groupDataItem type] == CAMPAIGN_GROUPS) {
-                    [megGroupsData setObject:groupDataItem forKey:@"groups"];
-                   break;
-                }
-            }
-            @catch (NSException *exception)  {
-                VWOLogDebug(@"MutuallyExclusive  %@", exception);
-           
-            }
-        }
-    }
-
-    NSDictionary<NSString *, Group*> *mappedData = [CampaignGroupMapper createAndGetGroups: megGroupsData];
-
-    MutuallyExclusiveGroups *meg = [[MutuallyExclusiveGroups alloc] initMutuallyExclusiveGroups:userId];
-    [meg addGroups:mappedData];
-    return [meg getCampaign:args jsonData:campaignsData];
+    MEGManager *megManager = [[MEGManager alloc] init];
+    return [megManager getCampaign:userId args:args];
 }
 
 + (void)trackConversion:(NSString *)goal {

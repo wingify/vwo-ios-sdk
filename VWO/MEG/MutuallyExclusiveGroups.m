@@ -12,6 +12,9 @@
 #include <math.h>
 #import "Group.h"
 #import "VWOLogger.h"
+#import "PriorityQualificationWinnerResult.h"
+#import "VWOSegmentEvaluator.h"
+#import "VWOController.h"
 
 @implementation MutuallyExclusiveGroups
 
@@ -78,8 +81,6 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
         
         // there must be at least one type of id
         // either GROUP or CAMPAIGN
-        VWOLogDebug(@"MutuallyExclusive The groupId and campaignId both are null");
-
         return nil;
     }
 
@@ -96,8 +97,7 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
 
 
        // if there is no sign of group we can simply use the campaign matching logic
-
-              campaign = [self getCampaignFromCampaignId: userId campaign: campaignId];
+        campaign = [self getCampaignFromCampaignId: userId campaign: campaignId];
         
         VWOLogDebug(@"MutuallyExclusive Campaign selected from the mutually exclusive group is [ %@ ]",campaign);
 
@@ -155,7 +155,7 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
         @try {
 
             NSDictionary *groupDataItem = campaignsData[i];
-            VWOCampaign *groupData = groupDataItem; //[groupDataItem objectForKey:CAMPAIGN_TYPE] ;
+            VWOCampaign *groupData = [[VWOCampaign alloc] initWithDictionary:groupDataItem];
             
             if([[groupData type] isEqual:TYPE_VISUAL_AB]){
                 if([[groupData  testKey] isEqual: testKey]){
@@ -195,7 +195,7 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
 
         @try {
             NSDictionary *groupDataItem = campaignsData[i];
-            VWOCampaign *groupData = groupDataItem;
+            VWOCampaign *groupData = [[VWOCampaign alloc] initWithDictionary:groupDataItem];
             
             if([[groupData type] isEqual:TYPE_VISUAL_AB]){
                 if([[NSString stringWithFormat:@"%d",[groupData iD]] isEqual: [NSString stringWithFormat:@"%@",campaignId]]){
@@ -253,9 +253,146 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
      Group *interestedGroup = CAMPAIGN_GROUPS[groupName];
 
       if (interestedGroup == nil) return nil;
+    
+    // evaluate all the priority campaigns
+        NSLog(@"----------- { BEGIN } Priority Campaign Evaluation -----------");
+        NSArray<NSString *> *priorityCampaignsInGroup = [interestedGroup getPriorityCampaigns];
+        if (priorityCampaignsInGroup.count == 0) {
+            NSLog(@"> there are 0 priority campaigns");
+        }
+        for (int i = 0; i < priorityCampaignsInGroup.count; i++) {
+            NSString *priorityCampaign = priorityCampaignsInGroup[i];
+            NSLog(@"now evaluating priority campaign ( p ) @ index %d -> %@", i, priorityCampaign);
+            PriorityQualificationWinnerResult *result = [self isQualifiedAsWinner:priorityCampaign isGroupPassedByUser:YES];
+            if ([result isQualified]) {
+                NSLog(@"found a winner campaign from the priority campaign list -> %@", priorityCampaign);
+                return priorityCampaign;
+            }
+        }
+        NSLog(@"----------- { END } Priority Campaign Evaluation -----------");
 
-     return [interestedGroup getCampaignForRespectiveWeight:normalizedValue];
+        NSLog(@"none of the priority campaigns are qualified as winners, next will try to check for weighted campaign.");
+    return [interestedGroup getCampaignForRespectiveWeight:normalizedValue];
+}
 
+- (PriorityQualificationWinnerResult *)isQualifiedAsWinner:(NSString *)priorityCampaignId isGroupPassedByUser:(BOOL)isGroupPassedByUser {
+    
+    BOOL priorityIsNull = ([priorityCampaignId isEqual: @""]);
+    if (priorityIsNull) {
+        VWOLogDebug(@"the passed priority campaign id is null, will not qualify.");
+        
+        PriorityQualificationWinnerResult *result = [[PriorityQualificationWinnerResult alloc] init];
+        result.qualified = NO;
+        result.groupInPriority = isGroupPassedByUser;
+        result.priorityCampaignFound = NO;
+        return result;
+    }
+    
+    @try {
+        
+        VWOCampaignArray * vwoData = [VWOController.shared getCampaignData];
+        if (vwoData == nil || [vwoData count] == 0){
+            VWOLogDebug(@"INCONSISTENT STATE detected, local data for VWO is not present.");
+            
+            PriorityQualificationWinnerResult *result = [[PriorityQualificationWinnerResult alloc] init];
+            result.qualified = NO;
+            result.groupInPriority = isGroupPassedByUser;
+            result.priorityCampaignFound = NO;
+            return result;
+            
+        }
+        
+        VWOLogDebug(@"> evaluating each campaign from campaign list to check if they are qualified");
+        BOOL isPriorityCampaignFoundLocally = NO;
+        for (int i = 0; i < vwoData.count; i++) {
+            VWOCampaign *campaign = vwoData[i];
+            
+            BOOL isPriorityCampaignValid = [self isPriorityValid:campaign priorityCampaignId:priorityCampaignId];
+            
+            if (!isGroupPassedByUser && !isPriorityCampaignValid) {
+                // skip
+                VWOLogDebug(@"will not evaluate -> %@ as it is redundant to do so", [campaign iD]);
+                continue;
+            }
+            
+            if (isPriorityCampaignValid) {
+                // avoid assigning false once it is true because we want to know that
+                // if campaignId and priorityCampaignId matched at some point
+                isPriorityCampaignFoundLocally = YES;
+            }
+            
+            if ([self isSegmentationValid:campaign] && [self isVariationValid:campaign] && isPriorityCampaignValid) {
+                
+                PriorityQualificationWinnerResult *result = [[PriorityQualificationWinnerResult alloc] init];
+                result.qualified = YES;
+                result.groupInPriority = isGroupPassedByUser;
+                result.priorityCampaignFound = YES;
+                return result;
+            }
+            
+            // at this point the campaign did not qualify so if no group was passed then we can stop this loop
+            // this optimizes our runtime cost as { null } will be returned after loop cases are exhausted
+            if (!isGroupPassedByUser) {
+                break;
+            }
+            
+            PriorityQualificationWinnerResult *result = [[PriorityQualificationWinnerResult alloc] init];
+            result.qualified = NO;
+            result.groupInPriority = isGroupPassedByUser;
+            result.priorityCampaignFound = isPriorityCampaignFoundLocally;
+            return result;
+        }
+    }
+    @catch (NSException *exception)  {
+        PriorityQualificationWinnerResult *result = [[PriorityQualificationWinnerResult alloc] init];
+        result.qualified = NO;
+        result.groupInPriority = isGroupPassedByUser;
+        result.priorityCampaignFound = NO;
+        return result;
+    }
+    PriorityQualificationWinnerResult *result = [[PriorityQualificationWinnerResult alloc] init];
+    result.qualified = NO;
+    result.groupInPriority = isGroupPassedByUser;
+    result.priorityCampaignFound = NO;
+    return result;
+}
+
+- (BOOL) isVariationValid:(VWOCampaign *)campaign {
+    BOOL isVariationNotNull = [campaign variation] != nil;
+    BOOL isVariationValid = (isVariationNotNull && [[campaign variation] iD] > 0);
+    if (isVariationValid) {
+        VWOLogDebug(@"VALID | variation id -> %ld", [[campaign variation] iD]);
+    } else {
+        if (isVariationNotNull) {
+            VWOLogDebug(@"INVALID | variation id -> %ld", [[campaign variation] iD]);
+        }
+    }
+    return isVariationValid;
+}
+
+- (BOOL) isSegmentationValid:(VWOCampaign *)campaign {
+    VWOSegment *segmentObject = [[VWOSegment alloc] initWithDictionary:[campaign segmentObject]];
+    BOOL isSegmentationValid = NO;
+    if(segmentObject){
+        VWOSegmentEvaluator *segmentEvaluator = [[VWOSegmentEvaluator alloc] init];
+        isSegmentationValid = [segmentEvaluator evaluate:segmentObject];
+    }
+    if (isSegmentationValid) {
+        VWOLogDebug(@"VALID | segmentation checks");
+    } else {
+        VWOLogDebug(@"INVALID | segmentation checks");
+    }
+    return isSegmentationValid;
+}
+
+- (BOOL)isPriorityValid:(VWOCampaign *)campaign priorityCampaignId:(NSString *)priorityCampaignId {
+    BOOL isSameAsPriority = ([campaign iD] == [priorityCampaignId longLongValue]);
+    if (isSameAsPriority) {
+        VWOLogDebug(@"VALID | campaignId -> %@ priorityCampaignId -> %@", [campaign iD], priorityCampaignId);
+    } else {
+        VWOLogDebug(@"INVALID | campaignId -> %@ priorityCampaignId -> %@", [campaign iD], priorityCampaignId);
+    }
+    return isSameAsPriority;
 }
 
 -(NSString *)getGroupNameFromGroupId: (int)groupId{
@@ -307,11 +444,30 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
     Group *interestedGroup = CAMPAIGN_GROUPS[campaignFoundInGroup];
 
     
-    if (interestedGroup == nil)
+    if (interestedGroup == nil) return nil; // basic null check because NSDictionary is being used
 
-        return nil; // basic null check because NSDictionary is being used
+    // check if this campaign is in priority list
+    // if not found there's no point in evaluating the list
+    if ([interestedGroup hasInPriority:campaign]) {
 
-    
+        VWOLogDebug(@"%@ found in priority campaign list.", campaign);
+
+        // evaluate priority campaigns
+        // here the campaign is the priorityCampaign because we are targeting the specific campaign
+        PriorityQualificationWinnerResult *result = [self isQualifiedAsWinner:campaign isGroupPassedByUser:NO];
+        if ([result isQualified]) {
+            VWOLogDebug(@"winner campaign found from the priority campaign list -> %@", campaign);
+            return campaign;
+        }
+
+        // check if we found the related campaign and still unqualified
+        if ([result isPriorityCampaignFound] && [result isNotQualified]) {
+            VWOLogDebug(@"priority campaign was found but was not qualified for winning, will simply return { null } from this point.");
+            return nil;
+        }
+    } else {
+        VWOLogDebug(@"priority campaigns does not have campaign -> %@, skipping redundant checks for optimization.", campaign);
+    }
 
     NSString *finalCampaign = [interestedGroup getCampaignForRespectiveWeight: normalizedValue];
 
@@ -393,7 +549,7 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
 
     if (IS_LOGS_SHOWN) {
 
-        NSLog(TAG, message);
+//        NSLog(TAG, message);
 
     }
 

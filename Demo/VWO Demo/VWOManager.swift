@@ -29,7 +29,8 @@ class VWOManager {
 //                VWO.pushCustomDimension(customDimensionKey: "userId", customDimensionValue: "userName")
                 hud.hide(animated: false)
                 SCLAlertView().showSuccess("Success", subTitle: "VWO launched successfully \(apiKey)")
-                
+                var str: String? = nil;
+                VWO.variationNameFor(testKey: str ?? "")
                 
             }
         }, failure: { (errorString) in

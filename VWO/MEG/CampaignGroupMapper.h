@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Group.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSDictionary *)getCampaignGroups: (NSDictionary *)jsonObject;
 + (NSDictionary *)createAndGetGroups: (NSDictionary *)jsonObject;
++ (void)preparePriority: (NSDictionary *)source destination:(Group *)destination;
++ (void)prepareEt:(NSDictionary *)source destination:(Group *)destination;
++ (void)prepareCampaigns:(NSDictionary *)source destination:(Group *)destination;
++ (void)prepareWeight:(NSDictionary *)source destination:(Group *)destination;
++ (NSDictionary *)getGroups: (NSDictionary *)jsonObject;
+
 @end
 
 NS_ASSUME_NONNULL_END
