@@ -57,7 +57,7 @@ float m = 1.0;
             
             Group *group = [[Group alloc]init];
             group.name = groupName;
-//            group.Id = key.intValue;
+            group.Id = key.intValue;
             
             [self prepareWeight:objGroup destination:group];
             [self prepareCampaigns:objGroup destination:group];
