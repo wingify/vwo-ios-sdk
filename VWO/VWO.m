@@ -195,10 +195,16 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     NSParameterAssert(campaignTestKey);
     __block NSString *variationName;
     dispatch_barrier_sync(VWOController.taskQueue, ^{
-        variationName = [VWOController.shared variationNameForCampaignTestKey:campaignTestKey];
+        @try {
+            variationName = [VWOController.shared variationNameForCampaignTestKey:campaignTestKey];
+        }
+        @catch (NSException *exception) {
+            
+            VWOLogError(@"Caught an exception: %@", exception);
+        }
     });
     return variationName;
-
+    
 }
 
 + (NSString *)getCampaign:(NSString *)userId args:(NSDictionary *)args {
