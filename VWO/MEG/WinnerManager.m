@@ -12,6 +12,7 @@
 #import "Pair.h"
 #import "Response.h"
 #import "VWOUserDefaults.h"
+#import "VWOConstants.h"
 
 @implementation WinnerManager
 
@@ -36,12 +37,14 @@ static NSString *const KEY_SAVED_ARRAY_OF_WINNER_CAMPAIGNS = @"winner_mappings";
         Winner *winner = [[[Winner alloc] init] fromJSONObject:user];
 
         // prepare groupId and test_key
-        NSString *groupId = [args objectForKey:ID_GROUP];
+        NSString *nonConstID_GROUP = [ID_GROUP copy];
+        NSString *groupId = [args objectForKey:nonConstID_GROUP];
         NSString *testKey = nil;
 
         if (groupId == nil) {
             // test_key will only be applicable when there is no groupId
-            testKey = [args objectForKey:TEST_KEY];
+            NSString *nonConstKEY_TEST_KEY = [KEY_TEST_KEY copy];
+            testKey = [args objectForKey:nonConstKEY_TEST_KEY];
         }
 
         Mapping *mapping = [self prepareWinnerMappingUsing:groupId testKey:testKey winnerCampaign:nil];
@@ -98,12 +101,14 @@ static NSString *const KEY_SAVED_ARRAY_OF_WINNER_CAMPAIGNS = @"winner_mappings";
     }
     
     // if there is groupId then campaign will be ignored altogether
-    NSString *groupId = [args objectForKey:ID_GROUP];
+    NSString *nonConstID_GROUP = [ID_GROUP copy];
+    NSString *groupId = [args objectForKey:nonConstID_GROUP];
     NSString *testKey = nil;
     
     if (groupId == nil) {
         // test_key will only be applicable when there is no groupId
-        testKey = [args objectForKey:TEST_KEY];
+        NSString *nonConstKEY_TEST_KEY = [KEY_TEST_KEY copy];
+        testKey = [args objectForKey:nonConstKEY_TEST_KEY];
     }
     
     if ([root count] == 0) {

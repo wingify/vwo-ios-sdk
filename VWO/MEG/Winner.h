@@ -11,10 +11,6 @@
 
 @interface Winner : NSObject
 
-extern NSString const *ID_GROUP;
-extern NSString const *TEST_KEY;
-extern NSString const *KEY_USER;
-
 @property (nonatomic, copy) NSString *user;
 
 - (Winner *)fromJSONObject:(NSDictionary *)jsonObject;

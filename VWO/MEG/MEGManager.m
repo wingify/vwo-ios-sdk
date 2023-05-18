@@ -68,7 +68,6 @@ static NSString * const CAMPAIGN_GROUPS = @"groups";
     if ([localResponse shouldServePreviousWinnerCampaign]) {
         // user doesn't exist, should continue processing
         NSString *savedWinnerCampaign = [localResponse winnerCampaign];
-        NSString *servingNull = (savedWinnerCampaign == nil) ? @"null" : savedWinnerCampaign;
         return savedWinnerCampaign;
     }
 

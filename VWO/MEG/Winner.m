@@ -97,13 +97,14 @@ NSMutableArray<Mapping *> *mappings;
 
 - (Pair *)getRemarkForUserArgs:(Mapping *)mapping args:(NSDictionary<NSString *, NSString *> *)args {
 
-    BOOL isGroupIdPresent = ![args[ID_GROUP] isEqualToString:@""];
-    BOOL isTestKeyPresent = ![args[TEST_KEY] isEqualToString:@""];
+    NSString *nonConstID_GROUP = [ID_GROUP copy];
+    NSString *nonConstKEY_TEST_KEY = [KEY_TEST_KEY copy];
+    BOOL isGroupIdPresent = ![args[nonConstID_GROUP] isEqualToString:@""];
+    BOOL isTestKeyPresent = ![args[nonConstKEY_TEST_KEY] isEqualToString:@""];
 
     if (!isGroupIdPresent && !isTestKeyPresent) {
         // there's no point in evaluating the stored values if both are null
         // as this is a user error
-        LocalUserSearchRemark local = NotFoundForPassedArgs;
         return [[Pair alloc] initWithFirst:@(NotFoundForPassedArgs) second:@""];
     }
 
