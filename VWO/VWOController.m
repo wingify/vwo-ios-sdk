@@ -208,8 +208,15 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
         if (matchedGoal) {
 
             if ([VWOUserDefaults isGoalMarked:matchedGoal inCampaign:campaign]) {
-                VWOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
-                return;
+                BOOL isEventArchEnabled = [VWOUserDefaults IsEventArchEnabled];
+                if(!isEventArchEnabled){
+                    VWOLogDebug(@"Goal '%@' already marked and eventArch is not enabled. Will not be marked again", matchedGoal);
+                    return;
+                }
+                if([matchedGoal mca] != -1){
+                    VWOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
+                    return;
+                }
             }
         }
     }
