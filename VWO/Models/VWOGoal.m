@@ -9,6 +9,7 @@
 #import "VWOGoal.h"
 #import "NSDictionary+VWO.h"
 #import "VWOLogger.h"
+#import "VWOConstants.h"
 
 static NSString * kId          = @"id";
 static NSString * kType        = @"type";
@@ -44,7 +45,9 @@ static NSString * kMca         = @"mca";
 
     GoalType type = GoalTypeCustom;
     NSString *revenueProp = @"";
-    if([goalDict[kType] isEqualToString:@"REVENUE_TRACKING"]) {
+    
+    NSString *nonConstRevenueTracking = [ConstRevenueTracking copy];
+    if([goalDict[kType] isEqualToString:nonConstRevenueTracking]) {
         type = GoalTypeRevenue;
         revenueProp = goalDict[kRevenueProp];
     }

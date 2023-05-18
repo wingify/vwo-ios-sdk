@@ -16,6 +16,7 @@ extern NSString const *ConstCampaigns;
 extern NSString const *ConstCollectionPrefix;
 extern NSString const *ConstIsEventArchEnabled;
 extern NSString const *ConstAPIVersion;
+extern NSString const *ConstRevenueTracking;
 
 @end
 
