@@ -214,6 +214,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
                     return;
                 }
                 if([matchedGoal mca] != -1){
+                    //if mca flag != -1, then goal is not triggered multiple times.
                     VWOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
                     return;
                 }
