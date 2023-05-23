@@ -149,13 +149,18 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
     if (campaignsData.count== 0) return nil;
 
     
+    
+    VWOCampaignArray * campaignsArray = [VWOController.shared getCampaignData];
+    if(campaignsArray.count==0) return nil;
+    
+    for (int i = 0; i < campaignsArray.count; i++) {
 
-    for (int i = 0; i < campaignsData.count; i++) {
-
+        VWOCampaign *groupData = campaignsArray[i];
+        NSLog(@"Testing MEG Priority groupCamp%@",groupData);
+//        VWOCampaign *groupData = [[VWOCampaign alloc] initWithDictionary:groupDataItem];
+        
         @try {
 
-            NSDictionary *groupDataItem = campaignsData[i];
-            VWOCampaign *groupData = [[VWOCampaign alloc] initWithDictionary:groupDataItem];
             
             if([[groupData type] isEqual:TYPE_VISUAL_AB]){
                 if([[groupData  testKey] isEqual: testKey]){
@@ -190,12 +195,14 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
     if (campaignsData.count== 0) return nil;
 
     
-
-    for (int i = 0; i < campaignsData.count; i++) {
+    VWOCampaignArray * campaignsArray = [VWOController.shared getCampaignData];
+    if(campaignsArray.count==0) return nil;
+    
+    for (int i = 0; i < campaignsArray.count; i++) {
 
         @try {
-            NSDictionary *groupDataItem = campaignsData[i];
-            VWOCampaign *groupData = [[VWOCampaign alloc] initWithDictionary:groupDataItem];
+            VWOCampaign *groupData = campaignsArray[i];
+//            VWOCampaign *groupData = [[VWOCampaign alloc] initWithDictionary:groupDataItem];
             
             if([[groupData type] isEqual:TYPE_VISUAL_AB]){
                 if([[NSString stringWithFormat:@"%d",[groupData iD]] isEqual: [NSString stringWithFormat:@"%@",campaignId]]){
@@ -248,7 +255,7 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
 
     NSNumber *normalizedValue = [self getNormalizedValue:murmurHash];
 
-    VWOLogDebug(@"MutuallyExclusive  Normalized value for user with userID -> %@ is  ",userId,normalizedValue);
+    VWOLogDebug(@"MutuallyExclusive  Normalized value for user with userID -> %@ is  %@",userId,normalizedValue);
 
      Group *interestedGroup = CAMPAIGN_GROUPS[groupName];
 
@@ -332,15 +339,15 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
             
             // at this point the campaign did not qualify so if no group was passed then we can stop this loop
             // this optimizes our runtime cost as { null } will be returned after loop cases are exhausted
-            if (!isGroupPassedByUser) {
-                break;
-            }
-            
-            PriorityQualificationWinnerResult *result = [[PriorityQualificationWinnerResult alloc] init];
-            result.qualified = NO;
-            result.groupInPriority = isGroupPassedByUser;
-            result.priorityCampaignFound = isPriorityCampaignFoundLocally;
-            return result;
+//            if (!isGroupPassedByUser) {
+//                break;
+//            }
+//
+//            PriorityQualificationWinnerResult *result = [[PriorityQualificationWinnerResult alloc] init];
+//            result.qualified = NO;
+//            result.groupInPriority = isGroupPassedByUser;
+//            result.priorityCampaignFound = isPriorityCampaignFoundLocally;
+//            return result;
         }
     }
     @catch (NSException *exception)  {
@@ -386,12 +393,13 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
 }
 
 - (BOOL)isPriorityValid:(VWOCampaign *)campaign priorityCampaignId:(NSString *)priorityCampaignId {
-    BOOL isSameAsPriority = ([campaign iD] == [priorityCampaignId longLongValue]);
-    if (isSameAsPriority) {
-        VWOLogDebug(@"VALID | campaignId -> %@ priorityCampaignId -> %@", [campaign iD], priorityCampaignId);
-    } else {
-        VWOLogDebug(@"INVALID | campaignId -> %@ priorityCampaignId -> %@", [campaign iD], priorityCampaignId);
-    }
+    NSLog(@"Testing MEG Priority %d %lld",[campaign iD],[priorityCampaignId longLongValue]);
+    BOOL isSameAsPriority = ([campaign iD] == [priorityCampaignId intValue]);
+//    if (isSameAsPriority) {
+//        VWOLogDebug(@"VALID | campaignId -> %@ priorityCampaignId -> %d", [campaign iD], [priorityCampaignId intValue]);
+//    } else {
+//        VWOLogDebug(@"INVALID | campaignId -> %@ priorityCampaignId -> %d", [campaign iD], [priorityCampaignId intValue]);
+//    }
     return isSameAsPriority;
 }
 

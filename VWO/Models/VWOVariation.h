@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface VWOVariation : NSObject
 
 @property(nonatomic, assign) int iD;
+@property(nonatomic, assign) int weight;
 @property(atomic) NSString *name;
 @property(atomic, nullable) NSDictionary *changes;
 

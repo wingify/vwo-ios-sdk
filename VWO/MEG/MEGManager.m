@@ -17,8 +17,7 @@
 #import "WinnerManager.h"
 #import "Response.h"
 #import "VWOController.h"
-
-static NSString * const CAMPAIGN_GROUPS = @"groups";
+#import "VWOConstants.h"
 
 @implementation MEGManager
 
@@ -50,7 +49,7 @@ static NSString * const CAMPAIGN_GROUPS = @"groups";
         for (int i = 0; i < campaignsData.count; i++) {
             @try {
                 VWOCampaign *groupDataItem = campaignsData[i];
-                if ([groupDataItem type] == CAMPAIGN_GROUPS) {
+                if ([groupDataItem type] == ConstGroups) {
                     [megGroupsData setObject:groupDataItem forKey:@"groups"];
                    break;
                 }

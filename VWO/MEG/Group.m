@@ -269,7 +269,7 @@ NSString *VALUE_INVALID_PRIORITY_CAMPAIGN = @"InvalidCampaign";
 
 
 - (void)createWeightMap {
-    if (![self isNotAdvanceMEGAllocation]) {
+    if ([self isNotAdvanceMEGAllocation]) {
         [MutuallyExclusiveGroups log:[NSString stringWithFormat:@"not using weight from the server, preparing EQUAL allocation because et = %d [ NOTE: et=1->Random, et=2 -> Advance ]", self.et]];
         
         [self createEquallyDistributedWeightMap];
