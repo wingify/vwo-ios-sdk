@@ -43,7 +43,7 @@ class PhoneListVC: UIViewController {
         
 //      let TestKey =  VWO.getCampaign("e57e8bd1-fb5f-478d-80d2-5127eb5d79f7", args: ["groupId":"8"])
 //        let TestKey =  VWO.getCampaign("e57e8bd1-fb5f-478d-80d2-5127eb5d79f7", args: ["test_key":"ME123"])
-        let TestKey =  VWO.getCampaign("9c3832ad-15f9-420a-93cd-a7f2cde0f7bc", args: ["test_key":"ME123","groupId":"8"])
+//        let TestKey =  VWO.getCampaign("9c3832ad-15f9-420a-93cd-a7f2cde0f7bc", args: ["test_key":"ME123","groupId":"8"])
 
         destination.phone = phoneList[t]
     }

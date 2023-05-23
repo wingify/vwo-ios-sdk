@@ -20,6 +20,18 @@
 		7B165B1629383B1D0060EEE2 /* MurmurHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B165B1429383B1D0060EEE2 /* MurmurHash.m */; };
 		7B6B7E09294094AA00961493 /* VWOGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B6B7E07294094AA00961493 /* VWOGroup.h */; };
 		7B6B7E0A294094AA00961493 /* VWOGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B7E08294094AA00961493 /* VWOGroup.m */; };
+		BA6899102A1C9BFE0003E538 /* WinnerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = BA6899042A1C9BFE0003E538 /* WinnerManager.h */; };
+		BA6899112A1C9BFE0003E538 /* Pair.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6899052A1C9BFE0003E538 /* Pair.m */; };
+		BA6899122A1C9BFE0003E538 /* PriorityQualificationWinnerResult.h in Headers */ = {isa = PBXBuildFile; fileRef = BA6899062A1C9BFE0003E538 /* PriorityQualificationWinnerResult.h */; };
+		BA6899132A1C9BFE0003E538 /* PriorityQualificationWinnerResult.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6899072A1C9BFE0003E538 /* PriorityQualificationWinnerResult.m */; };
+		BA6899142A1C9BFE0003E538 /* Winner.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6899082A1C9BFE0003E538 /* Winner.m */; };
+		BA6899152A1C9BFE0003E538 /* Winner.h in Headers */ = {isa = PBXBuildFile; fileRef = BA6899092A1C9BFE0003E538 /* Winner.h */; };
+		BA6899162A1C9BFE0003E538 /* WinnerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA68990A2A1C9BFE0003E538 /* WinnerManager.m */; };
+		BA6899172A1C9BFE0003E538 /* Response.h in Headers */ = {isa = PBXBuildFile; fileRef = BA68990B2A1C9BFE0003E538 /* Response.h */; };
+		BA6899182A1C9BFE0003E538 /* Pair.h in Headers */ = {isa = PBXBuildFile; fileRef = BA68990C2A1C9BFE0003E538 /* Pair.h */; };
+		BA6899192A1C9BFE0003E538 /* Weight.h in Headers */ = {isa = PBXBuildFile; fileRef = BA68990D2A1C9BFE0003E538 /* Weight.h */; };
+		BA68991A2A1C9BFE0003E538 /* Weight.m in Sources */ = {isa = PBXBuildFile; fileRef = BA68990E2A1C9BFE0003E538 /* Weight.m */; };
+		BA68991B2A1C9BFE0003E538 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = BA68990F2A1C9BFE0003E538 /* Response.m */; };
 		E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31714C61F838C2F0036CF07 /* VWOTests.swift */; };
 		E32079C120075516005CB5CD /* CampaignIDMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C020075516005CB5CD /* CampaignIDMissing.json */; };
 		E32079C320075541005CB5CD /* CampaignStatusMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C220075541005CB5CD /* CampaignStatusMissing.json */; };
@@ -160,6 +172,18 @@
 		7B165B1429383B1D0060EEE2 /* MurmurHash.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MurmurHash.m; sourceTree = "<group>"; };
 		7B6B7E07294094AA00961493 /* VWOGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOGroup.h; sourceTree = "<group>"; };
 		7B6B7E08294094AA00961493 /* VWOGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOGroup.m; sourceTree = "<group>"; };
+		BA6899042A1C9BFE0003E538 /* WinnerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinnerManager.h; sourceTree = "<group>"; };
+		BA6899052A1C9BFE0003E538 /* Pair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pair.m; sourceTree = "<group>"; };
+		BA6899062A1C9BFE0003E538 /* PriorityQualificationWinnerResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityQualificationWinnerResult.h; sourceTree = "<group>"; };
+		BA6899072A1C9BFE0003E538 /* PriorityQualificationWinnerResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityQualificationWinnerResult.m; sourceTree = "<group>"; };
+		BA6899082A1C9BFE0003E538 /* Winner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Winner.m; sourceTree = "<group>"; };
+		BA6899092A1C9BFE0003E538 /* Winner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Winner.h; sourceTree = "<group>"; };
+		BA68990A2A1C9BFE0003E538 /* WinnerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinnerManager.m; sourceTree = "<group>"; };
+		BA68990B2A1C9BFE0003E538 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
+		BA68990C2A1C9BFE0003E538 /* Pair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pair.h; sourceTree = "<group>"; };
+		BA68990D2A1C9BFE0003E538 /* Weight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weight.h; sourceTree = "<group>"; };
+		BA68990E2A1C9BFE0003E538 /* Weight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Weight.m; sourceTree = "<group>"; };
+		BA68990F2A1C9BFE0003E538 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
 		E31714C51F838C2F0036CF07 /* VWOTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VWOTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		E31714C61F838C2F0036CF07 /* VWOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOTests.swift; sourceTree = "<group>"; };
 		E319151E1F67F1B900FC1695 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -294,6 +318,18 @@
 		7B165AF82936AEA70060EEE2 /* MEG */ = {
 			isa = PBXGroup;
 			children = (
+				BA68990C2A1C9BFE0003E538 /* Pair.h */,
+				BA6899052A1C9BFE0003E538 /* Pair.m */,
+				BA6899062A1C9BFE0003E538 /* PriorityQualificationWinnerResult.h */,
+				BA6899072A1C9BFE0003E538 /* PriorityQualificationWinnerResult.m */,
+				BA68990B2A1C9BFE0003E538 /* Response.h */,
+				BA68990F2A1C9BFE0003E538 /* Response.m */,
+				BA68990D2A1C9BFE0003E538 /* Weight.h */,
+				BA68990E2A1C9BFE0003E538 /* Weight.m */,
+				BA6899092A1C9BFE0003E538 /* Winner.h */,
+				BA6899082A1C9BFE0003E538 /* Winner.m */,
+				BA6899042A1C9BFE0003E538 /* WinnerManager.h */,
+				BA68990A2A1C9BFE0003E538 /* WinnerManager.m */,
 				7B165B03293756EE0060EEE2 /* MutuallyExclusiveGroups.h */,
 				7B165B04293756EE0060EEE2 /* MutuallyExclusiveGroups.m */,
 				7B165B0729376B6E0060EEE2 /* Group.h */,
@@ -537,6 +573,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA6899192A1C9BFE0003E538 /* Weight.h in Headers */,
+				BA6899182A1C9BFE0003E538 /* Pair.h in Headers */,
 				7B6B7E09294094AA00961493 /* VWOGroup.h in Headers */,
 				E39815851F6291970035D519 /* VWOLogger.h in Headers */,
 				E39815591F6291680035D519 /* VWOGoal.h in Headers */,
@@ -556,10 +594,14 @@
 				E35484F51F713C2E00E14D2E /* NSURLSession+Synchronous.h in Headers */,
 				E3529574206B720A00C90716 /* VWOSocketConnector.h in Headers */,
 				E3E95E8D206D0B13006DCE6C /* VWOConfig.h in Headers */,
+				BA6899102A1C9BFE0003E538 /* WinnerManager.h in Headers */,
 				7B165B1129376BA30060EEE2 /* CampaignGroupMapper.h in Headers */,
+				BA6899152A1C9BFE0003E538 /* Winner.h in Headers */,
+				BA6899172A1C9BFE0003E538 /* Response.h in Headers */,
 				E398155F1F6291680035D519 /* VWOVariation.h in Headers */,
 				E39567A3206E5DA80030B30B /* VWOCampaignFetcher.h in Headers */,
 				E3BBA3602068FA630046B2F2 /* VWOSocket.h in Headers */,
+				BA6899122A1C9BFE0003E538 /* PriorityQualificationWinnerResult.h in Headers */,
 				E398157F1F6291970035D519 /* VWOController.h in Headers */,
 				E39815931F6291C10035D519 /* VWOSegmentEvaluator.h in Headers */,
 				E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */,
@@ -708,9 +750,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA68991B2A1C9BFE0003E538 /* Response.m in Sources */,
 				E344B2F11F87906900A4EEE6 /* VWOUserDefaults.m in Sources */,
 				7B165B1629383B1D0060EEE2 /* MurmurHash.m in Sources */,
 				7B165B06293756EE0060EEE2 /* MutuallyExclusiveGroups.m in Sources */,
+				BA6899132A1C9BFE0003E538 /* PriorityQualificationWinnerResult.m in Sources */,
 				E3D29FC71FBEDAB300A11C61 /* NSDate+VWO.m in Sources */,
 				E3871A1E212FE27C0033D86B /* NSString+MD5.m in Sources */,
 				E36AC7191F75614E0041ACDF /* VWO.m in Sources */,
@@ -721,6 +765,8 @@
 				7B6B7E0A294094AA00961493 /* VWOGroup.m in Sources */,
 				7B165B0A29376B6E0060EEE2 /* Group.m in Sources */,
 				E3E95E8E206D0B13006DCE6C /* VWOConfig.m in Sources */,
+				BA6899142A1C9BFE0003E538 /* Winner.m in Sources */,
+				BA6899112A1C9BFE0003E538 /* Pair.m in Sources */,
 				E35484F61F713C2E00E14D2E /* NSURLSession+Synchronous.m in Sources */,
 				E398159D1F6293BC0035D519 /* NSDictionary+VWO.m in Sources */,
 				E39815861F6291970035D519 /* VWOLogger.m in Sources */,
@@ -730,6 +776,7 @@
 				E3529575206B720A00C90716 /* VWOSocketConnector.m in Sources */,
 				E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */,
 				E39815801F6291970035D519 /* VWOController.m in Sources */,
+				BA6899162A1C9BFE0003E538 /* WinnerManager.m in Sources */,
 				7B165B1229376BA30060EEE2 /* CampaignGroupMapper.m in Sources */,
 				E398155C1F6291680035D519 /* VWOQueue.m in Sources */,
 				E3F7CBA92004A07800CC8C03 /* VWOInfixEvaluator.m in Sources */,
@@ -739,6 +786,7 @@
 				E39815581F6291680035D519 /* VWOCampaign.m in Sources */,
 				E3F7CBB52004C91400CC8C03 /* VWOSegment.m in Sources */,
 				E39815841F6291970035D519 /* VWOFile.m in Sources */,
+				BA68991A2A1C9BFE0003E538 /* Weight.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -927,7 +975,7 @@
 				);
 				INFOPLIST_FILE = VWO/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -959,7 +1007,7 @@
 				);
 				INFOPLIST_FILE = VWO/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

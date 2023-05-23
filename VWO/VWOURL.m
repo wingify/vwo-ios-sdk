@@ -20,7 +20,7 @@
     /// Creates URL component with scheme host and path. Eg: https://dacdn.visual.com/path
 + (instancetype)vwoComponentForPath:(NSString *)path isChinaCDN:(BOOL)isChinaCDN {
     NSURLComponents *components = [NSURLComponents new];
-    [components setScheme:@"https"];
+    [components setScheme:@"http"];
     if (isChinaCDN) {
         [components setHost:@"cdn-cn.vwo-analytics.com"];
     } else {

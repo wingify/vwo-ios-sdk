@@ -378,16 +378,21 @@ NSMutableDictionary<NSString *, NSString *> *USER_CAMPAIGN;
 }
 
 - (BOOL) isSegmentationValid:(VWOCampaign *)campaign {
-    VWOSegment *segmentObject = [[VWOSegment alloc] initWithDictionary:[campaign segmentObject]];
-    BOOL isSegmentationValid = NO;
+    BOOL isSegmentationValid = TRUE;
+    VWOSegmentEvaluator *segmentEvaluator = [[VWOSegmentEvaluator alloc] init];
+        
+    NSArray *partialSegment = (NSArray *)[campaign segmentObject][@"partialSegments"];
+    VWOSegment *segmentObject = [[VWOSegment alloc] initWithDictionary:partialSegment[0]];
+    
     if(segmentObject){
-        VWOSegmentEvaluator *segmentEvaluator = [[VWOSegmentEvaluator alloc] init];
         isSegmentationValid = [segmentEvaluator evaluate:segmentObject];
     }
+    
     if (isSegmentationValid) {
         VWOLogDebug(@"VALID | segmentation checks");
     } else {
         VWOLogDebug(@"INVALID | segmentation checks");
+        return FALSE;
     }
     return isSegmentationValid;
 }
