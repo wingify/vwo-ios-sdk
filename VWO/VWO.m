@@ -47,7 +47,11 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 + (void)launchForAPIKey:(NSString *)apiKey {
     NSParameterAssert(apiKey);
     dispatch_barrier_async(VWOController.taskQueue, ^{
-        [VWOController.shared launchWithAPIKey:apiKey config:nil withTimeout:nil withCallback:nil failure:nil];
+        @try {
+                [VWOController.shared launchWithAPIKey:apiKey config:nil withTimeout:nil withCallback:nil failure:nil];
+        }@catch (NSException *exception) {
+                 VWOLogError(@"Caught an exception: %@", exception);
+        }
     });
 }
 
@@ -61,17 +65,17 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 }
 
 + (void)launchForAPIKey:(NSString *)apiKey
-             config:(VWOConfig *)config
+                 config:(VWOConfig *)config
              completion:(void(^)(void))completion
                 failure:(nullable void (^)(NSString *error))failureBlock {
     NSParameterAssert(apiKey);
     dispatch_barrier_async(VWOController.taskQueue, ^{
         [VWOController.shared launchWithAPIKey:apiKey
-                                    config:config
+                                        config:config
                                    withTimeout:nil
                                   withCallback:completion
                                        failure:failureBlock];
-
+        
     });
 }
 
@@ -80,11 +84,11 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     NSParameterAssert(apiKey);
     dispatch_barrier_sync(VWOController.taskQueue, ^{
         [VWOController.shared launchWithAPIKey:apiKey
-                                    config:nil
+                                        config:nil
                                    withTimeout:@(timeout)
                                   withCallback:nil
                                        failure:nil];
-
+        
     });
 }
 
@@ -98,21 +102,21 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
                                    withTimeout:@(timeout)
                                   withCallback:nil
                                        failure:nil];
-
+        
     });
 }
 
 + (void)launchSynchronouslyForAPIKey:(NSString *)apiKey
                              timeout:(NSTimeInterval)timeout
-                          config:(VWOConfig *)config {
+                              config:(VWOConfig *)config {
     NSParameterAssert(apiKey);
     dispatch_barrier_sync(VWOController.taskQueue, ^{
         [VWOController.shared launchWithAPIKey:apiKey
-                                    config:config
+                                        config:config
                                    withTimeout:@(timeout)
                                   withCallback:nil
                                        failure:nil];
-
+        
     });
 }
 
@@ -120,7 +124,11 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     NSParameterAssert(key);
     __block id object;
     dispatch_barrier_sync(VWOController.taskQueue, ^{
-        object = [VWOController.shared variationForKey:key];
+        @try {
+            object = [VWOController.shared variationForKey:key];
+        }@catch (NSException *exception) {
+            VWOLogError(@"Caught an exception: %@", exception);
+        }
     });
     return object;
 }
@@ -129,7 +137,11 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     NSParameterAssert(key);
     __block id object;
     dispatch_barrier_sync(VWOController.taskQueue, ^{
-        object = [VWOController.shared variationForKey:key testKey:testKey];
+        @try {
+            object = [VWOController.shared variationForKey:key testKey:testKey];
+        }@catch (NSException *exception) {
+            VWOLogError(@"Caught an exception: %@", exception);
+        }
     });
     
     return object;
@@ -145,7 +157,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 }
 
 + (id)variationForKey:(NSString *)key defaultValue:(id)defaultValue {
-        // Deprecated
+    // Deprecated
     return [self objectForKey:key defaultValue:defaultValue];
 }
 
@@ -199,7 +211,6 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
             variationName = [VWOController.shared variationNameForCampaignTestKey:campaignTestKey];
         }
         @catch (NSException *exception) {
-            
             VWOLogError(@"Caught an exception: %@", exception);
         }
     });
@@ -216,25 +227,25 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     VWOCampaignArray * campaignsData = [VWOController.shared getCampaignData];
     
     NSMutableDictionary *megGroupsData = [[NSMutableDictionary alloc] init];
-
+    
     if (campaignsData != nil && campaignsData.count > 0) {
         for (int i = 0; i < campaignsData.count; i++) {
             @try {
                 VWOCampaign *groupDataItem = campaignsData[i];
                 if ([groupDataItem type] == CAMPAIGN_GROUPS) {
                     [megGroupsData setObject:groupDataItem forKey:@"groups"];
-                   break;
+                    break;
                 }
             }
             @catch (NSException *exception)  {
                 VWOLogDebug(@"MutuallyExclusive  %@", exception);
-           
+                
             }
         }
     }
-
+    
     NSDictionary<NSString *, Group*> *mappedData = [CampaignGroupMapper createAndGetGroups: megGroupsData];
-
+    
     MutuallyExclusiveGroups *meg = [[MutuallyExclusiveGroups alloc] initMutuallyExclusiveGroups:userId];
     [meg addGroups:mappedData];
     return [meg getCampaign:args jsonData:campaignsData];
@@ -273,7 +284,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     dispatch_barrier_async(VWOController.taskQueue, ^{
         [VWOController.shared pushCustomDimension:customDimensionKey withCustomDimensionValue:customDimensionValue];
     });
-
+    
 }
 
 + (NSString *)version {
