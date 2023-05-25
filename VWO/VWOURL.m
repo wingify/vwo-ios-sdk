@@ -231,7 +231,7 @@ static NSString *kSDKversionNumber = @"19";
         }
     };
     
-    if (goalValue != nil) {
+    if (goalValue != nil && goal.revenueProp != nil) {
         VWOMetaDict = @{
             Metric: @{
                 [NSString stringWithFormat:@"id_%d", campaign.iD]: goalIDArray

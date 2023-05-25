@@ -16,7 +16,7 @@
 - (nullable NSData *)sendSynchronousDataTaskWithURL:(nonnull NSURL *)url
                                   returningResponse:(NSURLResponse *_Nullable*_Nullable)response
                                               error:(NSError *_Nullable*_Nullable)error {
-    if(VWOUserDefaults.IsEventArchEnabled != NULL && VWOUserDefaults.IsEventArchEnabled == EventArchEnabled){
+    if(VWOUserDefaults.IsEventArchEnabled != NULL && [VWOUserDefaults.IsEventArchEnabled isEqual:EventArchEnabled]){
         NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
         [urlRequest setHTTPMethod:@"POST"];
         [urlRequest setValue:UserAgentValue forHTTPHeaderField:@"User-Agent"];
