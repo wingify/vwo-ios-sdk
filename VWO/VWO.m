@@ -50,7 +50,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
         @try {
                 [VWOController.shared launchWithAPIKey:apiKey config:nil withTimeout:nil withCallback:nil failure:nil];
         }@catch (NSException *exception) {
-                 VWOLogError(@"Caught an exception: %@", exception);
+            VWOLogException(@"Caught an exception in launchForAPIKey method: %@", exception);
         }
     });
 }
@@ -127,7 +127,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
         @try {
             object = [VWOController.shared variationForKey:key];
         }@catch (NSException *exception) {
-            VWOLogError(@"Caught an exception: %@", exception);
+            VWOLogException(@"Caught an exception in objectForKey method: %@", exception);
         }
     });
     return object;
@@ -140,7 +140,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
         @try {
             object = [VWOController.shared variationForKey:key testKey:testKey];
         }@catch (NSException *exception) {
-            VWOLogError(@"Caught an exception: %@", exception);
+            VWOLogException(@"Caught an exception in objectForKey testKey method: %@", exception);
         }
     });
     
@@ -211,7 +211,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
             variationName = [VWOController.shared variationNameForCampaignTestKey:campaignTestKey];
         }
         @catch (NSException *exception) {
-            VWOLogError(@"Caught an exception: %@", exception);
+            VWOLogException(@"Caught an exception in variationNameForTestKey method: %@", exception);
         }
     });
     return variationName;
