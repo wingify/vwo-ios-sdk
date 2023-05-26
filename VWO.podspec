@@ -14,6 +14,11 @@ Pod::Spec.new do |s|
     s.swift_version = '5.0'
     s.default_subspec = 'All'
 
+     s.pod_target_xcconfig = {
+              'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+      }
+    s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+
     s.subspec 'Core' do |ss|
 	    ss.source_files = 'VWO/**/*.{m,h}'
 	end
@@ -22,8 +27,5 @@ Pod::Spec.new do |s|
 	    ss.source_files = 'Socket/**/*.{m,h}', 'VWO/**/*.{m,h}'
 	    ss.dependency 'Socket.IO-Client-Swift', '~> 15.2.0'
     end
-    s.pod_target_xcconfig = {
-      'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
-    }
-    s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+    
 end
