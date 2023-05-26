@@ -116,7 +116,13 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
             case VWOSegmentTypeDayOfWeek: {
                 NSAssert(self.date != nil, @"Date not available");
-                BOOL contains = [segment.rOperand containsObject:[NSNumber numberWithInteger:self.date.dayOfWeek]];
+                BOOL contains = NO;
+                NSString *givenType = segment.rOperand.firstObject;
+                NSString *currentDayValue = [NSString stringWithFormat:@"%ld", self.date.dayOfWeek];
+                if([givenType isEqualToString:currentDayValue]){
+                    contains = YES;
+                }
+                
                 return ((contains && segment.operator == OperatorTypeIsEqualTo) ||
                         (!contains && segment.operator == OperatorTypeIsNotEqualTo));
             }
@@ -180,8 +186,17 @@ static NSString * kReturningVisitor = @"returning_visitor";
 
             case VWOSegmentTypeDeviceType: {
                 NSString *givenDeviceType = segment.rOperand.firstObject;
-                BOOL valid = (self.appleDeviceType == VWOAppleDeviceTypeIPhone && [givenDeviceType isEqualToString:@"iPhone"]) ||
-                (self.appleDeviceType == VWOAppleDeviceTypeIPad && [givenDeviceType isEqualToString:@"iPad"]);
+                BOOL valid = false;
+                if(givenDeviceType == nil){
+                    return NO;
+                }
+                if([givenDeviceType caseInsensitiveCompare:@"iPhone"] == NSOrderedSame){
+                    valid = (self.appleDeviceType == VWOAppleDeviceTypeIPhone);
+                }
+                else if([givenDeviceType caseInsensitiveCompare:@"iPad"] == NSOrderedSame){
+                    valid = (self.appleDeviceType == VWOAppleDeviceTypeIPad);
+                }
+                
                 return ((valid && segment.operator == OperatorTypeIsEqualTo) ||
                         (!valid && segment.operator == OperatorTypeIsNotEqualTo));
             }

@@ -17,6 +17,9 @@ static NSString * const KEY_CAMPAIGN_GROUPS = @"campaignGroups";
 static NSString * const KEY_GROUPS = @"groups";
 static NSString * const KEY_NAME = @"name";
 static NSString * const KEY_CAMPAIGNS = @"campaigns";
+static NSString * const KEY_PRIORITY = @"p";
+static NSString * const KEY_ET = @"et";
+static NSString * const KEY_WEIGHT = @"wt";
 
 float m = 1.0;
 
@@ -49,7 +52,6 @@ float m = 1.0;
             NSString *key = itrJsonGroups[index];
             
             NSDictionary *objGroup = jsonGroups[key];
-            NSArray *arrCampaigns = objGroup[KEY_CAMPAIGNS];
             
             NSString *groupName = objGroup[KEY_NAME];
             
@@ -57,9 +59,11 @@ float m = 1.0;
             group.name = groupName;
             group.Id = key.intValue;
             
-            for (int i = 0; i < arrCampaigns.count; i++) {
-                [group addCampaign:arrCampaigns[i]];
-            }
+            [self prepareWeight:objGroup destination:group];
+            [self prepareCampaigns:objGroup destination:group];
+            [self prepareEt:objGroup destination:group];
+            [self preparePriority:objGroup destination:group];
+            
             VWOLogDebug(@"MutuallyExclusive  Added Group Id %d", group.Id);
             VWOLogDebug(@"MutuallyExclusive  Added Group Campaign %@", group.getCampaigns);
 
@@ -72,6 +76,52 @@ float m = 1.0;
         VWOLogDebug(@"MutuallyExclusive  error while adding groups %@", exception);
     }
     return groups;
+}
+
++ (void)preparePriority: (NSDictionary *)source destination:(Group *)destination {
+    if (![source objectForKey:KEY_PRIORITY]) return;
+
+    NSArray *priority = [source objectForKey:KEY_PRIORITY];
+    NSLog(@"priority should be given to these campaigns -> %@", priority);
+    for (int pIndex = 0; pIndex < priority.count; ++pIndex) {
+        [destination addPriority:[priority objectAtIndex:pIndex]];
+    }
+}
+
++ (void)prepareEt:(NSDictionary *)source destination:(Group *)destination {
+    if (![source objectForKey:KEY_ET]) return;
+
+    int et = [[source objectForKey:KEY_ET] intValue];
+    [destination addEt:et];
+}
+
++ (void)prepareCampaigns:(NSDictionary *)source destination:(Group *)destination {
+    if (![source objectForKey:KEY_CAMPAIGNS]) return;
+
+    NSArray *arrCampaigns = [source objectForKey:KEY_CAMPAIGNS];
+    for (int index = 0; index < arrCampaigns.count; index++) {
+        [destination addCampaign:[arrCampaigns objectAtIndex:index]];
+    }
+}
+
++ (void)prepareWeight:(NSDictionary *)source destination:(Group *)destination {
+    if (![source objectForKey:KEY_WEIGHT]) return;
+
+    NSLog(@"------------------------------------------------------------");
+    NSLog(@"preparing for -> %@", destination.name);
+    NSLog(@"found weight sent from server, preparing the weight value for later usage.");
+    NSLog(@"NOTE: these weight will only be applied if no priority campaign exist.");
+
+    NSDictionary *weights = [source objectForKey:KEY_WEIGHT];
+    NSEnumerator *enumerator = [weights keyEnumerator];
+    NSString *campaign;
+    while ((campaign = [enumerator nextObject])) {
+        NSNumber *weightNumber = [weights objectForKey:campaign];
+        int weight = [weightNumber intValue];
+        [destination addWeight:campaign weight:weight];
+    }
+
+    NSLog(@"------------------------------------------------------------");
 }
 
 + (NSDictionary *)getGroups: (NSDictionary *)jsonObject{

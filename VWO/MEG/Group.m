@@ -7,10 +7,63 @@
 //
 
 #import "Group.h"
+#import "Weight.h"
 #import "CampaignUniquenessTracker.h"
 #import "MutuallyExclusiveGroups.h"
 
+@interface Group ()
+
+// Private instance variable
+@property (nonatomic, strong) NSMutableArray<NSString *> *priorityCampaigns;
+
+/**
+* Type of allocation:
+* 1 - Random
+* 2 - Advance
+* <p>
+* DOC: https://confluence.wingify.com/pages/viewpage.action?spaceKey=VWOENG&title=Mutually+Exclusive+Weights+and+Prioritization+in+Mobile+App+Testing
+*/
+@property (nonatomic,assign) int et;
+
+// Using NSMutableArray to maintain the insertion order
+@property (nonatomic, strong) NSMutableArray<Weight *> *weightMapFromServer;
+
+@end
+
 @implementation Group
+
+const int VALUE_ET_INVALID = -1;
+const int VALUE_ET_RANDOM = 1;
+const int VALUE_ET_ADVANCE = 2;
+NSString *VALUE_INVALID_PRIORITY_CAMPAIGN = @"InvalidCampaign";
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        // Initialize private properties
+        _priorityCampaigns = [[NSMutableArray<NSString *> alloc] init];
+        _et= VALUE_ET_INVALID;
+        _weightMapFromServer = [[NSMutableArray<Weight *> alloc] init];
+    }
+    return self;
+}
+
+- (NSMutableArray<NSString *> *)getPriorityCampaigns {
+    return _priorityCampaigns;
+}
+
+- (void)addPriority:(NSString *)p {
+    [_priorityCampaigns addObject:p];
+}
+
+- (int)getEt {
+    return _et;
+}
+
+- (void)addEt:(int)et {
+    _et = et;
+}
 
 - (NSUInteger) getCampaignSize {
 
@@ -36,9 +89,44 @@
 
 }
 
+- (NSString *)getPriorityCampaign {
+    [MutuallyExclusiveGroups log:[NSString stringWithFormat:@"will try to check for priority campaign against campaign list in group -> %@", self.name]];
+
+    // check if et is advance as priority is not
+    if ([self isNotAdvanceMEGAllocation]) {
+    [MutuallyExclusiveGroups log:[NSString stringWithFormat:@"et ( %d ) is not advance type, priority campaigns ( p ) will not be applicable.", self.et]];
+    return VALUE_INVALID_PRIORITY_CAMPAIGN;
+    }
+
+    if (self.priorityCampaigns.count == 0) {
+    [MutuallyExclusiveGroups log:@"et is advance but the priority array is empty."];
+    return VALUE_INVALID_PRIORITY_CAMPAIGN;
+    }
+
+    [MutuallyExclusiveGroups log:[NSString stringWithFormat:@"there are %lu priorityCampaigns in %@", (unsigned long)self.priorityCampaigns.count, self.name]];
+
+    for (NSString *priorityCampaign in self.priorityCampaigns) {
+    if ([self.campaignList containsObject:priorityCampaign]) {
+    [MutuallyExclusiveGroups log:[NSString stringWithFormat:@"priority campaign >> %@ << found in -> %@", priorityCampaign, self.name]];
+    return priorityCampaign;
+    } else {
+    [MutuallyExclusiveGroups log:[NSString stringWithFormat:@"priority campaign >> %@ << doesn't exist in %@", priorityCampaign, self.name]];
+    }
+    }
+
+    [MutuallyExclusiveGroups log:@"priority campaign not defined, caller should continue with normal MEG logic."];
+
+    // we found nothing
+    return VALUE_INVALID_PRIORITY_CAMPAIGN;
+    }
+
+- (BOOL)isNotAdvanceMEGAllocation {
+    return (_et != VALUE_ET_ADVANCE);
+}
+
 - (void) calculateWeight {
 
-    float total = 100; // because 100%
+    float total = 100;
 
     NSUInteger totalCampaigns = self.campaignList.count;
 
@@ -180,7 +268,31 @@
 
 
 
-- (void) createWeightMap {
+- (void)createWeightMap {
+    if ([self isNotAdvanceMEGAllocation]) {
+        [MutuallyExclusiveGroups log:[NSString stringWithFormat:@"not using weight from the server, preparing EQUAL allocation because et = %d [ NOTE: et=1->Random, et=2 -> Advance ]", self.et]];
+        
+        [self createEquallyDistributedWeightMap];
+    } else {
+        [MutuallyExclusiveGroups log:@"weight is received from the server, preparing WEIGHTED allocation."];
+        [self createWeightMapFromProvidedValues];
+    }
+}
+
+- (void)createWeightMapFromProvidedValues {
+    if (self.weightMap == nil) {
+        self.weightMap = [[NSMutableDictionary alloc] init];
+    }
+    
+    [MutuallyExclusiveGroups log:@"morphing weighted allocation data to existing MEG weight format"];
+    for (int index = 0; index < [self.weightMapFromServer count]; index++) {
+        Weight *weight = self.weightMapFromServer[index];
+        [self.weightMap setObject:weight.getRange forKey:weight.getCampaign];
+    }
+}
+
+
+- (void) createEquallyDistributedWeightMap {
 
     if (_weightMap == nil) {
 
@@ -213,5 +325,40 @@
 }
 
 
+- (void)addWeight:(NSString *)campaign weight:(NSInteger)weight {
+
+    NSLog(@"adding priority weight -> %ld for campaign -> %@", (long)weight, campaign);
+
+    NSMutableArray<NSNumber *> *weightRange = [NSMutableArray new];
+    if (self.weightMapFromServer.count == 0) {
+        [weightRange addObject:@(0)]; // will start at 0
+        [weightRange addObject:@(weight)]; // end
+    } else {
+        // last weight's end will be this weight's start
+        Weight *lastWeight = self.weightMapFromServer.lastObject;
+        // add range
+        [weightRange addObject: ([lastWeight getRangeEnd])]; // start will be the end of last entry
+        NSInteger endWeight = [[lastWeight getRangeEnd] intValue] + weight;
+        [weightRange addObject: [NSNumber numberWithInteger:endWeight]]; // end will be start + current weight
+    }
+
+    Weight *weightObject = [[Weight alloc] init:campaign range:weightRange];
+    [self.weightMapFromServer addObject:weightObject];
+    NSLog(@"campaign %@ range %@ to %@", [weightObject getCampaign], [weightObject getRangeStart], [weightObject getRangeEnd]);
+}
+
+- (BOOL)hasInPriority:(NSString *)campaign {
+    for(int i=0;i<_priorityCampaigns.count;i++){
+        NSString *priorityItem = [NSString stringWithFormat:@"%@", _priorityCampaigns[i]];
+        if([priorityItem isEqual:campaign]){
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+- (BOOL)doesNotHaveInPriority:(NSString *)campaign {
+    return ![self hasInPriority:campaign];
+}
 
 @end

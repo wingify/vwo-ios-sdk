@@ -15,5 +15,11 @@ extern NSString const *ConstType;
 extern NSString const *ConstCampaigns;
 extern NSString const *ConstCollectionPrefix;
 extern NSString const *ConstAPIVersion;
+extern NSString const *KEY_GROUP;
+extern NSString const *KEY_TEST_KEY;
+extern NSString const *KEY_WINNER_CAMPAIGN;
+extern NSString const *KEY_USER;
+extern NSString const *KEY_MAPPING;
+extern NSString const *ID_GROUP;
 
 @end

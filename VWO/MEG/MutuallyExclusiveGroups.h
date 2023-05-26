@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PriorityQualificationWinnerResult.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)getTestKeyFromCampaignId: (NSString *)campaignId campaignsData: (NSArray *)campaignsData;
 - (NSString *)getCampaignFromSpecificGroup: (NSString *)groupName;
 - (NSString *)getGroupNameFromGroupId: (int)groupId;
+- (PriorityQualificationWinnerResult *)isQualifiedAsWinner:(NSString *)priorityCampaignId isGroupPassedByUser:(BOOL)isGroupPassedByUser;
 - (NSString *)getCampaignFromCampaignId: (NSString *)userId campaign: (NSString *)campaign;
 - (NSString *)getCampaignIfPresent: (NSString *)campaignKey;
 - (NSNumber *)getNormalizedValue: (NSNumber *)murmurHash;

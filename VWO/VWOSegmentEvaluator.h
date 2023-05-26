@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "VWODevice.h"
+#import "VWOSegment.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property uint screenHeight;
 
 - (BOOL)canUserBePartOfCampaignForSegment:(nullable NSDictionary *)segment;
+- (BOOL)evaluate:(VWOSegment *) segment;
 
 + (VWOSegmentEvaluator *)makeEvaluator:(NSDictionary<NSString *, NSString *> *)customVariables;
 @end

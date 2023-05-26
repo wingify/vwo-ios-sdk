@@ -19,11 +19,25 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableDictionary<NSString *, id> *weightMap;
 @property(nonatomic,strong)NSNumber *weight;
 
+- (instancetype)init;
+- (NSMutableArray<NSString *> *)getPriorityCampaigns;
+- (void)addPriority:(NSString *)p;
+- (int)getEt;
+- (void)addEt:(int)et;
+- (NSUInteger) getCampaignSize;
+- (NSString *)getPriorityCampaign;
+- (BOOL)isNotAdvanceMEGAllocation;
+- (void)createWeightMap;
+- (void)createWeightMapFromProvidedValues;
+- (void) createEquallyDistributedWeightMap;
+- (void)addWeight:(NSString *)campaign weight:(NSInteger)weight;
 - (NSString *) getCampaignForRespectiveWeight: (NSNumber *) weight;
 - (NSMutableArray<NSString *> *) getCampaigns;
 - (NSString *) getNameOnlyIfPresent: (NSString *) toSearch;
 - (NSString *) getOnlyIfPresent: (NSString *) toSearch;
 - (void) addCampaign: (NSString *) campaign;
+- (BOOL)hasInPriority:(NSString *)campaign;
+- (BOOL)doesNotHaveInPriority:(NSString *)campaign;
 @end
 
 NS_ASSUME_NONNULL_END
