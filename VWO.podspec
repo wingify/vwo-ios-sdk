@@ -10,14 +10,9 @@ Pod::Spec.new do |s|
 	s.author            = { 'VWO' => 'info@wingify.com' }
 	s.source            = { :git => "https://github.com/wingify/vwo-ios-sdk.git",
                             :tag => s.version.to_s }
-	s.platform     	    = :ios, '11.0'
+	s.platform     	    = :ios, '9.0'
     s.swift_version = '5.0'
     s.default_subspec = 'All'
-
-     s.pod_target_xcconfig = {
-              'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
-      }
-    s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
     s.subspec 'Core' do |ss|
 	    ss.source_files = 'VWO/**/*.{m,h}'
