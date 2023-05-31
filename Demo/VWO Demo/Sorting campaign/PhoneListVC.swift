@@ -54,7 +54,7 @@ class PhoneListVC: UIViewController {
 
 
     @IBAction func reloadTapped(_ sender: Any) {
-        let variation = VWO.variationNameFor(testKey: "METest")
+        let variation = VWO.variationNameFor(testKey: "camp1")
         switch variation {
         case "Sort-Alphabetically":
             phoneList.sort(by: sortPhoneAlphabetically)
@@ -65,6 +65,15 @@ class PhoneListVC: UIViewController {
             break
         }
         tableView.reloadData()
+        VWO.trackConversion("harshrevenue", value:69.0)
+            VWO.trackConversion("tiggerevent")
+        
+//      let TestKey =  VWO.getCampaign("e57e8bd1-fb5f-478d-80d2-5127eb5d79f7", args: ["groupId":"36"])
+//        let TestKey =  VWO.getCampaign("e57e8bd1-fb5f-478d-80d2-5127eb5d79f7", args: ["test_key":"camp5Harsh", "groupId":"36"])
+//        let TestKey =  VWO.getCampaign("e57e8bd1-fb5f-478d-80d2-5127eb5d79f7", args: ["test_key":"camp5Harsh"])
+//        print("Harsh TestKey @%",TestKey)
+//        let TestKey =  VWO.getCampaign("e57e8bd1-fb5f-478d-80d2-5127eb5d79f7", args: ["test_key":"ME123"])
+//        VWO.getCampaign("HarshUserID", args: ["test_key":"ME123","groupId":"8"])
     }
 }
 

@@ -27,6 +27,14 @@ NSString const *ConstRevenueTracking = @"REVENUE_TRACKING";
 //for making API calls
 NSString const *ConstAPIVersion = @"3";
 
+//for MEG
+NSString const *KEY_GROUP = @"group";
+NSString const *KEY_TEST_KEY = @"test_key";
+NSString const *KEY_WINNER_CAMPAIGN = @"winner_campaign";
+NSString const *KEY_USER = @"user";
+NSString const *KEY_MAPPING = @"mapping";
+NSString const *ID_GROUP = @"groupId";
+
 @end
 
 @implementation VWOData360Constants: NSObject

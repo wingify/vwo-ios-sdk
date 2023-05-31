@@ -16,7 +16,7 @@
     NSArray *missing = [segmentDict keysMissingFrom:@[@"type", @"operator", @"rOperandValue"]];
     if (missing.count > 0) { return NO; }
     if (![segmentDict[@"type"] isKindOfClass:NSString.class]) { return NO; }
-    if (segmentDict[@"prevLogicalOperator"] != nil) {
+    if (segmentDict[@"prevLogicalOperator"] != nil && segmentDict[@"prevLogicalOperator"] != [NSNull null]) {
         if (![segmentDict[@"prevLogicalOperator"] isEqualToString:@"AND"] &&
             ![segmentDict[@"prevLogicalOperator"] isEqualToString:@"OR"]) {
             return NO;

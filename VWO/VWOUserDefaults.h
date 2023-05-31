@@ -27,6 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, readonly) NSString *IsEventArchEnabled;
 @property (class, readonly) NSMutableDictionary *EventArchData;
 
++ (nullable id)objectForKey:(NSString *)key;
++ (void)setObject:(nullable id)value forKey:(NSString *)key;
+
 + (void)setExcludedCampaign:(VWOCampaign *)campaign;
 
 + (BOOL)isTrackingUserForCampaign:(VWOCampaign *)campaign;
