@@ -120,14 +120,15 @@ static NSString * CAMPAIGN_GROUPS = @"groups";
     return self.variation.changes[key];
 }
 
-- (nullable VWOGoal *)goalForIdentifier:(NSString *)identifier {
+- (nullable NSMutableArray <VWOGoal *>*)goalForIdentifier:(NSString *)identifier {
     NSParameterAssert(identifier);
+    NSMutableArray <VWOGoal *>*matchedGoalsArray = [NSMutableArray new];
     for (VWOGoal *goal in self.goals) {
         if ([goal.identifier isEqualToString:identifier]) {
-            return goal;
+            [matchedGoalsArray addObject:goal];
         }
     }
-    return nil;
+    return matchedGoalsArray;
 }
 
 -(nullable VWOGroup *)groupForMeg{

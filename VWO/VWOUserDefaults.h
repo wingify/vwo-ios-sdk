@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, getter=isReturningUser, readonly) BOOL returningUser;
 @property (class, readonly) NSString *UUID;
 @property (class, readonly) NSString *CollectionPrefix;
+@property (class, readonly) NSString *IsEventArchEnabled;
+@property (class, readonly) NSMutableDictionary *EventArchData;
 
 + (void)setExcludedCampaign:(VWOCampaign *)campaign;
 
@@ -36,6 +38,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)setDefaultsKey:(NSString *)key;
 + (void)updateUUID:(NSString*)uuid;
 + (void)updateCollectionPrefix:(NSString*)collectionPrefix;
++ (void)updateIsEventArchEnabled:(NSString*)isEventArchEnabled;
++ (void)updateEventArchData:(NSString *)url valueDict:(NSMutableDictionary *)EventArchDict;
++ (void)removeEventArchDataItem:(NSString *)url;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -20,6 +20,8 @@ typedef NS_ENUM(NSInteger, GoalType) {
 @property(nonatomic, assign) int iD;
 @property NSString *identifier;
 @property (nonatomic, assign) GoalType type;
+@property NSString *revenueProp;
+@property(nonatomic, assign) int mca;
 
 - (nullable instancetype)initWithDictionary:(NSDictionary *)goalDict;
 

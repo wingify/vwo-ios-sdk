@@ -10,12 +10,14 @@
 #import "VWOCampaign.h"
 #import "VWOLogger.h"
 
-static NSString * kTracking        = @"tracking";
-static NSString * kGoalsMarked     = @"goalsMarked";
-static NSString * kSessionCount    = @"sessionCount";
-static NSString * kReturningUser   = @"returningUser";
-static NSString * kUUID            = @"UUID";
-static NSString * kCollectionPrefix= @"collectionPrefix";
+static NSString * kTracking           = @"tracking";
+static NSString * kGoalsMarked        = @"goalsMarked";
+static NSString * kSessionCount       = @"sessionCount";
+static NSString * kReturningUser      = @"returningUser";
+static NSString * kUUID               = @"UUID";
+static NSString * kCollectionPrefix   = @"collectionPrefix";
+static NSString * kIsEventArchEnabled = @"isEventArchEnabled";
+static NSString * kEventArchData      = @"eventArchData";
 
 static NSString * _userDefaultsKey;
 
@@ -98,6 +100,14 @@ static NSString * _userDefaultsKey;
     return [self objectForKey:kCollectionPrefix];
 }
 
++ (NSString *)IsEventArchEnabled {
+    return [self objectForKey:kIsEventArchEnabled];
+}
+
++ (NSMutableDictionary *)EventArchData {
+    return [self objectForKey:kEventArchData];
+}
+
 + (void)setSessionCount:(NSUInteger)count {
     [self setObject:@(count) forKey:kSessionCount];
     [self updateIsReturningUser];
@@ -115,8 +125,33 @@ static NSString * _userDefaultsKey;
     [self setObject:uuid forKey:kUUID];
 }
 
-+(void)updateCollectionPrefix:(NSString *)collectionPrefix {
++ (void)updateCollectionPrefix:(NSString *)collectionPrefix {
     [self setObject:collectionPrefix forKey:kCollectionPrefix];
+}
+
++ (void)updateIsEventArchEnabled:(NSString *)isEventArchEnabled {
+    [self setObject:isEventArchEnabled forKey:kIsEventArchEnabled];
+}
+
++ (void)updateEventArchData:(NSString *)url valueDict:(NSMutableDictionary *)EventArchDict {
+    NSMutableDictionary *EventArchData = [[self objectForKey:kEventArchData] mutableCopy];
+    if(EventArchData == nil){
+        NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
+        newDict[url] = EventArchDict;
+        [self setObject:newDict forKey:kEventArchData];
+    }
+    else{
+        EventArchData[url] = EventArchDict;
+        [self setObject:EventArchData forKey:kEventArchData];
+    }
+}
+
++ (void)removeEventArchDataItem:(NSString *)url {
+    NSMutableDictionary *EventArchData = [[self objectForKey:kEventArchData] mutableCopy];
+    if(EventArchData != NULL){
+        [EventArchData removeObjectForKey:url];
+        [self setObject:EventArchData forKey:kEventArchData];
+    }
 }
 
 + (NSUInteger)sessionCount {

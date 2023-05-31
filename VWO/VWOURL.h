@@ -22,14 +22,27 @@ NS_ASSUME_NONNULL_BEGIN
                               dateTime:(NSDate *)date
                               config:(VWOConfig *) config;
 
+- (NSURL *)forMakingUserPartOfCampaignEventArch:(VWOCampaign *)campaign
+                              dateTime:(NSDate *)date
+                              config:(VWOConfig *) config;
+
 - (NSURL *)forMarkingGoal:(VWOGoal *)goal
                 withValue:(nullable NSNumber *)goalValue
-                 campaign:(VWOCampaign *)campaign
-                 dateTime:(NSDate *)date;
+                campaign:(VWOCampaign *)campaign
+                dateTime:(NSDate *)date;
+
+- (NSURL *)forMarkingGoalEventArch:(VWOGoal *)goal
+                withValue:(nullable NSNumber *)goalValue
+                campaign:(VWOCampaign *)campaign
+                dateTime:(NSDate *)date;
 
 - (NSURL *)forPushingCustomDimension:(NSString *) customDimensionKey
                         withCustomDimensionValue:(NSString *) customDimensionValue
                         dateTime:(NSDate *)date;
+
+- (NSURL *)forPushingCustomDimensionEventArch:(NSString *)customDimensionKey
+                                withCustomDimensionValue:(nonnull NSString *)customDimensionValue
+                                     dateTime:(nonnull NSDate *)date;
 
 @end
 
