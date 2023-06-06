@@ -22,6 +22,8 @@ NSString const *ConstCollectionPrefix = @"collectionPrefix";
 
 NSString const *ConstIsEventArchEnabled = @"isEventArchEnabled";
 
+NSString const *ConstIsMobile360Enabled = @"isMobile360Enabled";
+
 NSString const *ConstRevenueTracking = @"REVENUE_TRACKING";
 
 //for making API calls

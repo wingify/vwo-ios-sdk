@@ -142,8 +142,8 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 
 +(void)checkForIsEventArchEnabledFlag:(NSDictionary *)jsonDict{
     BOOL isEventArchEnabledFlag = [[jsonDict objectForKey:ConstIsEventArchEnabled] boolValue];
-//    BOOL *isEventArchEnabledFlag = [jsonDict objectForKey: ConstIsEventArchEnabled];
-    if(isEventArchEnabledFlag != NULL && isEventArchEnabledFlag == YES){
+    BOOL isMobile360EnabledFlag = [[jsonDict objectForKey:ConstIsMobile360Enabled] boolValue];
+    if(isEventArchEnabledFlag != NULL && isEventArchEnabledFlag == YES && isMobile360EnabledFlag != NULL && isMobile360EnabledFlag == YES){
         [VWOUserDefaults updateIsEventArchEnabled: EventArchEnabled];
     }
     else{
