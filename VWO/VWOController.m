@@ -201,9 +201,8 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     }
 
     VWOLogDebug(@"Controller markConversionForGoal %@", goalIdentifier);
-
-        //Check if the goal is already marked.
-    for (VWOCampaign *campaign in _campaignList) {
+    
+    for(VWOCampaign *campaign in _campaignList){
         NSMutableArray <VWOGoal *>*matchedGoals = [campaign goalForIdentifier:goalIdentifier];
         if([matchedGoals count] == 0){
             continue;
@@ -211,31 +210,22 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
         
         for(VWOGoal *matchedGoal in matchedGoals){
             if (matchedGoal) {
-                
                 if ([VWOUserDefaults isGoalMarked:matchedGoal inCampaign:campaign]) {
                     BOOL isEventArchEnabled = [VWOUserDefaults IsEventArchEnabled];
                     if(!isEventArchEnabled){
                         VWOLogDebug(@"Goal '%@' already marked and eventArch is not enabled. Will not be marked again", matchedGoal);
-                        return;
+                        continue;
                     }
                     if([matchedGoal mca] != -1){
                         //if mca flag != -1, then goal is not triggered multiple times.
                         VWOLogDebug(@"Goal '%@' already marked. Will not be marked again", matchedGoal);
-                        return;
+                        continue;
                     }
                 }
-            }
-        }
-    }
-
-        // Mark goal(Goal can be present in multiple campaigns
-    for (VWOCampaign *campaign in _campaignList) {
-        NSMutableArray <VWOGoal *>*matchedGoals = [campaign goalForIdentifier:goalIdentifier];
-        if([matchedGoals count] == 0){
-            continue;
-        }
-        for(VWOGoal *matchedGoal in matchedGoals){
-            if (matchedGoal) {
+                NSNumber *finalValue = NULL;
+                if([[matchedGoal revenueProp] length] != 0){
+                    finalValue = value;
+                }
                 if ([VWOUserDefaults isTrackingUserForCampaign:campaign]) {
                     [VWOUserDefaults markGoalConversion:matchedGoal inCampaign:campaign];
                     
@@ -244,13 +234,13 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
                         ([VWOUserDefaults.IsEventArchEnabled isEqualToString:EventArchEnabled])){
                         //for Event based API calls
                         url = [_vwoURL forMarkingGoalEventArch:matchedGoal
-                                            withValue:value
+                                            withValue:finalValue
                                              campaign:campaign
                                               dateTime:NSDate.date];
                     }else{
                         //for previous version support
                         url = [_vwoURL forMarkingGoal:matchedGoal
-                                            withValue:value
+                                            withValue:finalValue
                                              campaign:campaign
                                               dateTime:NSDate.date];
                     }
