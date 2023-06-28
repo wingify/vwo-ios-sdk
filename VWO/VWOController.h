@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString *kVWOSDKversion = @"2.15.0";
+static NSString *kVWOSDKversion = @"2.15.1";
 
 @class VWOConfig;
 

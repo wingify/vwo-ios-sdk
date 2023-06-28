@@ -54,7 +54,7 @@ class PhoneListVC: UIViewController {
 
 
     @IBAction func reloadTapped(_ sender: Any) {
-        let variation = VWO.variationNameFor(testKey: "camp1")
+        let variation = VWO.variationNameFor(testKey: "androidCampaign")
         switch variation {
         case "Sort-Alphabetically":
             phoneList.sort(by: sortPhoneAlphabetically)
