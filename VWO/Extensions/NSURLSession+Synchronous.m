@@ -16,8 +16,9 @@
 - (nullable NSData *)sendSynchronousDataTaskWithURL:(nonnull NSURL *)url
                                   returningResponse:(NSURLResponse *_Nullable*_Nullable)response
                                               error:(NSError *_Nullable*_Nullable)error {
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     if(VWOUserDefaults.IsEventArchEnabled != NULL && [VWOUserDefaults.IsEventArchEnabled isEqual:EventArchEnabled]){
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+        //this code block handles network requests for Data360 EventArch calls
         [urlRequest setHTTPMethod:@"POST"];
         [urlRequest setValue:UserAgentValue forHTTPHeaderField:@"User-Agent"];
         
@@ -35,7 +36,18 @@
         
         return [self sendSynchronousDataTaskWithRequest:urlRequest returningResponse:response error:error];
     }
-    return [self sendSynchronousDataTaskWithRequest:[NSURLRequest requestWithURL:url] returningResponse:response error:error];
+    
+    NSMutableDictionary *networkHTTPMethodTypeData = VWOUserDefaults.NetworkHTTPMethodTypeData;
+    if(networkHTTPMethodTypeData != NULL){
+        //this code block handles network requests MethodType
+        NSString *urlString = [url absoluteString];
+        NSString *networkHTTPMethodTypeForURL = [networkHTTPMethodTypeData objectForKey:urlString];
+        
+        if(networkHTTPMethodTypeForURL != NULL && networkHTTPMethodTypeForURL.length != 0){
+            [urlRequest setHTTPMethod: networkHTTPMethodTypeForURL];
+        }
+    }
+    return [self sendSynchronousDataTaskWithRequest:urlRequest returningResponse:response error:error];
 }
 
 - (nullable NSData *)sendSynchronousDataTaskWithRequest:(nonnull NSURLRequest *)request

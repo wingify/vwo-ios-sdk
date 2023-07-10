@@ -279,5 +279,13 @@ __deprecated_msg("Use objectForKey:defaultValue instead");
 + (void) pushCustomDimension:(NSString *) customDimensionKey
                 withCustomDimensionValue:(NSString *) customDimensionValue NS_SWIFT_NAME(pushCustomDimension(customDimensionKey:customDimensionValue:));
 
+/**
+ Push the custom dimensions to the VWO servers.
+ * This will help to filter out the reports on VWO web-app.
+
+ @param customDimensionDictionary dictionary containing key and value pairs for customDimension
+ */
++ (void)pushCustomDimension:(NSMutableDictionary *)customDimensionDictionary NS_SWIFT_NAME(pushCustomDimension(customDimensionDictionary:));
+
 @end
 NS_ASSUME_NONNULL_END

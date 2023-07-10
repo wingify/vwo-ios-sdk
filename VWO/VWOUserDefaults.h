@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, readonly) NSString *CollectionPrefix;
 @property (class, readonly) NSString *IsEventArchEnabled;
 @property (class, readonly) NSMutableDictionary *EventArchData;
+@property (class, readonly) NSMutableDictionary *NetworkHTTPMethodTypeData;
 
 + (nullable id)objectForKey:(NSString *)key;
 + (void)setObject:(nullable id)value forKey:(NSString *)key;
@@ -43,7 +44,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)updateCollectionPrefix:(NSString*)collectionPrefix;
 + (void)updateIsEventArchEnabled:(NSString*)isEventArchEnabled;
 + (void)updateEventArchData:(NSString *)url valueDict:(NSMutableDictionary *)EventArchDict;
++ (void)updateNetworkHTTPMethodTypeData:(NSString *)url HTTPMethodType:(NSString *)HTTPMethodType;
+
 + (void)removeEventArchDataItem:(NSString *)url;
++ (void)removeNetworkHTTPMethodTypeDataItem:(NSString *)url;
 @end
 
 NS_ASSUME_NONNULL_END

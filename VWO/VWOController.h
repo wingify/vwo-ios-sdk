@@ -43,6 +43,7 @@ static NSString *kVWOSDKversion = @"2.15.0";
 -(NSString *) getUserId;
 - (nullable NSString *)variationNameForCampaignTestKey:(NSString *)campaignTestKey;
 - (void)pushCustomDimension:(NSString *) customDimensionKey withCustomDimensionValue:(NSString *) customDimensionValue;
+- (void)pushCustomDimension:(NSMutableDictionary<NSString *, id> *)customDimensionDictionary;
 
 @end
 

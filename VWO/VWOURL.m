@@ -339,4 +339,77 @@ static NSString *kSDKversionNumber = @"19";
     return components.URL;
 }
 
+- (NSURL *)forPushingCustomDimension:(NSMutableDictionary<NSString *, id> *)customDimensionDictionary
+                            dateTime:(nonnull NSDate *)date {
+    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/mobile-app/push" isChinaCDN:_isChinaCDN];
+    if(VWOUserDefaults.CollectionPrefix != NULL && VWOUserDefaults.CollectionPrefix.length != 0){
+        NSString *path = [NSString stringWithFormat: @"%@/mobile-app/push", VWOUserDefaults.CollectionPrefix];
+        components = [NSURLComponents vwoComponentForPath:path isChinaCDN:_isChinaCDN];
+    }
+    NSMutableDictionary *paramDict = [NSMutableDictionary new];
+    paramDict[@"account_id"]    = _accountID;
+    paramDict[@"u"]             = VWOUserDefaults.UUID;
+    paramDict[@"s"]             = [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount];
+    paramDict[@"random"]        = [self randomNumber];
+    paramDict[@"sId"]           = [NSString stringWithFormat:@"%f", date.timeIntervalSince1970];
+    paramDict[@"tags"]          = customDimensionDictionary;
+
+    components.queryItems = [paramDict toQueryItems];
+    
+    NSString *urlString = [components.URL absoluteString];
+    [VWOUserDefaults updateNetworkHTTPMethodTypeData:urlString HTTPMethodType: @"POST"];
+    
+    return components.URL;
+}
+
+- (NSURL *)forPushingCustomDimensionEventArch:(NSMutableDictionary<NSString *, id> *)customDimensionDictionary
+                                dateTime:(nonnull NSDate *)date {
+    NSURLComponents *components = [NSURLComponents vwoComponentForPath:@"/events/t" isChinaCDN:_isChinaCDN];
+    if(VWOUserDefaults.CollectionPrefix != NULL && VWOUserDefaults.CollectionPrefix.length != 0){
+        NSString *path = [NSString stringWithFormat: @"%@/events/t", VWOUserDefaults.CollectionPrefix];
+        components = [NSURLComponents vwoComponentForPath:path isChinaCDN:_isChinaCDN];
+    }
+    
+    unsigned long currentTimeInSec = (unsigned long)date.timeIntervalSince1970;
+    unsigned long currentTimeInMilli = (unsigned long)(date.timeIntervalSince1970 * 1000);
+    
+    NSMutableDictionary *paramDict =
+    [@{APIEventName: PushEventName,
+       AccountID: _accountID,
+       APIKey: [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
+       CurrentTimeInMillis: [NSString stringWithFormat:@"%lu", currentTimeInMilli],
+       Random: [self randomNumber]
+     } mutableCopy];
+    
+    components.queryItems = [paramDict toQueryItems];
+    
+    NSMutableDictionary *EventArchDict = @{
+        D: @{
+            MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
+            VisitorID: VWOUserDefaults.UUID,
+            SessionID: [NSNumber numberWithUnsignedLong : currentTimeInSec],
+            Event: @{
+                EventProps: @{
+                    SDKName: SDKNameValue,
+                    SDKVersion: kSDKversionNumber,
+                    IsCustomEvent: @((BOOL)true),
+                    InternalVisitor: @{
+                        VisitorProps: customDimensionDictionary
+                    }
+                },
+                Data360EventName: PushEventName,
+                EventTime: [NSNumber numberWithUnsignedLong : currentTimeInMilli]
+            },
+            ExternalVisitor: @{
+                VisitorProps: customDimensionDictionary
+            }
+        }
+    };
+    
+    NSString *urlString = [components.URL absoluteString];
+    [VWOUserDefaults updateEventArchData:urlString valueDict:EventArchDict];
+    
+    return components.URL;
+}
+
 @end
