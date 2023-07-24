@@ -124,7 +124,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 + (id)objectForKey:(NSString *)key{
     NSParameterAssert(key);
     __block id object;
-    dispatch_barrier_sync(VWOController.taskQueue, ^{
+    dispatch_barrier_async(VWOController.taskQueue, ^{
         @try {
             object = [VWOController.shared variationForKey:key];
         }@catch (NSException *exception) {
@@ -137,14 +137,14 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 + (id)objectForKey:(NSString *)key testKey:(NSString *)testKey{
     NSParameterAssert(key);
     __block id object;
-    dispatch_barrier_sync(VWOController.taskQueue, ^{
-        @try {
+    @try {
+        dispatch_barrier_async(VWOController.taskQueue, ^{
             object = [VWOController.shared variationForKey:key testKey:testKey];
-        }@catch (NSException *exception) {
-            VWOLogException(@"Caught an exception in objectForKey testKey method: %@", exception);
-        }
-    });
-    
+            
+        });
+    }@catch (NSException *exception) {
+        VWOLogException(@"Caught an exception in objectForKey testKey method: %@", exception);
+    }
     return object;
 }
 + (id)objectForKey:(NSString *)key defaultValue:(nullable id)defaultValue{
@@ -207,7 +207,7 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 + (nullable NSString *)variationNameForTestKey:(NSString *)campaignTestKey {
     NSParameterAssert(campaignTestKey);
     __block NSString *variationName;
-    dispatch_barrier_sync(VWOController.taskQueue, ^{
+    dispatch_barrier_async(VWOController.taskQueue, ^{
         @try {
             variationName = [VWOController.shared variationNameForCampaignTestKey:campaignTestKey];
         }
