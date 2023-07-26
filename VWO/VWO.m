@@ -207,14 +207,22 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
 + (nullable NSString *)variationNameForTestKey:(NSString *)campaignTestKey {
     NSParameterAssert(campaignTestKey);
     __block NSString *variationName;
+
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_enter(group);
+    
     dispatch_barrier_async(VWOController.taskQueue, ^{
         @try {
-            variationName = [VWOController.shared variationNameForCampaignTestKey:campaignTestKey];
+             variationName = [VWOController.shared variationNameForCampaignTestKey:campaignTestKey];
         }
         @catch (NSException *exception) {
             VWOLogException(@"Caught an exception in variationNameForTestKey method: %@", exception);
         }
+        dispatch_group_leave(group);
     });
+    
+    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+    
     return variationName;
     
 }
