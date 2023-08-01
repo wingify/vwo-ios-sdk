@@ -18,6 +18,7 @@ static NSString * kUUID                      = @"UUID";
 static NSString * kCollectionPrefix          = @"collectionPrefix";
 static NSString * kIsEventArchEnabled        = @"isEventArchEnabled";
 static NSString * kEventArchData             = @"eventArchData";
+static NSString * kNonEventArchData          = @"nonEventArchData";
 static NSString * kNetworkHTTPMethodTypeData = @"networkHTTPMethodTypeData";
 
 static NSString * _userDefaultsKey;
@@ -109,6 +110,10 @@ static NSString * _userDefaultsKey;
     return [self objectForKey:kEventArchData];
 }
 
++ (NSMutableDictionary *)NonEventArchData {
+    return [self objectForKey:kNonEventArchData];
+}
+
 + (NSMutableDictionary *)NetworkHTTPMethodTypeData {
     return [self objectForKey:kNetworkHTTPMethodTypeData];
 }
@@ -151,6 +156,19 @@ static NSString * _userDefaultsKey;
     }
 }
 
++ (void)updateNonEventArchData:(NSString *)url valueDict:(NSMutableDictionary *)NonEventArchDict {
+    NSMutableDictionary *NonEventArchData = [[self objectForKey:kNonEventArchData] mutableCopy];
+    if(NonEventArchData == nil){
+        NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
+        tempDict[url] = NonEventArchDict;
+        [self setObject:tempDict forKey:kNonEventArchData];
+    }
+    else{
+        NonEventArchData[url] = NonEventArchDict;
+        [self setObject:NonEventArchData forKey:kNonEventArchData];
+    }
+}
+
 +(void)updateNetworkHTTPMethodTypeData:(NSString *)url HTTPMethodType:(NSString *)HTTPMethodType {
     NSMutableDictionary *SavedNetworkHTTPMethodTypeData = [[self objectForKey:kNetworkHTTPMethodTypeData] mutableCopy];
     if(SavedNetworkHTTPMethodTypeData == nil){
@@ -169,6 +187,14 @@ static NSString * _userDefaultsKey;
     if(EventArchData != NULL){
         [EventArchData removeObjectForKey:url];
         [self setObject:EventArchData forKey:kEventArchData];
+    }
+}
+
++ (void)removeNonEventArchDataItem:(NSString *)url {
+    NSMutableDictionary *NonEventArchData = [[self objectForKey:kNonEventArchData] mutableCopy];
+    if(NonEventArchData != NULL){
+        [NonEventArchData removeObjectForKey:url];
+        [self setObject:NonEventArchData forKey:kNonEventArchData];
     }
 }
 

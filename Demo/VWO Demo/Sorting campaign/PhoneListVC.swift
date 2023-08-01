@@ -54,7 +54,7 @@ class PhoneListVC: UIViewController {
 
 
     @IBAction func reloadTapped(_ sender: Any) {
-        let variation = VWO.variationNameFor(testKey: "camp1")
+        let variation = VWO.variationNameFor(testKey: "harshcamp1")
         switch variation {
         case "Sort-Alphabetically":
             phoneList.sort(by: sortPhoneAlphabetically)
@@ -65,8 +65,22 @@ class PhoneListVC: UIViewController {
             break
         }
         tableView.reloadData()
-        VWO.trackConversion("harshrevenue", value:69.0)
-            VWO.trackConversion("tiggerevent")
+//        VWO.trackConversion("harshrevenue", value:69.0)
+        VWO.trackConversion("eventWithProperties3")
+        
+        let myDictionary: [String: Any] = [
+            "harsh": "Raghav",
+            "key2": 42,
+            "key3": 23.9,
+            "key4": true
+//                    "key5": Date()
+        ]
+        let mutableDictionary = NSMutableDictionary(dictionary: myDictionary)
+//                let dict = VWO.createVWOCustomDimensionDictionary(<#Any?#>)
+//                VWOCustomDimensionDictionary.init
+        VWO.pushCustomDimension(customDimensionDictionary: mutableDictionary)
+        
+//        VWO.pushCustomDimension(customDimensionKey: "harsh", customDimensionValue: "Raghav")
         
 //      let TestKey =  VWO.getCampaign("e57e8bd1-fb5f-478d-80d2-5127eb5d79f7", args: ["groupId":"36"])
 //        let TestKey =  VWO.getCampaign("e57e8bd1-fb5f-478d-80d2-5127eb5d79f7", args: ["test_key":"camp5Harsh", "groupId":"36"])

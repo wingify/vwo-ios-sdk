@@ -231,7 +231,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
                     
                     NSURL *url = NULL;
                     if((VWOUserDefaults.IsEventArchEnabled != NULL) &&
-                        ([VWOUserDefaults.IsEventArchEnabled isEqualToString:EventArchEnabled])){
+                        ([VWOUserDefaults.IsEventArchEnabled isEqualToString:ConstEventArchEnabled])){
                         //for Event based API calls
                         url = [_vwoURL forMarkingGoalEventArch:matchedGoal
                                             withValue:finalValue
@@ -426,7 +426,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     NSURL *url = NULL;
     
     if((VWOUserDefaults.IsEventArchEnabled != NULL) &&
-       ([VWOUserDefaults.IsEventArchEnabled isEqualToString:EventArchEnabled])){
+       ([VWOUserDefaults.IsEventArchEnabled isEqualToString:ConstEventArchEnabled])){
         //for Event based API calls
         url = [_vwoURL forMakingUserPartOfCampaignEventArch:campaign dateTime:NSDate.date config: _vwoConfig];
     }else{
@@ -453,7 +453,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     NSURL *url = NULL;
     
     if((VWOUserDefaults.IsEventArchEnabled != NULL) &&
-       ([VWOUserDefaults.IsEventArchEnabled isEqualToString:EventArchEnabled])){
+       ([VWOUserDefaults.IsEventArchEnabled isEqualToString:ConstEventArchEnabled])){
         //for Event based API calls
         url = [_vwoURL forPushingCustomDimensionEventArch:customDimensionKey withCustomDimensionValue:customDimensionValue dateTime:NSDate.date];
     }else{
@@ -477,7 +477,7 @@ static NSString *const kUserDefaultsKey = @"vwo.09cde70ba7a94aff9d843b1b846a79a7
     NSURL *url = NULL;
     
     if((VWOUserDefaults.IsEventArchEnabled != NULL) &&
-       ([VWOUserDefaults.IsEventArchEnabled isEqualToString:EventArchEnabled])){
+       ([VWOUserDefaults.IsEventArchEnabled isEqualToString:ConstEventArchEnabled])){
         //for Event based API calls
         url = [_vwoURL forPushingCustomDimensionEventArch:customDimensionDictionary dateTime:NSDate.date];
     }else{

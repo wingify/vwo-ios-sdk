@@ -27,17 +27,6 @@ class VWOManager {
         VWO.launch(apiKey: apiKey, config: config, completion: {
             DispatchQueue.main.async {
                
-                let myDictionary: [String: Any] = [
-                    "Key1": "Value1",
-                    "Key2": 42,
-                    "Key3": 23.9,
-                    "key4": true
-//                    "key5": Date()
-                ]
-                let mutableDictionary = NSMutableDictionary(dictionary: myDictionary)
-//                let dict = VWO.createVWOCustomDimensionDictionary(<#Any?#>)
-//                VWOCustomDimensionDictionary.init
-                VWO.pushCustomDimension(customDimensionDictionary: mutableDictionary)
 //                VWO.pushCustomDimension(customDimensionKey: "userId", customDimensionValue: "userName")
                 hud.hide(animated: false)
                 SCLAlertView().showSuccess("Success", subTitle: "VWO launched successfully \(apiKey)")
