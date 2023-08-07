@@ -67,18 +67,19 @@ NSString const *KeyDeviceNameExtraData          = @"dt";
 NSString const *KeyIOSVersionExtraData          = @"os";
 
 //common network constants
-NSString const *KeyExperimentID     = @"experiment_id";
-NSString const *KeyAccountID        = @"account_id";
-NSString const *KeyCombination      = @"combination";
-NSString const *KeyUUID             = @"u";
-NSString const *KeySessionCount     = @"s";
-NSString const *KeyRandom           = @"random";
-NSString const *KeyTimeStamp        = @"sId";
-NSString const *KeyExtraData        = @"ed";
-NSString const *KeyCustomDimension  = @"tags";
-NSString const *KeyGoalID           = @"goal_id";
-NSString const *KeyGoalRevenue      = @"r";
-NSString const *KeyU                = @"u";
+NSString const *KeyExperimentID         = @"experiment_id";
+NSString const *KeyApplicationVersion   = @"av";
+NSString const *KeyAccountID            = @"account_id";
+NSString const *KeyCombination          = @"combination";
+NSString const *KeyUUID                 = @"u";
+NSString const *KeySessionCount         = @"s";
+NSString const *KeyRandom               = @"random";
+NSString const *KeyTimeStamp            = @"sId";
+NSString const *KeyExtraData            = @"ed";
+NSString const *KeyCustomDimension      = @"tags";
+NSString const *KeyGoalID               = @"goal_id";
+NSString const *KeyGoalRevenue          = @"r";
+NSString const *KeyU                    = @"u";
 
 //fetching campaign specific keywords
 NSString const *KeyAPIVersionFetchingCampaign               = @"api-version";
@@ -105,6 +106,7 @@ NSString *ConstUserAgentValue = @"iOSVwoAb";
 
 //query params
 NSString const *APIEventName = @"en";// value changes based on the current API call
+NSString const *ApplicationVersion = @"av";
 NSString const *TrackUserEventName = @"vwo_variationShown";
 NSString const *PushEventName = @"vwo_syncVisitorProp";
 NSString const *AccountID = @"a";
