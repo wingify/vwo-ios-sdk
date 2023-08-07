@@ -147,7 +147,7 @@ static NSString *kSDKversionNumber = @"19";
     
     components.queryItems = [paramDict toQueryItems];
     
-    NSMutableDictionary *EventArchDict = @{
+    NSDictionary *EventArchDict = @{
         D: @{
             MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,
@@ -240,7 +240,7 @@ static NSString *kSDKversionNumber = @"19";
         };
     }
     
-    NSMutableDictionary *EventArchDict = @{
+    NSDictionary *EventArchDict = @{
         D: @{
             MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,
@@ -306,7 +306,7 @@ static NSString *kSDKversionNumber = @"19";
     
     components.queryItems = [paramDict toQueryItems];
     
-    NSMutableDictionary *EventArchDict = @{
+    NSDictionary *EventArchDict = @{
         D: @{
             MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,
@@ -368,9 +368,7 @@ static NSString *kSDKversionNumber = @"19";
         NSData *customDimensionJsonData = [NSJSONSerialization dataWithJSONObject:customDimensionServerDictionary options:0 error:&error];
         if (customDimensionJsonData) {
             NSString *customDimensionJsonString = [[NSString alloc] initWithData:customDimensionJsonData encoding:NSUTF8StringEncoding];
-            
-            NSCharacterSet *allowedCharacters = [NSCharacterSet URLQueryAllowedCharacterSet];
-            NSString *encodedCustomDimensionString = [customDimensionJsonString stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
+
             NSDictionary * finalizedCustomDimensionDictionary = @{
                 KeyCustomDimension : customDimensionJsonString
             };
@@ -402,7 +400,7 @@ static NSString *kSDKversionNumber = @"19";
     
     components.queryItems = [paramDict toQueryItems];
     
-    NSMutableDictionary *EventArchDict = @{
+    NSDictionary *EventArchDict = @{
         D: @{
             MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,

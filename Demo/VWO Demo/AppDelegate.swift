@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 //        setCurrentViewController(vc: houseNav)
         setCurrentViewController(vc: phoneNav)
-        VWOManager.launch("e742458cd6d45a021a424ffd43548c00-20001062")
+        VWOManager.launch("0e698817697a4e6a0f923845cc690752-20000838")
         
         return true
     }

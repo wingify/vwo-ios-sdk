@@ -44,8 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)updateUUID:(NSString*)uuid;
 + (void)updateCollectionPrefix:(NSString*)collectionPrefix;
 + (void)updateIsEventArchEnabled:(NSString*)isEventArchEnabled;
-+ (void)updateEventArchData:(NSString *)url valueDict:(NSMutableDictionary *)EventArchDict;
-+ (void)updateNonEventArchData:(NSString *)url valueDict:(NSMutableDictionary *)NonEventArchDict;
++ (void)updateEventArchData:(NSString *)url valueDict:(NSDictionary *)EventArchDict;
++ (void)updateNonEventArchData:(NSString *)url valueDict:(NSDictionary *)NonEventArchDict;
 + (void)updateNetworkHTTPMethodTypeData:(NSString *)url HTTPMethodType:(NSString *)HTTPMethodType;
 
 + (void)removeEventArchDataItem:(NSString *)url;

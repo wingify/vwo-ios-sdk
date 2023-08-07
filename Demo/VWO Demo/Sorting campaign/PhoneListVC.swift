@@ -66,7 +66,7 @@ class PhoneListVC: UIViewController {
         }
         tableView.reloadData()
 //        VWO.trackConversion("harshrevenue", value:69.0)
-        VWO.trackConversion("eventWithProperties3")
+        VWO.trackConversion("harshgoal1")
         
         let myDictionary: [String: Any] = [
             "harsh": "Raghav",
