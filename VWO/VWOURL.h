@@ -44,6 +44,12 @@ NS_ASSUME_NONNULL_BEGIN
                                 withCustomDimensionValue:(nonnull NSString *)customDimensionValue
                                      dateTime:(nonnull NSDate *)date;
 
+- (NSURL *)forPushingCustomDimension:(NSMutableDictionary *)customDimensionDictionary
+                            dateTime:(nonnull NSDate *)date;
+
+- (NSURL *)forPushingCustomDimensionEventArch:(NSMutableDictionary *)customDimensionDictionary
+                                     dateTime:(nonnull NSDate *)date;
+
 @end
 
 NS_ASSUME_NONNULL_END
