@@ -63,16 +63,22 @@ static NSString *kSDKversionNumber = @"19";
     return [NSString stringWithFormat:@"%f", ((double)arc4random_uniform(0xffffffff))/(0xffffffff - 1)];
 }
 
+- (NSString *) appVersion {
+    NSString *appVersion = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
+    if (appVersion == nil) { return @"NA"; }
+    return appVersion;
+}
+
 - (NSDictionary *)extraParametersWithDate:(NSDate *)date {
     NSString *appVersion = NSBundle.mainBundle.infoDictionary[ConstKeyBundleAppVersion];
     if (appVersion == nil) { appVersion = ConstNotAvailable; }
     return @{KeyTimeStampExtraData          : [NSString stringWithFormat:@"%f", date.timeIntervalSince1970],
              KeySDKVersionNumberExtraData   : kSDKversionNumber,
              KeyAppKeyExtraData             : _appKey,
-             KeyAppVersionExtraData         : appVersion,
+             KeyAppVersionExtraData         : [self appVersion],
              KeyDeviceNameExtraData         : VWODevice.deviceName,//Device Type
              KeyIOSVersionExtraData         : VWODevice.iOSVersion
-             };
+            };
 }
 
 #pragma mark - Public Methods
@@ -80,16 +86,17 @@ static NSString *kSDKversionNumber = @"19";
 - (NSURL *)forFetchingCampaigns:(nullable NSString *)userID {
     NSURLComponents *components = [NSURLComponents vwoComponentForPath:ConstFetchingCampaignsEndpoint isChinaCDN:_isChinaCDN];
     NSMutableDictionary *paramDict =
-    [@{KeyAPIVersionFetchingCampaign: ConstAPIVersion,
-      KeyAccountIDFetchingCampaign              : _accountID,
-      KeyDeviceNameFetchingCampaign             : VWODevice.deviceName,
-      KeyAppKeyFetchingCampaign                 : _appKey,
-      KeyCampaignVariationPairsFetchingCampaign : VWOUserDefaults.campaignVariationPairs.toString,
-      KeyIOSVersionFetchingCampaign             : VWODevice.iOSVersion,
-      KeyRandomNumberFetchingCampaign           : [self randomNumber],
-      KeyUUIDFetchingCampaign                   : VWOUserDefaults.UUID,
-      KeySDKversionNumberFetchingCampaign       : kSDKversionNumber
-      } mutableCopy];
+    [@{KeyAPIVersionFetchingCampaign                : ConstAPIVersion,
+       KeyApplicationVersion                        : [self appVersion],
+       KeyAccountIDFetchingCampaign                 : _accountID,
+       KeyDeviceNameFetchingCampaign                : VWODevice.deviceName,
+       KeyAppKeyFetchingCampaign                    : _appKey,
+       KeyCampaignVariationPairsFetchingCampaign    : VWOUserDefaults.campaignVariationPairs.toString,
+       KeyIOSVersionFetchingCampaign                : VWODevice.iOSVersion,
+       KeyRandomNumberFetchingCampaign              : [self randomNumber],
+       KeyUUIDFetchingCampaign                      : VWOUserDefaults.UUID,
+       KeySDKversionNumberFetchingCampaign          : kSDKversionNumber
+     } mutableCopy];
     if (userID) {
         NSString * uHash = userID.generateMD5;
         paramDict[keyUHashFetchingCampaign] = uHash;
@@ -109,14 +116,15 @@ static NSString *kSDKversionNumber = @"19";
     }
     
     NSMutableDictionary *paramDict =
-    [@{KeyExperimentID  : [NSString stringWithFormat:@"%d", campaign.iD],
-       KeyAccountID     : _accountID,
-       KeyCombination   : [NSString stringWithFormat:@"%d", campaign.variation.iD],
-       KeyUUID          : VWOUserDefaults.UUID,
-       KeySessionCount  : [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount],
-       KeyRandom        : [self randomNumber],
-       KeyTimeStamp     : [NSString stringWithFormat:@"%lu", (unsigned long)date.timeIntervalSince1970],
-       KeyExtraData     : [self extraParametersWithDate:date].toString
+    [@{KeyExperimentID          : [NSString stringWithFormat:@"%d", campaign.iD],
+       KeyApplicationVersion    : [self appVersion],
+       KeyAccountID             : _accountID,
+       KeyCombination           : [NSString stringWithFormat:@"%d", campaign.variation.iD],
+       KeyUUID                  : VWOUserDefaults.UUID,
+       KeySessionCount          : [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount],
+       KeyRandom                : [self randomNumber],
+       KeyTimeStamp             : [NSString stringWithFormat:@"%lu", (unsigned long)date.timeIntervalSince1970],
+       KeyExtraData             : [self extraParametersWithDate:date].toString
       } mutableCopy];
     if (config.customDimension != nil) {
         paramDict[KeyCustomDimension] = config.customDimension;
@@ -139,6 +147,7 @@ static NSString *kSDKversionNumber = @"19";
     
     NSMutableDictionary *paramDict =
     [@{APIEventName         : TrackUserEventName,
+       ApplicationVersion   : [self appVersion],
        AccountID            : _accountID,
        APIKey               : [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
        CurrentTimeInMillis  : [NSString stringWithFormat:@"%lu", currentTimeInMilli],
@@ -147,7 +156,7 @@ static NSString *kSDKversionNumber = @"19";
     
     components.queryItems = [paramDict toQueryItems];
     
-    NSMutableDictionary *EventArchDict = @{
+    NSDictionary *EventArchDict = @{
         D: @{
             MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,
@@ -183,15 +192,16 @@ static NSString *kSDKversionNumber = @"19";
     }
     
     NSMutableDictionary <NSString *, NSString *> *paramDict = [NSMutableDictionary new];
-    paramDict[KeyExperimentID]  = [NSString stringWithFormat:@"%d", campaign.iD];
-    paramDict[KeyAccountID]     = _accountID;
-    paramDict[KeyCombination]   = [NSString stringWithFormat:@"%d", campaign.variation.iD];
-    paramDict[KeyUUID]          = VWOUserDefaults.UUID;
-    paramDict[KeySessionCount]  = [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount];
-    paramDict[KeyRandom]        = [self randomNumber];
-    paramDict[KeyTimeStamp]     = [NSString stringWithFormat:@"%f", date.timeIntervalSince1970];
-    paramDict[KeyExtraData]     = [self extraParametersWithDate:date].toString;
-    paramDict[KeyGoalID]        = [NSString stringWithFormat:@"%d", goal.iD];
+    paramDict[KeyExperimentID]          = [NSString stringWithFormat:@"%d", campaign.iD];
+    paramDict[KeyApplicationVersion]    = [self appVersion];
+    paramDict[KeyAccountID]             = _accountID;
+    paramDict[KeyCombination]           = [NSString stringWithFormat:@"%d", campaign.variation.iD];
+    paramDict[KeyUUID]                  = VWOUserDefaults.UUID;
+    paramDict[KeySessionCount]          = [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount];
+    paramDict[KeyRandom]                = [self randomNumber];
+    paramDict[KeyTimeStamp]             = [NSString stringWithFormat:@"%f", date.timeIntervalSince1970];
+    paramDict[KeyExtraData]             = [self extraParametersWithDate:date].toString;
+    paramDict[KeyGoalID]                = [NSString stringWithFormat:@"%d", goal.iD];
 
     if (goalValue != nil) {
         paramDict[KeyGoalRevenue] = [NSString stringWithFormat:@"%@", goalValue];
@@ -215,6 +225,7 @@ static NSString *kSDKversionNumber = @"19";
     
     NSMutableDictionary *paramDict =
     [@{APIEventName         : goal.identifier,
+       ApplicationVersion   : [self appVersion],
        AccountID            : _accountID,
        APIKey               : [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
        CurrentTimeInMillis  : [NSString stringWithFormat:@"%lu", currentTimeInMilli],
@@ -240,7 +251,7 @@ static NSString *kSDKversionNumber = @"19";
         };
     }
     
-    NSMutableDictionary *EventArchDict = @{
+    NSDictionary *EventArchDict = @{
         D: @{
             MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,
@@ -273,12 +284,13 @@ static NSString *kSDKversionNumber = @"19";
         components = [NSURLComponents vwoComponentForPath:path isChinaCDN:_isChinaCDN];
     }
     NSMutableDictionary <NSString *, NSString *> *paramDict = [NSMutableDictionary new];
-    paramDict[KeyAccountID]         = _accountID;
-    paramDict[KeyUUID]              = VWOUserDefaults.UUID;
-    paramDict[KeySessionCount]      = [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount];
-    paramDict[KeyRandom]            = [self randomNumber];
-    paramDict[KeyTimeStamp]         = [NSString stringWithFormat:@"%f", date.timeIntervalSince1970];
-    paramDict[KeyCustomDimension]   = [NSString stringWithFormat:@"{\"u\":{\"%@\":\"%@\"}}", customDimensionKey, customDimensionValue];
+    paramDict[KeyAccountID]             = _accountID;
+    paramDict[KeyApplicationVersion]    = [self appVersion];
+    paramDict[KeyUUID]                  = VWOUserDefaults.UUID;
+    paramDict[KeySessionCount]          = [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount];
+    paramDict[KeyRandom]                = [self randomNumber];
+    paramDict[KeyTimeStamp]             = [NSString stringWithFormat:@"%f", date.timeIntervalSince1970];
+    paramDict[KeyCustomDimension]       = [NSString stringWithFormat:@"{\"u\":{\"%@\":\"%@\"}}", customDimensionKey, customDimensionValue];
 
     components.queryItems = [paramDict toQueryItems];
     return components.URL;
@@ -298,6 +310,7 @@ static NSString *kSDKversionNumber = @"19";
     
     NSMutableDictionary *paramDict =
     [@{APIEventName         : PushEventName,
+       ApplicationVersion   : [self appVersion],
        AccountID            : _accountID,
        APIKey               : [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
        CurrentTimeInMillis  : [NSString stringWithFormat:@"%lu", currentTimeInMilli],
@@ -306,7 +319,7 @@ static NSString *kSDKversionNumber = @"19";
     
     components.queryItems = [paramDict toQueryItems];
     
-    NSMutableDictionary *EventArchDict = @{
+    NSDictionary *EventArchDict = @{
         D: @{
             MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,
@@ -347,12 +360,13 @@ static NSString *kSDKversionNumber = @"19";
         components = [NSURLComponents vwoComponentForPath:path isChinaCDN:_isChinaCDN];
     }
     
-    NSMutableDictionary *paramDict  = [NSMutableDictionary new];
-    paramDict[KeyAccountID]         = _accountID;
-    paramDict[KeyUUID]              = VWOUserDefaults.UUID;
-    paramDict[KeySessionCount]      = [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount];
-    paramDict[KeyRandom]            = [self randomNumber];
-    paramDict[KeyTimeStamp]         = [NSString stringWithFormat:@"%f", date.timeIntervalSince1970];
+    NSMutableDictionary *paramDict      = [NSMutableDictionary new];
+    paramDict[KeyAccountID]             = _accountID;
+    paramDict[KeyApplicationVersion]    = [self appVersion];
+    paramDict[KeyUUID]                  = VWOUserDefaults.UUID;
+    paramDict[KeySessionCount]          = [NSString stringWithFormat:@"%lu", (unsigned long)VWOUserDefaults.sessionCount];
+    paramDict[KeyRandom]                = [self randomNumber];
+    paramDict[KeyTimeStamp]             = [NSString stringWithFormat:@"%f", date.timeIntervalSince1970];
     
     components.queryItems = [paramDict toQueryItems];
     
@@ -368,9 +382,7 @@ static NSString *kSDKversionNumber = @"19";
         NSData *customDimensionJsonData = [NSJSONSerialization dataWithJSONObject:customDimensionServerDictionary options:0 error:&error];
         if (customDimensionJsonData) {
             NSString *customDimensionJsonString = [[NSString alloc] initWithData:customDimensionJsonData encoding:NSUTF8StringEncoding];
-            
-            NSCharacterSet *allowedCharacters = [NSCharacterSet URLQueryAllowedCharacterSet];
-            NSString *encodedCustomDimensionString = [customDimensionJsonString stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
+
             NSDictionary * finalizedCustomDimensionDictionary = @{
                 KeyCustomDimension : customDimensionJsonString
             };
@@ -394,6 +406,7 @@ static NSString *kSDKversionNumber = @"19";
     
     NSMutableDictionary *paramDict =
     [@{APIEventName         : PushEventName,
+       ApplicationVersion   : [self appVersion],
        AccountID            : _accountID,
        APIKey               : [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
        CurrentTimeInMillis  : [NSString stringWithFormat:@"%lu", currentTimeInMilli],
@@ -402,7 +415,7 @@ static NSString *kSDKversionNumber = @"19";
     
     components.queryItems = [paramDict toQueryItems];
     
-    NSMutableDictionary *EventArchDict = @{
+    NSDictionary *EventArchDict = @{
         D: @{
             MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,

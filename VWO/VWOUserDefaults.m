@@ -143,7 +143,7 @@ static NSString * _userDefaultsKey;
     [self setObject:isEventArchEnabled forKey:kIsEventArchEnabled];
 }
 
-+ (void)updateEventArchData:(NSString *)url valueDict:(NSMutableDictionary *)EventArchDict {
++ (void)updateEventArchData:(NSString *)url valueDict:(NSDictionary *)EventArchDict {
     NSMutableDictionary *EventArchData = [[self objectForKey:kEventArchData] mutableCopy];
     if(EventArchData == nil){
         NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
@@ -156,7 +156,7 @@ static NSString * _userDefaultsKey;
     }
 }
 
-+ (void)updateNonEventArchData:(NSString *)url valueDict:(NSMutableDictionary *)NonEventArchDict {
++ (void)updateNonEventArchData:(NSString *)url valueDict:(NSDictionary *)NonEventArchDict {
     NSMutableDictionary *NonEventArchData = [[self objectForKey:kNonEventArchData] mutableCopy];
     if(NonEventArchData == nil){
         NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];

@@ -53,6 +53,7 @@ extern NSString const *KeyIOSVersionExtraData;
 
 //common network constants
 extern NSString const *KeyExperimentID;
+extern NSString const *KeyApplicationVersion;
 extern NSString const *KeyAccountID;
 extern NSString const *KeyCombination;
 extern NSString const *KeyUUID;
@@ -88,6 +89,7 @@ extern NSString *ConstEventArchDisabled;
 
 // MARK: - QueryParamsEventArchEnabled
 extern NSString const *APIEventName;
+extern NSString const *ApplicationVersion;
 extern NSString const *TrackUserEventName;
 extern NSString const *PushEventName;
 extern NSString const *AccountID;
