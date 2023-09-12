@@ -16,13 +16,14 @@
 - (nullable NSData *)sendSynchronousDataTaskWithURL:(nonnull NSURL *)url
                                   returningResponse:(NSURLResponse *_Nullable*_Nullable)response
                                               error:(NSError *_Nullable*_Nullable)error {
-    if(VWOUserDefaults.IsEventArchEnabled != NULL && [VWOUserDefaults.IsEventArchEnabled isEqual:EventArchEnabled]){
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+    NSString *urlString = [url absoluteString];
+    if(VWOUserDefaults.IsEventArchEnabled != NULL && [VWOUserDefaults.IsEventArchEnabled isEqual:ConstEventArchEnabled]){
+        //this code block handles network requests for Data360 EventArch calls
         [urlRequest setHTTPMethod:@"POST"];
-        [urlRequest setValue:UserAgentValue forHTTPHeaderField:@"User-Agent"];
+        [urlRequest setValue:ConstUserAgentValue forHTTPHeaderField:@"User-Agent"];
         
         if(VWOUserDefaults.EventArchData != NULL){
-            NSString *urlString = [url absoluteString];
             NSMutableDictionary *eventArchData = VWOUserDefaults.EventArchData;
             NSDictionary *payloadEventArch = [eventArchData objectForKey:urlString];
             
@@ -35,7 +36,30 @@
         
         return [self sendSynchronousDataTaskWithRequest:urlRequest returningResponse:response error:error];
     }
-    return [self sendSynchronousDataTaskWithRequest:[NSURLRequest requestWithURL:url] returningResponse:response error:error];
+    
+    NSMutableDictionary *networkHTTPMethodTypeData = VWOUserDefaults.NetworkHTTPMethodTypeData;
+    if(networkHTTPMethodTypeData != NULL){
+        //this code block handles network requests MethodType
+        NSString *networkHTTPMethodTypeForURL = [networkHTTPMethodTypeData objectForKey:urlString];
+        
+        if(networkHTTPMethodTypeForURL != NULL && networkHTTPMethodTypeForURL.length != 0){
+            [urlRequest setHTTPMethod: networkHTTPMethodTypeForURL];
+        }
+    }
+    
+    NSMutableDictionary *nonEventArchData = VWOUserDefaults.NonEventArchData;
+    if(nonEventArchData != NULL){
+        //this code block handles the nonEventArch requestBody
+        NSDictionary *payloadNonEventArch = [nonEventArchData objectForKey:urlString];
+        
+        if(payloadNonEventArch != NULL){
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payloadNonEventArch options:NSJSONWritingPrettyPrinted error:nil];
+            [urlRequest setHTTPBody:jsonData];
+            [VWOUserDefaults removeNonEventArchDataItem:urlString];
+        }
+    }
+    
+    return [self sendSynchronousDataTaskWithRequest:urlRequest returningResponse:response error:error];
 }
 
 - (nullable NSData *)sendSynchronousDataTaskWithRequest:(nonnull NSURLRequest *)request

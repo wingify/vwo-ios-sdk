@@ -15,8 +15,7 @@
             self.optOut ? @"YES" : @"NO",
             self.isChinaCDN ? @"YES" : @"NO",
             self.disablePreview ? @"YES" : @"NO",
-            self.userID,
-            self.customVariables];
+            self.userID];
 }
 
 - (void) setCustomDimension:(nonnull NSString *)customDimensionKey withCustomDimensionValue:(nonnull NSString *)customDimensionValue {

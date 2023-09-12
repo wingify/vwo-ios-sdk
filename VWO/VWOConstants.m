@@ -26,6 +26,10 @@ NSString const *ConstIsMobile360Enabled = @"isMobile360Enabled";
 
 NSString const *ConstRevenueTracking = @"REVENUE_TRACKING";
 
+NSString *ConstNotAvailable = @"NA";
+
+NSString *ConstKeyBundleAppVersion = @"CFBundleShortVersionString";
+
 //for making API calls
 NSString const *ConstAPIVersion = @"3";
 
@@ -39,18 +43,70 @@ NSString const *ID_GROUP = @"groupId";
 
 @end
 
+@implementation VWONetworkCallConstants: NSObject
+
+NSString *ConstNetworkScheme = @"http";
+
+NSString *ConstBaseURL = @"dacdn.visualwebsiteoptimizer.com";
+
+NSString *ConstChinaCDNBaseURL = @"cdn-cn.vwo-analytics.com";
+
+//endpoints
+NSString const *ConstFetchingCampaignsEndpoint       = @"/mobile";
+NSString const *ConstTrackUserEndpoint               = @"/track-user";
+NSString const *ConstTrackGoalEndpoint               = @"/track-goal";
+NSString const *ConstPushingCustomDimensionEndpoint  = @"/mobile-app/push";
+NSString const *ConstEventArchEndpoint               = @"/events/t";
+
+//extra data constants
+NSString const *KeyTimeStampExtraData           = @"lt";
+NSString const *KeySDKVersionNumberExtraData    = @"v";
+NSString const *KeyAppKeyExtraData              = @"i";
+NSString const *KeyAppVersionExtraData          = @"av";
+NSString const *KeyDeviceNameExtraData          = @"dt";
+NSString const *KeyIOSVersionExtraData          = @"os";
+
+//common network constants
+NSString const *KeyExperimentID         = @"experiment_id";
+NSString const *KeyApplicationVersion   = @"av";
+NSString const *KeyAccountID            = @"account_id";
+NSString const *KeyCombination          = @"combination";
+NSString const *KeyUUID                 = @"u";
+NSString const *KeySessionCount         = @"s";
+NSString const *KeyRandom               = @"random";
+NSString const *KeyTimeStamp            = @"sId";
+NSString const *KeyExtraData            = @"ed";
+NSString const *KeyCustomDimension      = @"tags";
+NSString const *KeyGoalID               = @"goal_id";
+NSString const *KeyGoalRevenue          = @"r";
+NSString const *KeyU                    = @"u";
+
+//fetching campaign specific keywords
+NSString const *KeyAPIVersionFetchingCampaign               = @"api-version";
+NSString const *KeyAccountIDFetchingCampaign                = @"a";
+NSString const *KeyDeviceNameFetchingCampaign               = @"dt";
+NSString const *KeyAppKeyFetchingCampaign                   = @"i";
+NSString const *KeyCampaignVariationPairsFetchingCampaign   = @"k";
+NSString const *KeyIOSVersionFetchingCampaign               = @"os";
+NSString const *KeyRandomNumberFetchingCampaign             = @"r";
+NSString const *KeyUUIDFetchingCampaign                     = @"u";
+NSString const *KeySDKversionNumberFetchingCampaign         = @"v";
+NSString const *keyUHashFetchingCampaign                    = @"uHash";
+@end
+
 @implementation VWOData360Constants: NSObject
 
 //for enabling EventArch
-NSString const *EventArchEnabled = @"eventArchEnabled";
+NSString *ConstEventArchEnabled = @"eventArchEnabled";
 
 //for disabling EventArch
-NSString const *EventArchDisabled = @"eventArchDisabled";
+NSString *ConstEventArchDisabled = @"eventArchDisabled";
 
-NSString const *UserAgentValue = @"iOSVwoAb";
+NSString *ConstUserAgentValue = @"iOSVwoAb";
 
 //query params
 NSString const *APIEventName = @"en";// value changes based on the current API call
+NSString const *ApplicationVersion = @"av";
 NSString const *TrackUserEventName = @"vwo_variationShown";
 NSString const *PushEventName = @"vwo_syncVisitorProp";
 NSString const *AccountID = @"a";

@@ -18,6 +18,8 @@ extern NSString const *ConstIsEventArchEnabled;
 extern NSString const *ConstIsMobile360Enabled;
 extern NSString const *ConstAPIVersion;
 extern NSString const *ConstRevenueTracking;
+extern NSString *ConstNotAvailable;
+extern NSString *ConstKeyBundleAppVersion;
 
 extern NSString const *KEY_GROUP;
 extern NSString const *KEY_TEST_KEY;
@@ -28,16 +30,66 @@ extern NSString const *ID_GROUP;
 
 @end
 
+@interface VWONetworkCallConstants : NSObject
+
+extern NSString *ConstNetworkScheme;
+extern NSString *ConstBaseURL;
+extern NSString *ConstChinaCDNBaseURL;
+
+//endpoints
+extern NSString *ConstFetchingCampaignsEndpoint;
+extern NSString *ConstTrackUserEndpoint;
+extern NSString *ConstTrackGoalEndpoint;
+extern NSString *ConstPushingCustomDimensionEndpoint;
+extern NSString *ConstEventArchEndpoint;
+
+//extra data constants
+extern NSString const *KeyTimeStampExtraData;
+extern NSString const *KeySDKVersionNumberExtraData;
+extern NSString const *KeyAppKeyExtraData;
+extern NSString const *KeyAppVersionExtraData;
+extern NSString const *KeyDeviceNameExtraData;
+extern NSString const *KeyIOSVersionExtraData;
+
+//common network constants
+extern NSString const *KeyExperimentID;
+extern NSString const *KeyApplicationVersion;
+extern NSString const *KeyAccountID;
+extern NSString const *KeyCombination;
+extern NSString const *KeyUUID;
+extern NSString const *KeySessionCount;
+extern NSString const *KeyRandom;
+extern NSString const *KeyTimeStamp;
+extern NSString const *KeyExtraData;
+extern NSString const *KeyCustomDimension;
+extern NSString const *KeyGoalID;
+extern NSString const *KeyGoalRevenue;
+extern NSString const *KeyU;
+
+//fetching campaign specific keywords
+extern NSString const *KeyAPIVersionFetchingCampaign;
+extern NSString const *KeyAccountIDFetchingCampaign;
+extern NSString const *KeyDeviceNameFetchingCampaign;
+extern NSString const *KeyAppKeyFetchingCampaign;
+extern NSString const *KeyCampaignVariationPairsFetchingCampaign;
+extern NSString const *KeyIOSVersionFetchingCampaign;
+extern NSString const *KeyRandomNumberFetchingCampaign;
+extern NSString const *KeyUUIDFetchingCampaign;
+extern NSString const *KeySDKversionNumberFetchingCampaign;
+extern NSString const *keyUHashFetchingCampaign;
+@end
+
 @interface VWOData360Constants : NSObject
 
 extern NSString const *ConstGroups;
 
-extern NSString const *UserAgentValue;
-extern NSString const *EventArchEnabled;
-extern NSString const *EventArchDisabled;
+extern NSString *ConstUserAgentValue;
+extern NSString *ConstEventArchEnabled;
+extern NSString *ConstEventArchDisabled;
 
 // MARK: - QueryParamsEventArchEnabled
 extern NSString const *APIEventName;
+extern NSString const *ApplicationVersion;
 extern NSString const *TrackUserEventName;
 extern NSString const *PushEventName;
 extern NSString const *AccountID;

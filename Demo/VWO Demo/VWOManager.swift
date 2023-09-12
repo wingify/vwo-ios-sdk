@@ -26,6 +26,7 @@ class VWOManager {
 //        config.isChinaCDN = false
         VWO.launch(apiKey: apiKey, config: config, completion: {
             DispatchQueue.main.async {
+               
 //                VWO.pushCustomDimension(customDimensionKey: "userId", customDimensionValue: "userName")
                 hud.hide(animated: false)
                 SCLAlertView().showSuccess("Success", subTitle: "VWO launched successfully \(apiKey)")

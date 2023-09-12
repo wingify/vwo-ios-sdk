@@ -10,14 +10,16 @@
 #import "VWOCampaign.h"
 #import "VWOLogger.h"
 
-static NSString * kTracking           = @"tracking";
-static NSString * kGoalsMarked        = @"goalsMarked";
-static NSString * kSessionCount       = @"sessionCount";
-static NSString * kReturningUser      = @"returningUser";
-static NSString * kUUID               = @"UUID";
-static NSString * kCollectionPrefix   = @"collectionPrefix";
-static NSString * kIsEventArchEnabled = @"isEventArchEnabled";
-static NSString * kEventArchData      = @"eventArchData";
+static NSString * kTracking                  = @"tracking";
+static NSString * kGoalsMarked               = @"goalsMarked";
+static NSString * kSessionCount              = @"sessionCount";
+static NSString * kReturningUser             = @"returningUser";
+static NSString * kUUID                      = @"UUID";
+static NSString * kCollectionPrefix          = @"collectionPrefix";
+static NSString * kIsEventArchEnabled        = @"isEventArchEnabled";
+static NSString * kEventArchData             = @"eventArchData";
+static NSString * kNonEventArchData          = @"nonEventArchData";
+static NSString * kNetworkHTTPMethodTypeData = @"networkHTTPMethodTypeData";
 
 static NSString * _userDefaultsKey;
 
@@ -108,6 +110,14 @@ static NSString * _userDefaultsKey;
     return [self objectForKey:kEventArchData];
 }
 
++ (NSMutableDictionary *)NonEventArchData {
+    return [self objectForKey:kNonEventArchData];
+}
+
++ (NSMutableDictionary *)NetworkHTTPMethodTypeData {
+    return [self objectForKey:kNetworkHTTPMethodTypeData];
+}
+
 + (void)setSessionCount:(NSUInteger)count {
     [self setObject:@(count) forKey:kSessionCount];
     [self updateIsReturningUser];
@@ -133,7 +143,7 @@ static NSString * _userDefaultsKey;
     [self setObject:isEventArchEnabled forKey:kIsEventArchEnabled];
 }
 
-+ (void)updateEventArchData:(NSString *)url valueDict:(NSMutableDictionary *)EventArchDict {
++ (void)updateEventArchData:(NSString *)url valueDict:(NSDictionary *)EventArchDict {
     NSMutableDictionary *EventArchData = [[self objectForKey:kEventArchData] mutableCopy];
     if(EventArchData == nil){
         NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
@@ -146,11 +156,53 @@ static NSString * _userDefaultsKey;
     }
 }
 
++ (void)updateNonEventArchData:(NSString *)url valueDict:(NSDictionary *)NonEventArchDict {
+    NSMutableDictionary *NonEventArchData = [[self objectForKey:kNonEventArchData] mutableCopy];
+    if(NonEventArchData == nil){
+        NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
+        tempDict[url] = NonEventArchDict;
+        [self setObject:tempDict forKey:kNonEventArchData];
+    }
+    else{
+        NonEventArchData[url] = NonEventArchDict;
+        [self setObject:NonEventArchData forKey:kNonEventArchData];
+    }
+}
+
++(void)updateNetworkHTTPMethodTypeData:(NSString *)url HTTPMethodType:(NSString *)HTTPMethodType {
+    NSMutableDictionary *SavedNetworkHTTPMethodTypeData = [[self objectForKey:kNetworkHTTPMethodTypeData] mutableCopy];
+    if(SavedNetworkHTTPMethodTypeData == nil){
+        NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
+        newDict[url] = HTTPMethodType;
+        [self setObject:newDict forKey:kNetworkHTTPMethodTypeData];
+    }
+    else{
+        SavedNetworkHTTPMethodTypeData[url] = HTTPMethodType;
+        [self setObject:SavedNetworkHTTPMethodTypeData forKey:kNetworkHTTPMethodTypeData];
+    }
+}
+
 + (void)removeEventArchDataItem:(NSString *)url {
     NSMutableDictionary *EventArchData = [[self objectForKey:kEventArchData] mutableCopy];
     if(EventArchData != NULL){
         [EventArchData removeObjectForKey:url];
         [self setObject:EventArchData forKey:kEventArchData];
+    }
+}
+
++ (void)removeNonEventArchDataItem:(NSString *)url {
+    NSMutableDictionary *NonEventArchData = [[self objectForKey:kNonEventArchData] mutableCopy];
+    if(NonEventArchData != NULL){
+        [NonEventArchData removeObjectForKey:url];
+        [self setObject:NonEventArchData forKey:kNonEventArchData];
+    }
+}
+
++ (void)removeNetworkHTTPMethodTypeDataItem:(NSString *)url {
+    NSMutableDictionary *SavedNetworkHTTPMethodTypeData = [[self objectForKey:kNetworkHTTPMethodTypeData] mutableCopy];
+    if(SavedNetworkHTTPMethodTypeData != NULL){
+        [SavedNetworkHTTPMethodTypeData removeObjectForKey:url];
+        [self setObject:SavedNetworkHTTPMethodTypeData forKey:kNetworkHTTPMethodTypeData];
     }
 }
 

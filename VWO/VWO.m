@@ -260,6 +260,31 @@ NSString * const VWOUserStartedTrackingInCampaignNotification = @"VWOUserStarted
     
 }
 
++ (void)pushCustomDimension:(NSMutableDictionary *)customDimensionDictionary {
+    NSParameterAssert(customDimensionDictionary);
+    
+    NSArray *values = [customDimensionDictionary allValues];
+
+    @try {
+        for (id value in values) {
+            if([value isKindOfClass:[NSString class]] || [value isKindOfClass:[NSNumber class]]){
+                continue;
+            }
+            else{
+                @throw [NSException exceptionWithName:@"VWOCustomDimensionException" reason:@"Please enter values with valid type" userInfo:nil];
+            }
+        }
+    }
+    @catch (NSException *exception) {
+        VWOLogException(@"Caught an exception in pushCustomDimension method: %@", exception);
+        return;
+    }
+    
+    dispatch_barrier_async(VWOController.taskQueue, ^{
+        [VWOController.shared pushCustomDimension:customDimensionDictionary];
+    });
+}
+
 + (NSString *)version {
     return kVWOSDKversion;
 }
