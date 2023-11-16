@@ -45,7 +45,7 @@ NSString const *ID_GROUP = @"groupId";
 
 @implementation VWONetworkCallConstants: NSObject
 
-NSString *ConstNetworkScheme = @"http";
+NSString *ConstNetworkScheme = @"https";
 
 NSString *ConstBaseURL = @"dacdn.visualwebsiteoptimizer.com";
 
