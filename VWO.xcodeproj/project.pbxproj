@@ -36,6 +36,8 @@
 		BAA32AC12A20C82900737458 /* Mapping.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA32ABD2A20C82900737458 /* Mapping.m */; };
 		BAA32AC22A20C82900737458 /* MEGManager.h in Headers */ = {isa = PBXBuildFile; fileRef = BAA32ABE2A20C82900737458 /* MEGManager.h */; };
 		BAA32AC32A20C82900737458 /* MEGManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA32ABF2A20C82900737458 /* MEGManager.m */; };
+		BAAFFEF32B064D2800112AB8 /* VWOConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAFFEF12B064D2700112AB8 /* VWOConstants.m */; };
+		BAAFFEF42B064D2800112AB8 /* VWOConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = BAAFFEF22B064D2700112AB8 /* VWOConstants.h */; };
 		E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31714C61F838C2F0036CF07 /* VWOTests.swift */; };
 		E32079C120075516005CB5CD /* CampaignIDMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C020075516005CB5CD /* CampaignIDMissing.json */; };
 		E32079C320075541005CB5CD /* CampaignStatusMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C220075541005CB5CD /* CampaignStatusMissing.json */; };
@@ -192,6 +194,8 @@
 		BAA32ABD2A20C82900737458 /* Mapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mapping.m; sourceTree = "<group>"; };
 		BAA32ABE2A20C82900737458 /* MEGManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEGManager.h; sourceTree = "<group>"; };
 		BAA32ABF2A20C82900737458 /* MEGManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEGManager.m; sourceTree = "<group>"; };
+		BAAFFEF12B064D2700112AB8 /* VWOConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOConstants.m; sourceTree = "<group>"; };
+		BAAFFEF22B064D2700112AB8 /* VWOConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOConstants.h; sourceTree = "<group>"; };
 		E31714C51F838C2F0036CF07 /* VWOTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VWOTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		E31714C61F838C2F0036CF07 /* VWOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOTests.swift; sourceTree = "<group>"; };
 		E319151E1F67F1B900FC1695 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -403,6 +407,8 @@
 		E39814D81F6288C80035D519 /* VWO */ = {
 			isa = PBXGroup;
 			children = (
+				BAAFFEF22B064D2700112AB8 /* VWOConstants.h */,
+				BAAFFEF12B064D2700112AB8 /* VWOConstants.m */,
 				7B165AF82936AEA70060EEE2 /* MEG */,
 				E39814D91F6288C80035D519 /* VWO.h */,
 				E36AC7181F75614E0041ACDF /* VWO.m */,
@@ -606,6 +612,7 @@
 				7B165B0929376B6E0060EEE2 /* Group.h in Headers */,
 				7B165B05293756EE0060EEE2 /* MutuallyExclusiveGroups.h in Headers */,
 				E35484F51F713C2E00E14D2E /* NSURLSession+Synchronous.h in Headers */,
+				BAAFFEF42B064D2800112AB8 /* VWOConstants.h in Headers */,
 				E3529574206B720A00C90716 /* VWOSocketConnector.h in Headers */,
 				E3E95E8D206D0B13006DCE6C /* VWOConfig.h in Headers */,
 				BA6899102A1C9BFE0003E538 /* WinnerManager.h in Headers */,
@@ -790,6 +797,7 @@
 				E3529575206B720A00C90716 /* VWOSocketConnector.m in Sources */,
 				E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */,
 				E39815801F6291970035D519 /* VWOController.m in Sources */,
+				BAAFFEF32B064D2800112AB8 /* VWOConstants.m in Sources */,
 				BAA32AC32A20C82900737458 /* MEGManager.m in Sources */,
 				BA6899162A1C9BFE0003E538 /* WinnerManager.m in Sources */,
 				7B165B1229376BA30060EEE2 /* CampaignGroupMapper.m in Sources */,
