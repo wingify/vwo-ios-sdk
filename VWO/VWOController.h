@@ -12,7 +12,7 @@
 @class VWOSegmentEvaluator, VWOUserDefaults;
 
 NS_ASSUME_NONNULL_BEGIN
-
+//latest version
 static NSString *kVWOSDKversion = @"2.17.0";
 
 @class VWOConfig;
