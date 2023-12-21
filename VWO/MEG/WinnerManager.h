@@ -4,6 +4,7 @@
 //
 //  Created by Harsh Raghav on 09/05/23.
 //
+#import <Foundation/Foundation.h>
 #import "Response.h"
 
 @interface WinnerManager : NSObject

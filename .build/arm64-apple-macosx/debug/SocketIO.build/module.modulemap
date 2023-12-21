@@ -1,0 +1,4 @@
+module SocketIO {
+    header "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIO-Swift.h"
+    requires objc
+}

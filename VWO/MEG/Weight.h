@@ -5,7 +5,7 @@
 //  Created by Harsh Raghav on 04/05/23.
 //
 
-
+#import <Foundation/Foundation.h>
 @interface Weight : NSObject
 
 - (instancetype)init:(NSString *)UserId range:(NSArray<NSNumber *> *)range;

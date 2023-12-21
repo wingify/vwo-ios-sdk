@@ -4,7 +4,7 @@
 //
 //  Created by Harsh Raghav on 12/05/23.
 //
-
+#import <Foundation/Foundation.h>
 @interface Mapping : NSObject
 
 @property(nonatomic, assign)NSString *group;

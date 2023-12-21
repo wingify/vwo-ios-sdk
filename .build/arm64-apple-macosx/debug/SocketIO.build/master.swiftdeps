@@ -1,0 +1,55 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "0de21edf3cbf015e48244fa81ed0fdc1c8043dc7c85022ca9def4f6a672f6f7c"
+build_start_time: [1703150218, 13260841]
+build_end_time: [1703150220, 40154933]
+inputs:
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckEmitter.swift"
+  : [1703150214, 74605464]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckManager.swift"
+  : [1703150214, 74771404]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketAnyEvent.swift"
+  : [1703150214, 74938774]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketEventHandler.swift"
+  : [1703150214, 75033664]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClient.swift"
+  : [1703150214, 75468540]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientConfiguration.swift"
+  : [1703150214, 75588703]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientOption.swift"
+  : [1703150214, 75713157]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientSpec.swift"
+  : [1703150214, 75911045]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOStatus.swift"
+  : [1703150214, 75999736]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketRawView.swift"
+  : [1703150214, 76074123]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngine.swift"
+  : [1703150214, 76329231]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineClient.swift"
+  : [1703150214, 76432228]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePacketType.swift"
+  : [1703150214, 76508522]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePollable.swift"
+  : [1703150214, 76592445]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineSpec.swift"
+  : [1703150214, 76707601]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineWebsocket.swift"
+  : [1703150214, 76778888]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManager.swift"
+  : [1703150214, 76994895]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManagerSpec.swift"
+  : [1703150214, 77076435]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketPacket.swift"
+  : [1703150214, 77204704]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketParsable.swift"
+  : [1703150214, 77288389]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SSLSecurity.swift"
+  : [1703150214, 77385425]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketExtensions.swift"
+  : [1703150214, 77478885]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketLogger.swift"
+  : [1703150214, 77543258]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketStringReader.swift"
+  : [1703150214, 77742338]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketTypes.swift"
+  : [1703150214, 77812433]

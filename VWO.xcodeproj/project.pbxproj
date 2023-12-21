@@ -1,1151 +1,1853 @@
 // !$*UTF8*$!
 {
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 52;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		32C4822427A421CE007128E3 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 32C4822327A421CE007128E3 /* SocketIO */; };
-		7B165B05293756EE0060EEE2 /* MutuallyExclusiveGroups.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B165B03293756EE0060EEE2 /* MutuallyExclusiveGroups.h */; };
-		7B165B06293756EE0060EEE2 /* MutuallyExclusiveGroups.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B165B04293756EE0060EEE2 /* MutuallyExclusiveGroups.m */; };
-		7B165B0929376B6E0060EEE2 /* Group.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B165B0729376B6E0060EEE2 /* Group.h */; };
-		7B165B0A29376B6E0060EEE2 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B165B0829376B6E0060EEE2 /* Group.m */; };
-		7B165B0D29376B8C0060EEE2 /* CampaignUniquenessTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B165B0B29376B8C0060EEE2 /* CampaignUniquenessTracker.h */; };
-		7B165B0E29376B8C0060EEE2 /* CampaignUniquenessTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B165B0C29376B8C0060EEE2 /* CampaignUniquenessTracker.m */; };
-		7B165B1129376BA30060EEE2 /* CampaignGroupMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B165B0F29376BA30060EEE2 /* CampaignGroupMapper.h */; };
-		7B165B1229376BA30060EEE2 /* CampaignGroupMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B165B1029376BA30060EEE2 /* CampaignGroupMapper.m */; };
-		7B165B1529383B1D0060EEE2 /* MurmurHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B165B1329383B1D0060EEE2 /* MurmurHash.h */; };
-		7B165B1629383B1D0060EEE2 /* MurmurHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B165B1429383B1D0060EEE2 /* MurmurHash.m */; };
-		7B6B7E09294094AA00961493 /* VWOGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B6B7E07294094AA00961493 /* VWOGroup.h */; };
-		7B6B7E0A294094AA00961493 /* VWOGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6B7E08294094AA00961493 /* VWOGroup.m */; };
-		BA6899102A1C9BFE0003E538 /* WinnerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = BA6899042A1C9BFE0003E538 /* WinnerManager.h */; };
-		BA6899112A1C9BFE0003E538 /* Pair.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6899052A1C9BFE0003E538 /* Pair.m */; };
-		BA6899122A1C9BFE0003E538 /* PriorityQualificationWinnerResult.h in Headers */ = {isa = PBXBuildFile; fileRef = BA6899062A1C9BFE0003E538 /* PriorityQualificationWinnerResult.h */; };
-		BA6899132A1C9BFE0003E538 /* PriorityQualificationWinnerResult.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6899072A1C9BFE0003E538 /* PriorityQualificationWinnerResult.m */; };
-		BA6899142A1C9BFE0003E538 /* Winner.m in Sources */ = {isa = PBXBuildFile; fileRef = BA6899082A1C9BFE0003E538 /* Winner.m */; };
-		BA6899152A1C9BFE0003E538 /* Winner.h in Headers */ = {isa = PBXBuildFile; fileRef = BA6899092A1C9BFE0003E538 /* Winner.h */; };
-		BA6899162A1C9BFE0003E538 /* WinnerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA68990A2A1C9BFE0003E538 /* WinnerManager.m */; };
-		BA6899172A1C9BFE0003E538 /* Response.h in Headers */ = {isa = PBXBuildFile; fileRef = BA68990B2A1C9BFE0003E538 /* Response.h */; };
-		BA6899182A1C9BFE0003E538 /* Pair.h in Headers */ = {isa = PBXBuildFile; fileRef = BA68990C2A1C9BFE0003E538 /* Pair.h */; };
-		BA6899192A1C9BFE0003E538 /* Weight.h in Headers */ = {isa = PBXBuildFile; fileRef = BA68990D2A1C9BFE0003E538 /* Weight.h */; };
-		BA68991A2A1C9BFE0003E538 /* Weight.m in Sources */ = {isa = PBXBuildFile; fileRef = BA68990E2A1C9BFE0003E538 /* Weight.m */; };
-		BA68991B2A1C9BFE0003E538 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = BA68990F2A1C9BFE0003E538 /* Response.m */; };
-		BAA32AC02A20C82900737458 /* Mapping.h in Headers */ = {isa = PBXBuildFile; fileRef = BAA32ABC2A20C82900737458 /* Mapping.h */; };
-		BAA32AC12A20C82900737458 /* Mapping.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA32ABD2A20C82900737458 /* Mapping.m */; };
-		BAA32AC22A20C82900737458 /* MEGManager.h in Headers */ = {isa = PBXBuildFile; fileRef = BAA32ABE2A20C82900737458 /* MEGManager.h */; };
-		BAA32AC32A20C82900737458 /* MEGManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA32ABF2A20C82900737458 /* MEGManager.m */; };
-		BAAFFEF32B064D2800112AB8 /* VWOConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAFFEF12B064D2700112AB8 /* VWOConstants.m */; };
-		BAAFFEF42B064D2800112AB8 /* VWOConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = BAAFFEF22B064D2700112AB8 /* VWOConstants.h */; };
-		E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31714C61F838C2F0036CF07 /* VWOTests.swift */; };
-		E32079C120075516005CB5CD /* CampaignIDMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C020075516005CB5CD /* CampaignIDMissing.json */; };
-		E32079C320075541005CB5CD /* CampaignStatusMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C220075541005CB5CD /* CampaignStatusMissing.json */; };
-		E32079C520076797005CB5CD /* CampaignExcluded.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C420076797005CB5CD /* CampaignExcluded.json */; };
-		E32079C720076C3D005CB5CD /* CampaignRunningKeysMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E32079C620076C3D005CB5CD /* CampaignRunningKeysMissing.json */; };
-		E323AF4D20567E9B00DC00C0 /* BasicSegmentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E323AF4C20567E9B00DC00C0 /* BasicSegmentation.swift */; };
-		E327C124203EC95100161CC2 /* iOSVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E327C123203EC95100161CC2 /* iOSVersionTests.swift */; };
-		E327C126203ECFEB00161CC2 /* DayOfWeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E327C125203ECFEB00161CC2 /* DayOfWeekTests.swift */; };
-		E327C128203ED2A800161CC2 /* HourOftheDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E327C127203ED2A800161CC2 /* HourOftheDayTests.swift */; };
-		E32C7A161FC58603009ABF2F /* VWOGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */; };
-		E32C7A181FC5886A009ABF2F /* VWOVariationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */; };
-		E341CC6B203C3CFB008D182B /* DeviceTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E341CC6A203C3CFA008D182B /* DeviceTypeTests.swift */; };
-		E341CC77203C41D4008D182B /* VisitorTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E341CC76203C41D4008D182B /* VisitorTypeTests.swift */; };
-		E341CC82203C44AD008D182B /* PredefinedSegmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E341CC81203C44AD008D182B /* PredefinedSegmentTests.swift */; };
-		E341CC85203C4658008D182B /* AppVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E341CC84203C4658008D182B /* AppVersionTests.swift */; };
-		E344B2F01F87906900A4EEE6 /* VWOUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = E344B2EE1F87906900A4EEE6 /* VWOUserDefaults.h */; };
-		E344B2F11F87906900A4EEE6 /* VWOUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = E344B2EF1F87906900A4EEE6 /* VWOUserDefaults.m */; };
-		E3470B792008C6180035BEEF /* VWOConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3470B782008C6170035BEEF /* VWOConfigTests.swift */; };
-		E3529574206B720A00C90716 /* VWOSocketConnector.h in Headers */ = {isa = PBXBuildFile; fileRef = E3529572206B720A00C90716 /* VWOSocketConnector.h */; };
-		E3529575206B720A00C90716 /* VWOSocketConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = E3529573206B720A00C90716 /* VWOSocketConnector.m */; };
-		E35484F51F713C2E00E14D2E /* NSURLSession+Synchronous.h in Headers */ = {isa = PBXBuildFile; fileRef = E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */; };
-		E35484F61F713C2E00E14D2E /* NSURLSession+Synchronous.m in Sources */ = {isa = PBXBuildFile; fileRef = E35484F41F713C2E00E14D2E /* NSURLSession+Synchronous.m */; };
-		E3689A3F20061F1A00764398 /* VWOCampaignTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3689A3E20061F1A00764398 /* VWOCampaignTests.swift */; };
-		E3689A4120061F6F00764398 /* Campaign1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3689A4020061F6F00764398 /* Campaign1.json */; };
-		E3689A432006205D00764398 /* CampaignPaused.json in Resources */ = {isa = PBXBuildFile; fileRef = E3689A422006205D00764398 /* CampaignPaused.json */; };
-		E36AC7191F75614E0041ACDF /* VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E36AC7181F75614E0041ACDF /* VWO.m */; };
-		E3806D30205269D800FFE897 /* DeviceWidthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3806D2F205269D800FFE897 /* DeviceWidthTests.swift */; };
-		E3806D3220526C6900FFE897 /* DeviceHeightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3806D3120526C6900FFE897 /* DeviceHeightTests.swift */; };
-		E3806D342052717100FFE897 /* LocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3806D332052717100FFE897 /* LocationTests.swift */; };
-		E3871A1D212FE27C0033D86B /* NSString+MD5.h in Headers */ = {isa = PBXBuildFile; fileRef = E3871A1B212FE27C0033D86B /* NSString+MD5.h */; };
-		E3871A1E212FE27C0033D86B /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = E3871A1C212FE27C0033D86B /* NSString+MD5.m */; };
-		E388B6CE1F8F7D350023E11E /* VWOURLQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = E388B6CC1F8F7D350023E11E /* VWOURLQueue.h */; };
-		E388B6CF1F8F7D350023E11E /* VWOURLQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E388B6CD1F8F7D350023E11E /* VWOURLQueue.m */; };
-		E3924B3C1FC2C2D8006A9EB2 /* And1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3924B3B1FC2C2D8006A9EB2 /* And1.json */; };
-		E3924B3E1FC2D8B7006A9EB2 /* And2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3924B3D1FC2D8B7006A9EB2 /* And2.json */; };
-		E3924B401FC2DC24006A9EB2 /* Or1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3924B3F1FC2DC24006A9EB2 /* Or1.json */; };
-		E3924B421FC2DD15006A9EB2 /* Or2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3924B411FC2DD15006A9EB2 /* Or2.json */; };
-		E3924B441FC2E65E006A9EB2 /* Or3.json in Resources */ = {isa = PBXBuildFile; fileRef = E3924B431FC2E65E006A9EB2 /* Or3.json */; };
-		E3924B461FC408AD006A9EB2 /* Complex1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3924B451FC408AD006A9EB2 /* Complex1.json */; };
-		E3924B481FC40B2F006A9EB2 /* Complex2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3924B471FC40B2F006A9EB2 /* Complex2.json */; };
-		E3924B4A1FC42C06006A9EB2 /* VWODictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3924B491FC42C06006A9EB2 /* VWODictionaryTests.swift */; };
-		E3924B4C1FC4520D006A9EB2 /* VWOQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3924B4B1FC4520D006A9EB2 /* VWOQueueTests.swift */; };
-		E39567A3206E5DA80030B30B /* VWOCampaignFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = E39567A1206E5DA80030B30B /* VWOCampaignFetcher.h */; };
-		E39567A4206E5DA80030B30B /* VWOCampaignFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = E39567A2206E5DA80030B30B /* VWOCampaignFetcher.m */; };
-		E39814E01F6288C80035D519 /* VWO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39814D61F6288C80035D519 /* VWO.framework */; };
-		E39814E71F6288C80035D519 /* VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E39814D91F6288C80035D519 /* VWO.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E39814F51F628CAA0035D519 /* VWO.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E39814F41F628CAA0035D519 /* VWO.podspec */; };
-		E39815571F6291680035D519 /* VWOCampaign.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815431F6291680035D519 /* VWOCampaign.h */; };
-		E39815581F6291680035D519 /* VWOCampaign.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815441F6291680035D519 /* VWOCampaign.m */; };
-		E39815591F6291680035D519 /* VWOGoal.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815451F6291680035D519 /* VWOGoal.h */; };
-		E398155A1F6291680035D519 /* VWOGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815461F6291680035D519 /* VWOGoal.m */; };
-		E398155B1F6291680035D519 /* VWOQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815471F6291680035D519 /* VWOQueue.h */; };
-		E398155C1F6291680035D519 /* VWOQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815481F6291680035D519 /* VWOQueue.m */; };
-		E398155F1F6291680035D519 /* VWOVariation.h in Headers */ = {isa = PBXBuildFile; fileRef = E398154B1F6291680035D519 /* VWOVariation.h */; };
-		E39815601F6291680035D519 /* VWOVariation.m in Sources */ = {isa = PBXBuildFile; fileRef = E398154C1F6291680035D519 /* VWOVariation.m */; };
-		E398157F1F6291970035D519 /* VWOController.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815731F6291960035D519 /* VWOController.h */; };
-		E39815801F6291970035D519 /* VWOController.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815741F6291960035D519 /* VWOController.m */; };
-		E39815811F6291970035D519 /* VWODevice.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815751F6291970035D519 /* VWODevice.h */; };
-		E39815821F6291970035D519 /* VWODevice.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815761F6291970035D519 /* VWODevice.m */; };
-		E39815831F6291970035D519 /* VWOFile.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815771F6291970035D519 /* VWOFile.h */; };
-		E39815841F6291970035D519 /* VWOFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815781F6291970035D519 /* VWOFile.m */; };
-		E39815851F6291970035D519 /* VWOLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815791F6291970035D519 /* VWOLogger.h */; };
-		E39815861F6291970035D519 /* VWOLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E398157A1F6291970035D519 /* VWOLogger.m */; };
-		E39815931F6291C10035D519 /* VWOSegmentEvaluator.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815911F6291C10035D519 /* VWOSegmentEvaluator.h */; };
-		E39815941F6291C10035D519 /* VWOSegmentEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815921F6291C10035D519 /* VWOSegmentEvaluator.m */; };
-		E398159C1F6293BC0035D519 /* NSDictionary+VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E39815981F6293BC0035D519 /* NSDictionary+VWO.h */; };
-		E398159D1F6293BC0035D519 /* NSDictionary+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E39815991F6293BC0035D519 /* NSDictionary+VWO.m */; };
-		E3BBA3602068FA630046B2F2 /* VWOSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = E3BBA35E2068FA630046B2F2 /* VWOSocket.h */; };
-		E3BBA3612068FA630046B2F2 /* VWOSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BBA35F2068FA630046B2F2 /* VWOSocket.m */; };
-		E3C06640200C925000FF9EF5 /* Campaign2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C0663F200C925000FF9EF5 /* Campaign2.json */; };
-		E3C06643200C932F00FF9EF5 /* Goal1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C06642200C932F00FF9EF5 /* Goal1.json */; };
-		E3C06645200C933F00FF9EF5 /* Goal2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C06644200C933F00FF9EF5 /* Goal2.json */; };
-		E3C06647200C935B00FF9EF5 /* GoalIdMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C06646200C935B00FF9EF5 /* GoalIdMissing.json */; };
-		E3C06649200C937B00FF9EF5 /* GoalIdentifierMissing.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C06648200C937B00FF9EF5 /* GoalIdentifierMissing.json */; };
-		E3C0664C200C94AD00FF9EF5 /* Variation1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C0664B200C94AD00FF9EF5 /* Variation1.json */; };
-		E3C0664E200C94C500FF9EF5 /* VarationControl.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C0664D200C94C500FF9EF5 /* VarationControl.json */; };
-		E3C06650200C94DD00FF9EF5 /* VariationMissingKeys.json in Resources */ = {isa = PBXBuildFile; fileRef = E3C0664F200C94DD00FF9EF5 /* VariationMissingKeys.json */; };
-		E3C06652200CA4CB00FF9EF5 /* VWOURLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C06651200CA4CB00FF9EF5 /* VWOURLTests.swift */; };
-		E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D29F951FBD91B700A11C61 /* Extra.swift */; };
-		E3D29FC61FBEDAB300A11C61 /* NSDate+VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D29FC41FBEDAB300A11C61 /* NSDate+VWO.h */; };
-		E3D29FC71FBEDAB300A11C61 /* NSDate+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D29FC51FBEDAB300A11C61 /* NSDate+VWO.m */; };
-		E3D29FCA1FBEDE2A00A11C61 /* NSString+VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D29FC81FBEDE2A00A11C61 /* NSString+VWO.h */; };
-		E3D29FCB1FBEDE2A00A11C61 /* NSString+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D29FC91FBEDE2A00A11C61 /* NSString+VWO.m */; };
-		E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */ = {isa = PBXBuildFile; fileRef = E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */; };
-		E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */; };
-		E3E95E8D206D0B13006DCE6C /* VWOConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = E3E95E8B206D0B13006DCE6C /* VWOConfig.h */; };
-		E3E95E8E206D0B13006DCE6C /* VWOConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E95E8C206D0B13006DCE6C /* VWOConfig.m */; };
-		E3F2D512204437B200862EE3 /* CustomVariableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2D511204437B200862EE3 /* CustomVariableTests.swift */; };
-		E3F2D5152044389C00862EE3 /* ComplexSegmentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2D5142044389C00862EE3 /* ComplexSegmentationTests.swift */; };
-		E3F7CBA82004A07800CC8C03 /* VWOInfixEvaluator.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F7CBA62004A07800CC8C03 /* VWOInfixEvaluator.h */; };
-		E3F7CBA92004A07800CC8C03 /* VWOInfixEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBA72004A07800CC8C03 /* VWOInfixEvaluator.m */; };
-		E3F7CBAC2004A9B100CC8C03 /* VWOStack.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F7CBAA2004A9B100CC8C03 /* VWOStack.h */; };
-		E3F7CBAD2004A9B100CC8C03 /* VWOStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBAB2004A9B100CC8C03 /* VWOStack.m */; };
-		E3F7CBAF2004B72E00CC8C03 /* VWOStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBAE2004B72E00CC8C03 /* VWOStackTests.swift */; };
-		E3F7CBB12004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBB02004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift */; };
-		E3F7CBB42004C91400CC8C03 /* VWOSegment.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F7CBB22004C91400CC8C03 /* VWOSegment.h */; };
-		E3F7CBB52004C91400CC8C03 /* VWOSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBB32004C91400CC8C03 /* VWOSegment.m */; };
-		E3F7CBB72004D6E600CC8C03 /* Bracket1.json in Resources */ = {isa = PBXBuildFile; fileRef = E3F7CBB62004D6E600CC8C03 /* Bracket1.json */; };
-		E3F7CBB92004D85E00CC8C03 /* Bracket2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3F7CBB82004D85E00CC8C03 /* Bracket2.json */; };
-		E3F7CBBB2004D93D00CC8C03 /* Bracket3.json in Resources */ = {isa = PBXBuildFile; fileRef = E3F7CBBA2004D93D00CC8C03 /* Bracket3.json */; };
-		E3F7CBBD2004DFEE00CC8C03 /* Bracket4.json in Resources */ = {isa = PBXBuildFile; fileRef = E3F7CBBC2004DFEE00CC8C03 /* Bracket4.json */; };
-		E3F7CBBF2004E0AB00CC8C03 /* NestedBracket2.json in Resources */ = {isa = PBXBuildFile; fileRef = E3F7CBBE2004E0AB00CC8C03 /* NestedBracket2.json */; };
-		E3F7CBC12004E57900CC8C03 /* VWOSegmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7CBC02004E57900CC8C03 /* VWOSegmentTests.swift */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		E39814E11F6288C80035D519 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E39814CD1F6288C80035D519 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E39814D51F6288C80035D519;
-			remoteInfo = VWO;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		E3F52EE9206A33AD0026F0F4 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
-/* Begin PBXFileReference section */
-		7B165B03293756EE0060EEE2 /* MutuallyExclusiveGroups.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MutuallyExclusiveGroups.h; sourceTree = "<group>"; };
-		7B165B04293756EE0060EEE2 /* MutuallyExclusiveGroups.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MutuallyExclusiveGroups.m; sourceTree = "<group>"; };
-		7B165B0729376B6E0060EEE2 /* Group.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
-		7B165B0829376B6E0060EEE2 /* Group.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
-		7B165B0B29376B8C0060EEE2 /* CampaignUniquenessTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CampaignUniquenessTracker.h; sourceTree = "<group>"; };
-		7B165B0C29376B8C0060EEE2 /* CampaignUniquenessTracker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CampaignUniquenessTracker.m; sourceTree = "<group>"; };
-		7B165B0F29376BA30060EEE2 /* CampaignGroupMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CampaignGroupMapper.h; sourceTree = "<group>"; };
-		7B165B1029376BA30060EEE2 /* CampaignGroupMapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CampaignGroupMapper.m; sourceTree = "<group>"; };
-		7B165B1329383B1D0060EEE2 /* MurmurHash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MurmurHash.h; sourceTree = "<group>"; };
-		7B165B1429383B1D0060EEE2 /* MurmurHash.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MurmurHash.m; sourceTree = "<group>"; };
-		7B6B7E07294094AA00961493 /* VWOGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOGroup.h; sourceTree = "<group>"; };
-		7B6B7E08294094AA00961493 /* VWOGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOGroup.m; sourceTree = "<group>"; };
-		BA6899042A1C9BFE0003E538 /* WinnerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WinnerManager.h; sourceTree = "<group>"; };
-		BA6899052A1C9BFE0003E538 /* Pair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pair.m; sourceTree = "<group>"; };
-		BA6899062A1C9BFE0003E538 /* PriorityQualificationWinnerResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityQualificationWinnerResult.h; sourceTree = "<group>"; };
-		BA6899072A1C9BFE0003E538 /* PriorityQualificationWinnerResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityQualificationWinnerResult.m; sourceTree = "<group>"; };
-		BA6899082A1C9BFE0003E538 /* Winner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Winner.m; sourceTree = "<group>"; };
-		BA6899092A1C9BFE0003E538 /* Winner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Winner.h; sourceTree = "<group>"; };
-		BA68990A2A1C9BFE0003E538 /* WinnerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WinnerManager.m; sourceTree = "<group>"; };
-		BA68990B2A1C9BFE0003E538 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
-		BA68990C2A1C9BFE0003E538 /* Pair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pair.h; sourceTree = "<group>"; };
-		BA68990D2A1C9BFE0003E538 /* Weight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weight.h; sourceTree = "<group>"; };
-		BA68990E2A1C9BFE0003E538 /* Weight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Weight.m; sourceTree = "<group>"; };
-		BA68990F2A1C9BFE0003E538 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
-		BAA32ABC2A20C82900737458 /* Mapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mapping.h; sourceTree = "<group>"; };
-		BAA32ABD2A20C82900737458 /* Mapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mapping.m; sourceTree = "<group>"; };
-		BAA32ABE2A20C82900737458 /* MEGManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEGManager.h; sourceTree = "<group>"; };
-		BAA32ABF2A20C82900737458 /* MEGManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEGManager.m; sourceTree = "<group>"; };
-		BAAFFEF12B064D2700112AB8 /* VWOConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOConstants.m; sourceTree = "<group>"; };
-		BAAFFEF22B064D2700112AB8 /* VWOConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOConstants.h; sourceTree = "<group>"; };
-		E31714C51F838C2F0036CF07 /* VWOTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VWOTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		E31714C61F838C2F0036CF07 /* VWOTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOTests.swift; sourceTree = "<group>"; };
-		E319151E1F67F1B900FC1695 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		E31915231F6802D500FC1695 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
-		E32079C020075516005CB5CD /* CampaignIDMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignIDMissing.json; sourceTree = "<group>"; };
-		E32079C220075541005CB5CD /* CampaignStatusMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignStatusMissing.json; sourceTree = "<group>"; };
-		E32079C420076797005CB5CD /* CampaignExcluded.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignExcluded.json; sourceTree = "<group>"; };
-		E32079C620076C3D005CB5CD /* CampaignRunningKeysMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignRunningKeysMissing.json; sourceTree = "<group>"; };
-		E323AF4C20567E9B00DC00C0 /* BasicSegmentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSegmentation.swift; sourceTree = "<group>"; };
-		E327C123203EC95100161CC2 /* iOSVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSVersionTests.swift; sourceTree = "<group>"; };
-		E327C125203ECFEB00161CC2 /* DayOfWeekTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekTests.swift; sourceTree = "<group>"; };
-		E327C127203ED2A800161CC2 /* HourOftheDayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourOftheDayTests.swift; sourceTree = "<group>"; };
-		E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOGoalTests.swift; sourceTree = "<group>"; };
-		E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOVariationTests.swift; sourceTree = "<group>"; };
-		E341CC6A203C3CFA008D182B /* DeviceTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypeTests.swift; sourceTree = "<group>"; };
-		E341CC76203C41D4008D182B /* VisitorTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorTypeTests.swift; sourceTree = "<group>"; };
-		E341CC81203C44AD008D182B /* PredefinedSegmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredefinedSegmentTests.swift; sourceTree = "<group>"; };
-		E341CC84203C4658008D182B /* AppVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionTests.swift; sourceTree = "<group>"; };
-		E344B2EE1F87906900A4EEE6 /* VWOUserDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOUserDefaults.h; sourceTree = "<group>"; };
-		E344B2EF1F87906900A4EEE6 /* VWOUserDefaults.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOUserDefaults.m; sourceTree = "<group>"; };
-		E3470B782008C6170035BEEF /* VWOConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOConfigTests.swift; sourceTree = "<group>"; };
-		E3529572206B720A00C90716 /* VWOSocketConnector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOSocketConnector.h; sourceTree = "<group>"; };
-		E3529573206B720A00C90716 /* VWOSocketConnector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOSocketConnector.m; sourceTree = "<group>"; };
-		E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSession+Synchronous.h"; sourceTree = "<group>"; };
-		E35484F41F713C2E00E14D2E /* NSURLSession+Synchronous.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSession+Synchronous.m"; sourceTree = "<group>"; };
-		E3689A3E20061F1A00764398 /* VWOCampaignTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOCampaignTests.swift; sourceTree = "<group>"; };
-		E3689A4020061F6F00764398 /* Campaign1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Campaign1.json; sourceTree = "<group>"; };
-		E3689A422006205D00764398 /* CampaignPaused.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CampaignPaused.json; sourceTree = "<group>"; };
-		E36AC7181F75614E0041ACDF /* VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWO.m; sourceTree = "<group>"; };
-		E3806D2F205269D800FFE897 /* DeviceWidthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceWidthTests.swift; sourceTree = "<group>"; };
-		E3806D3120526C6900FFE897 /* DeviceHeightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHeightTests.swift; sourceTree = "<group>"; };
-		E3806D332052717100FFE897 /* LocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
-		E3871A1B212FE27C0033D86B /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
-		E3871A1C212FE27C0033D86B /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
-		E388B6CC1F8F7D350023E11E /* VWOURLQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOURLQueue.h; sourceTree = "<group>"; };
-		E388B6CD1F8F7D350023E11E /* VWOURLQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOURLQueue.m; sourceTree = "<group>"; };
-		E3924B3B1FC2C2D8006A9EB2 /* And1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = And1.json; sourceTree = "<group>"; };
-		E3924B3D1FC2D8B7006A9EB2 /* And2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = And2.json; sourceTree = "<group>"; };
-		E3924B3F1FC2DC24006A9EB2 /* Or1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Or1.json; sourceTree = "<group>"; };
-		E3924B411FC2DD15006A9EB2 /* Or2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Or2.json; sourceTree = "<group>"; };
-		E3924B431FC2E65E006A9EB2 /* Or3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Or3.json; sourceTree = "<group>"; };
-		E3924B451FC408AD006A9EB2 /* Complex1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Complex1.json; sourceTree = "<group>"; };
-		E3924B471FC40B2F006A9EB2 /* Complex2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Complex2.json; sourceTree = "<group>"; };
-		E3924B491FC42C06006A9EB2 /* VWODictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWODictionaryTests.swift; sourceTree = "<group>"; };
-		E3924B4B1FC4520D006A9EB2 /* VWOQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOQueueTests.swift; sourceTree = "<group>"; };
-		E39567A1206E5DA80030B30B /* VWOCampaignFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOCampaignFetcher.h; sourceTree = "<group>"; };
-		E39567A2206E5DA80030B30B /* VWOCampaignFetcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOCampaignFetcher.m; sourceTree = "<group>"; };
-		E39814D61F6288C80035D519 /* VWO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VWO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E39814D91F6288C80035D519 /* VWO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWO.h; sourceTree = "<group>"; };
-		E39814DA1F6288C80035D519 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E39814DF1F6288C80035D519 /* VWOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VWOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E39814E61F6288C80035D519 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E39814F41F628CAA0035D519 /* VWO.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VWO.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		E39815431F6291680035D519 /* VWOCampaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOCampaign.h; sourceTree = "<group>"; };
-		E39815441F6291680035D519 /* VWOCampaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOCampaign.m; sourceTree = "<group>"; };
-		E39815451F6291680035D519 /* VWOGoal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VWOGoal.h; sourceTree = "<group>"; };
-		E39815461F6291680035D519 /* VWOGoal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VWOGoal.m; sourceTree = "<group>"; };
-		E39815471F6291680035D519 /* VWOQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VWOQueue.h; sourceTree = "<group>"; };
-		E39815481F6291680035D519 /* VWOQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = VWOQueue.m; sourceTree = "<group>"; };
-		E398154B1F6291680035D519 /* VWOVariation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VWOVariation.h; sourceTree = "<group>"; };
-		E398154C1F6291680035D519 /* VWOVariation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOVariation.m; sourceTree = "<group>"; };
-		E39815731F6291960035D519 /* VWOController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOController.h; sourceTree = "<group>"; };
-		E39815741F6291960035D519 /* VWOController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOController.m; sourceTree = "<group>"; };
-		E39815751F6291970035D519 /* VWODevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWODevice.h; path = Helpers/VWODevice.h; sourceTree = "<group>"; };
-		E39815761F6291970035D519 /* VWODevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = VWODevice.m; path = Helpers/VWODevice.m; sourceTree = "<group>"; };
-		E39815771F6291970035D519 /* VWOFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWOFile.h; path = Helpers/VWOFile.h; sourceTree = "<group>"; };
-		E39815781F6291970035D519 /* VWOFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = VWOFile.m; path = Helpers/VWOFile.m; sourceTree = "<group>"; };
-		E39815791F6291970035D519 /* VWOLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = VWOLogger.h; path = Helpers/VWOLogger.h; sourceTree = "<group>"; };
-		E398157A1F6291970035D519 /* VWOLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = VWOLogger.m; path = Helpers/VWOLogger.m; sourceTree = "<group>"; };
-		E39815911F6291C10035D519 /* VWOSegmentEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOSegmentEvaluator.h; sourceTree = "<group>"; };
-		E39815921F6291C10035D519 /* VWOSegmentEvaluator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOSegmentEvaluator.m; sourceTree = "<group>"; };
-		E39815981F6293BC0035D519 /* NSDictionary+VWO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+VWO.h"; sourceTree = "<group>"; };
-		E39815991F6293BC0035D519 /* NSDictionary+VWO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VWO.m"; sourceTree = "<group>"; };
-		E3BBA35E2068FA630046B2F2 /* VWOSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOSocket.h; sourceTree = "<group>"; };
-		E3BBA35F2068FA630046B2F2 /* VWOSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOSocket.m; sourceTree = "<group>"; };
-		E3C0663F200C925000FF9EF5 /* Campaign2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Campaign2.json; sourceTree = "<group>"; };
-		E3C06642200C932F00FF9EF5 /* Goal1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Goal1.json; sourceTree = "<group>"; };
-		E3C06644200C933F00FF9EF5 /* Goal2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Goal2.json; sourceTree = "<group>"; };
-		E3C06646200C935B00FF9EF5 /* GoalIdMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GoalIdMissing.json; sourceTree = "<group>"; };
-		E3C06648200C937B00FF9EF5 /* GoalIdentifierMissing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GoalIdentifierMissing.json; sourceTree = "<group>"; };
-		E3C0664B200C94AD00FF9EF5 /* Variation1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Variation1.json; sourceTree = "<group>"; };
-		E3C0664D200C94C500FF9EF5 /* VarationControl.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VarationControl.json; sourceTree = "<group>"; };
-		E3C0664F200C94DD00FF9EF5 /* VariationMissingKeys.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = VariationMissingKeys.json; sourceTree = "<group>"; };
-		E3C06651200CA4CB00FF9EF5 /* VWOURLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOURLTests.swift; sourceTree = "<group>"; };
-		E3D29F951FBD91B700A11C61 /* Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extra.swift; sourceTree = "<group>"; };
-		E3D29FC41FBEDAB300A11C61 /* NSDate+VWO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+VWO.h"; sourceTree = "<group>"; };
-		E3D29FC51FBEDAB300A11C61 /* NSDate+VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+VWO.m"; sourceTree = "<group>"; };
-		E3D29FC81FBEDE2A00A11C61 /* NSString+VWO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+VWO.h"; sourceTree = "<group>"; };
-		E3D29FC91FBEDE2A00A11C61 /* NSString+VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+VWO.m"; sourceTree = "<group>"; };
-		E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VWOURL.h; sourceTree = "<group>"; };
-		E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VWOURL.m; sourceTree = "<group>"; };
-		E3E95E8B206D0B13006DCE6C /* VWOConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOConfig.h; sourceTree = "<group>"; };
-		E3E95E8C206D0B13006DCE6C /* VWOConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOConfig.m; sourceTree = "<group>"; };
-		E3F2D511204437B200862EE3 /* CustomVariableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVariableTests.swift; sourceTree = "<group>"; };
-		E3F2D5142044389C00862EE3 /* ComplexSegmentationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexSegmentationTests.swift; sourceTree = "<group>"; };
-		E3F7CBA62004A07800CC8C03 /* VWOInfixEvaluator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOInfixEvaluator.h; sourceTree = "<group>"; };
-		E3F7CBA72004A07800CC8C03 /* VWOInfixEvaluator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOInfixEvaluator.m; sourceTree = "<group>"; };
-		E3F7CBAA2004A9B100CC8C03 /* VWOStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOStack.h; sourceTree = "<group>"; };
-		E3F7CBAB2004A9B100CC8C03 /* VWOStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOStack.m; sourceTree = "<group>"; };
-		E3F7CBAE2004B72E00CC8C03 /* VWOStackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOStackTests.swift; sourceTree = "<group>"; };
-		E3F7CBB02004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOInfixEvaluatorTests.swift; sourceTree = "<group>"; };
-		E3F7CBB22004C91400CC8C03 /* VWOSegment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOSegment.h; sourceTree = "<group>"; };
-		E3F7CBB32004C91400CC8C03 /* VWOSegment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOSegment.m; sourceTree = "<group>"; };
-		E3F7CBB62004D6E600CC8C03 /* Bracket1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bracket1.json; sourceTree = "<group>"; };
-		E3F7CBB82004D85E00CC8C03 /* Bracket2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bracket2.json; sourceTree = "<group>"; };
-		E3F7CBBA2004D93D00CC8C03 /* Bracket3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bracket3.json; sourceTree = "<group>"; };
-		E3F7CBBC2004DFEE00CC8C03 /* Bracket4.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Bracket4.json; sourceTree = "<group>"; };
-		E3F7CBBE2004E0AB00CC8C03 /* NestedBracket2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NestedBracket2.json; sourceTree = "<group>"; };
-		E3F7CBC02004E57900CC8C03 /* VWOSegmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWOSegmentTests.swift; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		E39814D21F6288C80035D519 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				32C4822427A421CE007128E3 /* SocketIO in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E39814DC1F6288C80035D519 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E39814E01F6288C80035D519 /* VWO.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		7B165AF82936AEA70060EEE2 /* MEG */ = {
-			isa = PBXGroup;
-			children = (
-				BAA32ABC2A20C82900737458 /* Mapping.h */,
-				BAA32ABD2A20C82900737458 /* Mapping.m */,
-				BAA32ABE2A20C82900737458 /* MEGManager.h */,
-				BAA32ABF2A20C82900737458 /* MEGManager.m */,
-				BA68990C2A1C9BFE0003E538 /* Pair.h */,
-				BA6899052A1C9BFE0003E538 /* Pair.m */,
-				BA6899062A1C9BFE0003E538 /* PriorityQualificationWinnerResult.h */,
-				BA6899072A1C9BFE0003E538 /* PriorityQualificationWinnerResult.m */,
-				BA68990B2A1C9BFE0003E538 /* Response.h */,
-				BA68990F2A1C9BFE0003E538 /* Response.m */,
-				BA68990D2A1C9BFE0003E538 /* Weight.h */,
-				BA68990E2A1C9BFE0003E538 /* Weight.m */,
-				BA6899092A1C9BFE0003E538 /* Winner.h */,
-				BA6899082A1C9BFE0003E538 /* Winner.m */,
-				BA6899042A1C9BFE0003E538 /* WinnerManager.h */,
-				BA68990A2A1C9BFE0003E538 /* WinnerManager.m */,
-				7B165B03293756EE0060EEE2 /* MutuallyExclusiveGroups.h */,
-				7B165B04293756EE0060EEE2 /* MutuallyExclusiveGroups.m */,
-				7B165B0729376B6E0060EEE2 /* Group.h */,
-				7B165B0829376B6E0060EEE2 /* Group.m */,
-				7B165B0B29376B8C0060EEE2 /* CampaignUniquenessTracker.h */,
-				7B165B0C29376B8C0060EEE2 /* CampaignUniquenessTracker.m */,
-				7B165B0F29376BA30060EEE2 /* CampaignGroupMapper.h */,
-				7B165B1029376BA30060EEE2 /* CampaignGroupMapper.m */,
-				7B165B1329383B1D0060EEE2 /* MurmurHash.h */,
-				7B165B1429383B1D0060EEE2 /* MurmurHash.m */,
-			);
-			path = MEG;
-			sourceTree = "<group>";
-		};
-		E3529571206B704600C90716 /* Socket */ = {
-			isa = PBXGroup;
-			children = (
-				E3BBA35E2068FA630046B2F2 /* VWOSocket.h */,
-				E3BBA35F2068FA630046B2F2 /* VWOSocket.m */,
-			);
-			path = Socket;
-			sourceTree = "<group>";
-		};
-		E35902BE2006241900ACDEBC /* CampaignTests */ = {
-			isa = PBXGroup;
-			children = (
-				E3689A3E20061F1A00764398 /* VWOCampaignTests.swift */,
-				E3689A4020061F6F00764398 /* Campaign1.json */,
-				E3C0663F200C925000FF9EF5 /* Campaign2.json */,
-				E3689A422006205D00764398 /* CampaignPaused.json */,
-				E32079C020075516005CB5CD /* CampaignIDMissing.json */,
-				E32079C220075541005CB5CD /* CampaignStatusMissing.json */,
-				E32079C420076797005CB5CD /* CampaignExcluded.json */,
-				E32079C620076C3D005CB5CD /* CampaignRunningKeysMissing.json */,
-			);
-			path = CampaignTests;
-			sourceTree = "<group>";
-		};
-		E39814CC1F6288C80035D519 = {
-			isa = PBXGroup;
-			children = (
-				E39814D81F6288C80035D519 /* VWO */,
-				E3529571206B704600C90716 /* Socket */,
-				E39814E31F6288C80035D519 /* VWOTests */,
-				E39814D71F6288C80035D519 /* Products */,
-				E3BBA33B2068F2500046B2F2 /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		E39814D71F6288C80035D519 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E39814D61F6288C80035D519 /* VWO.framework */,
-				E39814DF1F6288C80035D519 /* VWOTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E39814D81F6288C80035D519 /* VWO */ = {
-			isa = PBXGroup;
-			children = (
-				BAAFFEF22B064D2700112AB8 /* VWOConstants.h */,
-				BAAFFEF12B064D2700112AB8 /* VWOConstants.m */,
-				7B165AF82936AEA70060EEE2 /* MEG */,
-				E39814D91F6288C80035D519 /* VWO.h */,
-				E36AC7181F75614E0041ACDF /* VWO.m */,
-				E39815731F6291960035D519 /* VWOController.h */,
-				E39815741F6291960035D519 /* VWOController.m */,
-				E39567A1206E5DA80030B30B /* VWOCampaignFetcher.h */,
-				E39567A2206E5DA80030B30B /* VWOCampaignFetcher.m */,
-				E3E95E8B206D0B13006DCE6C /* VWOConfig.h */,
-				E3E95E8C206D0B13006DCE6C /* VWOConfig.m */,
-				E344B2EE1F87906900A4EEE6 /* VWOUserDefaults.h */,
-				E344B2EF1F87906900A4EEE6 /* VWOUserDefaults.m */,
-				E3D5F7FB1F6BD86C0011C43C /* VWOURL.h */,
-				E3D5F7FC1F6BD86C0011C43C /* VWOURL.m */,
-				E388B6CC1F8F7D350023E11E /* VWOURLQueue.h */,
-				E388B6CD1F8F7D350023E11E /* VWOURLQueue.m */,
-				E39815911F6291C10035D519 /* VWOSegmentEvaluator.h */,
-				E39815921F6291C10035D519 /* VWOSegmentEvaluator.m */,
-				E3F7CBA62004A07800CC8C03 /* VWOInfixEvaluator.h */,
-				E3F7CBA72004A07800CC8C03 /* VWOInfixEvaluator.m */,
-				E3529572206B720A00C90716 /* VWOSocketConnector.h */,
-				E3529573206B720A00C90716 /* VWOSocketConnector.m */,
-				E39815F71F62A13A0035D519 /* Helpers */,
-				E39815951F6293BC0035D519 /* Extensions */,
-				E39815421F6291680035D519 /* Models */,
-				E39814DA1F6288C80035D519 /* Info.plist */,
-				E39814F41F628CAA0035D519 /* VWO.podspec */,
-				E319151E1F67F1B900FC1695 /* README.md */,
-				E31915231F6802D500FC1695 /* LICENSE */,
-			);
-			path = VWO;
-			sourceTree = "<group>";
-		};
-		E39814E31F6288C80035D519 /* VWOTests */ = {
-			isa = PBXGroup;
-			children = (
-				E31714C61F838C2F0036CF07 /* VWOTests.swift */,
-				E3924B491FC42C06006A9EB2 /* VWODictionaryTests.swift */,
-				E3924B4B1FC4520D006A9EB2 /* VWOQueueTests.swift */,
-				E3F7CBAE2004B72E00CC8C03 /* VWOStackTests.swift */,
-				E3F7CBB02004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift */,
-				E3470B782008C6170035BEEF /* VWOConfigTests.swift */,
-				E3F7CBC02004E57900CC8C03 /* VWOSegmentTests.swift */,
-				E3C06651200CA4CB00FF9EF5 /* VWOURLTests.swift */,
-				E3C06641200C931200FF9EF5 /* GoalTests */,
-				E3C0664A200C949800FF9EF5 /* VariationTests */,
-				E35902BE2006241900ACDEBC /* CampaignTests */,
-				E3D29FA11FBDA85100A11C61 /* Segmentation */,
-				E3D29F951FBD91B700A11C61 /* Extra.swift */,
-				E39814E61F6288C80035D519 /* Info.plist */,
-				E31714C51F838C2F0036CF07 /* VWOTests-Bridging-Header.h */,
-			);
-			path = VWOTests;
-			sourceTree = "<group>";
-		};
-		E39815421F6291680035D519 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				E39815431F6291680035D519 /* VWOCampaign.h */,
-				E39815441F6291680035D519 /* VWOCampaign.m */,
-				E39815451F6291680035D519 /* VWOGoal.h */,
-				E39815461F6291680035D519 /* VWOGoal.m */,
-				E39815471F6291680035D519 /* VWOQueue.h */,
-				E39815481F6291680035D519 /* VWOQueue.m */,
-				E3F7CBAA2004A9B100CC8C03 /* VWOStack.h */,
-				E3F7CBAB2004A9B100CC8C03 /* VWOStack.m */,
-				E398154B1F6291680035D519 /* VWOVariation.h */,
-				E398154C1F6291680035D519 /* VWOVariation.m */,
-				E3F7CBB22004C91400CC8C03 /* VWOSegment.h */,
-				E3F7CBB32004C91400CC8C03 /* VWOSegment.m */,
-				7B6B7E07294094AA00961493 /* VWOGroup.h */,
-				7B6B7E08294094AA00961493 /* VWOGroup.m */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		E39815951F6293BC0035D519 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				E3871A1B212FE27C0033D86B /* NSString+MD5.h */,
-				E3871A1C212FE27C0033D86B /* NSString+MD5.m */,
-				E39815981F6293BC0035D519 /* NSDictionary+VWO.h */,
-				E39815991F6293BC0035D519 /* NSDictionary+VWO.m */,
-				E3D29FC41FBEDAB300A11C61 /* NSDate+VWO.h */,
-				E3D29FC51FBEDAB300A11C61 /* NSDate+VWO.m */,
-				E3D29FC81FBEDE2A00A11C61 /* NSString+VWO.h */,
-				E3D29FC91FBEDE2A00A11C61 /* NSString+VWO.m */,
-				E35484F31F713C2E00E14D2E /* NSURLSession+Synchronous.h */,
-				E35484F41F713C2E00E14D2E /* NSURLSession+Synchronous.m */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		E39815F71F62A13A0035D519 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				E39815751F6291970035D519 /* VWODevice.h */,
-				E39815761F6291970035D519 /* VWODevice.m */,
-				E39815771F6291970035D519 /* VWOFile.h */,
-				E39815781F6291970035D519 /* VWOFile.m */,
-				E39815791F6291970035D519 /* VWOLogger.h */,
-				E398157A1F6291970035D519 /* VWOLogger.m */,
-			);
-			name = Helpers;
-			sourceTree = "<group>";
-		};
-		E3BBA33B2068F2500046B2F2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E3C06641200C931200FF9EF5 /* GoalTests */ = {
-			isa = PBXGroup;
-			children = (
-				E32C7A151FC58603009ABF2F /* VWOGoalTests.swift */,
-				E3C06642200C932F00FF9EF5 /* Goal1.json */,
-				E3C06644200C933F00FF9EF5 /* Goal2.json */,
-				E3C06646200C935B00FF9EF5 /* GoalIdMissing.json */,
-				E3C06648200C937B00FF9EF5 /* GoalIdentifierMissing.json */,
-			);
-			path = GoalTests;
-			sourceTree = "<group>";
-		};
-		E3C0664A200C949800FF9EF5 /* VariationTests */ = {
-			isa = PBXGroup;
-			children = (
-				E32C7A171FC5886A009ABF2F /* VWOVariationTests.swift */,
-				E3C0664B200C94AD00FF9EF5 /* Variation1.json */,
-				E3C0664D200C94C500FF9EF5 /* VarationControl.json */,
-				E3C0664F200C94DD00FF9EF5 /* VariationMissingKeys.json */,
-			);
-			path = VariationTests;
-			sourceTree = "<group>";
-		};
-		E3D29FA11FBDA85100A11C61 /* Segmentation */ = {
-			isa = PBXGroup;
-			children = (
-				E323AF4C20567E9B00DC00C0 /* BasicSegmentation.swift */,
-				E341CC6A203C3CFA008D182B /* DeviceTypeTests.swift */,
-				E341CC76203C41D4008D182B /* VisitorTypeTests.swift */,
-				E341CC81203C44AD008D182B /* PredefinedSegmentTests.swift */,
-				E3F2D511204437B200862EE3 /* CustomVariableTests.swift */,
-				E341CC84203C4658008D182B /* AppVersionTests.swift */,
-				E327C123203EC95100161CC2 /* iOSVersionTests.swift */,
-				E327C125203ECFEB00161CC2 /* DayOfWeekTests.swift */,
-				E327C127203ED2A800161CC2 /* HourOftheDayTests.swift */,
-				E3806D332052717100FFE897 /* LocationTests.swift */,
-				E3806D2F205269D800FFE897 /* DeviceWidthTests.swift */,
-				E3806D3120526C6900FFE897 /* DeviceHeightTests.swift */,
-				E3F2D5132044387F00862EE3 /* ComplexTests */,
-			);
-			path = Segmentation;
-			sourceTree = "<group>";
-		};
-		E3F2D5132044387F00862EE3 /* ComplexTests */ = {
-			isa = PBXGroup;
-			children = (
-				E3F2D5142044389C00862EE3 /* ComplexSegmentationTests.swift */,
-				E3924B3B1FC2C2D8006A9EB2 /* And1.json */,
-				E3924B3D1FC2D8B7006A9EB2 /* And2.json */,
-				E3924B3F1FC2DC24006A9EB2 /* Or1.json */,
-				E3924B411FC2DD15006A9EB2 /* Or2.json */,
-				E3924B431FC2E65E006A9EB2 /* Or3.json */,
-				E3924B451FC408AD006A9EB2 /* Complex1.json */,
-				E3924B471FC40B2F006A9EB2 /* Complex2.json */,
-				E3F7CBB62004D6E600CC8C03 /* Bracket1.json */,
-				E3F7CBB82004D85E00CC8C03 /* Bracket2.json */,
-				E3F7CBBA2004D93D00CC8C03 /* Bracket3.json */,
-				E3F7CBBC2004DFEE00CC8C03 /* Bracket4.json */,
-				E3F7CBBE2004E0AB00CC8C03 /* NestedBracket2.json */,
-			);
-			path = ComplexTests;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		E39814D31F6288C80035D519 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BA6899192A1C9BFE0003E538 /* Weight.h in Headers */,
-				BA6899182A1C9BFE0003E538 /* Pair.h in Headers */,
-				7B6B7E09294094AA00961493 /* VWOGroup.h in Headers */,
-				E39815851F6291970035D519 /* VWOLogger.h in Headers */,
-				E39815591F6291680035D519 /* VWOGoal.h in Headers */,
-				E3871A1D212FE27C0033D86B /* NSString+MD5.h in Headers */,
-				E3D29FCA1FBEDE2A00A11C61 /* NSString+VWO.h in Headers */,
-				E3D29FC61FBEDAB300A11C61 /* NSDate+VWO.h in Headers */,
-				E39815811F6291970035D519 /* VWODevice.h in Headers */,
-				BAA32AC02A20C82900737458 /* Mapping.h in Headers */,
-				7B165B1529383B1D0060EEE2 /* MurmurHash.h in Headers */,
-				E398155B1F6291680035D519 /* VWOQueue.h in Headers */,
-				E3F7CBAC2004A9B100CC8C03 /* VWOStack.h in Headers */,
-				E388B6CE1F8F7D350023E11E /* VWOURLQueue.h in Headers */,
-				E344B2F01F87906900A4EEE6 /* VWOUserDefaults.h in Headers */,
-				E39815571F6291680035D519 /* VWOCampaign.h in Headers */,
-				BAA32AC22A20C82900737458 /* MEGManager.h in Headers */,
-				E39815831F6291970035D519 /* VWOFile.h in Headers */,
-				7B165B0929376B6E0060EEE2 /* Group.h in Headers */,
-				7B165B05293756EE0060EEE2 /* MutuallyExclusiveGroups.h in Headers */,
-				E35484F51F713C2E00E14D2E /* NSURLSession+Synchronous.h in Headers */,
-				BAAFFEF42B064D2800112AB8 /* VWOConstants.h in Headers */,
-				E3529574206B720A00C90716 /* VWOSocketConnector.h in Headers */,
-				E3E95E8D206D0B13006DCE6C /* VWOConfig.h in Headers */,
-				BA6899102A1C9BFE0003E538 /* WinnerManager.h in Headers */,
-				7B165B1129376BA30060EEE2 /* CampaignGroupMapper.h in Headers */,
-				BA6899152A1C9BFE0003E538 /* Winner.h in Headers */,
-				BA6899172A1C9BFE0003E538 /* Response.h in Headers */,
-				E398155F1F6291680035D519 /* VWOVariation.h in Headers */,
-				E39567A3206E5DA80030B30B /* VWOCampaignFetcher.h in Headers */,
-				E3BBA3602068FA630046B2F2 /* VWOSocket.h in Headers */,
-				BA6899122A1C9BFE0003E538 /* PriorityQualificationWinnerResult.h in Headers */,
-				E398157F1F6291970035D519 /* VWOController.h in Headers */,
-				E39815931F6291C10035D519 /* VWOSegmentEvaluator.h in Headers */,
-				E3D5F7FD1F6BD86C0011C43C /* VWOURL.h in Headers */,
-				E3F7CBB42004C91400CC8C03 /* VWOSegment.h in Headers */,
-				E398159C1F6293BC0035D519 /* NSDictionary+VWO.h in Headers */,
-				7B165B0D29376B8C0060EEE2 /* CampaignUniquenessTracker.h in Headers */,
-				E3F7CBA82004A07800CC8C03 /* VWOInfixEvaluator.h in Headers */,
-				E39814E71F6288C80035D519 /* VWO.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
-/* Begin PBXNativeTarget section */
-		E39814D51F6288C80035D519 /* VWO */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E39814EA1F6288C80035D519 /* Build configuration list for PBXNativeTarget "VWO" */;
-			buildPhases = (
-				E39814D11F6288C80035D519 /* Sources */,
-				E39814D21F6288C80035D519 /* Frameworks */,
-				E39814D31F6288C80035D519 /* Headers */,
-				E39814D41F6288C80035D519 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = VWO;
-			packageProductDependencies = (
-				32C4822327A421CE007128E3 /* SocketIO */,
-			);
-			productName = VWO;
-			productReference = E39814D61F6288C80035D519 /* VWO.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		E39814DE1F6288C80035D519 /* VWOTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E39814ED1F6288C80035D519 /* Build configuration list for PBXNativeTarget "VWOTests" */;
-			buildPhases = (
-				E39814DB1F6288C80035D519 /* Sources */,
-				E39814DC1F6288C80035D519 /* Frameworks */,
-				E39814DD1F6288C80035D519 /* Resources */,
-				E3F52EE9206A33AD0026F0F4 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E39814E21F6288C80035D519 /* PBXTargetDependency */,
-			);
-			name = VWOTests;
-			productName = VWOTests;
-			productReference = E39814DF1F6288C80035D519 /* VWOTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		E39814CD1F6288C80035D519 /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastUpgradeCheck = 1230;
-				ORGANIZATIONNAME = vwo;
-				TargetAttributes = {
-					E39814D51F6288C80035D519 = {
-						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = DBN26NC8KE;
-						ProvisioningStyle = Automatic;
-					};
-					E39814DE1F6288C80035D519 = {
-						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = DBN26NC8KE;
-						LastSwiftMigration = 1320;
-						ProvisioningStyle = Automatic;
-					};
-				};
-			};
-			buildConfigurationList = E39814D01F6288C80035D519 /* Build configuration list for PBXProject "VWO" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				English,
-				en,
-				Base,
-			);
-			mainGroup = E39814CC1F6288C80035D519;
-			packageReferences = (
-				32C4822227A421CE007128E3 /* XCRemoteSwiftPackageReference "socket" */,
-			);
-			productRefGroup = E39814D71F6288C80035D519 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				E39814D51F6288C80035D519 /* VWO */,
-				E39814DE1F6288C80035D519 /* VWOTests */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		E39814D41F6288C80035D519 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E39814F51F628CAA0035D519 /* VWO.podspec in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E39814DD1F6288C80035D519 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E32079C120075516005CB5CD /* CampaignIDMissing.json in Resources */,
-				E3C06650200C94DD00FF9EF5 /* VariationMissingKeys.json in Resources */,
-				E3F7CBBB2004D93D00CC8C03 /* Bracket3.json in Resources */,
-				E3C06640200C925000FF9EF5 /* Campaign2.json in Resources */,
-				E3C06647200C935B00FF9EF5 /* GoalIdMissing.json in Resources */,
-				E3924B461FC408AD006A9EB2 /* Complex1.json in Resources */,
-				E3924B3E1FC2D8B7006A9EB2 /* And2.json in Resources */,
-				E32079C320075541005CB5CD /* CampaignStatusMissing.json in Resources */,
-				E3C06643200C932F00FF9EF5 /* Goal1.json in Resources */,
-				E3689A432006205D00764398 /* CampaignPaused.json in Resources */,
-				E3924B481FC40B2F006A9EB2 /* Complex2.json in Resources */,
-				E3F7CBB92004D85E00CC8C03 /* Bracket2.json in Resources */,
-				E3C0664E200C94C500FF9EF5 /* VarationControl.json in Resources */,
-				E3924B401FC2DC24006A9EB2 /* Or1.json in Resources */,
-				E3C06649200C937B00FF9EF5 /* GoalIdentifierMissing.json in Resources */,
-				E3F7CBBD2004DFEE00CC8C03 /* Bracket4.json in Resources */,
-				E32079C520076797005CB5CD /* CampaignExcluded.json in Resources */,
-				E3924B441FC2E65E006A9EB2 /* Or3.json in Resources */,
-				E3C06645200C933F00FF9EF5 /* Goal2.json in Resources */,
-				E3924B3C1FC2C2D8006A9EB2 /* And1.json in Resources */,
-				E32079C720076C3D005CB5CD /* CampaignRunningKeysMissing.json in Resources */,
-				E3924B421FC2DD15006A9EB2 /* Or2.json in Resources */,
-				E3F7CBBF2004E0AB00CC8C03 /* NestedBracket2.json in Resources */,
-				E3689A4120061F6F00764398 /* Campaign1.json in Resources */,
-				E3F7CBB72004D6E600CC8C03 /* Bracket1.json in Resources */,
-				E3C0664C200C94AD00FF9EF5 /* Variation1.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		E39814D11F6288C80035D519 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BA68991B2A1C9BFE0003E538 /* Response.m in Sources */,
-				E344B2F11F87906900A4EEE6 /* VWOUserDefaults.m in Sources */,
-				7B165B1629383B1D0060EEE2 /* MurmurHash.m in Sources */,
-				7B165B06293756EE0060EEE2 /* MutuallyExclusiveGroups.m in Sources */,
-				BA6899132A1C9BFE0003E538 /* PriorityQualificationWinnerResult.m in Sources */,
-				E3D29FC71FBEDAB300A11C61 /* NSDate+VWO.m in Sources */,
-				E3871A1E212FE27C0033D86B /* NSString+MD5.m in Sources */,
-				E36AC7191F75614E0041ACDF /* VWO.m in Sources */,
-				E3F7CBAD2004A9B100CC8C03 /* VWOStack.m in Sources */,
-				E39567A4206E5DA80030B30B /* VWOCampaignFetcher.m in Sources */,
-				E3BBA3612068FA630046B2F2 /* VWOSocket.m in Sources */,
-				E39815941F6291C10035D519 /* VWOSegmentEvaluator.m in Sources */,
-				7B6B7E0A294094AA00961493 /* VWOGroup.m in Sources */,
-				7B165B0A29376B6E0060EEE2 /* Group.m in Sources */,
-				E3E95E8E206D0B13006DCE6C /* VWOConfig.m in Sources */,
-				BA6899142A1C9BFE0003E538 /* Winner.m in Sources */,
-				BA6899112A1C9BFE0003E538 /* Pair.m in Sources */,
-				E35484F61F713C2E00E14D2E /* NSURLSession+Synchronous.m in Sources */,
-				E398159D1F6293BC0035D519 /* NSDictionary+VWO.m in Sources */,
-				E39815861F6291970035D519 /* VWOLogger.m in Sources */,
-				7B165B0E29376B8C0060EEE2 /* CampaignUniquenessTracker.m in Sources */,
-				E39815821F6291970035D519 /* VWODevice.m in Sources */,
-				E398155A1F6291680035D519 /* VWOGoal.m in Sources */,
-				E3529575206B720A00C90716 /* VWOSocketConnector.m in Sources */,
-				E3D5F7FE1F6BD86C0011C43C /* VWOURL.m in Sources */,
-				E39815801F6291970035D519 /* VWOController.m in Sources */,
-				BAAFFEF32B064D2800112AB8 /* VWOConstants.m in Sources */,
-				BAA32AC32A20C82900737458 /* MEGManager.m in Sources */,
-				BA6899162A1C9BFE0003E538 /* WinnerManager.m in Sources */,
-				7B165B1229376BA30060EEE2 /* CampaignGroupMapper.m in Sources */,
-				BAA32AC12A20C82900737458 /* Mapping.m in Sources */,
-				E398155C1F6291680035D519 /* VWOQueue.m in Sources */,
-				E3F7CBA92004A07800CC8C03 /* VWOInfixEvaluator.m in Sources */,
-				E39815601F6291680035D519 /* VWOVariation.m in Sources */,
-				E388B6CF1F8F7D350023E11E /* VWOURLQueue.m in Sources */,
-				E3D29FCB1FBEDE2A00A11C61 /* NSString+VWO.m in Sources */,
-				E39815581F6291680035D519 /* VWOCampaign.m in Sources */,
-				E3F7CBB52004C91400CC8C03 /* VWOSegment.m in Sources */,
-				E39815841F6291970035D519 /* VWOFile.m in Sources */,
-				BA68991A2A1C9BFE0003E538 /* Weight.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E39814DB1F6288C80035D519 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E3689A3F20061F1A00764398 /* VWOCampaignTests.swift in Sources */,
-				E32C7A181FC5886A009ABF2F /* VWOVariationTests.swift in Sources */,
-				E3924B4A1FC42C06006A9EB2 /* VWODictionaryTests.swift in Sources */,
-				E3924B4C1FC4520D006A9EB2 /* VWOQueueTests.swift in Sources */,
-				E341CC85203C4658008D182B /* AppVersionTests.swift in Sources */,
-				E3F7CBB12004BF4700CC8C03 /* VWOInfixEvaluatorTests.swift in Sources */,
-				E3806D3220526C6900FFE897 /* DeviceHeightTests.swift in Sources */,
-				E3F2D512204437B200862EE3 /* CustomVariableTests.swift in Sources */,
-				E3F7CBAF2004B72E00CC8C03 /* VWOStackTests.swift in Sources */,
-				E3806D30205269D800FFE897 /* DeviceWidthTests.swift in Sources */,
-				E341CC82203C44AD008D182B /* PredefinedSegmentTests.swift in Sources */,
-				E341CC77203C41D4008D182B /* VisitorTypeTests.swift in Sources */,
-				E327C128203ED2A800161CC2 /* HourOftheDayTests.swift in Sources */,
-				E3D29F961FBD91B700A11C61 /* Extra.swift in Sources */,
-				E327C124203EC95100161CC2 /* iOSVersionTests.swift in Sources */,
-				E341CC6B203C3CFB008D182B /* DeviceTypeTests.swift in Sources */,
-				E327C126203ECFEB00161CC2 /* DayOfWeekTests.swift in Sources */,
-				E3C06652200CA4CB00FF9EF5 /* VWOURLTests.swift in Sources */,
-				E3470B792008C6180035BEEF /* VWOConfigTests.swift in Sources */,
-				E323AF4D20567E9B00DC00C0 /* BasicSegmentation.swift in Sources */,
-				E3806D342052717100FFE897 /* LocationTests.swift in Sources */,
-				E3F7CBC12004E57900CC8C03 /* VWOSegmentTests.swift in Sources */,
-				E31714C71F838C2F0036CF07 /* VWOTests.swift in Sources */,
-				E32C7A161FC58603009ABF2F /* VWOGoalTests.swift in Sources */,
-				E3F2D5152044389C00862EE3 /* ComplexSegmentationTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E39814E21F6288C80035D519 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E39814D51F6288C80035D519 /* VWO */;
-			targetProxy = E39814E11F6288C80035D519 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin XCBuildConfiguration section */
-		E39814E81F6288C80035D519 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		E39814E91F6288C80035D519 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		E39814EB1F6288C80035D519 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = DBN26NC8KE;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = VWO/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				VALIDATE_WORKSPACE = YES;
-			};
-			name = Debug;
-		};
-		E39814EC1F6288C80035D519 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = DBN26NC8KE;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = VWO/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				VALIDATE_WORKSPACE = YES;
-			};
-			name = Release;
-		};
-		E39814EE1F6288C80035D519 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = DBN26NC8KE;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = VWOTests/Info.plist;
-				INSTALL_PATH = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWOTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "VWOTests/VWOTests-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				VALIDATE_WORKSPACE = YES;
-			};
-			name = Debug;
-		};
-		E39814EF1F6288C80035D519 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = DBN26NC8KE;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = VWOTests/Info.plist;
-				INSTALL_PATH = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Wingify.VWOTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "VWOTests/VWOTests-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
-				VALIDATE_WORKSPACE = YES;
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		E39814D01F6288C80035D519 /* Build configuration list for PBXProject "VWO" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E39814E81F6288C80035D519 /* Debug */,
-				E39814E91F6288C80035D519 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E39814EA1F6288C80035D519 /* Build configuration list for PBXNativeTarget "VWO" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E39814EB1F6288C80035D519 /* Debug */,
-				E39814EC1F6288C80035D519 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E39814ED1F6288C80035D519 /* Build configuration list for PBXNativeTarget "VWOTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E39814EE1F6288C80035D519 /* Debug */,
-				E39814EF1F6288C80035D519 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		32C4822227A421CE007128E3 /* XCRemoteSwiftPackageReference "socket" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
-			requirement = {
-				kind = exactVersion;
-				version = 15.2.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		32C4822327A421CE007128E3 /* SocketIO */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 32C4822227A421CE007128E3 /* XCRemoteSwiftPackageReference "socket" */;
-			productName = SocketIO;
-		};
-/* End XCSwiftPackageProductDependency section */
-	};
-	rootObject = E39814CD1F6288C80035D519 /* Project object */;
+   archiveVersion = "1";
+   objectVersion = "46";
+   objects = {
+      "OBJ_1" = {
+         isa = "PBXProject";
+         attributes = {
+            LastSwiftMigration = "9999";
+            LastUpgradeCheck = "9999";
+         };
+         buildConfigurationList = "OBJ_2";
+         compatibilityVersion = "Xcode 3.2";
+         developmentRegion = "en";
+         hasScannedForEncodings = "0";
+         knownRegions = (
+            "en"
+         );
+         mainGroup = "OBJ_5";
+         productRefGroup = "OBJ_110";
+         projectDirPath = ".";
+         targets = (
+            "socket.io-client-swift::SocketIO",
+            "socket.io-client-swift::SwiftPMPackageDescription",
+            "starscream::Starscream",
+            "starscream::SwiftPMPackageDescription",
+            "vwo-ios-sdk::VWO",
+            "vwo-ios-sdk::SwiftPMPackageDescription"
+         );
+      };
+      "OBJ_10" = {
+         isa = "PBXFileReference";
+         path = "VWOCampaignFetcher.h";
+         sourceTree = "<group>";
+      };
+      "OBJ_100" = {
+         isa = "PBXFileReference";
+         path = "SocketStringReader.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_101" = {
+         isa = "PBXFileReference";
+         path = "SocketTypes.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_102" = {
+         isa = "PBXFileReference";
+         explicitFileType = "sourcecode.swift";
+         name = "Package.swift";
+         path = "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Package.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_103" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_104",
+            "OBJ_109"
+         );
+         name = "Starscream 3.1.2";
+         path = "";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_104" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_105",
+            "OBJ_106",
+            "OBJ_107",
+            "OBJ_108"
+         );
+         name = "Starscream";
+         path = ".build/checkouts/Starscream/Sources/Starscream";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_105" = {
+         isa = "PBXFileReference";
+         path = "Compression.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_106" = {
+         isa = "PBXFileReference";
+         path = "SSLClientCertificate.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_107" = {
+         isa = "PBXFileReference";
+         path = "SSLSecurity.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_108" = {
+         isa = "PBXFileReference";
+         path = "WebSocket.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_109" = {
+         isa = "PBXFileReference";
+         explicitFileType = "sourcecode.swift";
+         name = "Package.swift";
+         path = "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/Starscream/Package.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_11" = {
+         isa = "PBXFileReference";
+         path = "VWOConstants.h";
+         sourceTree = "<group>";
+      };
+      "OBJ_110" = {
+         isa = "PBXGroup";
+         children = (
+            "socket.io-client-swift::SocketIO::Product",
+            "starscream::Starscream::Product",
+            "vwo-ios-sdk::VWO::Product"
+         );
+         name = "Products";
+         path = "";
+         sourceTree = "BUILT_PRODUCTS_DIR";
+      };
+      "OBJ_114" = {
+         isa = "PBXFileReference";
+         path = "VWOTests";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_115" = {
+         isa = "PBXFileReference";
+         path = "Demo";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_116" = {
+         isa = "PBXFileReference";
+         path = "VWO";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_117" = {
+         isa = "PBXFileReference";
+         path = "VWO.xcworkspace";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_118" = {
+         isa = "PBXFileReference";
+         path = "Cartfile.resolved";
+         sourceTree = "<group>";
+      };
+      "OBJ_119" = {
+         isa = "PBXFileReference";
+         path = "LICENSE";
+         sourceTree = "<group>";
+      };
+      "OBJ_12" = {
+         isa = "PBXFileReference";
+         path = "VWOSegmentEvaluator.h";
+         sourceTree = "<group>";
+      };
+      "OBJ_120" = {
+         isa = "PBXFileReference";
+         path = "Cartfile";
+         sourceTree = "<group>";
+      };
+      "OBJ_121" = {
+         isa = "PBXFileReference";
+         path = "README.md";
+         sourceTree = "<group>";
+      };
+      "OBJ_122" = {
+         isa = "PBXFileReference";
+         path = "VWO.podspec";
+         sourceTree = "<group>";
+      };
+      "OBJ_123" = {
+         isa = "PBXFileReference";
+         path = "wcarthage";
+         sourceTree = "<group>";
+      };
+      "OBJ_125" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_126",
+            "OBJ_127"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_126" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CURRENT_PROJECT_VERSION = "1";
+            DRIVERKIT_DEPLOYMENT_TARGET = "19.0";
+            ENABLE_TESTABILITY = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "VWO.xcodeproj/SocketIO_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "11.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.13";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            PRODUCT_BUNDLE_IDENTIFIER = "SocketIO";
+            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+            SKIP_INSTALL = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "SocketIO";
+            TVOS_DEPLOYMENT_TARGET = "11.0";
+            WATCHOS_DEPLOYMENT_TARGET = "4.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_127" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CURRENT_PROJECT_VERSION = "1";
+            DRIVERKIT_DEPLOYMENT_TARGET = "19.0";
+            ENABLE_TESTABILITY = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "VWO.xcodeproj/SocketIO_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "11.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.13";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            PRODUCT_BUNDLE_IDENTIFIER = "SocketIO";
+            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+            SKIP_INSTALL = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "5.0";
+            TARGET_NAME = "SocketIO";
+            TVOS_DEPLOYMENT_TARGET = "11.0";
+            WATCHOS_DEPLOYMENT_TARGET = "4.0";
+         };
+         name = "Release";
+      };
+      "OBJ_128" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_129",
+            "OBJ_130",
+            "OBJ_131",
+            "OBJ_132",
+            "OBJ_133",
+            "OBJ_134",
+            "OBJ_135",
+            "OBJ_136",
+            "OBJ_137",
+            "OBJ_138",
+            "OBJ_139",
+            "OBJ_140",
+            "OBJ_141",
+            "OBJ_142",
+            "OBJ_143",
+            "OBJ_144",
+            "OBJ_145",
+            "OBJ_146",
+            "OBJ_147",
+            "OBJ_148",
+            "OBJ_149",
+            "OBJ_150",
+            "OBJ_151",
+            "OBJ_152",
+            "OBJ_153"
+         );
+      };
+      "OBJ_129" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_72";
+      };
+      "OBJ_13" = {
+         isa = "PBXFileReference";
+         path = "VWOUserDefaults.h";
+         sourceTree = "<group>";
+      };
+      "OBJ_130" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_73";
+      };
+      "OBJ_131" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_75";
+      };
+      "OBJ_132" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_76";
+      };
+      "OBJ_133" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_77";
+      };
+      "OBJ_134" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_78";
+      };
+      "OBJ_135" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_79";
+      };
+      "OBJ_136" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_80";
+      };
+      "OBJ_137" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_81";
+      };
+      "OBJ_138" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_82";
+      };
+      "OBJ_139" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_84";
+      };
+      "OBJ_14" = {
+         isa = "PBXFileReference";
+         path = "VWOURL.h";
+         sourceTree = "<group>";
+      };
+      "OBJ_140" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_85";
+      };
+      "OBJ_141" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_86";
+      };
+      "OBJ_142" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_87";
+      };
+      "OBJ_143" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_88";
+      };
+      "OBJ_144" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_89";
+      };
+      "OBJ_145" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_91";
+      };
+      "OBJ_146" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_92";
+      };
+      "OBJ_147" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_94";
+      };
+      "OBJ_148" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_95";
+      };
+      "OBJ_149" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_97";
+      };
+      "OBJ_15" = {
+         isa = "PBXFileReference";
+         path = "VWOInfixEvaluator.h";
+         sourceTree = "<group>";
+      };
+      "OBJ_150" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_98";
+      };
+      "OBJ_151" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_99";
+      };
+      "OBJ_152" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_100";
+      };
+      "OBJ_153" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_101";
+      };
+      "OBJ_154" = {
+         isa = "PBXFrameworksBuildPhase";
+         files = (
+            "OBJ_155"
+         );
+      };
+      "OBJ_155" = {
+         isa = "PBXBuildFile";
+         fileRef = "starscream::Starscream::Product";
+      };
+      "OBJ_156" = {
+         isa = "PBXTargetDependency";
+         target = "starscream::Starscream";
+      };
+      "OBJ_159" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_160",
+            "OBJ_161"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_16" = {
+         isa = "PBXFileReference";
+         path = "VWOURLQueue.h";
+         sourceTree = "<group>";
+      };
+      "OBJ_160" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            LD = "/usr/bin/true";
+            OTHER_SWIFT_FLAGS = (
+               "-swift-version",
+               "5",
+               "-I",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI",
+               "-sdk",
+               "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
+               "-package-description-version",
+               "5.0.0"
+            );
+            SWIFT_VERSION = "5.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_161" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            LD = "/usr/bin/true";
+            OTHER_SWIFT_FLAGS = (
+               "-swift-version",
+               "5",
+               "-I",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI",
+               "-sdk",
+               "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
+               "-package-description-version",
+               "5.0.0"
+            );
+            SWIFT_VERSION = "5.0";
+         };
+         name = "Release";
+      };
+      "OBJ_162" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_163"
+         );
+      };
+      "OBJ_163" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_102";
+      };
+      "OBJ_164" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_165",
+            "OBJ_166"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_165" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CURRENT_PROJECT_VERSION = "1";
+            ENABLE_TESTABILITY = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "VWO.xcodeproj/Starscream_Info.plist";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
+            );
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            PRODUCT_BUNDLE_IDENTIFIER = "Starscream";
+            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+            SKIP_INSTALL = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "4.2";
+            TARGET_NAME = "Starscream";
+         };
+         name = "Debug";
+      };
+      "OBJ_166" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CURRENT_PROJECT_VERSION = "1";
+            ENABLE_TESTABILITY = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)"
+            );
+            INFOPLIST_FILE = "VWO.xcodeproj/Starscream_Info.plist";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
+            );
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            PRODUCT_BUNDLE_IDENTIFIER = "Starscream";
+            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+            SKIP_INSTALL = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            SWIFT_VERSION = "4.2";
+            TARGET_NAME = "Starscream";
+         };
+         name = "Release";
+      };
+      "OBJ_167" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_168",
+            "OBJ_169",
+            "OBJ_170",
+            "OBJ_171"
+         );
+      };
+      "OBJ_168" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_105";
+      };
+      "OBJ_169" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_106";
+      };
+      "OBJ_17" = {
+         isa = "PBXFileReference";
+         path = "VWOController.h";
+         sourceTree = "<group>";
+      };
+      "OBJ_170" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_107";
+      };
+      "OBJ_171" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_108";
+      };
+      "OBJ_172" = {
+         isa = "PBXFrameworksBuildPhase";
+         files = (
+         );
+      };
+      "OBJ_174" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_175",
+            "OBJ_176"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_175" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            LD = "/usr/bin/true";
+            OTHER_SWIFT_FLAGS = (
+               "-swift-version",
+               "4.2",
+               "-I",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI",
+               "-sdk",
+               "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
+               "-package-description-version",
+               "4.2.0"
+            );
+            SWIFT_VERSION = "4.2";
+         };
+         name = "Debug";
+      };
+      "OBJ_176" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            LD = "/usr/bin/true";
+            OTHER_SWIFT_FLAGS = (
+               "-swift-version",
+               "4.2",
+               "-I",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI",
+               "-sdk",
+               "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
+               "-package-description-version",
+               "4.2.0"
+            );
+            SWIFT_VERSION = "4.2";
+         };
+         name = "Release";
+      };
+      "OBJ_177" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_178"
+         );
+      };
+      "OBJ_178" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_109";
+      };
+      "OBJ_18" = {
+         isa = "PBXFileReference";
+         path = "VWOSocket.h";
+         sourceTree = "<group>";
+      };
+      "OBJ_180" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_181",
+            "OBJ_182"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_181" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_MODULES = "YES";
+            CURRENT_PROJECT_VERSION = "1";
+            DEFINES_MODULE = "YES";
+            DRIVERKIT_DEPLOYMENT_TARGET = "19.0";
+            ENABLE_TESTABILITY = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(SRCROOT)/VWO/Public",
+               "",
+               "Extensions/",
+               "Helpers/",
+               "Models/"
+            );
+            INFOPLIST_FILE = "VWO.xcodeproj/VWO_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "11.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.13";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            PRODUCT_BUNDLE_IDENTIFIER = "VWO";
+            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+            SKIP_INSTALL = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            TARGET_NAME = "VWO";
+            TVOS_DEPLOYMENT_TARGET = "11.0";
+            WATCHOS_DEPLOYMENT_TARGET = "4.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_182" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_MODULES = "YES";
+            CURRENT_PROJECT_VERSION = "1";
+            DEFINES_MODULE = "YES";
+            DRIVERKIT_DEPLOYMENT_TARGET = "19.0";
+            ENABLE_TESTABILITY = "YES";
+            FRAMEWORK_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+            );
+            HEADER_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(SRCROOT)/VWO/Public",
+               "",
+               "Extensions/",
+               "Helpers/",
+               "Models/"
+            );
+            INFOPLIST_FILE = "VWO.xcodeproj/VWO_Info.plist";
+            IPHONEOS_DEPLOYMENT_TARGET = "11.0";
+            LD_RUNPATH_SEARCH_PATHS = (
+               "$(inherited)",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.13";
+            OTHER_CFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_LDFLAGS = (
+               "$(inherited)"
+            );
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)"
+            );
+            PRODUCT_BUNDLE_IDENTIFIER = "VWO";
+            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+            SKIP_INSTALL = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)"
+            );
+            TARGET_NAME = "VWO";
+            TVOS_DEPLOYMENT_TARGET = "11.0";
+            WATCHOS_DEPLOYMENT_TARGET = "4.0";
+         };
+         name = "Release";
+      };
+      "OBJ_183" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_184",
+            "OBJ_185",
+            "OBJ_186",
+            "OBJ_187",
+            "OBJ_188",
+            "OBJ_189",
+            "OBJ_190",
+            "OBJ_191",
+            "OBJ_192",
+            "OBJ_193",
+            "OBJ_194",
+            "OBJ_195",
+            "OBJ_196",
+            "OBJ_197",
+            "OBJ_198",
+            "OBJ_199",
+            "OBJ_200",
+            "OBJ_201",
+            "OBJ_202",
+            "OBJ_203",
+            "OBJ_204",
+            "OBJ_205",
+            "OBJ_206",
+            "OBJ_207",
+            "OBJ_208",
+            "OBJ_209",
+            "OBJ_210",
+            "OBJ_211",
+            "OBJ_212",
+            "OBJ_213",
+            "OBJ_214",
+            "OBJ_215",
+            "OBJ_216",
+            "OBJ_217",
+            "OBJ_218",
+            "OBJ_219",
+            "OBJ_220",
+            "OBJ_221",
+            "OBJ_222",
+            "OBJ_223"
+         );
+      };
+      "OBJ_184" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_21";
+      };
+      "OBJ_185" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_22";
+      };
+      "OBJ_186" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_23";
+      };
+      "OBJ_187" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_24";
+      };
+      "OBJ_188" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_25";
+      };
+      "OBJ_189" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_27";
+      };
+      "OBJ_19" = {
+         isa = "PBXFileReference";
+         path = "Info.plist";
+         sourceTree = "<group>";
+      };
+      "OBJ_190" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_28";
+      };
+      "OBJ_191" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_29";
+      };
+      "OBJ_192" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_31";
+      };
+      "OBJ_193" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_32";
+      };
+      "OBJ_194" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_33";
+      };
+      "OBJ_195" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_34";
+      };
+      "OBJ_196" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_35";
+      };
+      "OBJ_197" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_36";
+      };
+      "OBJ_198" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_37";
+      };
+      "OBJ_199" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_38";
+      };
+      "OBJ_2" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_3",
+            "OBJ_4"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_20" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_21",
+            "OBJ_22",
+            "OBJ_23",
+            "OBJ_24",
+            "OBJ_25"
+         );
+         name = "Extensions";
+         path = "Extensions";
+         sourceTree = "<group>";
+      };
+      "OBJ_200" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_39";
+      };
+      "OBJ_201" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_40";
+      };
+      "OBJ_202" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_41";
+      };
+      "OBJ_203" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_42";
+      };
+      "OBJ_204" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_43";
+      };
+      "OBJ_205" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_45";
+      };
+      "OBJ_206" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_46";
+      };
+      "OBJ_207" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_47";
+      };
+      "OBJ_208" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_48";
+      };
+      "OBJ_209" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_49";
+      };
+      "OBJ_21" = {
+         isa = "PBXFileReference";
+         path = "NSDate+VWO.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_210" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_50";
+      };
+      "OBJ_211" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_51";
+      };
+      "OBJ_212" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_52";
+      };
+      "OBJ_213" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_53";
+      };
+      "OBJ_214" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_54";
+      };
+      "OBJ_215" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_55";
+      };
+      "OBJ_216" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_56";
+      };
+      "OBJ_217" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_57";
+      };
+      "OBJ_218" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_58";
+      };
+      "OBJ_219" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_59";
+      };
+      "OBJ_22" = {
+         isa = "PBXFileReference";
+         path = "NSDictionary+VWO.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_220" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_60";
+      };
+      "OBJ_221" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_61";
+      };
+      "OBJ_222" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_62";
+      };
+      "OBJ_223" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_63";
+      };
+      "OBJ_224" = {
+         isa = "PBXHeadersBuildPhase";
+         files = (
+            "OBJ_225",
+            "OBJ_226"
+         );
+      };
+      "OBJ_225" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_65";
+         settings = {
+            ATTRIBUTES = (
+               "Public"
+            );
+         };
+      };
+      "OBJ_226" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_66";
+         settings = {
+            ATTRIBUTES = (
+               "Public"
+            );
+         };
+      };
+      "OBJ_227" = {
+         isa = "PBXFrameworksBuildPhase";
+         files = (
+            "OBJ_228",
+            "OBJ_229"
+         );
+      };
+      "OBJ_228" = {
+         isa = "PBXBuildFile";
+         fileRef = "socket.io-client-swift::SocketIO::Product";
+      };
+      "OBJ_229" = {
+         isa = "PBXBuildFile";
+         fileRef = "starscream::Starscream::Product";
+      };
+      "OBJ_23" = {
+         isa = "PBXFileReference";
+         path = "NSString+MD5.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_230" = {
+         isa = "PBXTargetDependency";
+         target = "socket.io-client-swift::SocketIO";
+      };
+      "OBJ_231" = {
+         isa = "PBXTargetDependency";
+         target = "starscream::Starscream";
+      };
+      "OBJ_233" = {
+         isa = "XCConfigurationList";
+         buildConfigurations = (
+            "OBJ_234",
+            "OBJ_235"
+         );
+         defaultConfigurationIsVisible = "0";
+         defaultConfigurationName = "Release";
+      };
+      "OBJ_234" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            LD = "/usr/bin/true";
+            OTHER_SWIFT_FLAGS = (
+               "-swift-version",
+               "5",
+               "-I",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI",
+               "-sdk",
+               "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
+               "-package-description-version",
+               "5.6.0"
+            );
+            SWIFT_VERSION = "5.0";
+         };
+         name = "Debug";
+      };
+      "OBJ_235" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            LD = "/usr/bin/true";
+            OTHER_SWIFT_FLAGS = (
+               "-swift-version",
+               "5",
+               "-I",
+               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI",
+               "-sdk",
+               "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
+               "-package-description-version",
+               "5.6.0"
+            );
+            SWIFT_VERSION = "5.0";
+         };
+         name = "Release";
+      };
+      "OBJ_236" = {
+         isa = "PBXSourcesBuildPhase";
+         files = (
+            "OBJ_237"
+         );
+      };
+      "OBJ_237" = {
+         isa = "PBXBuildFile";
+         fileRef = "OBJ_6";
+      };
+      "OBJ_24" = {
+         isa = "PBXFileReference";
+         path = "NSString+VWO.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_25" = {
+         isa = "PBXFileReference";
+         path = "NSURLSession+Synchronous.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_26" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_27",
+            "OBJ_28",
+            "OBJ_29"
+         );
+         name = "Helpers";
+         path = "Helpers";
+         sourceTree = "<group>";
+      };
+      "OBJ_27" = {
+         isa = "PBXFileReference";
+         path = "VWODevice.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_28" = {
+         isa = "PBXFileReference";
+         path = "VWOFile.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_29" = {
+         isa = "PBXFileReference";
+         path = "VWOLogger.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_3" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_OBJC_ARC = "YES";
+            COMBINE_HIDPI_IMAGES = "YES";
+            COPY_PHASE_STRIP = "NO";
+            DEBUG_INFORMATION_FORMAT = "dwarf";
+            DYLIB_INSTALL_NAME_BASE = "@rpath";
+            ENABLE_NS_ASSERTIONS = "YES";
+            GCC_OPTIMIZATION_LEVEL = "0";
+            GCC_PREPROCESSOR_DEFINITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE=1",
+               "DEBUG=1"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            ONLY_ACTIVE_ARCH = "YES";
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)",
+               "-DXcode"
+            );
+            PRODUCT_NAME = "$(TARGET_NAME)";
+            SDKROOT = "macosx";
+            SUPPORTED_PLATFORMS = (
+               "$(AVAILABLE_PLATFORMS)"
+            );
+            SUPPORTS_MACCATALYST = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE",
+               "DEBUG"
+            );
+            SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+            USE_HEADERMAP = "NO";
+         };
+         name = "Debug";
+      };
+      "OBJ_30" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_31",
+            "OBJ_32",
+            "OBJ_33",
+            "OBJ_34",
+            "OBJ_35",
+            "OBJ_36",
+            "OBJ_37",
+            "OBJ_38",
+            "OBJ_39",
+            "OBJ_40",
+            "OBJ_41",
+            "OBJ_42",
+            "OBJ_43"
+         );
+         name = "MEG";
+         path = "MEG";
+         sourceTree = "<group>";
+      };
+      "OBJ_31" = {
+         isa = "PBXFileReference";
+         path = "CampaignGroupMapper.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_32" = {
+         isa = "PBXFileReference";
+         path = "CampaignUniquenessTracker.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_33" = {
+         isa = "PBXFileReference";
+         path = "Group.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_34" = {
+         isa = "PBXFileReference";
+         path = "MEGManager.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_35" = {
+         isa = "PBXFileReference";
+         path = "Mapping.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_36" = {
+         isa = "PBXFileReference";
+         path = "MurmurHash.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_37" = {
+         isa = "PBXFileReference";
+         path = "MutuallyExclusiveGroups.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_38" = {
+         isa = "PBXFileReference";
+         path = "Pair.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_39" = {
+         isa = "PBXFileReference";
+         path = "PriorityQualificationWinnerResult.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_4" = {
+         isa = "XCBuildConfiguration";
+         buildSettings = {
+            CLANG_ENABLE_OBJC_ARC = "YES";
+            COMBINE_HIDPI_IMAGES = "YES";
+            COPY_PHASE_STRIP = "YES";
+            DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+            DYLIB_INSTALL_NAME_BASE = "@rpath";
+            GCC_OPTIMIZATION_LEVEL = "s";
+            GCC_PREPROCESSOR_DEFINITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE=1"
+            );
+            MACOSX_DEPLOYMENT_TARGET = "10.10";
+            OTHER_SWIFT_FLAGS = (
+               "$(inherited)",
+               "-DXcode"
+            );
+            PRODUCT_NAME = "$(TARGET_NAME)";
+            SDKROOT = "macosx";
+            SUPPORTED_PLATFORMS = (
+               "$(AVAILABLE_PLATFORMS)"
+            );
+            SUPPORTS_MACCATALYST = "YES";
+            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+               "$(inherited)",
+               "SWIFT_PACKAGE"
+            );
+            SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+            USE_HEADERMAP = "NO";
+         };
+         name = "Release";
+      };
+      "OBJ_40" = {
+         isa = "PBXFileReference";
+         path = "Response.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_41" = {
+         isa = "PBXFileReference";
+         path = "Weight.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_42" = {
+         isa = "PBXFileReference";
+         path = "Winner.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_43" = {
+         isa = "PBXFileReference";
+         path = "WinnerManager.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_44" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_45",
+            "OBJ_46",
+            "OBJ_47",
+            "OBJ_48",
+            "OBJ_49",
+            "OBJ_50",
+            "OBJ_51"
+         );
+         name = "Models";
+         path = "Models";
+         sourceTree = "<group>";
+      };
+      "OBJ_45" = {
+         isa = "PBXFileReference";
+         path = "VWOCampaign.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_46" = {
+         isa = "PBXFileReference";
+         path = "VWOGoal.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_47" = {
+         isa = "PBXFileReference";
+         path = "VWOGroup.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_48" = {
+         isa = "PBXFileReference";
+         path = "VWOQueue.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_49" = {
+         isa = "PBXFileReference";
+         path = "VWOSegment.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_5" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_6",
+            "OBJ_7",
+            "OBJ_67",
+            "OBJ_68",
+            "OBJ_110",
+            "OBJ_114",
+            "OBJ_115",
+            "OBJ_116",
+            "OBJ_117",
+            "OBJ_118",
+            "OBJ_119",
+            "OBJ_120",
+            "OBJ_121",
+            "OBJ_122",
+            "OBJ_123"
+         );
+         path = "";
+         sourceTree = "<group>";
+      };
+      "OBJ_50" = {
+         isa = "PBXFileReference";
+         path = "VWOStack.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_51" = {
+         isa = "PBXFileReference";
+         path = "VWOVariation.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_52" = {
+         isa = "PBXFileReference";
+         path = "VWO.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_53" = {
+         isa = "PBXFileReference";
+         path = "VWOCampaignFetcher.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_54" = {
+         isa = "PBXFileReference";
+         path = "VWOConfig.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_55" = {
+         isa = "PBXFileReference";
+         path = "VWOConstants.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_56" = {
+         isa = "PBXFileReference";
+         path = "VWOController.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_57" = {
+         isa = "PBXFileReference";
+         path = "VWOInfixEvaluator.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_58" = {
+         isa = "PBXFileReference";
+         path = "VWOSegmentEvaluator.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_59" = {
+         isa = "PBXFileReference";
+         path = "VWOSocket.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_6" = {
+         isa = "PBXFileReference";
+         explicitFileType = "sourcecode.swift";
+         path = "Package.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_60" = {
+         isa = "PBXFileReference";
+         path = "VWOSocketConnector.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_61" = {
+         isa = "PBXFileReference";
+         path = "VWOURL.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_62" = {
+         isa = "PBXFileReference";
+         path = "VWOURLQueue.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_63" = {
+         isa = "PBXFileReference";
+         path = "VWOUserDefaults.m";
+         sourceTree = "<group>";
+      };
+      "OBJ_64" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_65",
+            "OBJ_66"
+         );
+         name = "Public";
+         path = "Public";
+         sourceTree = "<group>";
+      };
+      "OBJ_65" = {
+         isa = "PBXFileReference";
+         path = "VWOConfig.h";
+         sourceTree = "<group>";
+      };
+      "OBJ_66" = {
+         isa = "PBXFileReference";
+         path = "VWO.h";
+         sourceTree = "<group>";
+      };
+      "OBJ_67" = {
+         isa = "PBXGroup";
+         children = (
+         );
+         name = "Tests";
+         path = "";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_68" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_69",
+            "OBJ_103"
+         );
+         name = "Dependencies";
+         path = "";
+         sourceTree = "<group>";
+      };
+      "OBJ_69" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_70",
+            "OBJ_102"
+         );
+         name = "SocketIO 15.2.0";
+         path = "";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_7" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_8"
+         );
+         name = "Sources";
+         path = "";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_70" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_71",
+            "OBJ_74",
+            "OBJ_83",
+            "OBJ_90",
+            "OBJ_93",
+            "OBJ_96"
+         );
+         name = "SocketIO";
+         path = ".build/checkouts/socket.io-client-swift/Source/SocketIO";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_71" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_72",
+            "OBJ_73"
+         );
+         name = "Ack";
+         path = "Ack";
+         sourceTree = "<group>";
+      };
+      "OBJ_72" = {
+         isa = "PBXFileReference";
+         path = "SocketAckEmitter.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_73" = {
+         isa = "PBXFileReference";
+         path = "SocketAckManager.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_74" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_75",
+            "OBJ_76",
+            "OBJ_77",
+            "OBJ_78",
+            "OBJ_79",
+            "OBJ_80",
+            "OBJ_81",
+            "OBJ_82"
+         );
+         name = "Client";
+         path = "Client";
+         sourceTree = "<group>";
+      };
+      "OBJ_75" = {
+         isa = "PBXFileReference";
+         path = "SocketAnyEvent.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_76" = {
+         isa = "PBXFileReference";
+         path = "SocketEventHandler.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_77" = {
+         isa = "PBXFileReference";
+         path = "SocketIOClient.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_78" = {
+         isa = "PBXFileReference";
+         path = "SocketIOClientConfiguration.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_79" = {
+         isa = "PBXFileReference";
+         path = "SocketIOClientOption.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_8" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_9",
+            "OBJ_10",
+            "OBJ_11",
+            "OBJ_12",
+            "OBJ_13",
+            "OBJ_14",
+            "OBJ_15",
+            "OBJ_16",
+            "OBJ_17",
+            "OBJ_18",
+            "OBJ_19",
+            "OBJ_20",
+            "OBJ_26",
+            "OBJ_30",
+            "OBJ_44",
+            "OBJ_52",
+            "OBJ_53",
+            "OBJ_54",
+            "OBJ_55",
+            "OBJ_56",
+            "OBJ_57",
+            "OBJ_58",
+            "OBJ_59",
+            "OBJ_60",
+            "OBJ_61",
+            "OBJ_62",
+            "OBJ_63",
+            "OBJ_64"
+         );
+         name = "VWO";
+         path = "VWO";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_80" = {
+         isa = "PBXFileReference";
+         path = "SocketIOClientSpec.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_81" = {
+         isa = "PBXFileReference";
+         path = "SocketIOStatus.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_82" = {
+         isa = "PBXFileReference";
+         path = "SocketRawView.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_83" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_84",
+            "OBJ_85",
+            "OBJ_86",
+            "OBJ_87",
+            "OBJ_88",
+            "OBJ_89"
+         );
+         name = "Engine";
+         path = "Engine";
+         sourceTree = "<group>";
+      };
+      "OBJ_84" = {
+         isa = "PBXFileReference";
+         path = "SocketEngine.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_85" = {
+         isa = "PBXFileReference";
+         path = "SocketEngineClient.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_86" = {
+         isa = "PBXFileReference";
+         path = "SocketEnginePacketType.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_87" = {
+         isa = "PBXFileReference";
+         path = "SocketEnginePollable.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_88" = {
+         isa = "PBXFileReference";
+         path = "SocketEngineSpec.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_89" = {
+         isa = "PBXFileReference";
+         path = "SocketEngineWebsocket.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_9" = {
+         isa = "PBXFileReference";
+         path = "VWOSocketConnector.h";
+         sourceTree = "<group>";
+      };
+      "OBJ_90" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_91",
+            "OBJ_92"
+         );
+         name = "Manager";
+         path = "Manager";
+         sourceTree = "<group>";
+      };
+      "OBJ_91" = {
+         isa = "PBXFileReference";
+         path = "SocketManager.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_92" = {
+         isa = "PBXFileReference";
+         path = "SocketManagerSpec.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_93" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_94",
+            "OBJ_95"
+         );
+         name = "Parse";
+         path = "Parse";
+         sourceTree = "<group>";
+      };
+      "OBJ_94" = {
+         isa = "PBXFileReference";
+         path = "SocketPacket.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_95" = {
+         isa = "PBXFileReference";
+         path = "SocketParsable.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_96" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_97",
+            "OBJ_98",
+            "OBJ_99",
+            "OBJ_100",
+            "OBJ_101"
+         );
+         name = "Util";
+         path = "Util";
+         sourceTree = "<group>";
+      };
+      "OBJ_97" = {
+         isa = "PBXFileReference";
+         path = "SSLSecurity.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_98" = {
+         isa = "PBXFileReference";
+         path = "SocketExtensions.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_99" = {
+         isa = "PBXFileReference";
+         path = "SocketLogger.swift";
+         sourceTree = "<group>";
+      };
+      "socket.io-client-swift::SocketIO" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_125";
+         buildPhases = (
+            "OBJ_128",
+            "OBJ_154"
+         );
+         dependencies = (
+            "OBJ_156"
+         );
+         name = "SocketIO";
+         productName = "SocketIO";
+         productReference = "socket.io-client-swift::SocketIO::Product";
+         productType = "com.apple.product-type.framework";
+      };
+      "socket.io-client-swift::SocketIO::Product" = {
+         isa = "PBXFileReference";
+         path = "SocketIO.framework";
+         sourceTree = "BUILT_PRODUCTS_DIR";
+      };
+      "socket.io-client-swift::SwiftPMPackageDescription" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_159";
+         buildPhases = (
+            "OBJ_162"
+         );
+         dependencies = (
+         );
+         name = "SocketIOPackageDescription";
+         productName = "SocketIOPackageDescription";
+         productType = "com.apple.product-type.framework";
+      };
+      "starscream::Starscream" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_164";
+         buildPhases = (
+            "OBJ_167",
+            "OBJ_172"
+         );
+         dependencies = (
+         );
+         name = "Starscream";
+         productName = "Starscream";
+         productReference = "starscream::Starscream::Product";
+         productType = "com.apple.product-type.framework";
+      };
+      "starscream::Starscream::Product" = {
+         isa = "PBXFileReference";
+         path = "Starscream.framework";
+         sourceTree = "BUILT_PRODUCTS_DIR";
+      };
+      "starscream::SwiftPMPackageDescription" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_174";
+         buildPhases = (
+            "OBJ_177"
+         );
+         dependencies = (
+         );
+         name = "StarscreamPackageDescription";
+         productName = "StarscreamPackageDescription";
+         productType = "com.apple.product-type.framework";
+      };
+      "vwo-ios-sdk::SwiftPMPackageDescription" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_233";
+         buildPhases = (
+            "OBJ_236"
+         );
+         dependencies = (
+         );
+         name = "VWOPackageDescription";
+         productName = "VWOPackageDescription";
+         productType = "com.apple.product-type.framework";
+      };
+      "vwo-ios-sdk::VWO" = {
+         isa = "PBXNativeTarget";
+         buildConfigurationList = "OBJ_180";
+         buildPhases = (
+            "OBJ_183",
+            "OBJ_224",
+            "OBJ_227"
+         );
+         dependencies = (
+            "OBJ_230",
+            "OBJ_231"
+         );
+         name = "VWO";
+         productName = "VWO";
+         productReference = "vwo-ios-sdk::VWO::Product";
+         productType = "com.apple.product-type.framework";
+      };
+      "vwo-ios-sdk::VWO::Product" = {
+         isa = "PBXFileReference";
+         path = "VWO.framework";
+         sourceTree = "BUILT_PRODUCTS_DIR";
+      };
+   };
+   rootObject = "OBJ_1";
 }

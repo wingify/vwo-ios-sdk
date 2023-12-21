@@ -1,0 +1,419 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+
+  },
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.SocketIO-debug.module" : {
+      "executable" : "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "importPath" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckEmitter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketAnyEvent.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketEventHandler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientConfiguration.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientOption.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientSpec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOStatus.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketRawView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePacketType.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePollable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineSpec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineWebsocket.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManagerSpec.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketPacket.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketParsable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SSLSecurity.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketExtensions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketLogger.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketStringReader.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketTypes.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.swiftmodule"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "SocketIO",
+      "moduleOutputPath" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.swiftmodule",
+      "objects" : [
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Ack/SocketAckEmitter.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Ack/SocketAckManager.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketAnyEvent.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketEventHandler.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClient.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientConfiguration.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientOption.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientSpec.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOStatus.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketRawView.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngine.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineClient.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEnginePacketType.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEnginePollable.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineSpec.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineWebsocket.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Manager/SocketManager.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Manager/SocketManagerSpec.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Parse/SocketPacket.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Parse/SocketParsable.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SSLSecurity.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketExtensions.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketLogger.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketStringReader.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketTypes.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx10.13",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-g",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIO-Swift.h",
+        "-color-diagnostics",
+        "-sdk",
+        "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
+        "-F",
+        "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-suppress-warnings"
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Ack/SocketAckEmitter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Ack/SocketAckManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketAnyEvent.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketEventHandler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientConfiguration.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientOption.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientSpec.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOStatus.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketRawView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEnginePacketType.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEnginePollable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineSpec.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineWebsocket.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Manager/SocketManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Manager/SocketManagerSpec.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Parse/SocketPacket.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Parse/SocketParsable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SSLSecurity.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketExtensions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketLogger.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketStringReader.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketTypes.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckEmitter.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckManager.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketAnyEvent.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketEventHandler.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClient.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientConfiguration.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientOption.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientSpec.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOStatus.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketRawView.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngine.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineClient.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePacketType.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePollable.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineSpec.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineWebsocket.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManager.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManagerSpec.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketPacket.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketParsable.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SSLSecurity.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketExtensions.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketLogger.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketStringReader.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketTypes.swift"
+      ],
+      "tempsPath" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.Starscream-debug.module" : {
+      "executable" : "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "importPath" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/Compression.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/SSLClientCertificate.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/SSLSecurity.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/WebSocket.swift"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "Starscream",
+      "moduleOutputPath" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.swiftmodule",
+      "objects" : [
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/Compression.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/SSLClientCertificate.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/SSLSecurity.swift.o",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/WebSocket.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx10.13",
+        "-swift-version",
+        "4.2",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-g",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/Starscream-Swift.h",
+        "-color-diagnostics",
+        "-sdk",
+        "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
+        "-F",
+        "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-suppress-warnings"
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/Compression.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/SSLClientCertificate.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/SSLSecurity.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/WebSocket.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/Compression.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/SSLClientCertificate.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/SSLSecurity.swift",
+        "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/WebSocket.swift"
+      ],
+      "tempsPath" : "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "testDiscoveryCommands" : {
+
+  }
+}

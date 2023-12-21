@@ -4,7 +4,7 @@
 //
 //  Created by Harsh Raghav on 15/05/23.
 //
-
+#import <Foundation/Foundation.h>
 #import "WinnerManager.h"
 
 @interface MEGManager : NSObject
