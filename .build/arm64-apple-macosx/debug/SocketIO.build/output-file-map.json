@@ -1,0 +1,155 @@
+{
+  "": {
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/master.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckEmitter.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Ack/SocketAckEmitter.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Ack/SocketAckEmitter.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Ack/SocketAckEmitter~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Ack/SocketAckEmitter.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Ack/SocketAckManager.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Ack/SocketAckManager.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Ack/SocketAckManager.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Ack/SocketAckManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Ack/SocketAckManager.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketAnyEvent.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketAnyEvent.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketAnyEvent.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketAnyEvent~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketAnyEvent.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketEventHandler.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketEventHandler.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketEventHandler.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketEventHandler~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketEventHandler.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClient.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClient.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClient.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClient.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientConfiguration.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientConfiguration.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientConfiguration.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientConfiguration~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientConfiguration.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientOption.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientOption.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientOption.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientOption~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientOption.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOClientSpec.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientSpec.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientSpec.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientSpec~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOClientSpec.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketIOStatus.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOStatus.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOStatus.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOStatus~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketIOStatus.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Client/SocketRawView.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketRawView.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketRawView.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketRawView~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Client/SocketRawView.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngine.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngine.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngine.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngine~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngine.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineClient.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineClient.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineClient.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineClient.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePacketType.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEnginePacketType.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEnginePacketType.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEnginePacketType~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEnginePacketType.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEnginePollable.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEnginePollable.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEnginePollable.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEnginePollable~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEnginePollable.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineSpec.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineSpec.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineSpec.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineSpec~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineSpec.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Engine/SocketEngineWebsocket.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineWebsocket.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineWebsocket.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineWebsocket~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Engine/SocketEngineWebsocket.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManager.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Manager/SocketManager.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Manager/SocketManager.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Manager/SocketManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Manager/SocketManager.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Manager/SocketManagerSpec.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Manager/SocketManagerSpec.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Manager/SocketManagerSpec.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Manager/SocketManagerSpec~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Manager/SocketManagerSpec.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketPacket.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Parse/SocketPacket.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Parse/SocketPacket.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Parse/SocketPacket~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Parse/SocketPacket.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Parse/SocketParsable.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Parse/SocketParsable.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Parse/SocketParsable.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Parse/SocketParsable~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Parse/SocketParsable.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SSLSecurity.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SSLSecurity.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SSLSecurity.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SSLSecurity~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SSLSecurity.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketExtensions.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketExtensions.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketExtensions.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketExtensions~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketExtensions.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketLogger.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketLogger.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketLogger.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketLogger~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketLogger.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketStringReader.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketStringReader.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketStringReader.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketStringReader~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketStringReader.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/socket.io-client-swift/Source/SocketIO/Util/SocketTypes.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketTypes.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketTypes.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketTypes~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/Util/SocketTypes.swiftdeps"
+  }
+}

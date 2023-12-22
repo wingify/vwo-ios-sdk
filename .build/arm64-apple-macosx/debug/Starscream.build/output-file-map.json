@@ -1,0 +1,29 @@
+{
+  "": {
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/master.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/Compression.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/Compression.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/Compression.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/Compression~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/Compression.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/SSLClientCertificate.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/SSLClientCertificate.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/SSLClientCertificate.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/SSLClientCertificate~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/SSLClientCertificate.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/SSLSecurity.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/SSLSecurity.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/SSLSecurity.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/SSLSecurity~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/SSLSecurity.swiftdeps"
+  },
+  "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/WebSocket.swift": {
+    "dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/WebSocket.d",
+    "object": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/WebSocket.swift.o",
+    "swiftmodule": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/WebSocket~partial.swiftmodule",
+    "swift-dependencies": "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/WebSocket.swiftdeps"
+  }
+}

@@ -1,0 +1,13 @@
+version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
+options: "452e113a923878179f42b986b22ca54c4f341ec0d537e38d8ab7328e5bc530fa"
+build_start_time: [1703236653, 914655000]
+build_end_time: [1703236656, 394512000]
+inputs:
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/Compression.swift"
+  : [1703236650, 741122638]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/SSLClientCertificate.swift"
+  : [1703236650, 741213222]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/SSLSecurity.swift"
+  : [1703236650, 741374558]
+  ? "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/checkouts/Starscream/Sources/Starscream/WebSocket.swift"
+  : [1703236650, 741687729]

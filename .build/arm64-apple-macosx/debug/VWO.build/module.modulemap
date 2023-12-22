@@ -1,0 +1,4 @@
+module VWO {
+    umbrella header "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/VWO/Public/VWO.h"
+    export *
+}

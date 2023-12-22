@@ -1,0 +1,456 @@
+9b44bfb754758a26c4187c46f2710c9707a552f2	not-for-merge	branch '1.0-swift4' of https://github.com/socketio/socket.io-client-swift
+e644abb8399bd547b534713dfd2c64ed9028cdaf	not-for-merge	branch 'carthage-testing' of https://github.com/socketio/socket.io-client-swift
+76b941933e564566f219146d5585600eb7454193	not-for-merge	branch 'development' of https://github.com/socketio/socket.io-client-swift
+1faa4b925c43b921aa83a205121ad90af62ad435	not-for-merge	branch 'linux' of https://github.com/socketio/socket.io-client-swift
+175da8b5156f6b132436f0676cc84c2f6a766b6e	not-for-merge	branch 'master' of https://github.com/socketio/socket.io-client-swift
+2a0e0f5e2847b6e68afa86e555b259de4f983f17	not-for-merge	branch 'socket.io-3' of https://github.com/socketio/socket.io-client-swift
+6399df4c337383c9bbc17ecd6ad2e9feac9751ba	not-for-merge	'refs/pull/1/head' of https://github.com/socketio/socket.io-client-swift
+f6076d69a3f9a8ef38085765856c9b7a46e89999	not-for-merge	'refs/pull/1004/head' of https://github.com/socketio/socket.io-client-swift
+782232eccbc8c1a3969347360f44e23c5894f7bd	not-for-merge	'refs/pull/1004/merge' of https://github.com/socketio/socket.io-client-swift
+148950ff025c9e9a5ef6087d776af09b97e93954	not-for-merge	'refs/pull/1014/head' of https://github.com/socketio/socket.io-client-swift
+eca0f9fd553f68fd36e6433cb3c6767d6a2f630c	not-for-merge	'refs/pull/1014/merge' of https://github.com/socketio/socket.io-client-swift
+c09aad0c56486839c088af7572b6a05f52acc56e	not-for-merge	'refs/pull/1015/head' of https://github.com/socketio/socket.io-client-swift
+998d20de393eec57cb1f856bc9f002a575491676	not-for-merge	'refs/pull/1015/merge' of https://github.com/socketio/socket.io-client-swift
+feb476c76bd9dcf67dde754bf27c0073d7259366	not-for-merge	'refs/pull/1034/head' of https://github.com/socketio/socket.io-client-swift
+2cc47b01175f7e7bcd58059e7e3f955c0f27f249	not-for-merge	'refs/pull/1035/head' of https://github.com/socketio/socket.io-client-swift
+b48f1e9af54f1d926002174766b6fd9c83c9f561	not-for-merge	'refs/pull/1049/head' of https://github.com/socketio/socket.io-client-swift
+3d36603e9e55bdfbe240648afa96283872b9b51c	not-for-merge	'refs/pull/1051/head' of https://github.com/socketio/socket.io-client-swift
+14f90fdbe470d0c9acf38d72d1d355d7523024f3	not-for-merge	'refs/pull/1051/merge' of https://github.com/socketio/socket.io-client-swift
+eab73c81a73fd2ebf72d7434012bb918cac33548	not-for-merge	'refs/pull/1058/head' of https://github.com/socketio/socket.io-client-swift
+165ec257131bc7ecfa52e93c85c295437118ba15	not-for-merge	'refs/pull/1059/head' of https://github.com/socketio/socket.io-client-swift
+8f50375cf2ce4d712a0225eb7c62329c67bff033	not-for-merge	'refs/pull/1061/head' of https://github.com/socketio/socket.io-client-swift
+d25a926226ecfafcd462a10fb9144d7347681446	not-for-merge	'refs/pull/1079/head' of https://github.com/socketio/socket.io-client-swift
+867db19bc5ee69ddff2beb88c8700fa2ce71aff2	not-for-merge	'refs/pull/1080/head' of https://github.com/socketio/socket.io-client-swift
+09fc43349ff5c2736cb24cc015dfdd564d2302c3	not-for-merge	'refs/pull/1097/head' of https://github.com/socketio/socket.io-client-swift
+bc4ef651efa3d9f32e8c060ab85ad1ff049ed02f	not-for-merge	'refs/pull/1102/head' of https://github.com/socketio/socket.io-client-swift
+9018e7d883d70ccd50f8eb9501157091337e69a3	not-for-merge	'refs/pull/1103/head' of https://github.com/socketio/socket.io-client-swift
+84a0200d544c69d6cbac29ffb13220cf2a0d455f	not-for-merge	'refs/pull/1103/merge' of https://github.com/socketio/socket.io-client-swift
+ec86a19fc638ff61e42b3487ebf7e568ce2bc992	not-for-merge	'refs/pull/1110/head' of https://github.com/socketio/socket.io-client-swift
+5a6a4f02d9716bc1fd434380f6563ff0e2cf717f	not-for-merge	'refs/pull/1112/head' of https://github.com/socketio/socket.io-client-swift
+e0cbe59a102ffeb5697d1eff21ae4cd3d68ec023	not-for-merge	'refs/pull/1119/head' of https://github.com/socketio/socket.io-client-swift
+2fb7b42ef88fa8259e932e51c0a94321480ef6a2	not-for-merge	'refs/pull/112/head' of https://github.com/socketio/socket.io-client-swift
+b247aeb3f38e07830a1af8a0867d7e568447b1ce	not-for-merge	'refs/pull/112/merge' of https://github.com/socketio/socket.io-client-swift
+4af28c3a576d441376ebc20bb47ffe929cc1d20d	not-for-merge	'refs/pull/1123/head' of https://github.com/socketio/socket.io-client-swift
+6190fef7c400e28518d91939f01d742a78bda7dd	not-for-merge	'refs/pull/1125/head' of https://github.com/socketio/socket.io-client-swift
+3cfd12b0bc96dc3ba2822de93b48024ff0792087	not-for-merge	'refs/pull/1126/head' of https://github.com/socketio/socket.io-client-swift
+4c98c24047f6f9c7f6a5814006243c0c05cf1e65	not-for-merge	'refs/pull/1148/head' of https://github.com/socketio/socket.io-client-swift
+a17a66af00fb1e074133e852709468b872c6e605	not-for-merge	'refs/pull/1149/head' of https://github.com/socketio/socket.io-client-swift
+fc4e1802f60067cd79e2ef7d35900c2c25ba4292	not-for-merge	'refs/pull/1159/head' of https://github.com/socketio/socket.io-client-swift
+0df634a586d41cff5543fee8b18b6a44624af81a	not-for-merge	'refs/pull/1165/head' of https://github.com/socketio/socket.io-client-swift
+22b9a1e2f27931371838432dc17d91495fd1e362	not-for-merge	'refs/pull/117/head' of https://github.com/socketio/socket.io-client-swift
+bd7428485cd3482f358a7d86d62ddbd9f2961085	not-for-merge	'refs/pull/1176/head' of https://github.com/socketio/socket.io-client-swift
+0d44b10734dcd30a013960f1e968508fa85c7a40	not-for-merge	'refs/pull/1179/head' of https://github.com/socketio/socket.io-client-swift
+5f75e6080bebbe73ba63c2ff4c11a83bdee98a2e	not-for-merge	'refs/pull/118/head' of https://github.com/socketio/socket.io-client-swift
+cb4d95511bf7fc20c8f9e2cc68e2681438f1bed6	not-for-merge	'refs/pull/1198/head' of https://github.com/socketio/socket.io-client-swift
+b332225ebb7341f9f28d380f4a8919c7a4606319	not-for-merge	'refs/pull/1213/head' of https://github.com/socketio/socket.io-client-swift
+553e41304563d316f4a1a8d143037bf0b776b961	not-for-merge	'refs/pull/1214/head' of https://github.com/socketio/socket.io-client-swift
+987f66cb997527b77526b050318c6aa112980aa4	not-for-merge	'refs/pull/1214/merge' of https://github.com/socketio/socket.io-client-swift
+1db9232d7176e3366fc2fb110aed934ebc870511	not-for-merge	'refs/pull/1231/head' of https://github.com/socketio/socket.io-client-swift
+f2c892b993720ec26650eec22afe5d208ec18069	not-for-merge	'refs/pull/1233/head' of https://github.com/socketio/socket.io-client-swift
+72f59c6c6ff3d238d482c46b43117c36c3cf83de	not-for-merge	'refs/pull/1233/merge' of https://github.com/socketio/socket.io-client-swift
+d2f2057010e837d2e5d14e8bd8e1500b88cccca6	not-for-merge	'refs/pull/1238/head' of https://github.com/socketio/socket.io-client-swift
+5611c8ad24077e35a66dd7f8aa1a34f902888b41	not-for-merge	'refs/pull/1241/head' of https://github.com/socketio/socket.io-client-swift
+046bb0e9ff65d2cdf603f0e77f729ee4b112f9fc	not-for-merge	'refs/pull/1246/head' of https://github.com/socketio/socket.io-client-swift
+6650afd3e4287c175a8b814f01deecd2d3af3c01	not-for-merge	'refs/pull/127/head' of https://github.com/socketio/socket.io-client-swift
+61435b17448635f922787d5c4c94052c98447b2d	not-for-merge	'refs/pull/1283/head' of https://github.com/socketio/socket.io-client-swift
+d934aa7d8b70ac1f45d8283eec7f914357ea85b8	not-for-merge	'refs/pull/1283/merge' of https://github.com/socketio/socket.io-client-swift
+c62be894913a18ec8b10553725f508aadc947e75	not-for-merge	'refs/pull/1286/head' of https://github.com/socketio/socket.io-client-swift
+2a0e0f5e2847b6e68afa86e555b259de4f983f17	not-for-merge	'refs/pull/1309/head' of https://github.com/socketio/socket.io-client-swift
+9704944a56a1514bd7fdc573124f80fda9a2c7ad	not-for-merge	'refs/pull/1320/head' of https://github.com/socketio/socket.io-client-swift
+929ce805ade86249f3a5dc66b1a4df01a25bc60f	not-for-merge	'refs/pull/1320/merge' of https://github.com/socketio/socket.io-client-swift
+ef6b63c82fa2e1da850619f4f12f39a677d36fea	not-for-merge	'refs/pull/1324/head' of https://github.com/socketio/socket.io-client-swift
+5b49a59a73371ef029bc52e020a11868a71c4436	not-for-merge	'refs/pull/1331/head' of https://github.com/socketio/socket.io-client-swift
+e69f0853417f223747acf7dc5144d44ad009791d	not-for-merge	'refs/pull/1331/merge' of https://github.com/socketio/socket.io-client-swift
+8a27ae6d236a1b95597f0a881ae8ab78e778575e	not-for-merge	'refs/pull/1334/head' of https://github.com/socketio/socket.io-client-swift
+cd4f4dc89d4305314e4dfb26e61f92c60e5b8c59	not-for-merge	'refs/pull/1334/merge' of https://github.com/socketio/socket.io-client-swift
+678fb81ed59e3ad2bf7701694f16ab57940c5969	not-for-merge	'refs/pull/1335/head' of https://github.com/socketio/socket.io-client-swift
+5b792d4e3bb226ac7309aec394f3fc118e4c2d48	not-for-merge	'refs/pull/1338/head' of https://github.com/socketio/socket.io-client-swift
+4c95a51cb9f31e48bc6816ec257b1cacef67d49d	not-for-merge	'refs/pull/1338/merge' of https://github.com/socketio/socket.io-client-swift
+16f69c042997fdf03bf2ee1c11f119b748cb9688	not-for-merge	'refs/pull/1340/head' of https://github.com/socketio/socket.io-client-swift
+9609774b3a5de7330bd864fc9c258dfa61849bd6	not-for-merge	'refs/pull/1359/head' of https://github.com/socketio/socket.io-client-swift
+61d0a41103fc58bfab49552d680b59f39608d038	not-for-merge	'refs/pull/1362/head' of https://github.com/socketio/socket.io-client-swift
+9e8e2fbe3bf52ef42d26515339658eaaa535a8fa	not-for-merge	'refs/pull/1370/head' of https://github.com/socketio/socket.io-client-swift
+ec4378ca492179fe810a72dfbb50a7845f18bd35	not-for-merge	'refs/pull/1375/head' of https://github.com/socketio/socket.io-client-swift
+c6d28246ea58bf973d29a0b6e63be79c0ce8e0c0	not-for-merge	'refs/pull/1385/head' of https://github.com/socketio/socket.io-client-swift
+cc3ce5679e4797007c1cd17c3d1aab319c632a48	not-for-merge	'refs/pull/1388/head' of https://github.com/socketio/socket.io-client-swift
+27d772bbeb9c48a0b330259daefda94b24893114	not-for-merge	'refs/pull/1399/head' of https://github.com/socketio/socket.io-client-swift
+49214d8c23d3dce3eb9c14216e9bcd9e9dd4ab7b	not-for-merge	'refs/pull/1399/merge' of https://github.com/socketio/socket.io-client-swift
+25464ffb9de4a80c15b4c60eb0ff858c60b4bace	not-for-merge	'refs/pull/141/head' of https://github.com/socketio/socket.io-client-swift
+eb9de532f197935fe7f3f14f594d6fa19d7f8e64	not-for-merge	'refs/pull/1410/head' of https://github.com/socketio/socket.io-client-swift
+332a25f2418b0c33f196bac6393aba6ddfcfd884	not-for-merge	'refs/pull/1419/head' of https://github.com/socketio/socket.io-client-swift
+45cc6b9728436d974639e6773af26a7426578182	not-for-merge	'refs/pull/1420/head' of https://github.com/socketio/socket.io-client-swift
+852fe1d48c3e66c1a008f0b6c46a55b93c3ae74c	not-for-merge	'refs/pull/1436/head' of https://github.com/socketio/socket.io-client-swift
+8837d4a0d83d92d89c22234a6b30d6b337fddd5a	not-for-merge	'refs/pull/1437/head' of https://github.com/socketio/socket.io-client-swift
+d374018f81874a4ff321547d15e8c8f4840606e2	not-for-merge	'refs/pull/144/head' of https://github.com/socketio/socket.io-client-swift
+801811beabd8ffeafaeee4c90165bb9530f98443	not-for-merge	'refs/pull/144/merge' of https://github.com/socketio/socket.io-client-swift
+80636bf291681ff2953187442207acd14b7d994a	not-for-merge	'refs/pull/1443/head' of https://github.com/socketio/socket.io-client-swift
+18f1cf4614cfe947d2ba3ef3ccbfa977415f0eed	not-for-merge	'refs/pull/1444/head' of https://github.com/socketio/socket.io-client-swift
+8405ba94495255988b39a7ed57ebd404cef9b521	not-for-merge	'refs/pull/1444/merge' of https://github.com/socketio/socket.io-client-swift
+66eca437b802a12a7a64a8c6bad0b6aa76cb84ac	not-for-merge	'refs/pull/1447/head' of https://github.com/socketio/socket.io-client-swift
+69124a74e86835f1120211197575d72612a631ef	not-for-merge	'refs/pull/1448/head' of https://github.com/socketio/socket.io-client-swift
+3c81d0ee55111a80a8f39b9c61782887ec98ceb4	not-for-merge	'refs/pull/1451/head' of https://github.com/socketio/socket.io-client-swift
+d36501b68bd359c023dc5588a4634756e296da2e	not-for-merge	'refs/pull/1452/head' of https://github.com/socketio/socket.io-client-swift
+401b2b0ba9a4717668106f569089930a6007db8b	not-for-merge	'refs/pull/1452/merge' of https://github.com/socketio/socket.io-client-swift
+a21af1016eb6eb322464ea918f698ea32681092e	not-for-merge	'refs/pull/1463/head' of https://github.com/socketio/socket.io-client-swift
+76b941933e564566f219146d5585600eb7454193	not-for-merge	'refs/pull/1464/head' of https://github.com/socketio/socket.io-client-swift
+063449d56e7825379fa7a2e263003ba8a40a847d	not-for-merge	'refs/pull/1464/merge' of https://github.com/socketio/socket.io-client-swift
+eab2d79102d464c7c66638255bfb8de08fe89e48	not-for-merge	'refs/pull/1465/head' of https://github.com/socketio/socket.io-client-swift
+6dd51170bb11de3f91a5e083a7370eee70cb4c98	not-for-merge	'refs/pull/1467/head' of https://github.com/socketio/socket.io-client-swift
+1cfb8e81916dc8bac508b39428546ea096b4bbaa	not-for-merge	'refs/pull/1467/merge' of https://github.com/socketio/socket.io-client-swift
+8fdf279abd39f644e4b448b015464bd879cf88e2	not-for-merge	'refs/pull/15/head' of https://github.com/socketio/socket.io-client-swift
+4e9d4942b045a0319876d5d38231321f5d4d5803	not-for-merge	'refs/pull/15/merge' of https://github.com/socketio/socket.io-client-swift
+2a7ec38d48e29022ec418ad90823ef912a75ca8c	not-for-merge	'refs/pull/151/head' of https://github.com/socketio/socket.io-client-swift
+3234b71b5bc152504a2879793bc59580d45fb5b7	not-for-merge	'refs/pull/155/head' of https://github.com/socketio/socket.io-client-swift
+44cc4354d267a1ac1d93a73cf8df024667d5a081	not-for-merge	'refs/pull/155/merge' of https://github.com/socketio/socket.io-client-swift
+1777d490c53c5e9db9e5d704c123dc0e3127ff0c	not-for-merge	'refs/pull/156/head' of https://github.com/socketio/socket.io-client-swift
+0fb9be62473bc7f4b008b883809088dd9d50eba0	not-for-merge	'refs/pull/158/head' of https://github.com/socketio/socket.io-client-swift
+0842439460caf4181791c7602eafb0cbe9b0da5d	not-for-merge	'refs/pull/159/head' of https://github.com/socketio/socket.io-client-swift
+79f0c2f72bb66c9b6afb6b22306939e5e778d0f4	not-for-merge	'refs/pull/159/merge' of https://github.com/socketio/socket.io-client-swift
+f32c0850ac76ee6d442b206895b9adb58d57f17a	not-for-merge	'refs/pull/161/head' of https://github.com/socketio/socket.io-client-swift
+222f622d3a3f892c53ff138464c797f783c821cf	not-for-merge	'refs/pull/164/head' of https://github.com/socketio/socket.io-client-swift
+713ce46e3b9ea829dc32680809af8033fc939977	not-for-merge	'refs/pull/167/head' of https://github.com/socketio/socket.io-client-swift
+c6997f32dd7e90b72ec6d2b5a9c2b9520bc17977	not-for-merge	'refs/pull/170/head' of https://github.com/socketio/socket.io-client-swift
+07f9d4f548dd612b60268985dd6dc718fe7c0c54	not-for-merge	'refs/pull/172/head' of https://github.com/socketio/socket.io-client-swift
+bee997aff423f805c2f9b483e0fa75c052cdd1e5	not-for-merge	'refs/pull/173/head' of https://github.com/socketio/socket.io-client-swift
+f580055010ff82198db7983988afb52fba6d3072	not-for-merge	'refs/pull/173/merge' of https://github.com/socketio/socket.io-client-swift
+bee997aff423f805c2f9b483e0fa75c052cdd1e5	not-for-merge	'refs/pull/174/head' of https://github.com/socketio/socket.io-client-swift
+2e9232365df3f971077c1a72982ed45e0c9cbac0	not-for-merge	'refs/pull/175/head' of https://github.com/socketio/socket.io-client-swift
+153e9eda6547831e80673cf07022765cab891e62	not-for-merge	'refs/pull/18/head' of https://github.com/socketio/socket.io-client-swift
+702bebe20dec942f93e926d3c17cbbd985e6a867	not-for-merge	'refs/pull/18/merge' of https://github.com/socketio/socket.io-client-swift
+a9b4193fe4051a5fc9edf443c3401b20c845fe98	not-for-merge	'refs/pull/183/head' of https://github.com/socketio/socket.io-client-swift
+01b88f8e374bd83280d15d263225bb2f64380063	not-for-merge	'refs/pull/185/head' of https://github.com/socketio/socket.io-client-swift
+21ac65733f095dd409fdc6d4fbdffa39b4b8cfbb	not-for-merge	'refs/pull/186/head' of https://github.com/socketio/socket.io-client-swift
+0ebbf3f0cd375c50f2a0b6e206639d60ae514301	not-for-merge	'refs/pull/192/head' of https://github.com/socketio/socket.io-client-swift
+17fb142083fe7bd170c31a9f14af92e56bc023ca	not-for-merge	'refs/pull/194/head' of https://github.com/socketio/socket.io-client-swift
+a11533b61f238266709dc3d5d64422a92c0405cf	not-for-merge	'refs/pull/198/head' of https://github.com/socketio/socket.io-client-swift
+fc5232e7689aadfb6bb90e8eb32f2c22bd5daaaa	not-for-merge	'refs/pull/199/head' of https://github.com/socketio/socket.io-client-swift
+505cd4808f515993bc309bbd8063ec746c99a52e	not-for-merge	'refs/pull/199/merge' of https://github.com/socketio/socket.io-client-swift
+6d49c37fb858b53f61a0bdaf75b8cb7f95b42f8a	not-for-merge	'refs/pull/201/head' of https://github.com/socketio/socket.io-client-swift
+c67058b9680401453039d01eac0fa699e7821f78	not-for-merge	'refs/pull/206/head' of https://github.com/socketio/socket.io-client-swift
+29ba4c6a9100550a51786364b68143ae27bebc04	not-for-merge	'refs/pull/206/merge' of https://github.com/socketio/socket.io-client-swift
+fd3dbee71c18dc6c896de0b5fe4054c03ff16282	not-for-merge	'refs/pull/21/head' of https://github.com/socketio/socket.io-client-swift
+d2e6048fdb1173c204bd9111a2679ffeda6a72ae	not-for-merge	'refs/pull/211/head' of https://github.com/socketio/socket.io-client-swift
+3bdcff09ff0707b5d8f6e30fe2cf0efdfb10cfd3	not-for-merge	'refs/pull/211/merge' of https://github.com/socketio/socket.io-client-swift
+86bd271a9f7e0787edb96f70749f6cffe68b351d	not-for-merge	'refs/pull/212/head' of https://github.com/socketio/socket.io-client-swift
+fe0d21cb465372011bf09a4dd422f383c13a7854	not-for-merge	'refs/pull/213/head' of https://github.com/socketio/socket.io-client-swift
+a4c269bc6cddc6d3370d990dba7813c4c4f94d84	not-for-merge	'refs/pull/213/merge' of https://github.com/socketio/socket.io-client-swift
+8f27b0d021e61a34bf376846a81aaa2ae7411b1d	not-for-merge	'refs/pull/222/head' of https://github.com/socketio/socket.io-client-swift
+6e54ac453438ca6b1bd18212ae35d352e63a5d9a	not-for-merge	'refs/pull/227/head' of https://github.com/socketio/socket.io-client-swift
+6ac69d1c2d1c29353e7e311cbdf214c5019a743a	not-for-merge	'refs/pull/23/head' of https://github.com/socketio/socket.io-client-swift
+5533545adb2ad78f100a50b71fa40bd87fd71480	not-for-merge	'refs/pull/24/head' of https://github.com/socketio/socket.io-client-swift
+04d49fe7cb37f64831601605e7e40d0c5b7d029c	not-for-merge	'refs/pull/248/head' of https://github.com/socketio/socket.io-client-swift
+7b11e7c3e026ba78bfea59549d69e21b1e083450	not-for-merge	'refs/pull/250/head' of https://github.com/socketio/socket.io-client-swift
+85cf6c48b157c2604c3ad79de5aa741d7470b564	not-for-merge	'refs/pull/255/head' of https://github.com/socketio/socket.io-client-swift
+15ed066f6367ea4dd4396df6a00792e2c53b0f4b	not-for-merge	'refs/pull/262/head' of https://github.com/socketio/socket.io-client-swift
+acfb1f0ee1bd419f6482054daf044ebd0a0608af	not-for-merge	'refs/pull/262/merge' of https://github.com/socketio/socket.io-client-swift
+10e91145573ca6327e5b6f7e20edfec0ed362fc7	not-for-merge	'refs/pull/265/head' of https://github.com/socketio/socket.io-client-swift
+b409a833f55e109dc6b2f3e7ccad1b2970581d4a	not-for-merge	'refs/pull/265/merge' of https://github.com/socketio/socket.io-client-swift
+edeac1c2b0abe63e1cc92ce2f98370b33f13de9d	not-for-merge	'refs/pull/273/head' of https://github.com/socketio/socket.io-client-swift
+8f6019d0de4ed663206198d9d79306af2ad2f1f9	not-for-merge	'refs/pull/273/merge' of https://github.com/socketio/socket.io-client-swift
+3c9070b3e77b77011b5b9e67f0c625fe9099f142	not-for-merge	'refs/pull/277/head' of https://github.com/socketio/socket.io-client-swift
+e366e808ae6b6ce7083da5a4086db60ab4765f7c	not-for-merge	'refs/pull/278/head' of https://github.com/socketio/socket.io-client-swift
+8715780b6922f1c7efcc659107d2322c973c011e	not-for-merge	'refs/pull/28/head' of https://github.com/socketio/socket.io-client-swift
+9a2e6b3fe5eed169d68b9955bc89750b74ecf70a	not-for-merge	'refs/pull/28/merge' of https://github.com/socketio/socket.io-client-swift
+e06a7925032ef2cb316d819905120854977dc25d	not-for-merge	'refs/pull/280/head' of https://github.com/socketio/socket.io-client-swift
+c5c00510e53591d0c69bfe37d2b82b1af739029e	not-for-merge	'refs/pull/289/head' of https://github.com/socketio/socket.io-client-swift
+1e96d7982d3c5bb195d3ff1f439f26261192520c	not-for-merge	'refs/pull/317/head' of https://github.com/socketio/socket.io-client-swift
+a53b7167b66a15bcce7fe98331418fbf0a8f5283	not-for-merge	'refs/pull/330/head' of https://github.com/socketio/socket.io-client-swift
+293d71bf97709a5e1a22c98ba3c3557d534bf306	not-for-merge	'refs/pull/335/head' of https://github.com/socketio/socket.io-client-swift
+5c1abd7279df4807ed3a7173bb12f3d3b8abb016	not-for-merge	'refs/pull/343/head' of https://github.com/socketio/socket.io-client-swift
+bf08f793aaa835e5f6a7470425db168ff22ce2ca	not-for-merge	'refs/pull/343/merge' of https://github.com/socketio/socket.io-client-swift
+30731305989a65b20a3ab535346e6094aa75b7c1	not-for-merge	'refs/pull/344/head' of https://github.com/socketio/socket.io-client-swift
+1b4b571be66e28cf20632e289c4c1a9b6fafce60	not-for-merge	'refs/pull/349/head' of https://github.com/socketio/socket.io-client-swift
+1529d395c482511dbe32d1beab97ad7374d3e318	not-for-merge	'refs/pull/349/merge' of https://github.com/socketio/socket.io-client-swift
+119b479be295012d4b507aa885947a5a8d010603	not-for-merge	'refs/pull/361/head' of https://github.com/socketio/socket.io-client-swift
+4ea3f40ca781775c1dda871858012572307487d8	not-for-merge	'refs/pull/362/head' of https://github.com/socketio/socket.io-client-swift
+e02ca23d14071aafb5d4237ba574e45b77d29676	not-for-merge	'refs/pull/363/head' of https://github.com/socketio/socket.io-client-swift
+3d47ff469fba4cb33babbaaa43383d9528333287	not-for-merge	'refs/pull/372/head' of https://github.com/socketio/socket.io-client-swift
+ab536e227963513435612287a6a9e51736404feb	not-for-merge	'refs/pull/373/head' of https://github.com/socketio/socket.io-client-swift
+f9bfb03fcb05fd3a01b9751c76c944bba14b440a	not-for-merge	'refs/pull/380/head' of https://github.com/socketio/socket.io-client-swift
+67c360f8f43024ed2ea6a60fdcd123f1e05a7797	not-for-merge	'refs/pull/380/merge' of https://github.com/socketio/socket.io-client-swift
+0e38039a0c3d66ed17538088ac3eaefeb1db2da7	not-for-merge	'refs/pull/397/head' of https://github.com/socketio/socket.io-client-swift
+69bf1829e61940ca7f5c7535cddcdce360e71cdd	not-for-merge	'refs/pull/397/merge' of https://github.com/socketio/socket.io-client-swift
+0e38039a0c3d66ed17538088ac3eaefeb1db2da7	not-for-merge	'refs/pull/398/head' of https://github.com/socketio/socket.io-client-swift
+6fd3294fbae98b12178e7bcb03cc031f6942af34	not-for-merge	'refs/pull/399/head' of https://github.com/socketio/socket.io-client-swift
+4263cf70cf0dff1bf00aface23c1bdfec1f94aab	not-for-merge	'refs/pull/4/head' of https://github.com/socketio/socket.io-client-swift
+b5666bb4e8483f20b085be5254782af73d617524	not-for-merge	'refs/pull/4/merge' of https://github.com/socketio/socket.io-client-swift
+2952120fc1b940ac19afcdfb1f82ffd243756841	not-for-merge	'refs/pull/40/head' of https://github.com/socketio/socket.io-client-swift
+2e5442d3863394e24edfb9b39ccfe1ffae7183da	not-for-merge	'refs/pull/408/head' of https://github.com/socketio/socket.io-client-swift
+32e04ec2d9f80d57fc87f12908cb6c33dd2df7f0	not-for-merge	'refs/pull/418/head' of https://github.com/socketio/socket.io-client-swift
+67f09ed66b6a24094cc59329785945ba5de0e85c	not-for-merge	'refs/pull/418/merge' of https://github.com/socketio/socket.io-client-swift
+382821144685dd16271a3713690da01782918fb4	not-for-merge	'refs/pull/422/head' of https://github.com/socketio/socket.io-client-swift
+777fa30c764ced09b7a280413a0b636f437b8516	not-for-merge	'refs/pull/427/head' of https://github.com/socketio/socket.io-client-swift
+99adb49736e36f2a230082ec8da3450875f15c06	not-for-merge	'refs/pull/436/head' of https://github.com/socketio/socket.io-client-swift
+8f0a7c8f8214e963a9421036a3a4ee0ed38d3ee7	not-for-merge	'refs/pull/438/head' of https://github.com/socketio/socket.io-client-swift
+a1f24ff2817865cf8d5b11180eaaacf8683b244c	not-for-merge	'refs/pull/44/head' of https://github.com/socketio/socket.io-client-swift
+9e1e024b22605f0fa4c59ca993833e9586036a6b	not-for-merge	'refs/pull/443/head' of https://github.com/socketio/socket.io-client-swift
+5305d35a98fe3320c361ee00ba68c41aaf8f21d7	not-for-merge	'refs/pull/443/merge' of https://github.com/socketio/socket.io-client-swift
+7f088212f74475670177549eddf41dcfb83676c8	not-for-merge	'refs/pull/454/head' of https://github.com/socketio/socket.io-client-swift
+cea3466fd889342a4b094e66a537753dcb87d783	not-for-merge	'refs/pull/454/merge' of https://github.com/socketio/socket.io-client-swift
+518c256cc2dc3bba7e32600acfaddc9da8292dcc	not-for-merge	'refs/pull/455/head' of https://github.com/socketio/socket.io-client-swift
+59c158119a44fc83bcae61fd42fd090b20ba3374	not-for-merge	'refs/pull/466/head' of https://github.com/socketio/socket.io-client-swift
+31e2f0ea4bd5e48a89e9b0eb6884162638af958d	not-for-merge	'refs/pull/47/head' of https://github.com/socketio/socket.io-client-swift
+d3500d38ba8bdd61abefb3a3db924c6c373f2759	not-for-merge	'refs/pull/479/head' of https://github.com/socketio/socket.io-client-swift
+bc929b7c2654448e6448c0ead1cfbe153bb5f429	not-for-merge	'refs/pull/484/head' of https://github.com/socketio/socket.io-client-swift
+d808d8f157ef24f9bdbf70d773000db046397e94	not-for-merge	'refs/pull/486/head' of https://github.com/socketio/socket.io-client-swift
+fe9d8856e1e27a799b7f57d07a1cd787fccab019	not-for-merge	'refs/pull/489/head' of https://github.com/socketio/socket.io-client-swift
+b6630a32f0db7e45c42c8264194c66464f952711	not-for-merge	'refs/pull/489/merge' of https://github.com/socketio/socket.io-client-swift
+a009afc6de5e0b0f48545ae300ef0c75bf6e28b0	not-for-merge	'refs/pull/490/head' of https://github.com/socketio/socket.io-client-swift
+b5844aef15417ca13e91eddf4dded8132f4bf494	not-for-merge	'refs/pull/50/head' of https://github.com/socketio/socket.io-client-swift
+3a426edea2f2d0023feb7607f4794e02bc7b9fe5	not-for-merge	'refs/pull/50/merge' of https://github.com/socketio/socket.io-client-swift
+c1167e55a14fd27026b1fd9e93b0683b9e865c64	not-for-merge	'refs/pull/515/head' of https://github.com/socketio/socket.io-client-swift
+f278c5866725abf6d0cbfaf743f833689482da29	not-for-merge	'refs/pull/515/merge' of https://github.com/socketio/socket.io-client-swift
+deac1bbe1779e74b33d9acec90ef7f3a3a31c530	not-for-merge	'refs/pull/52/head' of https://github.com/socketio/socket.io-client-swift
+74149581374a11ea87c839a19a8af3600e7601cc	not-for-merge	'refs/pull/520/head' of https://github.com/socketio/socket.io-client-swift
+969fae1744d6faf2b09928215c5783a1ef044442	not-for-merge	'refs/pull/520/merge' of https://github.com/socketio/socket.io-client-swift
+26bde05019e3f30a1e9ef98a6de5ae903861b70a	not-for-merge	'refs/pull/523/head' of https://github.com/socketio/socket.io-client-swift
+883f310e7b180ab72dde21436263de671190cd3a	not-for-merge	'refs/pull/523/merge' of https://github.com/socketio/socket.io-client-swift
+30855312f9954eac28536a5bbbabe537b94edaf6	not-for-merge	'refs/pull/524/head' of https://github.com/socketio/socket.io-client-swift
+cc29848fd8440bfb40f1394b7fa043611d745d6d	not-for-merge	'refs/pull/524/merge' of https://github.com/socketio/socket.io-client-swift
+1c3ea768299e7a2c90f5eb3e3d07df1a0a96f550	not-for-merge	'refs/pull/53/head' of https://github.com/socketio/socket.io-client-swift
+64fee2df28bc5a9f0653696df7e84e4dd174a08b	not-for-merge	'refs/pull/543/head' of https://github.com/socketio/socket.io-client-swift
+cb1358b87f950d3f3a353c0a8d350037fa2b35b1	not-for-merge	'refs/pull/543/merge' of https://github.com/socketio/socket.io-client-swift
+0143dc25bfe1231e97e6ed01c40697b7f4f4bf31	not-for-merge	'refs/pull/544/head' of https://github.com/socketio/socket.io-client-swift
+057be73990b61d50ae9a5c3667a65edc0e2f5fd3	not-for-merge	'refs/pull/55/head' of https://github.com/socketio/socket.io-client-swift
+ea3fca376772ae4308eb2b2481f4e1937d84336f	not-for-merge	'refs/pull/557/head' of https://github.com/socketio/socket.io-client-swift
+21b9e0f4c260e3b1de987fcdd4b95da767ec91f1	not-for-merge	'refs/pull/572/head' of https://github.com/socketio/socket.io-client-swift
+268d3d654700b3f30a21a0c909089c42f4657adb	not-for-merge	'refs/pull/572/merge' of https://github.com/socketio/socket.io-client-swift
+3fda340ad1b82691124f588fa076fe00631462ff	not-for-merge	'refs/pull/58/head' of https://github.com/socketio/socket.io-client-swift
+7f35e3e1e45edf8f71d0bacf57f904d4f387df3c	not-for-merge	'refs/pull/59/head' of https://github.com/socketio/socket.io-client-swift
+d8ea3a3c11b9d008457dc89bbc67cc1707ead5f5	not-for-merge	'refs/pull/6/head' of https://github.com/socketio/socket.io-client-swift
+f943f41895a536861606c91519c1dc6b9ad8d1fe	not-for-merge	'refs/pull/602/head' of https://github.com/socketio/socket.io-client-swift
+cecf662649be1f4a33dc0302fd7d026e699669be	not-for-merge	'refs/pull/620/head' of https://github.com/socketio/socket.io-client-swift
+111995eaf3d1c5a27f8175e30150b603958cd9d9	not-for-merge	'refs/pull/620/merge' of https://github.com/socketio/socket.io-client-swift
+cecf662649be1f4a33dc0302fd7d026e699669be	not-for-merge	'refs/pull/621/head' of https://github.com/socketio/socket.io-client-swift
+2bc38fc3f3f1dd7487f2f294f953cdac9abd5a51	not-for-merge	'refs/pull/621/merge' of https://github.com/socketio/socket.io-client-swift
+fcb2b6bbf618658752b88c5495510103efa74e8a	not-for-merge	'refs/pull/622/head' of https://github.com/socketio/socket.io-client-swift
+c462381587d16d7a1ed249d1a8d11e3b24df5d51	not-for-merge	'refs/pull/628/head' of https://github.com/socketio/socket.io-client-swift
+99faafe7234c6fa9780b91c8d4b5a99263723cce	not-for-merge	'refs/pull/629/head' of https://github.com/socketio/socket.io-client-swift
+e7f8f9db1afd4de396864eaf85d0a1d0695f7fa6	not-for-merge	'refs/pull/63/head' of https://github.com/socketio/socket.io-client-swift
+4d9508a21f05a1c1fa37ce4a79aa2fe988512477	not-for-merge	'refs/pull/642/head' of https://github.com/socketio/socket.io-client-swift
+92352ba0a67f6d5e7f65ed23c2165285a9cd4f05	not-for-merge	'refs/pull/642/merge' of https://github.com/socketio/socket.io-client-swift
+9a2b59ad78541e32d2de67b6b171c4a9b7ac2122	not-for-merge	'refs/pull/643/head' of https://github.com/socketio/socket.io-client-swift
+907b1b3ae2481369ba22c7b8cec98a5a454def40	not-for-merge	'refs/pull/651/head' of https://github.com/socketio/socket.io-client-swift
+d668da69fb7e24b1762383068e00d803d9b98d80	not-for-merge	'refs/pull/658/head' of https://github.com/socketio/socket.io-client-swift
+67b83fb7c2cc35664beb65c0d816228325ee170b	not-for-merge	'refs/pull/660/head' of https://github.com/socketio/socket.io-client-swift
+1c567c3ade27733fc7354ba3d518c8fc695d4fc1	not-for-merge	'refs/pull/660/merge' of https://github.com/socketio/socket.io-client-swift
+24c127cd31dfb298b86f15a1fa5ea0d957fa4233	not-for-merge	'refs/pull/662/head' of https://github.com/socketio/socket.io-client-swift
+75c4a0375e652147cac861c7b1c1c47c25e9e246	not-for-merge	'refs/pull/662/merge' of https://github.com/socketio/socket.io-client-swift
+c306802aca259257362d3503330bab73811e6f8a	not-for-merge	'refs/pull/666/head' of https://github.com/socketio/socket.io-client-swift
+f6e34e0235b192c98b9979cb80bfe2e3a60b1720	not-for-merge	'refs/pull/666/merge' of https://github.com/socketio/socket.io-client-swift
+9edd322a70a09de6bfc0085fa3ff4766c99f710b	not-for-merge	'refs/pull/669/head' of https://github.com/socketio/socket.io-client-swift
+a7c90cdac96db453eb63fa4a3cfc0d00ffacd793	not-for-merge	'refs/pull/671/head' of https://github.com/socketio/socket.io-client-swift
+1ff8e11a1f093c3692584bd1e0735e8edadc6949	not-for-merge	'refs/pull/673/head' of https://github.com/socketio/socket.io-client-swift
+7d8eb6ffc7256e4570274f0f3906963968cfd2f3	not-for-merge	'refs/pull/678/head' of https://github.com/socketio/socket.io-client-swift
+df3d7ae5361d0ce10b261c9331e51b8e7ad2a02c	not-for-merge	'refs/pull/699/head' of https://github.com/socketio/socket.io-client-swift
+33f3ef4846aecbc8199544282de91368e325e6fb	not-for-merge	'refs/pull/7/head' of https://github.com/socketio/socket.io-client-swift
+2ee104bb5eb96450616277cc2e5e3f42d57d7afd	not-for-merge	'refs/pull/71/head' of https://github.com/socketio/socket.io-client-swift
+b71348a07435289a04ce6981a272194cbb497cb1	not-for-merge	'refs/pull/713/head' of https://github.com/socketio/socket.io-client-swift
+38dea9bb3ee6fc22978ca7c337e43284c8d8579f	not-for-merge	'refs/pull/719/head' of https://github.com/socketio/socket.io-client-swift
+8f22bdef46ba3413362100336220d43e5a3ee89e	not-for-merge	'refs/pull/730/head' of https://github.com/socketio/socket.io-client-swift
+49961eb6cf700bd6584eaeaed08e1b0faad3ea9e	not-for-merge	'refs/pull/735/head' of https://github.com/socketio/socket.io-client-swift
+98ac2a80353ec9b437e2ac26d699b3c851680e94	not-for-merge	'refs/pull/749/head' of https://github.com/socketio/socket.io-client-swift
+92792ba71ecbc099ef662b96ea5d2e62b1046992	not-for-merge	'refs/pull/752/head' of https://github.com/socketio/socket.io-client-swift
+451f4a9d6888b8ab3804e20e31f603bed99e54e7	not-for-merge	'refs/pull/760/head' of https://github.com/socketio/socket.io-client-swift
+945c4a402aad028c652effe73825cd6638743c3f	not-for-merge	'refs/pull/760/merge' of https://github.com/socketio/socket.io-client-swift
+5621f0dbe17cd5bbd5bf82493d1556738abf4371	not-for-merge	'refs/pull/776/head' of https://github.com/socketio/socket.io-client-swift
+69c67a2b8174b9d62ba1a228a6eb63d096288437	not-for-merge	'refs/pull/78/head' of https://github.com/socketio/socket.io-client-swift
+64b56c593e50b9fd287c62611c78605adac1957b	not-for-merge	'refs/pull/783/head' of https://github.com/socketio/socket.io-client-swift
+1e927b0c45e0d773d871f9b6b17400e30979707b	not-for-merge	'refs/pull/789/head' of https://github.com/socketio/socket.io-client-swift
+18170197530b492c47ddba3a49dae4b988e5e73c	not-for-merge	'refs/pull/789/merge' of https://github.com/socketio/socket.io-client-swift
+757bfdc867a874fe53db7af4a956d7bc89ab8d4a	not-for-merge	'refs/pull/796/head' of https://github.com/socketio/socket.io-client-swift
+ea20dc809e5ea7719e3b259629ad5e21711b2f8c	not-for-merge	'refs/pull/8/head' of https://github.com/socketio/socket.io-client-swift
+f6fa5b79ea3d53ddbe459387e06ed2a69a74a087	not-for-merge	'refs/pull/809/head' of https://github.com/socketio/socket.io-client-swift
+9be3184f2a39f0f48703b9dab680e328e9a14bc8	not-for-merge	'refs/pull/810/head' of https://github.com/socketio/socket.io-client-swift
+2c65974a7d485aecfc2a362ef583fbf437a4f7af	not-for-merge	'refs/pull/818/head' of https://github.com/socketio/socket.io-client-swift
+7760c4f91366d23a5f535576843326dc22afe0b9	not-for-merge	'refs/pull/818/merge' of https://github.com/socketio/socket.io-client-swift
+819735efbf0597a6f38823e7f3e2f0a55111fd28	not-for-merge	'refs/pull/822/head' of https://github.com/socketio/socket.io-client-swift
+9021836e80e47592b383b395557c3ddc374a76a3	not-for-merge	'refs/pull/822/merge' of https://github.com/socketio/socket.io-client-swift
+66d052cee24d84ee2ebf7570271b8025790685bb	not-for-merge	'refs/pull/824/head' of https://github.com/socketio/socket.io-client-swift
+5c0bbde77be2a029e6d4c8180f17a3114be32867	not-for-merge	'refs/pull/830/head' of https://github.com/socketio/socket.io-client-swift
+45955aec4a1fa0df97ac945d202d33e71a2e2f54	not-for-merge	'refs/pull/833/head' of https://github.com/socketio/socket.io-client-swift
+953bc09bf36ef26139a03731bff308addbcb3c0c	not-for-merge	'refs/pull/834/head' of https://github.com/socketio/socket.io-client-swift
+f2ae32b01d97dc51942211b9bc335cd2ae5ae78b	not-for-merge	'refs/pull/840/head' of https://github.com/socketio/socket.io-client-swift
+5b52edd880514a55fca80bc0b045eaaf502cef65	not-for-merge	'refs/pull/844/head' of https://github.com/socketio/socket.io-client-swift
+45af5d96d99165b97df1cec972a282b10db93b72	not-for-merge	'refs/pull/858/head' of https://github.com/socketio/socket.io-client-swift
+00b87a25050e26bc13ff79cf211e5a77ae759b5d	not-for-merge	'refs/pull/868/head' of https://github.com/socketio/socket.io-client-swift
+b62590aa78620d685278b953f294c26c9f4b05ef	not-for-merge	'refs/pull/868/merge' of https://github.com/socketio/socket.io-client-swift
+a611aee89995696687114983a2e4ac81e073e28f	not-for-merge	'refs/pull/881/head' of https://github.com/socketio/socket.io-client-swift
+01db97b1b19d40664d20e00a5276e3823d77fa37	not-for-merge	'refs/pull/889/head' of https://github.com/socketio/socket.io-client-swift
+e1a0839d9307f2470c3a982df250dd7bb8d4fa4b	not-for-merge	'refs/pull/889/merge' of https://github.com/socketio/socket.io-client-swift
+f6076d69a3f9a8ef38085765856c9b7a46e89999	not-for-merge	'refs/pull/893/head' of https://github.com/socketio/socket.io-client-swift
+b62b4c47a9fc50180880f13775f9269ee9f48c6d	not-for-merge	'refs/pull/893/merge' of https://github.com/socketio/socket.io-client-swift
+8e7c8444d3746c6311839bffd30c0dd287d88c6a	not-for-merge	'refs/pull/9/head' of https://github.com/socketio/socket.io-client-swift
+1595ebf16116de84c49d40917eca8d404e60ddc4	not-for-merge	'refs/pull/915/head' of https://github.com/socketio/socket.io-client-swift
+36a48c99f46b67d9507d3cc1ea899fd472a3be64	not-for-merge	'refs/pull/915/merge' of https://github.com/socketio/socket.io-client-swift
+d3aaaec9bb2983b23eb440f42558b4f44fd1975e	not-for-merge	'refs/pull/921/head' of https://github.com/socketio/socket.io-client-swift
+9598a885d0a38ca46f8080ebebf08b5a68b1ad07	not-for-merge	'refs/pull/921/merge' of https://github.com/socketio/socket.io-client-swift
+4ec634ccfd46c6d494d0a4d6815ddc2691997f43	not-for-merge	'refs/pull/924/head' of https://github.com/socketio/socket.io-client-swift
+d3aaaec9bb2983b23eb440f42558b4f44fd1975e	not-for-merge	'refs/pull/925/head' of https://github.com/socketio/socket.io-client-swift
+fa7fcc8c3bbc20dfdbe3fb17b38682f34cd19bea	not-for-merge	'refs/pull/927/head' of https://github.com/socketio/socket.io-client-swift
+79c05ad6e645723b4c99f03caa7f18ca6a06603c	not-for-merge	'refs/pull/927/merge' of https://github.com/socketio/socket.io-client-swift
+8df1a1241236306a5bb67cb27fc57bcc75e21465	not-for-merge	'refs/pull/941/head' of https://github.com/socketio/socket.io-client-swift
+2e7be97a38bd47fa28058fc33bdaa545d806e0f8	not-for-merge	'refs/pull/96/head' of https://github.com/socketio/socket.io-client-swift
+4e558833a3a80c0a3c9eaa449c5cc6e8526832d1	not-for-merge	'refs/pull/961/head' of https://github.com/socketio/socket.io-client-swift
+47bcfb1299f488ea95d6b5b9fa34c659935bc5c9	not-for-merge	'refs/pull/991/head' of https://github.com/socketio/socket.io-client-swift
+4ea1bb9c43627edb9a31a99367a6d9ef2e832e2d	not-for-merge	'refs/pull/993/head' of https://github.com/socketio/socket.io-client-swift
+b71348a07435289a04ce6981a272194cbb497cb1	not-for-merge	tag 'remove-test-server' of https://github.com/socketio/socket.io-client-swift
+c7a155230cea8fc2db24a4fe70087e9f3696735d	not-for-merge	tag 'swift2.3' of https://github.com/socketio/socket.io-client-swift
+2e5a85a3f2ee5b5e5968a05cd85b1be31722f932	not-for-merge	tag 'v1.0.0' of https://github.com/socketio/socket.io-client-swift
+368a9c8af3dccaaa06987e9c25605730466da6d4	not-for-merge	tag 'v1.0.0-beta.1' of https://github.com/socketio/socket.io-client-swift
+232c22789a636b3cea4fa939cfc3a5c3ebdf084a	not-for-merge	tag 'v1.0.0-beta.2' of https://github.com/socketio/socket.io-client-swift
+56f6c5ce3b827d4f0157aecec22f53bdd8a5e79d	not-for-merge	tag 'v1.0.0-beta.3' of https://github.com/socketio/socket.io-client-swift
+40c70925cc68c036e8edb3759c2c5856dc4fce38	not-for-merge	tag 'v1.0.0-beta.4' of https://github.com/socketio/socket.io-client-swift
+0ae17f8a73760c599f0a2f74c6547ae4997aacc2	not-for-merge	tag 'v1.0.0-beta.5' of https://github.com/socketio/socket.io-client-swift
+082c00dbb1837c7fb6428b71e6d353b4873fef3f	not-for-merge	tag 'v1.0.0-beta.6' of https://github.com/socketio/socket.io-client-swift
+63cf32f30ea36386f350c00f4e4463d3c411340b	not-for-merge	tag 'v1.0.0-beta.7' of https://github.com/socketio/socket.io-client-swift
+3d7540d5935046b607e99e8c92c157ea8328b88f	not-for-merge	tag 'v1.0.0-beta.8' of https://github.com/socketio/socket.io-client-swift
+114ce4ca0f74a9ad2772edd146a7f6af3b1a7483	not-for-merge	tag 'v1.1.0' of https://github.com/socketio/socket.io-client-swift
+ac2bc13b11f74c3c04b030ef40894ee51ba1a6fe	not-for-merge	tag 'v1.1.0-pod' of https://github.com/socketio/socket.io-client-swift
+8f7f43f83e11c5258c5cd9e63a8e6c618ccc6dfb	not-for-merge	tag 'v1.1.1' of https://github.com/socketio/socket.io-client-swift
+abbd8e6a67b62383bfd1a97d495cd776a5b74d73	not-for-merge	tag 'v1.1.2' of https://github.com/socketio/socket.io-client-swift
+8e7c8444d3746c6311839bffd30c0dd287d88c6a	not-for-merge	tag 'v1.1.3' of https://github.com/socketio/socket.io-client-swift
+dcf9f280f6776cbb663c94626249ad9de646d08b	not-for-merge	tag 'v1.1.4' of https://github.com/socketio/socket.io-client-swift
+6e84950c05dfda917d8893ddf953ac5e2dd6a078	not-for-merge	tag 'v1.2.0' of https://github.com/socketio/socket.io-client-swift
+27124610445774ed76a596fbabd4f51c55707f80	not-for-merge	tag 'v1.2.1' of https://github.com/socketio/socket.io-client-swift
+472ba5005809b43636a074b64a1ee95df408b33e	not-for-merge	tag 'v1.2.2' of https://github.com/socketio/socket.io-client-swift
+66aaa521204886fb5e23abcda9e6daa6aeaf8934	not-for-merge	tag 'v1.3.0' of https://github.com/socketio/socket.io-client-swift
+2f82de9502d79a9e7932a2f68beeb1cd21110c7c	not-for-merge	tag 'v1.3.1' of https://github.com/socketio/socket.io-client-swift
+2837c7c42cd065c6d43eb78a3949df706ca91ed0	not-for-merge	tag 'v1.3.2' of https://github.com/socketio/socket.io-client-swift
+4c7b3175caa5ae2d195cd25b7364e0018bc8ffef	not-for-merge	tag 'v1.3.3' of https://github.com/socketio/socket.io-client-swift
+78aba627a21aadaa75748fa1aa2397dca116ccbd	not-for-merge	tag 'v1.3.4' of https://github.com/socketio/socket.io-client-swift
+bbaefba9ca5e371aeb54515396e8764e28283245	not-for-merge	tag 'v1.4.0' of https://github.com/socketio/socket.io-client-swift
+f008f116a6fb9c6f5d055bd37463013154067999	not-for-merge	tag 'v1.4.1' of https://github.com/socketio/socket.io-client-swift
+2cae405d29193cff075b2176185a2b89f14c1ead	not-for-merge	tag 'v1.4.2' of https://github.com/socketio/socket.io-client-swift
+57731bebf82aab6eee756892f671cd902b8cb179	not-for-merge	tag 'v1.4.3' of https://github.com/socketio/socket.io-client-swift
+7b7ccb87dac49495d5a1074f1c1eb34c57366e64	not-for-merge	tag 'v1.4.4' of https://github.com/socketio/socket.io-client-swift
+a1f24ff2817865cf8d5b11180eaaacf8683b244c	not-for-merge	tag 'v1.5.0' of https://github.com/socketio/socket.io-client-swift
+c2d488e35cafcd88b5b946bd604cb59185760577	not-for-merge	tag 'v1.5.1' of https://github.com/socketio/socket.io-client-swift
+0c3e25ef3c9b0eb1dedab15cd1c74fedbba251fc	not-for-merge	tag 'v1.5.2' of https://github.com/socketio/socket.io-client-swift
+77dfd78904e894a3e71141c5ffa949aafae761e5	not-for-merge	tag 'v10.0.0' of https://github.com/socketio/socket.io-client-swift
+b86e78797e82fe4ab36787a30ee2bc6a811be52c	not-for-merge	tag 'v10.0.1' of https://github.com/socketio/socket.io-client-swift
+056b90966994a3de07f72e78c3fa7651cc5e098b	not-for-merge	tag 'v10.1.0' of https://github.com/socketio/socket.io-client-swift
+d0c638ff5eff242e5164368c5f997aa093f34417	not-for-merge	tag 'v10.2.0' of https://github.com/socketio/socket.io-client-swift
+b0e9cf7dc67f9102daaf06fc3775d340ebe06f7f	not-for-merge	tag 'v11.0.0' of https://github.com/socketio/socket.io-client-swift
+a210a8f9e55f75f0b4579070a9929655945985ec	not-for-merge	tag 'v11.0.1' of https://github.com/socketio/socket.io-client-swift
+bd060625c2ff7d9acad32f336145a44e3b73a9dc	not-for-merge	tag 'v11.0.2' of https://github.com/socketio/socket.io-client-swift
+c3e54af0cb53b33faed55dd51f1d29d8ea015be7	not-for-merge	tag 'v11.1.0' of https://github.com/socketio/socket.io-client-swift
+4904d5baa467763fea9a71ca6981ef5369080425	not-for-merge	tag 'v11.1.1' of https://github.com/socketio/socket.io-client-swift
+9cfbb6dbbc2d42d66c9af9dc0502cd5e76555c5e	not-for-merge	tag 'v11.1.2' of https://github.com/socketio/socket.io-client-swift
+29228e2334333f6e25b8d7732a8a49ed00df04d9	not-for-merge	tag 'v11.1.3' of https://github.com/socketio/socket.io-client-swift
+9d5c7994a0f61ea143ed0e74b56b9b180ef0d39e	not-for-merge	tag 'v12.0.0' of https://github.com/socketio/socket.io-client-swift
+e8b7db0767cb8474fb58ef76a8e811264ad990c4	not-for-merge	tag 'v12.1.0' of https://github.com/socketio/socket.io-client-swift
+3d5afb94eace547beeeed8a8effc35b3b3484c50	not-for-merge	tag 'v12.1.1' of https://github.com/socketio/socket.io-client-swift
+2c211c67e348c121ea4a6772e4cde53334f3b4aa	not-for-merge	tag 'v12.1.2' of https://github.com/socketio/socket.io-client-swift
+1ae532a6a376532cc4966a2de9af6f5ec0f18ccd	not-for-merge	tag 'v12.1.3' of https://github.com/socketio/socket.io-client-swift
+fcb98d2654fa97603c32549f549c2388d011a60c	not-for-merge	tag 'v13.0.0' of https://github.com/socketio/socket.io-client-swift
+1225261fd0ba342915066c225187eae0f806dbf4	not-for-merge	tag 'v13.0.1' of https://github.com/socketio/socket.io-client-swift
+713713f6da5e7a0166a58fab6006ee9d546ffe64	not-for-merge	tag 'v13.1.0' of https://github.com/socketio/socket.io-client-swift
+62eea4ff7964a875c6f3e2b9642d006aafee5f0b	not-for-merge	tag 'v13.1.1' of https://github.com/socketio/socket.io-client-swift
+83a31d0539d6c53f008618b35348cb48dc876922	not-for-merge	tag 'v13.1.2' of https://github.com/socketio/socket.io-client-swift
+0cd0fc45757c0bfe1055ef92ca09ea7a4221dd7e	not-for-merge	tag 'v13.1.3' of https://github.com/socketio/socket.io-client-swift
+de262bf9051aa5274322cfec2b7dd29f3c7a6114	not-for-merge	tag 'v13.2.0' of https://github.com/socketio/socket.io-client-swift
+366841b78d5ff11c882414e5f7dbbbc2caed6a7a	not-for-merge	tag 'v13.2.1' of https://github.com/socketio/socket.io-client-swift
+f3b4ac507d30a623170495dc3477c4fd59a009b6	not-for-merge	tag 'v13.3.0' of https://github.com/socketio/socket.io-client-swift
+57132032b68c2c22e093fb358640e8a95a421e16	not-for-merge	tag 'v13.3.1' of https://github.com/socketio/socket.io-client-swift
+e54c6f38d8eebb0a091fb7735203ecd88474005d	not-for-merge	tag 'v13.4.0' of https://github.com/socketio/socket.io-client-swift
+81aa9569a4c4a2c840f9571e8b98d08533a4960c	not-for-merge	tag 'v14.0.0' of https://github.com/socketio/socket.io-client-swift
+a7ed4a53370c0e13326543cb46c03079307837c9	not-for-merge	tag 'v15.0.0' of https://github.com/socketio/socket.io-client-swift
+9057a798bce0fda5a5a840ee7bd3c1ec20f22976	not-for-merge	tag 'v15.0.0-beta1' of https://github.com/socketio/socket.io-client-swift
+40d16de18c94d338a87fc19038a1a536f5be5b0b	not-for-merge	tag 'v15.1.0' of https://github.com/socketio/socket.io-client-swift
+c68140d84cafff673aacf8bf09471b97c226f38a	not-for-merge	tag 'v15.2.0' of https://github.com/socketio/socket.io-client-swift
+521aeea3440fe72dfbb7e6dc406eb1d47efa2228	not-for-merge	tag 'v16.0.0' of https://github.com/socketio/socket.io-client-swift
+b36b82317c1d7de3c1c3c906d69fc635d30b0e2b	not-for-merge	tag 'v16.0.0-beta0' of https://github.com/socketio/socket.io-client-swift
+fdc41784dc150fd9ce2f741a1211978c4e338051	not-for-merge	tag 'v16.0.0-beta1' of https://github.com/socketio/socket.io-client-swift
+86be3540f0594116c3bb7eb6045ea65f50899165	not-for-merge	tag 'v16.0.0-beta2' of https://github.com/socketio/socket.io-client-swift
+c15b20cc2cbf1f59863a2c869e22ff76be73056f	not-for-merge	tag 'v16.0.1' of https://github.com/socketio/socket.io-client-swift
+175da8b5156f6b132436f0676cc84c2f6a766b6e	not-for-merge	tag 'v16.1.0' of https://github.com/socketio/socket.io-client-swift
+d2b5c449eb879fd736963a33bf76abcfaf8fac90	not-for-merge	tag 'v2.0.0' of https://github.com/socketio/socket.io-client-swift
+f6ec74fe40476818418a17b6769ee980b1c371fe	not-for-merge	tag 'v2.0.1' of https://github.com/socketio/socket.io-client-swift
+8205702afc0aeb795d8647202e0f0e3204623eee	not-for-merge	tag 'v2.0.2' of https://github.com/socketio/socket.io-client-swift
+18928c823c5853c516a70e4121132c39c03ad76b	not-for-merge	tag 'v2.0.3' of https://github.com/socketio/socket.io-client-swift
+85e1f315384ea264973c37d81ee55b25955d6844	not-for-merge	tag 'v2.0.4' of https://github.com/socketio/socket.io-client-swift
+5e5ec2f6b6f057d6f27032222ee2dab1ef32a387	not-for-merge	tag 'v2.0.5' of https://github.com/socketio/socket.io-client-swift
+cd48abe4cd7dff62be57e426b96adf30ecaf2e16	not-for-merge	tag 'v2.0.6' of https://github.com/socketio/socket.io-client-swift
+21b295f8fa909d7b021da2d4035725ea5752f5d8	not-for-merge	tag 'v2.1.0' of https://github.com/socketio/socket.io-client-swift
+9bc40fcae17d8c15cc286e69e30f344476cfd0cb	not-for-merge	tag 'v2.2.0' of https://github.com/socketio/socket.io-client-swift
+6cb372e3b9db6e116e465757126c40ad2f00da4d	not-for-merge	tag 'v2.2.1' of https://github.com/socketio/socket.io-client-swift
+2ee104bb5eb96450616277cc2e5e3f42d57d7afd	not-for-merge	tag 'v2.2.2' of https://github.com/socketio/socket.io-client-swift
+c049f62028b83d4b293d1df9a105a57df72be74f	not-for-merge	tag 'v2.2.3' of https://github.com/socketio/socket.io-client-swift
+9ec521a6de8c0fef586037042d19a60166ddcfbe	not-for-merge	tag 'v2.3.0' of https://github.com/socketio/socket.io-client-swift
+2453f33191ab862026de103a264860bf4a59ce0f	not-for-merge	tag 'v2.3.1' of https://github.com/socketio/socket.io-client-swift
+ac663a8875661794d22c2856188e9572f01b99fa	not-for-merge	tag 'v2.3.10' of https://github.com/socketio/socket.io-client-swift
+eeadccec9476bbc276845c1ba69c9f331fa6f644	not-for-merge	tag 'v2.3.2' of https://github.com/socketio/socket.io-client-swift
+079063e3968f8b015563bbd98312b3ce2bc9bc16	not-for-merge	tag 'v2.3.3' of https://github.com/socketio/socket.io-client-swift
+58571e53878a38e4645ad693eaf13ae8ee543bd2	not-for-merge	tag 'v2.3.4' of https://github.com/socketio/socket.io-client-swift
+63021eb99517c1cc144f618811c40a052172f101	not-for-merge	tag 'v2.3.5' of https://github.com/socketio/socket.io-client-swift
+d8f65c28046f4b7e7be7fe4672cd8ccee009d9a7	not-for-merge	tag 'v2.3.6' of https://github.com/socketio/socket.io-client-swift
+846897157c22c2d593cf2cee96a82c54e3b4f7f0	not-for-merge	tag 'v2.3.7' of https://github.com/socketio/socket.io-client-swift
+ea0fc9933e08940a82cb40c95e6bc98d7aa644a8	not-for-merge	tag 'v2.3.8' of https://github.com/socketio/socket.io-client-swift
+fba226a6de88dca890c20d3aaf0a77d3127e50a3	not-for-merge	tag 'v2.3.9' of https://github.com/socketio/socket.io-client-swift
+67f57daaab477f9fe77c824f6b4dcd6bd69bc266	not-for-merge	tag 'v2.4.0' of https://github.com/socketio/socket.io-client-swift
+9b9becebae995adef3435ba9f2c3ddaf3cc43f1e	not-for-merge	tag 'v2.4.1' of https://github.com/socketio/socket.io-client-swift
+9b9becebae995adef3435ba9f2c3ddaf3cc43f1e	not-for-merge	tag 'v2.4.2' of https://github.com/socketio/socket.io-client-swift
+46cea36df795b8418eb7d8957f721129b0b8f044	not-for-merge	tag 'v2.4.3' of https://github.com/socketio/socket.io-client-swift
+f6970d2f2adeb57d4161f29a563864f44e3f8cce	not-for-merge	tag 'v2.4.4' of https://github.com/socketio/socket.io-client-swift
+8320e296e94aaf3cc3e4d83a582028885fa372e9	not-for-merge	tag 'v2.4.5' of https://github.com/socketio/socket.io-client-swift
+2e7be97a38bd47fa28058fc33bdaa545d806e0f8	not-for-merge	tag 'v3.0.0' of https://github.com/socketio/socket.io-client-swift
+fd21ca00d327f3514066f9173f8dbbc6b5b0a67e	not-for-merge	tag 'v3.0.1' of https://github.com/socketio/socket.io-client-swift
+ba5638a109a108f0eba3a919903113ad61204414	not-for-merge	tag 'v3.0.2' of https://github.com/socketio/socket.io-client-swift
+13176f149c596bf8ae0a39d3bfa455ff55f8ad0d	not-for-merge	tag 'v3.1.0' of https://github.com/socketio/socket.io-client-swift
+20b28b2f4350bccb7f013a06fc0d651f4bccac1e	not-for-merge	tag 'v3.1.1' of https://github.com/socketio/socket.io-client-swift
+f933b7addc0461a77f1069abed1d60791526376d	not-for-merge	tag 'v3.1.2' of https://github.com/socketio/socket.io-client-swift
+798d8a62aebdf39434b4261b81e1ac6315022f99	not-for-merge	tag 'v3.1.3' of https://github.com/socketio/socket.io-client-swift
+4dd882b8ad87e284996ab61584c0d5d586802256	not-for-merge	tag 'v3.1.4' of https://github.com/socketio/socket.io-client-swift
+48672d8df3e6db460e4c5f995a7418bbce7d8017	not-for-merge	tag 'v3.1.5' of https://github.com/socketio/socket.io-client-swift
+1648a51b6f6506506d91c7ee2268ca45805a799b	not-for-merge	tag 'v3.1.6' of https://github.com/socketio/socket.io-client-swift
+ea7e60cde23f54c0cfefea9a20fd5a19918bcfc6	not-for-merge	tag 'v4.0.0' of https://github.com/socketio/socket.io-client-swift
+ee386304681b1e41f0276d9b18175cbc402f0516	not-for-merge	tag 'v4.0.1' of https://github.com/socketio/socket.io-client-swift
+aee0382cbc77b51aa95215db2aab98d9986c6e55	not-for-merge	tag 'v4.0.2' of https://github.com/socketio/socket.io-client-swift
+0579e7ec19ff4614bbaa0ccacb2b297eacd12f48	not-for-merge	tag 'v4.0.3' of https://github.com/socketio/socket.io-client-swift
+bba966a125dba136271caf41a9806f3277a22571	not-for-merge	tag 'v4.0.4' of https://github.com/socketio/socket.io-client-swift
+d808ae18d2f6a42a38f665ce11b0e15bd724cfca	not-for-merge	tag 'v4.1.0' of https://github.com/socketio/socket.io-client-swift
+da5977ac3161c9d5e3d85da824cb5b15d355e96d	not-for-merge	tag 'v4.1.1' of https://github.com/socketio/socket.io-client-swift
+db63aa63c2fdce4acab2fe3d0621952d53564889	not-for-merge	tag 'v4.1.2' of https://github.com/socketio/socket.io-client-swift
+b9fd6c9d5b79f10bb44ec881b32ff8cf726d7328	not-for-merge	tag 'v4.1.3' of https://github.com/socketio/socket.io-client-swift
+5848516c4ef2ce4250720d58c37129d089a560cb	not-for-merge	tag 'v4.1.4' of https://github.com/socketio/socket.io-client-swift
+7b1f72852fb945f08ca104c353761e1f66ae68cb	not-for-merge	tag 'v4.1.5' of https://github.com/socketio/socket.io-client-swift
+44c5591646de33380768a1b95cbe12d3ef4826e0	not-for-merge	tag 'v4.1.6' of https://github.com/socketio/socket.io-client-swift
+ee5934de6a23387eba4ca10f8f478cbd81565e36	not-for-merge	tag 'v5.0.0' of https://github.com/socketio/socket.io-client-swift
+95d2dce641d290efad25d346dd9723e372cede59	not-for-merge	tag 'v5.1.0' of https://github.com/socketio/socket.io-client-swift
+2e6803bd1a5f76aa96289c5ebb24afebd71a376c	not-for-merge	tag 'v5.2.0' of https://github.com/socketio/socket.io-client-swift
+4d07d2911f45bc2a436377160d6f4b81c622b6bb	not-for-merge	tag 'v5.2.1' of https://github.com/socketio/socket.io-client-swift
+90f512e03b83aa912663b04284fe5887a8d009cc	not-for-merge	tag 'v5.2.2' of https://github.com/socketio/socket.io-client-swift
+94f02e567ad3ef4ad7d36f4570a1e48eaefecaef	not-for-merge	tag 'v5.2.3' of https://github.com/socketio/socket.io-client-swift
+ff9c1bb67b5f6b22064d191a3ff29f61317583a2	not-for-merge	tag 'v5.3.0' of https://github.com/socketio/socket.io-client-swift
+da453a303e0c322d4384926b2c56b2be942c2f47	not-for-merge	tag 'v5.3.1' of https://github.com/socketio/socket.io-client-swift
+15dfba42a721a238b9f15b4364896bc1c52f704f	not-for-merge	tag 'v5.3.2' of https://github.com/socketio/socket.io-client-swift
+750ba138e17dfe2e63e9de17a6ff2cf9e7bcb186	not-for-merge	tag 'v5.3.3' of https://github.com/socketio/socket.io-client-swift
+7fe2dc2c70ef3146f462b6c3d7a20d28d0c52d30	not-for-merge	tag 'v5.4.0' of https://github.com/socketio/socket.io-client-swift
+0bf27b8c490896c560dee68683511762a4cdde13	not-for-merge	tag 'v5.4.1' of https://github.com/socketio/socket.io-client-swift
+16e0bf63193940cb22f712bfb4671299d50ed2dd	not-for-merge	tag 'v5.5.0' of https://github.com/socketio/socket.io-client-swift
+2919d4a5ce210cc0e4c42128a7bdb156b3e10ba9	not-for-merge	tag 'v6.0.0' of https://github.com/socketio/socket.io-client-swift
+98e58b3b4164c7d190576971c3da586f3e481288	not-for-merge	tag 'v6.1.0' of https://github.com/socketio/socket.io-client-swift
+c237197b8c31b3d40ddafcbe10a47d488e9e91e4	not-for-merge	tag 'v6.1.1' of https://github.com/socketio/socket.io-client-swift
+31e4c60db8bb17522c501867aafe967ab4cd3bbf	not-for-merge	tag 'v6.1.2' of https://github.com/socketio/socket.io-client-swift
+45373ad680f05d7def1f4ab1a28c74a629ee727f	not-for-merge	tag 'v6.1.3' of https://github.com/socketio/socket.io-client-swift
+05c0874f323e7917e460da5ad0a0fb70efd23923	not-for-merge	tag 'v6.1.4' of https://github.com/socketio/socket.io-client-swift
+f15a6dc4918edd6daa4e8fd120ee6fa731f559c6	not-for-merge	tag 'v6.1.5' of https://github.com/socketio/socket.io-client-swift
+6147cda561a1f3f742a568cb5b7e72c2edadbe1a	not-for-merge	tag 'v6.1.6' of https://github.com/socketio/socket.io-client-swift
+e3c8cc7fd96eb2e2aa6eea3a7cb627f0741094c8	not-for-merge	tag 'v7.0.0' of https://github.com/socketio/socket.io-client-swift
+c7c824c3c53287c669b3c8fb3890f4c902a1e09e	not-for-merge	tag 'v7.0.1' of https://github.com/socketio/socket.io-client-swift
+5bca810ce5ccfcea567333f49a440da0beda21e7	not-for-merge	tag 'v7.0.2' of https://github.com/socketio/socket.io-client-swift
+8c29d47d4ff78ee774b2e36489f328719d6534e5	not-for-merge	tag 'v7.0.3' of https://github.com/socketio/socket.io-client-swift
+1de64456bdc3f18cdcca7d6f405e357253e18c5d	not-for-merge	tag 'v8.0.0' of https://github.com/socketio/socket.io-client-swift
+0849a756864e926c2bb0b501b9005345e0009620	not-for-merge	tag 'v8.0.1' of https://github.com/socketio/socket.io-client-swift
+2faa2aeb953f05dfa7d15b92b3010f0526224f0c	not-for-merge	tag 'v8.0.2' of https://github.com/socketio/socket.io-client-swift
+85b6dc1766f5e76179ce45e6fcf4a6a6513c900f	not-for-merge	tag 'v8.1.0' of https://github.com/socketio/socket.io-client-swift
+2b8476ceca037cb5120d9272b134de35eb589163	not-for-merge	tag 'v8.1.1' of https://github.com/socketio/socket.io-client-swift
+163a770abc4842250d31b8662354d0df190c2885	not-for-merge	tag 'v8.1.2' of https://github.com/socketio/socket.io-client-swift
+0bb7fdd2eb32170f483716933b09dd7e3d6e0514	not-for-merge	tag 'v8.2.0' of https://github.com/socketio/socket.io-client-swift
+551ad7f6afd6c9eb01412f155cc08db77e6a37d4	not-for-merge	tag 'v8.3.0' of https://github.com/socketio/socket.io-client-swift
+01790af3c557b33474ca64462c380697307a0b24	not-for-merge	tag 'v8.3.1' of https://github.com/socketio/socket.io-client-swift
+3faf183cb2fc71cab55c7ee59bff8f509a35e333	not-for-merge	tag 'v8.3.2' of https://github.com/socketio/socket.io-client-swift
+1949b1fd487abb4301f57c608645357b8195aa2e	not-for-merge	tag 'v8.3.3' of https://github.com/socketio/socket.io-client-swift
+e549f6df9ae501bb7672aeb7e1291a6053ff2b8b	not-for-merge	tag 'v9.0.0' of https://github.com/socketio/socket.io-client-swift
+87ecee13e6dbba4619a05fbcc9b933352da852e9	not-for-merge	tag 'v9.0.1' of https://github.com/socketio/socket.io-client-swift
