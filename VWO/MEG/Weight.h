@@ -5,6 +5,7 @@
 //  Created by Harsh Raghav on 04/05/23.
 //
 
+#import <Foundation/Foundation.h>
 
 @interface Weight : NSObject
 

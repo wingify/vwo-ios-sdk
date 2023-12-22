@@ -360,13 +360,13 @@
 			path = MEG;
 			sourceTree = "<group>";
 		};
-		E3529571206B704600C90716 /* Socket */ = {
+		BAEC9A642B3575860050DD80 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				E3BBA35E2068FA630046B2F2 /* VWOSocket.h */,
-				E3BBA35F2068FA630046B2F2 /* VWOSocket.m */,
+				E39814D91F6288C80035D519 /* VWO.h */,
+				E3E95E8B206D0B13006DCE6C /* VWOConfig.h */,
 			);
-			path = Socket;
+			path = Public;
 			sourceTree = "<group>";
 		};
 		E35902BE2006241900ACDEBC /* CampaignTests */ = {
@@ -388,7 +388,6 @@
 			isa = PBXGroup;
 			children = (
 				E39814D81F6288C80035D519 /* VWO */,
-				E3529571206B704600C90716 /* Socket */,
 				E39814E31F6288C80035D519 /* VWOTests */,
 				E39814D71F6288C80035D519 /* Products */,
 				E3BBA33B2068F2500046B2F2 /* Frameworks */,
@@ -407,16 +406,15 @@
 		E39814D81F6288C80035D519 /* VWO */ = {
 			isa = PBXGroup;
 			children = (
+				BAEC9A642B3575860050DD80 /* Public */,
 				BAAFFEF22B064D2700112AB8 /* VWOConstants.h */,
 				BAAFFEF12B064D2700112AB8 /* VWOConstants.m */,
 				7B165AF82936AEA70060EEE2 /* MEG */,
-				E39814D91F6288C80035D519 /* VWO.h */,
 				E36AC7181F75614E0041ACDF /* VWO.m */,
 				E39815731F6291960035D519 /* VWOController.h */,
 				E39815741F6291960035D519 /* VWOController.m */,
 				E39567A1206E5DA80030B30B /* VWOCampaignFetcher.h */,
 				E39567A2206E5DA80030B30B /* VWOCampaignFetcher.m */,
-				E3E95E8B206D0B13006DCE6C /* VWOConfig.h */,
 				E3E95E8C206D0B13006DCE6C /* VWOConfig.m */,
 				E344B2EE1F87906900A4EEE6 /* VWOUserDefaults.h */,
 				E344B2EF1F87906900A4EEE6 /* VWOUserDefaults.m */,
@@ -429,6 +427,8 @@
 				E3F7CBA62004A07800CC8C03 /* VWOInfixEvaluator.h */,
 				E3F7CBA72004A07800CC8C03 /* VWOInfixEvaluator.m */,
 				E3529572206B720A00C90716 /* VWOSocketConnector.h */,
+				E3BBA35E2068FA630046B2F2 /* VWOSocket.h */,
+				E3BBA35F2068FA630046B2F2 /* VWOSocket.m */,
 				E3529573206B720A00C90716 /* VWOSocketConnector.m */,
 				E39815F71F62A13A0035D519 /* Helpers */,
 				E39815951F6293BC0035D519 /* Extensions */,
