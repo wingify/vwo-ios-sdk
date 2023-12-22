@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 	end
 
     s.subspec 'All' do |ss|
-	    ss.source_files = 'Socket/**/*.{m,h}', 'VWO/**/*.{m,h}'
+	    ss.source_files = 'VWO/**/*.{m,h}'
 	    ss.dependency 'Socket.IO-Client-Swift', '~> 15.2.0'
     end
     

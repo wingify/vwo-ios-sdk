@@ -1,1853 +1,1145 @@
 // !$*UTF8*$!
 {
-   archiveVersion = "1";
-   objectVersion = "46";
-   objects = {
-      "OBJ_1" = {
-         isa = "PBXProject";
-         attributes = {
-            LastSwiftMigration = "9999";
-            LastUpgradeCheck = "9999";
-         };
-         buildConfigurationList = "OBJ_2";
-         compatibilityVersion = "Xcode 3.2";
-         developmentRegion = "en";
-         hasScannedForEncodings = "0";
-         knownRegions = (
-            "en"
-         );
-         mainGroup = "OBJ_5";
-         productRefGroup = "OBJ_110";
-         projectDirPath = ".";
-         targets = (
-            "socket.io-client-swift::SocketIO",
-            "socket.io-client-swift::SwiftPMPackageDescription",
-            "starscream::Starscream",
-            "starscream::SwiftPMPackageDescription",
-            "vwo-ios-sdk::VWO",
-            "vwo-ios-sdk::SwiftPMPackageDescription"
-         );
-      };
-      "OBJ_10" = {
-         isa = "PBXFileReference";
-         path = "VWOCampaignFetcher.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_100" = {
-         isa = "PBXFileReference";
-         path = "SocketStringReader.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_101" = {
-         isa = "PBXFileReference";
-         path = "SocketTypes.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_102" = {
-         isa = "PBXFileReference";
-         explicitFileType = "sourcecode.swift";
-         name = "Package.swift";
-         path = "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Package.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_103" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_104",
-            "OBJ_109"
-         );
-         name = "Starscream 3.1.2";
-         path = "";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_104" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_105",
-            "OBJ_106",
-            "OBJ_107",
-            "OBJ_108"
-         );
-         name = "Starscream";
-         path = ".build/checkouts/Starscream/Sources/Starscream";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_105" = {
-         isa = "PBXFileReference";
-         path = "Compression.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_106" = {
-         isa = "PBXFileReference";
-         path = "SSLClientCertificate.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_107" = {
-         isa = "PBXFileReference";
-         path = "SSLSecurity.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_108" = {
-         isa = "PBXFileReference";
-         path = "WebSocket.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_109" = {
-         isa = "PBXFileReference";
-         explicitFileType = "sourcecode.swift";
-         name = "Package.swift";
-         path = "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/Starscream/Package.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_11" = {
-         isa = "PBXFileReference";
-         path = "VWOConstants.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_110" = {
-         isa = "PBXGroup";
-         children = (
-            "socket.io-client-swift::SocketIO::Product",
-            "starscream::Starscream::Product",
-            "vwo-ios-sdk::VWO::Product"
-         );
-         name = "Products";
-         path = "";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "OBJ_114" = {
-         isa = "PBXFileReference";
-         path = "VWOTests";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_115" = {
-         isa = "PBXFileReference";
-         path = "Demo";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_116" = {
-         isa = "PBXFileReference";
-         path = "VWO";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_117" = {
-         isa = "PBXFileReference";
-         path = "VWO.xcworkspace";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_118" = {
-         isa = "PBXFileReference";
-         path = "Cartfile.resolved";
-         sourceTree = "<group>";
-      };
-      "OBJ_119" = {
-         isa = "PBXFileReference";
-         path = "LICENSE";
-         sourceTree = "<group>";
-      };
-      "OBJ_12" = {
-         isa = "PBXFileReference";
-         path = "VWOSegmentEvaluator.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_120" = {
-         isa = "PBXFileReference";
-         path = "Cartfile";
-         sourceTree = "<group>";
-      };
-      "OBJ_121" = {
-         isa = "PBXFileReference";
-         path = "README.md";
-         sourceTree = "<group>";
-      };
-      "OBJ_122" = {
-         isa = "PBXFileReference";
-         path = "VWO.podspec";
-         sourceTree = "<group>";
-      };
-      "OBJ_123" = {
-         isa = "PBXFileReference";
-         path = "wcarthage";
-         sourceTree = "<group>";
-      };
-      "OBJ_125" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_126",
-            "OBJ_127"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_126" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CURRENT_PROJECT_VERSION = "1";
-            DRIVERKIT_DEPLOYMENT_TARGET = "19.0";
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "VWO.xcodeproj/SocketIO_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "11.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.13";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "SocketIO";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "SocketIO";
-            TVOS_DEPLOYMENT_TARGET = "11.0";
-            WATCHOS_DEPLOYMENT_TARGET = "4.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_127" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CURRENT_PROJECT_VERSION = "1";
-            DRIVERKIT_DEPLOYMENT_TARGET = "19.0";
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "VWO.xcodeproj/SocketIO_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "11.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.13";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "SocketIO";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "5.0";
-            TARGET_NAME = "SocketIO";
-            TVOS_DEPLOYMENT_TARGET = "11.0";
-            WATCHOS_DEPLOYMENT_TARGET = "4.0";
-         };
-         name = "Release";
-      };
-      "OBJ_128" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_129",
-            "OBJ_130",
-            "OBJ_131",
-            "OBJ_132",
-            "OBJ_133",
-            "OBJ_134",
-            "OBJ_135",
-            "OBJ_136",
-            "OBJ_137",
-            "OBJ_138",
-            "OBJ_139",
-            "OBJ_140",
-            "OBJ_141",
-            "OBJ_142",
-            "OBJ_143",
-            "OBJ_144",
-            "OBJ_145",
-            "OBJ_146",
-            "OBJ_147",
-            "OBJ_148",
-            "OBJ_149",
-            "OBJ_150",
-            "OBJ_151",
-            "OBJ_152",
-            "OBJ_153"
-         );
-      };
-      "OBJ_129" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_72";
-      };
-      "OBJ_13" = {
-         isa = "PBXFileReference";
-         path = "VWOUserDefaults.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_130" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_73";
-      };
-      "OBJ_131" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_75";
-      };
-      "OBJ_132" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_76";
-      };
-      "OBJ_133" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_77";
-      };
-      "OBJ_134" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_78";
-      };
-      "OBJ_135" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_79";
-      };
-      "OBJ_136" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_80";
-      };
-      "OBJ_137" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_81";
-      };
-      "OBJ_138" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_82";
-      };
-      "OBJ_139" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_84";
-      };
-      "OBJ_14" = {
-         isa = "PBXFileReference";
-         path = "VWOURL.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_140" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_85";
-      };
-      "OBJ_141" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_86";
-      };
-      "OBJ_142" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_87";
-      };
-      "OBJ_143" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_88";
-      };
-      "OBJ_144" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_89";
-      };
-      "OBJ_145" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_91";
-      };
-      "OBJ_146" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_92";
-      };
-      "OBJ_147" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_94";
-      };
-      "OBJ_148" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_95";
-      };
-      "OBJ_149" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_97";
-      };
-      "OBJ_15" = {
-         isa = "PBXFileReference";
-         path = "VWOInfixEvaluator.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_150" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_98";
-      };
-      "OBJ_151" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_99";
-      };
-      "OBJ_152" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_100";
-      };
-      "OBJ_153" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_101";
-      };
-      "OBJ_154" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-            "OBJ_155"
-         );
-      };
-      "OBJ_155" = {
-         isa = "PBXBuildFile";
-         fileRef = "starscream::Starscream::Product";
-      };
-      "OBJ_156" = {
-         isa = "PBXTargetDependency";
-         target = "starscream::Starscream";
-      };
-      "OBJ_159" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_160",
-            "OBJ_161"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_16" = {
-         isa = "PBXFileReference";
-         path = "VWOURLQueue.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_160" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI",
-               "-sdk",
-               "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
-               "-package-description-version",
-               "5.0.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_161" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI",
-               "-sdk",
-               "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
-               "-package-description-version",
-               "5.0.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Release";
-      };
-      "OBJ_162" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_163"
-         );
-      };
-      "OBJ_163" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_102";
-      };
-      "OBJ_164" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_165",
-            "OBJ_166"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_165" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CURRENT_PROJECT_VERSION = "1";
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "VWO.xcodeproj/Starscream_Info.plist";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "Starscream";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "4.2";
-            TARGET_NAME = "Starscream";
-         };
-         name = "Debug";
-      };
-      "OBJ_166" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CURRENT_PROJECT_VERSION = "1";
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)"
-            );
-            INFOPLIST_FILE = "VWO.xcodeproj/Starscream_Info.plist";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "Starscream";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            SWIFT_VERSION = "4.2";
-            TARGET_NAME = "Starscream";
-         };
-         name = "Release";
-      };
-      "OBJ_167" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_168",
-            "OBJ_169",
-            "OBJ_170",
-            "OBJ_171"
-         );
-      };
-      "OBJ_168" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_105";
-      };
-      "OBJ_169" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_106";
-      };
-      "OBJ_17" = {
-         isa = "PBXFileReference";
-         path = "VWOController.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_170" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_107";
-      };
-      "OBJ_171" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_108";
-      };
-      "OBJ_172" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-         );
-      };
-      "OBJ_174" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_175",
-            "OBJ_176"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_175" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "4.2",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI",
-               "-sdk",
-               "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
-               "-package-description-version",
-               "4.2.0"
-            );
-            SWIFT_VERSION = "4.2";
-         };
-         name = "Debug";
-      };
-      "OBJ_176" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "4.2",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI",
-               "-sdk",
-               "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
-               "-package-description-version",
-               "4.2.0"
-            );
-            SWIFT_VERSION = "4.2";
-         };
-         name = "Release";
-      };
-      "OBJ_177" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_178"
-         );
-      };
-      "OBJ_178" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_109";
-      };
-      "OBJ_18" = {
-         isa = "PBXFileReference";
-         path = "VWOSocket.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_180" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_181",
-            "OBJ_182"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_181" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            CURRENT_PROJECT_VERSION = "1";
-            DEFINES_MODULE = "YES";
-            DRIVERKIT_DEPLOYMENT_TARGET = "19.0";
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/VWO/Public",
-               "",
-               "Extensions/",
-               "Helpers/",
-               "Models/"
-            );
-            INFOPLIST_FILE = "VWO.xcodeproj/VWO_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "11.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.13";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "VWO";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            TARGET_NAME = "VWO";
-            TVOS_DEPLOYMENT_TARGET = "11.0";
-            WATCHOS_DEPLOYMENT_TARGET = "4.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_182" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_MODULES = "YES";
-            CURRENT_PROJECT_VERSION = "1";
-            DEFINES_MODULE = "YES";
-            DRIVERKIT_DEPLOYMENT_TARGET = "19.0";
-            ENABLE_TESTABILITY = "YES";
-            FRAMEWORK_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(PLATFORM_DIR)/Developer/Library/Frameworks"
-            );
-            HEADER_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(SRCROOT)/VWO/Public",
-               "",
-               "Extensions/",
-               "Helpers/",
-               "Models/"
-            );
-            INFOPLIST_FILE = "VWO.xcodeproj/VWO_Info.plist";
-            IPHONEOS_DEPLOYMENT_TARGET = "11.0";
-            LD_RUNPATH_SEARCH_PATHS = (
-               "$(inherited)",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.13";
-            OTHER_CFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_LDFLAGS = (
-               "$(inherited)"
-            );
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)"
-            );
-            PRODUCT_BUNDLE_IDENTIFIER = "VWO";
-            PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-            PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-            SKIP_INSTALL = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)"
-            );
-            TARGET_NAME = "VWO";
-            TVOS_DEPLOYMENT_TARGET = "11.0";
-            WATCHOS_DEPLOYMENT_TARGET = "4.0";
-         };
-         name = "Release";
-      };
-      "OBJ_183" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_184",
-            "OBJ_185",
-            "OBJ_186",
-            "OBJ_187",
-            "OBJ_188",
-            "OBJ_189",
-            "OBJ_190",
-            "OBJ_191",
-            "OBJ_192",
-            "OBJ_193",
-            "OBJ_194",
-            "OBJ_195",
-            "OBJ_196",
-            "OBJ_197",
-            "OBJ_198",
-            "OBJ_199",
-            "OBJ_200",
-            "OBJ_201",
-            "OBJ_202",
-            "OBJ_203",
-            "OBJ_204",
-            "OBJ_205",
-            "OBJ_206",
-            "OBJ_207",
-            "OBJ_208",
-            "OBJ_209",
-            "OBJ_210",
-            "OBJ_211",
-            "OBJ_212",
-            "OBJ_213",
-            "OBJ_214",
-            "OBJ_215",
-            "OBJ_216",
-            "OBJ_217",
-            "OBJ_218",
-            "OBJ_219",
-            "OBJ_220",
-            "OBJ_221",
-            "OBJ_222",
-            "OBJ_223"
-         );
-      };
-      "OBJ_184" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_21";
-      };
-      "OBJ_185" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_22";
-      };
-      "OBJ_186" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_23";
-      };
-      "OBJ_187" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_24";
-      };
-      "OBJ_188" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_25";
-      };
-      "OBJ_189" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_27";
-      };
-      "OBJ_19" = {
-         isa = "PBXFileReference";
-         path = "Info.plist";
-         sourceTree = "<group>";
-      };
-      "OBJ_190" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_28";
-      };
-      "OBJ_191" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_29";
-      };
-      "OBJ_192" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_31";
-      };
-      "OBJ_193" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_32";
-      };
-      "OBJ_194" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_33";
-      };
-      "OBJ_195" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_34";
-      };
-      "OBJ_196" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_35";
-      };
-      "OBJ_197" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_36";
-      };
-      "OBJ_198" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_37";
-      };
-      "OBJ_199" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_38";
-      };
-      "OBJ_2" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_3",
-            "OBJ_4"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_20" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_21",
-            "OBJ_22",
-            "OBJ_23",
-            "OBJ_24",
-            "OBJ_25"
-         );
-         name = "Extensions";
-         path = "Extensions";
-         sourceTree = "<group>";
-      };
-      "OBJ_200" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_39";
-      };
-      "OBJ_201" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_40";
-      };
-      "OBJ_202" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_41";
-      };
-      "OBJ_203" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_42";
-      };
-      "OBJ_204" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_43";
-      };
-      "OBJ_205" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_45";
-      };
-      "OBJ_206" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_46";
-      };
-      "OBJ_207" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_47";
-      };
-      "OBJ_208" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_48";
-      };
-      "OBJ_209" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_49";
-      };
-      "OBJ_21" = {
-         isa = "PBXFileReference";
-         path = "NSDate+VWO.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_210" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_50";
-      };
-      "OBJ_211" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_51";
-      };
-      "OBJ_212" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_52";
-      };
-      "OBJ_213" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_53";
-      };
-      "OBJ_214" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_54";
-      };
-      "OBJ_215" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_55";
-      };
-      "OBJ_216" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_56";
-      };
-      "OBJ_217" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_57";
-      };
-      "OBJ_218" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_58";
-      };
-      "OBJ_219" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_59";
-      };
-      "OBJ_22" = {
-         isa = "PBXFileReference";
-         path = "NSDictionary+VWO.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_220" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_60";
-      };
-      "OBJ_221" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_61";
-      };
-      "OBJ_222" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_62";
-      };
-      "OBJ_223" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_63";
-      };
-      "OBJ_224" = {
-         isa = "PBXHeadersBuildPhase";
-         files = (
-            "OBJ_225",
-            "OBJ_226"
-         );
-      };
-      "OBJ_225" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_65";
-         settings = {
-            ATTRIBUTES = (
-               "Public"
-            );
-         };
-      };
-      "OBJ_226" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_66";
-         settings = {
-            ATTRIBUTES = (
-               "Public"
-            );
-         };
-      };
-      "OBJ_227" = {
-         isa = "PBXFrameworksBuildPhase";
-         files = (
-            "OBJ_228",
-            "OBJ_229"
-         );
-      };
-      "OBJ_228" = {
-         isa = "PBXBuildFile";
-         fileRef = "socket.io-client-swift::SocketIO::Product";
-      };
-      "OBJ_229" = {
-         isa = "PBXBuildFile";
-         fileRef = "starscream::Starscream::Product";
-      };
-      "OBJ_23" = {
-         isa = "PBXFileReference";
-         path = "NSString+MD5.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_230" = {
-         isa = "PBXTargetDependency";
-         target = "socket.io-client-swift::SocketIO";
-      };
-      "OBJ_231" = {
-         isa = "PBXTargetDependency";
-         target = "starscream::Starscream";
-      };
-      "OBJ_233" = {
-         isa = "XCConfigurationList";
-         buildConfigurations = (
-            "OBJ_234",
-            "OBJ_235"
-         );
-         defaultConfigurationIsVisible = "0";
-         defaultConfigurationName = "Release";
-      };
-      "OBJ_234" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI",
-               "-sdk",
-               "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
-               "-package-description-version",
-               "5.6.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Debug";
-      };
-      "OBJ_235" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            LD = "/usr/bin/true";
-            OTHER_SWIFT_FLAGS = (
-               "-swift-version",
-               "5",
-               "-I",
-               "$(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI",
-               "-sdk",
-               "/Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
-               "-package-description-version",
-               "5.6.0"
-            );
-            SWIFT_VERSION = "5.0";
-         };
-         name = "Release";
-      };
-      "OBJ_236" = {
-         isa = "PBXSourcesBuildPhase";
-         files = (
-            "OBJ_237"
-         );
-      };
-      "OBJ_237" = {
-         isa = "PBXBuildFile";
-         fileRef = "OBJ_6";
-      };
-      "OBJ_24" = {
-         isa = "PBXFileReference";
-         path = "NSString+VWO.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_25" = {
-         isa = "PBXFileReference";
-         path = "NSURLSession+Synchronous.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_26" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_27",
-            "OBJ_28",
-            "OBJ_29"
-         );
-         name = "Helpers";
-         path = "Helpers";
-         sourceTree = "<group>";
-      };
-      "OBJ_27" = {
-         isa = "PBXFileReference";
-         path = "VWODevice.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_28" = {
-         isa = "PBXFileReference";
-         path = "VWOFile.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_29" = {
-         isa = "PBXFileReference";
-         path = "VWOLogger.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_3" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_OBJC_ARC = "YES";
-            COMBINE_HIDPI_IMAGES = "YES";
-            COPY_PHASE_STRIP = "NO";
-            DEBUG_INFORMATION_FORMAT = "dwarf";
-            DYLIB_INSTALL_NAME_BASE = "@rpath";
-            ENABLE_NS_ASSERTIONS = "YES";
-            GCC_OPTIMIZATION_LEVEL = "0";
-            GCC_PREPROCESSOR_DEFINITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE=1",
-               "DEBUG=1"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            ONLY_ACTIVE_ARCH = "YES";
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)",
-               "-DXcode"
-            );
-            PRODUCT_NAME = "$(TARGET_NAME)";
-            SDKROOT = "macosx";
-            SUPPORTED_PLATFORMS = (
-               "$(AVAILABLE_PLATFORMS)"
-            );
-            SUPPORTS_MACCATALYST = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE",
-               "DEBUG"
-            );
-            SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-            USE_HEADERMAP = "NO";
-         };
-         name = "Debug";
-      };
-      "OBJ_30" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_31",
-            "OBJ_32",
-            "OBJ_33",
-            "OBJ_34",
-            "OBJ_35",
-            "OBJ_36",
-            "OBJ_37",
-            "OBJ_38",
-            "OBJ_39",
-            "OBJ_40",
-            "OBJ_41",
-            "OBJ_42",
-            "OBJ_43"
-         );
-         name = "MEG";
-         path = "MEG";
-         sourceTree = "<group>";
-      };
-      "OBJ_31" = {
-         isa = "PBXFileReference";
-         path = "CampaignGroupMapper.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_32" = {
-         isa = "PBXFileReference";
-         path = "CampaignUniquenessTracker.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_33" = {
-         isa = "PBXFileReference";
-         path = "Group.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_34" = {
-         isa = "PBXFileReference";
-         path = "MEGManager.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_35" = {
-         isa = "PBXFileReference";
-         path = "Mapping.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_36" = {
-         isa = "PBXFileReference";
-         path = "MurmurHash.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_37" = {
-         isa = "PBXFileReference";
-         path = "MutuallyExclusiveGroups.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_38" = {
-         isa = "PBXFileReference";
-         path = "Pair.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_39" = {
-         isa = "PBXFileReference";
-         path = "PriorityQualificationWinnerResult.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_4" = {
-         isa = "XCBuildConfiguration";
-         buildSettings = {
-            CLANG_ENABLE_OBJC_ARC = "YES";
-            COMBINE_HIDPI_IMAGES = "YES";
-            COPY_PHASE_STRIP = "YES";
-            DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-            DYLIB_INSTALL_NAME_BASE = "@rpath";
-            GCC_OPTIMIZATION_LEVEL = "s";
-            GCC_PREPROCESSOR_DEFINITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE=1"
-            );
-            MACOSX_DEPLOYMENT_TARGET = "10.10";
-            OTHER_SWIFT_FLAGS = (
-               "$(inherited)",
-               "-DXcode"
-            );
-            PRODUCT_NAME = "$(TARGET_NAME)";
-            SDKROOT = "macosx";
-            SUPPORTED_PLATFORMS = (
-               "$(AVAILABLE_PLATFORMS)"
-            );
-            SUPPORTS_MACCATALYST = "YES";
-            SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-               "$(inherited)",
-               "SWIFT_PACKAGE"
-            );
-            SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-            USE_HEADERMAP = "NO";
-         };
-         name = "Release";
-      };
-      "OBJ_40" = {
-         isa = "PBXFileReference";
-         path = "Response.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_41" = {
-         isa = "PBXFileReference";
-         path = "Weight.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_42" = {
-         isa = "PBXFileReference";
-         path = "Winner.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_43" = {
-         isa = "PBXFileReference";
-         path = "WinnerManager.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_44" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_45",
-            "OBJ_46",
-            "OBJ_47",
-            "OBJ_48",
-            "OBJ_49",
-            "OBJ_50",
-            "OBJ_51"
-         );
-         name = "Models";
-         path = "Models";
-         sourceTree = "<group>";
-      };
-      "OBJ_45" = {
-         isa = "PBXFileReference";
-         path = "VWOCampaign.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_46" = {
-         isa = "PBXFileReference";
-         path = "VWOGoal.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_47" = {
-         isa = "PBXFileReference";
-         path = "VWOGroup.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_48" = {
-         isa = "PBXFileReference";
-         path = "VWOQueue.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_49" = {
-         isa = "PBXFileReference";
-         path = "VWOSegment.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_5" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_6",
-            "OBJ_7",
-            "OBJ_67",
-            "OBJ_68",
-            "OBJ_110",
-            "OBJ_114",
-            "OBJ_115",
-            "OBJ_116",
-            "OBJ_117",
-            "OBJ_118",
-            "OBJ_119",
-            "OBJ_120",
-            "OBJ_121",
-            "OBJ_122",
-            "OBJ_123"
-         );
-         path = "";
-         sourceTree = "<group>";
-      };
-      "OBJ_50" = {
-         isa = "PBXFileReference";
-         path = "VWOStack.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_51" = {
-         isa = "PBXFileReference";
-         path = "VWOVariation.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_52" = {
-         isa = "PBXFileReference";
-         path = "VWO.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_53" = {
-         isa = "PBXFileReference";
-         path = "VWOCampaignFetcher.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_54" = {
-         isa = "PBXFileReference";
-         path = "VWOConfig.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_55" = {
-         isa = "PBXFileReference";
-         path = "VWOConstants.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_56" = {
-         isa = "PBXFileReference";
-         path = "VWOController.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_57" = {
-         isa = "PBXFileReference";
-         path = "VWOInfixEvaluator.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_58" = {
-         isa = "PBXFileReference";
-         path = "VWOSegmentEvaluator.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_59" = {
-         isa = "PBXFileReference";
-         path = "VWOSocket.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_6" = {
-         isa = "PBXFileReference";
-         explicitFileType = "sourcecode.swift";
-         path = "Package.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_60" = {
-         isa = "PBXFileReference";
-         path = "VWOSocketConnector.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_61" = {
-         isa = "PBXFileReference";
-         path = "VWOURL.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_62" = {
-         isa = "PBXFileReference";
-         path = "VWOURLQueue.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_63" = {
-         isa = "PBXFileReference";
-         path = "VWOUserDefaults.m";
-         sourceTree = "<group>";
-      };
-      "OBJ_64" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_65",
-            "OBJ_66"
-         );
-         name = "Public";
-         path = "Public";
-         sourceTree = "<group>";
-      };
-      "OBJ_65" = {
-         isa = "PBXFileReference";
-         path = "VWOConfig.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_66" = {
-         isa = "PBXFileReference";
-         path = "VWO.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_67" = {
-         isa = "PBXGroup";
-         children = (
-         );
-         name = "Tests";
-         path = "";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_68" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_69",
-            "OBJ_103"
-         );
-         name = "Dependencies";
-         path = "";
-         sourceTree = "<group>";
-      };
-      "OBJ_69" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_70",
-            "OBJ_102"
-         );
-         name = "SocketIO 15.2.0";
-         path = "";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_7" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_8"
-         );
-         name = "Sources";
-         path = "";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_70" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_71",
-            "OBJ_74",
-            "OBJ_83",
-            "OBJ_90",
-            "OBJ_93",
-            "OBJ_96"
-         );
-         name = "SocketIO";
-         path = ".build/checkouts/socket.io-client-swift/Source/SocketIO";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_71" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_72",
-            "OBJ_73"
-         );
-         name = "Ack";
-         path = "Ack";
-         sourceTree = "<group>";
-      };
-      "OBJ_72" = {
-         isa = "PBXFileReference";
-         path = "SocketAckEmitter.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_73" = {
-         isa = "PBXFileReference";
-         path = "SocketAckManager.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_74" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_75",
-            "OBJ_76",
-            "OBJ_77",
-            "OBJ_78",
-            "OBJ_79",
-            "OBJ_80",
-            "OBJ_81",
-            "OBJ_82"
-         );
-         name = "Client";
-         path = "Client";
-         sourceTree = "<group>";
-      };
-      "OBJ_75" = {
-         isa = "PBXFileReference";
-         path = "SocketAnyEvent.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_76" = {
-         isa = "PBXFileReference";
-         path = "SocketEventHandler.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_77" = {
-         isa = "PBXFileReference";
-         path = "SocketIOClient.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_78" = {
-         isa = "PBXFileReference";
-         path = "SocketIOClientConfiguration.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_79" = {
-         isa = "PBXFileReference";
-         path = "SocketIOClientOption.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_8" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_9",
-            "OBJ_10",
-            "OBJ_11",
-            "OBJ_12",
-            "OBJ_13",
-            "OBJ_14",
-            "OBJ_15",
-            "OBJ_16",
-            "OBJ_17",
-            "OBJ_18",
-            "OBJ_19",
-            "OBJ_20",
-            "OBJ_26",
-            "OBJ_30",
-            "OBJ_44",
-            "OBJ_52",
-            "OBJ_53",
-            "OBJ_54",
-            "OBJ_55",
-            "OBJ_56",
-            "OBJ_57",
-            "OBJ_58",
-            "OBJ_59",
-            "OBJ_60",
-            "OBJ_61",
-            "OBJ_62",
-            "OBJ_63",
-            "OBJ_64"
-         );
-         name = "VWO";
-         path = "VWO";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_80" = {
-         isa = "PBXFileReference";
-         path = "SocketIOClientSpec.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_81" = {
-         isa = "PBXFileReference";
-         path = "SocketIOStatus.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_82" = {
-         isa = "PBXFileReference";
-         path = "SocketRawView.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_83" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_84",
-            "OBJ_85",
-            "OBJ_86",
-            "OBJ_87",
-            "OBJ_88",
-            "OBJ_89"
-         );
-         name = "Engine";
-         path = "Engine";
-         sourceTree = "<group>";
-      };
-      "OBJ_84" = {
-         isa = "PBXFileReference";
-         path = "SocketEngine.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_85" = {
-         isa = "PBXFileReference";
-         path = "SocketEngineClient.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_86" = {
-         isa = "PBXFileReference";
-         path = "SocketEnginePacketType.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_87" = {
-         isa = "PBXFileReference";
-         path = "SocketEnginePollable.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_88" = {
-         isa = "PBXFileReference";
-         path = "SocketEngineSpec.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_89" = {
-         isa = "PBXFileReference";
-         path = "SocketEngineWebsocket.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_9" = {
-         isa = "PBXFileReference";
-         path = "VWOSocketConnector.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_90" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_91",
-            "OBJ_92"
-         );
-         name = "Manager";
-         path = "Manager";
-         sourceTree = "<group>";
-      };
-      "OBJ_91" = {
-         isa = "PBXFileReference";
-         path = "SocketManager.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_92" = {
-         isa = "PBXFileReference";
-         path = "SocketManagerSpec.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_93" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_94",
-            "OBJ_95"
-         );
-         name = "Parse";
-         path = "Parse";
-         sourceTree = "<group>";
-      };
-      "OBJ_94" = {
-         isa = "PBXFileReference";
-         path = "SocketPacket.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_95" = {
-         isa = "PBXFileReference";
-         path = "SocketParsable.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_96" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_97",
-            "OBJ_98",
-            "OBJ_99",
-            "OBJ_100",
-            "OBJ_101"
-         );
-         name = "Util";
-         path = "Util";
-         sourceTree = "<group>";
-      };
-      "OBJ_97" = {
-         isa = "PBXFileReference";
-         path = "SSLSecurity.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_98" = {
-         isa = "PBXFileReference";
-         path = "SocketExtensions.swift";
-         sourceTree = "<group>";
-      };
-      "OBJ_99" = {
-         isa = "PBXFileReference";
-         path = "SocketLogger.swift";
-         sourceTree = "<group>";
-      };
-      "socket.io-client-swift::SocketIO" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_125";
-         buildPhases = (
-            "OBJ_128",
-            "OBJ_154"
-         );
-         dependencies = (
-            "OBJ_156"
-         );
-         name = "SocketIO";
-         productName = "SocketIO";
-         productReference = "socket.io-client-swift::SocketIO::Product";
-         productType = "com.apple.product-type.framework";
-      };
-      "socket.io-client-swift::SocketIO::Product" = {
-         isa = "PBXFileReference";
-         path = "SocketIO.framework";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "socket.io-client-swift::SwiftPMPackageDescription" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_159";
-         buildPhases = (
-            "OBJ_162"
-         );
-         dependencies = (
-         );
-         name = "SocketIOPackageDescription";
-         productName = "SocketIOPackageDescription";
-         productType = "com.apple.product-type.framework";
-      };
-      "starscream::Starscream" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_164";
-         buildPhases = (
-            "OBJ_167",
-            "OBJ_172"
-         );
-         dependencies = (
-         );
-         name = "Starscream";
-         productName = "Starscream";
-         productReference = "starscream::Starscream::Product";
-         productType = "com.apple.product-type.framework";
-      };
-      "starscream::Starscream::Product" = {
-         isa = "PBXFileReference";
-         path = "Starscream.framework";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-      "starscream::SwiftPMPackageDescription" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_174";
-         buildPhases = (
-            "OBJ_177"
-         );
-         dependencies = (
-         );
-         name = "StarscreamPackageDescription";
-         productName = "StarscreamPackageDescription";
-         productType = "com.apple.product-type.framework";
-      };
-      "vwo-ios-sdk::SwiftPMPackageDescription" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_233";
-         buildPhases = (
-            "OBJ_236"
-         );
-         dependencies = (
-         );
-         name = "VWOPackageDescription";
-         productName = "VWOPackageDescription";
-         productType = "com.apple.product-type.framework";
-      };
-      "vwo-ios-sdk::VWO" = {
-         isa = "PBXNativeTarget";
-         buildConfigurationList = "OBJ_180";
-         buildPhases = (
-            "OBJ_183",
-            "OBJ_224",
-            "OBJ_227"
-         );
-         dependencies = (
-            "OBJ_230",
-            "OBJ_231"
-         );
-         name = "VWO";
-         productName = "VWO";
-         productReference = "vwo-ios-sdk::VWO::Product";
-         productType = "com.apple.product-type.framework";
-      };
-      "vwo-ios-sdk::VWO::Product" = {
-         isa = "PBXFileReference";
-         path = "VWO.framework";
-         sourceTree = "BUILT_PRODUCTS_DIR";
-      };
-   };
-   rootObject = "OBJ_1";
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		OBJ_129 /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_72 /* SocketAckEmitter.swift */; };
+		OBJ_130 /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_73 /* SocketAckManager.swift */; };
+		OBJ_131 /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_75 /* SocketAnyEvent.swift */; };
+		OBJ_132 /* SocketEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_76 /* SocketEventHandler.swift */; };
+		OBJ_133 /* SocketIOClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_77 /* SocketIOClient.swift */; };
+		OBJ_134 /* SocketIOClientConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_78 /* SocketIOClientConfiguration.swift */; };
+		OBJ_135 /* SocketIOClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_79 /* SocketIOClientOption.swift */; };
+		OBJ_136 /* SocketIOClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_80 /* SocketIOClientSpec.swift */; };
+		OBJ_137 /* SocketIOStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_81 /* SocketIOStatus.swift */; };
+		OBJ_138 /* SocketRawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_82 /* SocketRawView.swift */; };
+		OBJ_139 /* SocketEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_84 /* SocketEngine.swift */; };
+		OBJ_140 /* SocketEngineClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_85 /* SocketEngineClient.swift */; };
+		OBJ_141 /* SocketEnginePacketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_86 /* SocketEnginePacketType.swift */; };
+		OBJ_142 /* SocketEnginePollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_87 /* SocketEnginePollable.swift */; };
+		OBJ_143 /* SocketEngineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_88 /* SocketEngineSpec.swift */; };
+		OBJ_144 /* SocketEngineWebsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_89 /* SocketEngineWebsocket.swift */; };
+		OBJ_145 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_91 /* SocketManager.swift */; };
+		OBJ_146 /* SocketManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_92 /* SocketManagerSpec.swift */; };
+		OBJ_147 /* SocketPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_94 /* SocketPacket.swift */; };
+		OBJ_148 /* SocketParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_95 /* SocketParsable.swift */; };
+		OBJ_149 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* SSLSecurity.swift */; };
+		OBJ_150 /* SocketExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_98 /* SocketExtensions.swift */; };
+		OBJ_151 /* SocketLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_99 /* SocketLogger.swift */; };
+		OBJ_152 /* SocketStringReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_100 /* SocketStringReader.swift */; };
+		OBJ_153 /* SocketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_101 /* SocketTypes.swift */; };
+		OBJ_155 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "starscream::Starscream::Product" /* Starscream.framework */; };
+		OBJ_163 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_102 /* Package.swift */; };
+		OBJ_168 /* Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_105 /* Compression.swift */; };
+		OBJ_169 /* SSLClientCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_106 /* SSLClientCertificate.swift */; };
+		OBJ_170 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_107 /* SSLSecurity.swift */; };
+		OBJ_171 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_108 /* WebSocket.swift */; };
+		OBJ_178 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_109 /* Package.swift */; };
+		OBJ_184 /* NSDate+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* NSDate+VWO.m */; };
+		OBJ_185 /* NSDictionary+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* NSDictionary+VWO.m */; };
+		OBJ_186 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* NSString+MD5.m */; };
+		OBJ_187 /* NSString+VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* NSString+VWO.m */; };
+		OBJ_188 /* NSURLSession+Synchronous.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* NSURLSession+Synchronous.m */; };
+		OBJ_189 /* VWODevice.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* VWODevice.m */; };
+		OBJ_190 /* VWOFile.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* VWOFile.m */; };
+		OBJ_191 /* VWOLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* VWOLogger.m */; };
+		OBJ_192 /* CampaignGroupMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* CampaignGroupMapper.m */; };
+		OBJ_193 /* CampaignUniquenessTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* CampaignUniquenessTracker.m */; };
+		OBJ_194 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* Group.m */; };
+		OBJ_195 /* MEGManager.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* MEGManager.m */; };
+		OBJ_196 /* Mapping.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Mapping.m */; };
+		OBJ_197 /* MurmurHash.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* MurmurHash.m */; };
+		OBJ_198 /* MutuallyExclusiveGroups.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* MutuallyExclusiveGroups.m */; };
+		OBJ_199 /* Pair.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* Pair.m */; };
+		OBJ_200 /* PriorityQualificationWinnerResult.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* PriorityQualificationWinnerResult.m */; };
+		OBJ_201 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* Response.m */; };
+		OBJ_202 /* Weight.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* Weight.m */; };
+		OBJ_203 /* Winner.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* Winner.m */; };
+		OBJ_204 /* WinnerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* WinnerManager.m */; };
+		OBJ_205 /* VWOCampaign.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* VWOCampaign.m */; };
+		OBJ_206 /* VWOGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* VWOGoal.m */; };
+		OBJ_207 /* VWOGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* VWOGroup.m */; };
+		OBJ_208 /* VWOQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* VWOQueue.m */; };
+		OBJ_209 /* VWOSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* VWOSegment.m */; };
+		OBJ_210 /* VWOStack.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* VWOStack.m */; };
+		OBJ_211 /* VWOVariation.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* VWOVariation.m */; };
+		OBJ_212 /* VWO.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_52 /* VWO.m */; };
+		OBJ_213 /* VWOCampaignFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* VWOCampaignFetcher.m */; };
+		OBJ_214 /* VWOConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* VWOConfig.m */; };
+		OBJ_215 /* VWOConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_55 /* VWOConstants.m */; };
+		OBJ_216 /* VWOController.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* VWOController.m */; };
+		OBJ_217 /* VWOInfixEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* VWOInfixEvaluator.m */; };
+		OBJ_218 /* VWOSegmentEvaluator.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* VWOSegmentEvaluator.m */; };
+		OBJ_219 /* VWOSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* VWOSocket.m */; };
+		OBJ_220 /* VWOSocketConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* VWOSocketConnector.m */; };
+		OBJ_221 /* VWOURL.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* VWOURL.m */; };
+		OBJ_222 /* VWOURLQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_62 /* VWOURLQueue.m */; };
+		OBJ_223 /* VWOUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_63 /* VWOUserDefaults.m */; };
+		OBJ_225 /* VWOConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_65 /* VWOConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		OBJ_226 /* VWO.h in Headers */ = {isa = PBXBuildFile; fileRef = OBJ_66 /* VWO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		OBJ_228 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "socket.io-client-swift::SocketIO::Product" /* SocketIO.framework */; };
+		OBJ_229 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "starscream::Starscream::Product" /* Starscream.framework */; };
+		OBJ_237 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BA7E839D2B3550A90008303D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "socket.io-client-swift::SocketIO";
+			remoteInfo = SocketIO;
+		};
+		BA7E839E2B3550A90008303D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "starscream::Starscream";
+			remoteInfo = Starscream;
+		};
+		BA7E839F2B3550A90008303D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "starscream::Starscream";
+			remoteInfo = Starscream;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		OBJ_10 /* VWOCampaignFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOCampaignFetcher.h; sourceTree = "<group>"; };
+		OBJ_100 /* SocketStringReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketStringReader.swift; sourceTree = "<group>"; };
+		OBJ_101 /* SocketTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketTypes.swift; sourceTree = "<group>"; };
+		OBJ_102 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/socket.io-client-swift/Package.swift"; sourceTree = "<group>"; };
+		OBJ_105 /* Compression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compression.swift; sourceTree = "<group>"; };
+		OBJ_106 /* SSLClientCertificate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLClientCertificate.swift; sourceTree = "<group>"; };
+		OBJ_107 /* SSLSecurity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLSecurity.swift; sourceTree = "<group>"; };
+		OBJ_108 /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
+		OBJ_109 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/.build/checkouts/Starscream/Package.swift"; sourceTree = "<group>"; };
+		OBJ_11 /* VWOConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOConstants.h; sourceTree = "<group>"; };
+		OBJ_114 /* VWOTests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VWOTests; sourceTree = SOURCE_ROOT; };
+		OBJ_115 /* Demo */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Demo; sourceTree = SOURCE_ROOT; };
+		OBJ_116 /* VWO */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VWO; sourceTree = SOURCE_ROOT; };
+		OBJ_117 /* VWO.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = VWO.xcworkspace; sourceTree = SOURCE_ROOT; };
+		OBJ_118 /* Cartfile.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
+		OBJ_119 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		OBJ_12 /* VWOSegmentEvaluator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOSegmentEvaluator.h; sourceTree = "<group>"; };
+		OBJ_120 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		OBJ_121 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_122 /* VWO.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = VWO.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		OBJ_123 /* wcarthage */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = wcarthage; sourceTree = "<group>"; };
+		OBJ_13 /* VWOUserDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOUserDefaults.h; sourceTree = "<group>"; };
+		OBJ_14 /* VWOURL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOURL.h; sourceTree = "<group>"; };
+		OBJ_15 /* VWOInfixEvaluator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOInfixEvaluator.h; sourceTree = "<group>"; };
+		OBJ_16 /* VWOURLQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOURLQueue.h; sourceTree = "<group>"; };
+		OBJ_17 /* VWOController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOController.h; sourceTree = "<group>"; };
+		OBJ_18 /* VWOSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOSocket.h; sourceTree = "<group>"; };
+		OBJ_19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		OBJ_21 /* NSDate+VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+VWO.m"; sourceTree = "<group>"; };
+		OBJ_22 /* NSDictionary+VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+VWO.m"; sourceTree = "<group>"; };
+		OBJ_23 /* NSString+MD5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		OBJ_24 /* NSString+VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+VWO.m"; sourceTree = "<group>"; };
+		OBJ_25 /* NSURLSession+Synchronous.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURLSession+Synchronous.m"; sourceTree = "<group>"; };
+		OBJ_27 /* VWODevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWODevice.m; sourceTree = "<group>"; };
+		OBJ_28 /* VWOFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOFile.m; sourceTree = "<group>"; };
+		OBJ_29 /* VWOLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOLogger.m; sourceTree = "<group>"; };
+		OBJ_31 /* CampaignGroupMapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CampaignGroupMapper.m; sourceTree = "<group>"; };
+		OBJ_32 /* CampaignUniquenessTracker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CampaignUniquenessTracker.m; sourceTree = "<group>"; };
+		OBJ_33 /* Group.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		OBJ_34 /* MEGManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MEGManager.m; sourceTree = "<group>"; };
+		OBJ_35 /* Mapping.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mapping.m; sourceTree = "<group>"; };
+		OBJ_36 /* MurmurHash.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MurmurHash.m; sourceTree = "<group>"; };
+		OBJ_37 /* MutuallyExclusiveGroups.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MutuallyExclusiveGroups.m; sourceTree = "<group>"; };
+		OBJ_38 /* Pair.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pair.m; sourceTree = "<group>"; };
+		OBJ_39 /* PriorityQualificationWinnerResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriorityQualificationWinnerResult.m; sourceTree = "<group>"; };
+		OBJ_40 /* Response.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
+		OBJ_41 /* Weight.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Weight.m; sourceTree = "<group>"; };
+		OBJ_42 /* Winner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Winner.m; sourceTree = "<group>"; };
+		OBJ_43 /* WinnerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WinnerManager.m; sourceTree = "<group>"; };
+		OBJ_45 /* VWOCampaign.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOCampaign.m; sourceTree = "<group>"; };
+		OBJ_46 /* VWOGoal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOGoal.m; sourceTree = "<group>"; };
+		OBJ_47 /* VWOGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOGroup.m; sourceTree = "<group>"; };
+		OBJ_48 /* VWOQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOQueue.m; sourceTree = "<group>"; };
+		OBJ_49 /* VWOSegment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOSegment.m; sourceTree = "<group>"; };
+		OBJ_50 /* VWOStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOStack.m; sourceTree = "<group>"; };
+		OBJ_51 /* VWOVariation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOVariation.m; sourceTree = "<group>"; };
+		OBJ_52 /* VWO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWO.m; sourceTree = "<group>"; };
+		OBJ_53 /* VWOCampaignFetcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOCampaignFetcher.m; sourceTree = "<group>"; };
+		OBJ_54 /* VWOConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOConfig.m; sourceTree = "<group>"; };
+		OBJ_55 /* VWOConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOConstants.m; sourceTree = "<group>"; };
+		OBJ_56 /* VWOController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOController.m; sourceTree = "<group>"; };
+		OBJ_57 /* VWOInfixEvaluator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOInfixEvaluator.m; sourceTree = "<group>"; };
+		OBJ_58 /* VWOSegmentEvaluator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOSegmentEvaluator.m; sourceTree = "<group>"; };
+		OBJ_59 /* VWOSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOSocket.m; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_60 /* VWOSocketConnector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOSocketConnector.m; sourceTree = "<group>"; };
+		OBJ_61 /* VWOURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOURL.m; sourceTree = "<group>"; };
+		OBJ_62 /* VWOURLQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOURLQueue.m; sourceTree = "<group>"; };
+		OBJ_63 /* VWOUserDefaults.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VWOUserDefaults.m; sourceTree = "<group>"; };
+		OBJ_65 /* VWOConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOConfig.h; sourceTree = "<group>"; };
+		OBJ_66 /* VWO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWO.h; sourceTree = "<group>"; };
+		OBJ_72 /* SocketAckEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketAckEmitter.swift; sourceTree = "<group>"; };
+		OBJ_73 /* SocketAckManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketAckManager.swift; sourceTree = "<group>"; };
+		OBJ_75 /* SocketAnyEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketAnyEvent.swift; sourceTree = "<group>"; };
+		OBJ_76 /* SocketEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketEventHandler.swift; sourceTree = "<group>"; };
+		OBJ_77 /* SocketIOClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOClient.swift; sourceTree = "<group>"; };
+		OBJ_78 /* SocketIOClientConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOClientConfiguration.swift; sourceTree = "<group>"; };
+		OBJ_79 /* SocketIOClientOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOClientOption.swift; sourceTree = "<group>"; };
+		OBJ_80 /* SocketIOClientSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOClientSpec.swift; sourceTree = "<group>"; };
+		OBJ_81 /* SocketIOStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOStatus.swift; sourceTree = "<group>"; };
+		OBJ_82 /* SocketRawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketRawView.swift; sourceTree = "<group>"; };
+		OBJ_84 /* SocketEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketEngine.swift; sourceTree = "<group>"; };
+		OBJ_85 /* SocketEngineClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketEngineClient.swift; sourceTree = "<group>"; };
+		OBJ_86 /* SocketEnginePacketType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketEnginePacketType.swift; sourceTree = "<group>"; };
+		OBJ_87 /* SocketEnginePollable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketEnginePollable.swift; sourceTree = "<group>"; };
+		OBJ_88 /* SocketEngineSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketEngineSpec.swift; sourceTree = "<group>"; };
+		OBJ_89 /* SocketEngineWebsocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketEngineWebsocket.swift; sourceTree = "<group>"; };
+		OBJ_9 /* VWOSocketConnector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VWOSocketConnector.h; sourceTree = "<group>"; };
+		OBJ_91 /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
+		OBJ_92 /* SocketManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManagerSpec.swift; sourceTree = "<group>"; };
+		OBJ_94 /* SocketPacket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketPacket.swift; sourceTree = "<group>"; };
+		OBJ_95 /* SocketParsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketParsable.swift; sourceTree = "<group>"; };
+		OBJ_97 /* SSLSecurity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLSecurity.swift; sourceTree = "<group>"; };
+		OBJ_98 /* SocketExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketExtensions.swift; sourceTree = "<group>"; };
+		OBJ_99 /* SocketLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketLogger.swift; sourceTree = "<group>"; };
+		"socket.io-client-swift::SocketIO::Product" /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SocketIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"starscream::Starscream::Product" /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"vwo-ios-sdk::VWO::Product" /* VWO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VWO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		OBJ_154 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_155 /* Starscream.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_172 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_227 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_228 /* SocketIO.framework in Frameworks */,
+				OBJ_229 /* Starscream.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		OBJ_103 /* Starscream 3.1.2 */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_104 /* Starscream */,
+				OBJ_109 /* Package.swift */,
+			);
+			name = "Starscream 3.1.2";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_104 /* Starscream */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_105 /* Compression.swift */,
+				OBJ_106 /* SSLClientCertificate.swift */,
+				OBJ_107 /* SSLSecurity.swift */,
+				OBJ_108 /* WebSocket.swift */,
+			);
+			name = Starscream;
+			path = .build/checkouts/Starscream/Sources/Starscream;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_110 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"socket.io-client-swift::SocketIO::Product" /* SocketIO.framework */,
+				"starscream::Starscream::Product" /* Starscream.framework */,
+				"vwo-ios-sdk::VWO::Product" /* VWO.framework */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_20 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_21 /* NSDate+VWO.m */,
+				OBJ_22 /* NSDictionary+VWO.m */,
+				OBJ_23 /* NSString+MD5.m */,
+				OBJ_24 /* NSString+VWO.m */,
+				OBJ_25 /* NSURLSession+Synchronous.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		OBJ_26 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_27 /* VWODevice.m */,
+				OBJ_28 /* VWOFile.m */,
+				OBJ_29 /* VWOLogger.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		OBJ_30 /* MEG */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_31 /* CampaignGroupMapper.m */,
+				OBJ_32 /* CampaignUniquenessTracker.m */,
+				OBJ_33 /* Group.m */,
+				OBJ_34 /* MEGManager.m */,
+				OBJ_35 /* Mapping.m */,
+				OBJ_36 /* MurmurHash.m */,
+				OBJ_37 /* MutuallyExclusiveGroups.m */,
+				OBJ_38 /* Pair.m */,
+				OBJ_39 /* PriorityQualificationWinnerResult.m */,
+				OBJ_40 /* Response.m */,
+				OBJ_41 /* Weight.m */,
+				OBJ_42 /* Winner.m */,
+				OBJ_43 /* WinnerManager.m */,
+			);
+			path = MEG;
+			sourceTree = "<group>";
+		};
+		OBJ_44 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_45 /* VWOCampaign.m */,
+				OBJ_46 /* VWOGoal.m */,
+				OBJ_47 /* VWOGroup.m */,
+				OBJ_48 /* VWOQueue.m */,
+				OBJ_49 /* VWOSegment.m */,
+				OBJ_50 /* VWOStack.m */,
+				OBJ_51 /* VWOVariation.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		OBJ_5 /*  */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_67 /* Tests */,
+				OBJ_68 /* Dependencies */,
+				OBJ_110 /* Products */,
+				OBJ_114 /* VWOTests */,
+				OBJ_115 /* Demo */,
+				OBJ_116 /* VWO */,
+				OBJ_117 /* VWO.xcworkspace */,
+				OBJ_118 /* Cartfile.resolved */,
+				OBJ_119 /* LICENSE */,
+				OBJ_120 /* Cartfile */,
+				OBJ_121 /* README.md */,
+				OBJ_122 /* VWO.podspec */,
+				OBJ_123 /* wcarthage */,
+			);
+			name = "";
+			sourceTree = "<group>";
+		};
+		OBJ_64 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_65 /* VWOConfig.h */,
+				OBJ_66 /* VWO.h */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		OBJ_67 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_68 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_69 /* SocketIO 15.2.0 */,
+				OBJ_103 /* Starscream 3.1.2 */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		OBJ_69 /* SocketIO 15.2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_70 /* SocketIO */,
+				OBJ_102 /* Package.swift */,
+			);
+			name = "SocketIO 15.2.0";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* VWO */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_70 /* SocketIO */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_71 /* Ack */,
+				OBJ_74 /* Client */,
+				OBJ_83 /* Engine */,
+				OBJ_90 /* Manager */,
+				OBJ_93 /* Parse */,
+				OBJ_96 /* Util */,
+			);
+			name = SocketIO;
+			path = ".build/checkouts/socket.io-client-swift/Source/SocketIO";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_71 /* Ack */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_72 /* SocketAckEmitter.swift */,
+				OBJ_73 /* SocketAckManager.swift */,
+			);
+			path = Ack;
+			sourceTree = "<group>";
+		};
+		OBJ_74 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_75 /* SocketAnyEvent.swift */,
+				OBJ_76 /* SocketEventHandler.swift */,
+				OBJ_77 /* SocketIOClient.swift */,
+				OBJ_78 /* SocketIOClientConfiguration.swift */,
+				OBJ_79 /* SocketIOClientOption.swift */,
+				OBJ_80 /* SocketIOClientSpec.swift */,
+				OBJ_81 /* SocketIOStatus.swift */,
+				OBJ_82 /* SocketRawView.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		OBJ_8 /* VWO */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* VWOSocketConnector.h */,
+				OBJ_10 /* VWOCampaignFetcher.h */,
+				OBJ_11 /* VWOConstants.h */,
+				OBJ_12 /* VWOSegmentEvaluator.h */,
+				OBJ_13 /* VWOUserDefaults.h */,
+				OBJ_14 /* VWOURL.h */,
+				OBJ_15 /* VWOInfixEvaluator.h */,
+				OBJ_16 /* VWOURLQueue.h */,
+				OBJ_17 /* VWOController.h */,
+				OBJ_18 /* VWOSocket.h */,
+				OBJ_19 /* Info.plist */,
+				OBJ_20 /* Extensions */,
+				OBJ_26 /* Helpers */,
+				OBJ_30 /* MEG */,
+				OBJ_44 /* Models */,
+				OBJ_52 /* VWO.m */,
+				OBJ_53 /* VWOCampaignFetcher.m */,
+				OBJ_54 /* VWOConfig.m */,
+				OBJ_55 /* VWOConstants.m */,
+				OBJ_56 /* VWOController.m */,
+				OBJ_57 /* VWOInfixEvaluator.m */,
+				OBJ_58 /* VWOSegmentEvaluator.m */,
+				OBJ_59 /* VWOSocket.m */,
+				OBJ_60 /* VWOSocketConnector.m */,
+				OBJ_61 /* VWOURL.m */,
+				OBJ_62 /* VWOURLQueue.m */,
+				OBJ_63 /* VWOUserDefaults.m */,
+				OBJ_64 /* Public */,
+			);
+			path = VWO;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_83 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_84 /* SocketEngine.swift */,
+				OBJ_85 /* SocketEngineClient.swift */,
+				OBJ_86 /* SocketEnginePacketType.swift */,
+				OBJ_87 /* SocketEnginePollable.swift */,
+				OBJ_88 /* SocketEngineSpec.swift */,
+				OBJ_89 /* SocketEngineWebsocket.swift */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		OBJ_90 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_91 /* SocketManager.swift */,
+				OBJ_92 /* SocketManagerSpec.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		OBJ_93 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_94 /* SocketPacket.swift */,
+				OBJ_95 /* SocketParsable.swift */,
+			);
+			path = Parse;
+			sourceTree = "<group>";
+		};
+		OBJ_96 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_97 /* SSLSecurity.swift */,
+				OBJ_98 /* SocketExtensions.swift */,
+				OBJ_99 /* SocketLogger.swift */,
+				OBJ_100 /* SocketStringReader.swift */,
+				OBJ_101 /* SocketTypes.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		OBJ_224 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_225 /* VWOConfig.h in Headers */,
+				OBJ_226 /* VWO.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		"socket.io-client-swift::SocketIO" /* SocketIO */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_125 /* Build configuration list for PBXNativeTarget "SocketIO" */;
+			buildPhases = (
+				OBJ_128 /* Sources */,
+				OBJ_154 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_156 /* PBXTargetDependency */,
+			);
+			name = SocketIO;
+			productName = SocketIO;
+			productReference = "socket.io-client-swift::SocketIO::Product" /* SocketIO.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"socket.io-client-swift::SwiftPMPackageDescription" /* SocketIOPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_159 /* Build configuration list for PBXNativeTarget "SocketIOPackageDescription" */;
+			buildPhases = (
+				OBJ_162 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SocketIOPackageDescription;
+			productName = SocketIOPackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+		"starscream::Starscream" /* Starscream */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_164 /* Build configuration list for PBXNativeTarget "Starscream" */;
+			buildPhases = (
+				OBJ_167 /* Sources */,
+				OBJ_172 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Starscream;
+			productName = Starscream;
+			productReference = "starscream::Starscream::Product" /* Starscream.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"starscream::SwiftPMPackageDescription" /* StarscreamPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_174 /* Build configuration list for PBXNativeTarget "StarscreamPackageDescription" */;
+			buildPhases = (
+				OBJ_177 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StarscreamPackageDescription;
+			productName = StarscreamPackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+		"vwo-ios-sdk::SwiftPMPackageDescription" /* VWOPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_233 /* Build configuration list for PBXNativeTarget "VWOPackageDescription" */;
+			buildPhases = (
+				OBJ_236 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VWOPackageDescription;
+			productName = VWOPackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+		"vwo-ios-sdk::VWO" /* VWO */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_180 /* Build configuration list for PBXNativeTarget "VWO" */;
+			buildPhases = (
+				OBJ_183 /* Sources */,
+				OBJ_224 /* Headers */,
+				OBJ_227 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_230 /* PBXTargetDependency */,
+				OBJ_231 /* PBXTargetDependency */,
+			);
+			name = VWO;
+			productName = VWO;
+			productReference = "vwo-ios-sdk::VWO::Product" /* VWO.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 9999;
+				LastUpgradeCheck = 9999;
+			};
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "VWO" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = OBJ_5 /*  */;
+			productRefGroup = OBJ_110 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"socket.io-client-swift::SocketIO" /* SocketIO */,
+				"socket.io-client-swift::SwiftPMPackageDescription" /* SocketIOPackageDescription */,
+				"starscream::Starscream" /* Starscream */,
+				"starscream::SwiftPMPackageDescription" /* StarscreamPackageDescription */,
+				"vwo-ios-sdk::VWO" /* VWO */,
+				"vwo-ios-sdk::SwiftPMPackageDescription" /* VWOPackageDescription */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		OBJ_128 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_129 /* SocketAckEmitter.swift in Sources */,
+				OBJ_130 /* SocketAckManager.swift in Sources */,
+				OBJ_131 /* SocketAnyEvent.swift in Sources */,
+				OBJ_132 /* SocketEventHandler.swift in Sources */,
+				OBJ_133 /* SocketIOClient.swift in Sources */,
+				OBJ_134 /* SocketIOClientConfiguration.swift in Sources */,
+				OBJ_135 /* SocketIOClientOption.swift in Sources */,
+				OBJ_136 /* SocketIOClientSpec.swift in Sources */,
+				OBJ_137 /* SocketIOStatus.swift in Sources */,
+				OBJ_138 /* SocketRawView.swift in Sources */,
+				OBJ_139 /* SocketEngine.swift in Sources */,
+				OBJ_140 /* SocketEngineClient.swift in Sources */,
+				OBJ_141 /* SocketEnginePacketType.swift in Sources */,
+				OBJ_142 /* SocketEnginePollable.swift in Sources */,
+				OBJ_143 /* SocketEngineSpec.swift in Sources */,
+				OBJ_144 /* SocketEngineWebsocket.swift in Sources */,
+				OBJ_145 /* SocketManager.swift in Sources */,
+				OBJ_146 /* SocketManagerSpec.swift in Sources */,
+				OBJ_147 /* SocketPacket.swift in Sources */,
+				OBJ_148 /* SocketParsable.swift in Sources */,
+				OBJ_149 /* SSLSecurity.swift in Sources */,
+				OBJ_150 /* SocketExtensions.swift in Sources */,
+				OBJ_151 /* SocketLogger.swift in Sources */,
+				OBJ_152 /* SocketStringReader.swift in Sources */,
+				OBJ_153 /* SocketTypes.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_162 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_163 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_167 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_168 /* Compression.swift in Sources */,
+				OBJ_169 /* SSLClientCertificate.swift in Sources */,
+				OBJ_170 /* SSLSecurity.swift in Sources */,
+				OBJ_171 /* WebSocket.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_177 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_178 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_183 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_184 /* NSDate+VWO.m in Sources */,
+				OBJ_185 /* NSDictionary+VWO.m in Sources */,
+				OBJ_186 /* NSString+MD5.m in Sources */,
+				OBJ_187 /* NSString+VWO.m in Sources */,
+				OBJ_188 /* NSURLSession+Synchronous.m in Sources */,
+				OBJ_189 /* VWODevice.m in Sources */,
+				OBJ_190 /* VWOFile.m in Sources */,
+				OBJ_191 /* VWOLogger.m in Sources */,
+				OBJ_192 /* CampaignGroupMapper.m in Sources */,
+				OBJ_193 /* CampaignUniquenessTracker.m in Sources */,
+				OBJ_194 /* Group.m in Sources */,
+				OBJ_195 /* MEGManager.m in Sources */,
+				OBJ_196 /* Mapping.m in Sources */,
+				OBJ_197 /* MurmurHash.m in Sources */,
+				OBJ_198 /* MutuallyExclusiveGroups.m in Sources */,
+				OBJ_199 /* Pair.m in Sources */,
+				OBJ_200 /* PriorityQualificationWinnerResult.m in Sources */,
+				OBJ_201 /* Response.m in Sources */,
+				OBJ_202 /* Weight.m in Sources */,
+				OBJ_203 /* Winner.m in Sources */,
+				OBJ_204 /* WinnerManager.m in Sources */,
+				OBJ_205 /* VWOCampaign.m in Sources */,
+				OBJ_206 /* VWOGoal.m in Sources */,
+				OBJ_207 /* VWOGroup.m in Sources */,
+				OBJ_208 /* VWOQueue.m in Sources */,
+				OBJ_209 /* VWOSegment.m in Sources */,
+				OBJ_210 /* VWOStack.m in Sources */,
+				OBJ_211 /* VWOVariation.m in Sources */,
+				OBJ_212 /* VWO.m in Sources */,
+				OBJ_213 /* VWOCampaignFetcher.m in Sources */,
+				OBJ_214 /* VWOConfig.m in Sources */,
+				OBJ_215 /* VWOConstants.m in Sources */,
+				OBJ_216 /* VWOController.m in Sources */,
+				OBJ_217 /* VWOInfixEvaluator.m in Sources */,
+				OBJ_218 /* VWOSegmentEvaluator.m in Sources */,
+				OBJ_219 /* VWOSocket.m in Sources */,
+				OBJ_220 /* VWOSocketConnector.m in Sources */,
+				OBJ_221 /* VWOURL.m in Sources */,
+				OBJ_222 /* VWOURLQueue.m in Sources */,
+				OBJ_223 /* VWOUserDefaults.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_236 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_237 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		OBJ_156 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "starscream::Starscream" /* Starscream */;
+			targetProxy = BA7E839E2B3550A90008303D /* PBXContainerItemProxy */;
+		};
+		OBJ_230 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "socket.io-client-swift::SocketIO" /* SocketIO */;
+			targetProxy = BA7E839D2B3550A90008303D /* PBXContainerItemProxy */;
+		};
+		OBJ_231 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "starscream::Starscream" /* Starscream */;
+			targetProxy = BA7E839F2B3550A90008303D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		OBJ_126 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = VWO.xcodeproj/SocketIO_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = SocketIO;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = SocketIO;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Debug;
+		};
+		OBJ_127 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = VWO.xcodeproj/SocketIO_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = SocketIO;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = SocketIO;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Release;
+		};
+		OBJ_160 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI -sdk /Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -package-description-version 5.0.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		OBJ_161 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI -sdk /Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -package-description-version 5.0.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		OBJ_165 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = VWO.xcodeproj/Starscream_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Starscream;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = Starscream;
+			};
+			name = Debug;
+		};
+		OBJ_166 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = VWO.xcodeproj/Starscream_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Starscream;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 4.2;
+				TARGET_NAME = Starscream;
+			};
+			name = Release;
+		};
+		OBJ_175 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 4.2 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI -sdk /Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -package-description-version 4.2.0";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		OBJ_176 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 4.2 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI -sdk /Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -package-description-version 4.2.0";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		OBJ_181 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/VWO/Public",
+					Extensions/,
+					Helpers/,
+					Models/,
+				);
+				INFOPLIST_FILE = VWO.xcodeproj/VWO_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = VWO;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				TARGET_NAME = VWO;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Debug;
+		};
+		OBJ_182 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.0;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/VWO/Public",
+					Extensions/,
+					Helpers/,
+					Models/,
+				);
+				INFOPLIST_FILE = VWO.xcodeproj/VWO_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = VWO;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				TARGET_NAME = VWO;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Release;
+		};
+		OBJ_234 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI -sdk /Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -package-description-version 5.6.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		OBJ_235 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/ManifestAPI -sdk /Users/parveshchauhan/Downloads/Xcode 14.0.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -package-description-version 5.6.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+					"DEBUG=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "$(AVAILABLE_PLATFORMS)";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "$(AVAILABLE_PLATFORMS)";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		OBJ_125 /* Build configuration list for PBXNativeTarget "SocketIO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_126 /* Debug */,
+				OBJ_127 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_159 /* Build configuration list for PBXNativeTarget "SocketIOPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_160 /* Debug */,
+				OBJ_161 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_164 /* Build configuration list for PBXNativeTarget "Starscream" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_165 /* Debug */,
+				OBJ_166 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_174 /* Build configuration list for PBXNativeTarget "StarscreamPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_175 /* Debug */,
+				OBJ_176 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_180 /* Build configuration list for PBXNativeTarget "VWO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_181 /* Debug */,
+				OBJ_182 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_2 /* Build configuration list for PBXProject "VWO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_233 /* Build configuration list for PBXNativeTarget "VWOPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_234 /* Debug */,
+				OBJ_235 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = OBJ_1 /* Project object */;
 }
