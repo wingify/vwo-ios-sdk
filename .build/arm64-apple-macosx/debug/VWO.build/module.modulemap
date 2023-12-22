@@ -1,4 +1,0 @@
-module VWO {
-    umbrella header "/Users/parveshchauhan/Documents/Project/VWO AB SPM/vwo-ios-sdk/VWO/Public/VWO.h"
-    export *
-}
