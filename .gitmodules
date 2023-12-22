@@ -1,0 +1,3 @@
+[submodule "vwo-ios-sdk"]
+	path = vwo-ios-sdk
+	url = https://github.com/wingify/vwo-ios-sdk/tree/feature/swift-package-support
