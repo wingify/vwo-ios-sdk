@@ -1,4 +1,0 @@
-module SocketIO {
-    header "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/SocketIO.build/SocketIO-Swift.h"
-    requires objc
-}

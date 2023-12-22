@@ -1,4 +1,0 @@
-module Starscream {
-    header "/Users/parveshchauhan/Documents/Project/VWO AB SDK project/mobile-testing-ios-sdk/.build/arm64-apple-macosx/debug/Starscream.build/Starscream-Swift.h"
-    requires objc
-}
