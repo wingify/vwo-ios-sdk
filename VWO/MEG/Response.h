@@ -5,6 +5,8 @@
 //  Created by Harsh Raghav on 12/05/23.
 //
 
+#import <Foundation/Foundation.h>
+
 @interface Response : NSObject
 
 @property (nonatomic, assign) BOOL shouldServePreviousWinnerCampaign;
