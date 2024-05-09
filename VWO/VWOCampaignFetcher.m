@@ -45,6 +45,15 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
     }
 
     if (data == nil) {
+        if (ConstAPIVersion != VWOUserDefaults.PreviousAPIversion) {
+            VWOLogWarning(@"No campaigns available. No cache available for current AppVersion");
+            if (failureBlock) {
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    failureBlock(errorString);
+                });
+            }
+            return nil;
+        }
         data = [NSData dataWithContentsOfURL:VWOFile.campaignCache];
         if (data == nil) {
             VWOLogWarning(@"No campaigns available. No cache available");
@@ -57,6 +66,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
         }
         VWOLogInfo(@"Loading from Cache");
     } else {
+        [VWOUserDefaults updatePreviousAPIversion:(NSString *)ConstAPIVersion];
         BOOL isIt = [data writeToURL:VWOFile.campaignCache atomically:YES];
         VWOLogDebug(@"Cache updated: %@", isIt ? @"success" : @"failed");
     }
