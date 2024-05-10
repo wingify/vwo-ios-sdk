@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, readonly) NSMutableDictionary *EventArchData;
 @property (class, readonly) NSMutableDictionary *NonEventArchData;
 @property (class, readonly) NSMutableDictionary *NetworkHTTPMethodTypeData;
+@property (class, readonly) NSString *PreviousAPIversion;
 
 + (nullable id)objectForKey:(NSString *)key;
 + (void)setObject:(nullable id)value forKey:(NSString *)key;
@@ -47,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)updateEventArchData:(NSString *)url valueDict:(NSDictionary *)EventArchDict;
 + (void)updateNonEventArchData:(NSString *)url valueDict:(NSDictionary *)NonEventArchDict;
 + (void)updateNetworkHTTPMethodTypeData:(NSString *)url HTTPMethodType:(NSString *)HTTPMethodType;
++ (void)updatePreviousAPIversion:(NSString *)apiVersion;
 
 + (void)removeEventArchDataItem:(NSString *)url;
 + (void)removeNonEventArchDataItem:(NSString *)url;
