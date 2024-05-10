@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 	s.name              = "VWO"
-	s.version           = "2.17.0"
+	s.version           = "2.18.2"
 	s.summary           = "VWO SDK for A/B Testing iOS apps."
 	s.description       = "VWO iOS SDK enables you to A/B test mobile apps."
 	s.documentation_url = "http://developers.vwo.com/reference#ios-sdk-reference"
@@ -13,13 +13,14 @@ Pod::Spec.new do |s|
 	s.platform     	    = :ios, '9.0'
     s.swift_version = '5.0'
     s.default_subspec = 'All'
-
+    s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+    s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
     s.subspec 'Core' do |ss|
 	    ss.source_files = 'VWO/**/*.{m,h}'
 	end
 
     s.subspec 'All' do |ss|
-	    ss.source_files = 'Socket/**/*.{m,h}', 'VWO/**/*.{m,h}'
+	    ss.source_files = '**/*.{m,h}','VWO/**/*.{m,h}'
 	    ss.dependency 'Socket.IO-Client-Swift', '~> 15.2.0'
     end
     
