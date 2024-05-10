@@ -20,6 +20,7 @@ static NSString * kIsEventArchEnabled        = @"isEventArchEnabled";
 static NSString * kEventArchData             = @"eventArchData";
 static NSString * kNonEventArchData          = @"nonEventArchData";
 static NSString * kNetworkHTTPMethodTypeData = @"networkHTTPMethodTypeData";
+static NSString * kPreviousAPIversion        = @"previousAPIversion";
 
 static NSString * _userDefaultsKey;
 
@@ -106,6 +107,10 @@ static NSString * _userDefaultsKey;
     return [self objectForKey:kIsEventArchEnabled];
 }
 
++ (NSString *)PreviousAPIversion {
+    return [self objectForKey:kPreviousAPIversion];
+}
+
 + (NSMutableDictionary *)EventArchData {
     return [self objectForKey:kEventArchData];
 }
@@ -141,6 +146,10 @@ static NSString * _userDefaultsKey;
 
 + (void)updateIsEventArchEnabled:(NSString *)isEventArchEnabled {
     [self setObject:isEventArchEnabled forKey:kIsEventArchEnabled];
+}
+
++ (void)updatePreviousAPIversion:(NSString *)appVersion {
+    [self setObject:appVersion forKey:kPreviousAPIversion];
 }
 
 + (void)updateEventArchData:(NSString *)url valueDict:(NSDictionary *)EventArchDict {
