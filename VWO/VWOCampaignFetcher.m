@@ -26,14 +26,14 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
  @return Array of campaigns. nil if network returns 400. nil if campaign list not available on network and cache
  */
 + (nullable VWOCampaignArray *)getCampaignsWithTimeout:(NSNumber *)timeout
-                                                         url:(NSURL *)url
-                                                withCallback:(void(^)(void))completionBlock
-                                                     failure:(void(^)(NSString *error))failureBlock {
+                                                   url:(NSURL *)url
+                                          withCallback:(void(^)(void))completionBlock
+                                               failure:(void(^)(NSString *error))failureBlock {
     VWOLogDebug(@"Fetching campaigns");
     NSString *errorString;
-
+    
     NSData *data = [self getCampaignsFromNetworkWithTimeout:timeout url:url onFailure:&errorString];
-
+    
     if (errorString != nil) {
         VWOLogError(errorString);
         if (failureBlock) {
@@ -43,7 +43,7 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
         }
         return nil;
     }
-
+    
     if (data == nil) {
         if (ConstAPIVersion != VWOUserDefaults.PreviousAPIversion) {
             VWOLogWarning(@"No campaigns available. No cache available for current AppVersion");
@@ -70,15 +70,25 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
         BOOL isIt = [data writeToURL:VWOFile.campaignCache atomically:YES];
         VWOLogDebug(@"Cache updated: %@", isIt ? @"success" : @"failed");
     }
-
+    
     NSError *jsonerror;
     //handle NSDict nd NSArray comparison
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror];
     VWOLogDebug(@"%@", jsonDict);
     
+    if (![jsonDict isKindOfClass:[NSDictionary class]]) {
+        NSLog(@"Expected a dictionary but received a %@", NSStringFromClass([jsonDict class]));
+        if (failureBlock) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                failureBlock(errorString);
+            });
+        }
+        return nil;
+    }
+    
     [self checkForIsEventArchEnabledFlag:jsonDict];
     VWOCampaignArray *allCampaigns = [self EUCheckAndDataFetching:jsonDict];
-
+    
     if (completionBlock) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             completionBlock();
@@ -90,20 +100,20 @@ static NSTimeInterval const defaultFetchCampaignsTimeout = 60;
 + (nullable NSData *)getCampaignsFromNetworkWithTimeout:(NSNumber *)timeout
                                                     url:(NSURL *)url
                                               onFailure:(NSString **)errorString {
-
+    
     NSTimeInterval timeOutInterval = (timeout == nil) ? defaultFetchCampaignsTimeout : timeout.doubleValue;
     NSURLRequest *request = [NSURLRequest requestWithURL:url
                                              cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                          timeoutInterval:timeOutInterval];
-
+    
     NSError *error = nil;
     NSURLResponse *response = nil;
     NSData *data = [NSURLSession.sharedSession sendSynchronousDataTaskWithRequest:request
                                                                 returningResponse:&response
                                                                             error:&error];
-
+    
     if (data == nil) { return nil; }
-
+    
     NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
     if(statusCode >= 400 && statusCode <= 499) {
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
