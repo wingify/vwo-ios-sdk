@@ -1,0 +1,21 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '11.0'
+
+target 'VWO Demo' do
+  use_frameworks!
+   #pod 'VWO', '~> 2.7.1'
+   pod 'VWO', :path => '../'
+   pod 'SCLAlertView', '~> 0.8'
+   pod 'MBProgressHUD', '~> 1.1.0'
+
+
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+#      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+    end
+  end
+end
