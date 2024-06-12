@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 	s.name              = "VWO"
-	s.version           = "2.18.2"
+	s.version           = "2.18.3"
 	s.summary           = "VWO SDK for A/B Testing iOS apps."
 	s.description       = "VWO iOS SDK enables you to A/B test mobile apps."
 	s.documentation_url = "http://developers.vwo.com/reference#ios-sdk-reference"
@@ -16,7 +16,5 @@ Pod::Spec.new do |s|
     s.subspec 'Core' do |ss|
           ss.source_files = 'VWO/**/*.{m,h}'
       end
-    s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-    s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
     
 end
