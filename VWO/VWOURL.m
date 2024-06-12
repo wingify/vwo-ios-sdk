@@ -147,9 +147,9 @@ static NSString *kSDKversionNumber = @"19";
     
     NSMutableDictionary *paramDict =
     [@{APIEventName         : TrackUserEventName,
-       ApplicationVersion   : [self appVersion],
-       AccountID            : _accountID,
-       APIKey               : [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
+       VWO_ApplicationVersion   : [self appVersion],
+       VWO_AccountID            : _accountID,
+       VWO_APIKey               : [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
        CurrentTimeInMillis  : [NSString stringWithFormat:@"%lu", currentTimeInMilli],
        Random               : [self randomNumber]
      } mutableCopy];
@@ -158,13 +158,13 @@ static NSString *kSDKversionNumber = @"19";
     
     NSDictionary *EventArchDict = @{
         D: @{
-            MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
+            VWO_MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,
-            SessionID: [NSNumber numberWithUnsignedLong : currentTimeInSec],
+            VWO_SessionID: [NSNumber numberWithUnsignedLong : currentTimeInSec],
             Event: @{
                 EventProps: @{
-                    SDKName: SDKNameValue,
-                    SDKVersion: kSDKversionNumber,
+                    VWO_SDKName: VWO_SDKNameValue,
+                    VWO_SDKVersion: kSDKversionNumber,
                     CampaignID: [NSNumber numberWithInt : campaign.iD],
                     VariationID: [NSNumber numberWithInt : campaign.variation.iD],
                     IsFirst: @1 //always 1
@@ -225,9 +225,9 @@ static NSString *kSDKversionNumber = @"19";
     
     NSMutableDictionary *paramDict =
     [@{APIEventName         : goal.identifier,
-       ApplicationVersion   : [self appVersion],
-       AccountID            : _accountID,
-       APIKey               : [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
+       VWO_ApplicationVersion   : [self appVersion],
+       VWO_AccountID            : _accountID,
+       VWO_APIKey               : [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
        CurrentTimeInMillis  : [NSString stringWithFormat:@"%lu", currentTimeInMilli],
        Random               : [self randomNumber]
      } mutableCopy];
@@ -253,13 +253,13 @@ static NSString *kSDKversionNumber = @"19";
     
     NSDictionary *EventArchDict = @{
         D: @{
-            MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
+            VWO_MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,
-            SessionID: [NSNumber numberWithUnsignedLong : currentTimeInSec],
+            VWO_SessionID: [NSNumber numberWithUnsignedLong : currentTimeInSec],
             Event: @{
                 EventProps: @{
-                    SDKName: SDKNameValue,
-                    SDKVersion: kSDKversionNumber,
+                    VWO_SDKName: VWO_SDKNameValue,
+                    VWO_SDKVersion: kSDKversionNumber,
                     IsCustomEvent: @((BOOL)true),
                     VWOMeta: VWOMetaDict
                 },
@@ -310,9 +310,9 @@ static NSString *kSDKversionNumber = @"19";
     
     NSMutableDictionary *paramDict =
     [@{APIEventName         : PushEventName,
-       ApplicationVersion   : [self appVersion],
-       AccountID            : _accountID,
-       APIKey               : [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
+       VWO_ApplicationVersion   : [self appVersion],
+       VWO_AccountID            : _accountID,
+       VWO_APIKey               : [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
        CurrentTimeInMillis  : [NSString stringWithFormat:@"%lu", currentTimeInMilli],
        Random               : [self randomNumber]
      } mutableCopy];
@@ -321,13 +321,13 @@ static NSString *kSDKversionNumber = @"19";
     
     NSDictionary *EventArchDict = @{
         D: @{
-            MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
+            VWO_MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,
-            SessionID: [NSNumber numberWithUnsignedLong : currentTimeInSec],
+            VWO_SessionID: [NSNumber numberWithUnsignedLong : currentTimeInSec],
             Event: @{
                 EventProps: @{
-                    SDKName: SDKNameValue,
-                    SDKVersion: kSDKversionNumber,
+                    VWO_SDKName: VWO_SDKNameValue,
+                    VWO_SDKVersion: kSDKversionNumber,
                     IsCustomEvent: @((BOOL)true),
                     InternalVisitor: @{
                         VisitorProps: @{
@@ -406,9 +406,9 @@ static NSString *kSDKversionNumber = @"19";
     
     NSMutableDictionary *paramDict =
     [@{APIEventName         : PushEventName,
-       ApplicationVersion   : [self appVersion],
-       AccountID            : _accountID,
-       APIKey               : [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
+       VWO_ApplicationVersion   : [self appVersion],
+       VWO_AccountID            : _accountID,
+       VWO_APIKey               : [NSString stringWithFormat:@"%@-%@", _appKey, _accountID],
        CurrentTimeInMillis  : [NSString stringWithFormat:@"%lu", currentTimeInMilli],
        Random               : [self randomNumber]
      } mutableCopy];
@@ -417,13 +417,13 @@ static NSString *kSDKversionNumber = @"19";
     
     NSDictionary *EventArchDict = @{
         D: @{
-            MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
+            VWO_MessageID: [NSString stringWithFormat:@"%@-%lu", VWOUserDefaults.UUID, currentTimeInMilli],
             VisitorID: VWOUserDefaults.UUID,
-            SessionID: [NSNumber numberWithUnsignedLong : currentTimeInSec],
+            VWO_SessionID: [NSNumber numberWithUnsignedLong : currentTimeInSec],
             Event: @{
                 EventProps: @{
-                    SDKName: SDKNameValue,
-                    SDKVersion: kSDKversionNumber,
+                    VWO_SDKName: VWO_SDKNameValue,
+                    VWO_SDKVersion: kSDKversionNumber,
                     IsCustomEvent: @((BOOL)true),
                     InternalVisitor: @{
                         VisitorProps: customDimensionDictionary

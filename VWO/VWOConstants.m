@@ -106,24 +106,24 @@ NSString *ConstUserAgentValue = @"iOSVwoAb";
 
 //query params
 NSString const *APIEventName = @"en";// value changes based on the current API call
-NSString const *ApplicationVersion = @"av";
+NSString const *VWO_ApplicationVersion = @"av";
 NSString const *TrackUserEventName = @"vwo_variationShown";
 NSString const *PushEventName = @"vwo_syncVisitorProp";
-NSString const *AccountID = @"a";
-NSString const *APIKey = @"env";
+NSString const *VWO_AccountID = @"a";
+NSString const *VWO_APIKey = @"env";
 NSString const *CurrentTimeInMillis = @"eTime";
 NSString const *Random = @"random";
 
 //payloads params
 NSString const *D = @"d";
-NSString const *MessageID = @"msgId";// uuid-currentTimeStamp in seconds
+NSString const *VWO_MessageID = @"msgId";// uuid-currentTimeStamp in seconds
 NSString const *VisitorID = @"visId";//uuid
-NSString const *SessionID = @"sessionId";//current timestamp in seconds
+NSString const *VWO_SessionID = @"sessionId";//current timestamp in seconds
 NSString const *Event = @"event";
 NSString const *EventProps = @"props";
-NSString const *SDKName = @"sdkName";//name of the sdk
-NSString const *SDKNameValue = @"vwo-ios-sdk";
-NSString const *SDKVersion = @"sdkVersion";//version of the sdk
+NSString const *VWO_SDKName = @"sdkName";//name of the sdk
+NSString const *VWO_SDKNameValue = @"vwo-ios-sdk";
+NSString const *VWO_SDKVersion = @"sdkVersion";//version of the sdk
 NSString const *CampaignID = @"id";//id of the campaign
 NSString const *VariationID = @"variation";//id of the variation
 NSString const *IsFirst = @"isFirst";//this will be sent as 1 always

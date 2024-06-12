@@ -89,24 +89,24 @@ extern NSString *ConstEventArchDisabled;
 
 // MARK: - QueryParamsEventArchEnabled
 extern NSString const *APIEventName;
-extern NSString const *ApplicationVersion;
+extern NSString const *VWO_ApplicationVersion;
 extern NSString const *TrackUserEventName;
 extern NSString const *PushEventName;
-extern NSString const *AccountID;
-extern NSString const *APIKey;
+extern NSString const *VWO_AccountID;
+extern NSString const *VWO_APIKey;
 extern NSString const *CurrentTimeInMillis;
 extern NSString const *Random;
 
 // MARK: - Data360PayloadParams
 extern NSString const *D;
-extern NSString const *MessageID;// uuid-currentTimeStamp in seconds
+extern NSString const *VWO_MessageID;// uuid-currentTimeStamp in seconds
 extern NSString const *VisitorID;//uuid
-extern NSString const *SessionID;//current timestamp in seconds
+extern NSString const *VWO_SessionID;//current timestamp in seconds
 extern NSString const *Event;
 extern NSString const *EventProps;
-extern NSString const *SDKName;//name of the sdk
-extern NSString const *SDKNameValue;
-extern NSString const *SDKVersion;//version of the sdk
+extern NSString const *VWO_SDKName;//name of the sdk
+extern NSString const *VWO_SDKNameValue;
+extern NSString const *VWO_SDKVersion;//version of the sdk
 extern NSString const *CampaignID;//id of the campaign
 extern NSString const *VariationID;//id of the variation
 extern NSString const *IsFirst;//this will be sent as 1 always
